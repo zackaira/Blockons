@@ -1,0 +1,86 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/account-icon",
+	"title": "Block-Ons Account Icon",
+	"textdomain": "blockons",
+	"icon": "admin-users",
+	"category": "blockons-category",
+	"attributes": {
+		"alignment": {
+			"type": "string",
+			"default": "none"
+		},
+		"hasDropdown": {
+			"type": "boolean",
+			"default": false
+		},
+		"showDashboard": {
+			"type": "boolean",
+			"default": true
+		},
+		"showOrders": {
+			"type": "boolean",
+			"default": true
+		},
+		"showDownloads": {
+			"type": "boolean",
+			"default": true
+		},
+		"showAddresses": {
+			"type": "boolean",
+			"default": true
+		},
+		"showAccountDetails": {
+			"type": "boolean",
+			"default": true
+		},
+		"textDashboard": {
+			"type": "string",
+			"default": "Dashboard"
+		},
+		"textOrders": {
+			"type": "string",
+			"default": "Orders"
+		},
+		"textDownloads": {
+			"type": "string",
+			"default": "Downloads"
+		},
+		"textAddresses": {
+			"type": "string",
+			"default": "Addresses"
+		},
+		"textAccountDetails": {
+			"type": "string",
+			"default": "Account Details"
+		},
+		"icon": {
+			"type": "string",
+			"default": "fa-regular fa-user"
+		},
+		"customIcon": {
+			"type": "string",
+			"default": "fa-regular fa-face-smile"
+		},
+		"iconBgColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"iconColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"dropBgColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"dropColor": {
+			"type": "string",
+			"default": "#747474"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": ["file:./style-index.css", "blockons-fontawesome"]
+}

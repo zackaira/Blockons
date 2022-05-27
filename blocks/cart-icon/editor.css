@@ -1,0 +1,17 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+
+/* -- To show the dropdown within the editor -- */
+.blockons-cart-icon-block.show .blockons-cart-icon-dropdown {
+	visibility: visible;
+	opacity: 1;
+}
+.blockons-cart-icon-inner {
+	width: 250px;
+	padding: 20px;
+	font-size: 13px;
+	line-height: 1.5em;
+	text-align: center;
+}

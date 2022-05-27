@@ -1,0 +1,41 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.helplink {
+	font-size: 12px;
+	font-style: normal;
+	color: rgb(117, 117, 117);
+	margin-bottom: 2em;
+}
+.helplink.fixmargin {
+	margin: -15px 0 25px;
+}
+.helplink a {
+	background-color: #cae4f1;
+	color: #297cba;
+	padding: 3px 7px 4px;
+	border-radius: 3px;
+	box-shadow: 0 1px 5px rgb(0 0 0 / 15%);
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	font-size: 12px;
+	text-decoration: none;
+}
+.helplink a:hover {
+	background-color: #c0deee;
+}
+
+.blockons-account-icon-dropdown .blockons-account-icon-item div.rich-text {
+	display: block;
+	text-decoration: none;
+	font-size: 14px;
+	width: 150px;
+	padding: 6px 10px;
+	color: inherit;
+}
+
+/* -- To show the dropdown within the editor -- */
+.blockons-account-icon-block.show .blockons-account-icon-dropdown {
+	visibility: visible;
+	opacity: 1;
+}

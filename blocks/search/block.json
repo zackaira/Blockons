@@ -1,0 +1,51 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/search",
+	"title": "Block-Ons Search",
+	"textdomain": "blockons",
+	"icon": "search",
+	"category": "blockons-category",
+	"attributes": {
+		"alignment": {
+			"type": "string",
+			"default": "none"
+		},
+		"searchDisplay": {
+			"type": "string",
+			"default": "dropdown"
+		},
+		"textInput": {
+			"type": "string",
+			"default": "Search..."
+		},
+		"textButton": {
+			"type": "string",
+			"default": "Go"
+		},
+		"iconBgColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"iconColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"searchBgColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"searchBtnBgColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"searchBtnColor": {
+			"type": "string",
+			"default": "#FFF"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"script": "file:./search.js",
+	"style": ["file:./style-index.css", "blockons-fontawesome"]
+}

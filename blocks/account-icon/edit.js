@@ -1,0 +1,360 @@
+/**
+ * WordPress dependencies
+ */
+import { useState } from "@wordpress/element";
+import { __ } from "@wordpress/i18n";
+import {
+	RichText,
+	AlignmentToolbar,
+	BlockControls,
+	InspectorControls,
+	useBlockProps,
+} from "@wordpress/block-editor";
+import {
+	PanelBody,
+	ToggleControl,
+	SelectControl,
+	CheckboxControl,
+	TextControl,
+	ColorPalette,
+} from "@wordpress/components";
+
+import { colorPickerPalette } from "../block-global";
+
+const Edit = (props) => {
+	const {
+		isSelected,
+		attributes: {
+			alignment,
+			hasDropdown,
+			showDashboard,
+			showOrders,
+			showDownloads,
+			showAddresses,
+			showAccountDetails,
+			textDashboard,
+			textOrders,
+			textDownloads,
+			textAddresses,
+			textAccountDetails,
+			icon,
+			customIcon,
+			iconBgColor,
+			iconColor,
+			dropBgColor,
+			dropColor,
+		},
+	} = props;
+
+	const [showDropDown, setShowDropDown] = useState(false);
+
+	const blockProps = useBlockProps({
+		className: alignment,
+	});
+
+	const onChangeAlignment = (newAlignment) => {
+		props.setAttributes({
+			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
+		});
+	};
+	const onChangeCustomIcon = (value) => {
+		props.setAttributes({ customIcon: value });
+	};
+
+	return (
+		<div {...blockProps}>
+			{isSelected && (
+				<InspectorControls>
+					<PanelBody
+						title={__("Account Icon Settings", "blockons")}
+						initialOpen={true}
+					>
+						<ToggleControl
+							label={__("Add Drop Down Menu", "blockons")}
+							help={__(
+								"Add a drop down menu on hover to display account page links.",
+								"blockons"
+							)}
+							checked={hasDropdown}
+							onChange={(newValue) => {
+								props.setAttributes({
+									hasDropdown: newValue,
+								});
+							}}
+						/>
+						{hasDropdown && (
+							<>
+								<ToggleControl // This setting is just for displaying the drop down, value is not saved.
+									label={__("Always Show Drop Down", "blockons")}
+									checked={showDropDown}
+									help={__(
+										"This will always display the drop down ONLY in the editor",
+										"blockons"
+									)}
+									onChange={() => {
+										setShowDropDown((state) => !state);
+									}}
+								/>
+								<CheckboxControl
+									label="Dashboard"
+									checked={showDashboard}
+									onChange={(newValue) => {
+										props.setAttributes({
+											showDashboard: newValue,
+										});
+									}}
+								/>
+								<CheckboxControl
+									label="Orders"
+									checked={showOrders}
+									onChange={(newValue) => {
+										props.setAttributes({
+											showOrders: newValue,
+										});
+									}}
+								/>
+								<CheckboxControl
+									label="Downloads"
+									checked={showDownloads}
+									onChange={(newValue) => {
+										props.setAttributes({
+											showDownloads: newValue,
+										});
+									}}
+								/>
+								<CheckboxControl
+									label="Addresses"
+									checked={showAddresses}
+									onChange={(newValue) => {
+										props.setAttributes({
+											showAddresses: newValue,
+										});
+									}}
+								/>
+								<CheckboxControl
+									label="Account Details"
+									checked={showAccountDetails}
+									onChange={(newValue) => {
+										props.setAttributes({
+											showAccountDetails: newValue,
+										});
+									}}
+								/>
+							</>
+						)}
+					</PanelBody>
+					<PanelBody
+						title={__("Account Icon Design", "blockons")}
+						initialOpen={false}
+					>
+						<SelectControl
+							label={__("Select an Icon", "blockons")}
+							value={icon}
+							options={[
+								{
+									label: __("User Outline", "blockons"),
+									value: "fa-regular fa-user",
+								},
+								{ label: __("User", "blockons"), value: "fa-solid fa-user" },
+								{
+									label: __("Circle User", "blockons"),
+									value: "fa-solid fa-circle-user",
+								},
+								{
+									label: __("Person", "blockons"),
+									value: "fa-solid fa-person",
+								},
+								{ label: __("Custom Icon", "blockons"), value: "custom" },
+							]}
+							onChange={(newIcon) =>
+								props.setAttributes({
+									icon: newIcon === undefined ? "fa-regular fa-user" : newIcon,
+								})
+							}
+							__nextHasNoMarginBottom
+						/>
+						{icon === "custom" && (
+							<>
+								<TextControl
+									label="Custom Icon Name"
+									value={customIcon}
+									onChange={onChangeCustomIcon}
+									help={__(
+										"Add your own custom icon by adding the Font Awesome icon full name",
+										"blockons"
+									)}
+								/>
+								<div className="helplink fixmargin">
+									<a href="#" target="_blank">
+										{__("Read More")}
+									</a>
+								</div>
+							</>
+						)}
+
+						<p>{__("Icon Background Color", "blockons")}</p>
+						<ColorPalette
+							colors={colorPickerPalette}
+							value={iconBgColor}
+							onChange={(newColor) =>
+								props.setAttributes({
+									iconBgColor: newColor === undefined ? "#FFF" : newColor,
+								})
+							}
+						/>
+
+						<p>{__("Icon Color", "blockons")}</p>
+						<ColorPalette
+							colors={colorPickerPalette}
+							value={iconColor}
+							onChange={(newColor) =>
+								props.setAttributes({
+									iconColor: newColor === undefined ? "#000" : newColor,
+								})
+							}
+						/>
+
+						<p>{__("Drop Down Background Color", "blockons")}</p>
+						<ColorPalette
+							colors={colorPickerPalette}
+							value={dropBgColor}
+							onChange={(newColor) =>
+								props.setAttributes({
+									dropBgColor: newColor === undefined ? "#FFF" : newColor,
+								})
+							}
+						/>
+
+						<p>{__("Drop Down Font Color", "blockons")}</p>
+						<ColorPalette
+							colors={colorPickerPalette}
+							value={dropColor}
+							onChange={(newColor) =>
+								props.setAttributes({
+									dropColor: newColor === undefined ? "#747474" : newColor,
+								})
+							}
+						/>
+					</PanelBody>
+				</InspectorControls>
+			)}
+			{
+				<BlockControls>
+					<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
+				</BlockControls>
+			}
+			<div
+				className={`blockons-account-icon-block ${
+					isSelected && showDropDown ? "show" : ""
+				}`}
+				style={{
+					backgroundColor: iconBgColor,
+				}}
+			>
+				<span
+					className={customIcon && icon == "custom" ? customIcon : icon}
+					style={{
+						color: iconColor,
+					}}
+				></span>
+				{hasDropdown && (
+					<div
+						className="blockons-account-icon-dropdown"
+						style={{
+							backgroundColor: dropBgColor,
+							color: dropColor,
+						}}
+					>
+						{showDashboard && (
+							<div className="blockons-account-icon-item">
+								<RichText
+									tagName="div"
+									placeholder={__("Dashboard", "blockons")}
+									value={textDashboard}
+									onChange={(newValue) =>
+										props.setAttributes({
+											textDashboard:
+												newValue === undefined
+													? __("Dashboard", "blockons")
+													: newValue,
+										})
+									}
+								/>
+							</div>
+						)}
+						{showOrders && (
+							<div className="blockons-account-icon-item">
+								<RichText
+									tagName="div"
+									placeholder={__("Orders", "blockons")}
+									value={textOrders}
+									onChange={(newValue) =>
+										props.setAttributes({
+											textOrders:
+												newValue === undefined
+													? __("Orders", "blockons")
+													: newValue,
+										})
+									}
+								/>
+							</div>
+						)}
+						{showDownloads && (
+							<div className="blockons-account-icon-item">
+								<RichText
+									tagName="div"
+									placeholder={__("Downloads", "blockons")}
+									value={textDownloads}
+									onChange={(newValue) =>
+										props.setAttributes({
+											textDownloads:
+												newValue === undefined
+													? __("Downloads", "blockons")
+													: newValue,
+										})
+									}
+								/>
+							</div>
+						)}
+						{showAddresses && (
+							<div className="blockons-account-icon-item">
+								<RichText
+									tagName="div"
+									placeholder={__("Addresses", "blockons")}
+									value={textAddresses}
+									onChange={(newValue) =>
+										props.setAttributes({
+											textAddresses:
+												newValue === undefined
+													? __("Addresses", "blockons")
+													: newValue,
+										})
+									}
+								/>
+							</div>
+						)}
+						{showAccountDetails && (
+							<div className="blockons-account-icon-item">
+								<RichText
+									tagName="div"
+									placeholder={__("Account Details", "blockons")}
+									value={textAccountDetails}
+									onChange={(newValue) =>
+										props.setAttributes({
+											textAccountDetails:
+												newValue === undefined
+													? __("Account Details", "blockons")
+													: newValue,
+										})
+									}
+								/>
+							</div>
+						)}
+					</div>
+				)}
+			</div>
+		</div>
+	);
+};
+
+export default Edit;

@@ -1,0 +1,15 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+
+/* -- To show the dropdown within the editor -- */
+.wp-block-blockons-search.blockons-show .blockons-search-dropdown,
+.wp-block-blockons-search.blockons-show .blockons-search-popup-overlay,
+.wp-block-blockons-search.blockons-show .blockons-search-popup-wrapper {
+	visibility: visible;
+	opacity: 1;
+}
+.blockons-search-input {
+	color: #939393;
+}

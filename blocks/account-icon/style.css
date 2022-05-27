@@ -1,0 +1,59 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.wp-block-blockons-account-icon {
+	display: flex;
+}
+.blockons-account-icon-block {
+	border-radius: 3px;
+	color: #000;
+	background-color: #fff;
+	font-size: 20px;
+	width: 45px;
+	height: 45px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+.blockons-account-icon-dropdown {
+	color: inherit;
+	position: absolute;
+	right: 0;
+	top: 100%;
+	background-color: #fff;
+	border-radius: 3px;
+	box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
+	z-index: 95;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.2s ease-in-out 0s;
+}
+.blockons-account-icon-dropdown .blockons-account-icon-item {
+	box-shadow: 0 1px 0 0 rgb(0 0 0 / 8%);
+}
+.blockons-account-icon-dropdown .blockons-account-icon-item:last-child {
+	box-shadow: none;
+}
+.blockons-account-icon-dropdown .blockons-account-icon-item a {
+	display: block;
+	text-decoration: none;
+	font-size: 14px;
+	width: 150px;
+	padding: 6px 10px;
+	color: inherit;
+}
+
+.blockons-account-icon-block:hover .blockons-account-icon-dropdown {
+	visibility: visible;
+	opacity: 1;
+}
+
+/* -- Alignment -- */
+.align-center {
+	justify-content: center;
+}
+.align-right {
+	justify-content: flex-end;
+}
