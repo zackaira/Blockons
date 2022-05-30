@@ -19,6 +19,14 @@
 			"type": "string",
 			"default": "fa-solid fa-cart-shopping"
 		},
+		"iconSize": {
+			"type": "number",
+			"default": 17
+		},
+		"iconPadding": {
+			"type": "number",
+			"default": 8
+		},
 		"customIcon": {
 			"type": "string",
 			"default": "fa-regular fa-face-smile"

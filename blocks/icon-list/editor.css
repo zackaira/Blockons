@@ -1,0 +1,24 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.blockons-list-wrap li.blockons-list-item {
+	box-shadow: none;
+	border-radius: 3px;
+	transition: box-shadow 0.3s ease-in-out 0s;
+}
+.blockons-list-wrap li.blockons-list-item:hover {
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 8%);
+}
+
+/* -- Item Level Controls -- */
+.blockons-item-btns {
+	position: absolute;
+	top: -10px;
+	right: 0;
+}
+
+/* -- Controls -- */
+.blockons-add-new {
+	margin: 15px 0 0;
+}

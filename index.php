@@ -22,6 +22,7 @@ if (has_block('blockons/cart-icon')) {
 require plugin_dir_path( __FILE__ ) . 'build/blocks/account-icon/index.php';
 require plugin_dir_path( __FILE__ ) . 'build/blocks/cart-icon/index.php';
 require plugin_dir_path( __FILE__ ) . 'build/blocks/search/index.php';
+require plugin_dir_path( __FILE__ ) . 'build/blocks/icon-list/index.php';
 // require plugin_dir_path( __FILE__ ) . 'build/blocks/05-recipe-card-esnext/index.php';
 // require plugin_dir_path( __FILE__ ) . 'build/blocks/10-dynamic-block/index.php';
 

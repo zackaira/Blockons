@@ -14,6 +14,8 @@ const Save = ({ attributes }) => {
 				className={`blockons-cart-icon-block`}
 				style={{
 					backgroundColor: attributes.iconBgColor,
+					fontSize: attributes.iconSize,
+					padding: attributes.iconPadding,
 				}}
 			>
 				<div className="blockons-cart-icon-block-icon">

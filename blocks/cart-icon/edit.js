@@ -14,7 +14,7 @@ import {
 	PanelBody,
 	ToggleControl,
 	SelectControl,
-	CheckboxControl,
+	RangeControl,
 	TextControl,
 	ColorPalette,
 } from "@wordpress/components";
@@ -28,6 +28,8 @@ const Edit = (props) => {
 			alignment,
 			hasDropdown,
 			icon,
+			iconSize,
+			iconPadding,
 			customIcon,
 			iconBgColor,
 			iconColor,
@@ -154,6 +156,29 @@ const Edit = (props) => {
 							</>
 						)}
 
+						<RangeControl
+							label={__("Icon Size", "blockons")}
+							value={iconSize}
+							onChange={(value) =>
+								props.setAttributes({
+									iconSize: value === undefined ? 17 : value,
+								})
+							}
+							min={14}
+							max={50}
+						/>
+						<RangeControl
+							label={__("Icon Padding", "blockons")}
+							value={iconPadding}
+							onChange={(value) =>
+								props.setAttributes({
+									iconPadding: value === undefined ? 5 : value,
+								})
+							}
+							min={0}
+							max={50}
+						/>
+
 						<p>{__("Icon Background Color", "blockons")}</p>
 						<ColorPalette
 							colors={colorPickerPalette}
@@ -213,13 +238,22 @@ const Edit = (props) => {
 					backgroundColor: iconBgColor,
 				}}
 			>
-				<div className="blockons-cart-icon-block-icon">
+				<div
+					className="blockons-cart-icon-block-icon"
+					style={{
+						fontSize: iconSize,
+						padding: iconPadding,
+					}}
+				>
 					<span
 						className={customIcon && icon == "custom" ? customIcon : icon}
 						style={{
 							color: iconColor,
 						}}
 					></span>
+					<div className="blockons-cart-amnt">
+						<span>$34,00</span> <span>(2 items)</span>
+					</div>
 				</div>
 				{hasDropdown && (
 					<div

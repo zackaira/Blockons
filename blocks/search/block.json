@@ -23,6 +23,14 @@
 			"type": "string",
 			"default": "Go"
 		},
+		"iconSize": {
+			"type": "number",
+			"default": 20
+		},
+		"iconPadding": {
+			"type": "number",
+			"default": 15
+		},
 		"iconBgColor": {
 			"type": "string",
 			"default": "#FFF"
@@ -30,6 +38,10 @@
 		"iconColor": {
 			"type": "string",
 			"default": "#000"
+		},
+		"searchAlign": {
+			"type": "string",
+			"default": "right"
 		},
 		"searchBgColor": {
 			"type": "string",

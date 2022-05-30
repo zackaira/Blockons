@@ -11,9 +11,15 @@ const Save = ({ attributes }) => {
 	return (
 		<div {...blockProps}>
 			<div
-				className={`blockons-search-block  ${attributes.searchDisplay}`}
+				className={`blockons-search-block  ${attributes.searchDisplay} ${
+					attributes.searchDisplay === "dropdown" && attributes.searchAlign
+						? attributes.searchAlign
+						: ""
+				}`}
 				style={{
 					backgroundColor: attributes.iconBgColor,
+					fontSize: attributes.iconSize,
+					padding: attributes.iconPadding,
 				}}
 			>
 				<span

@@ -16,17 +16,17 @@
 }
 .blockons-cart-icon-block-icon {
 	width: auto;
-	padding: 8px;
+	padding: 5px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-size: 17px;
 }
 .blockons-cart-icon-block-icon .blockons-cart-amnt {
-	font-size: 14px;
+	font-size: 0.92em;
 	color: inherit;
 	text-decoration: none;
-	margin: 0 0 0 8px;
+	margin: 0 0 0 10px;
 }
 
 .blockons-cart-icon-dropdown {

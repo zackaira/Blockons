@@ -59,6 +59,14 @@
 			"type": "string",
 			"default": "fa-regular fa-user"
 		},
+		"iconSize": {
+			"type": "number",
+			"default": 20
+		},
+		"iconPadding": {
+			"type": "number",
+			"default": 15
+		},
 		"customIcon": {
 			"type": "string",
 			"default": "fa-regular fa-face-smile"

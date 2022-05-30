@@ -10,8 +10,7 @@
 	color: #000;
 	background-color: #fff;
 	font-size: 20px;
-	width: 45px;
-	height: 45px;
+	padding: 15px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -22,7 +21,6 @@
 /* -- Drop Down Style -- */
 .blockons-search-block .blockons-search-dropdown {
 	position: absolute;
-	right: 0;
 	top: 100%;
 	background-color: #fff;
 	border-radius: 3px;
@@ -33,6 +31,17 @@
 	opacity: 0;
 	transition: all 0.2s ease-in-out 0s;
 }
+.blockons-search-block.right .blockons-search-dropdown {
+	right: 0;
+}
+.blockons-search-block.left .blockons-search-dropdown {
+	left: 0;
+}
+.blockons-search-block.center .blockons-search-dropdown {
+	left: 50%;
+	margin-left: -120px;
+}
+
 .blockons-search-dropdown .blockons-search-inner,
 .blockons-search-dropdown .blockons-search-inner form {
 	width: 240px;

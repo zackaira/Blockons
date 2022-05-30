@@ -16,6 +16,7 @@ import {
 	SelectControl,
 	CheckboxControl,
 	TextControl,
+	RangeControl,
 	ColorPalette,
 } from "@wordpress/components";
 
@@ -38,6 +39,8 @@ const Edit = (props) => {
 			textAddresses,
 			textAccountDetails,
 			icon,
+			iconSize,
+			iconPadding,
 			customIcon,
 			iconBgColor,
 			iconColor,
@@ -176,7 +179,7 @@ const Edit = (props) => {
 						{icon === "custom" && (
 							<>
 								<TextControl
-									label="Custom Icon Name"
+									label={__("Icon Name", "blockons")}
 									value={customIcon}
 									onChange={onChangeCustomIcon}
 									help={__(
@@ -191,6 +194,29 @@ const Edit = (props) => {
 								</div>
 							</>
 						)}
+
+						<RangeControl
+							label={__("Icon Size", "blockons")}
+							value={iconSize}
+							onChange={(value) =>
+								props.setAttributes({
+									iconSize: value === undefined ? 20 : value,
+								})
+							}
+							min={14}
+							max={50}
+						/>
+						<RangeControl
+							label={__("Icon Padding", "blockons")}
+							value={iconPadding}
+							onChange={(value) =>
+								props.setAttributes({
+									iconPadding: value === undefined ? 20 : value,
+								})
+							}
+							min={0}
+							max={60}
+						/>
 
 						<p>{__("Icon Background Color", "blockons")}</p>
 						<ColorPalette
@@ -249,6 +275,8 @@ const Edit = (props) => {
 				}`}
 				style={{
 					backgroundColor: iconBgColor,
+					fontSize: iconSize,
+					padding: iconPadding,
 				}}
 			>
 				<span

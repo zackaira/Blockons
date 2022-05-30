@@ -14,8 +14,7 @@ import {
 	PanelBody,
 	ToggleControl,
 	SelectControl,
-	CheckboxControl,
-	TextControl,
+	RangeControl,
 	ColorPalette,
 } from "@wordpress/components";
 
@@ -29,8 +28,11 @@ const Edit = (props) => {
 			searchDisplay,
 			textInput,
 			textButton,
+			iconSize,
+			iconPadding,
 			iconBgColor,
 			iconColor,
+			searchAlign,
 			searchBgColor,
 			searchBtnBgColor,
 			searchBtnColor,
@@ -96,11 +98,50 @@ const Edit = (props) => {
 								setShowSearch((state) => !state);
 							}}
 						/>
+
+						<SelectControl
+							label={__("Align Drop Down Search", "blockons")}
+							value={searchAlign}
+							options={[
+								{ label: __("Right", "blockons"), value: "right" },
+								{ label: __("Left", "blockons"), value: "left" },
+								{ label: __("Center", "blockons"), value: "center" },
+							]}
+							onChange={(value) =>
+								props.setAttributes({
+									searchAlign: value === undefined ? "right" : value,
+								})
+							}
+							__nextHasNoMarginBottom
+						/>
 					</PanelBody>
 					<PanelBody
 						title={__("Search Design", "blockons")}
 						initialOpen={false}
 					>
+						<RangeControl
+							label={__("Icon Size", "blockons")}
+							value={iconSize}
+							onChange={(value) =>
+								props.setAttributes({
+									iconSize: value === undefined ? 17 : value,
+								})
+							}
+							min={14}
+							max={50}
+						/>
+						<RangeControl
+							label={__("Icon Padding", "blockons")}
+							value={iconPadding}
+							onChange={(value) =>
+								props.setAttributes({
+									iconPadding: value === undefined ? 5 : value,
+								})
+							}
+							min={0}
+							max={50}
+						/>
+
 						<p>{__("Icon Background Color", "blockons")}</p>
 						<ColorPalette
 							colors={colorPickerPalette}
@@ -167,9 +208,13 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 			<div
-				className="blockons-search-block"
+				className={`blockons-search-block ${
+					searchDisplay === "dropdown" && searchAlign ? searchAlign : ""
+				}`}
 				style={{
 					backgroundColor: iconBgColor,
+					fontSize: iconSize,
+					padding: iconPadding,
 				}}
 			>
 				<span

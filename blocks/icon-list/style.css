@@ -1,0 +1,30 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.blockons-list-wrap {
+	margin: 0;
+	padding: 0;
+}
+.blockons-list-wrap li.blockons-list-item {
+	margin: 0 0 3px;
+	padding: 0;
+	list-style-type: none;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+.blockons-list-item-icon {
+	margin: 0 8px 0 0;
+}
+.blockons-list-item-text {
+}
+
+/* -- Alignment -- */
+.align-center {
+	justify-content: center;
+}
+.align-right {
+	justify-content: flex-end;
+}
