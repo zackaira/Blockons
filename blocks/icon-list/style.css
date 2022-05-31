@@ -16,15 +16,18 @@
 	justify-content: flex-start;
 }
 .blockons-list-item-icon {
-	margin: 0 8px 0 0;
+	margin: 0 5px 0 0;
+	padding: 2px 5px;
+	font-size: 18px;
 }
 .blockons-list-item-text {
+	font-size: inherit;
 }
 
 /* -- Alignment -- */
-.align-center {
+.wp-block-blockons-icon-list.align-center li.blockons-list-item {
 	justify-content: center;
 }
-.align-right {
+.wp-block-blockons-icon-list.align-right li.blockons-list-item {
 	justify-content: flex-end;
 }

@@ -16,15 +16,31 @@
 			"default": [
 				{
 					"itemId": 0,
-					"itemText": "Item One",
-					"itemIcon": "yes"
+					"itemText": "List Item",
+					"itemIcon": "check"
 				},
 				{
 					"itemId": 1,
-					"itemText": "Item Two",
-					"itemIcon": "yes"
+					"itemText": "List Item",
+					"itemIcon": "check"
 				}
 			]
+		},
+		"listItemSpacing": {
+			"type": "number",
+			"default": 3
+		},
+		"listItemIconSpacing": {
+			"type": "number",
+			"default": 5
+		},
+		"listItemIconSize": {
+			"type": "number",
+			"default": 18
+		},
+		"listItemFontSize": {
+			"type": "number",
+			"default": 16
 		}
 	},
 	"editorScript": "file:./index.js",

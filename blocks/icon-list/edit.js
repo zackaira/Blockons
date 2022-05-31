@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-import { useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	RichText,
@@ -12,24 +11,32 @@ import {
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
+	Dropdown,
 	ToggleControl,
 	SelectControl,
 	CheckboxControl,
 	TextControl,
 	RangeControl,
 	ColorPalette,
+	Icon,
 	Button,
 } from "@wordpress/components";
 
-import { colorPickerPalette } from "../block-global";
+import FontAwesomeIcon from "../_components/FontAwesomeIcon";
+import { iconListIcons } from "../block-global";
 
 const Edit = (props) => {
 	const {
 		isSelected,
-		attributes: { alignment, listItems },
+		attributes: {
+			alignment,
+			listItems,
+			listItemSpacing,
+			listItemIconSpacing,
+			listItemIconSize,
+			listItemFontSize,
+		},
 	} = props;
-
-	const [showDropDown, setShowDropDown] = useState(false);
 
 	const blockProps = useBlockProps({
 		className: alignment,
@@ -45,7 +52,12 @@ const Edit = (props) => {
 	};
 
 	// Item Control Functions
-	const handleItemChange = (itemText, index) => {
+	const handleItemIconChange = (itemIcon, index) => {
+		const newListItems = [...listItems];
+		newListItems[index].itemIcon = itemIcon;
+		props.setAttributes({ listItems: newListItems });
+	};
+	const handleItemTextChange = (itemText, index) => {
 		const newListItems = [...listItems];
 		newListItems[index].itemText = itemText;
 		props.setAttributes({ listItems: newListItems });
@@ -82,20 +94,93 @@ const Edit = (props) => {
 	if (listItems.length) {
 		listItemDisplay = listItems.map((listItem, index) => {
 			return (
-				<li className="blockons-list-item">
-					<div className="blockons-list-item-icon">
-						<span className="fa-solid fa-check"></span>
+				<li
+					className="blockons-list-item"
+					style={{
+						marginBottom: listItemSpacing,
+						fontSize: listItemFontSize,
+					}}
+				>
+					<div
+						className="blockons-list-item-icon"
+						style={{
+							marginRight: listItemIconSpacing,
+							fontSize: listItemIconSize,
+						}}
+					>
+						<Dropdown
+							className="blockons-icon-selecter"
+							contentClassName="blockons-editor-popup"
+							position="top right"
+							renderToggle={({ isOpen, onToggle }) => (
+								<FontAwesomeIcon
+									icon={listItem.itemIcon}
+									iconSize={listItemIconSize}
+									onClick={onToggle}
+								/>
+							)}
+							renderContent={() =>
+								Object.keys(iconListIcons).map((icon) => (
+									<FontAwesomeIcon
+										icon={icon}
+										iconSize={20}
+										onClick={() => handleItemIconChange(icon, index)}
+									/>
+								))
+							}
+						/>
 					</div>
 					<RichText
 						tagName="div"
 						placeholder={__("List Item", "blockons")}
-						// keepPlaceholderOnFocus
 						value={listItem.itemText}
-						// multiline={false}
+						multiline={false}
 						className="blockons-list-item-text"
-						onChange={(itemText) => handleItemChange(itemText, index)}
+						onChange={(itemText) => handleItemTextChange(itemText, index)}
 					/>
 					<div className="blockons-item-btns">
+						<Dropdown
+							className="blockons-item-level-settings"
+							contentClassName="blockons-editor-popup"
+							position="bottom right"
+							renderToggle={({ isOpen, onToggle }) => (
+								<Button
+									icon="art"
+									label={__("List Item Colors", "blockons")}
+									onClick={onToggle}
+									aria-expanded={isOpen}
+								/>
+							)}
+							renderContent={() => (
+								<>
+									<p>{__("Icon Size & Color", "blockons")}</p>
+									<RangeControl
+										value={listItem.iconNewSize}
+										onChange={() => {}}
+										min={10}
+										max={98}
+									/>
+									<ColorPalette
+										value={listItem.iconNewColor}
+										onChange={() => {}}
+									/>
+									<br />
+									<br />
+									<p>{__("Text Size & Color", "blockons")}</p>
+									<RangeControl
+										value={listItem.textNewSize}
+										onChange={() => {}}
+										min={10}
+										max={64}
+									/>
+									<ColorPalette
+										value={listItem.TextNewColor}
+										onChange={() => {}}
+									/>
+									<br />
+								</>
+							)}
+						/>
 						<Button
 							className="blockons-duplicate-item"
 							icon="admin-page"
@@ -124,26 +209,47 @@ const Edit = (props) => {
 						title={__("Icon List Settings", "blockons")}
 						initialOpen={true}
 					>
-						{/* <ToggleControl
-							label={__("Add Drop Down Menu", "blockons")}
-							help={__(
-								"Add a drop down menu on hover to display account page links.",
-								"blockons"
-							)}
-							checked={hasDropdown}
-							onChange={(newValue) => {
-								props.setAttributes({
-									hasDropdown: newValue,
-								});
-							}}
-						/> */}
-						empty
+						<RangeControl
+							label={__("Item Spacing", "blockons")}
+							value={listItemSpacing}
+							onChange={(value) =>
+								props.setAttributes({ listItemSpacing: value })
+							}
+							min={0}
+							max={100}
+						/>
+						<RangeControl
+							label={__("Icon & Text Spacing", "blockons")}
+							value={listItemIconSpacing}
+							onChange={(value) =>
+								props.setAttributes({ listItemIconSpacing: value })
+							}
+							min={0}
+							max={80}
+						/>
 					</PanelBody>
 					<PanelBody
 						title={__("Icon List Design", "blockons")}
 						initialOpen={false}
 					>
-						nothing here yet
+						<RangeControl
+							label={__("Icon Size", "blockons")}
+							value={listItemIconSize}
+							onChange={(newFontSize) => {
+								props.setAttributes({ listItemIconSize: newFontSize });
+							}}
+							min={10}
+							max={98}
+						/>
+						<RangeControl
+							label={__("Font Size", "blockons")}
+							value={listItemFontSize}
+							onChange={(value) =>
+								props.setAttributes({ listItemFontSize: value })
+							}
+							min={10}
+							max={64}
+						/>
 						{/* <SelectControl
 							label={__("Select a default Icon", "blockons")}
 							value={icon}
