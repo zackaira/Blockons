@@ -6,7 +6,7 @@ import FontAwesomeIcon from "../_components/FontAwesomeIcon";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
-		className: attributes.alignment,
+		className: `${attributes.alignment} items-${attributes.listItemsLayout}`,
 	});
 
 	const listItemElements = attributes.listItems.map((listItem, index) => {
@@ -14,24 +14,38 @@ const Save = ({ attributes }) => {
 			<li
 				className="blockons-list-item"
 				style={{
-					marginBottom: attributes.listItemSpacing,
-					fontSize: attributes.listItemFontSize,
+					...(attributes.listItemsLayout === "horizontal"
+						? { marginRight: attributes.listItemSpacing }
+						: { marginBottom: attributes.listItemSpacing }),
+					fontSize: listItem.itemTextSize
+						? listItem.itemTextSize
+						: attributes.listItemFontSize,
+					color: listItem.itemTextColor
+						? listItem.itemTextColor
+						: attributes.listItemFontColor,
 				}}
 			>
 				<div
 					className="blockons-list-item-icon"
 					style={{
 						marginRight: attributes.listItemIconSpacing,
-						fontSize: attributes.listItemIconSize,
+						fontSize: listItem.itemIconSize
+							? listItem.itemIconSize
+							: attributes.listItemIconSize,
+						color: listItem.itemIconColor
+							? listItem.itemIconColor
+							: attributes.listItemIconColor,
 					}}
 				>
 					<FontAwesomeIcon icon={listItem.itemIcon} />
 				</div>
-				<RichText.Content
-					tagName="div"
-					value={listItem.itemText}
-					className="blockons-list-item-text"
-				/>
+				{listItem.itemText && (
+					<RichText.Content
+						tagName="div"
+						value={listItem.itemText}
+						className="blockons-list-item-text"
+					/>
+				)}
 			</li>
 		);
 	});

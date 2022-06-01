@@ -10,6 +10,10 @@
 .blockons-list-wrap li.blockons-list-item:hover {
 	box-shadow: 0 0 0 1px rgb(0 0 0 / 8%);
 }
+.blockons-list-wrap li.blockons-list-item .blockons-list-item-icon:hover {
+	box-shadow: 0 0 0 1px #297cba;
+	cursor: pointer;
+}
 
 /* -- Item Level Controls -- */
 .blockons-item-btns {
@@ -21,15 +25,20 @@
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out 0s;
 }
+.wp-block-blockons-icon-list.items-horizontal .blockons-item-btns {
+	top: auto;
+	bottom: 100%;
+}
 .blockons-list-wrap li.blockons-list-item:hover .blockons-item-btns {
 	opacity: 1;
 }
-.blockons-list-wrap
-	li.blockons-list-item
-	.blockons-item-btns
-	.components-button.has-icon {
+.blockons-list-wrap li.blockons-list-item .blockons-item-btns button {
 	height: auto;
 	padding: 5px;
+}
+.blockons-list-wrap li.blockons-list-item .blockons-item-btns > div {
+	height: auto;
+	display: inline-flex;
 }
 
 /* .wp-block-blockons-icon-list.align-center .blockons-item-btns */

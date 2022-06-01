@@ -30,16 +30,19 @@ const Edit = (props) => {
 		isSelected,
 		attributes: {
 			alignment,
-			listItems,
+			listItems = 3,
+			listItemsLayout,
 			listItemSpacing,
 			listItemIconSpacing,
 			listItemIconSize,
+			listItemIconColor,
 			listItemFontSize,
+			listItemFontColor,
 		},
 	} = props;
 
 	const blockProps = useBlockProps({
-		className: alignment,
+		className: `${alignment} items-${listItemsLayout}`,
 	});
 
 	const onChangeAlignment = (newAlignment) => {
@@ -52,22 +55,91 @@ const Edit = (props) => {
 	};
 
 	// Item Control Functions
-	const handleItemIconChange = (itemIcon, index) => {
+	const handleItemIconChange = (itemIcon, itemId) => {
 		const newListItems = [...listItems];
-		newListItems[index].itemIcon = itemIcon;
-		props.setAttributes({ listItems: newListItems });
+		const editedListItems = newListItems.map((obj) => {
+			if (obj.itemId === itemId)
+				return {
+					...obj,
+					itemIcon: itemIcon,
+				};
+			return obj;
+		});
+		props.setAttributes({ listItems: editedListItems });
 	};
-	const handleItemTextChange = (itemText, index) => {
+	const handleItemIconSizeChange = (itemIconSize, itemId) => {
 		const newListItems = [...listItems];
-		newListItems[index].itemText = itemText;
-		props.setAttributes({ listItems: newListItems });
+		const editedListItems = newListItems.map((obj) => {
+			if (obj.itemId === itemId)
+				return {
+					...obj,
+					itemIconSize: itemIconSize,
+				};
+			return obj;
+		});
+		props.setAttributes({ listItems: editedListItems });
+	};
+	const handleItemIconColorChange = (itemIconColor, itemId) => {
+		const newListItems = [...listItems];
+		const editedListItems = newListItems.map((obj) => {
+			if (obj.itemId === itemId)
+				return {
+					...obj,
+					itemIconColor: itemIconColor,
+				};
+			return obj;
+		});
+		props.setAttributes({ listItems: editedListItems });
+	};
+	const handleItemTextSizeChange = (itemTextSize, itemId) => {
+		const newListItems = [...listItems];
+		const editedListItems = newListItems.map((obj) => {
+			if (obj.itemId === itemId)
+				return {
+					...obj,
+					itemTextSize: itemTextSize,
+				};
+			return obj;
+		});
+		props.setAttributes({ listItems: editedListItems });
+	};
+	const handleItemTextColorChange = (itemTextColor, itemId) => {
+		const newListItems = [...listItems];
+		const editedListItems = newListItems.map((obj) => {
+			if (obj.itemId === itemId)
+				return {
+					...obj,
+					itemTextColor: itemTextColor,
+				};
+			return obj;
+		});
+		props.setAttributes({ listItems: editedListItems });
+	};
+	const handleItemTextChange = (itemText, itemId) => {
+		const newListItems = [...listItems];
+		// Edit the item text and ID (this prevent the edit from editing all instances if the block is duplicated)
+		const editedListItems = newListItems.map((obj) => {
+			if (obj.itemId === itemId)
+				return {
+					...obj,
+					itemId:
+						itemId === "" ? Math.floor(Math.random() * 700) : slugify(itemText),
+					itemText: itemText,
+				};
+			return obj;
+		});
+		props.setAttributes({ listItems: editedListItems });
 	};
 	const handleAddItem = () => {
 		const newListItems = [...listItems];
 		newListItems.push({
 			itemId: newListItems.length + 1,
 			itemText: "",
-			itemIcon: "yes",
+			itemTextSize: null,
+			itemTextColor: null,
+			itemIcon: "check",
+			itemIconSize: null,
+			itemIconColor: null,
 		});
 		props.setAttributes({ listItems: newListItems });
 	};
@@ -78,12 +150,24 @@ const Edit = (props) => {
 		props.setAttributes({ listItems: newListItems });
 	};
 
-	const handleDuplicateItem = (index, icon, text) => {
+	const handleDuplicateItem = (
+		index,
+		text,
+		textSize,
+		textColor,
+		icon,
+		iconSize,
+		iconColor
+	) => {
 		const newListItems = [...listItems];
 		newListItems.splice(index + 1, 0, {
-			itemId: newListItems.length + 1,
+			itemId: Math.floor(Math.random() * 700) + 1,
 			itemText: text,
+			itemTextSize: textSize,
+			itemTextColor: textColor,
 			itemIcon: icon,
+			itemIconSize: iconSize,
+			itemIconColor: iconColor,
 		});
 		props.setAttributes({ listItems: newListItems });
 	};
@@ -97,25 +181,38 @@ const Edit = (props) => {
 				<li
 					className="blockons-list-item"
 					style={{
-						marginBottom: listItemSpacing,
-						fontSize: listItemFontSize,
+						...(listItemsLayout === "horizontal"
+							? { marginRight: listItemSpacing }
+							: { marginBottom: listItemSpacing }),
+						fontSize: listItem.itemTextSize
+							? listItem.itemTextSize
+							: listItemFontSize,
+						color: listItem.itemTextColor
+							? listItem.itemTextColor
+							: listItemFontColor,
 					}}
 				>
 					<div
 						className="blockons-list-item-icon"
 						style={{
 							marginRight: listItemIconSpacing,
-							fontSize: listItemIconSize,
+							color: listItem.itemIconColor
+								? listItem.itemIconColor
+								: listItemIconColor,
 						}}
 					>
 						<Dropdown
 							className="blockons-icon-selecter"
 							contentClassName="blockons-editor-popup"
-							position="top right"
+							position="bottom right"
 							renderToggle={({ isOpen, onToggle }) => (
 								<FontAwesomeIcon
 									icon={listItem.itemIcon}
-									iconSize={listItemIconSize}
+									iconSize={
+										listItem.itemIconSize
+											? listItem.itemIconSize
+											: listItemIconSize
+									}
 									onClick={onToggle}
 								/>
 							)}
@@ -124,7 +221,7 @@ const Edit = (props) => {
 									<FontAwesomeIcon
 										icon={icon}
 										iconSize={20}
-										onClick={() => handleItemIconChange(icon, index)}
+										onClick={() => handleItemIconChange(icon, listItem.itemId)}
 									/>
 								))
 							}
@@ -132,11 +229,13 @@ const Edit = (props) => {
 					</div>
 					<RichText
 						tagName="div"
-						placeholder={__("List Item", "blockons")}
+						placeholder={__("#ListItem", "blockons")}
 						value={listItem.itemText}
 						multiline={false}
 						className="blockons-list-item-text"
-						onChange={(itemText) => handleItemTextChange(itemText, index)}
+						onChange={(itemText) =>
+							handleItemTextChange(itemText, listItem.itemId)
+						}
 					/>
 					<div className="blockons-item-btns">
 						<Dropdown
@@ -153,29 +252,53 @@ const Edit = (props) => {
 							)}
 							renderContent={() => (
 								<>
-									<p>{__("Icon Size & Color", "blockons")}</p>
-									<RangeControl
-										value={listItem.iconNewSize}
-										onChange={() => {}}
-										min={10}
-										max={98}
-									/>
-									<ColorPalette
-										value={listItem.iconNewColor}
-										onChange={() => {}}
-									/>
-									<br />
-									<br />
 									<p>{__("Text Size & Color", "blockons")}</p>
 									<RangeControl
-										value={listItem.textNewSize}
-										onChange={() => {}}
+										value={
+											listItem.itemTextSize
+												? listItem.itemTextSize
+												: listItemFontSize
+										}
+										onChange={(textSize) =>
+											handleItemTextSizeChange(textSize, listItem.itemId)
+										}
 										min={10}
 										max={64}
 									/>
 									<ColorPalette
-										value={listItem.TextNewColor}
-										onChange={() => {}}
+										value={
+											listItem.itemTextColor
+												? listItem.itemTextColor
+												: listItemFontColor
+										}
+										onChange={(itemSize) =>
+											handleItemTextColorChange(itemSize, listItem.itemId)
+										}
+									/>
+									<br />
+									<br />
+									<p>{__("Icon Size & Color", "blockons")}</p>
+									<RangeControl
+										value={
+											listItem.itemIconSize
+												? listItem.itemIconSize
+												: listItemIconSize
+										}
+										onChange={(itemSize) =>
+											handleItemIconSizeChange(itemSize, listItem.itemId)
+										}
+										min={10}
+										max={98}
+									/>
+									<ColorPalette
+										value={
+											listItem.itemIconColor
+												? listItem.itemIconColor
+												: listItemIconColor
+										}
+										onChange={(itemSize) =>
+											handleItemIconColorChange(itemSize, listItem.itemId)
+										}
 									/>
 									<br />
 								</>
@@ -186,7 +309,15 @@ const Edit = (props) => {
 							icon="admin-page"
 							label="Duplicate Item"
 							onClick={() =>
-								handleDuplicateItem(index, listItem.itemIcon, listItem.itemText)
+								handleDuplicateItem(
+									index,
+									listItem.itemText,
+									listItem.itemTextSize,
+									listItem.itemTextColor,
+									listItem.itemIcon,
+									listItem.itemIconSize,
+									listItem.itemIconColor
+								)
 							}
 						/>
 						<Button
@@ -209,6 +340,21 @@ const Edit = (props) => {
 						title={__("Icon List Settings", "blockons")}
 						initialOpen={true}
 					>
+						<SelectControl
+							label={__("List Layout", "blockons")}
+							value={listItemsLayout}
+							options={[
+								{ label: __("Vertical", "blockons"), value: "vertical" },
+								{ label: __("Horizontal", "blockons"), value: "horizontal" },
+							]}
+							onChange={(value) =>
+								props.setAttributes({
+									listItemsLayout: value === undefined ? "vertical" : value,
+								})
+							}
+							__nextHasNoMarginBottom
+						/>
+
 						<RangeControl
 							label={__("Item Spacing", "blockons")}
 							value={listItemSpacing}
@@ -233,15 +379,6 @@ const Edit = (props) => {
 						initialOpen={false}
 					>
 						<RangeControl
-							label={__("Icon Size", "blockons")}
-							value={listItemIconSize}
-							onChange={(newFontSize) => {
-								props.setAttributes({ listItemIconSize: newFontSize });
-							}}
-							min={10}
-							max={98}
-						/>
-						<RangeControl
 							label={__("Font Size", "blockons")}
 							value={listItemFontSize}
 							onChange={(value) =>
@@ -249,6 +386,27 @@ const Edit = (props) => {
 							}
 							min={10}
 							max={64}
+						/>
+						<ColorPalette
+							value={listItemFontColor}
+							onChange={(newColor) => {
+								props.setAttributes({ listItemFontColor: newColor });
+							}}
+						/>
+						<RangeControl
+							label={__("Icon Size & Color", "blockons")}
+							value={listItemIconSize}
+							onChange={(newFontSize) => {
+								props.setAttributes({ listItemIconSize: newFontSize });
+							}}
+							min={10}
+							max={98}
+						/>
+						<ColorPalette
+							value={listItemIconColor}
+							onChange={(newColor) => {
+								props.setAttributes({ listItemIconColor: newColor });
+							}}
 						/>
 						{/* <SelectControl
 							label={__("Select a default Icon", "blockons")}
@@ -304,18 +462,28 @@ const Edit = (props) => {
 			}
 			<div className={`blockons-list-align`}>
 				<ul className="blockons-list-wrap">{listItemDisplay}</ul>
-				<div
-					className={`blockons-add-new ${
-						listItemDisplay === undefined ? "no-items" : "has-items"
-					}`}
-				>
-					<Button variant="secondary" onClick={handleAddItem}>
-						{__("Add List Item", "blockons")}
-					</Button>
-				</div>
+				{isSelected && (
+					<div
+						className={`blockons-add-new ${
+							listItemDisplay === undefined ? "no-items" : "has-items"
+						}`}
+					>
+						<Button variant="secondary" onClick={handleAddItem}>
+							{__("Add List Item", "blockons")}
+						</Button>
+					</div>
+				)}
 			</div>
 		</div>
 	);
 };
+
+const slugify = (str) =>
+	str
+		.toLowerCase()
+		.trim()
+		.replace(/[^\w\s-]/g, "")
+		.replace(/[\s_-]+/g, "-")
+		.replace(/^-+|-+$/g, "");
 
 export default Edit;

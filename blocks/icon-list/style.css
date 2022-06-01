@@ -7,7 +7,7 @@
 	padding: 0;
 }
 .blockons-list-wrap li.blockons-list-item {
-	margin: 0 0 3px;
+	margin: 0 0 6px;
 	padding: 0;
 	list-style-type: none;
 	position: relative;
@@ -17,17 +17,26 @@
 }
 .blockons-list-item-icon {
 	margin: 0 5px 0 0;
-	padding: 2px 5px;
+	padding: 0 5px;
 	font-size: 18px;
+	line-height: 1;
 }
 .blockons-list-item-text {
 	font-size: inherit;
 }
 
+/* -- Layout (vertical/horizontal) -- */
+.wp-block-blockons-icon-list.items-horizontal .blockons-list-wrap {
+	display: flex;
+	flex-wrap: wrap;
+}
+
 /* -- Alignment -- */
-.wp-block-blockons-icon-list.align-center li.blockons-list-item {
+.wp-block-blockons-icon-list.items-vertical.align-center li.blockons-list-item,
+.wp-block-blockons-icon-list.items-horizontal.align-center .blockons-list-wrap {
 	justify-content: center;
 }
-.wp-block-blockons-icon-list.align-right li.blockons-list-item {
+.wp-block-blockons-icon-list.items-vertical.align-right li.blockons-list-item,
+.wp-block-blockons-icon-list.items-horizontal.align-right .blockons-list-wrap {
 	justify-content: flex-end;
 }

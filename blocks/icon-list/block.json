@@ -16,19 +16,31 @@
 			"default": [
 				{
 					"itemId": 0,
-					"itemText": "List Item",
-					"itemIcon": "check"
+					"itemText": "",
+					"itemTextSize": null,
+					"itemTextColor": null,
+					"itemIcon": "check",
+					"itemIconSize": null,
+					"itemIconColor": null
 				},
 				{
 					"itemId": 1,
-					"itemText": "List Item",
-					"itemIcon": "check"
+					"itemText": "",
+					"itemTextSize": null,
+					"itemTextColor": null,
+					"itemIcon": "check",
+					"itemIconSize": null,
+					"itemIconColor": null
 				}
 			]
 		},
+		"listItemsLayout": {
+			"type": "string",
+			"default": "vertical"
+		},
 		"listItemSpacing": {
 			"type": "number",
-			"default": 3
+			"default": 8
 		},
 		"listItemIconSpacing": {
 			"type": "number",
@@ -38,9 +50,17 @@
 			"type": "number",
 			"default": 18
 		},
+		"listItemIconColor": {
+			"type": "string",
+			"default": "#4f4f4f"
+		},
 		"listItemFontSize": {
 			"type": "number",
 			"default": 16
+		},
+		"listItemFontColor": {
+			"type": "string",
+			"default": "#4f4f4f"
 		}
 	},
 	"editorScript": "file:./index.js",
