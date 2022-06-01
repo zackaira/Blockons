@@ -1,0 +1,57 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/line-heading",
+	"title": "Block-Ons Line Heading",
+	"textdomain": "blockons",
+	"icon": "admin-users",
+	"category": "blockons-category",
+	"attributes": {
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"hTag": {
+			"type": "string",
+			"default": "h3"
+		},
+		"headingTitle": {
+			"type": "string",
+			"default": ""
+		},
+		"headingWidth": {
+			"type": "number",
+			"default": 100
+		},
+		"lineWidth": {
+			"type": "number",
+			"default": 2
+		},
+		"lineStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"headElementAlign": {
+			"type": "string",
+			"default": "left"
+		},
+		"headVertAlign": {
+			"type": "string",
+			"default": "centeralign"
+		},
+		"fontSize": {
+			"type": "number"
+		},
+		"fontColor": {
+			"type": "string",
+			"default": "#4f4f4f"
+		},
+		"lineColor": {
+			"type": "string",
+			"default": "#4f4f4f"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": ["file:./style-index.css", "blockons-fontawesome"]
+}
