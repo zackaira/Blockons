@@ -1,5 +1,19 @@
 /**
- * Global Settings used in multiple blocks
+ * Global functions & Settings used in multiple blocks
+ */
+/*
+ * Convert Text to slug
+ */
+export const slugify = (str) =>
+	str
+		.toLowerCase()
+		.trim()
+		.replace(/[^\w\s-]/g, "")
+		.replace(/[\s_-]+/g, "-")
+		.replace(/^-+|-+$/g, "");
+
+/*
+ * Default Colors for Color Palette
  */
 export const colorPickerPalette = [
 	{ name: "white", color: "#FFF" },
@@ -8,6 +22,9 @@ export const colorPickerPalette = [
 	{ name: "black", color: "#000" },
 ];
 
+/*
+ * Font Awesome Icons used in Icon List
+ */
 export const iconListIcons = {
 	check: "check",
 	"square-check": "square-check",

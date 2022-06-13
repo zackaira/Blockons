@@ -11,17 +11,29 @@
 			"type": "string",
 			"default": "left"
 		},
+		"headElementAlign": {
+			"type": "string",
+			"default": "left"
+		},
 		"hTag": {
 			"type": "string",
 			"default": "h3"
 		},
+		"headWidthSet": {
+			"type": "string",
+			"default": "outer"
+		},
+		"headOuterWidth": {
+			"type": "number",
+			"default": 100
+		},
+		"headLineWidth": {
+			"type": "number",
+			"default": 100
+		},
 		"headingTitle": {
 			"type": "string",
 			"default": ""
-		},
-		"headingWidth": {
-			"type": "number",
-			"default": 100
 		},
 		"lineWidth": {
 			"type": "number",
@@ -31,16 +43,9 @@
 			"type": "string",
 			"default": "solid"
 		},
-		"headElementAlign": {
-			"type": "string",
-			"default": "left"
-		},
 		"headVertAlign": {
 			"type": "string",
 			"default": "centeralign"
-		},
-		"fontSize": {
-			"type": "number"
 		},
 		"fontColor": {
 			"type": "string",

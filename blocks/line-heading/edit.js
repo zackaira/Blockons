@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-import { useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	RichText,
@@ -13,10 +12,7 @@ import {
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
-	ToggleControl,
 	SelectControl,
-	CheckboxControl,
-	TextControl,
 	RangeControl,
 	ColorPalette,
 } from "@wordpress/components";
@@ -28,15 +24,16 @@ const Edit = (props) => {
 		isSelected,
 		attributes: {
 			alignment,
-			headingWidth,
 			hTag,
+			headWidthSet,
+			headElementAlign,
+			headOuterWidth,
+			headLineWidth,
 			headingTitle,
 			lineStyle,
 			lineWidth,
 			lineColor,
-			headElementAlign,
 			headVertAlign,
-			fontSize,
 			fontColor,
 		},
 	} = props;
@@ -50,9 +47,6 @@ const Edit = (props) => {
 			alignment: newAlignment === undefined ? "left" : newAlignment,
 		});
 	};
-	const onChangeCustomIcon = (value) => {
-		props.setAttributes({ customIcon: value });
-	};
 
 	return (
 		<div {...blockProps}>
@@ -63,7 +57,7 @@ const Edit = (props) => {
 						initialOpen={true}
 					>
 						<SelectControl
-							label={__("Heading Level", "blockons")}
+							label={__("Heading Tag Element", "blockons")}
 							value={hTag}
 							options={[
 								{ label: "H1", value: "h1" },
@@ -81,22 +75,73 @@ const Edit = (props) => {
 							}
 							__nextHasNoMarginBottom
 						/>
+
 						<SelectControl
-							label={__("Heading Alignment", "blockons")}
-							value={headElementAlign}
+							label={__("Heading Width", "blockons")}
+							value={headWidthSet}
 							options={[
-								{ label: "Left", value: "left" },
-								{ label: "Center", value: "center" },
-								{ label: "Right", value: "right" },
+								{ label: "Outer Width by percentage", value: "outer" },
+								{ label: "Line Width by pixels", value: "line" },
 							]}
 							onChange={(value) =>
 								props.setAttributes({
-									headElementAlign: value === undefined ? "center" : value,
+									headWidthSet: value === undefined ? "outer" : value,
 								})
 							}
 							__nextHasNoMarginBottom
 						/>
+						{headWidthSet === "outer" && (
+							<RangeControl
+								label={__("Outer Width", "blockons")}
+								value={headOuterWidth}
+								onChange={(value) =>
+									props.setAttributes({ headOuterWidth: value })
+								}
+								min={10}
+								max={100}
+								help={__(
+									"The width set will be the percentage of it's container",
+									"blockons"
+								)}
+							/>
+						)}
+						{headWidthSet === "line" && (
+							<RangeControl
+								label={__("Width", "blockons")}
+								value={headLineWidth}
+								onChange={(value) =>
+									props.setAttributes({ headLineWidth: value })
+								}
+								min={10}
+								max={1000}
+								help={__(
+									"This will set the pixel width of the heading lines",
+									"blockons"
+								)}
+							/>
+						)}
 
+						<SelectControl
+							label={__("Text & Line Vertical Alignment", "blockons")}
+							value={headVertAlign}
+							options={[
+								{ label: "Top", value: "topalign" },
+								{ label: "Center", value: "centeralign" },
+								{ label: "Base", value: "basealign" },
+								{ label: "Bottom", value: "bottomalign" },
+							]}
+							onChange={(value) =>
+								props.setAttributes({
+									headVertAlign: value === undefined ? "solid" : value,
+								})
+							}
+							__nextHasNoMarginBottom
+						/>
+					</PanelBody>
+					<PanelBody
+						title={__("Line Heading Design", "blockons")}
+						initialOpen={false}
+					>
 						<SelectControl
 							label={__("Line Style", "blockons")}
 							value={lineStyle}
@@ -118,40 +163,11 @@ const Edit = (props) => {
 							onChange={(value) => props.setAttributes({ lineWidth: value })}
 							min={1}
 							max={40}
-							clearable
-						/>
-						<RangeControl
-							label={__("Width", "blockons")}
-							value={headingWidth}
-							onChange={(value) => props.setAttributes({ headingWidth: value })}
-							min={10}
-							max={100}
-							clearable
 						/>
 
-						<SelectControl
-							label={__("Text & Line Alignment", "blockons")}
-							value={headVertAlign}
-							options={[
-								{ label: "Top", value: "topalign" },
-								{ label: "Center", value: "centeralign" },
-								{ label: "Base", value: "basealign" },
-								{ label: "Bottom", value: "bottomalign" },
-							]}
-							onChange={(value) =>
-								props.setAttributes({
-									headVertAlign: value === undefined ? "solid" : value,
-								})
-							}
-							__nextHasNoMarginBottom
-						/>
-					</PanelBody>
-					<PanelBody
-						title={__("Line Heading Design", "blockons")}
-						initialOpen={false}
-					>
 						<p>{__("Heading Font Color", "blockons")}</p>
 						<ColorPalette
+							colors={colorPickerPalette}
 							value={fontColor}
 							onChange={(colorValue) =>
 								props.setAttributes({
@@ -161,6 +177,7 @@ const Edit = (props) => {
 						/>
 						<p>{__("Line Color", "blockons")}</p>
 						<ColorPalette
+							colors={colorPickerPalette}
 							value={lineColor}
 							onChange={(colorValue) =>
 								props.setAttributes({
@@ -186,7 +203,7 @@ const Edit = (props) => {
 			<div
 				className={`blockons-lheading-wrap`}
 				style={{
-					width: headingWidth + "%",
+					...(headWidthSet === "outer" ? { width: headOuterWidth + "%" } : ""),
 				}}
 			>
 				{(alignment === "right" || alignment === "center") && (
@@ -194,6 +211,7 @@ const Edit = (props) => {
 						className="blockons-lheading-before"
 						style={{
 							borderBottom: `${lineWidth}px ${lineStyle} ${lineColor}`,
+							...(headWidthSet === "line" ? { width: headLineWidth } : ""),
 						}}
 					/>
 				)}
@@ -206,7 +224,6 @@ const Edit = (props) => {
 					onChange={(value) => props.setAttributes({ headingTitle: value })}
 					style={{
 						color: fontColor,
-						fontSize: fontSize,
 					}}
 				/>
 				{(alignment === "left" || alignment === "center") && (
@@ -214,6 +231,7 @@ const Edit = (props) => {
 						className="blockons-lheading-after"
 						style={{
 							borderBottom: `${lineWidth}px ${lineStyle} ${lineColor}`,
+							...(headWidthSet === "line" ? { width: headLineWidth } : ""),
 						}}
 					/>
 				)}

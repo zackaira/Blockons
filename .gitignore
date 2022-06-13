@@ -4,6 +4,8 @@ index.js.map
 build
 vendor
 
+/blocks/_new-block/
+
 # Directories/files that may appear in your environment
 .DS_Store
 *.log

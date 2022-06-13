@@ -1,0 +1,108 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.blockons-featured-product-block {
+	background-color: #fff;
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 10%), 0 0 8px rgb(0 0 0 / 12%);
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	padding: 15px;
+	overflow: hidden;
+}
+.blockons-featured-product-block a {
+	color: inherit;
+}
+.blockons-featured-product-detail h3 {
+	color: #fff;
+}
+.blockons-featured-product-detail p {
+}
+.blockons-featured-product-image {
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.blockons-featured-product-image img {
+	visibility: hidden;
+	opacity: 0;
+	display: block;
+	margin: 0;
+}
+
+/* -- Layout One -- */
+.wp-block-blockons-featured-product.layout-one
+	.blockons-featured-product-detail {
+	flex: 1;
+	order: 1;
+	padding: 0 30px 0 10px;
+	text-align: left;
+}
+.wp-block-blockons-featured-product.layout-one
+	.blockons-featured-product-image {
+	flex: 1;
+	order: 2;
+}
+/* -- Layout Two -- */
+.wp-block-blockons-featured-product.layout-two {
+}
+.wp-block-blockons-featured-product.layout-two
+	.blockons-featured-product-block {
+	position: relative;
+}
+.wp-block-blockons-featured-product.layout-two
+	.blockons-featured-product-detail {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	z-index: 8;
+	color: #fff;
+	text-shadow: 2px 0 6px rgb(255 255 255 / 35%);
+}
+.wp-block-blockons-featured-product.layout-two
+	.blockons-featured-product-image {
+	height: auto;
+	position: relative;
+}
+
+.wp-block-blockons-featured-product.layout-two .img-overlay {
+	background-color: rgb(0 0 0 / 25%);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+/* -- Switch -- */
+.blockons-featured-product-block.switch .blockons-featured-product-detail {
+	order: 2;
+	padding: 0 10px 0 30px;
+}
+.blockons-featured-product-block.switch .blockons-featured-product-image {
+	order: 1;
+}
+
+/* -- Text Align -- */
+.wp-block-blockons-featured-product.align-center
+	.blockons-featured-product-detail {
+	text-align: center;
+}
+.wp-block-blockons-featured-product.align-right
+	.blockons-featured-product-detail {
+	text-align: right;
+}
+/* -- Alignment -- */
+.align-center {
+	justify-content: center;
+}
+.align-right {
+	justify-content: flex-end;
+}

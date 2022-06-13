@@ -23,14 +23,14 @@ import {
 } from "@wordpress/components";
 
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
-import { iconListIcons } from "../block-global";
+import { slugify, iconListIcons } from "../block-global";
 
 const Edit = (props) => {
 	const {
 		isSelected,
 		attributes: {
 			alignment,
-			listItems = 3,
+			listItems,
 			listItemsLayout,
 			listItemSpacing,
 			listItemIconSpacing,
@@ -477,13 +477,5 @@ const Edit = (props) => {
 		</div>
 	);
 };
-
-const slugify = (str) =>
-	str
-		.toLowerCase()
-		.trim()
-		.replace(/[^\w\s-]/g, "")
-		.replace(/[\s_-]+/g, "-")
-		.replace(/^-+|-+$/g, "");
 
 export default Edit;

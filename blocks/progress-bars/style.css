@@ -1,0 +1,137 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+/* -- Progress Bar Styling -- */
+.wp-block-blockons-progress-bars {
+	display: flex;
+	justify-content: flex-start;
+}
+.blockons-progressbar-wrap {
+	flex: 1;
+	width: 100%;
+}
+.blockons-progressbar-wrap ul.blockons-progressbar {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+.blockons-progressbar-wrap
+	ul.blockons-progressbar
+	li.blockons-progressbar-item {
+	display: block;
+	margin: 0 0 15px;
+	padding: 0;
+	position: relative;
+}
+.blockons-progressbar-wrap
+	ul.blockons-progressbar
+	li.blockons-progressbar-item:last-child {
+	margin-bottom: 0 !important;
+}
+.blockons-progressbar-wrap .blockons-progressbar-bar {
+	background-color: #f7f7f7;
+	position: relative;
+	height: 18px;
+}
+.blockons-progressbar-wrap .blockons-progressbar-bar-inner {
+	background-color: #22b0ea;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	font-size: 12px;
+	padding: 0 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	transition: width 0.4s ease 0.4s;
+}
+.front .blockons-progressbar.pb-start .blockons-progressbar-bar-inner {
+	width: 35px !important;
+}
+.blockons-progressbar-wrap .blockons-progressbar-desc {
+	margin: 0 0 10px;
+}
+.wp-block-blockons-progress-bars.align-center .blockons-progressbar-desc {
+	text-align: center;
+}
+.wp-block-blockons-progress-bars.align-right .blockons-progressbar-desc {
+	text-align: right;
+}
+
+/* -- Alignment -- */
+.wp-block-blockons-progress-bars.center-align {
+	justify-content: center;
+}
+.wp-block-blockons-progress-bars.right-align {
+	justify-content: flex-end;
+}
+
+/* -- Progress Bar Design One -- */
+.blockons-progressbar-one .blockons-progressbar-bar {
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+}
+.blockons-progressbar-one .blockons-progressbar-bar-inner {
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3),
+		inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* -- Progress Bar Design Two (Flat) has no extra design -- */
+
+/* -- Progress Bar Design Three -- */
+.blockons-progressbar-three .blockons-progressbar-bar-inner {
+	position: relative;
+}
+.blockons-progressbar-three .blockons-progressbar-bar-inner::before {
+	background-color: rgba(0, 0, 0, 0.15);
+	display: block;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 50%;
+}
+
+/* -- Progress Bar Design Four -- */
+.blockons-progressbar-four .blockons-progressbar-bar {
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.blockons-progressbar-four .blockons-progressbar-bar-inner {
+	background-image: linear-gradient(
+		45deg,
+		rgba(255, 255, 255, 0.15) 25%,
+		transparent 25%,
+		transparent 50%,
+		rgba(255, 255, 255, 0.15) 50%,
+		rgba(255, 255, 255, 0.15) 75%,
+		transparent 75%,
+		transparent
+	);
+	background-size: 12px 12px;
+}
+
+/* -- Progress Bar Design Five -- */
+.blockons-progressbar-five .blockons-progressbar-bar {
+	padding: 0 0 18px;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+	border-bottom: 4px solid rgba(0, 0, 0, 0.15);
+}
+.blockons-progressbar-five .blockons-progressbar-bar-inner {
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+/* -- Progress Bar Design Six -- */
+.blockons-progressbar-six .blockons-progressbar-bar {
+	height: 3px !important;
+}
+.blockons-progressbar-six .blockons-progressbar-bar-inner {
+	height: 11px !important;
+	margin: -4px 0 0;
+	font-size: 1px;
+	color: transparent;
+}

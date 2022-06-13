@@ -21,5 +21,10 @@
 		"start": "wp-scripts start --webpack-copy-php --webpack-src-dir=blocks --output-path=build/blocks",
 		"build": "wp-scripts build --webpack-copy-php --webpack-src-dir=blocks --output-path=build/blocks",
 		"packages-update": "wp-scripts packages-update"
+	},
+	"dependencies": {
+		"axios": "^0.27.2",
+		"react-select": "^5.3.2",
+		"react-waypoint": "^10.1.0"
 	}
 }

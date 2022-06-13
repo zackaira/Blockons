@@ -8,7 +8,6 @@
  *
  * @package blockons
  */
-
 defined( 'ABSPATH' ) || exit;
 
 if ( !defined( 'BLOCKONS_PLUGIN_VERSION' ) ) {
@@ -19,13 +18,20 @@ if (has_block('blockons/cart-icon')) {
 	require plugin_dir_path( __FILE__ ) . 'assets/blocks/cart-icon/cart.php';
 }
 
+// Include Plugin API settings.
+require_once 'classes/class-admin-settings.php';
+// Include Plugin Block Styles.
+// require plugin_dir_path( __FILE__ ) . '/inc/block-styles.php';
+
+// Site Blocks
 require plugin_dir_path( __FILE__ ) . 'build/blocks/account-icon/index.php';
 require plugin_dir_path( __FILE__ ) . 'build/blocks/cart-icon/index.php';
 require plugin_dir_path( __FILE__ ) . 'build/blocks/search/index.php';
 require plugin_dir_path( __FILE__ ) . 'build/blocks/icon-list/index.php';
 require plugin_dir_path( __FILE__ ) . 'build/blocks/line-heading/index.php';
-// require plugin_dir_path( __FILE__ ) . 'build/blocks/05-recipe-card-esnext/index.php';
-// require plugin_dir_path( __FILE__ ) . 'build/blocks/10-dynamic-block/index.php';
+require plugin_dir_path( __FILE__ ) . 'build/blocks/progress-bars/index.php';
+// WooCommerce Blocks
+require plugin_dir_path( __FILE__ ) . 'build/blocks/featured-product/index.php';
 
 /**
  * Register scripts to be called by Block.json script/style
@@ -35,6 +41,15 @@ function blockons_register_theme_scripts() {
 	wp_register_style( 'blockons-fontawesome', plugin_dir_url( __FILE__ ) . '/assets/font-awesome/css/all.min.css', array(), BLOCKONS_PLUGIN_VERSION );
 	// Cart Icon Block JS
 	wp_register_script( 'blockons-cart-icon', plugin_dir_url( __FILE__ ) . '/assets/blocks/cart-icon/cart.js', array(), BLOCKONS_PLUGIN_VERSION );
+	// Progress Bars JS
+	wp_register_script( 'blockons-waypoint', plugin_dir_url( __FILE__ ) . '/assets/blocks/progress-bars/waypoints.min.js', array(), BLOCKONS_PLUGIN_VERSION );
+	wp_register_script( 'blockons-waypoint-inview', plugin_dir_url( __FILE__ ) . '/assets/blocks/progress-bars/inview.min.js', array(), BLOCKONS_PLUGIN_VERSION );
+	wp_register_script( 'blockons-progress-bars', plugin_dir_url( __FILE__ ) . '/assets/blocks/progress-bars/progress-bars.js', array( 'blockons-waypoint', 'blockons-waypoint-inview' ), BLOCKONS_PLUGIN_VERSION );
+
+	wp_register_script( 'blockons-file', plugin_dir_url( __FILE__ ) . '/assets/blocks/product-slider/file.js', array(), BLOCKONS_PLUGIN_VERSION );
+	wp_localize_script('blockons-file', 'siteObj', array(
+		'apiUrl' => esc_url(home_url('/wp-json')),
+	));
 }
 add_action('init', 'blockons_register_theme_scripts');
 

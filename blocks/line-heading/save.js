@@ -5,73 +5,50 @@ import { RichText, useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
-		className: attributes.alignment,
+		className: `align-${attributes.alignment} headalign-${attributes.headVertAlign} ${attributes.headElementAlign}-align`,
 	});
 
 	return (
 		<div {...blockProps}>
 			<div
-				className={`blockons-line-heading-block`}
+				className={`blockons-lheading-wrap`}
 				style={{
-					backgroundColor: attributes.iconBgColor,
-					fontSize: attributes.iconSize,
-					padding: attributes.iconPadding,
+					...(attributes.headWidthSet === "outer"
+						? { width: attributes.headOuterWidth + "%" }
+						: ""),
 				}}
 			>
-				<span
-					className={
-						attributes.customIcon && attributes.icon == "custom"
-							? attributes.customIcon
-							: attributes.icon
-					}
-					style={{
-						color: attributes.iconColor,
-					}}
-				></span>
-				{attributes.hasDropdown && (
+				{(attributes.alignment === "right" ||
+					attributes.alignment === "center") && (
 					<div
-						className="blockons-line-heading-dropdown"
+						className="blockons-lheading-before"
 						style={{
-							backgroundColor: attributes.dropBgColor,
-							color: attributes.dropColor,
+							borderBottom: `${attributes.lineWidth}px ${attributes.lineStyle} ${attributes.lineColor}`,
+							...(attributes.headWidthSet === "line"
+								? { width: attributes.headLineWidth }
+								: ""),
 						}}
-					>
-						{attributes.showDashboard && (
-							<div className="blockons-line-heading-item">
-								<a href="">
-									<RichText.Content value={attributes.textDashboard} />
-								</a>
-							</div>
-						)}
-						{attributes.showOrders && (
-							<div className="blockons-line-heading-item">
-								<a href="">
-									<RichText.Content value={attributes.textOrders} />
-								</a>
-							</div>
-						)}
-						{attributes.showDownloads && (
-							<div className="blockons-line-heading-item">
-								<a href="">
-									<RichText.Content value={attributes.textDownloads} />
-								</a>
-							</div>
-						)}
-						{attributes.showAddresses && (
-							<div className="blockons-line-heading-item">
-								<a href="">
-									<RichText.Content value={attributes.textAddresses} />
-								</a>
-							</div>
-						)}
-						{attributes.showAccountDetails && (
-							<div className="blockons-line-heading-item">
-								<a href="">
-									<RichText.Content value={attributes.textAccountDetails} />
-								</a>
-							</div>
-						)}
-					</div>
+					/>
+				)}
+				<RichText.Content
+					tagName={attributes.hTag}
+					value={attributes.headingTitle}
+					className="blockons-lheading-text"
+					style={{
+						color: attributes.fontColor,
+					}}
+				/>
+				{(attributes.alignment === "left" ||
+					attributes.alignment === "center") && (
+					<div
+						className="blockons-lheading-after"
+						style={{
+							borderBottom: `${attributes.lineWidth}px ${attributes.lineStyle} ${attributes.lineColor}`,
+							...(attributes.headWidthSet === "line"
+								? { width: attributes.headLineWidth }
+								: ""),
+						}}
+					/>
 				)}
 			</div>
 		</div>
