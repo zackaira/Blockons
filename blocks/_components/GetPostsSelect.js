@@ -4,7 +4,6 @@
 import { useState, useEffect } from "@wordpress/element";
 import axios from "axios";
 import Select from "react-select";
-import BlockonsLoader from "./BlockonsLoader";
 
 const GetPostsSelect = (props) => {
 	const { label, multiple = false, value, onChange, posts, siteurl } = props;
@@ -13,6 +12,8 @@ const GetPostsSelect = (props) => {
 	const [allProducts, setAllProducts] = useState([]);
 
 	useEffect(() => {
+		if (!siteurl) return;
+
 		setLoadingProducts(true);
 		axios.get(siteurl + "/blcns/v1/products").then((result) => {
 			setAllProducts(result.data);
@@ -22,7 +23,6 @@ const GetPostsSelect = (props) => {
 
 	return (
 		<div className="post-select-wrap">
-			{/*loadingProducts && <BlockonsLoader />*/}
 			<p>{label}</p>
 			<Select
 				// closeMenuOnSelect={true}

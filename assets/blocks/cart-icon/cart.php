@@ -1,5 +1,4 @@
 <?php
-var_dump('YES IT HAS THE BLOCK YOU DUMBASS !!!!!!!');
 /**
  * Add Cart Items and Mini Cart to footer (hidden)
  */

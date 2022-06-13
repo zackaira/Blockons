@@ -408,50 +408,6 @@ const Edit = (props) => {
 								props.setAttributes({ listItemIconColor: newColor });
 							}}
 						/>
-						{/* <SelectControl
-							label={__("Select a default Icon", "blockons")}
-							value={icon}
-							options={[
-								{
-									label: __("User Outline", "blockons"),
-									value: "fa-regular fa-user",
-								},
-								{ label: __("User", "blockons"), value: "fa-solid fa-user" },
-								{
-									label: __("Circle User", "blockons"),
-									value: "fa-solid fa-circle-user",
-								},
-								{
-									label: __("Person", "blockons"),
-									value: "fa-solid fa-person",
-								},
-								{ label: __("Custom Icon", "blockons"), value: "custom" },
-							]}
-							onChange={(newIcon) =>
-								props.setAttributes({
-									icon: newIcon === undefined ? "fa-regular fa-user" : newIcon,
-								})
-							}
-							__nextHasNoMarginBottom
-						/>
-						{icon === "custom" && (
-							<>
-								<TextControl
-									label={__("Icon Name", "blockons")}
-									value={customIcon}
-									onChange={onChangeCustomIcon}
-									help={__(
-										"Add your own custom icon by adding the Font Awesome icon full name",
-										"blockons"
-									)}
-								/>
-								<div className="helplink fixmargin">
-									<a href="#" target="_blank">
-										{__("Read More")}
-									</a>
-								</div>
-							</>
-						)} */}
 					</PanelBody>
 				</InspectorControls>
 			)}

@@ -23,6 +23,7 @@ import {
 } from "@wordpress/components";
 import GetPostsSelect from "../_components/GetPostsSelect";
 import BlockonsLoader from "../_components/BlockonsLoader";
+import parse from "html-react-parser";
 import { colorPickerPalette } from "../block-global";
 
 const Edit = (props) => {
@@ -33,11 +34,19 @@ const Edit = (props) => {
 			alignment,
 			selectedProduct,
 			padding,
+			innerPadding,
 			layout,
 			layoutSwitch,
 			layoutTwoOverlay,
+			overlayOpacity,
+			showDesc,
+			showPrice,
+			showButton,
 			blockBgColor,
 			blockFontColor,
+			buttonText,
+			detailWidth,
+			imgHeight,
 		},
 	} = props;
 
@@ -82,7 +91,7 @@ const Edit = (props) => {
 							}}
 							siteurl={site_url}
 						/>
-
+						<br />
 						<SelectControl
 							label={__("Featured Product Layout", "blockons")}
 							value={layout}
@@ -132,11 +141,66 @@ const Edit = (props) => {
 							min={0}
 							max={120}
 						/>
+						{layout === "one" && (
+							<RangeControl
+								label={__("Inner Block Padding", "blockons")}
+								value={innerPadding}
+								onChange={(value) =>
+									props.setAttributes({
+										innerPadding: value === undefined ? 30 : value,
+									})
+								}
+								min={0}
+								max={120}
+							/>
+						)}
+
+						<ToggleControl
+							label={__("Show Description", "blockons")}
+							checked={showDesc}
+							onChange={(newValue) => {
+								props.setAttributes({
+									showDesc: newValue,
+								});
+							}}
+						/>
+						<ToggleControl
+							label={__("Show Price", "blockons")}
+							checked={showPrice}
+							onChange={(newValue) => {
+								props.setAttributes({
+									showPrice: newValue,
+								});
+							}}
+						/>
+						<ToggleControl
+							label={__("Show Button", "blockons")}
+							checked={showButton}
+							onChange={(newValue) => {
+								props.setAttributes({
+									showButton: newValue,
+								});
+							}}
+						/>
 					</PanelBody>
 					<PanelBody
 						title={__("Featured Product Design", "blockons")}
 						initialOpen={false}
 					>
+						{layout === "two" && (
+							<RangeControl
+								label={__("Overlay Opacity", "blockons")}
+								value={overlayOpacity}
+								onChange={(value) =>
+									props.setAttributes({
+										overlayOpacity: value === undefined ? 35 : value,
+									})
+								}
+								min={0}
+								max={100}
+							/>
+						)}
+
 						<p>{__("Background Color", "blockons")}</p>
 						<ColorPalette
 							colors={colorPickerPalette}
@@ -154,9 +218,35 @@ const Edit = (props) => {
 							value={blockFontColor}
 							onChange={(newColor) =>
 								props.setAttributes({
-									blockFontColor: newColor === undefined ? "#FFF" : newColor,
+									blockFontColor: newColor === undefined ? "#444" : newColor,
 								})
 							}
+						/>
+
+						{layout === "one" && (
+							<RangeControl
+								label={__("Product Info Width", "blockons")}
+								value={detailWidth}
+								onChange={(value) =>
+									props.setAttributes({
+										detailWidth: value === undefined ? 50 : value,
+									})
+								}
+								min={20}
+								max={80}
+							/>
+						)}
+						<RangeControl
+							label={__("Product Image Height", "blockons")}
+							value={imgHeight}
+							onChange={(value) =>
+								props.setAttributes({
+									imgHeight: value === undefined ? "auto" : value,
+								})
+							}
+							min={100}
+							max={1000}
+							allowReset
 						/>
 					</PanelBody>
 				</InspectorControls>
@@ -180,38 +270,78 @@ const Edit = (props) => {
 				) : (
 					<div
 						className={`blockons-featured-product-block ${
-							layout === "one" && layoutSwitch ? "switch" : ""
+							layout === "one" && layoutSwitch ? "switch" : "noswitch"
 						}`}
 						style={{ backgroundColor: blockBgColor, padding }}
 					>
 						<div
 							className="blockons-featured-product-detail"
-							style={{ backgroundColor: blockFontColor }}
+							style={{
+								color:
+									layout === "two" && blockFontColor === "inherit"
+										? "#FFF"
+										: blockFontColor,
+								width: layout === "one" ? detailWidth + "%" : "auto",
+								padding: innerPadding / 2 + "px " + innerPadding + "px",
+							}}
 						>
-							<h3>
-								<a href="#">{selectedProductDetails.title}</a>
-							</h3>
-							<p>{selectedProductDetails.short_desc}</p>
-							<div className="blockons-featured-product-btn">
-								<a href="">View Product</a>
-							</div>
+							<h2 className="blockons-featured-product-title">
+								{selectedProductDetails.title}
+							</h2>
+
+							{showPrice && (
+								<div className="blockons-featured-product-price">
+									{selectedProductDetails.price
+										? parse(selectedProductDetails.price)
+										: ""}
+								</div>
+							)}
+
+							{showDesc && <p>{selectedProductDetails.short_desc}</p>}
+
+							{showButton && (
+								<div className="blockons-featured-product-btn">
+									<RichText
+										placeholder={__("View Product")}
+										value={buttonText}
+										onChange={(value) =>
+											props.setAttributes({
+												buttonText:
+													value === undefined ? "View Product" : value,
+											})
+										}
+										// withoutInteractiveFormatting
+										className={"wp-block-button__link"}
+									/>
+								</div>
+							)}
 						</div>
 						<div
 							className="blockons-featured-product-image"
 							style={{
-								backgroundImage:
-									"url(" + selectedProductDetails.featured_media + ")",
+								...(selectedProductDetails.featured_media
+									? {
+											backgroundImage:
+												"url(" + selectedProductDetails.featured_media + ")",
+									  }
+									: ""),
 							}}
 						>
 							{layout === "two" && layoutTwoOverlay && (
-								<div className="img-overlay"></div>
+								<div
+									className="img-overlay"
+									style={{
+										opacity: overlayOpacity + "%",
+									}}
+								></div>
 							)}
-							<a href="#">
-								<img
-									src={selectedProductDetails.featured_media}
-									alt={selectedProductDetails.title}
-								/>
-							</a>
+							<img
+								src={selectedProductDetails.featured_media}
+								alt={selectedProductDetails.title}
+								style={{
+									height: imgHeight !== "auto" ? imgHeight : "auto",
+								}}
+							/>
 						</div>
 					</div>
 				))}

@@ -123,10 +123,11 @@ class Blockons_WC_Rest_Routes {
 
 		$product_data = array(
 			'id' => $product->get_id(),
+			'type' => $product->get_type(),
 			'title' => $product->get_name(),
 			'featured_media' => $product_image,
 			'short_desc' => $product->get_short_description(),
-			'price' => $product->get_price(),
+			'price' => $product->get_price_html(),
 			'permalink' => get_permalink( $product->get_id() ),
 			'date_created' => $product->get_date_created(),
 		);

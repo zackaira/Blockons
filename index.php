@@ -1,10 +1,17 @@
 <?php
 /**
- * Plugin Name: Block-Ons (WORKING)
- * Plugin URI: https://github.com/WordPress/blockons
- * Description: This is a plugin demonstrating how to register new blocks for the Gutenberg editor.
- * Version: 1.1.0
- * Author: the Gutenberg Team
+ * Plugin Name: Block-Ons
+ * Version: 1.0.0
+ * Plugin URI: https://blockons.com/
+ * Description: WordPress editor blocks for you to build your website.
+ * Author: Kaira
+ * Author URI: https://kairaweb.com/
+ * Requires at least: 5.0
+ * Tested up to: 6.0
+ * WC requires at least: 7.3
+ * WC tested up to: 7.8
+ * Text Domain: blockons
+ * Domain Path: /lang/
  *
  * @package blockons
  */
@@ -14,15 +21,17 @@ if ( !defined( 'BLOCKONS_PLUGIN_VERSION' ) ) {
 	define('BLOCKONS_PLUGIN_VERSION', '1.0.0');
 }
 
-if (has_block('blockons/cart-icon')) {
-	require plugin_dir_path( __FILE__ ) . 'assets/blocks/cart-icon/cart.php';
-}
-
-// Include Plugin API settings.
+/**
+ * Include Plugin Files
+ */
+// Plugin API settings setup
 require_once 'classes/class-admin-settings.php';
-// Include Plugin Block Styles.
-// require plugin_dir_path( __FILE__ ) . '/inc/block-styles.php';
+// Include Block Styles for External blocks
+require plugin_dir_path( __FILE__ ) . '/inc/block-styles.php';
 
+/**
+ * Include Blockons blocks
+ */
 // Site Blocks
 require plugin_dir_path( __FILE__ ) . 'build/blocks/account-icon/index.php';
 require plugin_dir_path( __FILE__ ) . 'build/blocks/cart-icon/index.php';
@@ -53,8 +62,13 @@ function blockons_register_theme_scripts() {
 }
 add_action('init', 'blockons_register_theme_scripts');
 
+// File to include Cart & Mini Cart for the cart icon block
+if (has_block('blockons/cart-icon')) {
+	require plugin_dir_path( __FILE__ ) . 'assets/blocks/cart-icon/cart.php';
+}
+
 /**
- * Custom Blocks Category
+ * Create Blockons blocks Category
  */
 function blockons_blocks_custom_category($categories, $post) {
 	return array_merge(

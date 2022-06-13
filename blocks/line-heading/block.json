@@ -4,8 +4,9 @@
 	"name": "blockons/line-heading",
 	"title": "Block-Ons Line Heading",
 	"textdomain": "blockons",
-	"icon": "admin-users",
+	"icon": "heading",
 	"category": "blockons-category",
+	"keywords": ["line", "heading", "title"],
 	"attributes": {
 		"alignment": {
 			"type": "string",

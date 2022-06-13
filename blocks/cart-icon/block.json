@@ -6,6 +6,7 @@
 	"textdomain": "blockons",
 	"icon": "cart",
 	"category": "blockons-category",
+	"keywords": ["cart", "icon", "mini cart", "woocommerce", "header"],
 	"attributes": {
 		"alignment": {
 			"type": "string",

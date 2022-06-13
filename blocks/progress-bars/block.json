@@ -4,8 +4,9 @@
 	"name": "blockons/progress-bars",
 	"title": "Block-Ons Progress Bars",
 	"textdomain": "blockons",
-	"icon": "admin-users",
+	"icon": "editor-alignleft",
 	"category": "blockons-category",
+	"keywords": ["progress", "bars", "items"],
 	"attributes": {
 		"alignment": {
 			"type": "string",

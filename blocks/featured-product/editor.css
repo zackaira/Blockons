@@ -2,10 +2,12 @@
  * Note that these styles are loaded *after* common styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
+.blockons-postselect__control {
+	margin: 0 0 15px;
+}
 input.blockons-postselect__input {
 	box-shadow: none !important;
 }
-
 .no-selected-product,
 .loading-product {
 	background-color: #fff;

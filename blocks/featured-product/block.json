@@ -4,9 +4,13 @@
 	"name": "blockons/featured-product",
 	"title": "Block-Ons Featured Product",
 	"textdomain": "blockons",
-	"icon": "admin-users",
+	"icon": "star-empty",
 	"category": "blockons-category",
-	"keywords": ["featured product", "product"],
+	"keywords": ["featured", "product", "woocommerce"],
+	"styles": [
+		{ "name": "default", "label": "Default", "isDefault": true },
+		{ "name": "drop-shadow", "label": "Drop Shadow" }
+	],
 	"attributes": {
 		"alignment": {
 			"type": "string",
@@ -18,6 +22,10 @@
 		"padding": {
 			"type": "number",
 			"default": 15
+		},
+		"innerPadding": {
+			"type": "number",
+			"default": 30
 		},
 		"layout": {
 			"type": "string",
@@ -31,13 +39,41 @@
 			"type": "boolean",
 			"default": true
 		},
+		"overlayOpacity": {
+			"type": "number",
+			"default": 35
+		},
+		"showDesc": {
+			"type": "boolean",
+			"default": true
+		},
+		"showPrice": {
+			"type": "boolean",
+			"default": true
+		},
+		"showButton": {
+			"type": "boolean",
+			"default": true
+		},
 		"blockBgColor": {
 			"type": "string",
 			"default": "#FFF"
 		},
 		"blockFontColor": {
 			"type": "string",
-			"default": "#FFF"
+			"default": "inherit"
+		},
+		"buttonText": {
+			"type": "string",
+			"default": "View Product"
+		},
+		"detailWidth": {
+			"type": "number",
+			"default": 50
+		},
+		"imgHeight": {
+			"type": "number",
+			"default": "auto"
 		}
 	},
 	"editorScript": "file:./index.js",

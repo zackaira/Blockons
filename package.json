@@ -1,14 +1,14 @@
 {
 	"name": "blockons",
-	"version": "1.1.0",
+	"version": "1.0.0",
 	"private": true,
-	"description": "blah blah blah",
+	"description": "WordPress editor blocks for you to build your website",
 	"author": "Kaira",
 	"license": "GPL-2.0-or-later",
 	"keywords": [
-		"kaira",
-		"kaira",
-		"kaira"
+		"Editor Blocks",
+		"Gutenberg Blocks",
+		"woocommerce"
 	],
 	"devDependencies": {
 		"@wordpress/env": "^4.6.0",
@@ -24,6 +24,7 @@
 	},
 	"dependencies": {
 		"axios": "^0.27.2",
+		"html-react-parser": "^1.4.14",
 		"react-select": "^5.3.2",
 		"react-waypoint": "^10.1.0"
 	}

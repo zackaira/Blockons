@@ -12,12 +12,31 @@
 	overflow: hidden;
 }
 .blockons-featured-product-block a {
-	color: inherit;
+	color: inherit !important;
+	text-decoration: none !important;
 }
-.blockons-featured-product-detail h3 {
-	color: #fff;
+.blockons-featured-product-detail .blockons-featured-product-title {
+	color: inherit;
+	line-height: 1.2;
+	margin: 0 0 20px;
+	padding: 0;
 }
 .blockons-featured-product-detail p {
+	color: inherit;
+	margin: 15px 0 0;
+	padding: 0;
+}
+.blockons-featured-product-detail .blockons-featured-product-price {
+	font-weight: bold;
+}
+.blockons-featured-product-btn {
+	margin: 20px 0 0;
+}
+.blockons-featured-product-detail
+	.blockons-featured-product-btn
+	.wp-block-button__link {
+	padding: 0.6em 1.1em;
+	font-size: 1.1em;
 }
 .blockons-featured-product-image {
 	background-position: center center;
@@ -34,9 +53,10 @@
 /* -- Layout One -- */
 .wp-block-blockons-featured-product.layout-one
 	.blockons-featured-product-detail {
-	flex: 1;
+	width: 50%;
 	order: 1;
-	padding: 0 30px 0 10px;
+	padding: 15px 30px;
+	padding-right: 20px !important;
 	text-align: left;
 }
 .wp-block-blockons-featured-product.layout-one
@@ -45,8 +65,6 @@
 	order: 2;
 }
 /* -- Layout Two -- */
-.wp-block-blockons-featured-product.layout-two {
-}
 .wp-block-blockons-featured-product.layout-two
 	.blockons-featured-product-block {
 	position: relative;
@@ -67,24 +85,30 @@
 	text-shadow: 2px 0 6px rgb(255 255 255 / 35%);
 }
 .wp-block-blockons-featured-product.layout-two
+	.blockons-featured-product-detail
+	h2 {
+	color: #fff;
+}
+.wp-block-blockons-featured-product.layout-two
 	.blockons-featured-product-image {
 	height: auto;
 	position: relative;
+	flex: 1;
 }
 
 .wp-block-blockons-featured-product.layout-two .img-overlay {
-	background-color: rgb(0 0 0 / 25%);
+	background-color: #000;
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
+	opacity: 0.35;
 }
 
 /* -- Switch -- */
 .blockons-featured-product-block.switch .blockons-featured-product-detail {
 	order: 2;
-	padding: 0 10px 0 30px;
 }
 .blockons-featured-product-block.switch .blockons-featured-product-image {
 	order: 1;
