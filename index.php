@@ -20,6 +20,12 @@ defined( 'ABSPATH' ) || exit;
 if ( !defined( 'BLOCKONS_PLUGIN_VERSION' ) ) {
 	define('BLOCKONS_PLUGIN_VERSION', '1.0.0');
 }
+if ( !defined( 'BLOCKONS_PLUGIN_URL' ) ) {
+	define('BLOCKONS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+}
+if ( !defined( 'BLOCKONS_PLUGIN_DIR' ) ) {
+	define('BLOCKONS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+}
 
 /**
  * Include Plugin Files
@@ -27,44 +33,46 @@ if ( !defined( 'BLOCKONS_PLUGIN_VERSION' ) ) {
 // Plugin API settings setup
 require_once 'classes/class-admin-settings.php';
 // Include Block Styles for External blocks
-require plugin_dir_path( __FILE__ ) . '/inc/block-styles.php';
+require BLOCKONS_PLUGIN_DIR . '/inc/block-styles.php';
 
 /**
  * Include Blockons blocks
  */
 // Site Blocks
-require plugin_dir_path( __FILE__ ) . 'build/blocks/account-icon/index.php';
-require plugin_dir_path( __FILE__ ) . 'build/blocks/cart-icon/index.php';
-require plugin_dir_path( __FILE__ ) . 'build/blocks/search/index.php';
-require plugin_dir_path( __FILE__ ) . 'build/blocks/icon-list/index.php';
-require plugin_dir_path( __FILE__ ) . 'build/blocks/line-heading/index.php';
-require plugin_dir_path( __FILE__ ) . 'build/blocks/progress-bars/index.php';
+require BLOCKONS_PLUGIN_DIR . 'build/blocks/search/index.php';
+require BLOCKONS_PLUGIN_DIR . 'build/blocks/icon-list/index.php';
+require BLOCKONS_PLUGIN_DIR . 'build/blocks/line-heading/index.php';
+require BLOCKONS_PLUGIN_DIR . 'build/blocks/progress-bars/index.php';
 // WooCommerce Blocks
-require plugin_dir_path( __FILE__ ) . 'build/blocks/featured-product/index.php';
+if ( blockons_is_plugin_active( 'woocommerce.php' ) ) {
+	require BLOCKONS_PLUGIN_DIR . 'build/blocks/account-icon/index.php';
+	require BLOCKONS_PLUGIN_DIR . 'build/blocks/cart-icon/index.php';
+	require BLOCKONS_PLUGIN_DIR . 'build/blocks/featured-product/index.php';
+}
 
 /**
  * Register scripts to be called by Block.json script/style
  */
 function blockons_register_theme_scripts() {
 	// Font Awesome Free
-	wp_register_style( 'blockons-fontawesome', plugin_dir_url( __FILE__ ) . '/assets/font-awesome/css/all.min.css', array(), BLOCKONS_PLUGIN_VERSION );
+	wp_register_style( 'blockons-fontawesome', BLOCKONS_PLUGIN_URL . '/assets/font-awesome/css/all.min.css', array(), BLOCKONS_PLUGIN_VERSION );
 	// Cart Icon Block JS
-	wp_register_script( 'blockons-cart-icon', plugin_dir_url( __FILE__ ) . '/assets/blocks/cart-icon/cart.js', array(), BLOCKONS_PLUGIN_VERSION );
+	wp_register_script( 'blockons-cart-icon', BLOCKONS_PLUGIN_URL . '/assets/blocks/cart-icon/cart.js', array(), BLOCKONS_PLUGIN_VERSION );
 	// Progress Bars JS
-	wp_register_script( 'blockons-waypoint', plugin_dir_url( __FILE__ ) . '/assets/blocks/progress-bars/waypoints.min.js', array(), BLOCKONS_PLUGIN_VERSION );
-	wp_register_script( 'blockons-waypoint-inview', plugin_dir_url( __FILE__ ) . '/assets/blocks/progress-bars/inview.min.js', array(), BLOCKONS_PLUGIN_VERSION );
-	wp_register_script( 'blockons-progress-bars', plugin_dir_url( __FILE__ ) . '/assets/blocks/progress-bars/progress-bars.js', array( 'blockons-waypoint', 'blockons-waypoint-inview' ), BLOCKONS_PLUGIN_VERSION );
-
-	wp_register_script( 'blockons-file', plugin_dir_url( __FILE__ ) . '/assets/blocks/product-slider/file.js', array(), BLOCKONS_PLUGIN_VERSION );
-	wp_localize_script('blockons-file', 'siteObj', array(
-		'apiUrl' => esc_url(home_url('/wp-json')),
+	wp_register_script( 'blockons-waypoint', BLOCKONS_PLUGIN_URL . '/assets/blocks/progress-bars/waypoints.min.js', array(), BLOCKONS_PLUGIN_VERSION );
+	wp_register_script( 'blockons-waypoint-inview', BLOCKONS_PLUGIN_URL . '/assets/blocks/progress-bars/inview.min.js', array(), BLOCKONS_PLUGIN_VERSION );
+	wp_register_script( 'blockons-progress-bars', BLOCKONS_PLUGIN_URL . '/assets/blocks/progress-bars/progress-bars.js', array( 'blockons-waypoint', 'blockons-waypoint-inview' ), BLOCKONS_PLUGIN_VERSION );
+	
+	wp_register_script( 'blockons-file', BLOCKONS_PLUGIN_URL . '/assets/blocks/featured-product/file.js', array(), BLOCKONS_PLUGIN_VERSION );
+	wp_localize_script( 'blockons-file', 'siteObj', array(
+		'apiUrl' => esc_url(home_url('/wp-json') ),
 	));
 }
 add_action('init', 'blockons_register_theme_scripts');
 
 // File to include Cart & Mini Cart for the cart icon block
-if (has_block('blockons/cart-icon')) {
-	require plugin_dir_path( __FILE__ ) . 'assets/blocks/cart-icon/cart.php';
+if ( has_block( 'blockons/cart-icon' ) ) {
+	require BLOCKONS_PLUGIN_DIR . 'assets/blocks/cart-icon/cart.php';
 }
 
 /**
@@ -83,3 +91,24 @@ function blockons_blocks_custom_category($categories, $post) {
 	);
 }
 add_filter('block_categories_all', 'blockons_blocks_custom_category', 10, 2);
+
+function blockons_is_plugin_active( $plugin_name ) {
+	// Get Active Plugin Setting
+	$active_plugins = (array) get_option('active_plugins', array());
+	if (is_multisite()) {
+		$active_plugins = array_merge($active_plugins, array_keys(get_site_option( 'active_sitewide_plugins', array())));
+	}
+
+	$plugin_filenames = array();
+	foreach ($active_plugins as $plugin) {
+		if (false !== strpos( $plugin, '/') ) {
+			// normal plugin name (plugin-dir/plugin-filename.php)
+			list(, $filename ) = explode( '/', $plugin);
+		} else {
+			// no directory, just plugin file
+			$filename = $plugin;
+		}
+		$plugin_filenames[] = $filename;
+	}
+	return in_array($plugin_name, $plugin_filenames);
+}

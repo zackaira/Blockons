@@ -15,17 +15,11 @@ import {
 	Dropdown,
 	ToggleControl,
 	SelectControl,
-	CheckboxControl,
-	TextControl,
 	RangeControl,
 	ColorPalette,
-	Icon,
 	Button,
 } from "@wordpress/components";
-
-import { Waypoint } from "react-waypoint";
 import { slugify } from "../block-global";
-// import "../../assets/blocks/progress-bars/progress-bars";
 
 const Edit = (props) => {
 	const {
@@ -73,7 +67,6 @@ const Edit = (props) => {
 			return obj;
 		});
 		props.setAttributes({ listItems: editedListItems });
-		console.log(editedListItems);
 	};
 	const handleItemWidthChange = (pbWidth, pbId) => {
 		const newListItems = [...listItems];
@@ -176,30 +169,28 @@ const Edit = (props) => {
 						</div>
 					)}
 
-					<Waypoint onEnter={props._handleWaypointEnter}>
+					<div
+						className="blockons-progressbar-bar"
+						ref={props.innerRef}
+						style={{
+							height: pbItemHeight + "px",
+							backgroundColor: listItem.pbBgColor
+								? listItem.pbBgColor
+								: pbBarBgColor,
+						}}
+					>
 						<div
-							className="blockons-progressbar-bar"
-							ref={props.innerRef}
+							className="blockons-progressbar-bar-inner"
 							style={{
-								height: pbItemHeight + "px",
-								backgroundColor: listItem.pbBgColor
-									? listItem.pbBgColor
-									: pbBarBgColor,
+								width: listItem.pbWidth + "%",
+								backgroundColor: listItem.pbColor
+									? listItem.pbColor
+									: pbBarColor,
 							}}
 						>
-							<div
-								className="blockons-progressbar-bar-inner"
-								style={{
-									width: listItem.pbWidth + "%",
-									backgroundColor: listItem.pbColor
-										? listItem.pbColor
-										: pbBarColor,
-								}}
-							>
-								{pbShowPercent ? listItem.pbWidth + "%" : ""}
-							</div>
+							{pbShowPercent ? listItem.pbWidth + "%" : ""}
 						</div>
-					</Waypoint>
+					</div>
 
 					<div className="blockons-item-btns">
 						<Dropdown

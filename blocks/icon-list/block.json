@@ -64,6 +64,40 @@
 			"default": "#4f4f4f"
 		}
 	},
+	"example": {
+		"attributes": {
+			"pbDesign": "one",
+			"listItems": [
+				{
+					"itemId": "id1",
+					"itemText": "List Item 1",
+					"itemTextSize": null,
+					"itemTextColor": null,
+					"itemIcon": "check",
+					"itemIconSize": null,
+					"itemIconColor": null
+				},
+				{
+					"itemId": "id2",
+					"itemText": "List Item 2",
+					"itemTextSize": null,
+					"itemTextColor": null,
+					"itemIcon": "check",
+					"itemIconSize": null,
+					"itemIconColor": null
+				},
+				{
+					"itemId": "id3",
+					"itemText": "List Item 3",
+					"itemTextSize": null,
+					"itemTextColor": null,
+					"itemIcon": "check",
+					"itemIconSize": null,
+					"itemIconColor": null
+				}
+			]
+		}
+	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": ["file:./style-index.css", "blockons-fontawesome"]

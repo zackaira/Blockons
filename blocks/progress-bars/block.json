@@ -69,6 +69,27 @@
 			"default": "#404040"
 		}
 	},
+	"example": {
+		"attributes": {
+			"pbDesign": "one",
+			"listItems": [
+				{
+					"pbId": "someid",
+					"pbText": "Projects Completed",
+					"pbWidth": 82,
+					"pbColor": "",
+					"pbBgColor": ""
+				},
+				{
+					"pbId": "someotherid",
+					"pbText": "Coffe's Drank",
+					"pbWidth": 41,
+					"pbColor": "",
+					"pbBgColor": ""
+				}
+			]
+		}
+	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"viewScript": "blockons-progress-bars",
