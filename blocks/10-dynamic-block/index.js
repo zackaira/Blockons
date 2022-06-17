@@ -3,7 +3,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType } from "@wordpress/blocks";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -12,13 +12,13 @@ import { registerBlockType } from '@wordpress/blocks';
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import './style.scss';
+import "./style.css";
 
 /**
  * Internal dependencies
  */
-import json from './block.json';
-import Edit from './edit';
+import json from "./block.json";
+import Edit from "./edit";
 
 const { name } = json;
 
@@ -27,7 +27,7 @@ const { name } = json;
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType( name, {
+registerBlockType(name, {
 	/**
 	 * @see ./edit.js
 	 */
@@ -37,4 +37,4 @@ registerBlockType( name, {
 	 * Many examples use following for dynamic blocks: save: () => null
 	 * This is the default value in registerBlockType for the save property, so it has been omitted here.
 	 */
-} );
+});

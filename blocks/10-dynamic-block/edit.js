@@ -10,7 +10,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/richtext/
  */
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useBlockProps, RichText } from "@wordpress/block-editor";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -18,7 +18,7 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import './editor.scss';
+import "./editor.css";
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -30,15 +30,13 @@ import './editor.scss';
  * @param {Function} param0.setAttributes
  * @return {WPElement} Element to render.
  */
-export default function Edit( { attributes: { message }, setAttributes } ) {
+export default function Edit({ attributes: { message }, setAttributes }) {
 	return (
 		<RichText
-			{ ...useBlockProps() }
+			{...useBlockProps()}
 			tagName="p"
-			value={ message }
-			onChange={ ( newMessage ) =>
-				setAttributes( { message: newMessage } )
-			}
+			value={message}
+			onChange={(newMessage) => setAttributes({ message: newMessage })}
 		/>
 	);
 }
