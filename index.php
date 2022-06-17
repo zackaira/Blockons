@@ -43,6 +43,7 @@ require BLOCKONS_PLUGIN_DIR . 'build/blocks/search/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/icon-list/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/line-heading/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/progress-bars/index.php';
+require BLOCKONS_PLUGIN_DIR . 'build/blocks/marketing-button/index.php';
 // WooCommerce Blocks
 if ( blockons_is_plugin_active( 'woocommerce.php' ) ) {
 	require BLOCKONS_PLUGIN_DIR . 'build/blocks/account-icon/index.php';

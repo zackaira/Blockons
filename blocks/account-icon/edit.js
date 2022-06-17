@@ -47,6 +47,7 @@ const Edit = (props) => {
 			dropBgColor,
 			dropColor,
 		},
+		setAttributes,
 	} = props;
 
 	const [showDropDown, setShowDropDown] = useState(false);
@@ -56,12 +57,12 @@ const Edit = (props) => {
 	});
 
 	const onChangeAlignment = (newAlignment) => {
-		props.setAttributes({
+		setAttributes({
 			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
 		});
 	};
 	const onChangeCustomIcon = (value) => {
-		props.setAttributes({ customIcon: value });
+		setAttributes({ customIcon: value });
 	};
 
 	return (
@@ -80,7 +81,7 @@ const Edit = (props) => {
 							)}
 							checked={hasDropdown}
 							onChange={(newValue) => {
-								props.setAttributes({
+								setAttributes({
 									hasDropdown: newValue,
 								});
 							}}
@@ -102,7 +103,7 @@ const Edit = (props) => {
 									label="Dashboard"
 									checked={showDashboard}
 									onChange={(newValue) => {
-										props.setAttributes({
+										setAttributes({
 											showDashboard: newValue,
 										});
 									}}
@@ -111,7 +112,7 @@ const Edit = (props) => {
 									label="Orders"
 									checked={showOrders}
 									onChange={(newValue) => {
-										props.setAttributes({
+										setAttributes({
 											showOrders: newValue,
 										});
 									}}
@@ -120,7 +121,7 @@ const Edit = (props) => {
 									label="Downloads"
 									checked={showDownloads}
 									onChange={(newValue) => {
-										props.setAttributes({
+										setAttributes({
 											showDownloads: newValue,
 										});
 									}}
@@ -129,7 +130,7 @@ const Edit = (props) => {
 									label="Addresses"
 									checked={showAddresses}
 									onChange={(newValue) => {
-										props.setAttributes({
+										setAttributes({
 											showAddresses: newValue,
 										});
 									}}
@@ -138,7 +139,7 @@ const Edit = (props) => {
 									label="Account Details"
 									checked={showAccountDetails}
 									onChange={(newValue) => {
-										props.setAttributes({
+										setAttributes({
 											showAccountDetails: newValue,
 										});
 									}}
@@ -170,7 +171,7 @@ const Edit = (props) => {
 								{ label: __("Custom Icon", "blockons"), value: "custom" },
 							]}
 							onChange={(newIcon) =>
-								props.setAttributes({
+								setAttributes({
 									icon: newIcon === undefined ? "fa-regular fa-user" : newIcon,
 								})
 							}
@@ -199,23 +200,23 @@ const Edit = (props) => {
 							label={__("Icon Size", "blockons")}
 							value={iconSize}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									iconSize: value === undefined ? 20 : value,
 								})
 							}
 							min={14}
-							max={50}
+							max={80}
 						/>
 						<RangeControl
 							label={__("Icon Padding", "blockons")}
 							value={iconPadding}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									iconPadding: value === undefined ? 20 : value,
 								})
 							}
 							min={0}
-							max={60}
+							max={80}
 						/>
 
 						<p>{__("Icon Background Color", "blockons")}</p>
@@ -223,7 +224,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={iconBgColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									iconBgColor: newColor === undefined ? "#FFF" : newColor,
 								})
 							}
@@ -234,7 +235,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={iconColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									iconColor: newColor === undefined ? "#000" : newColor,
 								})
 							}
@@ -245,7 +246,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={dropBgColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									dropBgColor: newColor === undefined ? "#FFF" : newColor,
 								})
 							}
@@ -256,7 +257,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={dropColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									dropColor: newColor === undefined ? "#747474" : newColor,
 								})
 							}
@@ -300,7 +301,7 @@ const Edit = (props) => {
 									placeholder={__("Dashboard", "blockons")}
 									value={textDashboard}
 									onChange={(newValue) =>
-										props.setAttributes({
+										setAttributes({
 											textDashboard:
 												newValue === undefined
 													? __("Dashboard", "blockons")
@@ -317,7 +318,7 @@ const Edit = (props) => {
 									placeholder={__("Orders", "blockons")}
 									value={textOrders}
 									onChange={(newValue) =>
-										props.setAttributes({
+										setAttributes({
 											textOrders:
 												newValue === undefined
 													? __("Orders", "blockons")
@@ -334,7 +335,7 @@ const Edit = (props) => {
 									placeholder={__("Downloads", "blockons")}
 									value={textDownloads}
 									onChange={(newValue) =>
-										props.setAttributes({
+										setAttributes({
 											textDownloads:
 												newValue === undefined
 													? __("Downloads", "blockons")
@@ -351,7 +352,7 @@ const Edit = (props) => {
 									placeholder={__("Addresses", "blockons")}
 									value={textAddresses}
 									onChange={(newValue) =>
-										props.setAttributes({
+										setAttributes({
 											textAddresses:
 												newValue === undefined
 													? __("Addresses", "blockons")
@@ -368,7 +369,7 @@ const Edit = (props) => {
 									placeholder={__("Account Details", "blockons")}
 									value={textAccountDetails}
 									onChange={(newValue) =>
-										props.setAttributes({
+										setAttributes({
 											textAccountDetails:
 												newValue === undefined
 													? __("Account Details", "blockons")

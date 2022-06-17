@@ -39,6 +39,7 @@ const Edit = (props) => {
 			pbBarBgColor,
 			pbDescFontColor,
 		},
+		setAttributes,
 	} = props;
 
 	const blockProps = useBlockProps({
@@ -46,7 +47,7 @@ const Edit = (props) => {
 	});
 
 	const onChangeAlignment = (newAlignment) => {
-		props.setAttributes({
+		setAttributes({
 			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
 		});
 	};
@@ -66,7 +67,7 @@ const Edit = (props) => {
 				};
 			return obj;
 		});
-		props.setAttributes({ listItems: editedListItems });
+		setAttributes({ listItems: editedListItems });
 	};
 	const handleItemWidthChange = (pbWidth, pbId) => {
 		const newListItems = [...listItems];
@@ -78,7 +79,7 @@ const Edit = (props) => {
 				};
 			return obj;
 		});
-		props.setAttributes({ listItems: editedListItems });
+		setAttributes({ listItems: editedListItems });
 	};
 	const handleItemPbColorChange = (pbColor, pbId) => {
 		const newListItems = [...listItems];
@@ -90,7 +91,7 @@ const Edit = (props) => {
 				};
 			return obj;
 		});
-		props.setAttributes({ listItems: editedListItems });
+		setAttributes({ listItems: editedListItems });
 	};
 	const handleItemPbBgColorChange = (pbBgColor, pbId) => {
 		const newListItems = [...listItems];
@@ -102,7 +103,7 @@ const Edit = (props) => {
 				};
 			return obj;
 		});
-		props.setAttributes({ listItems: editedListItems });
+		setAttributes({ listItems: editedListItems });
 	};
 
 	const handleAddItem = () => {
@@ -114,13 +115,13 @@ const Edit = (props) => {
 			pbColor: "",
 			pbBgColor: "",
 		});
-		props.setAttributes({ listItems: newListItems });
+		setAttributes({ listItems: newListItems });
 	};
 
 	const handleRemoveItem = (index) => {
 		const newListItems = [...listItems];
 		newListItems.splice(index, 1);
-		props.setAttributes({ listItems: newListItems });
+		setAttributes({ listItems: newListItems });
 	};
 
 	const handleDuplicateItem = (index, pbText, pbWidth, pbColor, pbBgColor) => {
@@ -132,7 +133,7 @@ const Edit = (props) => {
 			pbColor,
 			pbBgColor,
 		});
-		props.setAttributes({ listItems: newListItems });
+		setAttributes({ listItems: newListItems });
 	};
 
 	// Progress Bars Items
@@ -276,20 +277,20 @@ const Edit = (props) => {
 							value={pbMaxWidth}
 							min={1}
 							max={100}
-							onChange={(value) => props.setAttributes({ pbMaxWidth: value })}
+							onChange={(value) => setAttributes({ pbMaxWidth: value })}
 						/>
 
 						<ToggleControl
 							label={__("Display Labels", "blockons")}
 							checked={pbShowLabel}
-							onChange={(value) => props.setAttributes({ pbShowLabel: value })}
+							onChange={(value) => setAttributes({ pbShowLabel: value })}
 						/>
 						{pbShowLabel && (
 							<RangeControl
 								label={__("Label Font Size", "blockons")}
 								value={pbItemDescSize}
 								onChange={(newFontSize) => {
-									props.setAttributes({ pbItemDescSize: newFontSize });
+									setAttributes({ pbItemDescSize: newFontSize });
 								}}
 								min={11}
 								max={48}
@@ -300,9 +301,7 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Item Spacing", "blockons")}
 							value={pbItemSpacing}
-							onChange={(value) =>
-								props.setAttributes({ pbItemSpacing: value })
-							}
+							onChange={(value) => setAttributes({ pbItemSpacing: value })}
 							min={0}
 							max={100}
 							clearable
@@ -311,9 +310,7 @@ const Edit = (props) => {
 							<RangeControl
 								label={__("Height of Progress Bars", "blockons")}
 								value={pbItemHeight}
-								onChange={(value) =>
-									props.setAttributes({ pbItemHeight: value })
-								}
+								onChange={(value) => setAttributes({ pbItemHeight: value })}
 								min={4}
 								max={140}
 								clearable
@@ -323,9 +320,7 @@ const Edit = (props) => {
 							<ToggleControl
 								label={__("Display Percentage", "blockons")}
 								checked={pbShowPercent}
-								onChange={(value) =>
-									props.setAttributes({ pbShowPercent: value })
-								}
+								onChange={(value) => setAttributes({ pbShowPercent: value })}
 							/>
 						)}
 					</PanelBody>
@@ -344,13 +339,13 @@ const Edit = (props) => {
 								{ label: "Border Bottom Line", value: "five" },
 								{ label: "Thin Line", value: "six" },
 							]}
-							onChange={(value) => props.setAttributes({ pbDesign: value })}
+							onChange={(value) => setAttributes({ pbDesign: value })}
 						/>
 						<p>{__("Bar Color", "blockons")}</p>
 						<ColorPalette
 							value={pbBarColor}
 							onChange={(colorValue) =>
-								props.setAttributes({
+								setAttributes({
 									pbBarColor: colorValue === undefined ? "#22b0ea" : colorValue,
 								})
 							}
@@ -361,7 +356,7 @@ const Edit = (props) => {
 						<ColorPalette
 							value={pbBarBgColor}
 							onChange={(colorValue) =>
-								props.setAttributes({
+								setAttributes({
 									pbBarBgColor:
 										colorValue === undefined ? "#F7F7F7" : colorValue,
 								})
@@ -373,7 +368,7 @@ const Edit = (props) => {
 						<ColorPalette
 							value={pbDescFontColor}
 							onChange={(colorValue) =>
-								props.setAttributes({
+								setAttributes({
 									pbDescFontColor:
 										colorValue === undefined ? "#404040" : colorValue,
 								})
@@ -391,7 +386,7 @@ const Edit = (props) => {
 							value={pbElementAlign}
 							controls={["left", "center", "right"]}
 							onChange={(value) => {
-								props.setAttributes({ pbElementAlign: value });
+								setAttributes({ pbElementAlign: value });
 							}}
 						/>
 					)}

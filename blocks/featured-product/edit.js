@@ -48,6 +48,7 @@ const Edit = (props) => {
 			detailWidth,
 			imgHeight,
 		},
+		setAttributes,
 	} = props;
 
 	const blockProps = useBlockProps({
@@ -55,7 +56,7 @@ const Edit = (props) => {
 	});
 
 	const onChangeAlignment = (newAlignment) => {
-		props.setAttributes({
+		setAttributes({
 			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
 		});
 	};
@@ -87,7 +88,7 @@ const Edit = (props) => {
 							label={__("Select a product to display", "blockons")}
 							value={selectedProduct}
 							onChange={(value) => {
-								props.setAttributes({ selectedProduct: value });
+								setAttributes({ selectedProduct: value });
 							}}
 							siteurl={site_url}
 						/>
@@ -100,7 +101,7 @@ const Edit = (props) => {
 								{ label: __("Overlayed Layout", "blockons"), value: "two" },
 							]}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									layout: value === undefined ? "one" : value,
 								})
 							}
@@ -111,7 +112,7 @@ const Edit = (props) => {
 								label={__("Switch Layout", "blockons")}
 								checked={layoutSwitch}
 								onChange={(newValue) => {
-									props.setAttributes({
+									setAttributes({
 										layoutSwitch: newValue,
 									});
 								}}
@@ -123,7 +124,7 @@ const Edit = (props) => {
 								label={__("Image Overlay", "blockons")}
 								checked={layoutTwoOverlay}
 								onChange={(newValue) => {
-									props.setAttributes({
+									setAttributes({
 										layoutTwoOverlay: newValue,
 									});
 								}}
@@ -134,7 +135,7 @@ const Edit = (props) => {
 							label={__("Block Padding", "blockons")}
 							value={padding}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									padding: value === undefined ? 15 : value,
 								})
 							}
@@ -146,7 +147,7 @@ const Edit = (props) => {
 								label={__("Inner Block Padding", "blockons")}
 								value={innerPadding}
 								onChange={(value) =>
-									props.setAttributes({
+									setAttributes({
 										innerPadding: value === undefined ? 30 : value,
 									})
 								}
@@ -159,7 +160,7 @@ const Edit = (props) => {
 							label={__("Show Description", "blockons")}
 							checked={showDesc}
 							onChange={(newValue) => {
-								props.setAttributes({
+								setAttributes({
 									showDesc: newValue,
 								});
 							}}
@@ -168,7 +169,7 @@ const Edit = (props) => {
 							label={__("Show Price", "blockons")}
 							checked={showPrice}
 							onChange={(newValue) => {
-								props.setAttributes({
+								setAttributes({
 									showPrice: newValue,
 								});
 							}}
@@ -177,7 +178,7 @@ const Edit = (props) => {
 							label={__("Show Button", "blockons")}
 							checked={showButton}
 							onChange={(newValue) => {
-								props.setAttributes({
+								setAttributes({
 									showButton: newValue,
 								});
 							}}
@@ -192,7 +193,7 @@ const Edit = (props) => {
 								label={__("Overlay Opacity", "blockons")}
 								value={overlayOpacity}
 								onChange={(value) =>
-									props.setAttributes({
+									setAttributes({
 										overlayOpacity: value === undefined ? 35 : value,
 									})
 								}
@@ -206,7 +207,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={blockBgColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									blockBgColor: newColor === undefined ? "#FFF" : newColor,
 								})
 							}
@@ -217,7 +218,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={blockFontColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									blockFontColor: newColor === undefined ? "#444" : newColor,
 								})
 							}
@@ -228,7 +229,7 @@ const Edit = (props) => {
 								label={__("Product Info Width", "blockons")}
 								value={detailWidth}
 								onChange={(value) =>
-									props.setAttributes({
+									setAttributes({
 										detailWidth: value === undefined ? 50 : value,
 									})
 								}
@@ -240,7 +241,7 @@ const Edit = (props) => {
 							label={__("Product Image Height", "blockons")}
 							value={imgHeight}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									imgHeight: value === undefined ? "auto" : value,
 								})
 							}
@@ -305,7 +306,7 @@ const Edit = (props) => {
 										placeholder={__("View Product")}
 										value={buttonText}
 										onChange={(value) =>
-											props.setAttributes({
+											setAttributes({
 												buttonText:
 													value === undefined ? "View Product" : value,
 											})

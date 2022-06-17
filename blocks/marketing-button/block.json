@@ -1,0 +1,69 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/marketing-button",
+	"title": "Block-Ons Marketing Button",
+	"textdomain": "blockons",
+	"icon": "heart",
+	"category": "blockons-category",
+	"keywords": ["marketing", "button", "cta"],
+	"attributes": {
+		"alignment": {
+			"type": "string",
+			"default": "center"
+		},
+		"buttonAlign": {
+			"type": "string",
+			"default": "left"
+		},
+		"linkTo": {
+			"type": "object"
+		},
+		"layout": {
+			"type": "string",
+			"default": "one"
+		},
+		"hasIcon": {
+			"type": "boolean",
+			"default": false
+		},
+		"theIcon": {
+			"type": "string",
+			"default": "star"
+		},
+		"iconPosition": {
+			"type": "string",
+			"default": "one"
+		},
+		"iconSize": {
+			"type": "number",
+			"default": 16
+		},
+		"title": {
+			"type": "string",
+			"default": "GRAB this offer now!"
+		},
+		"subText": {
+			"type": "string",
+			"default": "Valid only until July 28th"
+		},
+		"vertPad": {
+			"type": "number",
+			"default": 15
+		},
+		"horizPad": {
+			"type": "number",
+			"default": 18
+		}
+	},
+	"example": {
+		"attributes": {
+			"alignment": "left",
+			"title": "GRAB this offer now!",
+			"subText": "Valid only until July 28th"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": ["file:./style-index.css", "blockons-fontawesome"]
+}

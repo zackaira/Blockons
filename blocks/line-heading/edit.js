@@ -36,6 +36,7 @@ const Edit = (props) => {
 			headVertAlign,
 			fontColor,
 		},
+		setAttributes,
 	} = props;
 
 	const blockProps = useBlockProps({
@@ -43,7 +44,7 @@ const Edit = (props) => {
 	});
 
 	const onChangeAlignment = (newAlignment) => {
-		props.setAttributes({
+		setAttributes({
 			alignment: newAlignment === undefined ? "left" : newAlignment,
 		});
 	};
@@ -69,7 +70,7 @@ const Edit = (props) => {
 								{ label: "div", value: "div" },
 							]}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									hTag: value === undefined ? "h3" : value,
 								})
 							}
@@ -84,7 +85,7 @@ const Edit = (props) => {
 								{ label: "Line Width by pixels", value: "line" },
 							]}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									headWidthSet: value === undefined ? "outer" : value,
 								})
 							}
@@ -94,9 +95,7 @@ const Edit = (props) => {
 							<RangeControl
 								label={__("Outer Width", "blockons")}
 								value={headOuterWidth}
-								onChange={(value) =>
-									props.setAttributes({ headOuterWidth: value })
-								}
+								onChange={(value) => setAttributes({ headOuterWidth: value })}
 								min={10}
 								max={100}
 								help={__(
@@ -109,9 +108,7 @@ const Edit = (props) => {
 							<RangeControl
 								label={__("Width", "blockons")}
 								value={headLineWidth}
-								onChange={(value) =>
-									props.setAttributes({ headLineWidth: value })
-								}
+								onChange={(value) => setAttributes({ headLineWidth: value })}
 								min={10}
 								max={1000}
 								help={__(
@@ -131,7 +128,7 @@ const Edit = (props) => {
 								{ label: "Bottom", value: "bottomalign" },
 							]}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									headVertAlign: value === undefined ? "solid" : value,
 								})
 							}
@@ -151,7 +148,7 @@ const Edit = (props) => {
 								{ label: "Dashed", value: "dashed" },
 							]}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									lineStyle: value === undefined ? "solid" : value,
 								})
 							}
@@ -160,7 +157,7 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Line Thickness", "blockons")}
 							value={lineWidth}
-							onChange={(value) => props.setAttributes({ lineWidth: value })}
+							onChange={(value) => setAttributes({ lineWidth: value })}
 							min={1}
 							max={40}
 						/>
@@ -170,7 +167,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={fontColor}
 							onChange={(colorValue) =>
-								props.setAttributes({
+								setAttributes({
 									fontColor: colorValue === undefined ? "inherit" : colorValue,
 								})
 							}
@@ -180,7 +177,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={lineColor}
 							onChange={(colorValue) =>
-								props.setAttributes({
+								setAttributes({
 									lineColor: colorValue === undefined ? "#444" : colorValue,
 								})
 							}
@@ -195,7 +192,7 @@ const Edit = (props) => {
 						value={headElementAlign}
 						controls={["left", "center", "right"]}
 						onChange={(value) => {
-							props.setAttributes({ headElementAlign: value });
+							setAttributes({ headElementAlign: value });
 						}}
 					/>
 				</BlockControls>
@@ -221,7 +218,7 @@ const Edit = (props) => {
 					keepPlaceholderOnFocus
 					value={headingTitle}
 					className="blockons-lheading-text"
-					onChange={(value) => props.setAttributes({ headingTitle: value })}
+					onChange={(value) => setAttributes({ headingTitle: value })}
 					style={{
 						color: fontColor,
 					}}

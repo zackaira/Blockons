@@ -39,6 +39,7 @@ const Edit = (props) => {
 			listItemFontSize,
 			listItemFontColor,
 		},
+		setAttributes,
 	} = props;
 
 	const blockProps = useBlockProps({
@@ -46,12 +47,12 @@ const Edit = (props) => {
 	});
 
 	const onChangeAlignment = (newAlignment) => {
-		props.setAttributes({
+		setAttributes({
 			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
 		});
 	};
 	const onChangeCustomIcon = (value) => {
-		props.setAttributes({ customIcon: value });
+		setAttributes({ customIcon: value });
 	};
 
 	// Item Control Functions
@@ -65,7 +66,7 @@ const Edit = (props) => {
 				};
 			return obj;
 		});
-		props.setAttributes({ listItems: editedListItems });
+		setAttributes({ listItems: editedListItems });
 	};
 	const handleItemIconSizeChange = (itemIconSize, itemId) => {
 		const newListItems = [...listItems];
@@ -77,7 +78,7 @@ const Edit = (props) => {
 				};
 			return obj;
 		});
-		props.setAttributes({ listItems: editedListItems });
+		setAttributes({ listItems: editedListItems });
 	};
 	const handleItemIconColorChange = (itemIconColor, itemId) => {
 		const newListItems = [...listItems];
@@ -89,7 +90,7 @@ const Edit = (props) => {
 				};
 			return obj;
 		});
-		props.setAttributes({ listItems: editedListItems });
+		setAttributes({ listItems: editedListItems });
 	};
 	const handleItemTextSizeChange = (itemTextSize, itemId) => {
 		const newListItems = [...listItems];
@@ -101,7 +102,7 @@ const Edit = (props) => {
 				};
 			return obj;
 		});
-		props.setAttributes({ listItems: editedListItems });
+		setAttributes({ listItems: editedListItems });
 	};
 	const handleItemTextColorChange = (itemTextColor, itemId) => {
 		const newListItems = [...listItems];
@@ -113,7 +114,7 @@ const Edit = (props) => {
 				};
 			return obj;
 		});
-		props.setAttributes({ listItems: editedListItems });
+		setAttributes({ listItems: editedListItems });
 	};
 	const handleItemTextChange = (itemText, itemId) => {
 		const newListItems = [...listItems];
@@ -128,7 +129,7 @@ const Edit = (props) => {
 				};
 			return obj;
 		});
-		props.setAttributes({ listItems: editedListItems });
+		setAttributes({ listItems: editedListItems });
 	};
 	const handleAddItem = () => {
 		const newListItems = [...listItems];
@@ -141,13 +142,13 @@ const Edit = (props) => {
 			itemIconSize: null,
 			itemIconColor: null,
 		});
-		props.setAttributes({ listItems: newListItems });
+		setAttributes({ listItems: newListItems });
 	};
 
 	const handleRemoveItem = (index) => {
 		const newListItems = [...listItems];
 		newListItems.splice(index, 1);
-		props.setAttributes({ listItems: newListItems });
+		setAttributes({ listItems: newListItems });
 	};
 
 	const handleDuplicateItem = (
@@ -169,7 +170,7 @@ const Edit = (props) => {
 			itemIconSize: iconSize,
 			itemIconColor: iconColor,
 		});
-		props.setAttributes({ listItems: newListItems });
+		setAttributes({ listItems: newListItems });
 	};
 
 	// Icon List Items
@@ -348,7 +349,7 @@ const Edit = (props) => {
 								{ label: __("Horizontal", "blockons"), value: "horizontal" },
 							]}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									listItemsLayout: value === undefined ? "vertical" : value,
 								})
 							}
@@ -358,9 +359,7 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Item Spacing", "blockons")}
 							value={listItemSpacing}
-							onChange={(value) =>
-								props.setAttributes({ listItemSpacing: value })
-							}
+							onChange={(value) => setAttributes({ listItemSpacing: value })}
 							min={0}
 							max={100}
 						/>
@@ -368,7 +367,7 @@ const Edit = (props) => {
 							label={__("Icon & Text Spacing", "blockons")}
 							value={listItemIconSpacing}
 							onChange={(value) =>
-								props.setAttributes({ listItemIconSpacing: value })
+								setAttributes({ listItemIconSpacing: value })
 							}
 							min={0}
 							max={80}
@@ -381,23 +380,21 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Font Size", "blockons")}
 							value={listItemFontSize}
-							onChange={(value) =>
-								props.setAttributes({ listItemFontSize: value })
-							}
+							onChange={(value) => setAttributes({ listItemFontSize: value })}
 							min={10}
 							max={64}
 						/>
 						<ColorPalette
 							value={listItemFontColor}
 							onChange={(newColor) => {
-								props.setAttributes({ listItemFontColor: newColor });
+								setAttributes({ listItemFontColor: newColor });
 							}}
 						/>
 						<RangeControl
 							label={__("Icon Size & Color", "blockons")}
 							value={listItemIconSize}
 							onChange={(newFontSize) => {
-								props.setAttributes({ listItemIconSize: newFontSize });
+								setAttributes({ listItemIconSize: newFontSize });
 							}}
 							min={10}
 							max={98}
@@ -405,7 +402,7 @@ const Edit = (props) => {
 						<ColorPalette
 							value={listItemIconColor}
 							onChange={(newColor) => {
-								props.setAttributes({ listItemIconColor: newColor });
+								setAttributes({ listItemIconColor: newColor });
 							}}
 						/>
 					</PanelBody>

@@ -36,6 +36,7 @@ const Edit = (props) => {
 			dropBgColor,
 			dropColor,
 		},
+		setAttributes,
 	} = props;
 
 	const [showMiniCart, setShowMiniCart] = useState(false);
@@ -45,12 +46,12 @@ const Edit = (props) => {
 	});
 
 	const onChangeAlignment = (newAlignment) => {
-		props.setAttributes({
+		setAttributes({
 			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
 		});
 	};
 	const onChangeCustomIcon = (value) => {
-		props.setAttributes({ customIcon: value });
+		setAttributes({ customIcon: value });
 	};
 
 	return (
@@ -69,7 +70,7 @@ const Edit = (props) => {
 							)}
 							checked={hasDropdown}
 							onChange={(newValue) => {
-								props.setAttributes({
+								setAttributes({
 									hasDropdown: newValue,
 								});
 							}}
@@ -128,7 +129,7 @@ const Edit = (props) => {
 								},
 							]}
 							onChange={(newIcon) =>
-								props.setAttributes({
+								setAttributes({
 									icon:
 										newIcon === undefined
 											? "fa-solid fa-cart-shopping"
@@ -160,7 +161,7 @@ const Edit = (props) => {
 							label={__("Icon Size", "blockons")}
 							value={iconSize}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									iconSize: value === undefined ? 17 : value,
 								})
 							}
@@ -171,7 +172,7 @@ const Edit = (props) => {
 							label={__("Icon Padding", "blockons")}
 							value={iconPadding}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									iconPadding: value === undefined ? 5 : value,
 								})
 							}
@@ -184,7 +185,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={iconBgColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									iconBgColor: newColor === undefined ? "#FFF" : newColor,
 								})
 							}
@@ -195,7 +196,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={iconColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									iconColor: newColor === undefined ? "#000" : newColor,
 								})
 							}
@@ -206,7 +207,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={dropBgColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									dropBgColor: newColor === undefined ? "#FFF" : newColor,
 								})
 							}
@@ -217,7 +218,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={dropColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									dropColor: newColor === undefined ? "#747474" : newColor,
 								})
 							}

@@ -1,0 +1,31 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.components-dropdown.blockons-item-level-settings.blockons-marketing-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 1px 0 0 #000;
+}
+
+/* -- Show icon on hover -- */
+.wp-block-blockons-marketing-button
+	.blockons-marketing-button:hover
+	.blockons-mb-icon {
+	box-shadow: 0 0 0 1px #696969;
+}
+.wp-block-blockons-marketing-button
+	.blockons-marketing-button
+	.blockons-mb-icon:hover {
+	box-shadow: 0 0 0 1px #297cba;
+	cursor: pointer;
+}
+.wp-block-blockons-marketing-button
+	.blockons-marketing-button
+	.blockons-mb-icon
+	.blockons-icon-selecter {
+	line-height: 1;
+	display: flex;
+	align-items: center;
+}

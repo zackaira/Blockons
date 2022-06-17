@@ -37,6 +37,7 @@ const Edit = (props) => {
 			searchBtnBgColor,
 			searchBtnColor,
 		},
+		setAttributes,
 	} = props;
 
 	const [showSearch, setShowSearch] = useState(false);
@@ -48,15 +49,15 @@ const Edit = (props) => {
 	});
 
 	const onChangeAlignment = (newAlignment) => {
-		props.setAttributes({
+		setAttributes({
 			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
 		});
 	};
 	const onChangeInputText = (value) => {
-		props.setAttributes({ textInput: value });
+		setAttributes({ textInput: value });
 	};
 	const onChangeButtonText = (value) => {
-		props.setAttributes({ textButton: value });
+		setAttributes({ textButton: value });
 	};
 
 	const closePopup = () => {
@@ -79,7 +80,7 @@ const Edit = (props) => {
 								{ label: __("Popup", "blockons"), value: "popup" },
 							]}
 							onChange={(newDisplay) =>
-								props.setAttributes({
+								setAttributes({
 									searchDisplay:
 										newDisplay === undefined ? "dropdown" : newDisplay,
 								})
@@ -108,7 +109,7 @@ const Edit = (props) => {
 								{ label: __("Center", "blockons"), value: "center" },
 							]}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									searchAlign: value === undefined ? "right" : value,
 								})
 							}
@@ -123,7 +124,7 @@ const Edit = (props) => {
 							label={__("Icon Size", "blockons")}
 							value={iconSize}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									iconSize: value === undefined ? 17 : value,
 								})
 							}
@@ -134,7 +135,7 @@ const Edit = (props) => {
 							label={__("Icon Padding", "blockons")}
 							value={iconPadding}
 							onChange={(value) =>
-								props.setAttributes({
+								setAttributes({
 									iconPadding: value === undefined ? 5 : value,
 								})
 							}
@@ -147,7 +148,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={iconBgColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									iconBgColor: newColor === undefined ? "#FFF" : newColor,
 								})
 							}
@@ -158,7 +159,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={iconColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									iconColor: newColor === undefined ? "#000" : newColor,
 								})
 							}
@@ -171,7 +172,7 @@ const Edit = (props) => {
 									colors={colorPickerPalette}
 									value={searchBgColor}
 									onChange={(newColor) =>
-										props.setAttributes({
+										setAttributes({
 											searchBgColor: newColor === undefined ? "#FFF" : newColor,
 										})
 									}
@@ -184,7 +185,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={searchBtnBgColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									searchBtnBgColor: newColor === undefined ? "#000" : newColor,
 								})
 							}
@@ -194,7 +195,7 @@ const Edit = (props) => {
 							colors={colorPickerPalette}
 							value={searchBtnColor}
 							onChange={(newColor) =>
-								props.setAttributes({
+								setAttributes({
 									searchBtnColor: newColor === undefined ? "#FFF" : newColor,
 								})
 							}

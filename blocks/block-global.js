@@ -72,3 +72,15 @@ export const iconListIcons = {
 	tags: "tags",
 	ellipsis: "ellipsis",
 };
+
+/*
+ * Minimal RichText Settings
+ */
+export const minimalRichText = [
+	"core/bold",
+	"core/italic",
+	"core/highlight",
+	"core/subscript",
+	"core/superscript",
+	"core/strikethrough",
+];
