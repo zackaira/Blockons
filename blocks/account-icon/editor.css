@@ -20,6 +20,7 @@
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	font-size: 12px;
 	text-decoration: none;
+	margin-right: 5px;
 }
 .helplink a:hover {
 	background-color: #c0deee;

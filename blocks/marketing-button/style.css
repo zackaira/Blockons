@@ -12,6 +12,10 @@
 .blockons-marketing-button-block .blockons-marketing-button {
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	padding: 15px 18px;
+	border-radius: 3px;
 }
 .blockons-marketing-button-block
 	.blockons-marketing-button
@@ -24,14 +28,13 @@
 	display: flex;
 	align-items: center;
 }
-.blockons-marketing-button {
-	padding: 15px 18px;
-	border-radius: 3px;
-}
 .blockons-marketing-button-title {
 	margin: 0;
 	padding: 0;
 	line-height: 1;
+	font-size: 19px;
+	font-weight: 600;
+	color: #000;
 }
 .blockons-marketing-button-text-wrap {
 	margin-top: 8px;
@@ -40,14 +43,18 @@
 	margin: 0;
 	padding: 0;
 	line-height: 1;
+	font-size: 14px;
+	letter-spacing: 0.4px;
+	color: #656565;
 }
 
 /* -- Icon -- */
 .wp-block-blockons-marketing-button
 	.blockons-marketing-button
 	.blockons-mb-icon {
-	margin-top: -4px;
+	margin-top: -3px;
 	line-height: 1;
+	padding: 4px;
 }
 .wp-block-blockons-marketing-button.icon-pos-one
 	.blockons-marketing-button
@@ -104,12 +111,12 @@
 
 /* -- Design One -- */
 .wp-block-blockons-marketing-button.design-one .blockons-marketing-button {
-	background-color: #f9f9f9;
-	box-shadow: 0 0 0 1px rgb(0 0 0 / 15%);
+	background-color: #fff;
+	border: 2px solid #000;
 }
 
 /* -- Design Two -- */
 .wp-block-blockons-marketing-button.design-two .blockons-marketing-button {
-	background-color: transparent;
-	box-shadow: 0 0 0 2px rgb(0 0 0 / 25%);
+	background-color: #fff;
+	border: 0;
 }
