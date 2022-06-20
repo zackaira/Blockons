@@ -27,23 +27,6 @@ import { useKeenSlider } from "keen-slider/react";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
 import { slugify, iconListIcons } from "../block-global";
 
-// Add / Remove Slides
-// const MutationPlugin = (slider) => {
-// 	const observer = new MutationObserver(function (mutations) {
-// 		mutations.forEach(function (mutation) {
-// 			slider.update();
-// 		});
-// 	});
-
-// 	const config = { childList: true };
-// 	slider.on("created", () => {
-// 		observer.observe(slider.container, config);
-// 	});
-// 	slider.on("destroyed", () => {
-// 		observer.disconnect();
-// 	});
-// };
-
 const Edit = (props) => {
 	const {
 		isSelected,
@@ -51,6 +34,7 @@ const Edit = (props) => {
 			alignment,
 			slides,
 			slidesLayout,
+			sliderLoop,
 			sliderArrows,
 			sliderPagination,
 		},
@@ -59,6 +43,23 @@ const Edit = (props) => {
 
 	const blockProps = useBlockProps({
 		className: `${alignment} layout-${slidesLayout}`,
+	});
+
+	// Slider Settings
+	const [currentSlide, setCurrentSlide] = useState(0);
+	const [loaded, setLoaded] = useState(false);
+	const [sliderRef, instanceRef] = useKeenSlider({
+		initial: 0,
+		loop: sliderLoop,
+		animation: {
+			duration: 1500,
+		},
+		slideChanged(slider) {
+			setCurrentSlide(slider.track.details.rel);
+		},
+		created() {
+			setLoaded(true);
+		},
 	});
 
 	const onChangeAlignment = (newAlignment) => {
@@ -142,19 +143,6 @@ const Edit = (props) => {
 		instanceRef.current.update();
 	}, [handleAddItem, handleRemoveItem, handleDuplicateItem]);
 
-	// Slider Settings
-	const [currentSlide, setCurrentSlide] = useState(0);
-	const [loaded, setLoaded] = useState(false);
-	const [sliderRef, instanceRef] = useKeenSlider({
-		initial: 0,
-		slideChanged(slider) {
-			setCurrentSlide(slider.track.details.rel);
-		},
-		created() {
-			setLoaded(true);
-		},
-	});
-
 	// Testimonials Arrows
 	function SlideArrow(props) {
 		const disabeld = props.disabled ? " arrow--disabled" : "";
@@ -196,7 +184,7 @@ const Edit = (props) => {
 						<div className="blockons-slide-author">
 							<div
 								className={`blockons-slide-author-img ${
-									slideItem.itemImg ? "hasImg" : "noImg"
+									slideItem.itemImg ? "hasimg" : "noimg"
 								}`}
 							>
 								{slideItem.itemImg ? (
@@ -267,6 +255,12 @@ const Edit = (props) => {
 							]}
 							onChange={(value) => setAttributes({ slidesLayout: value })}
 						/>
+
+						<ToggleControl // This setting is just for displaying the drop down, value is not saved.
+							label={__("Loop/Infinite Sliding", "blockons")}
+							checked={sliderLoop}
+							onChange={(value) => setAttributes({ sliderLoop: value })}
+						/>
 					</PanelBody>
 					<PanelBody
 						title={__("Testimonials Design", "blockons")}
@@ -309,7 +303,7 @@ const Edit = (props) => {
 								onClick={(e) =>
 									e.stopPropagation() || instanceRef.current?.prev()
 								}
-								disabled={currentSlide === 0}
+								disabled={currentSlide === 0 && !sliderLoop}
 							/>
 
 							<SlideArrow
@@ -319,7 +313,8 @@ const Edit = (props) => {
 								}
 								disabled={
 									currentSlide ===
-									instanceRef.current.track.details.slides.length - 1
+										instanceRef.current.track.details.slides.length - 1 &&
+									!sliderLoop
 								}
 							/>
 						</>

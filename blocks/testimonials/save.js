@@ -2,35 +2,39 @@
  * WordPress dependencies
  */
 import { RichText, useBlockProps } from "@wordpress/block-editor";
+import { useKeenSlider } from "keen-slider/react";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
-		className: `${attributes.alignment} items-${attributes.listItemsLayout}`,
+		className: `${attributes.alignment} items-${attributes.slidesLayout}`,
 	});
 
-	const [refCallback, slider, sliderNode] = useKeenSlider(
-		{
-			slideChanged() {
-				console.log("slide changed");
-			},
-		},
-		[
-			// add plugins here
-		]
-	);
+	// const [sliderRef, instanceRef] = useKeenSlider({
+	// 	initial: 0,
+	// 	loop: true,
+	// 	animation: {
+	// 		duration: 1500,
+	// 	},
+	// 	slideChanged(slider) {
+	// 		setCurrentSlide(slider.track.details.rel);
+	// 	},
+	// 	created() {
+	// 		setLoaded(true);
+	// 	},
+	// });
 
-	const sliderSlideItems = attributes.listItems.map((listItem, index) => {
+	const sliderSlideItems = attributes.slides.map((slideItem, index) => {
 		return <div className="keen-slider__slide">slider item</div>;
 	});
 
 	return (
 		<div {...blockProps}>
-			<div className={`blockons-list-align`}>
-				<div ref={refCallback} className="keen-slider">
+			{/* <div className={`blockons-list-align`}>
+				<div ref={sliderRef} className="keen-slider">
 					{sliderSlideItems}
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 };
