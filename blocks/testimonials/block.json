@@ -1,0 +1,70 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/testimonials",
+	"title": "Block-Ons Testimonials",
+	"textdomain": "blockons",
+	"icon": "format-quote",
+	"category": "blockons-category",
+	"keywords": ["testimonials", "quote", "reviews", "comments", "slider"],
+	"attributes": {
+		"alignment": {
+			"type": "string",
+			"default": "none"
+		},
+		"slides": {
+			"type": "array",
+			"default": [
+				{
+					"itemId": 0,
+					"itemText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
+					"itemAuthor": "Joe Soap",
+					"itemImg": ""
+				},
+				{
+					"itemId": 1,
+					"itemText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
+					"itemAuthor": "Jenny Carter",
+					"itemImg": ""
+				},
+				{
+					"itemId": 2,
+					"itemText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
+					"itemAuthor": "John Smith",
+					"itemImg": ""
+				}
+			]
+		},
+		"slidesLayout": {
+			"type": "string",
+			"default": "vertical"
+		},
+		"sliderArrows": {
+			"type": "boolean",
+			"default": true
+		},
+		"sliderPagination": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"example": {
+		"attributes": {
+			"pbDesign": "one",
+			"slides": [
+				{
+					"itemId": "id1",
+					"itemText": "List Item 1",
+					"itemTextSize": null,
+					"itemTextColor": null,
+					"itemIcon": "check",
+					"itemIconSize": null,
+					"itemIconColor": null
+				}
+			]
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": ["file:./style-index.css", "blockons-fontawesome"]
+}

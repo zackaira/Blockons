@@ -44,6 +44,7 @@ require BLOCKONS_PLUGIN_DIR . 'build/blocks/icon-list/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/line-heading/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/progress-bars/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/marketing-button/index.php';
+require BLOCKONS_PLUGIN_DIR . 'build/blocks/testimonials/index.php';
 // WooCommerce Blocks
 if ( blockons_is_plugin_active( 'woocommerce.php' ) ) {
 	require BLOCKONS_PLUGIN_DIR . 'build/blocks/account-icon/index.php';
@@ -59,6 +60,9 @@ function blockons_register_theme_scripts() {
 	wp_register_style( 'blockons-fontawesome', BLOCKONS_PLUGIN_URL . '/assets/font-awesome/css/all.min.css', array(), BLOCKONS_PLUGIN_VERSION );
 	// Cart Icon Block JS
 	wp_register_script( 'blockons-cart-icon', BLOCKONS_PLUGIN_URL . '/assets/blocks/cart-icon/cart.js', array(), BLOCKONS_PLUGIN_VERSION );
+	wp_localize_script( 'blockons-cart-icon', 'cartIconObj', array(
+		'wcCartUrl' => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
+	));
 	// Progress Bars JS
 	wp_register_script( 'blockons-waypoint', BLOCKONS_PLUGIN_URL . '/assets/blocks/progress-bars/waypoints.min.js', array(), BLOCKONS_PLUGIN_VERSION );
 	wp_register_script( 'blockons-waypoint-inview', BLOCKONS_PLUGIN_URL . '/assets/blocks/progress-bars/inview.min.js', array(), BLOCKONS_PLUGIN_VERSION );
@@ -72,9 +76,9 @@ function blockons_register_theme_scripts() {
 add_action('init', 'blockons_register_theme_scripts');
 
 // File to include Cart & Mini Cart for the cart icon block
-if ( has_block( 'blockons/cart-icon' ) ) {
-	require BLOCKONS_PLUGIN_DIR . 'assets/blocks/cart-icon/cart.php';
-}
+// if ( has_block( 'blockons/cart-icon' ) ) {
+// 	require BLOCKONS_PLUGIN_DIR . 'assets/blocks/cart-icon/cart.php';
+// }
 
 /**
  * Create Blockons blocks Category

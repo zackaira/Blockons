@@ -9,6 +9,7 @@ import {
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
+	__experimentalLinkControl as LinkControl,
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
@@ -25,13 +26,20 @@ const Edit = (props) => {
 	const {
 		isSelected,
 		attributes: {
+			cartLink,
+			cartLinkNewTab,
 			alignment,
 			hasDropdown,
+			dropPosition,
+			noItems,
+			noAmount,
 			icon,
 			iconSize,
+			layoutSwitch,
 			iconPadding,
 			customIcon,
 			iconBgColor,
+			textColor,
 			iconColor,
 			dropBgColor,
 			dropColor,
@@ -62,6 +70,30 @@ const Edit = (props) => {
 						title={__("Cart Icon Settings", "blockons")}
 						initialOpen={true}
 					>
+						<TextControl
+							label="Cart Page Url"
+							value={cartLink}
+							onChange={(newValue) => {
+								setAttributes({
+									cartLink:
+										newValue === undefined ? cartIconObj.wcCartUrl : newValue,
+								});
+							}}
+							help={__(
+								"If not set, this defaults to the WooCommerce cart page",
+								"blockons"
+							)}
+						/>
+						<ToggleControl
+							label={__("Open in a new tab", "blockons")}
+							checked={cartLinkNewTab}
+							onChange={(newValue) => {
+								setAttributes({
+									cartLinkNewTab: newValue,
+								});
+							}}
+						/>
+
 						<ToggleControl
 							label={__("Add Mini Cart", "blockons")}
 							help={__(
@@ -90,38 +122,66 @@ const Edit = (props) => {
 								/>
 							</>
 						)}
+
+						<ToggleControl
+							label={__("Remove Cart Amount", "blockons")}
+							checked={noAmount}
+							onChange={(newValue) => {
+								setAttributes({
+									noAmount: newValue,
+								});
+							}}
+						/>
+						<ToggleControl
+							label={__("Remove Items Count", "blockons")}
+							checked={noItems}
+							onChange={(newValue) => {
+								setAttributes({
+									noItems: newValue,
+								});
+							}}
+						/>
 					</PanelBody>
 					<PanelBody
 						title={__("Cart Icon Design", "blockons")}
 						initialOpen={false}
 					>
+						<ToggleControl
+							label={__("Switch Layout", "blockons")}
+							checked={layoutSwitch}
+							onChange={(newValue) => {
+								setAttributes({
+									layoutSwitch: newValue,
+								});
+							}}
+						/>
 						<SelectControl
 							label={__("Select an Icon", "blockons")}
 							value={icon}
 							options={[
 								{
 									label: __("Shopping Cart", "blockons"),
-									value: "fa-solid fa-cart-shopping",
+									value: "cart-shopping",
 								},
 								{
 									label: __("Cart Arrow Down", "blockons"),
-									value: "fa-solid fa-cart-arrow-down",
+									value: "cart-arrow-down",
 								},
 								{
 									label: __("Shopping Basket", "blockons"),
-									value: "fa-solid fa-basket-shopping",
+									value: "basket-shopping",
 								},
 								{
 									label: __("Shopping Bag", "blockons"),
-									value: "fa-solid fa-bag-shopping",
+									value: "bag-shopping",
 								},
 								{
 									label: __("Shopping Suitcase", "blockons"),
-									value: "fa-solid fa-suitcase",
+									value: "suitcase",
 								},
 								{
 									label: __("Bucket", "blockons"),
-									value: "fa-solid fa-bucket",
+									value: "bucket",
 								},
 								{
 									label: __("Custom Icon", "blockons"),
@@ -130,10 +190,7 @@ const Edit = (props) => {
 							]}
 							onChange={(newIcon) =>
 								setAttributes({
-									icon:
-										newIcon === undefined
-											? "fa-solid fa-cart-shopping"
-											: newIcon,
+									icon: newIcon === undefined ? "cart-shopping" : newIcon,
 								})
 							}
 							__nextHasNoMarginBottom
@@ -145,7 +202,7 @@ const Edit = (props) => {
 									value={customIcon}
 									onChange={onChangeCustomIcon}
 									help={__(
-										"Add your own custom icon by adding the Font Awesome icon full name",
+										"Add your own custom icon by adding the Font Awesome icon name",
 										"blockons"
 									)}
 								/>
@@ -155,6 +212,32 @@ const Edit = (props) => {
 									</a>
 								</div>
 							</>
+						)}
+
+						{hasDropdown && (
+							<SelectControl
+								label={__("Drop Down Cart Position", "blockons")}
+								value={dropPosition}
+								options={[
+									{
+										label: __("Bottom Right", "blockons"),
+										value: "bottom-right",
+									},
+									{
+										label: __("Bottom Left", "blockons"),
+										value: "bottom-left",
+									},
+									{ label: __("Top Right", "blockons"), value: "top-right" },
+									{ label: __("Top Left", "blockons"), value: "top-left" },
+								]}
+								onChange={(newPosition) =>
+									setAttributes({
+										dropPosition:
+											newPosition === undefined ? "bottom-right" : newPosition,
+									})
+								}
+								__nextHasNoMarginBottom
+							/>
 						)}
 
 						<RangeControl
@@ -180,7 +263,7 @@ const Edit = (props) => {
 							max={50}
 						/>
 
-						<p>{__("Icon Background Color", "blockons")}</p>
+						<p>{__("Background Color", "blockons")}</p>
 						<ColorPalette
 							colors={colorPickerPalette}
 							value={iconBgColor}
@@ -191,6 +274,16 @@ const Edit = (props) => {
 							}
 						/>
 
+						<p>{__("Text Color", "blockons")}</p>
+						<ColorPalette
+							colors={colorPickerPalette}
+							value={textColor}
+							onChange={(newColor) =>
+								setAttributes({
+									textColor: newColor === undefined ? "#444" : newColor,
+								})
+							}
+						/>
 						<p>{__("Icon Color", "blockons")}</p>
 						<ColorPalette
 							colors={colorPickerPalette}
@@ -234,28 +327,36 @@ const Edit = (props) => {
 			<div
 				className={`blockons-cart-icon-block ${
 					isSelected && showMiniCart ? "show" : ""
-				}`}
+				} ${noItems ? "noitems" : ""} ${noAmount ? "noamount" : ""} ${
+					layoutSwitch ? "switch" : ""
+				} ${dropPosition}`}
 				style={{
 					backgroundColor: iconBgColor,
 				}}
 			>
-				<div
+				<a
+					// {...(cartLink ? { href: cartLink } : { href: cartIconObj.wcCartUrl })}
+					{...(cartLinkNewTab ? { target: "_blank" } : "")}
 					className="blockons-cart-icon-block-icon"
 					style={{
 						fontSize: iconSize,
 						padding: iconPadding,
+						color: textColor,
 					}}
 				>
 					<span
-						className={customIcon && icon == "custom" ? customIcon : icon}
+						className={`icon fa-solid fa-${
+							customIcon && icon == "custom" ? customIcon : icon
+						}`}
 						style={{
 							color: iconColor,
 						}}
 					></span>
 					<div className="blockons-cart-amnt">
-						<span>$34,00</span> <span>(2 items)</span>
+						<span className="amount">$34,00</span>{" "}
+						<span className="count">(2 items)</span>
 					</div>
-				</div>
+				</a>
 				{hasDropdown && (
 					<div
 						className="blockons-cart-icon-dropdown"

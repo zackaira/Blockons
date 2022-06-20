@@ -8,6 +8,13 @@
 	"category": "blockons-category",
 	"keywords": ["cart", "icon", "mini cart", "woocommerce", "header"],
 	"attributes": {
+		"cartLink": {
+			"type": "string"
+		},
+		"cartLinkNewTab": {
+			"type": "boolean",
+			"default": false
+		},
 		"alignment": {
 			"type": "string",
 			"default": "none"
@@ -16,13 +23,29 @@
 			"type": "boolean",
 			"default": false
 		},
+		"dropPosition": {
+			"type": "string",
+			"default": "bottom-right"
+		},
+		"noItems": {
+			"type": "boolean",
+			"default": false
+		},
+		"noAmount": {
+			"type": "boolean",
+			"default": false
+		},
 		"icon": {
 			"type": "string",
-			"default": "fa-solid fa-cart-shopping"
+			"default": "cart-shopping"
 		},
 		"iconSize": {
 			"type": "number",
 			"default": 17
+		},
+		"layoutSwitch": {
+			"type": "boolean",
+			"default": false
 		},
 		"iconPadding": {
 			"type": "number",
@@ -30,11 +53,15 @@
 		},
 		"customIcon": {
 			"type": "string",
-			"default": "fa-regular fa-face-smile"
+			"default": "face-smile"
 		},
 		"iconBgColor": {
 			"type": "string",
 			"default": "#FFF"
+		},
+		"textColor": {
+			"type": "string",
+			"default": "#444"
 		},
 		"iconColor": {
 			"type": "string",

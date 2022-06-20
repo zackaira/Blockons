@@ -11,25 +11,38 @@ const Save = ({ attributes }) => {
 	return (
 		<div {...blockProps}>
 			<div
-				className={`blockons-cart-icon-block`}
+				className={`blockons-cart-icon-block ${
+					attributes.noItems ? "noitems" : ""
+				} ${attributes.noAmount ? "noamount" : ""} ${
+					attributes.layoutSwitch ? "switch" : ""
+				}`}
 				style={{
 					backgroundColor: attributes.iconBgColor,
-					fontSize: attributes.iconSize,
-					padding: attributes.iconPadding,
 				}}
 			>
-				<div className="blockons-cart-icon-block-icon">
+				<a
+					{...(attributes.cartLink
+						? { href: attributes.cartLink }
+						: { href: cartIconObj.wcCartUrl })}
+					{...(attributes.cartLinkNewTab ? { target: "_blank" } : "")}
+					className="blockons-cart-icon-block-icon"
+					style={{
+						fontSize: attributes.iconSize,
+						padding: attributes.iconPadding,
+						color: attributes.textColor,
+					}}
+				>
 					<span
-						className={
+						className={`icon ${
 							attributes.customIcon && attributes.icon == "custom"
 								? attributes.customIcon
 								: attributes.icon
-						}
+						}`}
 						style={{
 							color: attributes.iconColor,
 						}}
 					></span>
-				</div>
+				</a>
 				{attributes.hasDropdown && (
 					<div
 						className="blockons-cart-icon-dropdown"

@@ -209,9 +209,6 @@ const Edit = (props) => {
 										/>
 										<div className="helplink fixmargin">
 											<a href="#" target="_blank">
-												{__("FA Icons")}
-											</a>
-											<a href="#" target="_blank">
 												{__("Read More")}
 											</a>
 										</div>

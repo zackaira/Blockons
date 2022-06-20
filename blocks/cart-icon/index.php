@@ -73,7 +73,7 @@ add_action('wp_footer', 'blockons_add_footer_wc_minicart' );
  * Update Cart Item AJAX
  */
 function blockons_woocommerce_cart_fragments( $fragments ) {
-	$fragments['a.blockons-cart-amnt'] = blockons_wc_minicart_item();
+	$fragments['div.blockons-cart-amnt'] = blockons_wc_minicart_item();
 	return $fragments;
 }
 add_filter( 'woocommerce_add_to_cart_fragments', 'blockons_woocommerce_cart_fragments' );
@@ -89,9 +89,9 @@ function blockons_wc_minicart_item() {
 	);
 	$has_items = $cart_itemno > 0 ? 'has-items' : 'no-items';
 
-	$mini_cart = '<a class="blockons-cart-amnt ' . sanitize_html_class( $has_items ) . '" href="' . esc_url( wc_get_cart_url() ) . '">
+	$mini_cart = '<div class="blockons-cart-amnt ' . sanitize_html_class( $has_items ) . '">
 						<span class="amount">' . wp_kses_data( WC()->cart->get_cart_subtotal() ) . '</span>
 						<span class="count">' . esc_html( '(' . $item_count_text . ')' ) . '</span>
-					</a>';
+					</div>';
 	return $mini_cart;
 }

@@ -4,9 +4,9 @@
 	"name": "blockons/marketing-button",
 	"title": "Block-Ons Marketing Button",
 	"textdomain": "blockons",
-	"icon": "heart",
+	"icon": "button",
 	"category": "blockons-category",
-	"keywords": ["marketing", "button", "cta"],
+	"keywords": ["marketing", "button", "cta", "banner"],
 	"attributes": {
 		"alignment": {
 			"type": "string",
