@@ -5,6 +5,48 @@
 .blockons-testimonials-slider:hover .blockons-slider-wrap {
 	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
 }
+
+.blockons-icon-text-select {
+	display: flex;
+	align-items: center;
+	margin-bottom: 24px;
+}
+.blockons-icon-text-select p {
+	margin: 0 0 0 12px;
+}
+.blockons-icon-text-select .blockons-icon-selecter {
+	padding: 5px;
+	cursor: pointer;
+}
+.blockons-icon-text-select:hover .blockons-icon-selecter {
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
+}
+
+/* -- Image Button -- */
+.blockons-upload-button {
+}
+.blockons-upload-remove {
+	background-color: #fff;
+	position: absolute;
+	border-radius: 20px;
+	top: -22px;
+	right: -10px;
+	box-shadow: 0 0 0 1px #000;
+	font-size: 12px !important;
+	padding: 0 !important;
+	width: 18px;
+	height: 18px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out 0.2s;
+}
+.blockons-slider-wrap:hover
+	.blockons-slide-author
+	span.blockons-fontawesome.fa-user::before {
+	content: "\f093";
+}
 /* -- Item Level Controls -- */
 .blockons-item-btns {
 	display: flex;
@@ -15,14 +57,15 @@
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out 0s;
 }
-.blockons-slider-wrap .keen-slider__slide:hover .blockons-item-btns {
+.blockons-slider-wrap .splide__slide:hover .blockons-item-btns,
+.blockons-slider-wrap:hover .blockons-upload-remove {
 	opacity: 1;
 }
-/* .blockons-slider-wrap .keen-slider__slide .blockons-item-btns button {
+/* .blockons-slider-wrap .splide__slide .blockons-item-btns button {
 	height: auto;
 	padding: 5px;
 }
-.blockons-slider-wrap .keen-slider__slide .blockons-item-btns > div {
+.blockons-slider-wrap .splide__slide .blockons-item-btns > div {
 	height: auto;
 	display: inline-flex;
 } */

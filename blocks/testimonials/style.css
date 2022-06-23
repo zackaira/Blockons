@@ -3,58 +3,97 @@
  * editor-specific styles using the same selectors will take precedence.
  */
 /* ---- Slider ---- */
-.blockons-testimonials-slider {
-}
 .blockons-slider-wrap {
 	position: relative;
 }
-.blockons-slider-wrap .blockons-slider {
+.blockons-slider-wrap .splide__list {
 	border-radius: 3px;
 	position: relative;
 }
 
 /* -- Slides -- */
-.blockons-slider .keen-slider__slide {
-	background-color: #f9f9f9;
-	height: 240px;
+.blockons-slider-wrap .splide.splide--slide {
+	padding: 0 0 30px;
+}
+.blockons-slider-wrap .splide__slide {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: 25px 60px 25px;
 }
 .blockons-slide-inner {
-	max-width: 60%;
+	width: 70%;
+	max-width: 800px;
 }
 .blockons-slide-text {
+	position: relative;
+}
+.blockons-slide-text .blockons-fontawesome.fa-quote-left {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	opacity: 0.4;
+	width: 5px;
+	height: 5px;
+}
+.blockons-slide-text .blockons-fontawesome.fa-quote-left::before {
+	position: absolute;
+	bottom: -15px;
+	right: 15px;
+}
+.blockons-slide-text .blockons-fontawesome.fa-quote-right {
+	position: absolute;
+	bottom: -15px;
+	right: 0;
+	z-index: 2;
+	opacity: 0.4;
+	width: 5px;
+	height: 5px;
 }
 .blockons-slide-text-txt {
+	position: relative;
+	z-index: 4;
 }
 .blockons-slide-author {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	margin-top: 30px;
+	margin: 42px 0 0;
+}
+.blockons-slide-author-img img {
+	width: 100%;
+	height: auto;
 }
 .blockons-slide-author-img {
-}
-.blockons-slide-author-img.hasimg {
-}
-.blockons-slide-author-img.noimg {
-	width: 28px;
-	height: 28px;
+	width: 45px;
+	height: 45px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border: 1px solid #888;
-	border-radius: 28px;
+	border-radius: 45px;
 	color: #888;
-	margin-right: 8px;
+	margin-right: 12px;
+	position: relative;
 }
-.blockons-slide-author-txt {
-	font-size: 0.8em;
+.blockons-slide-author-img.hasimg {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
+.blockons-slide-author-txt-auth {
+	font-size: 0.85em;
+	font-weight: bold;
+}
+.blockons-slide-author-txt-pos {
+	font-size: 0.75em;
+	letter-spacing: 0.2px;
+	margin-top: 3px;
 }
 
 /* ---- Slider Arrows ---- */
-.blockons-slider-wrap .slider-arrow {
+.blockons-slider-wrap .splide__arrow {
 	background-color: #fff;
 	box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
 	border-radius: 3px;
@@ -70,16 +109,16 @@
 	margin-top: -20px;
 	overflow: hidden;
 }
-.blockons-slider-wrap .arrow-left {
+.blockons-slider-wrap .splide__arrow--prev {
 	left: 10px;
 }
-.blockons-slider-wrap .arrow-right {
+.blockons-slider-wrap .splide__arrow--next {
 	right: 10px;
 }
-.blockons-slider-wrap .slider-arrow.arrow--disabled {
+.blockons-slider-wrap .splide__arrow.arrow--disabled {
 	cursor: default;
 }
-.blockons-slider-wrap .slider-arrow.arrow--disabled::before {
+.blockons-slider-wrap .splide__arrow.arrow--disabled::before {
 	display: block;
 	content: "";
 	position: absolute;
@@ -92,7 +131,7 @@
 	opacity: 0.6;
 }
 /* ---- Slider Pagination ---- */
-.slider-pagination {
+.splide__pagination {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -100,17 +139,82 @@
 	width: 100%;
 	bottom: -18px;
 }
-.slider-pagination button.dot {
+.splide__pagination button.splide__pagination__page {
 	width: 10px;
 	height: 10px;
 	border: 0;
 	box-shadow: inset 0 0 0 1px #000, 0 1px 5px rgb(0 0 0 / 12%);
 	border-radius: 10px;
 	background-color: #fff;
-	margin: 0 2px;
+	margin: 0 3px;
 	cursor: pointer;
 }
-.slider-pagination button.dot.active {
+.splide__pagination button.splide__pagination__page.is-active {
 	background-color: #000;
 	box-shadow: 0 1px 5px rgb(0 0 0 / 12%);
+	transform: scale(1.2);
+}
+
+.blockons-slider-wrap.on-hover .splide__arrow--prev,
+.blockons-slider-wrap.on-hover .splide__arrow--next,
+.blockons-slider-wrap.on-hover .splide__pagination {
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out 0s;
+}
+.blockons-slider-wrap.on-hover:hover .splide__arrow--prev,
+.blockons-slider-wrap.on-hover:hover .splide__arrow--next,
+.blockons-slider-wrap.on-hover:hover .splide__pagination {
+	opacity: 1;
+}
+
+/* -- Progress Bar -- */
+.splide__progress {
+	background: #ccc;
+}
+.splide__progress__bar {
+	background: greenyellow;
+	height: 2px;
+	transition: width 400ms ease;
+	width: 0;
+}
+
+/* -- Design One -- */
+.wp-block-blockons-testimonials.layout-one .blockons-slide-inner {
+	display: flex;
+	flex-direction: column;
+}
+
+/* -- Design Two -- */
+.wp-block-blockons-testimonials.layout-two .blockons-slide-inner {
+	display: flex;
+	align-items: center;
+	flex-direction: row-reverse;
+}
+.wp-block-blockons-testimonials.layout-two .blockons-slide-author {
+	margin: 0 40px 0 0;
+	min-width: 160px;
+	flex-direction: column;
+}
+.wp-block-blockons-testimonials.layout-two .blockons-slide-author-img {
+	margin: 0 0 8px;
+}
+.wp-block-blockons-testimonials.layout-two .blockons-slide-author-txt {
+	text-align: center;
+}
+
+/* -- Design Three -- */
+.wp-block-blockons-testimonials.layout-three .blockons-slide-inner {
+	display: flex;
+	flex-direction: column-reverse;
+}
+.wp-block-blockons-testimonials.layout-three .blockons-slide-author {
+	justify-content: center;
+	margin: 0 0 40px;
+	flex-direction: column;
+}
+.wp-block-blockons-testimonials.layout-three .blockons-slide-author-img {
+	margin: 0 0 8px;
+}
+.wp-block-blockons-testimonials.layout-three .blockons-slide-author-txt {
+	text-align: center;
 }

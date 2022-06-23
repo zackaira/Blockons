@@ -12,6 +12,10 @@
 			"type": "string",
 			"default": "none"
 		},
+		"slidesNumber": {
+			"type": "number",
+			"default": 1
+		},
 		"slides": {
 			"type": "array",
 			"default": [
@@ -19,19 +23,22 @@
 					"itemId": 0,
 					"itemText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
 					"itemAuthor": "Joe Soap",
-					"itemImg": ""
+					"itemAuthorPos": "Owner at Macabee",
+					"itemImg": {}
 				},
 				{
 					"itemId": 1,
 					"itemText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
 					"itemAuthor": "Jenny Carter",
-					"itemImg": ""
+					"itemAuthorPos": "Owner at Macabee",
+					"itemImg": {}
 				},
 				{
 					"itemId": 2,
 					"itemText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
 					"itemAuthor": "John Smith",
-					"itemImg": ""
+					"itemAuthorPos": "Owner at Macabee",
+					"itemImg": {}
 				}
 			]
 		},
@@ -39,17 +46,45 @@
 			"type": "string",
 			"default": "vertical"
 		},
+		"slidesWidth": {
+			"type": "number",
+			"default": 800
+		},
 		"sliderLoop": {
 			"type": "boolean",
 			"default": false
+		},
+		"controlsOnHover": {
+			"type": "boolean",
+			"default": false
+		},
+		"authPosition": {
+			"type": "boolean",
+			"default": true
+		},
+		"showQuotes": {
+			"type": "boolean",
+			"default": true
+		},
+		"quoteSize": {
+			"type": "number",
+			"default": 28
 		},
 		"sliderArrows": {
 			"type": "boolean",
 			"default": true
 		},
+		"sliderArrowIcon": {
+			"type": "string",
+			"default": "arrow-right"
+		},
 		"sliderPagination": {
 			"type": "boolean",
 			"default": true
+		},
+		"sliderPagDesign": {
+			"type": "string",
+			"default": "dots"
 		}
 	},
 	"example": {

@@ -73,6 +73,9 @@ export const iconListIcons = {
 	ellipsis: "ellipsis",
 };
 
+/*
+ * Font Awesome Icons used for Marketing Button
+ */
 export const marketingButtonIcons = {
 	"arrow-right": "arrow-right",
 	"caret-right": "caret-right",
@@ -136,6 +139,21 @@ export const marketingButtonIcons = {
 	"ice-cream": "ice-cream",
 	pen: "pen",
 	"pen-fancy": "pen-fancy",
+};
+
+/*
+ * Font Awesome Icons used for slider arrows
+ */
+export const sliderArrowIcons = {
+	"arrow-right": "arrow-right",
+	"arrow-right-long": "arrow-right-long",
+	"circle-arrow-right": "circle-arrow-right",
+	"circle-right": "circle-right",
+	"angles-right": "angles-right",
+	"chevron-right": "chevron-right",
+	"chevron-circle-right": "chevron-circle-right",
+	"caret-right": "caret-right",
+	"square-caret-right": "square-caret-right",
 };
 
 /*
