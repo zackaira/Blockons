@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	RichText,
@@ -16,14 +15,12 @@ import {
 	Dropdown,
 	ToggleControl,
 	SelectControl,
-	CheckboxControl,
-	TextControl,
 	RangeControl,
 	ColorPalette,
-	Icon,
 	Button,
 } from "@wordpress/components";
-import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
+import { v4 as uuidv4 } from "uuid";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
 import { slugify, sliderArrowIcons } from "../block-global";
@@ -35,35 +32,52 @@ const Edit = (props) => {
 			alignment,
 			slidesNumber,
 			slides,
+			slidesStyle,
+			noShadow,
 			slidesLayout,
 			slidesWidth,
-			sliderLoop,
-			controlsOnHover,
+			sliderRewind,
 			authPosition,
+			authIcon,
 			showQuotes,
 			quoteSize,
+			controlsOnHover,
+			sliderAuto,
 			sliderArrows,
+			arrowStyle,
 			sliderArrowIcon,
 			sliderPagination,
 			sliderPagDesign,
+			bgColor,
+			fontColor,
+			quotesColor,
+			quotesOpacity,
+			nameColor,
+			posColor,
 		},
 		setAttributes,
 	} = props;
 
 	const blockProps = useBlockProps({
-		className: `${alignment} layout-${slidesLayout}`,
+		className: `${alignment} layout-${slidesLayout} style-${slidesStyle} ${
+			noShadow ? "noOuter" : ""
+		} arrows-${sliderArrowIcon}`,
 	});
 
 	// Slider Settings
 	const sliderOptions = {
-		type: "slide",
-		rewind: true,
+		type: "slide", // slide | loop | fade
+		rewind: sliderRewind,
 		speed: 1000,
-		// autoplay: false,
-		// interval: 4000, // For autoplay
-		// pauseOnHover: false, // For autoplay
+		perPage: slidesNumber,
+		perView: 1,
+		gap: 10,
+		autoplay: false,
 		arrows: sliderArrows,
 		pagination: sliderPagination,
+		classes: {
+			arrow: "splide__arrow fa-solid",
+		},
 	};
 
 	const onChangeAlignment = (newAlignment) => {
@@ -152,7 +166,7 @@ const Edit = (props) => {
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
 			itemAuthor: "Joe Soap",
 			itemAuthorPos: "Owner at Macabee",
-			itemImg: "",
+			itemImg: {},
 		});
 		setAttributes({ slides: newSlides });
 	};
@@ -176,24 +190,6 @@ const Edit = (props) => {
 		// instanceRef.current.update();
 	};
 
-	// Testimonials Arrows
-	function SlideArrow({ prev }) {
-		return (
-			<button
-				className={`splide__arrow ${
-					prev ? "splide__arrow--prev" : "splide__arrow--next"
-				}`}
-			>
-				<FontAwesomeIcon
-					size={24}
-					icon={
-						prev ? sliderArrowIcon.replace("right", "left") : sliderArrowIcon
-					}
-				/>
-			</button>
-		);
-	}
-
 	// Testimonials Items
 	let sliderSlideItems;
 
@@ -204,12 +200,38 @@ const Edit = (props) => {
 					<div
 						className="blockons-slide-inner"
 						style={{
-							maxWidth: slidesWidth,
+							...(slidesNumber === 1 ? { maxWidth: slidesWidth } : ""),
 						}}
 					>
-						<div className="blockons-slide-text">
+						<div
+							className="blockons-slide-text"
+							style={{
+								...(slidesStyle === "three"
+									? { backgroundColor: bgColor }
+									: ""),
+								color: fontColor,
+							}}
+						>
+							{slidesStyle === "three" && (
+								<span
+									className="corner"
+									style={{
+										...(slidesStyle === "three"
+											? { borderColor: bgColor }
+											: ""),
+									}}
+								></span>
+							)}
+
 							{showQuotes && (
-								<FontAwesomeIcon iconSize={quoteSize} icon="quote-left" />
+								<FontAwesomeIcon
+									iconSize={quoteSize}
+									icon="quote-left"
+									style={{
+										color: quotesColor,
+										opacity: quotesOpacity,
+									}}
+								/>
 							)}
 							<RichText
 								tagName="div"
@@ -222,53 +244,64 @@ const Edit = (props) => {
 								}
 							/>
 							{showQuotes && (
-								<FontAwesomeIcon iconSize={quoteSize} icon="quote-right" />
+								<FontAwesomeIcon
+									iconSize={quoteSize}
+									icon="quote-right"
+									style={{
+										color: quotesColor,
+										opacity: quotesOpacity,
+									}}
+								/>
 							)}
 						</div>
 						<div className="blockons-slide-author">
-							<div
-								className={`blockons-slide-author-img ${
-									slideItem.itemImg && slideItem.itemImg.url
-										? "hasimg"
-										: "noimg"
-								}`}
-								style={{
-									...(slideItem.itemImg && slideItem.itemImg.url
-										? { backgroundImage: `url(${slideItem.itemImg.url})` }
-										: ""),
-								}}
-							>
-								<MediaUpload
-									className="components-icon-button components-toolbar__control"
-									allowedTypes={["image"]}
-									value={slideItem.itemImg}
-									onSelect={(media) =>
-										handleMediaSelect(media, slideItem.itemId)
-									}
-									render={({ open }) => {
-										return (
-											<>
-												{slideItem.itemImg && slideItem.itemImg.url && (
-													<Button
-														className="blockons-upload-remove"
-														onClick={() => handleMediaRemove(slideItem.itemId)}
-													>
-														X
-													</Button>
-												)}
-												{slideItem.itemImg && !slideItem.itemImg.url && (
-													<Button
-														className="blockons-upload-button"
-														onClick={open}
-													>
-														<FontAwesomeIcon icon="user" iconSize={18} />
-													</Button>
-												)}
-											</>
-										);
+							{authIcon && (
+								<div
+									className={`blockons-slide-author-img ${
+										slideItem.itemImg && slideItem.itemImg.url
+											? "hasimg"
+											: "noimg"
+									}`}
+									style={{
+										...(slideItem.itemImg && slideItem.itemImg.url
+											? { backgroundImage: `url(${slideItem.itemImg.url})` }
+											: ""),
 									}}
-								/>
-							</div>
+								>
+									<MediaUpload
+										className="components-icon-button components-toolbar__control"
+										allowedTypes={["image"]}
+										value={slideItem.itemImg}
+										onSelect={(media) =>
+											handleMediaSelect(media, slideItem.itemId)
+										}
+										render={({ open }) => {
+											return (
+												<>
+													{slideItem.itemImg && slideItem.itemImg.url && (
+														<Button
+															className="blockons-upload-remove"
+															onClick={() =>
+																handleMediaRemove(slideItem.itemId)
+															}
+														>
+															X
+														</Button>
+													)}
+													{slideItem.itemImg && !slideItem.itemImg.url && (
+														<Button
+															className="blockons-upload-button"
+															onClick={open}
+														>
+															<FontAwesomeIcon icon="user" iconSize={18} />
+														</Button>
+													)}
+												</>
+											);
+										}}
+									/>
+								</div>
+							)}
 							<div className="blockons-slide-author-txt">
 								<RichText
 									tagName="div"
@@ -279,6 +312,9 @@ const Edit = (props) => {
 									onChange={(newName) =>
 										handleItemAuthorChange(newName, slideItem.itemId)
 									}
+									style={{
+										color: nameColor,
+									}}
 								/>
 								{authPosition && (
 									<RichText
@@ -290,26 +326,15 @@ const Edit = (props) => {
 										onChange={(newAuthorPos) =>
 											handleItemAuthorPosChange(newAuthorPos, slideItem.itemId)
 										}
+										style={{
+											color: posColor,
+										}}
 									/>
 								)}
 							</div>
 						</div>
 					</div>
 					<div className="blockons-item-btns">
-						<Dropdown
-							className="blockons-item-level-settings"
-							contentClassName="blockons-editor-popup"
-							position="bottom right"
-							renderToggle={({ isOpen, onToggle }) => (
-								<Button
-									icon="art"
-									label={__("Slide Settings", "blockons")}
-									onClick={onToggle}
-									aria-expanded={isOpen}
-								/>
-							)}
-							renderContent={() => <>Settings coming soon...</>}
-						/>
 						<Button
 							className="blockons-duplicate-item"
 							icon="admin-page"
@@ -353,11 +378,28 @@ const Edit = (props) => {
 								})
 							}
 							min={1}
-							max={3}
+							max={4}
 						/>
 
 						<SelectControl
-							label="Testimonials Layout"
+							label="Style"
+							value={slidesStyle}
+							options={[
+								{ label: "Plain", value: "one" },
+								{ label: "Drop Shadows", value: "two" },
+								{ label: "Bubble", value: "three" },
+							]}
+							onChange={(value) => setAttributes({ slidesStyle: value })}
+						/>
+						{slidesStyle === "two" && (
+							<ToggleControl
+								label={__("Remove Outer Shadow", "blockons")}
+								checked={noShadow}
+								onChange={(value) => setAttributes({ noShadow: value })}
+							/>
+						)}
+						<SelectControl
+							label="Layout"
 							value={slidesLayout}
 							options={[
 								{ label: "Default Layout", value: "one" },
@@ -367,63 +409,136 @@ const Edit = (props) => {
 							onChange={(value) => setAttributes({ slidesLayout: value })}
 						/>
 
-						<RangeControl
-							label={__("Content Max Width", "blockons")}
-							value={slidesWidth}
-							onChange={(value) =>
-								setAttributes({
-									slidesWidth: value === undefined ? 800 : value,
-								})
-							}
-							min={400}
-							max={1000}
-						/>
-
-						<ToggleControl // This setting is just for displaying the drop down, value is not saved.
-							label={__("Loop/Infinite Sliding", "blockons")}
-							checked={sliderLoop}
-							onChange={(value) => setAttributes({ sliderLoop: value })}
-						/>
-						<ToggleControl // This setting is just for displaying the drop down, value is not saved.
-							label={__("Show Controls only on Hover", "blockons")}
-							checked={controlsOnHover}
-							onChange={(value) => setAttributes({ controlsOnHover: value })}
-						/>
-						<ToggleControl // This setting is just for displaying the drop down, value is not saved.
-							label={__("Show Author Position", "blockons")}
-							checked={authPosition}
-							onChange={(value) => setAttributes({ authPosition: value })}
-						/>
-						<ToggleControl // This setting is just for displaying the drop down, value is not saved.
-							label={__("Show Quotes", "blockons")}
-							checked={showQuotes}
-							onChange={(value) => setAttributes({ showQuotes: value })}
-						/>
-						{showQuotes && (
+						{slidesNumber === 1 && (
 							<RangeControl
-								label={__("Quotes Size", "blockons")}
-								value={quoteSize}
+								label={__("Content Max Width", "blockons")}
+								value={slidesWidth}
 								onChange={(value) =>
 									setAttributes({
-										quoteSize: value === undefined ? 24 : value,
+										slidesWidth: value === undefined ? 800 : value,
 									})
 								}
-								min={18}
-								max={54}
+								min={400}
+								max={1000}
 							/>
 						)}
+
+						<ToggleControl
+							label={__("Auto Play", "blockons")}
+							checked={sliderAuto}
+							onChange={(value) => setAttributes({ sliderAuto: value })}
+							help={__(
+								"This will only work on the site front-end. Turn on 'Rewind Slider' for an infinite loop",
+								"blockons"
+							)}
+						/>
+
+						<ToggleControl
+							label={__("Rewind Slider", "blockons")}
+							checked={sliderRewind}
+							onChange={(value) => setAttributes({ sliderRewind: value })}
+						/>
 					</PanelBody>
 					<PanelBody
 						title={__("Testimonials Design", "blockons")}
 						initialOpen={false}
 					>
-						empty
+						<ToggleControl
+							label={__("Show Author Position", "blockons")}
+							checked={authPosition}
+							onChange={(value) => setAttributes({ authPosition: value })}
+						/>
+						<ToggleControl
+							label={__("Show Author Image / Icon", "blockons")}
+							checked={authIcon}
+							onChange={(value) => setAttributes({ authIcon: value })}
+						/>
+						<ToggleControl
+							label={__("Show Quotes", "blockons")}
+							checked={showQuotes}
+							onChange={(value) => setAttributes({ showQuotes: value })}
+						/>
+						{showQuotes && (
+							<>
+								<RangeControl
+									label={__("Quotes Size", "blockons")}
+									value={quoteSize}
+									onChange={(value) =>
+										setAttributes({
+											quoteSize: value === undefined ? 24 : value,
+										})
+									}
+									min={18}
+									max={54}
+								/>
+								<p>{__("Quotes Color", "blockons")}</p>
+								<ColorPalette
+									value={quotesColor}
+									onChange={(colorValue) =>
+										setAttributes({
+											quotesColor:
+												colorValue === undefined ? "#000" : colorValue,
+										})
+									}
+								/>
+								<RangeControl
+									label={__("Quotes Opacity", "blockons")}
+									value={quotesOpacity}
+									onChange={(value) =>
+										setAttributes({
+											quotesOpacity: value === undefined ? 0.4 : value,
+										})
+									}
+									min={0}
+									max={1}
+									step={0.1}
+								/>
+							</>
+						)}
+
+						<p>{__("Background Color", "blockons")}</p>
+						<ColorPalette
+							value={bgColor}
+							onChange={(colorValue) =>
+								setAttributes({
+									bgColor: colorValue === undefined ? "#f0f0f0" : colorValue,
+								})
+							}
+						/>
+						<p>{__("Font Color", "blockons")}</p>
+						<ColorPalette
+							value={fontColor}
+							onChange={(colorValue) =>
+								setAttributes({
+									fontColor: colorValue === undefined ? "inherit" : colorValue,
+								})
+							}
+						/>
+
+						<p>{__("Author Name Color", "blockons")}</p>
+						<ColorPalette
+							value={nameColor}
+							onChange={(colorValue) =>
+								setAttributes({
+									nameColor: colorValue === undefined ? "inherit" : colorValue,
+								})
+							}
+						/>
+						<p>{__("Author Position Color", "blockons")}</p>
+						<ColorPalette
+							value={posColor}
+							onChange={(colorValue) =>
+								setAttributes({
+									posColor: colorValue === undefined ? "inherit" : colorValue,
+								})
+							}
+						/>
 					</PanelBody>
 					<PanelBody
 						title={__("Testimonials Slider Controls", "blockons")}
 						initialOpen={false}
 					>
-						<ToggleControl // This setting is just for displaying the drop down, value is not saved.
+						<ToggleControl
 							label={__("Show Arrows", "blockons")}
 							checked={sliderArrows}
 							onChange={(value) => setAttributes({ sliderArrows: value })}
@@ -431,11 +546,21 @@ const Edit = (props) => {
 
 						{sliderArrows && (
 							<>
+								<SelectControl
+									label="Style"
+									value={arrowStyle}
+									options={[
+										{ label: "Default", value: "one" },
+										{ label: "Round", value: "two" },
+										{ label: "Icon Only", value: "three" },
+									]}
+									onChange={(value) => setAttributes({ arrowStyle: value })}
+								/>
 								<div className="blockons-icon-text-select">
 									<Dropdown
 										className="blockons-icon-selecter"
-										contentClassName="blockons-editor-popup"
-										position="bottom right"
+										contentClassName="blockons-editor-popup arrow-selector"
+										position="bottom left"
 										renderToggle={({ isOpen, onToggle }) => (
 											<FontAwesomeIcon
 												icon={sliderArrowIcon}
@@ -460,7 +585,7 @@ const Edit = (props) => {
 							</>
 						)}
 
-						<ToggleControl // This setting is just for displaying the drop down, value is not saved.
+						<ToggleControl
 							label={__("Show Pagination", "blockons")}
 							checked={sliderPagination}
 							onChange={(value) => setAttributes({ sliderPagination: value })}
@@ -482,6 +607,17 @@ const Edit = (props) => {
 								/>
 							</>
 						)}
+
+						{sliderArrows ||
+							(sliderPagination && (
+								<ToggleControl
+									label={__("Show Controls only on Hover", "blockons")}
+									checked={controlsOnHover}
+									onChange={(value) =>
+										setAttributes({ controlsOnHover: value })
+									}
+								/>
+							))}
 					</PanelBody>
 				</InspectorControls>
 			)}
@@ -490,44 +626,17 @@ const Edit = (props) => {
 					<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
 				</BlockControls>
 			}
-			<div className={`blockons-testimonials-slider`}>
+			<div
+				className={`blockons-testimonials-slider`}
+				id={uuidv4()}
+				data-settings={JSON.stringify(sliderOptions)}
+			>
 				<div
 					className={`blockons-slider-wrap ${
 						controlsOnHover ? "on-hover" : ""
-					}`}
+					} arrow-style-${arrowStyle} pagination-${sliderPagDesign}`}
 				>
-					<Splide
-						hasTrack={false}
-						options={sliderOptions}
-						onMounted={(splide, prev, next) => {
-							console.log("Mounted");
-							console.log(splide);
-
-							// const bar = splide.root.querySelector(".my-slider-progress-bar");
-							// const end = splide.Components.Controller.getEnd() + 1;
-							// bar.style.width = String((100 * (splide.index + 1)) / end) + "%";
-						}}
-						onMove={(splide, prev, next) => {
-							console.log("Moved");
-
-							// const bar = splide.root.querySelector(".my-slider-progress-bar");
-							// const end = splide.Components.Controller.getEnd() + 1;
-							// bar.style.width = String((100 * (splide.index + 1)) / end) + "%";
-						}}
-					>
-						<SplideTrack>{sliderSlideItems}</SplideTrack>
-
-						{sliderArrows && (
-							<div className="splide__arrows">
-								<SlideArrow prev />
-								<SlideArrow />
-							</div>
-						)}
-
-						<div className="splide__progress">
-							<div className="splide__progress__bar" />
-						</div>
-					</Splide>
+					<Splide options={sliderOptions}>{sliderSlideItems}</Splide>
 				</div>
 				{isSelected && (
 					<div

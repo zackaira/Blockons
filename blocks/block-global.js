@@ -147,13 +147,9 @@ export const marketingButtonIcons = {
 export const sliderArrowIcons = {
 	"arrow-right": "arrow-right",
 	"arrow-right-long": "arrow-right-long",
-	"circle-arrow-right": "circle-arrow-right",
-	"circle-right": "circle-right",
-	"angles-right": "angles-right",
-	"chevron-right": "chevron-right",
-	"chevron-circle-right": "chevron-circle-right",
+	"angle-right": "angle-right",
 	"caret-right": "caret-right",
-	"square-caret-right": "square-caret-right",
+	"angles-right": "angles-right",
 };
 
 /*

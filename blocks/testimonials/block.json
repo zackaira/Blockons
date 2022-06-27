@@ -10,7 +10,7 @@
 	"attributes": {
 		"alignment": {
 			"type": "string",
-			"default": "none"
+			"default": "left"
 		},
 		"slidesNumber": {
 			"type": "number",
@@ -42,6 +42,14 @@
 				}
 			]
 		},
+		"slidesStyle": {
+			"type": "string",
+			"default": "one"
+		},
+		"noShadow": {
+			"type": "boolean",
+			"default": false
+		},
 		"slidesLayout": {
 			"type": "string",
 			"default": "vertical"
@@ -50,7 +58,7 @@
 			"type": "number",
 			"default": 800
 		},
-		"sliderLoop": {
+		"sliderRewind": {
 			"type": "boolean",
 			"default": false
 		},
@@ -62,6 +70,10 @@
 			"type": "boolean",
 			"default": true
 		},
+		"authIcon": {
+			"type": "boolean",
+			"default": true
+		},
 		"showQuotes": {
 			"type": "boolean",
 			"default": true
@@ -70,9 +82,17 @@
 			"type": "number",
 			"default": 28
 		},
+		"sliderAuto": {
+			"type": "boolean",
+			"default": false
+		},
 		"sliderArrows": {
 			"type": "boolean",
 			"default": true
+		},
+		"arrowStyle": {
+			"type": "string",
+			"default": "one"
 		},
 		"sliderArrowIcon": {
 			"type": "string",
@@ -85,6 +105,30 @@
 		"sliderPagDesign": {
 			"type": "string",
 			"default": "dots"
+		},
+		"bgColor": {
+			"type": "string",
+			"default": "#f0f0f0"
+		},
+		"fontColor": {
+			"type": "string",
+			"default": "inherit"
+		},
+		"quotesColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"quotesOpacity": {
+			"type": "number",
+			"default": 0.4
+		},
+		"nameColor": {
+			"type": "string",
+			"default": "inherit"
+		},
+		"posColor": {
+			"type": "string",
+			"default": "inherit"
 		}
 	},
 	"example": {
@@ -105,5 +149,10 @@
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": ["file:./style-index.css", "blockons-fontawesome"]
+	"viewScript": "file:./splide.js",
+	"style": [
+		"file:./style-index.css",
+		"blockons-fontawesome",
+		"blockons-splidecss"
+	]
 }

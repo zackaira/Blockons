@@ -74,6 +74,9 @@
 .blockons-editor-popup .components-popover__content {
 	width: 274px;
 }
+.blockons-editor-popup.arrow-selector .components-popover__content {
+	width: 185px;
+}
 .blockons-editor-popup .components-popover__content > div {
 	display: flex;
 	flex-wrap: wrap;
