@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "blockons/cart-icon",
-	"title": "Block-Ons Cart Icon",
+	"title": "Blockons Cart Icon",
 	"textdomain": "blockons",
 	"icon": "cart",
 	"category": "blockons-category",

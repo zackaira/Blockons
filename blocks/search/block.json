@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "blockons/search",
-	"title": "Block-Ons Search",
+	"title": "Blockons Search",
 	"textdomain": "blockons",
 	"icon": "search",
 	"category": "blockons-category",

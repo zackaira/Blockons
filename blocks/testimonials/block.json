@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "blockons/testimonials",
-	"title": "Block-Ons Testimonials",
+	"title": "Blockons Testimonials",
 	"textdomain": "blockons",
 	"icon": "format-quote",
 	"category": "blockons-category",

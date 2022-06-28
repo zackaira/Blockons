@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "blockons/marketing-button",
-	"title": "Block-Ons Marketing Button",
+	"title": "Blockons Marketing Button",
 	"textdomain": "blockons",
 	"icon": "button",
 	"category": "blockons-category",

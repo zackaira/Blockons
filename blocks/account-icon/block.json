@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "blockons/account-icon",
-	"title": "Block-Ons Account Icon",
+	"title": "Blockons Account Icon",
 	"textdomain": "blockons",
 	"icon": "admin-users",
 	"category": "blockons-category",

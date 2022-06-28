@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "blockons/progress-bars",
-	"title": "Block-Ons Progress Bars",
+	"title": "Blockons Progress Bars",
 	"textdomain": "blockons",
 	"icon": "editor-alignleft",
 	"category": "blockons-category",

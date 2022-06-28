@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Block-Ons
+ * Plugin Name: Blockons
  * Version: 1.0.0
  * Plugin URI: https://blockons.com/
- * Description: WordPress editor blocks for you to build your website.
+ * Description: WordPress editor blocks for you to build your website
  * Author: Kaira
  * Author URI: https://kairaweb.com/
  * Requires at least: 5.0
@@ -93,7 +93,7 @@ function blockons_blocks_custom_category($categories, $post) {
 		array(
 			array(
 				"slug" => "blockons-category",
-				"title" => __("Block-Ons Blocks", "arcane"),
+				"title" => __("Blockons Blocks", "arcane"),
 				// "icon" => "wordpress",
 			)
 		)
