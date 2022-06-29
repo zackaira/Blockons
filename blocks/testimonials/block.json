@@ -8,6 +8,9 @@
 	"category": "blockons-category",
 	"keywords": ["testimonials", "quote", "reviews", "comments", "slider"],
 	"attributes": {
+		"uniqueId": {
+			"type": "string"
+		},
 		"alignment": {
 			"type": "string",
 			"default": "left"

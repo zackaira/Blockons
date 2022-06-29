@@ -1,6 +1,7 @@
 /**
  * WordPress dependencies
  */
+import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	RichText,
@@ -29,6 +30,7 @@ const Edit = (props) => {
 	const {
 		isSelected,
 		attributes: {
+			uniqueId,
 			alignment,
 			slidesNumber,
 			slides,
@@ -79,6 +81,12 @@ const Edit = (props) => {
 			arrow: "splide__arrow fa-solid",
 		},
 	};
+
+	useEffect(() => {
+		setAttributes({
+			uniqueId: uuidv4(),
+		});
+	}, []);
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
@@ -334,28 +342,30 @@ const Edit = (props) => {
 							</div>
 						</div>
 					</div>
-					<div className="blockons-item-btns">
-						<Button
-							className="blockons-duplicate-item"
-							icon="admin-page"
-							label="Duplicate Item"
-							onClick={() =>
-								handleDuplicateItem(
-									index,
-									slideItem.itemText,
-									slideItem.itemAuthor,
-									slideItem.itemAuthorPos,
-									slideItem.itemImg
-								)
-							}
-						/>
-						<Button
-							className="blockons-remove-item"
-							icon="no-alt"
-							label="Delete Item"
-							onClick={() => handleRemoveItem(index)}
-						/>
-					</div>
+					{isSelected && (
+						<div className="blockons-item-btns">
+							<Button
+								className="blockons-duplicate-item"
+								icon="admin-page"
+								label="Duplicate Item"
+								onClick={() =>
+									handleDuplicateItem(
+										index,
+										slideItem.itemText,
+										slideItem.itemAuthor,
+										slideItem.itemAuthorPos,
+										slideItem.itemImg
+									)
+								}
+							/>
+							<Button
+								className="blockons-remove-item"
+								icon="no-alt"
+								label="Delete Item"
+								onClick={() => handleRemoveItem(index)}
+							/>
+						</div>
+					)}
 				</SplideSlide>
 			);
 		});
@@ -628,7 +638,7 @@ const Edit = (props) => {
 			}
 			<div
 				className={`blockons-testimonials-slider`}
-				id={uuidv4()}
+				id={uniqueId}
 				data-settings={JSON.stringify(sliderOptions)}
 			>
 				<div

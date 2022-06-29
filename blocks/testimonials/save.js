@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-import { useEffect } from "@wordpress/element";
 import { RichText, useBlockProps } from "@wordpress/block-editor";
 import { v4 as uuidv4 } from "uuid";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
@@ -140,7 +139,7 @@ const Save = ({ attributes }) => {
 		<div {...blockProps}>
 			<div
 				className={`blockons-testimonials-slider`}
-				id={uuidv4()}
+				id={attributes.uniqueId}
 				data-settings={JSON.stringify(sliderOptions)}
 			>
 				<div
