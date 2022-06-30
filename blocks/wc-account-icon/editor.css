@@ -26,7 +26,9 @@
 	background-color: #c0deee;
 }
 
-.blockons-account-icon-dropdown .blockons-account-icon-item div.rich-text {
+.blockons-wc-account-icon-dropdown
+	.blockons-wc-account-icon-item
+	div.rich-text {
 	display: block;
 	text-decoration: none;
 	font-size: 14px;
@@ -36,7 +38,7 @@
 }
 
 /* -- To show the dropdown within the editor -- */
-.blockons-account-icon-block.show .blockons-account-icon-dropdown {
+.blockons-wc-account-icon-block.show .blockons-wc-account-icon-dropdown {
 	visibility: visible;
 	opacity: 1;
 }

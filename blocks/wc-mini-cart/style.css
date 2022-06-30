@@ -2,10 +2,10 @@
  * Note that these styles are loaded *before* editor styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.wp-block-blockons-cart-icon {
+.wp-block-blockons-wc-mini-cart {
 	display: flex;
 }
-.blockons-cart-icon-block {
+.blockons-wc-mini-cart-block {
 	border-radius: 3px;
 	color: #000;
 	background-color: #fff;
@@ -14,7 +14,7 @@
 	justify-content: center;
 	position: relative;
 }
-.blockons-cart-icon-block-icon {
+.blockons-wc-mini-cart-block-icon {
 	width: auto;
 	padding: 5px;
 	display: flex;
@@ -23,20 +23,20 @@
 	font-size: 17px;
 	text-decoration: none !important;
 }
-.blockons-cart-icon-block-icon .icon {
+.blockons-wc-mini-cart-block-icon .icon {
 	margin: 0 10px 0 0;
 }
-.blockons-cart-icon-block-icon .amount {
+.blockons-wc-mini-cart-block-icon .amount {
 	margin: 0 6px 0 0;
 }
-.blockons-cart-icon-block-icon .blockons-cart-amnt {
+.blockons-wc-mini-cart-block-icon .blockons-cart-amnt {
 	font-size: 0.92em;
 	color: inherit;
 	text-decoration: none;
 	display: flex;
 }
 
-.blockons-cart-icon-dropdown {
+.blockons-wc-mini-cart-dropdown {
 	color: inherit;
 	position: absolute;
 	background-color: #fff;
@@ -47,60 +47,60 @@
 	visibility: hidden;
 	transition: all 0.2s ease-in-out 0.15s;
 }
-.blockons-cart-icon-block.bottom-right .blockons-cart-icon-dropdown {
+.blockons-wc-mini-cart-block.bottom-right .blockons-wc-mini-cart-dropdown {
 	right: 0;
 	top: calc(100% + 2px);
 }
-.blockons-cart-icon-block.bottom-left .blockons-cart-icon-dropdown {
+.blockons-wc-mini-cart-block.bottom-left .blockons-wc-mini-cart-dropdown {
 	left: 0;
 	top: calc(100% + 2px);
 }
-.blockons-cart-icon-block.top-right .blockons-cart-icon-dropdown {
+.blockons-wc-mini-cart-block.top-right .blockons-wc-mini-cart-dropdown {
 	right: 0;
 	bottom: calc(100% + 2px);
 }
-.blockons-cart-icon-block.top-left .blockons-cart-icon-dropdown {
+.blockons-wc-mini-cart-block.top-left .blockons-wc-mini-cart-dropdown {
 	left: 0;
 	bottom: calc(100% + 2px);
 }
 
-.blockons-cart-icon-block:hover .blockons-cart-icon-dropdown {
+.blockons-wc-mini-cart-block:hover .blockons-wc-mini-cart-dropdown {
 	visibility: visible;
 	opacity: 1;
 }
 
-.blockons-cart-icon-block.noicon span.icon,
-.blockons-cart-icon-block.noitems span.count,
-.blockons-cart-icon-block.noamount span.amount {
+.blockons-wc-mini-cart-block.noicon span.icon,
+.blockons-wc-mini-cart-block.noitems span.count,
+.blockons-wc-mini-cart-block.noamount span.amount {
 	display: none !important;
 }
-.blockons-cart-icon-block.switch span.icon {
+.blockons-wc-mini-cart-block.switch span.icon {
 	order: 3;
 	margin: 0 0 0 10px;
 }
-.blockons-cart-icon-block.switch span.count {
+.blockons-wc-mini-cart-block.switch span.count {
 	order: 1;
 }
-.blockons-cart-icon-block.switch span.amount {
+.blockons-wc-mini-cart-block.switch span.amount {
 	order: 2;
 	margin: 0 0 0 6px;
 }
-.blockons-cart-icon-block.noitems.noamount span.icon {
+.blockons-wc-mini-cart-block.noitems.noamount span.icon {
 	margin: 0;
 }
 
 /* -- Mini Cart Styling -- */
-.blockons-cart-icon-block .blockons-mini-crt {
+.blockons-wc-mini-cart-block .blockons-mini-crt {
 	width: 300px;
 	font-size: 14px;
 }
-.blockons-cart-icon-block
+.blockons-wc-mini-cart-block
 	.blockons-mini-crt
 	ul.woocommerce-mini-cart.cart_list {
 	margin: 0;
 	padding: 0;
 }
-.blockons-cart-icon-block
+.blockons-wc-mini-cart-block
 	.blockons-mini-crt
 	ul.woocommerce-mini-cart.cart_list
 	li.woocommerce-mini-cart-item {
@@ -110,7 +110,7 @@
 	list-style-type: none;
 	position: relative;
 }
-.blockons-cart-icon-block
+.blockons-wc-mini-cart-block
 	.blockons-mini-crt
 	ul.woocommerce-mini-cart.cart_list
 	li.woocommerce-mini-cart-item
@@ -123,7 +123,7 @@
 	letter-spacing: 0.3px;
 	margin: 0 0 2px;
 }
-.blockons-cart-icon-block
+.blockons-wc-mini-cart-block
 	.blockons-mini-crt
 	ul.woocommerce-mini-cart.cart_list
 	li.woocommerce-mini-cart-item
@@ -144,7 +144,7 @@
 	justify-content: center;
 	color: #cecece !important;
 }
-.blockons-cart-icon-block
+.blockons-wc-mini-cart-block
 	.blockons-mini-crt
 	ul.woocommerce-mini-cart.cart_list
 	li.woocommerce-mini-cart-item
@@ -152,7 +152,7 @@
 	background: none !important;
 	color: #de0404 !important;
 }
-.blockons-cart-icon-block
+.blockons-wc-mini-cart-block
 	.blockons-mini-crt
 	ul.woocommerce-mini-cart.cart_list
 	li.woocommerce-mini-cart-item
@@ -166,7 +166,7 @@
 	width: auto;
 	max-height: 80%;
 }
-.blockons-cart-icon-block
+.blockons-wc-mini-cart-block
 	.blockons-mini-crt
 	ul.woocommerce-mini-cart.cart_list
 	li.woocommerce-mini-cart-item
@@ -174,16 +174,16 @@
 	display: block;
 	font-size: 13px;
 }
-.blockons-cart-icon-block .woocommerce-mini-cart__total {
+.blockons-wc-mini-cart-block .woocommerce-mini-cart__total {
 	text-align: center;
 	font-size: 14px;
 	margin: 0;
 	padding: 15px 15px 0;
 }
-.blockons-cart-icon-block .woocommerce-mini-cart__total strong {
+.blockons-wc-mini-cart-block .woocommerce-mini-cart__total strong {
 	color: #303030;
 }
-.blockons-cart-icon-block .woocommerce-mini-cart__buttons {
+.blockons-wc-mini-cart-block .woocommerce-mini-cart__buttons {
 	text-align: center;
 	display: flex;
 	align-items: center;
@@ -191,7 +191,7 @@
 	margin: 0;
 	padding: 12px 15px 18px;
 }
-.blockons-cart-icon-block .woocommerce-mini-cart__buttons a.button {
+.blockons-wc-mini-cart-block .woocommerce-mini-cart__buttons a.button {
 	display: block;
 	background-color: #e8e8e8;
 	flex: 1;
@@ -209,14 +209,14 @@
 	cursor: pointer;
 	transition: all 0.2s linear 0s;
 }
-.blockons-cart-icon-block .woocommerce-mini-cart__buttons a.button:hover {
+.blockons-wc-mini-cart-block .woocommerce-mini-cart__buttons a.button:hover {
 	background-color: #9c9c9c;
 	color: #fff;
 }
-.blockons-cart-icon-block .blockUI.blockOverlay {
+.blockons-wc-mini-cart-block .blockUI.blockOverlay {
 	background-color: rgba(0, 0, 0, 0.12) !important;
 }
-.blockons-cart-icon-block .woocommerce-mini-cart__empty-message {
+.blockons-wc-mini-cart-block .woocommerce-mini-cart__empty-message {
 	text-align: center;
 	padding: 15px 10px;
 }

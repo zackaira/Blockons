@@ -4,12 +4,10 @@
 import { useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
-	RichText,
 	AlignmentToolbar,
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
-	__experimentalLinkControl as LinkControl,
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
@@ -17,9 +15,8 @@ import {
 	SelectControl,
 	RangeControl,
 	TextControl,
-	ColorPalette,
 } from "@wordpress/components";
-
+import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import { colorPickerPalette } from "../block-global";
 
 const Edit = (props) => {
@@ -67,7 +64,7 @@ const Edit = (props) => {
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody
-						title={__("Cart Icon Settings", "blockons")}
+						title={__("WC Mini Cart Settings", "blockons")}
 						initialOpen={true}
 					>
 						<TextControl
@@ -143,7 +140,7 @@ const Edit = (props) => {
 						/>
 					</PanelBody>
 					<PanelBody
-						title={__("Cart Icon Design", "blockons")}
+						title={__("WC Mini Cart Design", "blockons")}
 						initialOpen={false}
 					>
 						<ToggleControl
@@ -263,58 +260,55 @@ const Edit = (props) => {
 							max={50}
 						/>
 
-						<p>{__("Background Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Background Color", "blockons")}
 							value={iconBgColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									iconBgColor: newColor === undefined ? "#FFF" : newColor,
-								})
-							}
+									iconBgColor: colorValue === undefined ? "#FFF" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
-
-						<p>{__("Text Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Text Color", "blockons")}
 							value={textColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									textColor: newColor === undefined ? "#444" : newColor,
-								})
-							}
+									textColor: colorValue === undefined ? "#444" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
-						<p>{__("Icon Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Icon Color", "blockons")}
 							value={iconColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									iconColor: newColor === undefined ? "#000" : newColor,
-								})
-							}
+									iconColor: colorValue === undefined ? "#000" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
-
-						<p>{__("Drop Down Background Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Drop Down Background Color", "blockons")}
 							value={dropBgColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									dropBgColor: newColor === undefined ? "#FFF" : newColor,
-								})
-							}
+									dropBgColor: colorValue === undefined ? "#FFF" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
-
-						<p>{__("Drop Down Font Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Drop Down Font Color", "blockons")}
 							value={dropColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									dropColor: newColor === undefined ? "#747474" : newColor,
-								})
-							}
+									dropColor: colorValue === undefined ? "#747474" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
 					</PanelBody>
 				</InspectorControls>
@@ -325,7 +319,7 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 			<div
-				className={`blockons-cart-icon-block ${
+				className={`blockons-wc-mini-cart-block ${
 					isSelected && showMiniCart ? "show" : ""
 				} ${noItems ? "noitems" : ""} ${noAmount ? "noamount" : ""} ${
 					layoutSwitch ? "switch" : ""
@@ -337,7 +331,7 @@ const Edit = (props) => {
 				<a
 					// {...(cartLink ? { href: cartLink } : { href: cartIconObj.wcCartUrl })}
 					{...(cartLinkNewTab ? { target: "_blank" } : "")}
-					className="blockons-cart-icon-block-icon"
+					className="blockons-wc-mini-cart-block-icon"
 					style={{
 						fontSize: iconSize,
 						padding: iconPadding,
@@ -359,13 +353,13 @@ const Edit = (props) => {
 				</a>
 				{hasDropdown && (
 					<div
-						className="blockons-cart-icon-dropdown"
+						className="blockons-wc-mini-cart-dropdown"
 						style={{
 							backgroundColor: dropBgColor,
 							color: dropColor,
 						}}
 					>
-						<div className="blockons-cart-icon-inner">
+						<div className="blockons-wc-mini-cart-inner">
 							{__(
 								"This will display all the items that have been added to cart",
 								"blockons"

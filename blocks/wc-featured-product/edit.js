@@ -13,17 +13,14 @@ import {
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
-	BaseControl,
 	ToggleControl,
 	SelectControl,
-	CheckboxControl,
-	TextControl,
 	RangeControl,
-	ColorPalette,
 } from "@wordpress/components";
 import GetPostsSelect from "../_components/GetPostsSelect";
 import BlockonsLoader from "../_components/BlockonsLoader";
 import parse from "html-react-parser";
+import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import { colorPickerPalette } from "../block-global";
 
 const Edit = (props) => {
@@ -81,7 +78,7 @@ const Edit = (props) => {
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody
-						title={__("Featured Product Settings", "blockons")}
+						title={__("WC Featured Product Settings", "blockons")}
 						initialOpen={true}
 					>
 						<GetPostsSelect
@@ -94,7 +91,7 @@ const Edit = (props) => {
 						/>
 						<br />
 						<SelectControl
-							label={__("Featured Product Layout", "blockons")}
+							label={__("WC Featured Product Layout", "blockons")}
 							value={layout}
 							options={[
 								{ label: __("2 Column", "blockons"), value: "one" },
@@ -185,7 +182,7 @@ const Edit = (props) => {
 						/>
 					</PanelBody>
 					<PanelBody
-						title={__("Featured Product Design", "blockons")}
+						title={__("WC Featured Product Design", "blockons")}
 						initialOpen={false}
 					>
 						{layout === "two" && (
@@ -202,26 +199,27 @@ const Edit = (props) => {
 							/>
 						)}
 
-						<p>{__("Background Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Background Color", "blockons")}
 							value={blockBgColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									blockBgColor: newColor === undefined ? "#FFF" : newColor,
-								})
-							}
+									blockBgColor: colorValue === undefined ? "#FFF" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
 
-						<p>{__("Font Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Font Color", "blockons")}
 							value={blockFontColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									blockFontColor: newColor === undefined ? "#444" : newColor,
-								})
-							}
+									blockFontColor:
+										colorValue === undefined ? "#444" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
 
 						{layout === "one" && (
@@ -270,13 +268,13 @@ const Edit = (props) => {
 					</div>
 				) : (
 					<div
-						className={`blockons-featured-product-block ${
+						className={`blockons-wc-featured-product-block ${
 							layout === "one" && layoutSwitch ? "switch" : "noswitch"
 						}`}
 						style={{ backgroundColor: blockBgColor, padding }}
 					>
 						<div
-							className="blockons-featured-product-detail"
+							className="blockons-wc-featured-product-detail"
 							style={{
 								color:
 									layout === "two" && blockFontColor === "inherit"
@@ -286,12 +284,12 @@ const Edit = (props) => {
 								padding: innerPadding / 2 + "px " + innerPadding + "px",
 							}}
 						>
-							<h2 className="blockons-featured-product-title">
+							<h2 className="blockons-wc-featured-product-title">
 								{selectedProductDetails.title}
 							</h2>
 
 							{showPrice && (
-								<div className="blockons-featured-product-price">
+								<div className="blockons-wc-featured-product-price">
 									{selectedProductDetails.price
 										? parse(selectedProductDetails.price)
 										: ""}
@@ -301,7 +299,7 @@ const Edit = (props) => {
 							{showDesc && <p>{selectedProductDetails.short_desc}</p>}
 
 							{showButton && (
-								<div className="blockons-featured-product-btn">
+								<div className="blockons-wc-featured-product-btn">
 									<RichText
 										placeholder={__("View Product")}
 										value={buttonText}
@@ -318,7 +316,7 @@ const Edit = (props) => {
 							)}
 						</div>
 						<div
-							className="blockons-featured-product-image"
+							className="blockons-wc-featured-product-image"
 							style={{
 								...(selectedProductDetails.featured_media
 									? {

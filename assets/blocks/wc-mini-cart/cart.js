@@ -2,7 +2,9 @@
  * Little JS hack to display the Cart amount and Mini Cart in the Cart Icon Block
  */
 document.addEventListener("DOMContentLoaded", function () {
-	const cartIcons = document.querySelectorAll(".blockons-cart-icon-block-icon");
+	const cartIcons = document.querySelectorAll(
+		".blockons-wc-mini-cart-block-icon"
+	);
 
 	if (cartIcons) {
 		cartIcons.forEach((item) => {
@@ -11,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	}
 
-	const miniCarts = document.querySelectorAll(".blockons-cart-icon-inner");
+	const miniCarts = document.querySelectorAll(".blockons-wc-mini-cart-inner");
 
 	if (miniCarts) {
 		miniCarts.forEach((item) => {

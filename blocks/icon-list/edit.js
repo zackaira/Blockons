@@ -12,18 +12,14 @@ import {
 import {
 	PanelBody,
 	Dropdown,
-	ToggleControl,
 	SelectControl,
-	CheckboxControl,
-	TextControl,
 	RangeControl,
 	ColorPalette,
-	Icon,
 	Button,
 } from "@wordpress/components";
-
+import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
-import { slugify, iconListIcons } from "../block-global";
+import { colorPickerPalette, slugify, iconListIcons } from "../block-global";
 
 const Edit = (props) => {
 	const {
@@ -266,7 +262,8 @@ const Edit = (props) => {
 										min={10}
 										max={64}
 									/>
-									<ColorPalette
+									<BlockonsColorpicker
+										label={__("Text Color", "blockons")}
 										value={
 											listItem.itemTextColor
 												? listItem.itemTextColor
@@ -275,9 +272,9 @@ const Edit = (props) => {
 										onChange={(itemSize) =>
 											handleItemTextColorChange(itemSize, listItem.itemId)
 										}
+										paletteColors={colorPickerPalette}
 									/>
-									<br />
-									<br />
+
 									<p>{__("Icon Size & Color", "blockons")}</p>
 									<RangeControl
 										value={
@@ -291,7 +288,8 @@ const Edit = (props) => {
 										min={10}
 										max={98}
 									/>
-									<ColorPalette
+									<BlockonsColorpicker
+										label={__("Icon Color", "blockons")}
 										value={
 											listItem.itemIconColor
 												? listItem.itemIconColor
@@ -300,8 +298,8 @@ const Edit = (props) => {
 										onChange={(itemSize) =>
 											handleItemIconColorChange(itemSize, listItem.itemId)
 										}
+										paletteColors={colorPickerPalette}
 									/>
-									<br />
 								</>
 							)}
 						/>

@@ -4,11 +4,11 @@
  */
 
 /* -- To show the dropdown within the editor -- */
-.blockons-cart-icon-block.show .blockons-cart-icon-dropdown {
+.blockons-wc-mini-cart-block.show .blockons-wc-mini-cart-dropdown {
 	visibility: visible;
 	opacity: 1;
 }
-.blockons-cart-icon-inner {
+.blockons-wc-mini-cart-inner {
 	width: 250px;
 	padding: 20px;
 	font-size: 13px;

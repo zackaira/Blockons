@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useState, useEffect } from "@wordpress/element";
+import { useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	RichText,
@@ -17,7 +17,6 @@ import {
 	ToggleControl,
 	SelectControl,
 	RangeControl,
-	ColorPalette,
 	Button,
 } from "@wordpress/components";
 import { v4 as uuidv4 } from "uuid";
@@ -25,6 +24,8 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
 import { slugify, sliderArrowIcons } from "../block-global";
+import BlockonsColorpicker from "../_components/BlockonsColorpicker";
+import { colorPickerPalette } from "../block-global";
 
 const Edit = (props) => {
 	const {
@@ -61,8 +62,8 @@ const Edit = (props) => {
 	} = props;
 
 	const blockProps = useBlockProps({
-		className: `${alignment} layout-${slidesLayout} style-${slidesStyle} ${
-			noShadow ? "noOuter" : ""
+		className: `align-${alignment} layout-${slidesLayout} style-${slidesStyle} ${
+			noShadow ? "no-outer" : ""
 		} arrows-${sliderArrowIcon}`,
 	});
 
@@ -90,7 +91,7 @@ const Edit = (props) => {
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
-			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
+			alignment: newAlignment === undefined ? "left" : newAlignment,
 		});
 	};
 
@@ -208,7 +209,8 @@ const Edit = (props) => {
 					<div
 						className="blockons-slide-inner"
 						style={{
-							...(slidesNumber === 1 ? { maxWidth: slidesWidth } : ""),
+							width: slidesWidth + "%",
+							...(slidesStyle === "two" ? { backgroundColor: bgColor } : ""),
 						}}
 					>
 						<div
@@ -301,7 +303,11 @@ const Edit = (props) => {
 															className="blockons-upload-button"
 															onClick={open}
 														>
-															<FontAwesomeIcon icon="user" iconSize={18} />
+															<FontAwesomeIcon
+																icon="user"
+																iconSize={18}
+																color={"inherit"}
+															/>
 														</Button>
 													)}
 												</>
@@ -419,19 +425,17 @@ const Edit = (props) => {
 							onChange={(value) => setAttributes({ slidesLayout: value })}
 						/>
 
-						{slidesNumber === 1 && (
-							<RangeControl
-								label={__("Content Max Width", "blockons")}
-								value={slidesWidth}
-								onChange={(value) =>
-									setAttributes({
-										slidesWidth: value === undefined ? 800 : value,
-									})
-								}
-								min={400}
-								max={1000}
-							/>
-						)}
+						<RangeControl
+							label={__("Inner Content Width", "blockons")}
+							value={slidesWidth}
+							onChange={(value) =>
+								setAttributes({
+									slidesWidth: value === undefined ? 75 : value,
+								})
+							}
+							min={30}
+							max={100}
+						/>
 
 						<ToggleControl
 							label={__("Auto Play", "blockons")}
@@ -481,15 +485,16 @@ const Edit = (props) => {
 									min={18}
 									max={54}
 								/>
-								<p>{__("Quotes Color", "blockons")}</p>
-								<ColorPalette
+								<BlockonsColorpicker
+									label={__("Quotes Color", "blockons")}
 									value={quotesColor}
-									onChange={(colorValue) =>
+									onChange={(colorValue) => {
 										setAttributes({
 											quotesColor:
 												colorValue === undefined ? "#000" : colorValue,
-										})
-									}
+										});
+									}}
+									paletteColors={colorPickerPalette}
 								/>
 								<RangeControl
 									label={__("Quotes Opacity", "blockons")}
@@ -506,43 +511,53 @@ const Edit = (props) => {
 							</>
 						)}
 
-						<p>{__("Background Color", "blockons")}</p>
-						<ColorPalette
-							value={bgColor}
-							onChange={(colorValue) =>
-								setAttributes({
-									bgColor: colorValue === undefined ? "#f0f0f0" : colorValue,
-								})
-							}
-						/>
-						<p>{__("Font Color", "blockons")}</p>
-						<ColorPalette
+						{(slidesStyle === "two" || slidesStyle === "three") && (
+							<BlockonsColorpicker
+								label={__("Background Color", "blockons")}
+								value={bgColor}
+								onChange={(colorValue) => {
+									setAttributes({
+										bgColor: colorValue === undefined ? "#f9f9f9" : colorValue,
+									});
+								}}
+								paletteColors={colorPickerPalette}
+							/>
+						)}
+
+						<BlockonsColorpicker
+							label={__("Font Color", "blockons")}
 							value={fontColor}
-							onChange={(colorValue) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									fontColor: colorValue === undefined ? "inherit" : colorValue,
-								})
-							}
+									fontColor: colorValue === undefined ? "#4f4f4f" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
 
-						<p>{__("Author Name Color", "blockons")}</p>
-						<ColorPalette
+						<BlockonsColorpicker
+							label={__("Author Name Color", "blockons")}
 							value={nameColor}
-							onChange={(colorValue) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									nameColor: colorValue === undefined ? "inherit" : colorValue,
-								})
-							}
+									nameColor: colorValue === undefined ? "#4f4f4f" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
-						<p>{__("Author Position Color", "blockons")}</p>
-						<ColorPalette
-							value={posColor}
-							onChange={(colorValue) =>
-								setAttributes({
-									posColor: colorValue === undefined ? "inherit" : colorValue,
-								})
-							}
-						/>
+
+						{authPosition && (
+							<BlockonsColorpicker
+								label={__("Author Position Color", "blockons")}
+								value={posColor}
+								onChange={(colorValue) => {
+									setAttributes({
+										posColor: colorValue === undefined ? "#4f4f4f" : colorValue,
+									});
+								}}
+								paletteColors={colorPickerPalette}
+							/>
+						)}
 					</PanelBody>
 					<PanelBody
 						title={__("Testimonials Slider Controls", "blockons")}
@@ -556,16 +571,18 @@ const Edit = (props) => {
 
 						{sliderArrows && (
 							<>
-								<SelectControl
-									label="Style"
-									value={arrowStyle}
-									options={[
-										{ label: "Default", value: "one" },
-										{ label: "Round", value: "two" },
-										{ label: "Icon Only", value: "three" },
-									]}
-									onChange={(value) => setAttributes({ arrowStyle: value })}
-								/>
+								{(slidesStyle === "two" || slidesStyle === "three") && (
+									<SelectControl
+										label="Style"
+										value={arrowStyle}
+										options={[
+											{ label: "Default", value: "one" },
+											{ label: "Round", value: "two" },
+											{ label: "Icon Only", value: "three" },
+										]}
+										onChange={(value) => setAttributes({ arrowStyle: value })}
+									/>
+								)}
 								<div className="blockons-icon-text-select">
 									<Dropdown
 										className="blockons-icon-selecter"
@@ -618,16 +635,13 @@ const Edit = (props) => {
 							</>
 						)}
 
-						{sliderArrows ||
-							(sliderPagination && (
-								<ToggleControl
-									label={__("Show Controls only on Hover", "blockons")}
-									checked={controlsOnHover}
-									onChange={(value) =>
-										setAttributes({ controlsOnHover: value })
-									}
-								/>
-							))}
+						{(sliderArrows || sliderPagination) && (
+							<ToggleControl
+								label={__("Show Controls only on Hover", "blockons")}
+								checked={controlsOnHover}
+								onChange={(value) => setAttributes({ controlsOnHover: value })}
+							/>
+						)}
 					</PanelBody>
 				</InspectorControls>
 			)}

@@ -15,9 +15,8 @@ import {
 	ToggleControl,
 	SelectControl,
 	RangeControl,
-	ColorPalette,
 } from "@wordpress/components";
-
+import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import { colorPickerPalette } from "../block-global";
 
 const Edit = (props) => {
@@ -143,62 +142,64 @@ const Edit = (props) => {
 							max={50}
 						/>
 
-						<p>{__("Icon Background Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Icon Background Color", "blockons")}
 							value={iconBgColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									iconBgColor: newColor === undefined ? "#FFF" : newColor,
-								})
-							}
+									iconBgColor: colorValue === undefined ? "#FFF" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
 
-						<p>{__("Icon Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Icon Color", "blockons")}
 							value={iconColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									iconColor: newColor === undefined ? "#000" : newColor,
-								})
-							}
+									iconColor: colorValue === undefined ? "#000" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
 
 						{searchDisplay === "popup" && (
-							<>
-								<p>{__("Search Background Color", "blockons")}</p>
-								<ColorPalette
-									colors={colorPickerPalette}
-									value={searchBgColor}
-									onChange={(newColor) =>
-										setAttributes({
-											searchBgColor: newColor === undefined ? "#FFF" : newColor,
-										})
-									}
-								/>
-							</>
+							<BlockonsColorpicker
+								label={__("Search Background Color", "blockons")}
+								value={searchBgColor}
+								onChange={(colorValue) => {
+									setAttributes({
+										searchBgColor:
+											colorValue === undefined ? "#FFF" : colorValue,
+									});
+								}}
+								paletteColors={colorPickerPalette}
+							/>
 						)}
 
-						<p>{__("Search Button Background Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Search Button Background Color", "blockons")}
 							value={searchBtnBgColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									searchBtnBgColor: newColor === undefined ? "#000" : newColor,
-								})
-							}
+									searchBtnBgColor:
+										colorValue === undefined ? "#000" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
-						<p>{__("Search Button Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+
+						<BlockonsColorpicker
+							label={__("Search Button Color", "blockons")}
 							value={searchBtnColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									searchBtnColor: newColor === undefined ? "#FFF" : newColor,
-								})
-							}
+									searchBtnColor:
+										colorValue === undefined ? "#FFF" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
 					</PanelBody>
 				</InspectorControls>

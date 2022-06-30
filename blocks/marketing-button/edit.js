@@ -16,15 +16,12 @@ import {
 	Dropdown,
 	ToggleControl,
 	SelectControl,
-	CheckboxControl,
 	TextControl,
 	RangeControl,
-	ColorPalette,
-	Icon,
-	Button,
 	ToolbarButton,
 } from "@wordpress/components";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
+import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import {
 	colorPickerPalette,
 	minimalRichText,
@@ -294,60 +291,59 @@ const Edit = (props) => {
 							max={240}
 						/>
 
-						<p>{__("Background Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Background Color", "blockons")}
 							value={bgColor}
-							onChange={(colorValue) =>
+							onChange={(colorValue) => {
 								setAttributes({
 									bgColor: colorValue === undefined ? "#FFF" : colorValue,
-								})
-							}
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
 						{layout === "one" && (
-							<>
-								<p>{__("Border Color", "blockons")}</p>
-								<ColorPalette
-									colors={colorPickerPalette}
-									value={borderColor}
-									onChange={(colorValue) =>
-										setAttributes({
-											borderColor:
-												colorValue === undefined ? "#a223a1" : colorValue,
-										})
-									}
-								/>
-							</>
+							<BlockonsColorpicker
+								label={__("Border Color", "blockons")}
+								value={borderColor}
+								onChange={(colorValue) => {
+									setAttributes({
+										borderColor:
+											colorValue === undefined ? "#a223a1" : colorValue,
+									});
+								}}
+								paletteColors={colorPickerPalette}
+							/>
 						)}
-						<p>{__("Icon Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+
+						<BlockonsColorpicker
+							label={__("Icon Color", "blockons")}
 							value={iconColor}
-							onChange={(colorValue) =>
+							onChange={(colorValue) => {
 								setAttributes({
 									iconColor: colorValue === undefined ? "#a223a1" : colorValue,
-								})
-							}
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
-						<p>{__("Title Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Title Color", "blockons")}
 							value={titleColor}
-							onChange={(colorValue) =>
+							onChange={(colorValue) => {
 								setAttributes({
 									titleColor: colorValue === undefined ? "#000" : colorValue,
-								})
-							}
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
-						<p>{__("Text Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Text Color", "blockons")}
 							value={textColor}
-							onChange={(colorValue) =>
+							onChange={(colorValue) => {
 								setAttributes({
 									textColor: colorValue === undefined ? "#000" : colorValue,
-								})
-							}
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
 					</PanelBody>
 				</InspectorControls>

@@ -1,6 +1,4 @@
-/**
- * WordPress dependencies
- */
+// WordPress dependencies
 import { useState, useEffect } from "@wordpress/element";
 import axios from "axios";
 import Select from "react-select";

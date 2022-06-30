@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "blockons/line-heading",
-	"title": "Blockons Line Heading",
+	"title": "Line Heading",
 	"textdomain": "blockons",
 	"icon": "heading",
 	"category": "blockons-category",

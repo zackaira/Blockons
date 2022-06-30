@@ -17,9 +17,8 @@ import {
 	CheckboxControl,
 	TextControl,
 	RangeControl,
-	ColorPalette,
 } from "@wordpress/components";
-
+import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import { colorPickerPalette } from "../block-global";
 
 const Edit = (props) => {
@@ -70,7 +69,7 @@ const Edit = (props) => {
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody
-						title={__("Account Icon Settings", "blockons")}
+						title={__("WC Account Icon Settings", "blockons")}
 						initialOpen={true}
 					>
 						<ToggleControl
@@ -148,7 +147,7 @@ const Edit = (props) => {
 						)}
 					</PanelBody>
 					<PanelBody
-						title={__("Account Icon Design", "blockons")}
+						title={__("WC Account Icon Design", "blockons")}
 						initialOpen={false}
 					>
 						<SelectControl
@@ -219,48 +218,46 @@ const Edit = (props) => {
 							max={80}
 						/>
 
-						<p>{__("Icon Background Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Icon Background Color", "blockons")}
 							value={iconBgColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									iconBgColor: newColor === undefined ? "#FFF" : newColor,
-								})
-							}
+									iconBgColor: colorValue === undefined ? "#FFF" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
-
-						<p>{__("Icon Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Icon Color", "blockons")}
 							value={iconColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									iconColor: newColor === undefined ? "#000" : newColor,
-								})
-							}
+									iconColor: colorValue === undefined ? "#000" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
 
-						<p>{__("Drop Down Background Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Drop Down Background Color", "blockons")}
 							value={dropBgColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									dropBgColor: newColor === undefined ? "#FFF" : newColor,
-								})
-							}
+									dropBgColor: colorValue === undefined ? "#FFF" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
-
-						<p>{__("Drop Down Font Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Drop Down Font Color", "blockons")}
 							value={dropColor}
-							onChange={(newColor) =>
+							onChange={(colorValue) => {
 								setAttributes({
-									dropColor: newColor === undefined ? "#747474" : newColor,
-								})
-							}
+									dropColor: colorValue === undefined ? "#747474" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
 					</PanelBody>
 				</InspectorControls>
@@ -271,7 +268,7 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 			<div
-				className={`blockons-account-icon-block ${
+				className={`blockons-wc-account-icon-block ${
 					isSelected && showDropDown ? "show" : ""
 				}`}
 				style={{
@@ -288,14 +285,14 @@ const Edit = (props) => {
 				></span>
 				{hasDropdown && (
 					<div
-						className="blockons-account-icon-dropdown"
+						className="blockons-wc-account-icon-dropdown"
 						style={{
 							backgroundColor: dropBgColor,
 							color: dropColor,
 						}}
 					>
 						{showDashboard && (
-							<div className="blockons-account-icon-item">
+							<div className="blockons-wc-account-icon-item">
 								<RichText
 									tagName="div"
 									placeholder={__("Dashboard", "blockons")}
@@ -312,7 +309,7 @@ const Edit = (props) => {
 							</div>
 						)}
 						{showOrders && (
-							<div className="blockons-account-icon-item">
+							<div className="blockons-wc-account-icon-item">
 								<RichText
 									tagName="div"
 									placeholder={__("Orders", "blockons")}
@@ -329,7 +326,7 @@ const Edit = (props) => {
 							</div>
 						)}
 						{showDownloads && (
-							<div className="blockons-account-icon-item">
+							<div className="blockons-wc-account-icon-item">
 								<RichText
 									tagName="div"
 									placeholder={__("Downloads", "blockons")}
@@ -346,7 +343,7 @@ const Edit = (props) => {
 							</div>
 						)}
 						{showAddresses && (
-							<div className="blockons-account-icon-item">
+							<div className="blockons-wc-account-icon-item">
 								<RichText
 									tagName="div"
 									placeholder={__("Addresses", "blockons")}
@@ -363,7 +360,7 @@ const Edit = (props) => {
 							</div>
 						)}
 						{showAccountDetails && (
-							<div className="blockons-account-icon-item">
+							<div className="blockons-wc-account-icon-item">
 								<RichText
 									tagName="div"
 									placeholder={__("Account Details", "blockons")}

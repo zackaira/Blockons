@@ -61,14 +61,6 @@
 .blockons-slider-wrap:hover .blockons-upload-remove {
 	opacity: 1;
 }
-/* .blockons-slider-wrap .splide__slide .blockons-item-btns button {
-	height: auto;
-	padding: 5px;
-}
-.blockons-slider-wrap .splide__slide .blockons-item-btns > div {
-	height: auto;
-	display: inline-flex;
-} */
 
 /* -- Item level controls popup box -- */
 .blockons-editor-popup .components-popover__content {
@@ -99,4 +91,23 @@
 }
 .blockons-add-new {
 	margin: 15px 0 0;
+}
+
+/* -- Blockons Color Picker -- */
+.components-dropdown.blockons-colorpicker {
+	width: 100%;
+	margin: 0 0 15px;
+}
+.components-button.blockons-colorpicker-btn {
+	box-shadow: 0 0 0 1px #e0e0e0;
+	padding: 14px 12px;
+	width: 100%;
+	text-decoration: none;
+	color: #545454;
+}
+.components-button.blockons-colorpicker-btn .component-color-indicator {
+	margin: 0 10px 0 0;
+}
+.components-button.blockons-colorpicker-btn:hover {
+	box-shadow: 0 0 0 1px #b9b9b9;
 }

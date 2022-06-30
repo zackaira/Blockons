@@ -10,7 +10,7 @@ const Save = ({ attributes }) => {
 
 	return (
 		<div {...blockProps}>
-			<div className={`blockons-featured-product-block`}></div>
+			<div className={`blockons-wc-featured-product-block`}></div>
 			table of contents
 		</div>
 	);

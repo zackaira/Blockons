@@ -10,13 +10,8 @@ import {
 	BlockAlignmentToolbar,
 	useBlockProps,
 } from "@wordpress/block-editor";
-import {
-	PanelBody,
-	SelectControl,
-	RangeControl,
-	ColorPalette,
-} from "@wordpress/components";
-
+import { PanelBody, SelectControl, RangeControl } from "@wordpress/components";
+import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import { colorPickerPalette } from "../block-global";
 
 const Edit = (props) => {
@@ -162,25 +157,25 @@ const Edit = (props) => {
 							max={40}
 						/>
 
-						<p>{__("Heading Font Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Heading Font Color", "blockons")}
 							value={fontColor}
-							onChange={(colorValue) =>
+							onChange={(colorValue) => {
 								setAttributes({
 									fontColor: colorValue === undefined ? "inherit" : colorValue,
-								})
-							}
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
-						<p>{__("Line Color", "blockons")}</p>
-						<ColorPalette
-							colors={colorPickerPalette}
+						<BlockonsColorpicker
+							label={__("Line Color", "blockons")}
 							value={lineColor}
-							onChange={(colorValue) =>
+							onChange={(colorValue) => {
 								setAttributes({
 									lineColor: colorValue === undefined ? "#444" : colorValue,
-								})
-							}
+								});
+							}}
+							paletteColors={colorPickerPalette}
 						/>
 					</PanelBody>
 				</InspectorControls>

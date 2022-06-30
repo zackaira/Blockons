@@ -19,6 +19,8 @@ import {
 	ColorPalette,
 	Button,
 } from "@wordpress/components";
+import BlockonsColorpicker from "../_components/BlockonsColorpicker";
+import { colorPickerPalette } from "../block-global";
 import { slugify } from "../block-global";
 
 const Edit = (props) => {
@@ -216,25 +218,24 @@ const Edit = (props) => {
 											handleItemWidthChange(newWidth, listItem.pbId)
 										}
 									/>
-									<p>{__("Progress Bar Color", "blockons")}</p>
-									<ColorPalette
+									<BlockonsColorpicker
+										label={__("Progress Bar Color", "blockons")}
 										value={listItem.pbColor ? listItem.pbColor : pbBarColor}
 										onChange={(newColor) =>
 											handleItemPbColorChange(newColor, listItem.pbId)
 										}
+										paletteColors={colorPickerPalette}
 									/>
-									<br />
-									<br />
-									<p>{__("Background Color", "blockons")}</p>
-									<ColorPalette
+									<BlockonsColorpicker
+										label={__("Background Color", "blockons")}
 										value={
 											listItem.pbBgColor ? listItem.pbBgColor : pbBarBgColor
 										}
 										onChange={(newColor) =>
 											handleItemPbBgColorChange(newColor, listItem.pbId)
 										}
+										paletteColors={colorPickerPalette}
 									/>
-									<br />
 								</>
 							)}
 						/>
@@ -341,19 +342,18 @@ const Edit = (props) => {
 							]}
 							onChange={(value) => setAttributes({ pbDesign: value })}
 						/>
-						<p>{__("Bar Color", "blockons")}</p>
-						<ColorPalette
+						<BlockonsColorpicker
+							label={__("Bar Color", "blockons")}
 							value={pbBarColor}
 							onChange={(colorValue) =>
 								setAttributes({
 									pbBarColor: colorValue === undefined ? "#22b0ea" : colorValue,
 								})
 							}
+							paletteColors={colorPickerPalette}
 						/>
-						<br />
-						<br />
-						<p>{__("Bar Background Color", "blockons")}</p>
-						<ColorPalette
+						<BlockonsColorpicker
+							label={__("Bar Background Color", "blockons")}
 							value={pbBarBgColor}
 							onChange={(colorValue) =>
 								setAttributes({
@@ -361,11 +361,10 @@ const Edit = (props) => {
 										colorValue === undefined ? "#F7F7F7" : colorValue,
 								})
 							}
+							paletteColors={colorPickerPalette}
 						/>
-						<br />
-						<br />
-						<p>{__("Text Color", "blockons")}</p>
-						<ColorPalette
+						<BlockonsColorpicker
+							label={__("Text Color", "blockons")}
 							value={pbDescFontColor}
 							onChange={(colorValue) =>
 								setAttributes({
@@ -373,8 +372,8 @@ const Edit = (props) => {
 										colorValue === undefined ? "#404040" : colorValue,
 								})
 							}
+							paletteColors={colorPickerPalette}
 						/>
-						<br />
 					</PanelBody>
 				</InspectorControls>
 			)}

@@ -12,7 +12,7 @@ const Save = ({ attributes }) => {
 		className: `${attributes.alignment} layout-${
 			attributes.slidesLayout
 		} style-${attributes.slidesStyle} ${
-			attributes.noShadow ? "noOuter" : ""
+			attributes.noShadow ? "no-outer" : ""
 		} arrows-${attributes.sliderArrowIcon}`,
 	});
 
@@ -37,8 +37,9 @@ const Save = ({ attributes }) => {
 				<div
 					className="blockons-slide-inner"
 					style={{
-						...(attributes.slidesNumber === 1
-							? { maxWidth: attributes.slidesWidth }
+						width: attributes.slidesWidth + "%",
+						...(attributes.slidesStyle === "two"
+							? { backgroundColor: attributes.bgColor }
 							: ""),
 					}}
 				>

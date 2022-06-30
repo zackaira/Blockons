@@ -2,10 +2,10 @@
  * Note that these styles are loaded *before* editor styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.wp-block-blockons-account-icon {
+.wp-block-blockons-wc-account-icon {
 	display: flex;
 }
-.blockons-account-icon-block {
+.blockons-wc-account-icon-block {
 	border-radius: 3px;
 	color: #000;
 	background-color: #fff;
@@ -16,7 +16,7 @@
 	justify-content: center;
 	position: relative;
 }
-.blockons-account-icon-dropdown {
+.blockons-wc-account-icon-dropdown {
 	color: inherit;
 	position: absolute;
 	right: 0;
@@ -29,13 +29,13 @@
 	visibility: hidden;
 	transition: all 0.2s ease-in-out 0s;
 }
-.blockons-account-icon-dropdown .blockons-account-icon-item {
+.blockons-wc-account-icon-dropdown .blockons-wc-account-icon-item {
 	box-shadow: 0 1px 0 0 rgb(0 0 0 / 8%);
 }
-.blockons-account-icon-dropdown .blockons-account-icon-item:last-child {
+.blockons-wc-account-icon-dropdown .blockons-wc-account-icon-item:last-child {
 	box-shadow: none;
 }
-.blockons-account-icon-dropdown .blockons-account-icon-item a {
+.blockons-wc-account-icon-dropdown .blockons-wc-account-icon-item a {
 	display: block;
 	text-decoration: none;
 	font-size: 14px;
@@ -44,7 +44,7 @@
 	color: inherit;
 }
 
-.blockons-account-icon-block:hover .blockons-account-icon-dropdown {
+.blockons-wc-account-icon-block:hover .blockons-wc-account-icon-dropdown {
 	visibility: visible;
 	opacity: 1;
 }

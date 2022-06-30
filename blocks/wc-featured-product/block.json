@@ -1,16 +1,12 @@
 {
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
-	"name": "blockons/featured-product",
-	"title": "Blockons Featured Product",
+	"name": "blockons/wc-featured-product",
+	"title": "WooCommerce Featured Product",
 	"textdomain": "blockons",
 	"icon": "star-empty",
 	"category": "blockons-category",
 	"keywords": ["featured", "product", "woocommerce"],
-	"styles": [
-		{ "name": "default", "label": "Default", "isDefault": true },
-		{ "name": "drop-shadow", "label": "Drop Shadow" }
-	],
 	"attributes": {
 		"alignment": {
 			"type": "string",
@@ -61,7 +57,7 @@
 		},
 		"blockFontColor": {
 			"type": "string",
-			"default": "inherit"
+			"default": "#444"
 		},
 		"buttonText": {
 			"type": "string",

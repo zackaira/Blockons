@@ -47,9 +47,9 @@ require BLOCKONS_PLUGIN_DIR . 'build/blocks/marketing-button/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/testimonials/index.php';
 // WooCommerce Blocks
 if ( blockons_is_plugin_active( 'woocommerce.php' ) ) {
-	require BLOCKONS_PLUGIN_DIR . 'build/blocks/account-icon/index.php';
-	require BLOCKONS_PLUGIN_DIR . 'build/blocks/cart-icon/index.php';
-	require BLOCKONS_PLUGIN_DIR . 'build/blocks/featured-product/index.php';
+	require BLOCKONS_PLUGIN_DIR . 'build/blocks/wc-account-icon/index.php';
+	require BLOCKONS_PLUGIN_DIR . 'build/blocks/wc-mini-cart/index.php';
+	require BLOCKONS_PLUGIN_DIR . 'build/blocks/wc-featured-product/index.php';
 }
 
 /**
@@ -59,8 +59,8 @@ function blockons_register_theme_scripts() {
 	// Font Awesome Free
 	wp_register_style( 'blockons-fontawesome', BLOCKONS_PLUGIN_URL . 'assets/font-awesome/css/all.min.css', array(), BLOCKONS_PLUGIN_VERSION );
 	// Cart Icon Block JS
-	wp_register_script( 'blockons-cart-icon', BLOCKONS_PLUGIN_URL . 'assets/blocks/cart-icon/cart.js', array(), BLOCKONS_PLUGIN_VERSION );
-	wp_localize_script( 'blockons-cart-icon', 'cartIconObj', array(
+	wp_register_script( 'blockons-wc-mini-cart', BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-mini-cart/cart.js', array(), BLOCKONS_PLUGIN_VERSION );
+	wp_localize_script( 'blockons-wc-mini-cart', 'cartIconObj', array(
 		'wcCartUrl' => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
 	));
 	// Progress Bars JS
@@ -81,7 +81,7 @@ add_action('init', 'blockons_register_theme_scripts');
 
 // File to include Cart & Mini Cart for the cart icon block
 // if ( has_block( 'blockons/cart-icon' ) ) {
-// 	require BLOCKONS_PLUGIN_DIR . 'assets/blocks/cart-icon/cart.php';
+// 	require BLOCKONS_PLUGIN_DIR . 'assets/blocks/wc-mini-cart/cart.php';
 // }
 
 /**

@@ -1,17 +1,19 @@
 /**
  * WordPress dependencies
  */
-import { RichText, useBlockProps } from "@wordpress/block-editor";
+import { useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
 		className: attributes.alignment,
 	});
 
+	// const ajaxObj = cartIconObj ? cartIconObj : {}
+
 	return (
 		<div {...blockProps}>
 			<div
-				className={`blockons-cart-icon-block ${
+				className={`blockons-wc-mini-cart-block ${
 					attributes.noItems ? "noitems" : ""
 				} ${attributes.noAmount ? "noamount" : ""} ${
 					attributes.layoutSwitch ? "switch" : ""
@@ -25,7 +27,7 @@ const Save = ({ attributes }) => {
 						? { href: attributes.cartLink }
 						: { href: cartIconObj.wcCartUrl })}
 					{...(attributes.cartLinkNewTab ? { target: "_blank" } : "")}
-					className="blockons-cart-icon-block-icon"
+					className="blockons-wc-mini-cart-block-icon"
 					style={{
 						fontSize: attributes.iconSize,
 						padding: attributes.iconPadding,
@@ -45,13 +47,13 @@ const Save = ({ attributes }) => {
 				</a>
 				{attributes.hasDropdown && (
 					<div
-						className="blockons-cart-icon-dropdown"
+						className="blockons-wc-mini-cart-dropdown"
 						style={{
 							backgroundColor: attributes.dropBgColor,
 							color: attributes.dropColor,
 						}}
 					>
-						<div className="blockons-cart-icon-inner"></div>
+						<div className="blockons-wc-mini-cart-inner"></div>
 					</div>
 				)}
 			</div>
