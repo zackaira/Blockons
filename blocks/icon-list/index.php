@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Account Icon Block
+ * Plugin Name: Icon List Block
  * Plugin URI: https://github.com/WordPress/blockons
- * Description: An Account Icon Block.
+ * Description: An Icon List Block.
  * Version: 1.1.0
  * Author: Kaira
  *

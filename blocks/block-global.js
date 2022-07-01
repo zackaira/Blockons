@@ -1,6 +1,3 @@
-/**
- * Global functions & Settings used in multiple blocks
- */
 /*
  * Convert Text to slug
  */
@@ -17,9 +14,23 @@ export const slugify = (str) =>
  */
 export const colorPickerPalette = [
 	{ name: "white", color: "#FFF" },
-	{ name: "light", color: "#f7f7f7" },
-	{ name: "dark", color: "#4B4B4B" },
-	{ name: "black", color: "#000" },
+	{ name: "Grey", color: "#9b9b9b" },
+	{ name: "Black", color: "#000" },
+	{ name: "Dark", color: "#232323" },
+	{ name: "Turqoise", color: "#00b291" },
+	{ name: "Emerald", color: "#51d88b" },
+	{ name: "Peter River", color: "#3497df" },
+	{ name: "Amethyst", color: "#9c56b8" },
+	{ name: "Wet Asphalt", color: "#34495d" },
+	{ name: "Sunflower", color: "#f1c50f" },
+	{ name: "Carrot", color: "#e77e22" },
+	{ name: "Alizarin", color: "#e84c3d" },
+	{ name: "Clouds", color: "#ecf0f1" },
+	{ name: "Concrete", color: "#95a5a5" },
+	{ name: "Dusty Pink", color: "#d4afb9" },
+	{ name: "Soft Purple", color: "#9cadce" },
+	{ name: "Creamy", color: "#f2e8ce" },
+	{ name: "Soil", color: "#874c48" },
 ];
 
 /*

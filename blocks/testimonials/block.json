@@ -134,22 +134,6 @@
 			"default": "#4f4f4f"
 		}
 	},
-	"example": {
-		"attributes": {
-			"pbDesign": "one",
-			"slides": [
-				{
-					"itemId": "id1",
-					"itemText": "List Item 1",
-					"itemTextSize": null,
-					"itemTextColor": null,
-					"itemIcon": "check",
-					"itemIconSize": null,
-					"itemIconColor": null
-				}
-			]
-		}
-	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"viewScript": "file:./splide.js",

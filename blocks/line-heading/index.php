@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Account Icon Block
+ * Plugin Name: Line Heading Block
  * Plugin URI: https://github.com/WordPress/blockons
- * Description: An Account Icon Block.
+ * Description: An Line Heading Block.
  * Version: 1.1.0
  * Author: Kaira
  *

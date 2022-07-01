@@ -35,7 +35,7 @@ const Save = ({ attributes }) => {
 					}}
 				>
 					<span
-						className={`icon ${
+						className={`icon fa-solid fa-${
 							attributes.customIcon && attributes.icon == "custom"
 								? attributes.customIcon
 								: attributes.icon

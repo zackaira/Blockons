@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Account Icon Block
+ * Plugin Name: Testimonials Block
  * Plugin URI: https://github.com/WordPress/blockons
- * Description: An Account Icon Block.
+ * Description: An Testimonials Block.
  * Version: 1.1.0
  * Author: Kaira
  *

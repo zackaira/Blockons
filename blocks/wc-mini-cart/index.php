@@ -61,11 +61,11 @@ function blockons_add_footer_wc_minicart() {
 		'a' => array('class' => array(), 'href' => array()),
 		'span' => array('class' => array()),
 	);
-	$html = '<div class="blockons-hidden">' . blockons_wc_minicart_item() . '</div>';
+	$html = '<div class="blockons-hidden" style="display: none !important;">' . blockons_wc_minicart_item() . '</div>';
 
 	// Add Cart & Mini Cart to site footer
 	echo wp_kses($html ,$allowed_html);
-	the_widget( 'WC_Widget_Cart', array( 'title' => ''), array( 'before_widget' => '<div class="blockons-hidden"><div class="blockons-mini-crt">', 'after_widget' => '</div></div>' ) );
+	the_widget( 'WC_Widget_Cart', array( 'title' => ''), array( 'before_widget' => '<div class="blockons-hidden" style="display: none !important;"><div class="blockons-mini-crt">', 'after_widget' => '</div></div>' ) );
 }
 add_action('wp_footer', 'blockons_add_footer_wc_minicart' );
 
