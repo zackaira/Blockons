@@ -11,6 +11,10 @@
 		"uniqueId": {
 			"type": "string"
 		},
+		"sliderAlign": {
+			"type": "string",
+			"default": "left"
+		},
 		"slides": {
 			"type": "array",
 			"default": [
@@ -33,6 +37,10 @@
 		"sliderStyle": {
 			"type": "string",
 			"default": "one"
+		},
+		"sliderRoundNess": {
+			"type": "string",
+			"default": "square"
 		},
 		"sliderArrowIcon": {
 			"type": "string",

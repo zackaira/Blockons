@@ -4,8 +4,7 @@
 import { useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
-	RichText,
-	AlignmentToolbar,
+	BlockAlignmentToolbar,
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
@@ -34,8 +33,10 @@ const Edit = (props) => {
 		isSelected,
 		attributes: {
 			uniqueId,
+			sliderAlign,
 			slides,
 			sliderStyle,
+			sliderRoundNess,
 			sliderArrowIcon,
 			controlsOnHover,
 			sliderPagination,
@@ -45,7 +46,7 @@ const Edit = (props) => {
 	} = props;
 
 	const blockProps = useBlockProps({
-		className: `playbtn-one style-${sliderStyle} arrows-${sliderArrowIcon}`,
+		className: `${sliderAlign}-align playbtn-one style-${sliderStyle} arrows-${sliderArrowIcon} rn-${sliderRoundNess}`,
 	});
 
 	// Slider Settings
@@ -454,7 +455,17 @@ const Edit = (props) => {
 						title={__("Video Slider Design", "blockons")}
 						initialOpen={false}
 					>
-						EMPTY
+						<SelectControl
+							label="Slider Roundness"
+							value={sliderRoundNess}
+							options={[
+								{ label: "Square", value: "square" },
+								{ label: "Rounded", value: "rounded" },
+								{ label: "More Round", value: "rounder" },
+								{ label: "Very Round", value: "round" },
+							]}
+							onChange={(value) => setAttributes({ sliderRoundNess: value })}
+						/>
 					</PanelBody>
 					<PanelBody
 						title={__("Video Slider Slider Controls", "blockons")}
@@ -516,6 +527,19 @@ const Edit = (props) => {
 					</PanelBody>
 				</InspectorControls>
 			)}
+			{
+				<BlockControls>
+					<BlockAlignmentToolbar
+						value={sliderAlign}
+						controls={["left", "center", "right"]}
+						onChange={(value) => {
+							setAttributes({
+								sliderAlign: value === undefined ? "left" : value,
+							});
+						}}
+					/>
+				</BlockControls>
+			}
 			<div
 				className={`blockons-video-slider`}
 				id={uniqueId}
@@ -526,11 +550,7 @@ const Edit = (props) => {
 						controlsOnHover ? "on-hover" : ""
 					} pagination-${sliderPagDesign}`}
 				>
-					<Splide
-						onMoved={() => console.log("Slide moved!")}
-						options={sliderOptions}
-						extensions={{ Video }}
-					>
+					<Splide options={sliderOptions} extensions={{ Video }}>
 						{sliderSlideItems}
 					</Splide>
 				</div>

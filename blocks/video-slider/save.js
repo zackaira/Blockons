@@ -1,16 +1,13 @@
 /**
  * WordPress dependencies
  */
-import { RichText, useBlockProps } from "@wordpress/block-editor";
-import { v4 as uuidv4 } from "uuid";
+import { useBlockProps } from "@wordpress/block-editor";
 import { Splide } from "@splidejs/react-splide";
-import { Video } from "@splidejs/splide-extension-video";
 import "@splidejs/react-splide/css";
-import FontAwesomeIcon from "../_components/FontAwesomeIcon";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
-		className: `playbtn-one style-${attributes.sliderStyle} arrows-${attributes.sliderArrowIcon}`,
+		className: `playbtn-one style-${attributes.sliderStyle} arrows-${attributes.sliderArrowIcon} rn-${attributes.sliderRoundNess}`,
 	});
 
 	const sliderOptions = {

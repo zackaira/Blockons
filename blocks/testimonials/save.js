@@ -2,7 +2,6 @@
  * WordPress dependencies
  */
 import { RichText, useBlockProps } from "@wordpress/block-editor";
-import { v4 as uuidv4 } from "uuid";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
