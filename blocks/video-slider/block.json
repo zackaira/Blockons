@@ -11,6 +11,10 @@
 		"uniqueId": {
 			"type": "string"
 		},
+		"sliderWidth": {
+			"type": "number",
+			"default": "100%"
+		},
 		"sliderAlign": {
 			"type": "string",
 			"default": "left"
@@ -41,6 +45,18 @@
 		"sliderRoundNess": {
 			"type": "string",
 			"default": "square"
+		},
+		"sliderBorderWidth": {
+			"type": "number",
+			"default": 10
+		},
+		"sliderOuterRound": {
+			"type": "number",
+			"default": 4
+		},
+		"sliderBorderColor": {
+			"type": "string",
+			"default": "#000"
 		},
 		"sliderArrowIcon": {
 			"type": "string",

@@ -33,10 +33,14 @@ const Edit = (props) => {
 		isSelected,
 		attributes: {
 			uniqueId,
+			sliderWidth,
 			sliderAlign,
 			slides,
 			sliderStyle,
 			sliderRoundNess,
+			sliderBorderWidth,
+			sliderOuterRound,
+			sliderBorderColor,
 			sliderArrowIcon,
 			controlsOnHover,
 			sliderPagination,
@@ -441,12 +445,25 @@ const Edit = (props) => {
 						title={__("Video Slider Settings", "blockons")}
 						initialOpen={true}
 					>
+						<RangeControl
+							label={__("Slider Max Width", "blockons")}
+							value={sliderWidth}
+							onChange={(value) =>
+								setAttributes({
+									sliderWidth: value === undefined ? "100%" : value,
+								})
+							}
+							min={400}
+							max={1200}
+							allowReset
+						/>
 						<SelectControl
 							label="Style"
 							value={sliderStyle}
 							options={[
 								{ label: "Plain", value: "one" },
 								{ label: "Drop Shadows", value: "two" },
+								{ label: "Bordered", value: "three" },
 							]}
 							onChange={(value) => setAttributes({ sliderStyle: value })}
 						/>
@@ -466,6 +483,43 @@ const Edit = (props) => {
 							]}
 							onChange={(value) => setAttributes({ sliderRoundNess: value })}
 						/>
+						{sliderStyle === "three" && (
+							<>
+								<RangeControl
+									label={__("Border Width", "blockons")}
+									value={sliderBorderWidth}
+									onChange={(value) =>
+										setAttributes({
+											sliderBorderWidth: value === undefined ? 10 : value,
+										})
+									}
+									min={2}
+									max={80}
+								/>
+								<RangeControl
+									label={__("Outer Border Radius", "blockons")}
+									value={sliderOuterRound}
+									onChange={(value) =>
+										setAttributes({
+											sliderOuterRound: value === undefined ? 4 : value,
+										})
+									}
+									min={0}
+									max={100}
+								/>
+								<BlockonsColorpicker
+									label={__("Border Color", "blockons")}
+									value={sliderBorderColor}
+									onChange={(colorValue) => {
+										setAttributes({
+											sliderBorderColor:
+												colorValue === undefined ? "#000" : colorValue,
+										});
+									}}
+									paletteColors={colorPickerPalette}
+								/>
+							</>
+						)}
 					</PanelBody>
 					<PanelBody
 						title={__("Video Slider Slider Controls", "blockons")}
@@ -544,11 +598,23 @@ const Edit = (props) => {
 				className={`blockons-video-slider`}
 				id={uniqueId}
 				data-settings={JSON.stringify(sliderOptions)}
+				style={{
+					maxWidth: sliderWidth,
+				}}
 			>
 				<div
 					className={`blockons-video-slider-wrap ${
 						controlsOnHover ? "on-hover" : ""
 					} pagination-${sliderPagDesign}`}
+					style={{
+						...(sliderStyle === "three"
+							? {
+									padding: sliderBorderWidth,
+									borderRadius: sliderOuterRound,
+									backgroundColor: sliderBorderColor,
+							  }
+							: ""),
+					}}
 				>
 					<Splide options={sliderOptions} extensions={{ Video }}>
 						{sliderSlideItems}

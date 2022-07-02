@@ -3,14 +3,20 @@
  * editor-specific styles using the same selectors will take precedence.
  */
 /* ---- Slider ---- */
-.blockons-video-slider-wrap {
+.wp-block-blockons-video-slider {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
 }
-.blockons-video-slider-wrap .splide__list {
+.wp-block-blockons-video-slider.center-align {
+	justify-content: center;
 }
-/* -- Slides -- */
-.blockons-video-slider-wrap .splide__slide {
+.wp-block-blockons-video-slider.right-align {
+	justify-content: flex-end;
 }
-
+.blockons-video-slider {
+	flex: 1;
+}
 /* ---- Slider Arrows ---- */
 .blockons-video-slider-wrap .splide__arrow {
 	background-color: #fff;
@@ -135,15 +141,18 @@
 }
 
 /* -- Player Styles -- */
-/* -- One -- */
-.wp-block-blockons-video-slider.style-one .blockons-video-slider-wrap {
-}
 /* -- Two -- */
 .wp-block-blockons-video-slider.style-two .splide__track {
 	box-shadow: 0 1px 6px rgb(0 0 0 / 45%);
 }
 .wp-block-blockons-video-slider.style-two .splide__arrow {
 	box-shadow: 0 1px 6px rgb(0 0 0 / 45%);
+}
+/* -- Three -- */
+.wp-block-blockons-video-slider.style-three .blockons-video-slider-wrap {
+	background-color: #000;
+	padding: 10px;
+	border-radius: 4px;
 }
 /* -- Player Roundness -- */
 .wp-block-blockons-video-slider.rn-rounded .splide__track {
