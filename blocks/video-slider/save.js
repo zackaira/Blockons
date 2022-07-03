@@ -72,11 +72,23 @@ const Save = ({ attributes }) => {
 				className={`blockons-video-slider`}
 				id={attributes.uniqueId}
 				data-settings={JSON.stringify(sliderOptions)}
+				style={{
+					maxWidth: attributes.sliderWidth,
+				}}
 			>
 				<div
 					className={`blockons-video-slider-wrap ${
 						attributes.controlsOnHover ? "on-hover" : ""
 					} pagination-${attributes.sliderPagDesign}`}
+					style={{
+						...(attributes.sliderStyle === "three"
+							? {
+									padding: attributes.sliderBorderWidth,
+									borderRadius: attributes.sliderOuterRound,
+									backgroundColor: attributes.sliderBorderColor,
+							  }
+							: ""),
+					}}
 				>
 					<Splide>{sliderSlideItems}</Splide>
 				</div>

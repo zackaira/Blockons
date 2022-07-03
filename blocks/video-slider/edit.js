@@ -339,6 +339,8 @@ const Edit = (props) => {
 										</>
 									)}
 
+									{/* TRY REMOVING HTTPS BELOW: HERE and see if it fixes the YouTube error */}
+
 									<div className="blockons-videos-prev">
 										{slideItem.itemType === "youtube" && slideItem.itemUrl && (
 											<iframe
@@ -369,6 +371,8 @@ const Edit = (props) => {
 												</video>
 											)}
 									</div>
+
+									{/* TRY REMOVING HTTPS ABOVE: HERE and see if it fixes the YouTube error */}
 
 									<p>{__("Slide Cover Image", "blockons")}</p>
 									<MediaUpload
