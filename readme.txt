@@ -23,9 +23,6 @@ Are you tired of creating child themes or adding multiple plugins to customize y
 &#9989; **Search Icon** block
 Some extra text here to explain the block we've just mentioned above... So get explaining.
 
-&#9989; **Account Icon** block
-Some extra text here to explain the block we've just mentioned above... So get explaining.
-
 &#9989; **Line Heading** block
 Some extra text here to explain the block we've just mentioned above... So get explaining.
 
@@ -39,6 +36,12 @@ Some extra text here to explain the block we've just mentioned above... So get e
 Some extra text here to explain the block we've just mentioned above... So get explaining.
 
 &#9989; **Testimonials Slider** block
+Some extra text here to explain the block we've just mentioned above... So get explaining.
+
+&#9989; **Video Slider** block
+Some extra text here to explain the block we've just mentioned above... So get explaining.
+
+&#9989; **Account Icon** WooCommerce block
 Some extra text here to explain the block we've just mentioned above... So get explaining.
 
 &#9989; **WooCommerce Mini Cart** block

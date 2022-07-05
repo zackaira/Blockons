@@ -5,6 +5,7 @@ build
 vendor
 
 /blocks/_new-block/
+/blocks/_new_slider_block/
 
 # Directories/files that may appear in your environment
 .DS_Store

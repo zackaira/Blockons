@@ -42,6 +42,7 @@ require_once 'classes/class-admin-settings.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/search/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/icon-list/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/line-heading/index.php';
+require BLOCKONS_PLUGIN_DIR . 'build/blocks/image-carousel/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/progress-bars/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/marketing-button/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/testimonials/index.php';
