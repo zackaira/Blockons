@@ -15,59 +15,47 @@
 			"type": "string",
 			"default": "left"
 		},
-		"slidesNumber": {
-			"type": "number",
-			"default": 1
-		},
 		"slides": {
 			"type": "array",
 			"default": []
 		},
-		"slidesStyle": {
+		"carouselType": {
+			"type": "string",
+			"default": "slide"
+		},
+		"carouselNumber": {
+			"type": "number",
+			"default": 1
+		},
+		"carouselRewind": {
+			"type": "boolean",
+			"default": false
+		},
+		"carouselGap": {
+			"type": "number",
+			"default": 15
+		},
+		"captionPosition": {
 			"type": "string",
 			"default": "one"
 		},
-		"noShadow": {
-			"type": "boolean",
-			"default": false
+		"carouselStyle": {
+			"type": "string",
+			"default": "one"
 		},
-		"slidesLayout": {
+		"carouselLayout": {
 			"type": "string",
 			"default": "vertical"
-		},
-		"slidesWidth": {
-			"type": "number",
-			"default": 75
-		},
-		"sliderRewind": {
-			"type": "boolean",
-			"default": false
 		},
 		"controlsOnHover": {
 			"type": "boolean",
 			"default": false
 		},
-		"authPosition": {
-			"type": "boolean",
-			"default": true
-		},
-		"authIcon": {
-			"type": "boolean",
-			"default": true
-		},
-		"showQuotes": {
-			"type": "boolean",
-			"default": true
-		},
-		"quoteSize": {
-			"type": "number",
-			"default": 28
-		},
-		"sliderAuto": {
+		"carouselAuto": {
 			"type": "boolean",
 			"default": false
 		},
-		"sliderArrows": {
+		"carouselArrows": {
 			"type": "boolean",
 			"default": true
 		},
@@ -75,41 +63,17 @@
 			"type": "string",
 			"default": "one"
 		},
-		"sliderArrowIcon": {
+		"carouselArrowIcon": {
 			"type": "string",
 			"default": "arrow-right"
 		},
-		"sliderPagination": {
+		"carouselPagination": {
 			"type": "boolean",
 			"default": true
 		},
-		"sliderPagDesign": {
+		"carouselPagDesign": {
 			"type": "string",
 			"default": "dots"
-		},
-		"bgColor": {
-			"type": "string",
-			"default": "#f9f9f9"
-		},
-		"fontColor": {
-			"type": "string",
-			"default": "#4f4f4f"
-		},
-		"quotesColor": {
-			"type": "string",
-			"default": "#000"
-		},
-		"quotesOpacity": {
-			"type": "number",
-			"default": 0.4
-		},
-		"nameColor": {
-			"type": "string",
-			"default": "#4f4f4f"
-		},
-		"posColor": {
-			"type": "string",
-			"default": "#4f4f4f"
 		}
 	},
 	"editorScript": "file:./index.js",

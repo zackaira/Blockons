@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useEffect } from "@wordpress/element";
+import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	RichText,
@@ -34,52 +34,72 @@ const Edit = (props) => {
 		attributes: {
 			uniqueId,
 			alignment,
-			slidesNumber,
 			slides,
-			slidesStyle,
-			noShadow,
-			slidesLayout,
-			slidesWidth,
-			sliderRewind,
+			carouselType,
+			carouselNumber,
+			carouselRewind,
+			carouselGap,
+			captionPosition,
+			carouselStyle,
+			carouselLayout,
 			controlsOnHover,
-			sliderArrows,
+			carouselAuto,
+			carouselArrows,
 			arrowStyle,
-			sliderArrowIcon,
-			sliderPagination,
-			sliderPagDesign,
-			bgColor,
+			carouselArrowIcon,
+			carouselPagination,
+			carouselPagDesign,
 		},
 		setAttributes,
 	} = props;
 
+	const [needsReload, setNeedsReload] = useState(false);
+	const [initCarouselType, setInitCarouselType] = useState(carouselType);
+
 	const blockProps = useBlockProps({
-		className: `align-${alignment} layout-${slidesLayout} style-${slidesStyle} ${
-			noShadow ? "no-outer" : ""
-		} arrows-${sliderArrowIcon}`,
+		className: `align-${alignment} layout-${carouselLayout} style-${carouselStyle} arrows-${carouselArrowIcon}`,
 	});
+
+	// const sliderType = carouselType === "slide" ? "slide" : carouselType;
 
 	// Slider Settings
 	const sliderOptions = {
-		type: "loop", // slide | loop | fade
-		rewind: true,
+		type: carouselType, // slide | loop | fade
+		...(carouselType === "slide"
+			? {
+					rewind: carouselRewind,
+			  }
+			: {
+					rewind: true,
+			  }),
 		speed: 1000,
 		// padding: "5rem",
-		// perPage: 1,
-		// perView: 1,
-		height: "100%",
+		...(carouselType !== "fade" && {
+			perPage: carouselNumber,
+			perMove: 1,
+			gap: carouselNumber >= 2 ? carouselGap : 0,
+		}),
 		autoplay: false,
-		arrows: true,
-		pagination: true,
+		arrows: carouselArrows,
+		pagination: carouselPagination,
 		classes: {
 			arrow: "splide__arrow fa-solid",
 		},
 	};
 
+	console.log(sliderOptions);
+
 	useEffect(() => {
+		setInitCarouselType(carouselType);
 		setAttributes({
 			uniqueId: uuidv4(),
 		});
 	}, []);
+
+	useEffect(() => {
+		const hahha = carouselType !== initCarouselType ? true : false;
+		setNeedsReload(hahha);
+	}, [carouselType]);
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
@@ -129,30 +149,6 @@ const Edit = (props) => {
 			setAttributes({ slides: updatedSlides });
 		}
 	};
-	// const handleMediaRemove = (itemId) => {
-	// 	const newSlides = [...slides];
-	// 	const editedSlideItems = newSlides.map((obj) => {
-	// 		if (obj.itemId === itemId)
-	// 			return {
-	// 				...obj,
-	// 				itemImg: {},
-	// 			};
-	// 		return obj;
-	// 	});
-	// 	setAttributes({ slides: editedSlideItems });
-	// };
-
-	// Add Slide
-	const handleAddItem = () => {
-		const newSlides = [...slides];
-		newSlides.push({
-			imageId: newSlides.length + 1,
-			imageUrl: "",
-			imageAlt: "",
-			imageCaption: "",
-		});
-		setAttributes({ slides: newSlides });
-	};
 
 	const handleRemoveItem = (index) => {
 		const newSlides = [...slides];
@@ -182,6 +178,16 @@ const Edit = (props) => {
 							/>
 						</div>
 					)}
+					{(captionPosition === "two" ||
+						captionPosition === "three" ||
+						captionPosition === "four") &&
+						slideItem.imageCaption && (
+							<div className="blockons-imgcaption">
+								<div className="blockons-imgcaption-inner">
+									{slideItem.imageCaption}
+								</div>
+							</div>
+						)}
 				</SplideSlide>
 			);
 		});
@@ -216,6 +222,116 @@ const Edit = (props) => {
 								);
 							}}
 						/>
+
+						{slides.length >= 2 && (
+							<>
+								<SelectControl
+									label={__("Carousel Loop", "blockons")}
+									value={carouselType}
+									options={
+										carouselNumber === 1
+											? [
+													{
+														label: __("Basic Carousel", "blockons"),
+														value: "slide",
+													},
+													{
+														label: __("Loop Carousel", "blockons"),
+														value: "loop",
+													},
+													{
+														label: __("Fade", "blockons"),
+														value: "fade",
+													},
+											  ]
+											: [
+													{
+														label: __("Basic Carousel", "blockons"),
+														value: "slide",
+													},
+													{
+														label: __("Loop Carousel", "blockons"),
+														value: "loop",
+													},
+											  ]
+									}
+									onChange={(value) => {
+										setAttributes({
+											carouselType: value === undefined ? "none" : value,
+										});
+									}}
+									help={__(
+										"Changing this On/Off changes a 'read-only' property in the slider options which stops the slider working properly, so after changing this, please 'Save/Update' the post and reload the page to see it work properly again with the new setting.",
+										"blockons"
+									)}
+								/>
+
+								{carouselType !== "fade" && (
+									<RangeControl
+										label={__("Slides Per View", "blockons")}
+										value={carouselNumber}
+										onChange={(value) =>
+											setAttributes({ carouselNumber: value })
+										}
+										min={1}
+										max={slides.length <= 4 ? slides.length : 5}
+									/>
+								)}
+								{carouselNumber >= 2 && (
+									<RangeControl
+										label={__("Slides Gap", "blockons")}
+										value={carouselGap}
+										onChange={(value) => setAttributes({ carouselGap: value })}
+										min={0}
+										max={80}
+									/>
+								)}
+							</>
+						)}
+
+						{slides.length >= 1 && (
+							<>
+								{carouselType === "slide" && (
+									<ToggleControl
+										label={__("Rewind Carousel", "blockons")}
+										checked={carouselRewind}
+										onChange={(newValue) => {
+											setAttributes({
+												carouselRewind: newValue,
+											});
+										}}
+									/>
+								)}
+							</>
+						)}
+
+						<SelectControl
+							label={__("Display Image Caption", "blockons")}
+							value={captionPosition}
+							options={[
+								{
+									label: __("None", "blockons"),
+									value: "one",
+								},
+								{
+									label: __("Bottom Banner", "blockons"),
+									value: "two",
+								},
+								{
+									label: __("Over Image", "blockons"),
+									value: "three",
+								},
+								{
+									label: __("Below Slide", "blockons"),
+									value: "four",
+								},
+							]}
+							onChange={(value) => {
+								setAttributes({
+									captionPosition: value === undefined ? "one" : value,
+								});
+							}}
+						/>
 					</PanelBody>
 					<PanelBody
 						title={__("Image Carousel Design", "blockons")}
@@ -227,7 +343,85 @@ const Edit = (props) => {
 						title={__("Image Carousel Slider Controls", "blockons")}
 						initialOpen={false}
 					>
-						EMPTY
+						<ToggleControl
+							label={__("Show Arrows", "blockons")}
+							checked={carouselArrows}
+							onChange={(value) => setAttributes({ carouselArrows: value })}
+						/>
+
+						{carouselArrows && (
+							<>
+								{(carouselStyle === "two" || carouselStyle === "three") && (
+									<SelectControl
+										label="Style"
+										value={arrowStyle}
+										options={[
+											{ label: "Default", value: "one" },
+											{ label: "Round", value: "two" },
+											{ label: "Icon Only", value: "three" },
+										]}
+										onChange={(value) => setAttributes({ arrowStyle: value })}
+									/>
+								)}
+								<div className="blockons-icon-text-select">
+									<Dropdown
+										className="blockons-icon-selecter"
+										contentClassName="blockons-editor-popup arrow-selector"
+										position="bottom left"
+										renderToggle={({ isOpen, onToggle }) => (
+											<FontAwesomeIcon
+												icon={carouselArrowIcon}
+												iconSize={24}
+												onClick={onToggle}
+											/>
+										)}
+										renderContent={() =>
+											Object.keys(sliderArrowIcons).map((icon) => (
+												<FontAwesomeIcon
+													icon={icon}
+													iconSize={20}
+													onClick={() =>
+														setAttributes({ carouselArrowIcon: icon })
+													}
+												/>
+											))
+										}
+									/>
+									<p>{__("Select Slider Arrow Icons", "blockons")}</p>
+								</div>
+							</>
+						)}
+
+						<ToggleControl
+							label={__("Show Pagination", "blockons")}
+							checked={carouselPagination}
+							onChange={(value) => setAttributes({ carouselPagination: value })}
+						/>
+						{carouselPagination && (
+							<>
+								<SelectControl
+									label="Testimonials Layout"
+									value={carouselPagDesign}
+									options={[
+										{ label: "Dots", value: "dots" },
+										{ label: "Numbers", value: "numbers" },
+									]}
+									onChange={(value) =>
+										setAttributes({
+											carouselPagDesign: value === undefined ? "dots" : value,
+										})
+									}
+								/>
+							</>
+						)}
+
+						{(carouselArrows || carouselPagination) && (
+							<ToggleControl
+								label={__("Show Controls only on Hover", "blockons")}
+								checked={controlsOnHover}
+								onChange={(value) => setAttributes({ controlsOnHover: value })}
+							/>
+						)}
 					</PanelBody>
 				</InspectorControls>
 			)}
@@ -244,8 +438,18 @@ const Edit = (props) => {
 				<div
 					className={`blockons-imgcarousel-wrap ${
 						controlsOnHover ? "on-hover" : ""
-					} arrow-style-${arrowStyle} pagination-${sliderPagDesign}`}
+					} arrow-style-${arrowStyle} pagination-${carouselPagDesign} caption-${captionPosition}`}
 				>
+					{needsReload && (
+						<div className="blockons-reload">
+							<div className="blockons-reload-block">
+								{__(
+									"The block now needs to be re-loaded, Please save the post and refresh the page",
+									"blockons"
+								)}
+							</div>
+						</div>
+					)}
 					{slides.length ? (
 						<Splide options={sliderOptions}>{sliderSlideItems}</Splide>
 					) : (
@@ -274,17 +478,6 @@ const Edit = (props) => {
 						</div>
 					)}
 				</div>
-				{isSelected && (
-					<div
-						className={`blockons-add-new ${
-							sliderSlideItems === undefined ? "no-slides" : "has-slides"
-						}`}
-					>
-						<Button variant="secondary" onClick={handleAddItem}>
-							{__("Add Another Slide", "blockons")}
-						</Button>
-					</div>
-				)}
 			</div>
 		</div>
 	);
