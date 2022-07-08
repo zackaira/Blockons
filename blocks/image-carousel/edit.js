@@ -4,13 +4,11 @@
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
-	RichText,
 	AlignmentToolbar,
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
 	MediaUpload,
-	MediaPlaceholder,
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
@@ -40,10 +38,10 @@ const Edit = (props) => {
 			carouselRewind,
 			carouselGap,
 			captionPosition,
+			captionOnHover,
 			carouselStyle,
 			carouselLayout,
 			controlsOnHover,
-			carouselAuto,
 			carouselArrows,
 			arrowStyle,
 			carouselArrowIcon,
@@ -87,7 +85,7 @@ const Edit = (props) => {
 		},
 	};
 
-	console.log(sliderOptions);
+	// console.log(sliderOptions);
 
 	useEffect(() => {
 		setInitCarouselType(carouselType);
@@ -156,6 +154,18 @@ const Edit = (props) => {
 		setAttributes({ slides: newSlides });
 	};
 
+	let updateHeight = (slider) => {
+		let slide = slider.Components.Slides.getAt(slider.index).slide;
+		let sliderTrackParent = slide.closest(".carousel-resize");
+
+		if (sliderTrackParent) {
+			setTimeout(() => {
+				sliderTrackParent.querySelector(".splide__track").style.height =
+					slide.offsetHeight + "px";
+			}, 50);
+		}
+	};
+
 	// Image Carousel Items
 	let sliderSlideItems;
 
@@ -222,9 +232,11 @@ const Edit = (props) => {
 								);
 							}}
 						/>
+						<br />
 
 						{slides.length >= 2 && (
 							<>
+								<br />
 								<SelectControl
 									label={__("Carousel Loop", "blockons")}
 									value={carouselType}
@@ -261,10 +273,15 @@ const Edit = (props) => {
 										});
 									}}
 									help={__(
-										"Changing this On/Off changes a 'read-only' property in the slider options which stops the slider working properly, so after changing this, please 'Save/Update' the post and reload the page to see it work properly again with the new setting.",
+										"This setting changes a 'read-only' property in the slider options, please 'Save/Update' the post and reload the page to see it work with the new setting.",
 										"blockons"
 									)}
 								/>
+								<div className="helplink fixmargin">
+									<a href="#" target="_blank">
+										{__("Read More")}
+									</a>
+								</div>
 
 								{carouselType !== "fade" && (
 									<RangeControl
@@ -277,6 +294,7 @@ const Edit = (props) => {
 										max={slides.length <= 4 ? slides.length : 5}
 									/>
 								)}
+
 								{carouselNumber >= 2 && (
 									<RangeControl
 										label={__("Slides Gap", "blockons")}
@@ -286,11 +304,7 @@ const Edit = (props) => {
 										max={80}
 									/>
 								)}
-							</>
-						)}
 
-						{slides.length >= 1 && (
-							<>
 								{carouselType === "slide" && (
 									<ToggleControl
 										label={__("Rewind Carousel", "blockons")}
@@ -302,36 +316,45 @@ const Edit = (props) => {
 										}}
 									/>
 								)}
+
+								<SelectControl
+									label={__("Display Image Caption", "blockons")}
+									value={captionPosition}
+									options={[
+										{
+											label: __("None", "blockons"),
+											value: "one",
+										},
+										{
+											label: __("Bottom Banner", "blockons"),
+											value: "two",
+										},
+										{
+											label: __("Over Image", "blockons"),
+											value: "three",
+										},
+										{
+											label: __("Below Slide", "blockons"),
+											value: "four",
+										},
+									]}
+									onChange={(value) => {
+										setAttributes({
+											captionPosition: value === undefined ? "one" : value,
+										});
+									}}
+								/>
+								{(captionPosition === "two" || captionPosition === "three") && (
+									<ToggleControl
+										label={__("Show Caption only on Hover", "blockons")}
+										checked={captionOnHover}
+										onChange={(value) =>
+											setAttributes({ captionOnHover: value })
+										}
+									/>
+								)}
 							</>
 						)}
-
-						<SelectControl
-							label={__("Display Image Caption", "blockons")}
-							value={captionPosition}
-							options={[
-								{
-									label: __("None", "blockons"),
-									value: "one",
-								},
-								{
-									label: __("Bottom Banner", "blockons"),
-									value: "two",
-								},
-								{
-									label: __("Over Image", "blockons"),
-									value: "three",
-								},
-								{
-									label: __("Below Slide", "blockons"),
-									value: "four",
-								},
-							]}
-							onChange={(value) => {
-								setAttributes({
-									captionPosition: value === undefined ? "one" : value,
-								});
-							}}
-						/>
 					</PanelBody>
 					<PanelBody
 						title={__("Image Carousel Design", "blockons")}
@@ -434,24 +457,45 @@ const Edit = (props) => {
 				className={`blockons-image-carousel-slider`}
 				id={uniqueId}
 				data-settings={JSON.stringify(sliderOptions)}
+				data-slides={carouselNumber}
 			>
 				<div
 					className={`blockons-imgcarousel-wrap ${
 						controlsOnHover ? "on-hover" : ""
-					} arrow-style-${arrowStyle} pagination-${carouselPagDesign} caption-${captionPosition}`}
+					} ${carouselNumber === 1 ? "carousel-resize" : ""} ${
+						captionOnHover ? "cap-hover" : ""
+					} arrow-style-${arrowStyle} pagination-${carouselPagDesign} caption-${captionPosition} ${
+						needsReload &&
+						(initCarouselType === "slide" || initCarouselType === "loop") &&
+						carouselType === "fade"
+							? "reload-fix"
+							: ""
+					}`}
 				>
 					{needsReload && (
 						<div className="blockons-reload">
 							<div className="blockons-reload-block">
 								{__(
-									"The block now needs to be re-loaded, Please save the post and refresh the page",
+									"Please save the post and refresh the page to see this new setting take place",
 									"blockons"
 								)}
 							</div>
 						</div>
 					)}
 					{slides.length ? (
-						<Splide options={sliderOptions}>{sliderSlideItems}</Splide>
+						<Splide
+							options={sliderOptions}
+							onMounted={(slider) => {
+								setTimeout(() => {
+									updateHeight(slider);
+								}, 150);
+							}}
+							onMove={(slider) => updateHeight(slider)}
+							onResize={(slider) => updateHeight(slider)}
+							onUpdated={(slider) => updateHeight(slider)}
+						>
+							{sliderSlideItems}
+						</Splide>
 					) : (
 						<div className="blockons-imgcarousel-empty">
 							<MediaUpload

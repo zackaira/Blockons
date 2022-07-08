@@ -6,11 +6,17 @@
 .blockons-imgcarousel-wrap {
 	position: relative;
 }
+.blockons-imgcarousel-wrap .splide__track {
+	transition: height 0.2s ease-in-out 0s;
+}
 .blockons-imgcarousel-wrap .splide__list {
+	align-items: flex-start;
 }
 
 /* -- Slides -- */
-.blockons-imgcarousel-wrap .splide__slide {
+.blockons-imgcarousel-wrap .splide__slide .blockons-imgcarousel-inner {
+	display: flex;
+	justify-content: center;
 }
 
 /* ---- Slider Arrows ---- */
@@ -91,6 +97,9 @@
 	content: "\f101";
 }
 /* ---- Slider Pagination ---- */
+.blockons-imgcarousel-wrap .splide__pagination {
+	bottom: -25px;
+}
 .blockons-imgcarousel-wrap.pagination-dots
 	.splide__pagination
 	button.splide__pagination__page {
@@ -157,8 +166,9 @@
 /* - Two - */
 .blockons-imgcarousel-wrap.caption-two .blockons-imgcaption {
 	position: absolute;
-	bottom: 32px;
+	bottom: 12px;
 	background-color: rgb(255 255 255 / 70%);
+	box-shadow: 0 1px 5px rgb(0 0 0 / 12%);
 	width: calc(100% - 20px);
 	margin: 0 10px;
 	text-align: center;
@@ -166,6 +176,15 @@
 	letter-spacing: 0.4px;
 	padding: 5px 10px;
 	color: #000;
+}
+.blockons-imgcarousel-wrap.caption-two.cap-hover .blockons-imgcaption {
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out 0s;
+}
+.blockons-imgcarousel-wrap.caption-two.cap-hover
+	.splide__slide:hover
+	.blockons-imgcaption {
+	opacity: 1;
 }
 /* - Three - */
 .blockons-imgcarousel-wrap.caption-three .blockons-imgcaption {
@@ -176,7 +195,6 @@
 	bottom: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgb(0 0 0 / 35%);
 	padding: 20px;
 	display: flex;
 	align-items: center;
@@ -186,6 +204,18 @@
 	overflow-y: scroll;
 	color: #fff;
 	max-width: 280px;
+	background-color: rgb(0 0 0 / 50%);
+	padding: 20px 25px;
+	border-radius: 3px;
+}
+.blockons-imgcarousel-wrap.caption-three.cap-hover .blockons-imgcaption {
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out 0s;
+}
+.blockons-imgcarousel-wrap.caption-three.cap-hover
+	.splide__slide:hover
+	.blockons-imgcaption {
+	opacity: 1;
 }
 /* - Four - */
 .blockons-imgcarousel-wrap.caption-four .blockons-imgcaption {

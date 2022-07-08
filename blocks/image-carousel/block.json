@@ -39,6 +39,10 @@
 			"type": "string",
 			"default": "one"
 		},
+		"captionOnHover": {
+			"type": "boolean",
+			"default": false
+		},
 		"carouselStyle": {
 			"type": "string",
 			"default": "one"
@@ -48,10 +52,6 @@
 			"default": "vertical"
 		},
 		"controlsOnHover": {
-			"type": "boolean",
-			"default": false
-		},
-		"carouselAuto": {
 			"type": "boolean",
 			"default": false
 		},

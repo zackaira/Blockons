@@ -8,6 +8,13 @@
 .blockons-imgcarousel-empty {
 	background-color: #f0f0f0;
 	padding: 40px;
+	display: flex;
+	justify-content: center;
+}
+.blockons-imgcarousel-empty .blockons-upload-button {
+	background-color: #fff;
+	max-width: 320px;
+	padding: 30px;
 }
 /* -- Disabled - Needs to be reloaded -- */
 .blockons-reload {
@@ -33,7 +40,10 @@
 	max-width: 310px;
 	text-align: center;
 }
-
+.blockons-imgcarousel-wrap.reload-fix > .splide {
+	height: 400px !important;
+	background-color: #f0f0f0;
+}
 /* -- Image Button -- */
 .blockons-upload-button {
 }

@@ -1,30 +1,34 @@
 /**
  * WordPress dependencies
  */
-import { RichText, useBlockProps } from "@wordpress/block-editor";
+import { useBlockProps } from "@wordpress/block-editor";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-import FontAwesomeIcon from "../_components/FontAwesomeIcon";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
-		className: `${attributes.alignment} layout-${
-			attributes.slidesLayout
-		} style-${attributes.slidesStyle} ${
-			attributes.noShadow ? "no-outer" : ""
-		} arrows-${attributes.sliderArrowIcon}`,
+		className: `align-${attributes.alignment} layout-${attributes.carouselLayout} style-${attributes.carouselStyle} arrows-${attributes.carouselArrowIcon}`,
 	});
 
 	const sliderOptions = {
-		type: "slide", // slide | loop | fade
-		rewind: attributes.sliderRewind,
+		type: attributes.carouselType, // slide | loop | fade
+		...(attributes.carouselType === "slide"
+			? {
+					rewind: attributes.carouselRewind,
+			  }
+			: {
+					rewind: true,
+			  }),
 		speed: 1000,
-		perPage: attributes.slidesNumber,
-		perView: 1,
-		gap: 10,
+		// padding: "5rem",
+		...(attributes.carouselType !== "fade" && {
+			perPage: attributes.carouselNumber,
+			perMove: 1,
+			gap: attributes.carouselNumber >= 2 ? attributes.carouselGap : 0,
+		}),
 		autoplay: false,
-		arrows: attributes.sliderArrows,
-		pagination: attributes.sliderPagination,
+		arrows: attributes.carouselArrows,
+		pagination: attributes.carouselPagination,
 		classes: {
 			arrow: "splide__arrow fa-solid",
 		},
@@ -33,104 +37,21 @@ const Save = ({ attributes }) => {
 	const sliderSlideItems = attributes.slides.map((slideItem, index) => {
 		return (
 			<SplideSlide>
-				<div
-					className="blockons-slide-inner"
-					style={{
-						width: attributes.slidesWidth + "%",
-						...(attributes.slidesStyle === "two"
-							? { backgroundColor: attributes.bgColor }
-							: ""),
-					}}
-				>
-					<div
-						className="blockons-slide-text"
-						style={{
-							...(attributes.slidesStyle === "three"
-								? { backgroundColor: attributes.bgColor }
-								: ""),
-							color: attributes.fontColor,
-						}}
-					>
-						{attributes.slidesStyle === "three" && (
-							<span
-								className="corner"
-								style={{
-									...(attributes.slidesStyle === "three"
-										? { borderColor: attributes.bgColor }
-										: ""),
-								}}
-							></span>
-						)}
-
-						{attributes.showQuotes && (
-							<FontAwesomeIcon
-								iconSize={attributes.quoteSize}
-								icon="quote-left"
-								style={{
-									color: attributes.quotesColor,
-									opacity: attributes.quotesOpacity,
-								}}
-							/>
-						)}
-
-						<RichText.Content
-							tagName="div"
-							value={slideItem.itemText}
-							className="blockons-slide-text-txt"
-						/>
-
-						{attributes.showQuotes && (
-							<FontAwesomeIcon
-								iconSize={attributes.quoteSize}
-								icon="quote-right"
-								style={{
-									color: attributes.quotesColor,
-									opacity: attributes.quotesOpacity,
-								}}
-							/>
-						)}
-					</div>
-					<div className="blockons-slide-author">
-						{attributes.authIcon && (
-							<div
-								className={`blockons-slide-author-img ${
-									slideItem.itemImg && slideItem.itemImg.url
-										? "hasimg"
-										: "noimg"
-								}`}
-								style={{
-									...(slideItem.itemImg && slideItem.itemImg.url
-										? { backgroundImage: `url(${slideItem.itemImg.url})` }
-										: ""),
-								}}
-							>
-								{slideItem.itemImg && !slideItem.itemImg.url && (
-									<FontAwesomeIcon icon="user" iconSize={18} />
-								)}
-							</div>
-						)}
-						<div className="blockons-slide-author-txt">
-							<RichText.Content
-								tagName="div"
-								value={slideItem.itemAuthor}
-								className="blockons-slide-author-txt-auth"
-								style={{
-									color: attributes.nameColor,
-								}}
-							/>
-							{attributes.authPosition && (
-								<RichText.Content
-									tagName="div"
-									value={slideItem.itemAuthorPos}
-									className="blockons-slide-author-txt-pos"
-									style={{
-										color: attributes.posColor,
-									}}
-								/>
-							)}
-						</div>
-					</div>
+				<div className="blockons-imgcarousel-inner">
+					{slideItem.imageUrl && (
+						<img src={slideItem.imageUrl} alt={slideItem.alt} />
+					)}
 				</div>
+				{(attributes.captionPosition === "two" ||
+					attributes.captionPosition === "three" ||
+					attributes.captionPosition === "four") &&
+					slideItem.imageCaption && (
+						<div className="blockons-imgcaption">
+							<div className="blockons-imgcaption-inner">
+								{slideItem.imageCaption}
+							</div>
+						</div>
+					)}
 			</SplideSlide>
 		);
 	});
@@ -141,13 +62,16 @@ const Save = ({ attributes }) => {
 				className={`blockons-image-carousel-slider`}
 				id={attributes.uniqueId}
 				data-settings={JSON.stringify(sliderOptions)}
+				data-slides={attributes.carouselNumber}
 			>
 				<div
-					className={`blockons-slider-wrap ${
+					className={`blockons-imgcarousel-wrap ${
 						attributes.controlsOnHover ? "on-hover" : ""
+					} ${attributes.carouselNumber === 1 ? "carousel-resize" : ""} ${
+						attributes.captionOnHover ? "cap-hover" : ""
 					} arrow-style-${attributes.arrowStyle} pagination-${
-						attributes.sliderPagDesign
-					}`}
+						attributes.carouselPagDesign
+					} caption-${attributes.captionPosition}`}
 				>
 					<Splide>{sliderSlideItems}</Splide>
 				</div>
