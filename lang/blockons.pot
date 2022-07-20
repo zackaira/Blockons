@@ -1,0 +1,1872 @@
+# Copyright (C) 2022 Kaira
+# This file is distributed under the same license as the Blockons plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Blockons 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/blockons\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-07-18T09:47:12+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.6.0\n"
+"X-Domain: blockons\n"
+
+#. Plugin Name of the plugin
+msgid "Blockons"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://blockons.com/"
+msgstr ""
+
+#. Description of the plugin
+msgid "WordPress editor blocks for you to build your website"
+msgstr ""
+
+#. Author of the plugin
+msgid "Kaira"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://kairaweb.com/"
+msgstr ""
+
+#. translators: number of items in the mini cart.
+#: assets/blocks/wc-mini-cart/cart.php:38
+#: blocks/wc-mini-cart/index.php:63
+#: build/blocks/wc-mini-cart/index.php:94
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: blocks/icon-list/edit.js:229
+#: build/blocks/icon-list/index.js:528
+#: build/blocks/icon-list/index.js:461
+msgid "#ListItem"
+msgstr ""
+
+#: blocks/icon-list/edit.js:245
+#: blocks/progress-bars/edit.js:206
+#: build/blocks/icon-list/index.js:546
+#: build/blocks/progress-bars/index.js:470
+#: build/blocks/icon-list/index.js:477
+#: build/blocks/progress-bars/index.js:421
+msgid "List Item Colors"
+msgstr ""
+
+#: blocks/icon-list/edit.js:252
+#: build/blocks/icon-list/index.js:551
+#: build/blocks/icon-list/index.js:484
+msgid "Text Size & Color"
+msgstr ""
+
+#: blocks/icon-list/edit.js:266
+#: blocks/marketing-button/edit.js:339
+#: blocks/progress-bars/edit.js:367
+#: blocks/wc-mini-cart/edit.js:274
+#: build/blocks/icon-list/index.js:557
+#: build/blocks/marketing-button/index.js:585
+#: build/blocks/progress-bars/index.js:600
+#: build/blocks/wc-mini-cart/index.js:492
+#: build/blocks/icon-list/index.js:498
+#: build/blocks/marketing-button/index.js:571
+#: build/blocks/progress-bars/index.js:582
+#: build/blocks/wc-mini-cart/index.js:489
+msgid "Text Color"
+msgstr ""
+
+#: blocks/icon-list/edit.js:278
+#: blocks/icon-list/edit.js:392
+#: build/blocks/icon-list/index.js:561
+#: build/blocks/icon-list/index.js:638
+#: build/blocks/icon-list/index.js:510
+#: build/blocks/icon-list/index.js:624
+msgid "Icon Size & Color"
+msgstr ""
+
+#: blocks/icon-list/edit.js:292
+#: blocks/marketing-button/edit.js:319
+#: blocks/search/edit.js:157
+#: blocks/wc-account-icon/edit.js:232
+#: blocks/wc-mini-cart/edit.js:284
+#: build/blocks/icon-list/index.js:567
+#: build/blocks/marketing-button/index.js:567
+#: build/blocks/search/index.js:417
+#: build/blocks/wc-account-icon/index.js:466
+#: build/blocks/wc-mini-cart/index.js:501
+#: build/blocks/icon-list/index.js:524
+#: build/blocks/marketing-button/index.js:551
+#: build/blocks/search/index.js:372
+#: build/blocks/wc-account-icon/index.js:447
+#: build/blocks/wc-mini-cart/index.js:499
+msgid "Icon Color"
+msgstr ""
+
+#: blocks/icon-list/edit.js:339
+#: build/blocks/icon-list/index.js:587
+#: build/blocks/icon-list/index.js:571
+msgid "Icon List Settings"
+msgstr ""
+
+#: blocks/icon-list/edit.js:343
+#: build/blocks/icon-list/index.js:590
+#: build/blocks/icon-list/index.js:575
+msgid "List Layout"
+msgstr ""
+
+#: blocks/icon-list/edit.js:346
+#: build/blocks/icon-list/index.js:593
+#: build/blocks/icon-list/index.js:578
+msgid "Vertical"
+msgstr ""
+
+#: blocks/icon-list/edit.js:347
+#: build/blocks/icon-list/index.js:596
+#: build/blocks/icon-list/index.js:579
+msgid "Horizontal"
+msgstr ""
+
+#: blocks/icon-list/edit.js:358
+#: blocks/progress-bars/edit.js:303
+#: build/blocks/icon-list/index.js:604
+#: build/blocks/progress-bars/index.js:534
+#: build/blocks/icon-list/index.js:590
+#: build/blocks/progress-bars/index.js:518
+msgid "Item Spacing"
+msgstr ""
+
+#: blocks/icon-list/edit.js:365
+#: build/blocks/icon-list/index.js:612
+#: build/blocks/icon-list/index.js:597
+msgid "Icon & Text Spacing"
+msgstr ""
+
+#: blocks/icon-list/edit.js:375
+#: build/blocks/icon-list/index.js:620
+#: build/blocks/icon-list/index.js:607
+msgid "Icon List Design"
+msgstr ""
+
+#: blocks/icon-list/edit.js:379
+#: blocks/image-carousel/edit.js:455
+#: build/blocks/icon-list/index.js:623
+#: build/blocks/image-carousel/index.js:3441
+#: build/blocks/icon-list/index.js:611
+#: build/blocks/image-carousel/index.js:3439
+msgid "Font Size"
+msgstr ""
+
+#: blocks/icon-list/edit.js:423
+#: build/blocks/icon-list/index.js:666
+#: build/blocks/icon-list/index.js:655
+msgid "Add List Item"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:241
+#: blocks/_new_slider_block/edit.js:210
+#: build/blocks/image-carousel/index.js:3266
+#: build/blocks/_new_slider_block/index.js:3031
+#: build/blocks/image-carousel/index.js:3225
+#: build/blocks/_new_slider_block/index.js:3017
+msgid "Image Carousel Settings"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:271
+#: build/blocks/image-carousel/index.js:3287
+#: build/blocks/image-carousel/index.js:3255
+msgid "Carousel Loop"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:277
+#: blocks/image-carousel/edit.js:291
+#: build/blocks/image-carousel/index.js:3290
+#: build/blocks/image-carousel/index.js:3299
+#: build/blocks/image-carousel/index.js:3261
+#: build/blocks/image-carousel/index.js:3275
+msgid "Basic Carousel"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:281
+#: blocks/image-carousel/edit.js:295
+#: build/blocks/image-carousel/index.js:3293
+#: build/blocks/image-carousel/index.js:3302
+#: build/blocks/image-carousel/index.js:3265
+#: build/blocks/image-carousel/index.js:3279
+msgid "Loop Carousel"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:285
+#: build/blocks/image-carousel/index.js:3296
+#: build/blocks/image-carousel/index.js:3269
+msgid "Fade"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:305
+#: build/blocks/image-carousel/index.js:3310
+#: build/blocks/image-carousel/index.js:3289
+msgid "This setting changes a 'read-only' property in the slider options, if you change this, you will need to 'Save/Update' the post and reload the page to see it work with the new setting."
+msgstr ""
+
+#: blocks/image-carousel/edit.js:318
+#: build/blocks/image-carousel/index.js:3317
+#: build/blocks/image-carousel/index.js:3302
+msgid "Slides Per View"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:330
+#: build/blocks/image-carousel/index.js:3325
+#: build/blocks/image-carousel/index.js:3314
+msgid "Rewind Carousel"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:343
+#: blocks/_new_slider_block/edit.js:216
+#: build/blocks/image-carousel/index.js:3333
+#: build/blocks/_new_slider_block/index.js:3034
+#: build/blocks/image-carousel/index.js:3327
+#: build/blocks/_new_slider_block/index.js:3023
+msgid "Image Carousel Design"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:347
+#: build/blocks/image-carousel/index.js:3336
+#: build/blocks/image-carousel/index.js:3331
+msgid "Image Proportions"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:350
+#: build/blocks/image-carousel/index.js:3339
+#: build/blocks/image-carousel/index.js:3334
+msgid "Actual Image"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:351
+#: build/blocks/image-carousel/index.js:3342
+#: build/blocks/image-carousel/index.js:3335
+msgid "Square"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:353
+#: build/blocks/image-carousel/index.js:3345
+#: build/blocks/image-carousel/index.js:3337
+msgid "3:2 Rectangle"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:357
+#: build/blocks/image-carousel/index.js:3348
+#: build/blocks/image-carousel/index.js:3341
+msgid "4:3 Rectangle"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:361
+#: build/blocks/image-carousel/index.js:3351
+#: build/blocks/image-carousel/index.js:3345
+msgid "16:9 Panoramic"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:373
+#: build/blocks/image-carousel/index.js:3360
+#: build/blocks/image-carousel/index.js:3357
+msgid "Border Radius"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:376
+#: build/blocks/image-carousel/index.js:3363
+#: build/blocks/image-carousel/index.js:3360
+msgid "square"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:377
+#: build/blocks/image-carousel/index.js:3366
+#: build/blocks/image-carousel/index.js:3361
+msgid "Rounded"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:378
+#: build/blocks/image-carousel/index.js:3369
+#: build/blocks/image-carousel/index.js:3362
+msgid "More Round"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:379
+#: build/blocks/image-carousel/index.js:3372
+#: build/blocks/image-carousel/index.js:3363
+msgid "Very Round"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:390
+#: build/blocks/image-carousel/index.js:3381
+#: build/blocks/image-carousel/index.js:3374
+msgid "Slides Gap"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:400
+#: build/blocks/image-carousel/index.js:3389
+#: build/blocks/image-carousel/index.js:3384
+msgid "Carousel Side Padding"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:411
+#: build/blocks/image-carousel/index.js:3397
+#: build/blocks/image-carousel/index.js:3395
+msgid "Display Image Caption"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:414
+#: build/blocks/image-carousel/index.js:3400
+#: build/blocks/image-carousel/index.js:3398
+msgid "None"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:415
+#: build/blocks/image-carousel/index.js:3403
+#: build/blocks/image-carousel/index.js:3399
+msgid "Bottom Banner"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:416
+#: build/blocks/image-carousel/index.js:3406
+#: build/blocks/image-carousel/index.js:3400
+msgid "Over Image"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:417
+#: build/blocks/image-carousel/index.js:3409
+#: build/blocks/image-carousel/index.js:3401
+msgid "Below Slide"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:430
+#: blocks/marketing-button/edit.js:295
+#: blocks/progress-bars/edit.js:230
+#: blocks/testimonials/edit.js:516
+#: blocks/wc-featured-product/edit.js:203
+#: blocks/wc-mini-cart/edit.js:264
+#: build/blocks/image-carousel/index.js:3418
+#: build/blocks/marketing-button/index.js:549
+#: build/blocks/progress-bars/index.js:486
+#: build/blocks/testimonials/index.js:3510
+#: build/blocks/wc-featured-product/index.js:4788
+#: build/blocks/wc-mini-cart/index.js:483
+#: build/blocks/image-carousel/index.js:3414
+#: build/blocks/marketing-button/index.js:527
+#: build/blocks/progress-bars/index.js:445
+#: build/blocks/testimonials/index.js:3500
+#: build/blocks/wc-featured-product/index.js:4218
+#: build/blocks/wc-mini-cart/index.js:479
+msgid "Background Color"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:436
+#: build/blocks/image-carousel/index.js:3425
+#: build/blocks/image-carousel/index.js:3420
+msgid "Background Opacity"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:447
+#: blocks/testimonials/edit.js:528
+#: blocks/wc-featured-product/edit.js:214
+#: build/blocks/image-carousel/index.js:3434
+#: build/blocks/testimonials/index.js:3519
+#: build/blocks/wc-featured-product/index.js:4797
+#: build/blocks/image-carousel/index.js:3431
+#: build/blocks/testimonials/index.js:3512
+#: build/blocks/wc-featured-product/index.js:4229
+msgid "Font Color"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:467
+#: build/blocks/image-carousel/index.js:3449
+#: build/blocks/image-carousel/index.js:3451
+msgid "Show Caption only on Hover"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:474
+#: blocks/_new_slider_block/edit.js:222
+#: build/blocks/image-carousel/index.js:3455
+#: build/blocks/_new_slider_block/index.js:3037
+#: build/blocks/image-carousel/index.js:3458
+#: build/blocks/_new_slider_block/index.js:3029
+msgid "Image Carousel Slider Controls"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:478
+#: blocks/testimonials/edit.js:567
+#: build/blocks/image-carousel/index.js:3458
+#: build/blocks/testimonials/index.js:3549
+#: build/blocks/image-carousel/index.js:3462
+#: build/blocks/testimonials/index.js:3551
+msgid "Show Arrows"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:521
+#: blocks/testimonials/edit.js:610
+#: blocks/video-slider/edit.js:554
+#: build/blocks/image-carousel/index.js:3503
+#: build/blocks/testimonials/index.js:3594
+#: build/blocks/video-slider/index.js:6958
+#: build/blocks/image-carousel/index.js:3505
+msgid "Select Slider Arrow Icons"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:527
+#: blocks/testimonials/edit.js:616
+#: blocks/video-slider/edit.js:558
+#: build/blocks/image-carousel/index.js:3504
+#: build/blocks/testimonials/index.js:3595
+#: build/blocks/video-slider/index.js:6959
+#: build/blocks/image-carousel/index.js:3511
+#: build/blocks/testimonials/index.js:3600
+#: build/blocks/video-slider/index.js:6962
+msgid "Show Pagination"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:551
+#: blocks/testimonials/edit.js:640
+#: blocks/video-slider/edit.js:581
+#: build/blocks/image-carousel/index.js:3523
+#: build/blocks/testimonials/index.js:3614
+#: build/blocks/video-slider/index.js:6978
+#: build/blocks/image-carousel/index.js:3535
+#: build/blocks/testimonials/index.js:3624
+#: build/blocks/video-slider/index.js:6985
+msgid "Show Controls only on Hover"
+msgstr ""
+
+#: blocks/image-carousel/edit.js:582
+#: build/blocks/image-carousel/index.js:3542
+#: build/blocks/image-carousel/index.js:3566
+msgid "Please save the post and refresh the page to see this new setting take place"
+msgstr ""
+
+#: blocks/line-heading/edit.js:52
+#: build/blocks/line-heading/index.js:329
+#: build/blocks/line-heading/index.js:267
+msgid "Line Heading Settings"
+msgstr ""
+
+#: blocks/line-heading/edit.js:56
+#: build/blocks/line-heading/index.js:332
+#: build/blocks/line-heading/index.js:271
+msgid "Heading Tag Element"
+msgstr ""
+
+#: blocks/line-heading/edit.js:76
+#: build/blocks/line-heading/index.js:361
+#: build/blocks/line-heading/index.js:291
+msgid "Heading Width"
+msgstr ""
+
+#: blocks/line-heading/edit.js:91
+#: build/blocks/line-heading/index.js:375
+#: build/blocks/line-heading/index.js:306
+msgid "Outer Width"
+msgstr ""
+
+#: blocks/line-heading/edit.js:96
+#: build/blocks/line-heading/index.js:382
+#: build/blocks/line-heading/index.js:311
+msgid "The width set will be the percentage of it's container"
+msgstr ""
+
+#: blocks/line-heading/edit.js:104
+#: build/blocks/line-heading/index.js:384
+#: build/blocks/line-heading/index.js:319
+msgid "Width"
+msgstr ""
+
+#: blocks/line-heading/edit.js:109
+#: build/blocks/line-heading/index.js:391
+#: build/blocks/line-heading/index.js:324
+msgid "This will set the pixel width of the heading lines"
+msgstr ""
+
+#: blocks/line-heading/edit.js:117
+#: build/blocks/line-heading/index.js:393
+#: build/blocks/line-heading/index.js:332
+msgid "Text & Line Vertical Alignment"
+msgstr ""
+
+#: blocks/line-heading/edit.js:134
+#: build/blocks/line-heading/index.js:413
+#: build/blocks/line-heading/index.js:349
+msgid "Line Heading Design"
+msgstr ""
+
+#: blocks/line-heading/edit.js:138
+#: build/blocks/line-heading/index.js:416
+#: build/blocks/line-heading/index.js:353
+msgid "Line Style"
+msgstr ""
+
+#: blocks/line-heading/edit.js:153
+#: build/blocks/line-heading/index.js:433
+#: build/blocks/line-heading/index.js:368
+msgid "Line Thickness"
+msgstr ""
+
+#: blocks/line-heading/edit.js:161
+#: build/blocks/line-heading/index.js:441
+#: build/blocks/line-heading/index.js:376
+msgid "Heading Font Color"
+msgstr ""
+
+#: blocks/line-heading/edit.js:171
+#: build/blocks/line-heading/index.js:450
+#: build/blocks/line-heading/index.js:386
+msgid "Line Color"
+msgstr ""
+
+#: blocks/line-heading/edit.js:212
+#: build/blocks/line-heading/index.js:485
+#: build/blocks/line-heading/index.js:427
+msgid "Heading Title"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:127
+#: blocks/_new-block/edit.js:46
+#: build/blocks/marketing-button/index.js:422
+#: build/blocks/_new-block/index.js:53
+#: build/blocks/marketing-button/index.js:359
+#: build/blocks/_new-block/index.js:46
+msgid "Marketing Button Settings"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:131
+msgid "Design tooo colabory took ya!"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:134
+#: build/blocks/marketing-button/index.js:428
+#: build/blocks/marketing-button/index.js:366
+msgid "Bordered"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:135
+#: build/blocks/marketing-button/index.js:431
+#: build/blocks/marketing-button/index.js:367
+msgid "Plain"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:146
+#: build/blocks/marketing-button/index.js:439
+#: build/blocks/marketing-button/index.js:378
+msgid "Min Width"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:157
+#: build/blocks/marketing-button/index.js:447
+#: build/blocks/marketing-button/index.js:389
+msgid "Min Height"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:169
+#: build/blocks/marketing-button/index.js:455
+#: build/blocks/marketing-button/index.js:401
+msgid "Add an Icon"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:176
+#: build/blocks/marketing-button/index.js:462
+#: build/blocks/marketing-button/index.js:408
+msgid "Change the icon by clicking on the Icon within the editor"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:184
+#: build/blocks/marketing-button/index.js:464
+#: build/blocks/marketing-button/index.js:416
+msgid "Add a custom Icon"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:202
+#: blocks/wc-mini-cart/edit.js:201
+#: build/blocks/marketing-button/index.js:479
+#: build/blocks/wc-mini-cart/index.js:440
+#: build/blocks/marketing-button/index.js:434
+#: build/blocks/wc-mini-cart/index.js:416
+msgid "Add your own custom icon by adding the Font Awesome icon name"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:215
+#: build/blocks/marketing-button/index.js:486
+#: build/blocks/marketing-button/index.js:447
+msgid "Icon Position"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:218
+#: build/blocks/marketing-button/index.js:489
+#: build/blocks/marketing-button/index.js:450
+msgid "Before Title"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:219
+#: build/blocks/marketing-button/index.js:492
+#: build/blocks/marketing-button/index.js:451
+msgid "After Title"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:220
+#: build/blocks/marketing-button/index.js:495
+#: build/blocks/marketing-button/index.js:452
+msgid "Button Left"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:221
+#: build/blocks/marketing-button/index.js:498
+#: build/blocks/marketing-button/index.js:453
+msgid "Button Right"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:231
+#: blocks/search/edit.js:123
+#: blocks/wc-account-icon/edit.js:199
+#: blocks/wc-mini-cart/edit.js:241
+#: build/blocks/marketing-button/index.js:506
+#: build/blocks/search/index.js:392
+#: build/blocks/wc-account-icon/index.js:441
+#: build/blocks/wc-mini-cart/index.js:467
+#: build/blocks/marketing-button/index.js:463
+#: build/blocks/search/index.js:338
+#: build/blocks/wc-account-icon/index.js:414
+#: build/blocks/wc-mini-cart/index.js:456
+msgid "Icon Size"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:242
+#: build/blocks/marketing-button/index.js:514
+#: build/blocks/marketing-button/index.js:474
+msgid "Icon Spacing"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:256
+#: blocks/_new-block/edit.js:52
+#: build/blocks/marketing-button/index.js:522
+#: build/blocks/_new-block/index.js:56
+#: build/blocks/marketing-button/index.js:488
+#: build/blocks/_new-block/index.js:52
+msgid "Marketing Button Design"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:260
+#: build/blocks/marketing-button/index.js:525
+#: build/blocks/marketing-button/index.js:492
+msgid "Button Roundness"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:272
+#: build/blocks/marketing-button/index.js:533
+#: build/blocks/marketing-button/index.js:504
+msgid "Vertical Padding"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:283
+#: build/blocks/marketing-button/index.js:541
+#: build/blocks/marketing-button/index.js:515
+msgid "Horizontal Padding"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:306
+#: blocks/video-slider/edit.js:515
+#: build/blocks/marketing-button/index.js:558
+#: build/blocks/video-slider/index.js:6923
+#: build/blocks/marketing-button/index.js:538
+#: build/blocks/video-slider/index.js:6919
+msgid "Border Color"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:329
+#: build/blocks/marketing-button/index.js:576
+#: build/blocks/marketing-button/index.js:561
+msgid "Title Color"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:370
+#: build/blocks/marketing-button/index.js:615
+#: build/blocks/marketing-button/index.js:602
+msgid "Button Link"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:376
+#: build/blocks/marketing-button/index.js:620
+#: build/blocks/marketing-button/index.js:608
+msgid "Search or type url"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:408
+#: build/blocks/marketing-button/index.js:650
+#: build/blocks/marketing-button/index.js:640
+msgid "Button Title"
+msgstr ""
+
+#: blocks/marketing-button/edit.js:422
+#: build/blocks/marketing-button/index.js:667
+#: build/blocks/marketing-button/index.js:654
+msgid "Some extra text"
+msgstr ""
+
+#: blocks/progress-bars/edit.js:157
+#: build/blocks/progress-bars/index.js:436
+#: build/blocks/progress-bars/index.js:372
+msgid "Progress Bar Description"
+msgstr ""
+
+#: blocks/progress-bars/edit.js:222
+#: build/blocks/progress-bars/index.js:481
+#: build/blocks/progress-bars/index.js:437
+msgid "Progress Bar Color"
+msgstr ""
+
+#: blocks/progress-bars/edit.js:273
+#: build/blocks/progress-bars/index.js:506
+#: build/blocks/progress-bars/index.js:488
+msgid "Progress Bars Settings"
+msgstr ""
+
+#: blocks/progress-bars/edit.js:277
+#: build/blocks/progress-bars/index.js:509
+#: build/blocks/progress-bars/index.js:492
+msgid "Progress Bar Container Width"
+msgstr ""
+
+#: blocks/progress-bars/edit.js:285
+#: build/blocks/progress-bars/index.js:517
+#: build/blocks/progress-bars/index.js:500
+msgid "Display Labels"
+msgstr ""
+
+#: blocks/progress-bars/edit.js:291
+#: build/blocks/progress-bars/index.js:523
+#: build/blocks/progress-bars/index.js:506
+msgid "Label Font Size"
+msgstr ""
+
+#: blocks/progress-bars/edit.js:312
+#: build/blocks/progress-bars/index.js:543
+#: build/blocks/progress-bars/index.js:527
+msgid "Height of Progress Bars"
+msgstr ""
+
+#: blocks/progress-bars/edit.js:322
+#: build/blocks/progress-bars/index.js:552
+#: build/blocks/progress-bars/index.js:537
+msgid "Display Percentage"
+msgstr ""
+
+#: blocks/progress-bars/edit.js:329
+#: build/blocks/progress-bars/index.js:558
+#: build/blocks/progress-bars/index.js:544
+msgid "Progress Bars Design"
+msgstr ""
+
+#: blocks/progress-bars/edit.js:346
+#: build/blocks/progress-bars/index.js:586
+#: build/blocks/progress-bars/index.js:561
+msgid "Bar Color"
+msgstr ""
+
+#: blocks/progress-bars/edit.js:356
+#: build/blocks/progress-bars/index.js:593
+#: build/blocks/progress-bars/index.js:571
+msgid "Bar Background Color"
+msgstr ""
+
+#: blocks/search/edit.js:71
+#: build/blocks/search/index.js:347
+#: build/blocks/search/index.js:286
+msgid "Search Settings"
+msgstr ""
+
+#: blocks/search/edit.js:75
+#: build/blocks/search/index.js:350
+#: build/blocks/search/index.js:290
+msgid "Search Display"
+msgstr ""
+
+#: blocks/search/edit.js:78
+#: build/blocks/search/index.js:353
+#: build/blocks/search/index.js:293
+msgid "Drop Down"
+msgstr ""
+
+#: blocks/search/edit.js:79
+#: build/blocks/search/index.js:356
+#: build/blocks/search/index.js:294
+msgid "Popup"
+msgstr ""
+
+#: blocks/search/edit.js:91
+#: build/blocks/search/index.js:365
+#: build/blocks/search/index.js:306
+msgid "Show Search"
+msgstr ""
+
+#: blocks/search/edit.js:93
+#: build/blocks/search/index.js:367
+#: build/blocks/search/index.js:308
+msgid "This will always display the search ONLY in the editor"
+msgstr ""
+
+#: blocks/search/edit.js:103
+#: build/blocks/search/index.js:372
+#: build/blocks/search/index.js:318
+msgid "Align Drop Down Search"
+msgstr ""
+
+#: blocks/search/edit.js:106
+#: build/blocks/search/index.js:375
+#: build/blocks/search/index.js:321
+msgid "Right"
+msgstr ""
+
+#: blocks/search/edit.js:107
+#: build/blocks/search/index.js:378
+#: build/blocks/search/index.js:322
+msgid "Left"
+msgstr ""
+
+#: blocks/search/edit.js:108
+#: build/blocks/search/index.js:381
+#: build/blocks/search/index.js:323
+msgid "Center"
+msgstr ""
+
+#: blocks/search/edit.js:119
+#: build/blocks/search/index.js:389
+#: build/blocks/search/index.js:334
+msgid "Search Design"
+msgstr ""
+
+#: blocks/search/edit.js:134
+#: blocks/wc-account-icon/edit.js:210
+#: blocks/wc-mini-cart/edit.js:252
+#: build/blocks/search/index.js:400
+#: build/blocks/wc-account-icon/index.js:449
+#: build/blocks/wc-mini-cart/index.js:475
+#: build/blocks/search/index.js:349
+#: build/blocks/wc-account-icon/index.js:425
+#: build/blocks/wc-mini-cart/index.js:467
+msgid "Icon Padding"
+msgstr ""
+
+#: blocks/search/edit.js:146
+#: blocks/wc-account-icon/edit.js:222
+#: build/blocks/search/index.js:408
+#: build/blocks/wc-account-icon/index.js:457
+#: build/blocks/search/index.js:361
+#: build/blocks/wc-account-icon/index.js:437
+msgid "Icon Background Color"
+msgstr ""
+
+#: blocks/search/edit.js:169
+#: build/blocks/search/index.js:426
+#: build/blocks/search/index.js:384
+msgid "Search Background Color"
+msgstr ""
+
+#: blocks/search/edit.js:182
+#: build/blocks/search/index.js:435
+#: build/blocks/search/index.js:397
+msgid "Search Button Background Color"
+msgstr ""
+
+#: blocks/search/edit.js:194
+#: build/blocks/search/index.js:444
+#: build/blocks/search/index.js:409
+msgid "Search Button Color"
+msgstr ""
+
+#: blocks/tabs/edit.js:72
+#: build/blocks/tabs/index.js:356
+#: build/blocks/tabs/index.js:287
+msgid "Tabs Settings"
+msgstr ""
+
+#: blocks/tabs/edit.js:83
+#: build/blocks/tabs/index.js:364
+#: build/blocks/tabs/index.js:298
+msgid "Tabs Design"
+msgstr ""
+
+#: blocks/testimonials/edit.js:248
+#: build/blocks/testimonials/index.js:3313
+#: build/blocks/testimonials/index.js:3232
+msgid "Testimonial Text"
+msgstr ""
+
+#: blocks/testimonials/edit.js:322
+#: build/blocks/testimonials/index.js:3358
+#: build/blocks/testimonials/index.js:3306
+msgid "Author"
+msgstr ""
+
+#: blocks/testimonials/edit.js:336
+#: build/blocks/testimonials/index.js:3368
+#: build/blocks/testimonials/index.js:3320
+msgid "Position"
+msgstr ""
+
+#: blocks/testimonials/edit.js:385
+#: build/blocks/testimonials/index.js:3393
+#: build/blocks/testimonials/index.js:3369
+msgid "Testimonials Settings"
+msgstr ""
+
+#: blocks/testimonials/edit.js:389
+#: build/blocks/testimonials/index.js:3396
+#: build/blocks/testimonials/index.js:3373
+msgid "Number of Slides to Show"
+msgstr ""
+
+#: blocks/testimonials/edit.js:412
+#: build/blocks/testimonials/index.js:3420
+#: build/blocks/testimonials/index.js:3396
+msgid "Remove Outer Shadow"
+msgstr ""
+
+#: blocks/testimonials/edit.js:429
+#: build/blocks/testimonials/index.js:3442
+#: build/blocks/testimonials/index.js:3413
+msgid "Inner Content Width"
+msgstr ""
+
+#: blocks/testimonials/edit.js:441
+#: build/blocks/testimonials/index.js:3450
+#: build/blocks/testimonials/index.js:3425
+msgid "Auto Play"
+msgstr ""
+
+#: blocks/testimonials/edit.js:444
+#: build/blocks/testimonials/index.js:3455
+#: build/blocks/testimonials/index.js:3428
+msgid "This will only work on the site front-end. Turn on 'Rewind Slider' for an infinite loop"
+msgstr ""
+
+#: blocks/testimonials/edit.js:451
+#: build/blocks/testimonials/index.js:3457
+#: build/blocks/testimonials/index.js:3435
+msgid "Rewind Slider"
+msgstr ""
+
+#: blocks/testimonials/edit.js:457
+#: build/blocks/testimonials/index.js:3463
+#: build/blocks/testimonials/index.js:3441
+msgid "Testimonials Design"
+msgstr ""
+
+#: blocks/testimonials/edit.js:461
+#: build/blocks/testimonials/index.js:3466
+#: build/blocks/testimonials/index.js:3445
+msgid "Show Author Position"
+msgstr ""
+
+#: blocks/testimonials/edit.js:466
+#: build/blocks/testimonials/index.js:3472
+#: build/blocks/testimonials/index.js:3450
+msgid "Show Author Image / Icon"
+msgstr ""
+
+#: blocks/testimonials/edit.js:471
+#: build/blocks/testimonials/index.js:3478
+#: build/blocks/testimonials/index.js:3455
+msgid "Show Quotes"
+msgstr ""
+
+#: blocks/testimonials/edit.js:478
+#: build/blocks/testimonials/index.js:3484
+#: build/blocks/testimonials/index.js:3462
+msgid "Quotes Size"
+msgstr ""
+
+#: blocks/testimonials/edit.js:489
+#: build/blocks/testimonials/index.js:3492
+#: build/blocks/testimonials/index.js:3473
+msgid "Quotes Color"
+msgstr ""
+
+#: blocks/testimonials/edit.js:500
+#: build/blocks/testimonials/index.js:3501
+#: build/blocks/testimonials/index.js:3484
+msgid "Quotes Opacity"
+msgstr ""
+
+#: blocks/testimonials/edit.js:539
+#: build/blocks/testimonials/index.js:3528
+#: build/blocks/testimonials/index.js:3523
+msgid "Author Name Color"
+msgstr ""
+
+#: blocks/testimonials/edit.js:551
+#: build/blocks/testimonials/index.js:3537
+#: build/blocks/testimonials/index.js:3535
+msgid "Author Position Color"
+msgstr ""
+
+#: blocks/testimonials/edit.js:563
+#: build/blocks/testimonials/index.js:3546
+#: build/blocks/testimonials/index.js:3547
+msgid "Testimonials Slider Controls"
+msgstr ""
+
+#: blocks/testimonials/edit.js:672
+#: blocks/video-slider/edit.js:634
+#: blocks/_new_slider_block/edit.js:253
+#: build/blocks/testimonials/index.js:3635
+#: build/blocks/video-slider/index.js:7016
+#: build/blocks/_new_slider_block/index.js:3055
+#: build/blocks/testimonials/index.js:3656
+#: build/blocks/video-slider/index.js:7038
+#: build/blocks/_new_slider_block/index.js:3060
+msgid "Add Another Slide"
+msgstr ""
+
+#: blocks/video-slider/edit.js:244
+#: build/blocks/video-slider/index.js:6753
+#: build/blocks/video-slider/index.js:6648
+msgid "Upload Image and Video"
+msgstr ""
+
+#: blocks/video-slider/edit.js:267
+#: blocks/video-slider/edit.js:278
+#: build/blocks/video-slider/index.js:6773
+#: build/blocks/video-slider/index.js:6775
+#: build/blocks/video-slider/index.js:6671
+#: build/blocks/video-slider/index.js:6682
+msgid "Please enter ONLY the video ID"
+msgstr ""
+
+#: blocks/video-slider/edit.js:298
+#: build/blocks/video-slider/index.js:6781
+#: build/blocks/video-slider/index.js:6702
+msgid "Please ONLY upload mp4 Video"
+msgstr ""
+
+#: blocks/video-slider/edit.js:323
+#: build/blocks/video-slider/index.js:6793
+#: build/blocks/video-slider/index.js:6727
+msgid "Remove Video"
+msgstr ""
+
+#: blocks/video-slider/edit.js:332
+#: build/blocks/video-slider/index.js:6796
+#: build/blocks/video-slider/index.js:6736
+msgid "Upload a Custom Video"
+msgstr ""
+
+#: blocks/video-slider/edit.js:377
+#: build/blocks/video-slider/index.js:6818
+#: build/blocks/video-slider/index.js:6781
+msgid "Slide Cover Image"
+msgstr ""
+
+#: blocks/video-slider/edit.js:399
+#: build/blocks/video-slider/index.js:6836
+#: build/blocks/video-slider/index.js:6803
+msgid "Remove Cover Image"
+msgstr ""
+
+#: blocks/video-slider/edit.js:408
+#: build/blocks/video-slider/index.js:6839
+#: build/blocks/video-slider/index.js:6812
+msgid "Upload a Cover Image"
+msgstr ""
+
+#: blocks/video-slider/edit.js:449
+#: build/blocks/video-slider/index.js:6857
+#: build/blocks/video-slider/index.js:6853
+msgid "Video Slider Settings"
+msgstr ""
+
+#: blocks/video-slider/edit.js:453
+#: build/blocks/video-slider/index.js:6860
+#: build/blocks/video-slider/index.js:6857
+msgid "Slider Max Width"
+msgstr ""
+
+#: blocks/video-slider/edit.js:476
+#: build/blocks/video-slider/index.js:6885
+#: build/blocks/video-slider/index.js:6880
+msgid "Video Slider Design"
+msgstr ""
+
+#: blocks/video-slider/edit.js:493
+#: build/blocks/video-slider/index.js:6907
+#: build/blocks/video-slider/index.js:6897
+msgid "Border Width"
+msgstr ""
+
+#: blocks/video-slider/edit.js:504
+#: build/blocks/video-slider/index.js:6915
+#: build/blocks/video-slider/index.js:6908
+msgid "Outer Border Radius"
+msgstr ""
+
+#: blocks/video-slider/edit.js:529
+#: build/blocks/video-slider/index.js:6932
+#: build/blocks/video-slider/index.js:6933
+msgid "Video Slider Slider Controls"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:72
+#: build/blocks/wc-account-icon/index.js:345
+#: build/blocks/wc-account-icon/index.js:287
+msgid "WC Account Icon Settings"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:76
+#: build/blocks/wc-account-icon/index.js:348
+#: build/blocks/wc-account-icon/index.js:291
+msgid "Add Drop Down Menu"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:77
+#: build/blocks/wc-account-icon/index.js:349
+#: build/blocks/wc-account-icon/index.js:292
+msgid "Add a drop down menu on hover to display account page links."
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:91
+#: blocks/wc-mini-cart/edit.js:110
+#: build/blocks/wc-account-icon/index.js:358
+#: build/blocks/wc-mini-cart/index.js:374
+#: build/blocks/wc-account-icon/index.js:306
+#: build/blocks/wc-mini-cart/index.js:325
+msgid "Always Show Drop Down"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:93
+#: blocks/wc-mini-cart/edit.js:112
+#: build/blocks/wc-account-icon/index.js:360
+#: build/blocks/wc-mini-cart/index.js:376
+#: build/blocks/wc-account-icon/index.js:308
+#: build/blocks/wc-mini-cart/index.js:327
+msgid "This will always display the drop down ONLY in the editor"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:150
+#: build/blocks/wc-account-icon/index.js:405
+#: build/blocks/wc-account-icon/index.js:365
+msgid "WC Account Icon Design"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:154
+#: blocks/wc-mini-cart/edit.js:156
+#: build/blocks/wc-account-icon/index.js:408
+#: build/blocks/wc-mini-cart/index.js:408
+#: build/blocks/wc-account-icon/index.js:369
+#: build/blocks/wc-mini-cart/index.js:371
+msgid "Select an Icon"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:158
+#: build/blocks/wc-account-icon/index.js:411
+#: build/blocks/wc-account-icon/index.js:373
+msgid "User Outline"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:161
+#: build/blocks/wc-account-icon/index.js:414
+#: build/blocks/wc-account-icon/index.js:376
+msgid "User"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:163
+#: build/blocks/wc-account-icon/index.js:417
+#: build/blocks/wc-account-icon/index.js:378
+msgid "Circle User"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:167
+#: build/blocks/wc-account-icon/index.js:420
+#: build/blocks/wc-account-icon/index.js:382
+msgid "Person"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:170
+#: blocks/wc-mini-cart/edit.js:184
+#: build/blocks/wc-account-icon/index.js:423
+#: build/blocks/wc-mini-cart/index.js:429
+#: build/blocks/wc-account-icon/index.js:385
+#: build/blocks/wc-mini-cart/index.js:399
+msgid "Custom Icon"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:182
+#: build/blocks/wc-account-icon/index.js:431
+#: build/blocks/wc-account-icon/index.js:397
+msgid "Icon Name"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:185
+#: build/blocks/wc-account-icon/index.js:434
+#: build/blocks/wc-account-icon/index.js:400
+msgid "Add your own custom icon by adding the Font Awesome icon full name"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:243
+#: blocks/wc-mini-cart/edit.js:294
+#: build/blocks/wc-account-icon/index.js:475
+#: build/blocks/wc-mini-cart/index.js:510
+#: build/blocks/wc-account-icon/index.js:458
+#: build/blocks/wc-mini-cart/index.js:509
+msgid "Drop Down Background Color"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:253
+#: blocks/wc-mini-cart/edit.js:304
+#: build/blocks/wc-account-icon/index.js:484
+#: build/blocks/wc-mini-cart/index.js:519
+#: build/blocks/wc-account-icon/index.js:468
+msgid "Drop Down Font Color"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:298
+#: blocks/wc-account-icon/edit.js:304
+#: build/blocks/wc-account-icon/index.js:517
+#: build/blocks/wc-account-icon/index.js:520
+#: build/blocks/wc-account-icon/index.js:513
+#: build/blocks/wc-account-icon/index.js:519
+msgid "Dashboard"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:315
+#: blocks/wc-account-icon/edit.js:321
+#: build/blocks/wc-account-icon/index.js:526
+#: build/blocks/wc-account-icon/index.js:529
+#: build/blocks/wc-account-icon/index.js:530
+#: build/blocks/wc-account-icon/index.js:536
+msgid "Orders"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:332
+#: blocks/wc-account-icon/edit.js:338
+#: build/blocks/wc-account-icon/index.js:535
+#: build/blocks/wc-account-icon/index.js:538
+#: build/blocks/wc-account-icon/index.js:547
+#: build/blocks/wc-account-icon/index.js:553
+msgid "Downloads"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:349
+#: blocks/wc-account-icon/edit.js:355
+#: build/blocks/wc-account-icon/index.js:544
+#: build/blocks/wc-account-icon/index.js:547
+#: build/blocks/wc-account-icon/index.js:564
+#: build/blocks/wc-account-icon/index.js:570
+msgid "Addresses"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:366
+#: blocks/wc-account-icon/edit.js:372
+#: build/blocks/wc-account-icon/index.js:553
+#: build/blocks/wc-account-icon/index.js:556
+#: build/blocks/wc-account-icon/index.js:581
+#: build/blocks/wc-account-icon/index.js:587
+msgid "Account Details"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:81
+#: build/blocks/wc-featured-product/index.js:4695
+#: build/blocks/wc-featured-product/index.js:4096
+msgid "WC Featured Product Settings"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:85
+#: blocks/wc-featured-product/edit.js:260
+#: build/blocks/wc-featured-product/index.js:4698
+#: build/blocks/wc-featured-product/index.js:4827
+#: build/blocks/wc-featured-product/index.js:4100
+#: build/blocks/wc-featured-product/index.js:4275
+msgid "Select a product to display"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:94
+#: build/blocks/wc-featured-product/index.js:4707
+#: build/blocks/wc-featured-product/index.js:4109
+msgid "WC Featured Product Layout"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:97
+#: build/blocks/wc-featured-product/index.js:4710
+#: build/blocks/wc-featured-product/index.js:4112
+msgid "2 Column"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:98
+#: build/blocks/wc-featured-product/index.js:4713
+#: build/blocks/wc-featured-product/index.js:4113
+msgid "Overlayed Layout"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:109
+#: blocks/wc-mini-cart/edit.js:147
+#: build/blocks/wc-featured-product/index.js:4721
+#: build/blocks/wc-mini-cart/index.js:400
+#: build/blocks/wc-featured-product/index.js:4124
+#: build/blocks/wc-mini-cart/index.js:362
+msgid "Switch Layout"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:121
+#: build/blocks/wc-featured-product/index.js:4729
+#: build/blocks/wc-featured-product/index.js:4136
+msgid "Image Overlay"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:132
+#: build/blocks/wc-featured-product/index.js:4737
+#: build/blocks/wc-featured-product/index.js:4147
+msgid "Block Padding"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:144
+#: build/blocks/wc-featured-product/index.js:4745
+#: build/blocks/wc-featured-product/index.js:4159
+msgid "Inner Block Padding"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:157
+#: build/blocks/wc-featured-product/index.js:4753
+#: build/blocks/wc-featured-product/index.js:4172
+msgid "Show Description"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:166
+#: build/blocks/wc-featured-product/index.js:4761
+#: build/blocks/wc-featured-product/index.js:4181
+msgid "Show Price"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:175
+#: build/blocks/wc-featured-product/index.js:4769
+#: build/blocks/wc-featured-product/index.js:4190
+msgid "Show Button"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:185
+#: build/blocks/wc-featured-product/index.js:4777
+#: build/blocks/wc-featured-product/index.js:4200
+msgid "WC Featured Product Design"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:190
+#: build/blocks/wc-featured-product/index.js:4780
+#: build/blocks/wc-featured-product/index.js:4205
+msgid "Overlay Opacity"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:227
+#: build/blocks/wc-featured-product/index.js:4806
+#: build/blocks/wc-featured-product/index.js:4242
+msgid "Product Info Width"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:239
+#: build/blocks/wc-featured-product/index.js:4814
+#: build/blocks/wc-featured-product/index.js:4254
+msgid "Product Image Height"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:67
+#: build/blocks/wc-mini-cart/index.js:344
+#: build/blocks/wc-mini-cart/index.js:282
+msgid "WC Mini Cart Settings"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:79
+#: build/blocks/wc-mini-cart/index.js:354
+#: build/blocks/wc-mini-cart/index.js:294
+msgid "If not set, this defaults to the WooCommerce cart page"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:85
+#: build/blocks/wc-mini-cart/index.js:356
+#: build/blocks/wc-mini-cart/index.js:300
+msgid "Open in a new tab"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:95
+#: build/blocks/wc-mini-cart/index.js:364
+#: build/blocks/wc-mini-cart/index.js:310
+msgid "Add Mini Cart"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:96
+#: build/blocks/wc-mini-cart/index.js:365
+#: build/blocks/wc-mini-cart/index.js:311
+msgid "Add a drop down mini cart to display cart items"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:124
+#: build/blocks/wc-mini-cart/index.js:381
+#: build/blocks/wc-mini-cart/index.js:339
+msgid "Remove Cart Amount"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:133
+#: build/blocks/wc-mini-cart/index.js:389
+#: build/blocks/wc-mini-cart/index.js:348
+msgid "Remove Items Count"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:143
+#: build/blocks/wc-mini-cart/index.js:397
+#: build/blocks/wc-mini-cart/index.js:358
+msgid "WC Mini Cart Design"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:160
+#: build/blocks/wc-mini-cart/index.js:411
+#: build/blocks/wc-mini-cart/index.js:375
+msgid "Shopping Cart"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:164
+#: build/blocks/wc-mini-cart/index.js:414
+#: build/blocks/wc-mini-cart/index.js:379
+msgid "Cart Arrow Down"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:168
+#: build/blocks/wc-mini-cart/index.js:417
+#: build/blocks/wc-mini-cart/index.js:383
+msgid "Shopping Basket"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:172
+#: build/blocks/wc-mini-cart/index.js:420
+#: build/blocks/wc-mini-cart/index.js:387
+msgid "Shopping Bag"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:176
+#: build/blocks/wc-mini-cart/index.js:423
+#: build/blocks/wc-mini-cart/index.js:391
+msgid "Shopping Suitcase"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:180
+#: build/blocks/wc-mini-cart/index.js:426
+#: build/blocks/wc-mini-cart/index.js:395
+msgid "Bucket"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:216
+#: build/blocks/wc-mini-cart/index.js:447
+#: build/blocks/wc-mini-cart/index.js:431
+msgid "Drop Down Cart Position"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:220
+#: build/blocks/wc-mini-cart/index.js:450
+#: build/blocks/wc-mini-cart/index.js:435
+msgid "Bottom Right"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:224
+#: build/blocks/wc-mini-cart/index.js:453
+#: build/blocks/wc-mini-cart/index.js:439
+msgid "Bottom Left"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:227
+#: build/blocks/wc-mini-cart/index.js:456
+#: build/blocks/wc-mini-cart/index.js:442
+msgid "Top Right"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:228
+#: build/blocks/wc-mini-cart/index.js:459
+#: build/blocks/wc-mini-cart/index.js:443
+msgid "Top Left"
+msgstr ""
+
+#: blocks/wc-mini-cart/edit.js:363
+#: build/blocks/wc-mini-cart/index.js:563
+#: build/blocks/wc-mini-cart/index.js:578
+msgid "This will display all the items that have been added to cart"
+msgstr ""
+
+#: blocks/_components/GetPostsSelect.js:36
+#: build/blocks/wc-featured-product/index.js:4382
+#: build/blocks/wc-featured-product/index.js:3827
+msgid "Loading..."
+msgstr ""
+
+#: blocks/_components/GetPostsSelect.js:37
+#: build/blocks/wc-featured-product/index.js:4382
+#: build/blocks/wc-featured-product/index.js:3828
+msgid "Select..."
+msgstr ""
+
+#: blocks/_components/GetPostsSelect.js:39
+#: build/blocks/wc-featured-product/index.js:4383
+#: build/blocks/wc-featured-product/index.js:3830
+msgid "No Products"
+msgstr ""
+
+#: build/blocks/marketing-button/index.js:425
+#: build/blocks/marketing-button/index.js:363
+msgid "Design"
+msgstr ""
+
+#: blocks/icon-list/block.json
+#: build/blocks/icon-list/block.json
+msgctxt "block title"
+msgid "Icon List"
+msgstr ""
+
+#: blocks/icon-list/block.json
+#: build/blocks/icon-list/block.json
+msgctxt "block keyword"
+msgid "list"
+msgstr ""
+
+#: blocks/icon-list/block.json
+#: build/blocks/icon-list/block.json
+msgctxt "block keyword"
+msgid "icons"
+msgstr ""
+
+#: blocks/icon-list/block.json
+#: blocks/progress-bars/block.json
+#: build/blocks/icon-list/block.json
+#: build/blocks/progress-bars/block.json
+msgctxt "block keyword"
+msgid "items"
+msgstr ""
+
+#: blocks/icon-list/block.json
+#: build/blocks/icon-list/block.json
+msgctxt "block keyword"
+msgid "links"
+msgstr ""
+
+#: blocks/image-carousel/block.json
+#: blocks/_new_slider_block/block.json
+#: build/blocks/image-carousel/block.json
+#: build/blocks/_new_slider_block/block.json
+msgctxt "block title"
+msgid "Image Carousel"
+msgstr ""
+
+#: blocks/image-carousel/block.json
+#: blocks/_new_slider_block/block.json
+#: build/blocks/image-carousel/block.json
+#: build/blocks/_new_slider_block/block.json
+msgctxt "block keyword"
+msgid "image"
+msgstr ""
+
+#: blocks/image-carousel/block.json
+#: blocks/_new_slider_block/block.json
+#: build/blocks/image-carousel/block.json
+#: build/blocks/_new_slider_block/block.json
+msgctxt "block keyword"
+msgid "carousel"
+msgstr ""
+
+#: blocks/image-carousel/block.json
+#: blocks/video-slider/block.json
+#: blocks/_new_slider_block/block.json
+#: build/blocks/image-carousel/block.json
+#: build/blocks/video-slider/block.json
+#: build/blocks/_new_slider_block/block.json
+msgctxt "block keyword"
+msgid "gallery"
+msgstr ""
+
+#: blocks/image-carousel/block.json
+#: blocks/_new_slider_block/block.json
+#: build/blocks/image-carousel/block.json
+#: build/blocks/_new_slider_block/block.json
+msgctxt "block keyword"
+msgid "picture"
+msgstr ""
+
+#: blocks/image-carousel/block.json
+#: blocks/testimonials/block.json
+#: blocks/video-slider/block.json
+#: blocks/_new_slider_block/block.json
+#: build/blocks/image-carousel/block.json
+#: build/blocks/testimonials/block.json
+#: build/blocks/video-slider/block.json
+#: build/blocks/_new_slider_block/block.json
+msgctxt "block keyword"
+msgid "slider"
+msgstr ""
+
+#: blocks/line-heading/block.json
+#: build/blocks/line-heading/block.json
+msgctxt "block title"
+msgid "Line Heading"
+msgstr ""
+
+#: blocks/line-heading/block.json
+#: build/blocks/line-heading/block.json
+msgctxt "block keyword"
+msgid "line"
+msgstr ""
+
+#: blocks/line-heading/block.json
+#: build/blocks/line-heading/block.json
+msgctxt "block keyword"
+msgid "heading"
+msgstr ""
+
+#: blocks/line-heading/block.json
+#: build/blocks/line-heading/block.json
+msgctxt "block keyword"
+msgid "title"
+msgstr ""
+
+#: blocks/marketing-button/block.json
+#: build/blocks/marketing-button/block.json
+msgctxt "block title"
+msgid "Marketing Button"
+msgstr ""
+
+#: blocks/marketing-button/block.json
+#: blocks/_new-block/block.json
+#: build/blocks/marketing-button/block.json
+#: build/blocks/_new-block/block.json
+msgctxt "block keyword"
+msgid "marketing"
+msgstr ""
+
+#: blocks/marketing-button/block.json
+#: blocks/_new-block/block.json
+#: build/blocks/marketing-button/block.json
+#: build/blocks/_new-block/block.json
+msgctxt "block keyword"
+msgid "button"
+msgstr ""
+
+#: blocks/marketing-button/block.json
+#: blocks/_new-block/block.json
+#: build/blocks/marketing-button/block.json
+#: build/blocks/_new-block/block.json
+msgctxt "block keyword"
+msgid "cta"
+msgstr ""
+
+#: blocks/marketing-button/block.json
+#: build/blocks/marketing-button/block.json
+msgctxt "block keyword"
+msgid "banner"
+msgstr ""
+
+#: blocks/progress-bars/block.json
+#: build/blocks/progress-bars/block.json
+msgctxt "block title"
+msgid "Progress Bars"
+msgstr ""
+
+#: blocks/progress-bars/block.json
+#: build/blocks/progress-bars/block.json
+msgctxt "block keyword"
+msgid "progress"
+msgstr ""
+
+#: blocks/progress-bars/block.json
+#: build/blocks/progress-bars/block.json
+msgctxt "block keyword"
+msgid "bars"
+msgstr ""
+
+#: blocks/search/block.json
+#: build/blocks/search/block.json
+msgctxt "block title"
+msgid "Search Bar/Popup"
+msgstr ""
+
+#: blocks/search/block.json
+#: build/blocks/search/block.json
+msgctxt "block keyword"
+msgid "search"
+msgstr ""
+
+#: blocks/search/block.json
+#: build/blocks/search/block.json
+msgctxt "block keyword"
+msgid "searchbar"
+msgstr ""
+
+#: blocks/search/block.json
+#: blocks/wc-account-icon/block.json
+#: blocks/wc-mini-cart/block.json
+#: build/blocks/search/block.json
+#: build/blocks/wc-account-icon/block.json
+#: build/blocks/wc-mini-cart/block.json
+msgctxt "block keyword"
+msgid "icon"
+msgstr ""
+
+#: blocks/search/block.json
+#: blocks/wc-account-icon/block.json
+#: blocks/wc-featured-product/block.json
+#: blocks/wc-mini-cart/block.json
+#: build/blocks/search/block.json
+#: build/blocks/wc-account-icon/block.json
+#: build/blocks/wc-featured-product/block.json
+#: build/blocks/wc-mini-cart/block.json
+msgctxt "block keyword"
+msgid "woocommerce"
+msgstr ""
+
+#: blocks/search/block.json
+#: blocks/wc-account-icon/block.json
+#: blocks/wc-mini-cart/block.json
+#: build/blocks/search/block.json
+#: build/blocks/wc-account-icon/block.json
+#: build/blocks/wc-mini-cart/block.json
+msgctxt "block keyword"
+msgid "header"
+msgstr ""
+
+#: blocks/search/block.json
+#: build/blocks/search/block.json
+msgctxt "block keyword"
+msgid "site"
+msgstr ""
+
+#: blocks/tabs/block.json
+#: build/blocks/tabs/block.json
+msgctxt "block title"
+msgid "Tabs"
+msgstr ""
+
+#: blocks/tabs/block.json
+#: build/blocks/tabs/block.json
+msgctxt "block keyword"
+msgid "tabs"
+msgstr ""
+
+#: blocks/tabs/block.json
+#: build/blocks/tabs/block.json
+msgctxt "block keyword"
+msgid "tabbed"
+msgstr ""
+
+#: blocks/tabs/block.json
+#: build/blocks/tabs/block.json
+msgctxt "block keyword"
+msgid "content"
+msgstr ""
+
+#: blocks/tabs/block.json
+#: build/blocks/tabs/block.json
+msgctxt "block keyword"
+msgid "inner"
+msgstr ""
+
+#: blocks/testimonials/block.json
+#: build/blocks/testimonials/block.json
+msgctxt "block title"
+msgid "Testimonials"
+msgstr ""
+
+#: blocks/testimonials/block.json
+#: build/blocks/testimonials/block.json
+msgctxt "block keyword"
+msgid "testimonials"
+msgstr ""
+
+#: blocks/testimonials/block.json
+#: build/blocks/testimonials/block.json
+msgctxt "block keyword"
+msgid "quote"
+msgstr ""
+
+#: blocks/testimonials/block.json
+#: build/blocks/testimonials/block.json
+msgctxt "block keyword"
+msgid "reviews"
+msgstr ""
+
+#: blocks/testimonials/block.json
+#: build/blocks/testimonials/block.json
+msgctxt "block keyword"
+msgid "comments"
+msgstr ""
+
+#: blocks/video-slider/block.json
+#: build/blocks/video-slider/block.json
+msgctxt "block title"
+msgid "Video Slider"
+msgstr ""
+
+#: blocks/video-slider/block.json
+#: build/blocks/video-slider/block.json
+msgctxt "block keyword"
+msgid "video"
+msgstr ""
+
+#: blocks/video-slider/block.json
+#: build/blocks/video-slider/block.json
+msgctxt "block keyword"
+msgid "play"
+msgstr ""
+
+#: blocks/wc-account-icon/block.json
+#: build/blocks/wc-account-icon/block.json
+msgctxt "block title"
+msgid "WooCommerce Account Icon"
+msgstr ""
+
+#: blocks/wc-account-icon/block.json
+#: build/blocks/wc-account-icon/block.json
+msgctxt "block keyword"
+msgid "account"
+msgstr ""
+
+#: blocks/wc-account-icon/block.json
+#: build/blocks/wc-account-icon/block.json
+msgctxt "block keyword"
+msgid "profile"
+msgstr ""
+
+#: blocks/wc-featured-product/block.json
+#: build/blocks/wc-featured-product/block.json
+msgctxt "block title"
+msgid "WooCommerce Featured Product"
+msgstr ""
+
+#: blocks/wc-featured-product/block.json
+#: build/blocks/wc-featured-product/block.json
+msgctxt "block keyword"
+msgid "featured"
+msgstr ""
+
+#: blocks/wc-featured-product/block.json
+#: build/blocks/wc-featured-product/block.json
+msgctxt "block keyword"
+msgid "product"
+msgstr ""
+
+#: blocks/wc-mini-cart/block.json
+#: build/blocks/wc-mini-cart/block.json
+msgctxt "block title"
+msgid "WooCommerce Mini Cart"
+msgstr ""
+
+#: blocks/wc-mini-cart/block.json
+#: build/blocks/wc-mini-cart/block.json
+msgctxt "block keyword"
+msgid "cart"
+msgstr ""
+
+#: blocks/wc-mini-cart/block.json
+#: build/blocks/wc-mini-cart/block.json
+msgctxt "block keyword"
+msgid "mini cart"
+msgstr ""
+
+#: blocks/_new-block/block.json
+#: build/blocks/_new-block/block.json
+msgctxt "block title"
+msgid "Block-Ons Marketing Button"
+msgstr ""

@@ -44,6 +44,9 @@
 	height: 400px !important;
 	background-color: #f0f0f0;
 }
+.blockons-imgcarousel-wrap.reload-fix .splide__track {
+	visibility: hidden;
+}
 /* -- Image Button -- */
 .blockons-upload-button {
 }
@@ -111,4 +114,15 @@
 }
 .components-button.blockons-colorpicker-btn:hover {
 	box-shadow: 0 0 0 1px #b9b9b9;
+}
+
+/* -- Roundness -- */
+.wp-block-blockons-image-carousel.brad-two .blockons-item-btns {
+	right: 10px;
+}
+.wp-block-blockons-image-carousel.brad-three .blockons-item-btns {
+	right: 50px;
+}
+.wp-block-blockons-image-carousel.brad-four .blockons-item-btns {
+	right: 105px;
 }

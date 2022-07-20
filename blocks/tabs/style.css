@@ -1,0 +1,54 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.wp-block-blockons-tabs .tab-labels {
+	padding-left: 0;
+}
+.wp-block-blockons-tabs .tab-labels .tab-label {
+	cursor: pointer;
+	display: inline-block;
+	list-style: none;
+	margin: 2.5px;
+	padding: 1em 2em 0.5em;
+}
+.wp-block-blockons-tabs .tab-labels .tab-label.active {
+	background-color: #fff;
+}
+.wp-block-blockons-tabs .tab-labels .tab-label.active,
+.wp-block-blockons-tabs .tab-labels .tab-label:focus,
+.wp-block-blockons-tabs .tab-labels .tab-label:hover {
+	border-bottom: 4px solid #f57814;
+}
+.wp-block-blockons-tabs .tab-content .tab-panel {
+	display: none;
+}
+.wp-block-blockons-tabs .tab-content .tab-panel.active {
+	display: block;
+}
+@media only screen and (min-width: 768px) {
+	.wp-block-blockons-tabs.side-tab-layout {
+		display: flex;
+		width: 100%;
+	}
+	.wp-block-blockons-tabs.side-tab-layout .tab-labels {
+		border-right: 1px solid #bababa;
+		display: flex;
+		flex-direction: column;
+	}
+	.wp-block-blockons-tabs.side-tab-layout .tab-content,
+	.wp-block-blockons-tabs.side-tab-layout .tab-content .tab-panel.active {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+	}
+	.wp-block-blockons-tabs.side-tab-layout
+		.tab-content
+		.tab-panel.active
+		.wp-block-cgb-block-page-section {
+		flex: 1;
+	}
+	.wp-block-blockons-tabs.side-tab-layout .tab-content .tab-panel.active > * {
+		padding: 0 2rem;
+	}
+}

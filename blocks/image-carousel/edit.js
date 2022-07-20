@@ -23,7 +23,7 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
-import { slugify, sliderArrowIcons } from "../block-global";
+import { sliderArrowIcons } from "../block-global";
 import { colorPickerPalette } from "../block-global";
 
 const Edit = (props) => {
@@ -47,6 +47,13 @@ const Edit = (props) => {
 			carouselArrowIcon,
 			carouselPagination,
 			carouselPagDesign,
+			imageProportion,
+			carouselBRadius,
+			carouselSidePadding,
+			captionBgColor,
+			captionBgOpacity,
+			captionFontColor,
+			captionFontSize,
 		},
 		setAttributes,
 	} = props;
@@ -55,7 +62,7 @@ const Edit = (props) => {
 	const [initCarouselType, setInitCarouselType] = useState(carouselType);
 
 	const blockProps = useBlockProps({
-		className: `align-${alignment} layout-${carouselLayout} style-${carouselStyle} arrows-${carouselArrowIcon}`,
+		className: `align-${alignment} layout-${carouselLayout} style-${carouselStyle} arrows-${carouselArrowIcon} brad-${carouselBRadius}`,
 	});
 
 	// const sliderType = carouselType === "slide" ? "slide" : carouselType;
@@ -71,7 +78,7 @@ const Edit = (props) => {
 					rewind: true,
 			  }),
 		speed: 1000,
-		// padding: "5rem",
+		padding: carouselSidePadding,
 		...(carouselType !== "fade" && {
 			perPage: carouselNumber,
 			perMove: 1,
@@ -106,24 +113,8 @@ const Edit = (props) => {
 	};
 
 	// Item Controls Functions
-	const handleItemAuthorChange = (itemAuthor, itemId) => {
-		const newSlides = [...slides];
-		// Edit the item text and ID (this prevent the edit from editing all instances if the block is duplicated)
-		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.itemId === itemId)
-				return {
-					...obj,
-					itemId:
-						itemId === ""
-							? Math.floor(Math.random() * 800)
-							: slugify(itemAuthor),
-					itemAuthor: itemAuthor,
-				};
-			return obj;
-		});
-		setAttributes({ slides: editedSlideItems });
-	};
-	const handleMediaUpload = (media, itemId) => {
+	const handleMediaUpload = (media) => {
+		console.log(media);
 		const mediaItems = [...media];
 
 		if (mediaItems.length) {
@@ -162,7 +153,7 @@ const Edit = (props) => {
 			setTimeout(() => {
 				sliderTrackParent.querySelector(".splide__track").style.height =
 					slide.offsetHeight + "px";
-			}, 50);
+			}, 150);
 		}
 	};
 
@@ -173,9 +164,35 @@ const Edit = (props) => {
 		sliderSlideItems = slides.map((slideItem, index) => {
 			return (
 				<SplideSlide>
-					<div className="blockons-imgcarousel-inner">
-						{slideItem.imageUrl && (
-							<img src={slideItem.imageUrl} alt={slideItem.alt} />
+					<div
+						className={`blockons-imgcarousel-inner ${
+							imageProportion === "square" ||
+							imageProportion === "32rectangle" ||
+							imageProportion === "43rectangle" ||
+							imageProportion === "169panoramic"
+								? "imgbg"
+								: ""
+						}`}
+						style={{
+							...(imageProportion === "square" ||
+							imageProportion === "32rectangle" ||
+							imageProportion === "43rectangle" ||
+							imageProportion === "169panoramic"
+								? {
+										background: `url("${slideItem.imageUrl}") center center / cover no-repeat`,
+								  }
+								: ""),
+						}}
+					>
+						{imageProportion === "actual" ? (
+							slideItem.imageUrl && (
+								<img src={slideItem.imageUrl} alt={slideItem.alt} />
+							)
+						) : (
+							<img
+								src={`${siteObj.pluginUrl}assets/images/${imageProportion}.png`}
+								alt={slideItem.alt}
+							/>
 						)}
 					</div>
 					{isSelected && (
@@ -193,7 +210,20 @@ const Edit = (props) => {
 						captionPosition === "four") &&
 						slideItem.imageCaption && (
 							<div className="blockons-imgcaption">
-								<div className="blockons-imgcaption-inner">
+								<div
+									className="blockons-imgcaption-bg"
+									style={{
+										backgroundColor: captionBgColor,
+										opacity: captionBgOpacity,
+									}}
+								></div>
+								<div
+									className="blockons-imgcaption-inner"
+									style={{
+										fontSize: captionFontSize,
+										color: captionFontColor,
+									}}
+								>
 									{slideItem.imageCaption}
 								</div>
 							</div>
@@ -273,7 +303,7 @@ const Edit = (props) => {
 										});
 									}}
 									help={__(
-										"This setting changes a 'read-only' property in the slider options, please 'Save/Update' the post and reload the page to see it work with the new setting.",
+										"This setting changes a 'read-only' property in the slider options, if you change this, you will need to 'Save/Update' the post and reload the page to see it work with the new setting.",
 										"blockons"
 									)}
 								/>
@@ -295,16 +325,6 @@ const Edit = (props) => {
 									/>
 								)}
 
-								{carouselNumber >= 2 && (
-									<RangeControl
-										label={__("Slides Gap", "blockons")}
-										value={carouselGap}
-										onChange={(value) => setAttributes({ carouselGap: value })}
-										min={0}
-										max={80}
-									/>
-								)}
-
 								{carouselType === "slide" && (
 									<ToggleControl
 										label={__("Rewind Carousel", "blockons")}
@@ -316,43 +336,6 @@ const Edit = (props) => {
 										}}
 									/>
 								)}
-
-								<SelectControl
-									label={__("Display Image Caption", "blockons")}
-									value={captionPosition}
-									options={[
-										{
-											label: __("None", "blockons"),
-											value: "one",
-										},
-										{
-											label: __("Bottom Banner", "blockons"),
-											value: "two",
-										},
-										{
-											label: __("Over Image", "blockons"),
-											value: "three",
-										},
-										{
-											label: __("Below Slide", "blockons"),
-											value: "four",
-										},
-									]}
-									onChange={(value) => {
-										setAttributes({
-											captionPosition: value === undefined ? "one" : value,
-										});
-									}}
-								/>
-								{(captionPosition === "two" || captionPosition === "three") && (
-									<ToggleControl
-										label={__("Show Caption only on Hover", "blockons")}
-										checked={captionOnHover}
-										onChange={(value) =>
-											setAttributes({ captionOnHover: value })
-										}
-									/>
-								)}
 							</>
 						)}
 					</PanelBody>
@@ -360,7 +343,132 @@ const Edit = (props) => {
 						title={__("Image Carousel Design", "blockons")}
 						initialOpen={false}
 					>
-						EMPTY
+						<SelectControl
+							label={__("Image Proportions", "blockons")}
+							value={imageProportion}
+							options={[
+								{ label: __("Actual Image", "blockons"), value: "actual" },
+								{ label: __("Square", "blockons"), value: "square" },
+								{
+									label: __("3:2 Rectangle", "blockons"),
+									value: "32rectangle",
+								},
+								{
+									label: __("4:3 Rectangle", "blockons"),
+									value: "43rectangle",
+								},
+								{
+									label: __("16:9 Panoramic", "blockons"),
+									value: "169panoramic",
+								},
+							]}
+							onChange={(value) => {
+								setAttributes({
+									imageProportion: value === undefined ? "actual" : value,
+								});
+							}}
+						/>
+
+						<SelectControl
+							label={__("Border Radius", "blockons")}
+							value={carouselBRadius}
+							options={[
+								{ label: __("square", "blockons"), value: "one" },
+								{ label: __("Rounded", "blockons"), value: "two" },
+								{ label: __("More Round", "blockons"), value: "three" },
+								{ label: __("Very Round", "blockons"), value: "four" },
+							]}
+							onChange={(value) => {
+								setAttributes({
+									carouselBRadius: value === undefined ? "one" : value,
+								});
+							}}
+						/>
+
+						{carouselNumber >= 2 && (
+							<RangeControl
+								label={__("Slides Gap", "blockons")}
+								value={carouselGap}
+								onChange={(value) => setAttributes({ carouselGap: value })}
+								min={0}
+								max={100}
+							/>
+						)}
+
+						{carouselType === "loop" && (
+							<RangeControl
+								label={__("Carousel Side Padding", "blockons")}
+								value={carouselSidePadding}
+								onChange={(value) =>
+									setAttributes({ carouselSidePadding: value })
+								}
+								min={0}
+								max={200}
+							/>
+						)}
+
+						<SelectControl
+							label={__("Display Image Caption", "blockons")}
+							value={captionPosition}
+							options={[
+								{ label: __("None", "blockons"), value: "one" },
+								{ label: __("Bottom Banner", "blockons"), value: "two" },
+								{ label: __("Over Image", "blockons"), value: "three" },
+								{ label: __("Below Slide", "blockons"), value: "four" },
+							]}
+							onChange={(value) => {
+								setAttributes({
+									captionPosition: value === undefined ? "one" : value,
+								});
+							}}
+						/>
+						{(captionPosition === "two" ||
+							captionPosition === "three" ||
+							captionPosition === "four") && (
+							<>
+								<BlockonsColorpicker
+									label={__("Background Color", "blockons")}
+									value={captionBgColor}
+									onChange={(value) => setAttributes({ captionBgColor: value })}
+									paletteColors={colorPickerPalette}
+								/>
+								<RangeControl
+									label={__("Background Opacity", "blockons")}
+									value={captionBgOpacity}
+									onChange={(value) =>
+										setAttributes({ captionBgOpacity: value })
+									}
+									min={0}
+									max={1}
+									step={0.01}
+								/>
+
+								<BlockonsColorpicker
+									label={__("Font Color", "blockons")}
+									value={captionFontColor}
+									onChange={(value) =>
+										setAttributes({ captionFontColor: value })
+									}
+									paletteColors={colorPickerPalette}
+								/>
+								<RangeControl
+									label={__("Font Size", "blockons")}
+									value={captionFontSize}
+									onChange={(value) =>
+										setAttributes({ captionFontSize: value })
+									}
+									min={11}
+									max={18}
+								/>
+							</>
+						)}
+						{(captionPosition === "two" || captionPosition === "three") && (
+							<ToggleControl
+								label={__("Show Caption only on Hover", "blockons")}
+								checked={captionOnHover}
+								onChange={(value) => setAttributes({ captionOnHover: value })}
+							/>
+						)}
 					</PanelBody>
 					<PanelBody
 						title={__("Image Carousel Slider Controls", "blockons")}
@@ -465,11 +573,7 @@ const Edit = (props) => {
 					} ${carouselNumber === 1 ? "carousel-resize" : ""} ${
 						captionOnHover ? "cap-hover" : ""
 					} arrow-style-${arrowStyle} pagination-${carouselPagDesign} caption-${captionPosition} ${
-						needsReload &&
-						(initCarouselType === "slide" || initCarouselType === "loop") &&
-						carouselType === "fade"
-							? "reload-fix"
-							: ""
+						needsReload ? "reload-fix" : ""
 					}`}
 				>
 					{needsReload && (

@@ -74,6 +74,34 @@
 		"carouselPagDesign": {
 			"type": "string",
 			"default": "dots"
+		},
+		"imageProportion": {
+			"type": "string",
+			"default": "actual"
+		},
+		"carouselBRadius": {
+			"type": "string",
+			"default": "one"
+		},
+		"carouselSidePadding": {
+			"type": "number",
+			"default": 0
+		},
+		"captionBgColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"captionBgOpacity": {
+			"type": "number",
+			"default": 0.65
+		},
+		"captionFontColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"captionFontSize": {
+			"type": "number",
+			"default": 13
 		}
 	},
 	"editorScript": "file:./index.js",

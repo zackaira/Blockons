@@ -1,14 +1,23 @@
 <?php
 /**
- * Plugin Name: Icon List Block
+ * Plugin Name: Tabs Block
  * Plugin URI: https://github.com/WordPress/blockons
- * Description: An Icon List Block.
+ * Description: An Tabs Block.
  * Version: 1.1.0
  * Author: Kaira
  *
  * @package blockons
  */
+
 defined( 'ABSPATH' ) || exit;
+
+/**
+ * Load all translations for our plugin from the MO file.
+ */
+function blockons_tabs_load_textdomain() {
+	load_plugin_textdomain( 'blockons', false, basename( __DIR__ ) . '/languages' );
+}
+add_action( 'init', 'blockons_tabs_load_textdomain' );
 
 /**
  * Registers all block assets so that they can be enqueued through Gutenberg in
@@ -16,7 +25,8 @@ defined( 'ABSPATH' ) || exit;
  *
  * Passes translations to JavaScript.
  */
-function blockons_icon_list_register_block() {
+function blockons_tabs_register_block() {
+
 	// Register the block by passing the location of block.json.
 	register_block_type( __DIR__ );
 
@@ -26,8 +36,8 @@ function blockons_icon_list_register_block() {
 		 * plugin_dir_path( MY_PLUGIN ) . 'languages' ) ). For details see
 		 * https://make.wordpress.org/core/2018/11/09/new-javascript-i18n-support-in-wordpress/
 		 */
-		wp_set_script_translations( 'blockons-icon-list-editor-script', 'blockons', BLOCKONS_PLUGIN_DIR . 'lang' );
+		wp_set_script_translations( 'blockons-tabs', 'blockons' );
 	}
 
 }
-add_action( 'init', 'blockons_icon_list_register_block' );
+add_action( 'init', 'blockons_tabs_register_block' );

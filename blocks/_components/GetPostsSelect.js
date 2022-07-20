@@ -1,5 +1,6 @@
 // WordPress dependencies
 import { useState, useEffect } from "@wordpress/element";
+import { __ } from "@wordpress/i18n";
 import axios from "axios";
 import Select from "react-select";
 
@@ -30,8 +31,12 @@ const GetPostsSelect = (props) => {
 				isLoading={loadingProducts}
 				classNamePrefix="blockons-postselect"
 				isMulti={multiple}
-				placeholder={loadingProducts ? "Loading..." : "Select..."}
-				noOptionsMessage={() => "No Products"}
+				placeholder={
+					loadingProducts
+						? __("Loading...", "blockons")
+						: __("Select...", "blockons")
+				}
+				noOptionsMessage={() => __("No Products", "blockons")}
 			/>
 		</div>
 	);
