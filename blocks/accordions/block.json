@@ -1,0 +1,68 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/accordions",
+	"title": "Accordions",
+	"textdomain": "blockons",
+	"icon": "menu",
+	"category": "blockons-category",
+	"keywords": ["accordions", "accordionbed", "content", "inner"],
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"labelTag": {
+			"type": "string",
+			"default": "h4"
+		},
+		"accordionDesign": {
+			"type": "string",
+			"default": "one"
+		},
+		"accordionStyle": {
+			"type": "string",
+			"default": "one"
+		},
+		"itemSpacing": {
+			"type": "number",
+			"default": 12
+		},
+		"itemLabelBgColor": {
+			"type": "string",
+			"default": "#efefef"
+		},
+		"labelFontSize": {
+			"type": "number",
+			"default": 16
+		},
+		"itemLabelFontColor": {
+			"type": "string",
+			"default": "#555"
+		},
+		"labelIconSize": {
+			"type": "number",
+			"default": 20
+		},
+		"itemLabelIconColor": {
+			"type": "string",
+			"default": "#555"
+		},
+		"itemContentBgColor": {
+			"type": "string",
+			"default": "#FFF"
+		}
+	},
+	"providesContext": {
+		"blockons/accordionSpacing": "itemSpacing",
+		"blockons/itemLabelBgColor": "itemLabelBgColor",
+		"blockons/labelFontSize": "labelFontSize",
+		"blockons/itemLabelFontColor": "itemLabelFontColor",
+		"blockons/labelIconSize": "labelIconSize",
+		"blockons/itemLabelIconColor": "itemLabelIconColor",
+		"blockons/itemContentBgColor": "itemContentBgColor"
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"script": "file:./js-accordions.js",
+	"style": ["file:./style-index.css", "blockons-fontawesome"]
+}

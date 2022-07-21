@@ -1,0 +1,76 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.wp-block-blockons-accordions .accordion-label {
+	background-color: #efefef;
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0;
+	padding: 8px 12px;
+	font-size: 16px;
+	letter-spacing: 0.2px;
+	cursor: pointer;
+}
+.wp-block-blockons-accordions .accordion-label .accordion-label-title {
+	margin: 0;
+	padding: 0;
+}
+.wp-block-blockons-accordion .blockons-fontawesome {
+	transform: rotate(0deg);
+	transition: all 0.15s ease-in-out 0s;
+}
+.wp-block-blockons-accordion.selected .blockons-fontawesome {
+	transform: rotate(90deg);
+}
+.wp-block-blockons-accordions .accordion-content {
+	padding: 12px;
+}
+
+@-moz-keyframes spin {
+	100% {
+		-moz-transform: rotate(90deg);
+	}
+}
+@-webkit-keyframes spin {
+	100% {
+		-webkit-transform: rotate(90deg);
+	}
+}
+@keyframes spin {
+	100% {
+		-webkit-transform: rotate(90deg);
+		transform: rotate(90deg);
+	}
+}
+
+/* ---- Design One ---- */
+.wp-block-blockons-accordions.design-one .accordion-label {
+}
+.wp-block-blockons-accordions.design-one .accordion-content {
+}
+
+/* ---- Design Two ---- */
+.wp-block-blockons-accordions.design-two .accordion-label {
+}
+.wp-block-blockons-accordions.design-two .accordion-content {
+}
+
+/* ---- Design Three ---- */
+.wp-block-blockons-accordions.design-three .accordion-label {
+}
+.wp-block-blockons-accordions.design-three .accordion-content {
+}
+
+/* ---- Design Four ---- */
+.wp-block-blockons-accordions.design-four .accordion-label {
+}
+.wp-block-blockons-accordions.design-four .accordion-content {
+}
+
+/* -- SINGLE ACCORDION Styling -- */
+.wp-block-blockons-accordion {
+	margin: 0 0 12px;
+}

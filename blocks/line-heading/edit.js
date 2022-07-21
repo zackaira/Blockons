@@ -12,7 +12,7 @@ import {
 } from "@wordpress/block-editor";
 import { PanelBody, SelectControl, RangeControl } from "@wordpress/components";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
-import { colorPickerPalette } from "../block-global";
+import { elementTags, colorPickerPalette } from "../block-global";
 
 const Edit = (props) => {
 	const {
@@ -55,21 +55,12 @@ const Edit = (props) => {
 						<SelectControl
 							label={__("Heading Tag Element", "blockons")}
 							value={hTag}
-							options={[
-								{ label: "H1", value: "h1" },
-								{ label: "H2", value: "h2" },
-								{ label: "H3", value: "h3" },
-								{ label: "H4", value: "h4" },
-								{ label: "H5", value: "h5" },
-								{ label: "H6", value: "h6" },
-								{ label: "div", value: "div" },
-							]}
+							options={elementTags}
 							onChange={(value) =>
 								setAttributes({
 									hTag: value === undefined ? "h3" : value,
 								})
 							}
-							__nextHasNoMarginBottom
 						/>
 
 						<SelectControl
@@ -84,7 +75,6 @@ const Edit = (props) => {
 									headWidthSet: value === undefined ? "outer" : value,
 								})
 							}
-							__nextHasNoMarginBottom
 						/>
 						{headWidthSet === "outer" && (
 							<RangeControl
@@ -127,7 +117,6 @@ const Edit = (props) => {
 									headVertAlign: value === undefined ? "solid" : value,
 								})
 							}
-							__nextHasNoMarginBottom
 						/>
 					</PanelBody>
 					<PanelBody
@@ -147,7 +136,6 @@ const Edit = (props) => {
 									lineStyle: value === undefined ? "solid" : value,
 								})
 							}
-							__nextHasNoMarginBottom
 						/>
 						<RangeControl
 							label={__("Line Thickness", "blockons")}

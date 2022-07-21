@@ -34,6 +34,19 @@ export const colorPickerPalette = [
 ];
 
 /*
+ * RichText Tags to select for RichText
+ */
+export const elementTags = [
+	{ label: "H1", value: "h1" },
+	{ label: "H2", value: "h2" },
+	{ label: "H3", value: "h3" },
+	{ label: "H4", value: "h4" },
+	{ label: "H5", value: "h5" },
+	{ label: "H6", value: "h6" },
+	{ label: "div", value: "div" },
+];
+
+/*
  * Font Awesome Icons used in Icon List
  */
 export const iconListIcons = {
@@ -156,6 +169,17 @@ export const marketingButtonIcons = {
  * Font Awesome Icons used for slider arrows
  */
 export const sliderArrowIcons = {
+	"arrow-right": "arrow-right",
+	"arrow-right-long": "arrow-right-long",
+	"angle-right": "angle-right",
+	"caret-right": "caret-right",
+	"angles-right": "angles-right",
+};
+
+/*
+ * Font Awesome Icons used for accordions
+ */
+export const accordionArrowIcons = {
 	"arrow-right": "arrow-right",
 	"arrow-right-long": "arrow-right-long",
 	"angle-right": "angle-right",

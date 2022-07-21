@@ -39,15 +39,17 @@ require_once 'classes/class-admin-settings.php';
  * Include Blockons blocks
  */
 // Site Blocks
+require BLOCKONS_PLUGIN_DIR . 'build/blocks/accordions/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/search/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/icon-list/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/line-heading/index.php';
-require BLOCKONS_PLUGIN_DIR . 'build/blocks/tabs/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/image-carousel/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/progress-bars/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/marketing-button/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/testimonials/index.php';
 require BLOCKONS_PLUGIN_DIR . 'build/blocks/video-slider/index.php';
+// require BLOCKONS_PLUGIN_DIR . 'build/blocks/tabs/index.php';
+
 // WooCommerce Blocks
 if ( blockons_is_plugin_active( 'woocommerce.php' ) ) {
 	require BLOCKONS_PLUGIN_DIR . 'build/blocks/wc-account-icon/index.php';
@@ -109,6 +111,9 @@ function blockons_blocks_custom_category($categories, $post) {
 }
 add_filter('block_categories_all', 'blockons_blocks_custom_category', 10, 2);
 
+/**
+ * Function to check if other plugins are active
+ */
 function blockons_is_plugin_active( $plugin_name ) {
 	// Get Active Plugin Setting
 	$active_plugins = (array) get_option('active_plugins', array());
