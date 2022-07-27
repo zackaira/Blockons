@@ -185,6 +185,10 @@ export const accordionArrowIcons = {
 	"angle-right": "angle-right",
 	"caret-right": "caret-right",
 	"angles-right": "angles-right",
+	plus: "plus",
+	minus: "minus",
+	eye: "eye", // eye-slash
+	"circle-plus": "circle-plus",
 };
 
 /*

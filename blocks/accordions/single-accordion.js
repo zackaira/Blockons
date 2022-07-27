@@ -1,16 +1,32 @@
-import { RichText, InnerBlocks, useBlockProps } from "@wordpress/block-editor";
+import {
+	RichText,
+	InnerBlocks,
+	useBlockProps,
+	InspectorControls,
+} from "@wordpress/block-editor";
 import { useContext } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-import { Dropdown, TextControl } from "@wordpress/components";
+import {
+	Dropdown,
+	TextControl,
+	PanelBody,
+	SelectControl,
+	RangeControl,
+} from "@wordpress/components";
 import { subscribe } from "@wordpress/data";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
-import { elementTags, accordionArrowIcons } from "../block-global";
+import BlockonsColorpicker from "../_components/BlockonsColorpicker";
+import {
+	elementTags,
+	accordionArrowIcons,
+	colorPickerPalette,
+} from "../block-global";
 
 // Registering Child Innerblock for the Accordionbed Content block
 registerBlockType("blockons/accordion", {
-	title: __("Accordion"),
+	title: __("Accordion", "blockons"),
 	icon: "welcome-add-page",
 	parent: ["blockons/accordions"],
 	// category: "design",
@@ -23,20 +39,39 @@ registerBlockType("blockons/accordion", {
 			type: "string",
 			default: "arrow-right",
 		},
+		itemSpacing: {
+			type: "number",
+			default: 12,
+		},
+		itemLabelBgColor: {
+			type: "string",
+			default: "#efefef",
+		},
+		labelFontSize: {
+			type: "number",
+			default: 16,
+		},
+		itemLabelFontColor: {
+			type: "string",
+			default: "#555",
+		},
+		labelIconSize: {
+			type: "number",
+			default: 20,
+		},
+		itemLabelIconColor: {
+			type: "string",
+			default: "#555",
+		},
+		itemContentBgColor: {
+			type: "string",
+			default: "#FFF",
+		},
 		// accordionContext: {
 		// 	type: "object",
 		// 	default: {},
 		// },
 	},
-	usesContext: [
-		"blockons/accordionSpacing",
-		"blockons/itemLabelBgColor",
-		"blockons/labelFontSize",
-		"blockons/itemLabelFontColor",
-		"blockons/labelIconSize",
-		"blockons/itemLabelIconColor",
-		"blockons/itemContentBgColor",
-	],
 	/**
 	 *
 	 * Edit function for Child Accordion Block
@@ -46,9 +81,18 @@ registerBlockType("blockons/accordion", {
 		const {
 			isSelected,
 			className,
-			attributes: { accordionLabel, accordionIcon, accordionContext },
+			attributes: {
+				accordionLabel,
+				accordionIcon,
+				itemSpacing,
+				itemLabelBgColor,
+				labelFontSize,
+				itemLabelFontColor,
+				labelIconSize,
+				itemLabelIconColor,
+				itemContentBgColor,
+			},
 			setAttributes,
-			context,
 		} = props;
 
 		const onChangeAccordionLabel = (newAccordionLabel) => {
@@ -57,24 +101,81 @@ registerBlockType("blockons/accordion", {
 		const onChangeAccordionIcon = (newAccordionIcon) => {
 			setAttributes({ accordionIcon: newAccordionIcon });
 		};
-		const onChangeContext = (newContext) => {
-			setAttributes({
-				accordionContext: {
-					labelBgColor: context["blockons/itemLabelBgColor"],
-				},
-			});
-		};
 
 		const DEFAULT = [["core/paragraph", {}]];
 
 		return (
 			<div
 				className={`${className} ${isSelected ? "selected" : ""}`}
-				style={{ marginBottom: context["blockons/accordionSpacing"] }}
+				style={{ marginBottom: itemSpacing }}
 			>
+				{isSelected && (
+					<InspectorControls>
+						<PanelBody
+							title={__("Accordions Design", "blockons")}
+							initialOpen={false}
+						>
+							<p>{__("Accordion Spacing", "blockons")}</p>
+							<RangeControl
+								value={itemSpacing}
+								onChange={(value) => setAttributes({ itemSpacing: value })}
+								min={0}
+								max={100}
+							/>
+
+							<h4>{__("Accordion Labels", "blockons")}</h4>
+							<BlockonsColorpicker
+								label={__("Background Color", "blockons")}
+								value={itemLabelBgColor}
+								onChange={(value) => setAttributes({ itemLabelBgColor: value })}
+								paletteColors={colorPickerPalette}
+							/>
+							<p>{__("Font Size", "blockons")}</p>
+							<RangeControl
+								value={labelFontSize}
+								onChange={(value) => setAttributes({ labelFontSize: value })}
+								min={11}
+								max={44}
+							/>
+							<BlockonsColorpicker
+								label={__("Font Color", "blockons")}
+								value={itemLabelFontColor}
+								onChange={(value) =>
+									setAttributes({ itemLabelFontColor: value })
+								}
+								paletteColors={colorPickerPalette}
+							/>
+							<p>{__("Icon Size", "blockons")}</p>
+							<RangeControl
+								value={labelIconSize}
+								onChange={(value) => setAttributes({ labelIconSize: value })}
+								min={11}
+								max={44}
+							/>
+							<BlockonsColorpicker
+								label={__("Font Color", "blockons")}
+								value={itemLabelIconColor}
+								onChange={(value) =>
+									setAttributes({ itemLabelIconColor: value })
+								}
+								paletteColors={colorPickerPalette}
+							/>
+
+							<h4>{__("Accordion Content", "blockons")}</h4>
+							<BlockonsColorpicker
+								label={__("Background Color", "blockons")}
+								value={itemContentBgColor}
+								onChange={(value) =>
+									setAttributes({ itemContentBgColor: value })
+								}
+								paletteColors={colorPickerPalette}
+							/>
+						</PanelBody>
+					</InspectorControls>
+				)}
 				<div
 					className={"accordion-label"}
-					style={{ backgroundColor: context["blockons/itemLabelBgColor"] }}
+					style={{ backgroundColor: itemLabelBgColor }}
 				>
 					<RichText
 						tagName="p"
@@ -84,8 +185,8 @@ registerBlockType("blockons/accordion", {
 						className="accordion-label_input"
 						onChange={onChangeAccordionLabel}
 						style={{
-							fontSize: context["blockons/labelFontSize"],
-							color: context["blockons/itemLabelFontColor"],
+							fontSize: labelFontSize,
+							color: itemLabelFontColor,
 						}}
 					/>
 
@@ -96,10 +197,10 @@ registerBlockType("blockons/accordion", {
 						renderToggle={({ isOpen, onToggle }) => (
 							<FontAwesomeIcon
 								icon={accordionIcon}
-								iconSize={context["blockons/labelIconSize"]}
+								iconSize={labelIconSize}
 								onClick={onToggle}
 								style={{
-									color: context["blockons/itemLabelIconColor"],
+									color: itemLabelIconColor,
 								}}
 							/>
 						)}
@@ -116,10 +217,8 @@ registerBlockType("blockons/accordion", {
 				</div>
 				<div
 					className={`accordion-content`}
-					style={{ backgroundColor: context["blockons/itemContentBgColor"] }}
+					style={{ backgroundColor: itemContentBgColor }}
 				>
-					<TextControl value={accordionContext} onChange={onChangeContext} />
-
 					<InnerBlocks template={DEFAULT} />
 				</div>
 			</div>

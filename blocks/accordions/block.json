@@ -22,44 +22,7 @@
 		"accordionStyle": {
 			"type": "string",
 			"default": "one"
-		},
-		"itemSpacing": {
-			"type": "number",
-			"default": 12
-		},
-		"itemLabelBgColor": {
-			"type": "string",
-			"default": "#efefef"
-		},
-		"labelFontSize": {
-			"type": "number",
-			"default": 16
-		},
-		"itemLabelFontColor": {
-			"type": "string",
-			"default": "#555"
-		},
-		"labelIconSize": {
-			"type": "number",
-			"default": 20
-		},
-		"itemLabelIconColor": {
-			"type": "string",
-			"default": "#555"
-		},
-		"itemContentBgColor": {
-			"type": "string",
-			"default": "#FFF"
 		}
-	},
-	"providesContext": {
-		"blockons/accordionSpacing": "itemSpacing",
-		"blockons/itemLabelBgColor": "itemLabelBgColor",
-		"blockons/labelFontSize": "labelFontSize",
-		"blockons/itemLabelFontColor": "itemLabelFontColor",
-		"blockons/labelIconSize": "labelIconSize",
-		"blockons/itemLabelIconColor": "itemLabelIconColor",
-		"blockons/itemContentBgColor": "itemContentBgColor"
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
