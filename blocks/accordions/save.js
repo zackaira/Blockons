@@ -10,7 +10,7 @@ const Save = ({ attributes }) => {
 
 	return (
 		<div {...blockProps}>
-			<div className="accordion-content">
+			<div className="accordions-wrap">
 				<InnerBlocks.Content />
 			</div>
 		</div>

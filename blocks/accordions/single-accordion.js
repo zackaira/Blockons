@@ -67,10 +67,6 @@ registerBlockType("blockons/accordion", {
 			type: "string",
 			default: "#FFF",
 		},
-		// accordionContext: {
-		// 	type: "object",
-		// 	default: {},
-		// },
 	},
 	/**
 	 *
@@ -219,7 +215,9 @@ registerBlockType("blockons/accordion", {
 					className={`accordion-content`}
 					style={{ backgroundColor: itemContentBgColor }}
 				>
-					<InnerBlocks template={DEFAULT} />
+					<div className={`accordion-content-inner`}>
+						<InnerBlocks template={DEFAULT} />
+					</div>
 				</div>
 			</div>
 		);
@@ -265,7 +263,9 @@ registerBlockType("blockons/accordion", {
 					className={`accordion-content`}
 					style={{ backgroundColor: props.attributes.itemContentBgColor }}
 				>
-					<InnerBlocks.Content />
+					<div className={`accordion-content-inner`}>
+						<InnerBlocks.Content />
+					</div>
 				</div>
 			</div>
 		);
