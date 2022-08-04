@@ -4,13 +4,13 @@ import {
 	useBlockProps,
 	InspectorControls,
 } from "@wordpress/block-editor";
-import { useContext } from "@wordpress/element";
-import { useSelect } from "@wordpress/data";
+import { useState } from "@wordpress/element";
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 import {
 	Dropdown,
 	TextControl,
+	ToggleControl,
 	PanelBody,
 	SelectControl,
 	RangeControl,
@@ -31,6 +31,10 @@ registerBlockType("blockons/accordion", {
 	parent: ["blockons/accordions"],
 	// category: "design",
 	attributes: {
+		stayOpen: {
+			type: "boolean",
+			default: false,
+		},
 		accordionLabel: {
 			type: "string",
 			default: "",
@@ -97,18 +101,41 @@ registerBlockType("blockons/accordion", {
 		const onChangeAccordionIcon = (newAccordionIcon) => {
 			setAttributes({ accordionIcon: newAccordionIcon });
 		};
+		const [stayOpen, setStayOpen] = useState(false);
 
 		const DEFAULT = [["core/paragraph", {}]];
 
 		return (
 			<div
-				className={`${className} ${isSelected ? "selected" : ""}`}
+				className={`${className} ${isSelected || stayOpen ? "selected" : ""} ${
+					accordionIcon === "plus" ||
+					accordionIcon === "eye" ||
+					accordionIcon === "circle-plus"
+						? "change " + accordionIcon
+						: "rotate"
+				}`}
 				style={{ marginBottom: itemSpacing }}
 			>
 				{isSelected && (
 					<InspectorControls>
 						<PanelBody
-							title={__("Accordions Design", "blockons")}
+							title={__("Accordion Settings", "blockons")}
+							initialOpen={true}
+						>
+							<ToggleControl // This setting is just for displaying the drop down, value is not saved.
+								label={__("Stay Open", "blockons")}
+								checked={stayOpen}
+								help={__(
+									"Expand this panel on initial page load. Also Use this to keep the panel open while editing.",
+									"blockons"
+								)}
+								onChange={() => {
+									setStayOpen((state) => !state);
+								}}
+							/>
+						</PanelBody>
+						<PanelBody
+							title={__("Accordion Design", "blockons")}
 							initialOpen={false}
 						>
 							<p>{__("Accordion Spacing", "blockons")}</p>
@@ -229,7 +256,13 @@ registerBlockType("blockons/accordion", {
 	 */
 	save: (props) => {
 		const blockProps = useBlockProps.save({
-			className: `accordion-panel`,
+			className: `accordion-panel ${
+				props.attributes.accordionIcon === "plus" ||
+				props.attributes.accordionIcon === "eye" ||
+				props.attributes.accordionIcon === "circle-plus"
+					? "change " + props.attributes.accordionIcon
+					: "rotate"
+			}`, // ${stayOpen ? "active" : ""}
 			style: { marginBottom: 12 },
 		});
 

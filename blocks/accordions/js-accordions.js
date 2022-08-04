@@ -2,8 +2,7 @@
  * Functionality to show/hide the Blockons Accordions
  */
 document.addEventListener("DOMContentLoaded", () => {
-	console.log("accordions js loaded");
-
+	console.log("Here");
 	const accordionBlocks = document.querySelectorAll(
 		".wp-block-blockons-accordions"
 	);

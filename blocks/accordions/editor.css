@@ -20,16 +20,20 @@
 	padding: 0;
 }
 .block-editor-block-list__block .accordion-content {
-	display: none !important;
+	/* display: none !important; */
 	max-height: initial !important;
+}
+.wp-block-blockons-accordion .accordion-content {
+	display: none;
 }
 .wp-block-blockons-accordions
 	.block-editor-block-list__block.is-selected
 	.accordion-content,
 .wp-block-blockons-accordions
 	.block-editor-block-list__block.has-child-selected
-	.accordion-content {
-	display: block !important;
+	.accordion-content,
+.wp-block-blockons-accordion.selected .accordion-content {
+	display: block;
 }
 /* -- Appender Button -- */
 .wp-block-blockons-accordions.wp-block
@@ -48,6 +52,14 @@
 	.block-editor-button-block-appender {
 	border-radius: 4px;
 	padding: 10px;
+}
+
+/* -- Fix small black Appender Button position in Inner blocks -- */
+.block-editor-inner-blocks
+	.block-editor-block-list__block
+	.block-list-appender.block-list-appender {
+	position: relative;
+	margin: 20px 0 0;
 }
 
 /* -- Child Block Selected -- */

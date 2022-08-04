@@ -33,6 +33,9 @@ Our Line heading block is similar to the original heading block, but if offers a
 &#9989; **Icon List** block
 Use better lists items to display on your website, a fully customizable list with your own icons simply makes your lists better to look at and is sure to be more attractive to the viewers eye.
 
+&#9989; **Accordion(s)** block
+Display content in a show/hide accordion style block... This is good for displaying lots of content in an expandable section or displaying Frequently Asked Questions (FAQ's) where your users can select the content they want to see.
+
 &#9989; **Marketing Button** block
 Basically an advanced button block. The marketing button lets you add a stand out CTA button with an icon, heading and text to addtract your users to click.
 
@@ -49,10 +52,10 @@ Neatly display you Youtube, Vimeo or custom Videos in a powerful video carousel.
 Add a simple icon to your header or footer to let users quickly access their account or login to your website. Select from different account icons and change the colors as you like.
 
 &#9989; **WooCommerce Mini Cart** block
-Add a customizable WooCommerce cart to your site header or footer, with an optional drop down basket so your users can edit their cart, or simply Go to Cart and checkout to complete their purchase. 
+Add a customizable WooCommerce cart to your site header or footer, or anywhere you like, with an optional drop down basket so your users can edit their cart, or simply Go to Cart and Checkout to complete their purchase. 
 
 &#9989; **Featured Product** WooCommerce block
-Some extra text here to explain the block we've just mentioned above... So get explaining.
+Add a product standout/featured block for a selected product, with multiple display and design settings, bring attention to a product for your viewers to see.
 
 
 &#128312; Don't have the block you need? We're going to be working on adding lots more blocks... Send us some ideas and maybe we can add on the blocks you need next!

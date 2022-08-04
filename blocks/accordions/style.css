@@ -18,11 +18,16 @@
 	margin: 0;
 	padding: 0;
 }
-.wp-block-blockons-accordion .blockons-fontawesome {
+.wp-block-blockons-accordion.rotate .blockons-fontawesome {
 	transform: rotate(0deg);
 	transition: all 0.15s ease-in-out 0s;
 }
-.wp-block-blockons-accordion.selected .blockons-fontawesome {
+.wp-block-blockons-accordion.selected.rotate
+	.accordion-label
+	.blockons-fontawesome,
+.wp-block-blockons-accordion.active.rotate
+	.accordion-label
+	.blockons-fontawesome {
 	transform: rotate(90deg);
 }
 .wp-block-blockons-accordion .accordion-content {
@@ -32,6 +37,32 @@
 }
 .wp-block-blockons-accordion .accordion-content-inner {
 	padding: 12px;
+}
+
+/* -- Icon Changes for plus, eye and circle-plus -- */
+.wp-block-blockons-accordion.selected.change.plus
+	.accordion-label
+	.blockons-fontawesome::before,
+.wp-block-blockons-accordion.active.change.plus
+	.accordion-label
+	.blockons-fontawesome::before {
+	content: "\f068";
+}
+.wp-block-blockons-accordion.selected.change.eye
+	.accordion-label
+	.blockons-fontawesome::before,
+.wp-block-blockons-accordion.active.change.eye
+	.accordion-label
+	.blockons-fontawesome::before {
+	content: "\f070";
+}
+.wp-block-blockons-accordion.selected.change.circle-plus
+	.accordion-label
+	.blockons-fontawesome::before,
+.wp-block-blockons-accordion.active.change.circle-plus
+	.accordion-label
+	.blockons-fontawesome::before {
+	content: "\f056";
 }
 
 @-moz-keyframes spin {

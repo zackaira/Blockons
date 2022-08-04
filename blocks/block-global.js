@@ -186,8 +186,7 @@ export const accordionArrowIcons = {
 	"caret-right": "caret-right",
 	"angles-right": "angles-right",
 	plus: "plus",
-	minus: "minus",
-	eye: "eye", // eye-slash
+	eye: "eye",
 	"circle-plus": "circle-plus",
 };
 
