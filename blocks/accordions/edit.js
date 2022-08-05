@@ -1,39 +1,28 @@
 /**
  * WordPress dependencies
  */
-import { useState } from "@wordpress/element";
-import { useSelect } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
 import {
 	InnerBlocks,
-	AlignmentToolbar,
-	BlockControls,
 	InspectorControls,
 	useBlockProps,
 } from "@wordpress/block-editor";
-import {
-	PanelBody,
-	ToggleControl,
-	TextControl,
-	SelectControl,
-	RangeControl,
-	ColorPalette,
-} from "@wordpress/components";
-import BlockonsColorpicker from "../_components/BlockonsColorpicker";
-import { elementTags, colorPickerPalette } from "../block-global";
+import { PanelBody, ToggleControl, SelectControl } from "@wordpress/components";
 
 const ALLOWED_BLOCKS = ["blockons/accordion"];
 
 const Edit = (props) => {
 	const {
 		isSelected,
-		attributes: { labelTag, accordionDesign, closeAll },
+		attributes: { accordionDesign, iconFirst, closeAll, centeredLabel },
 		setAttributes,
 	} = props;
 
 	// Block Props
 	const blockProps = useBlockProps({
-		className: `design-${accordionDesign} ${closeAll ? "close-all" : ""}`,
+		className: `design-${accordionDesign} ${closeAll ? "close-all" : ""} ${
+			iconFirst ? "icon-first" : ""
+		} ${centeredLabel ? "centered" : ""}`,
 	});
 
 	return (
@@ -45,28 +34,34 @@ const Edit = (props) => {
 						initialOpen={true}
 					>
 						<SelectControl
-							label={__("Label Element", "blockons")}
-							value={labelTag}
-							options={elementTags}
-							onChange={(value) =>
-								setAttributes({
-									labelTag: value === undefined ? "h4" : value,
-								})
-							}
-						/>
-						<SelectControl
 							label={__("Accordion Design", "blockons")}
 							value={accordionDesign}
 							options={[
-								{ label: __("One", "blockons"), value: "one" },
-								{ label: __("Two", "blockons"), value: "two" },
-								{ label: __("Three", "blockons"), value: "three" },
-								{ label: __("Four", "blockons"), value: "four" },
+								{ label: __("Plain", "blockons"), value: "one" },
+								{ label: __("Underlined", "blockons"), value: "two" },
+								{ label: __("Outlined", "blockons"), value: "three" },
+								{ label: __("Side Line", "blockons"), value: "four" },
 							]}
 							onChange={(value) => {
 								setAttributes({
 									accordionDesign: value === undefined ? "one" : value,
 								});
+							}}
+						/>
+
+						<ToggleControl
+							label={__("Icon First", "blockons")}
+							checked={iconFirst}
+							onChange={(newValue) => {
+								setAttributes({ iconFirst: newValue });
+							}}
+						/>
+
+						<ToggleControl
+							label={__("Centered Label", "blockons")}
+							checked={centeredLabel}
+							onChange={(newValue) => {
+								setAttributes({ centeredLabel: newValue });
 							}}
 						/>
 

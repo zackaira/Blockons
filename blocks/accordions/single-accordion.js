@@ -31,6 +31,10 @@ registerBlockType("blockons/accordion", {
 	parent: ["blockons/accordions"],
 	// category: "design",
 	attributes: {
+		labelTag: {
+			type: "string",
+			default: "h4",
+		},
 		stayOpen: {
 			type: "boolean",
 			default: false,
@@ -82,6 +86,7 @@ registerBlockType("blockons/accordion", {
 			isSelected,
 			className,
 			attributes: {
+				labelTag,
 				stayOpen,
 				accordionLabel,
 				accordionIcon,
@@ -122,6 +127,17 @@ registerBlockType("blockons/accordion", {
 							title={__("Accordion Settings", "blockons")}
 							initialOpen={true}
 						>
+							<SelectControl
+								label={__("Label Element", "blockons")}
+								value={labelTag}
+								options={elementTags}
+								onChange={(value) =>
+									setAttributes({
+										labelTag: value === undefined ? "h4" : value,
+									})
+								}
+							/>
+
 							<ToggleControl
 								label={__("Stay Open", "blockons")}
 								checked={stayOpen}
@@ -205,7 +221,7 @@ registerBlockType("blockons/accordion", {
 						placeholder={__("Accordion Label", "blockons")}
 						value={accordionLabel}
 						multiline={false}
-						className="accordion-label_input"
+						className="accordion-label-title"
 						onChange={onChangeAccordionLabel}
 						style={{
 							fontSize: labelFontSize,
@@ -213,30 +229,32 @@ registerBlockType("blockons/accordion", {
 						}}
 					/>
 
-					<Dropdown
-						className="blockons-icon-selecter"
-						contentClassName="blockons-editor-popup"
-						position="bottom right"
-						renderToggle={({ isOpen, onToggle }) => (
-							<FontAwesomeIcon
-								icon={accordionIcon}
-								iconSize={labelIconSize}
-								onClick={onToggle}
-								style={{
-									color: itemLabelIconColor,
-								}}
-							/>
-						)}
-						renderContent={() =>
-							Object.keys(accordionArrowIcons).map((icon) => (
+					<div className="accordion-icon">
+						<Dropdown
+							className="blockons-icon-selecter"
+							contentClassName="blockons-editor-popup"
+							position="bottom right"
+							renderToggle={({ isOpen, onToggle }) => (
 								<FontAwesomeIcon
-									icon={icon}
-									iconSize={20}
-									onClick={() => onChangeAccordionIcon(icon)}
+									icon={accordionIcon}
+									iconSize={labelIconSize}
+									onClick={onToggle}
+									style={{
+										color: itemLabelIconColor,
+									}}
 								/>
-							))
-						}
-					/>
+							)}
+							renderContent={() =>
+								Object.keys(accordionArrowIcons).map((icon) => (
+									<FontAwesomeIcon
+										icon={icon}
+										iconSize={20}
+										onClick={() => onChangeAccordionIcon(icon)}
+									/>
+								))
+							}
+						/>
+					</div>
 				</div>
 				<div
 					className={`accordion-content`}
@@ -275,7 +293,7 @@ registerBlockType("blockons/accordion", {
 					}}
 				>
 					<RichText.Content
-						tagName="p"
+						tagName={attributes.labelTag}
 						value={attributes.accordionLabel}
 						className="accordion-label-title"
 						style={{
@@ -284,13 +302,15 @@ registerBlockType("blockons/accordion", {
 						}}
 					/>
 
-					<FontAwesomeIcon
-						icon={attributes.accordionIcon}
-						iconSize={attributes.labelIconSize}
-						style={{
-							color: attributes.itemLabelIconColor,
-						}}
-					/>
+					<div className="accordion-icon">
+						<FontAwesomeIcon
+							icon={attributes.accordionIcon}
+							iconSize={attributes.labelIconSize}
+							style={{
+								color: attributes.itemLabelIconColor,
+							}}
+						/>
+					</div>
 				</div>
 				<div
 					className={`accordion-content`}

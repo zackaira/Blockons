@@ -19,7 +19,15 @@
 			"type": "string",
 			"default": "one"
 		},
+		"iconFirst": {
+			"type": "boolean",
+			"default": false
+		},
 		"closeAll": {
+			"type": "boolean",
+			"default": false
+		},
+		"centeredLabel": {
 			"type": "boolean",
 			"default": false
 		}
