@@ -82,6 +82,7 @@ registerBlockType("blockons/accordion", {
 			isSelected,
 			className,
 			attributes: {
+				stayOpen,
 				accordionLabel,
 				accordionIcon,
 				itemSpacing,
@@ -101,7 +102,6 @@ registerBlockType("blockons/accordion", {
 		const onChangeAccordionIcon = (newAccordionIcon) => {
 			setAttributes({ accordionIcon: newAccordionIcon });
 		};
-		const [stayOpen, setStayOpen] = useState(false);
 
 		const DEFAULT = [["core/paragraph", {}]];
 
@@ -122,15 +122,15 @@ registerBlockType("blockons/accordion", {
 							title={__("Accordion Settings", "blockons")}
 							initialOpen={true}
 						>
-							<ToggleControl // This setting is just for displaying the drop down, value is not saved.
+							<ToggleControl
 								label={__("Stay Open", "blockons")}
 								checked={stayOpen}
 								help={__(
 									"Expand this panel on initial page load. Also Use this to keep the panel open while editing.",
 									"blockons"
 								)}
-								onChange={() => {
-									setStayOpen((state) => !state);
+								onChange={(newValue) => {
+									setAttributes({ stayOpen: newValue });
 								}}
 							/>
 						</PanelBody>
@@ -254,16 +254,16 @@ registerBlockType("blockons/accordion", {
 	 * Save function for Child Accordion Block
 	 *
 	 */
-	save: (props) => {
+	save: ({ attributes }) => {
 		const blockProps = useBlockProps.save({
-			className: `accordion-panel ${
-				props.attributes.accordionIcon === "plus" ||
-				props.attributes.accordionIcon === "eye" ||
-				props.attributes.accordionIcon === "circle-plus"
-					? "change " + props.attributes.accordionIcon
+			className: `accordion-panel ${attributes.stayOpen ? "active" : ""} ${
+				attributes.accordionIcon === "plus" ||
+				attributes.accordionIcon === "eye" ||
+				attributes.accordionIcon === "circle-plus"
+					? "change " + attributes.accordionIcon
 					: "rotate"
-			}`, // ${stayOpen ? "active" : ""}
-			style: { marginBottom: 12 },
+			}`,
+			style: { marginBottom: attributes.itemSpacing },
 		});
 
 		return (
@@ -271,30 +271,35 @@ registerBlockType("blockons/accordion", {
 				<div
 					className={"accordion-label"}
 					style={{
-						backgroundColor: "#999",
+						backgroundColor: attributes.itemLabelBgColor,
 					}}
 				>
 					<RichText.Content
 						tagName="p"
-						value={props.attributes.accordionLabel}
+						value={attributes.accordionLabel}
 						className="accordion-label-title"
 						style={{
-							fontSize: props.attributes.labelFontSize,
-							color: props.attributes.itemLabelFontColor,
+							fontSize: attributes.labelFontSize,
+							color: attributes.itemLabelFontColor,
 						}}
 					/>
 
 					<FontAwesomeIcon
-						icon={props.attributes.accordionIcon}
-						iconSize={props.attributes.labelIconSize}
+						icon={attributes.accordionIcon}
+						iconSize={attributes.labelIconSize}
 						style={{
-							color: props.attributes.itemLabelIconColor,
+							color: attributes.itemLabelIconColor,
 						}}
 					/>
 				</div>
 				<div
 					className={`accordion-content`}
-					style={{ backgroundColor: props.attributes.itemContentBgColor }}
+					style={{
+						backgroundColor: attributes.itemContentBgColor,
+						...(attributes.stayOpen
+							? { maxHeight: "initial" } // FIX THIS NOT ANIMATING PROPERLY
+							: { maxHeight: null }),
+					}}
 				>
 					<div className={`accordion-content-inner`}>
 						<InnerBlocks.Content />

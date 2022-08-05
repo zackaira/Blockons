@@ -38,6 +38,9 @@
 .wp-block-blockons-accordion .accordion-content-inner {
 	padding: 12px;
 }
+.accordion-content {
+	transition: max-height 0.25s ease-in-out 0s;
+}
 
 /* -- Icon Changes for plus, eye and circle-plus -- */
 .wp-block-blockons-accordion.selected.change.plus

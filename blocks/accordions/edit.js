@@ -27,13 +27,13 @@ const ALLOWED_BLOCKS = ["blockons/accordion"];
 const Edit = (props) => {
 	const {
 		isSelected,
-		attributes: { labelTag, accordionDesign, accordionStyle },
+		attributes: { labelTag, accordionDesign, closeAll },
 		setAttributes,
 	} = props;
 
 	// Block Props
 	const blockProps = useBlockProps({
-		className: `design-${accordionDesign} style-${accordionStyle}`,
+		className: `design-${accordionDesign} ${closeAll ? "close-all" : ""}`,
 	});
 
 	return (
@@ -69,37 +69,28 @@ const Edit = (props) => {
 								});
 							}}
 						/>
-						<SelectControl
-							label={__("Accordion Style", "blockons")}
-							value={accordionStyle}
-							options={[
-								{
-									label: __("Open Each Accordion Separately", "blockons"),
-									value: "one",
-								},
-								{
-									label: __("Open Accordion, Close Others", "blockons"),
-									value: "two",
-								},
-							]}
-							onChange={(value) => {
-								setAttributes({
-									accordionStyle: value === undefined ? "one" : value,
-								});
-							}}
+
+						<ToggleControl
+							label={__("Only 1 Accordion open at a time", "blockons")}
+							checked={closeAll}
 							help={__(
-								"This will animate nicely on the front-end. For loading and functionlaity, it does not animate in the back-end editor.",
+								"Close all other accordions when one is clicked open. This will only work on the front-end and not in the editor.",
 								"blockons"
 							)}
+							onChange={(newValue) => {
+								setAttributes({ closeAll: newValue });
+							}}
 						/>
 					</PanelBody>
 				</InspectorControls>
 			)}
 
-			<InnerBlocks
-				allowedBlocks={ALLOWED_BLOCKS}
-				renderAppender={InnerBlocks.ButtonBlockAppender}
-			/>
+			<div className="accordions-wrap">
+				<InnerBlocks
+					allowedBlocks={ALLOWED_BLOCKS}
+					renderAppender={InnerBlocks.ButtonBlockAppender}
+				/>
+			</div>
 		</div>
 	);
 };

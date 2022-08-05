@@ -382,14 +382,16 @@ const Edit = (props) => {
 							min={10}
 							max={64}
 						/>
-						<ColorPalette
+						<BlockonsColorpicker
+							label={__("Font Color", "blockons")}
 							value={listItemFontColor}
 							onChange={(newColor) => {
 								setAttributes({ listItemFontColor: newColor });
 							}}
+							paletteColors={colorPickerPalette}
 						/>
 						<RangeControl
-							label={__("Icon Size & Color", "blockons")}
+							label={__("Icon Size", "blockons")}
 							value={listItemIconSize}
 							onChange={(newFontSize) => {
 								setAttributes({ listItemIconSize: newFontSize });
@@ -397,11 +399,13 @@ const Edit = (props) => {
 							min={10}
 							max={98}
 						/>
-						<ColorPalette
+						<BlockonsColorpicker
+							label={__("Icon Color", "blockons")}
 							value={listItemIconColor}
 							onChange={(newColor) => {
 								setAttributes({ listItemIconColor: newColor });
 							}}
+							paletteColors={colorPickerPalette}
 						/>
 					</PanelBody>
 				</InspectorControls>

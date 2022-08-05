@@ -19,9 +19,9 @@
 			"type": "string",
 			"default": "one"
 		},
-		"accordionStyle": {
-			"type": "string",
-			"default": "one"
+		"closeAll": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"editorScript": "file:./index.js",
