@@ -21,8 +21,9 @@
 	margin: 0;
 	padding: 0;
 }
-.wp-block-blockons-accordions .accordion-label .accordion-icon {
-}
+/* .wp-block-blockons-accordions .accordion-label .accordion-icon {
+
+} */
 .wp-block-blockons-accordion.rotate .blockons-fontawesome {
 	transform: rotate(0deg);
 	transition: all 0.15s ease-in-out 0s;
@@ -90,18 +91,10 @@
 	}
 }
 
-/* ---- Design One ---- */
-.wp-block-blockons-accordions.design-one .accordion-label {
-}
-.wp-block-blockons-accordions.design-one .accordion-content {
-}
-
 /* ---- Design Two ---- */
 .wp-block-blockons-accordions.design-two .accordion-label {
 	border-radius: 0;
 	box-shadow: inset 0 -2px 0 rgb(0 0 0 / 35%);
-}
-.wp-block-blockons-accordions.design-two .accordion-content {
 }
 
 /* ---- Design Three ---- */
@@ -109,16 +102,12 @@
 	border-radius: 3px;
 	box-shadow: 0 0 2px rgb(0 0 0 / 75%);
 }
-.wp-block-blockons-accordions.design-three .accordion-content {
-}
 
 /* ---- Design Four ---- */
 .wp-block-blockons-accordions.design-four .accordion-label {
 	border-radius: 0;
 	box-shadow: inset 4px 0 rgb(0 0 0 / 35%);
 	padding-left: 16px;
-}
-.wp-block-blockons-accordions.design-four .accordion-content {
 }
 
 /* ---- Icon First ---- */
