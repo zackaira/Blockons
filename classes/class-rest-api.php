@@ -4,63 +4,66 @@
  */
 class Blockons_WC_Rest_Routes {
 	public function __construct() {
-		add_action('rest_api_init', [$this, 'blockons_wc_create_rest_routes']);
+		add_action('rest_api_init', [$this, 'blockons_create_rest_routes']);
 	}
 
 	/*
 	 * Create REST API routes for get & save
 	 */
-	public function blockons_wc_create_rest_routes() {
-		// register_rest_route('blcns/v1', '/settings', [
-		// 	'methods' => 'GET',
-		// 	'callback' => [$this, 'blockons_wc_get_settings'],
-		// 	'permission_callback' => [$this, 'blockons_wc_get_settings_permission'],
-		// ]);
-		// register_rest_route('blcns/v1', '/settings', [
-		// 	'methods' => 'POST',
-		// 	'callback' => [$this, 'blockons_wc_save_settings'],
-		// 	'permission_callback' => [$this, 'blockons_wc_save_settings_permission'],
-		// ]);
-		// register_rest_route('blcns/v1', '/delete', [
-		// 	'methods' => 'DELETE',
-		// 	'callback' => [$this, 'blockons_wc_delete_settings'],
-		// 	'permission_callback' => [$this, 'blockons_wc_save_settings_permission'],
-		// ]);
-		register_rest_route( 'blcns/v1', '/products', [
+	public function blockons_create_rest_routes() {
+		register_rest_route('blcns/v1', '/settings', [
 			'methods' => 'GET',
-			'callback' => [$this, 'blockons_wc_get_products'],
-			'permission_callback' => [$this, 'blockons_wc_get_settings_permission'],
+			'callback' => [$this, 'blockons_get_settings'],
+			'permission_callback' => [$this, 'blockons_get_settings_permission'],
 		]);
-		register_rest_route( 'blcns/v1', '/product/(?P<id>\d+)', [
-			'methods' => 'GET',
-			'callback' => [$this, 'blockons_wc_get_product_by_id'],
-			'permission_callback' => [$this, 'blockons_wc_get_settings_permission'],
+		register_rest_route('blcns/v1', '/settings', [
+			'methods' => 'POST',
+			'callback' => [$this, 'blockons_save_settings'],
+			'permission_callback' => [$this, 'blockons_save_settings_permission'],
 		]);
+		register_rest_route('blcns/v1', '/delete', [
+			'methods' => 'DELETE',
+			'callback' => [$this, 'blockons_delete_settings'],
+			'permission_callback' => [$this, 'blockons_save_settings_permission'],
+		]);
+		
+		if ( (new Blockons_Admin)->blockons_is_plugin_active( 'woocommerce.php' ) ) {
+			register_rest_route( 'blcns/v1', '/products', [
+				'methods' => 'GET',
+				'callback' => [$this, 'blockons_get_wc_products'],
+				'permission_callback' => [$this, 'blockons_get_settings_permission'],
+			]);
+			register_rest_route( 'blcns/v1', '/product/(?P<id>\d+)', [
+				'methods' => 'GET',
+				'callback' => [$this, 'blockons_get_wc_product_by_id'],
+				'permission_callback' => [$this, 'blockons_get_settings_permission'],
+			]);
+		}
 	}
 
 	/*
 	 * Get saved options from database
 	 */
-	public function blockons_wc_get_settings() {
-		$wascPluginOptions = get_option('blockons_options');
+	public function blockons_get_settings() {
+		$blockonsPluginOptions = get_option('blockons_options');
 
-		if (!$wascPluginOptions)
+		if (!$blockonsPluginOptions)
 			return;
 
-		return rest_ensure_response($wascPluginOptions);
+		return rest_ensure_response($blockonsPluginOptions);
 	}
 
 	/*
 	 * Allow permissions for get options
 	 */
-	public function blockons_wc_get_settings_permission() {
+	public function blockons_get_settings_permission() {
 		return true;
 	}
 
 	/*
 	 * Save settings as JSON string
 	 */
-	public function blockons_wc_save_settings() {
+	public function blockons_save_settings() {
 		$req = file_get_contents('php://input');
 		$reqData = json_decode($req, true);
 
@@ -72,14 +75,14 @@ class Blockons_WC_Rest_Routes {
 	/*
 	 * Set save permissions for admin users
 	 */
-	public function blockons_wc_save_settings_permission() {
+	public function blockons_save_settings_permission() {
 		return current_user_can('publish_posts') ? true : false;
 	}
 
 	/*
 	 * Delete the plugin settings
 	 */
-	public function blockons_wc_delete_settings() {
+	public function blockons_delete_settings() {
 		delete_option('blockons_options');
 
 		return rest_ensure_response('Success!');
@@ -92,7 +95,7 @@ class Blockons_WC_Rest_Routes {
 	/*
 	 * Get & Sort posts for 'Post Select' Component
 	 */
-	function blockons_wc_get_products($request) {
+	function blockons_get_wc_products($request) {
 		$all_products = array();
 
 		$products = get_posts( array(
@@ -115,7 +118,7 @@ class Blockons_WC_Rest_Routes {
 	/*
 	 * Get Image by ID for InputMediaUpload Component
 	 */
-	function blockons_wc_get_product_by_id($request) {
+	function blockons_get_wc_product_by_id($request) {
 		$product_id = $request->get_param( 'id' );
 		$product = wc_get_product( $product_id );
 

@@ -17,7 +17,7 @@ https://youtu.be/Byr4Lr6qUaY
 
 Blockons! It's free, it's customizable, and it's built for you!
 
-Add powerful and advanced blocks to your website to ehnace the WordPress (Gutenberg) editor, so you can easily create engaging and visually attractive website pages.
+Add powerful and advanced blocks to your website to enhance the WordPress (Gutenberg) editor, so you can easily create engaging and visually attractive website pages.
 
 We only have 10 blocks at the moment, but we're working on more... And we want to build what the you need, to be able to build a complete website using 1 blocks plugin.
 

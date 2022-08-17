@@ -3,6 +3,7 @@ node_modules
 index.js.map
 build
 vendor
+bundled
 
 /blocks/_new-block/
 /blocks/_new_slider_block/
@@ -12,6 +13,3 @@ vendor
 *.log
 /yarn.lock
 .vscode
-
-/vendor/
-build
