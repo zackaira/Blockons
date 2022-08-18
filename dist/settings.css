@@ -1,3 +1,6 @@
+/*!**************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/backend/settings.css ***!
+  \**************************************************************************************************************************************************/
 /**
  * Admin Settings Styling
  */
@@ -608,8 +611,8 @@ a.blockons-docs::before {
 	right: 0;
 	bottom: 0;
 	background-color: #ccc;
-	-webkit-transition: all 0.4s ease-in-out 0s;
-	transition: all 0.4s ease-in-out 0s;
+	-webkit-transition: all 0.18s ease-in-out 0s;
+	transition: all 0.18s ease-in-out 0s;
 }
 .toggle-switch-slider:before {
 	border-radius: 34px;
@@ -620,8 +623,8 @@ a.blockons-docs::before {
 	left: 4px;
 	bottom: 4px;
 	background-color: white;
-	-webkit-transition: all 0.4s ease-in-out 0s;
-	transition: all 0.4s ease-in-out 0s;
+	-webkit-transition: all 0.18s ease-in-out 0s;
+	transition: all 0.18s ease-in-out 0s;
 }
 .toggle-switch input.toggle-switch-checkbox:checked + .toggle-switch-slider {
 	background-color: #2196f3;

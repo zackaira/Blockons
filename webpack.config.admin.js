@@ -9,6 +9,8 @@ const config = {
 	entry: {
 		settings: "./src/settings.js",
 		"settings.min": "./src/settings.js",
+		admin: "./src/backend/admin/admin.js",
+		"admin.min": "./src/backend/admin/admin.js",
 	},
 	output: {
 		filename: "[name].js", // Uses the name of the file

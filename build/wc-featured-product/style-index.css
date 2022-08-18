@@ -1,0 +1,139 @@
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./blocks/wc-featured-product/style.css ***!
+  \******************************************************************************************************************************************************************************************/
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.blockons-wc-featured-product-block {
+	background-color: #fff;
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 10%), 0 0 8px rgb(0 0 0 / 12%);
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	padding: 15px;
+	overflow: hidden;
+}
+.blockons-wc-featured-product-block a {
+	color: inherit !important;
+	text-decoration: none !important;
+}
+.blockons-wc-featured-product-detail .blockons-wc-featured-product-title {
+	color: inherit;
+	line-height: 1.2;
+	margin: 0 0 20px;
+	padding: 0;
+}
+.blockons-wc-featured-product-detail p {
+	color: inherit;
+	margin: 15px 0 0;
+	padding: 0;
+}
+.blockons-wc-featured-product-detail .blockons-wc-featured-product-price {
+	font-weight: bold;
+}
+.blockons-wc-featured-product-btn {
+	margin: 20px 0 0;
+}
+.blockons-wc-featured-product-detail
+	.blockons-wc-featured-product-btn
+	.wp-block-button__link {
+	padding: 0.6em 1.1em;
+	font-size: 1.1em;
+}
+.blockons-wc-featured-product-image {
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.blockons-wc-featured-product-image img {
+	visibility: hidden;
+	opacity: 0;
+	display: block;
+	margin: 0;
+}
+
+/* -- Layout One -- */
+.wp-block-blockons-wc-featured-product.layout-one
+	.blockons-wc-featured-product-detail {
+	width: 50%;
+	order: 1;
+	padding: 15px 30px;
+	padding-right: 20px !important;
+	text-align: left;
+}
+.wp-block-blockons-wc-featured-product.layout-one
+	.blockons-wc-featured-product-image {
+	flex: 1;
+	order: 2;
+}
+/* -- Layout Two -- */
+.wp-block-blockons-wc-featured-product.layout-two
+	.blockons-wc-featured-product-block {
+	position: relative;
+}
+.wp-block-blockons-wc-featured-product.layout-two
+	.blockons-wc-featured-product-detail {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	z-index: 8;
+	color: #fff;
+	text-shadow: 2px 0 6px rgb(255 255 255 / 35%);
+}
+.wp-block-blockons-wc-featured-product.layout-two
+	.blockons-wc-featured-product-detail
+	h2 {
+	color: #fff;
+}
+.wp-block-blockons-wc-featured-product.layout-two
+	.blockons-wc-featured-product-image {
+	height: auto;
+	position: relative;
+	flex: 1;
+}
+
+.wp-block-blockons-wc-featured-product.layout-two .img-overlay {
+	background-color: #000;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0.35;
+}
+
+/* -- Switch -- */
+.blockons-wc-featured-product-block.switch
+	.blockons-wc-featured-product-detail {
+	order: 2;
+}
+.blockons-wc-featured-product-block.switch .blockons-wc-featured-product-image {
+	order: 1;
+}
+
+/* -- Text Align -- */
+.wp-block-blockons-wc-featured-product.align-center
+	.blockons-wc-featured-product-detail {
+	text-align: center;
+}
+.wp-block-blockons-wc-featured-product.align-right
+	.blockons-wc-featured-product-detail {
+	text-align: right;
+}
+/* -- Alignment -- */
+.align-center {
+	justify-content: center;
+}
+.align-right {
+	justify-content: flex-end;
+}
+
+
+/*# sourceMappingURL=style-index.css.map*/

@@ -32,28 +32,11 @@ const Settings = () => {
 	const [loadSetting, setLoadSetting] = useState(true);
 	// const isPremium = blockonsObject.can_use_premium_code === "1" ? true : false;
 
-	const [blockonsOptions, setWascOptions] = useState({});
+	const [blockonsOptions, setBlockonsOptions] = useState({});
 
 	// const wcActive = Boolean(blockonsObject.wcActive);
 
 	// setState dynamically for each setting
-	// const handleChange = ({
-	// 	target: { type, checked, name, value, className },
-	// }) => {
-	// 	if (
-	// 		type === "checkbox" &&
-	// 		(className === "checkbox-single" ||
-	// 			className === "toggle-switch-checkbox")
-	// 	)
-	// 		value = checked;
-
-	// 	// console.log("value: " + value);
-
-	// 	setWascOptions({
-	// 		...blockonsOptions,
-	// 		[name]: value,
-	// 	});
-	// };
 	const handleChange = ({
 		target: { type, checked, name, value, className },
 	}) => {
@@ -69,7 +52,7 @@ const Settings = () => {
 
 		const groupKey = settingGroup === "global" ? name.substring(7) : name;
 
-		setWascOptions({
+		setBlockonsOptions({
 			...blockonsOptions,
 			...(!settingGroup || settingGroup === "global" // sn_ name gets saved as default / in no group
 				? { [groupKey]: value }
@@ -81,10 +64,6 @@ const Settings = () => {
 				  }),
 		});
 	};
-
-	useEffect(() => {
-		// blockonsAdjustUI();
-	}, [blockonsOptions.add_blockons]);
 
 	console.log(blockonsOptions);
 
@@ -154,13 +133,13 @@ const Settings = () => {
 				// setState dynamically for all settings
 				if (blockonsOptions) {
 					for (const key in blockonsOptions) {
-						setWascOptions((prevState) => ({
+						setBlockonsOptions((prevState) => ({
 							...prevState,
 							[key]: blockonsOptions[key] ? blockonsOptions[key] : "",
 						}));
 					}
 				} else {
-					setWascOptions(blockonsDefault); // Set settings to defaults if not found
+					setBlockonsOptions(blockonsDefault); // Set settings to defaults if not found
 				}
 				// console.log(blockonsOptions);
 			})

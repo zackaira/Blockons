@@ -15,8 +15,8 @@ class Blockons_Admin {
 		// register_activation_hook( $this->file, array( $this, 'install' ) );
 
 		add_action('admin_menu', array( $this, 'blockons_create_admin_menu' ), 10, 1);
-		// add_filter('plugin_action_links_kaira-site-chat/kaira-site-chat.php', array($this, 'blockons_add_plugins_settings_link'));
-		// add_filter('plugin_row_meta', array($this, 'blockons_add_plugins_row_link'), 10, 2);
+		add_filter('plugin_action_links_blockons/blockons.php', array($this, 'blockons_add_plugins_settings_link'));
+		add_filter('plugin_row_meta', array($this, 'blockons_add_plugins_row_link'), 10, 2);
 
 		// Add a first time, dismissable notice
 		// add_action('admin_init', array($this, 'blockons_install_notice_ignore'), 0);
@@ -50,27 +50,27 @@ class Blockons_Admin {
 	/**
 	 * Create a Setting link on Plugins.php page
 	 */
-	// public function blockons_add_plugins_settings_link($links) {
-	// 	$settings_link = '<a href="admin.php?page=blockons-settings">' . esc_html__('Settings', 'blockons') . '</a>';
-	// 	array_push( $links, $settings_link );
+	public function blockons_add_plugins_settings_link($links) {
+		$settings_link = '<a href="options-general.php?page=blockons-settings">' . esc_html__('Settings', 'blockons') . '</a>';
+		array_push( $links, $settings_link );
 		
-  	// 	return $links;
-	// }
+  		return $links;
+	}
 
 	/**
 	 * Create a Setting link on Plugins.php page
 	 */
-	// public function blockons_add_plugins_row_link($plugin_meta, $plugin_file) {
-	// 	if ( strpos( $plugin_file, 'kaira-site-chat.php' ) !== false ) {
-	// 		$new_links = array(
-	// 			'Documentation' => '<a href="' . esc_url( 'https://blockons.com/documentation/' ) . '" target="_blank" aria-label="' . esc_attr__( 'View Site Chat documentation', 'blockons' ) . '">' . esc_html__( 'Documentation', 'blockons' ) . '</a>',
-	// 			'FAQs' => '<a href="' . esc_url( 'https://blockons.com/support/faqs/' ) . '" target="_blank" aria-label="' . esc_attr__( 'Go to Site Chat FAQ\'s', 'blockons' ) . '">' . esc_html__( 'FAQ\'s', 'blockons' ) . '</a>'
-	// 		);
-	// 		$plugin_meta = array_merge( $plugin_meta, $new_links );
-	// 	}
+	public function blockons_add_plugins_row_link($plugin_meta, $plugin_file) {
+		if ( strpos( $plugin_file, 'kaira-site-chat.php' ) !== false ) {
+			$new_links = array(
+				'Documentation' => '<a href="' . esc_url( 'https://blockons.com/documentation/' ) . '" target="_blank" aria-label="' . esc_attr__( 'View Blockons documentation', 'blockons' ) . '">' . esc_html__( 'Documentation', 'blockons' ) . '</a>',
+				'FAQs' => '<a href="' . esc_url( 'https://blockons.com/support/faqs/' ) . '" target="_blank" aria-label="' . esc_attr__( 'Go to Blockons FAQ\'s', 'blockons' ) . '">' . esc_html__( 'FAQ\'s', 'blockons' ) . '</a>'
+			);
+			$plugin_meta = array_merge( $plugin_meta, $new_links );
+		}
 		 
-	// 	return $plugin_meta;
-	// }
+		return $plugin_meta;
+	}
 	
 
 	/**
@@ -182,7 +182,7 @@ class Blockons_Admin {
 	/**
 	 * Function to check for active plugins
 	 */
-	public function blockons_is_plugin_active($plugin_name) {
+	public static function blockons_is_plugin_active($plugin_name) {
 		// Get Active Plugin Setting
 		$active_plugins = (array) get_option('active_plugins', array());
 		if (is_multisite()) {

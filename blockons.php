@@ -81,10 +81,9 @@ if ( function_exists( 'blockons_fs' ) ) {
 	require BLOCKONS_PLUGIN_DIR . 'build/marketing-button/index.php';
 	require BLOCKONS_PLUGIN_DIR . 'build/testimonials/index.php';
 	require BLOCKONS_PLUGIN_DIR . 'build/video-slider/index.php';
-	// require BLOCKONS_PLUGIN_DIR . 'build/tabs/index.php';
 
 	// WooCommerce Blocks
-	if ( (new Blockons_Admin)->blockons_is_plugin_active( 'woocommerce.php' ) ) {
+	if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
 		require BLOCKONS_PLUGIN_DIR . 'build/wc-account-icon/index.php';
 		require BLOCKONS_PLUGIN_DIR . 'build/wc-mini-cart/index.php';
 		require BLOCKONS_PLUGIN_DIR . 'build/wc-featured-product/index.php';

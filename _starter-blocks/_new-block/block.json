@@ -1,0 +1,34 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/marketing-button",
+	"title": "Block-Ons Marketing Button",
+	"textdomain": "blockons",
+	"icon": "heart",
+	"category": "blockons-category",
+	"keywords": ["marketing", "button", "cta"],
+	"attributes": {
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"title": {
+			"type": "string",
+			"default": "GRAB this offer now!"
+		},
+		"subText": {
+			"type": "string",
+			"default": "Valid only until July 28th"
+		}
+	},
+	"example": {
+		"attributes": {
+			"alignment": "left",
+			"title": "GRAB this offer now!",
+			"subText": "Valid only until July 28th"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": ["file:./style-index.css", "blockons-fontawesome"]
+}

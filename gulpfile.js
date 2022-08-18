@@ -6,6 +6,7 @@ function bundle() {
 		.src([
 			"**/*",
 			"!node_modules/**",
+			"!_starter-blocks/**",
 			"!blocks/**",
 			"!src/**",
 			"!bundled/**",

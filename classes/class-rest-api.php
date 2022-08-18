@@ -27,7 +27,7 @@ class Blockons_WC_Rest_Routes {
 			'permission_callback' => [$this, 'blockons_save_settings_permission'],
 		]);
 		
-		if ( (new Blockons_Admin)->blockons_is_plugin_active( 'woocommerce.php' ) ) {
+		if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
 			register_rest_route( 'blcns/v1', '/products', [
 				'methods' => 'GET',
 				'callback' => [$this, 'blockons_get_wc_products'],

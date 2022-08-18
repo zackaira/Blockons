@@ -1,0 +1,15 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.wp-block-blockons-marketing-button {
+	display: flex;
+}
+
+/* -- Alignment -- */
+.align-center {
+	justify-content: center;
+}
+.align-right {
+	justify-content: flex-end;
+}

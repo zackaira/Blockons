@@ -1,0 +1,65 @@
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./blocks/line-heading/style.css ***!
+  \***********************************************************************************************************************************************************************************/
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.blockons-lheading-wrap .blockons-lheading-text {
+	padding: 0 12px;
+	white-space: nowrap;
+	margin: 0;
+	line-height: 1.4;
+}
+.blockons-lheading-wrap.sao-textalign-left .blockons-lheading-text {
+	padding: 0 12px 0 0;
+}
+.blockons-lheading-wrap.sao-textalign-right .blockons-lheading-text {
+	padding: 0 0 0 12px;
+}
+.wp-block-blockons-line-heading,
+.blockons-lheading-wrap {
+	display: flex;
+}
+.blockons-lheading-wrap {
+	min-width: 200px;
+}
+.wp-block-blockons-line-heading
+	.blockons-lheading-wrap
+	.blockons-lheading-before,
+.wp-block-blockons-line-heading
+	.blockons-lheading-wrap
+	.blockons-lheading-after {
+	flex: 1;
+	display: block;
+	content: "";
+	height: 0;
+}
+/* -- Alignment of Text -- */
+.wp-block-blockons-line-heading.headalign-topalign .blockons-lheading-wrap {
+	align-items: flex-start;
+}
+.wp-block-blockons-line-heading.headalign-centeralign .blockons-lheading-wrap {
+	align-items: center;
+}
+.wp-block-blockons-line-heading.headalign-basealign .blockons-lheading-wrap {
+	align-items: baseline;
+}
+.wp-block-blockons-line-heading.headalign-bottomalign .blockons-lheading-wrap {
+	align-items: flex-end;
+}
+
+/* -- Alignment -- */
+.wp-block-blockons-line-heading.left-align,
+.wp-block-blockons-line-heading.undefined-align {
+	justify-content: flex-start;
+}
+.wp-block-blockons-line-heading.center-align {
+	justify-content: center;
+}
+.wp-block-blockons-line-heading.right-align {
+	justify-content: flex-end;
+}
+
+
+/*# sourceMappingURL=style-index.css.map*/
