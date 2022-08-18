@@ -3,13 +3,15 @@ import InputToggleSwitch from "./inputs/InputToggleSwitch";
 import { blockonsConvertToSlug } from "../helpers";
 
 const SettingRow = (props) => {
+	console.log(props.wcActive);
 	return (
 		<React.Fragment>
-			<div className="blockons-block">
+			<div className={`blockons-block ${props.disable ? "disabled" : ""}`}>
 				<div className="blockons-block-inner">
 					{props.pluginSpecific && (
 						<div className="wcbanner">{props.pluginSpecific}</div>
 					)}
+
 					<h4 className="blockons-block-title">{props.title}</h4>
 					<p className="blockons-block-desc">{props.description}</p>
 					<InputToggleSwitch {...props} />

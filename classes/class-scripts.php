@@ -51,6 +51,7 @@ class Blockons {
 	public function blockons_register_scripts() {
 		// Font Awesome Free
 		wp_register_style( 'blockons-fontawesome', BLOCKONS_PLUGIN_URL . 'assets/font-awesome/css/all.min.css', array(), BLOCKONS_PLUGIN_VERSION );
+
 		// JS URLs file/object for featured product, video slider, image carousel
 		wp_register_script( 'blockons-file', BLOCKONS_PLUGIN_URL . 'assets/blocks/featured-product/file.js', array(), BLOCKONS_PLUGIN_VERSION );
 		wp_localize_script( 'blockons-file', 'siteObj', array(
@@ -69,10 +70,10 @@ class Blockons {
 		wp_register_script( 'blockons-waypoint', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/waypoints.min.js', array(), BLOCKONS_PLUGIN_VERSION );
 		wp_register_script( 'blockons-waypoint-inview', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/inview.min.js', array(), BLOCKONS_PLUGIN_VERSION );
 		wp_register_script( 'blockons-progress-bars', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/progress-bars.js', array( 'blockons-waypoint', 'blockons-waypoint-inview' ), BLOCKONS_PLUGIN_VERSION );
+
 		// Testimonials
 		wp_register_style( 'blockons-splidecss', BLOCKONS_PLUGIN_URL . 'assets/slider/splide.min.css', array(), BLOCKONS_PLUGIN_VERSION );
 		wp_register_script( 'blockons-splidejs', BLOCKONS_PLUGIN_URL . 'assets/slider/splide.min.js', array(), BLOCKONS_PLUGIN_VERSION );
-		// wp_register_script( 'blockons-splide', BLOCKONS_PLUGIN_URL . 'assets/slider/blockons-splide.js', array('blockons-splidejs'), BLOCKONS_PLUGIN_VERSION );
 	} // End blockons_frontend_scripts ()
 
 	/**
@@ -89,7 +90,7 @@ class Blockons {
 	public function blockons_admin_scripts( $hook = '' ) {
 		$adminPage = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
 		// $suffix = (defined('WP_DEBUG') && true === WP_DEBUG) ? '' : '.min';
-		// global $kaira_scp_fs;
+		global $blockons_fs;
 		$blockonsOptions = get_option('blockons_options');
 		$blockonsDefaults = get_option('blockons_default_options');
 
@@ -117,12 +118,11 @@ class Blockons {
 			'apiUrl' => esc_url(home_url('/wp-json')),
 			'nonce' => wp_create_nonce('wp_rest'),
 			'blockonsOptions' => $blockonsOptions,
-			'blockonsDefaults' => $blockonsDefaults
-			// 'wcActive' => defined('WC_VERSION') ? true : false,
-			// 'accountUrl' => esc_url($kaira_scp_fs->get_account_url()),
-			// 'upgradeUrl' => esc_url($kaira_scp_fs->get_upgrade_url()),
-			// 'userIsAdmin' => current_user_can( 'manage_options' ),
-			// 'can_use_premium_code' => kaira_scp_fs()->can_use_premium_code(),
+			'blockonsDefaults' => $blockonsDefaults,
+			'accountUrl' => esc_url($blockons_fs->get_account_url()),
+			'wcActive' => defined('WC_VERSION') ? true : false,
+			// 'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
+			// 'can_use_premium_code' => blockons_fs()->can_use_premium_code(),
 		));
 		wp_enqueue_script('blockons-admin-settings-script');
 

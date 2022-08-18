@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-17T11:05:18+00:00\n"
+"POT-Creation-Date: 2022-08-18T14:31:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: blockons\n"
@@ -46,6 +46,30 @@ msgstr[1] ""
 #: classes/class-admin.php:40
 #: classes/class-admin.php:41
 msgid "Blockons Settings"
+msgstr ""
+
+#: classes/class-admin.php:52
+#: dist/settings.js:4855
+#: src/backend/Settings.js:171
+msgid "Settings"
+msgstr ""
+
+#: classes/class-admin.php:64
+msgid "View Blockons documentation"
+msgstr ""
+
+#: classes/class-admin.php:64
+#: dist/settings.js:5112
+#: src/backend/components/SettingRow.js:45
+msgid "Documentation"
+msgstr ""
+
+#: classes/class-admin.php:65
+msgid "Go to Blockons FAQ's"
+msgstr ""
+
+#: classes/class-admin.php:65
+msgid "FAQ's"
 msgstr ""
 
 #: classes/class-admin.php:105
@@ -423,11 +447,9 @@ msgid "Add List Item"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:241
-#: blocks/_new_slider_block/edit.js:210
 #: build/image-carousel/index.js:3317
-#: build/_new_slider_block/index.js:3040
+#: _starter-blocks/_new_slider_block/edit.js:210
 #: build/image-carousel/index.js:3252
-#: build/_new_slider_block/index.js:3017
 msgid "Image Carousel Settings"
 msgstr ""
 
@@ -480,11 +502,9 @@ msgid "Rewind Carousel"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:343
-#: blocks/_new_slider_block/edit.js:216
 #: build/image-carousel/index.js:3384
-#: build/_new_slider_block/index.js:3043
+#: _starter-blocks/_new_slider_block/edit.js:216
 #: build/image-carousel/index.js:3354
-#: build/_new_slider_block/index.js:3023
 msgid "Image Carousel Design"
 msgstr ""
 
@@ -609,11 +629,9 @@ msgid "Show Caption only on Hover"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:474
-#: blocks/_new_slider_block/edit.js:222
 #: build/image-carousel/index.js:3506
-#: build/_new_slider_block/index.js:3046
+#: _starter-blocks/_new_slider_block/edit.js:222
 #: build/image-carousel/index.js:3485
-#: build/_new_slider_block/index.js:3029
 msgid "Image Carousel Slider Controls"
 msgstr ""
 
@@ -752,11 +770,9 @@ msgid "Heading Title"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:127
-#: blocks/_new-block/edit.js:46
 #: build/marketing-button/index.js:473
-#: build/_new-block/index.js:56
+#: _starter-blocks/_new-block/edit.js:46
 #: build/marketing-button/index.js:386
-#: build/_new-block/index.js:46
 msgid "Marketing Button Settings"
 msgstr ""
 
@@ -848,11 +864,9 @@ msgid "Icon Spacing"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:256
-#: blocks/_new-block/edit.js:52
 #: build/marketing-button/index.js:573
-#: build/_new-block/index.js:59
+#: _starter-blocks/_new-block/edit.js:52
 #: build/marketing-button/index.js:515
-#: build/_new-block/index.js:52
 msgid "Marketing Button Design"
 msgstr ""
 
@@ -1206,13 +1220,11 @@ msgstr ""
 
 #: blocks/testimonials/edit.js:672
 #: blocks/video-slider/edit.js:634
-#: blocks/_new_slider_block/edit.js:253
 #: build/testimonials/index.js:3686
 #: build/video-slider/index.js:7067
-#: build/_new_slider_block/index.js:3064
+#: _starter-blocks/_new_slider_block/edit.js:253
 #: build/testimonials/index.js:3683
 #: build/video-slider/index.js:7065
-#: build/_new_slider_block/index.js:3060
 msgid "Add Another Slide"
 msgstr ""
 
@@ -1702,50 +1714,62 @@ msgstr ""
 msgid "No Products"
 msgstr ""
 
-#: blocks/_tabs/edit.js:72
-#: build/_tabs/index.js:146
-#: build/_tabs/index.js:110
-msgid "Tabs Settings"
-msgstr ""
-
-#: blocks/_tabs/edit.js:83
-#: build/_tabs/index.js:154
-#: build/_tabs/index.js:121
-msgid "Tabs Design"
-msgstr ""
-
-#: build/settings.js:4776
-#: src/backend/Settings.js:83
+#: dist/settings.js:4787
+#: src/backend/Settings.js:93
 msgid "Are you sure you want to delete all settings?"
 msgstr ""
 
-#: build/settings.js:4839
-#: src/backend/Settings.js:154
+#: dist/settings.js:4852
+#: src/backend/Settings.js:166
 msgid "Blocks"
 msgstr ""
 
-#: build/settings.js:4842
-#: src/backend/Settings.js:159
-msgid "Settings"
-msgstr ""
-
-#: build/settings.js:4845
-#: src/backend/Settings.js:164
-msgid "Extra"
-msgstr ""
-
-#: build/settings.js:4850
-#: src/backend/Settings.js:169
+#: dist/settings.js:4860
+#: src/backend/Settings.js:177
 msgid "Help"
 msgstr ""
 
-#: build/settings.js:5011
-#: src/backend/components/SettingRow.js:45
-msgid "Documentation"
+#: dist/settings.js:4871
+#: src/backend/Settings.js:191
+msgid "Editor Blocks"
 msgstr ""
 
-#: src/backend/Settings.js:198
+#: dist/settings.js:4871
+#: src/backend/Settings.js:194
+msgid "Choose the blocks you'd like to use when building with the WordPress block editor. You can turn off blocks to optimize for speed & page loading."
+msgstr ""
+
+#: dist/settings.js:4968
+#: src/backend/Settings.js:306
+msgid "More Blocks Coming Soon..."
+msgstr ""
+
+#: dist/settings.js:4976
+#: src/backend/Settings.js:315
 msgid "this is a description for the heading component"
+msgstr ""
+
+#: dist/settings.js:5004
+#: src/backend/Settings.js:355
+msgid "Save Settings"
+msgstr ""
+
+#: dist/settings.js:5010
+#: src/backend/Settings.js:364
+msgid "Reset Settings"
+msgstr ""
+
+#: dist/settings.js:5016
+#: src/backend/Settings.js:369
+msgid "Confirm... Reset All Settings!"
+msgstr ""
+
+#: _starter-blocks/_tabs/edit.js:72
+msgid "Tabs Settings"
+msgstr ""
+
+#: _starter-blocks/_tabs/edit.js:83
+msgid "Tabs Design"
 msgstr ""
 
 #: blocks/accordions/block.json
@@ -1767,17 +1791,15 @@ msgid "accordionbed"
 msgstr ""
 
 #: blocks/accordions/block.json
-#: blocks/_tabs/block.json
 #: build/accordions/block.json
-#: build/_tabs/block.json
+#: _starter-blocks/_tabs/block.json
 msgctxt "block keyword"
 msgid "content"
 msgstr ""
 
 #: blocks/accordions/block.json
-#: blocks/_tabs/block.json
 #: build/accordions/block.json
-#: build/_tabs/block.json
+#: _starter-blocks/_tabs/block.json
 msgctxt "block keyword"
 msgid "inner"
 msgstr ""
@@ -1815,43 +1837,38 @@ msgid "links"
 msgstr ""
 
 #: blocks/image-carousel/block.json
-#: blocks/_new_slider_block/block.json
 #: build/image-carousel/block.json
-#: build/_new_slider_block/block.json
+#: _starter-blocks/_new_slider_block/block.json
 msgctxt "block title"
 msgid "Image Carousel"
 msgstr ""
 
 #: blocks/image-carousel/block.json
-#: blocks/_new_slider_block/block.json
 #: build/image-carousel/block.json
-#: build/_new_slider_block/block.json
+#: _starter-blocks/_new_slider_block/block.json
 msgctxt "block keyword"
 msgid "image"
 msgstr ""
 
 #: blocks/image-carousel/block.json
-#: blocks/_new_slider_block/block.json
 #: build/image-carousel/block.json
-#: build/_new_slider_block/block.json
+#: _starter-blocks/_new_slider_block/block.json
 msgctxt "block keyword"
 msgid "carousel"
 msgstr ""
 
 #: blocks/image-carousel/block.json
 #: blocks/video-slider/block.json
-#: blocks/_new_slider_block/block.json
 #: build/image-carousel/block.json
 #: build/video-slider/block.json
-#: build/_new_slider_block/block.json
+#: _starter-blocks/_new_slider_block/block.json
 msgctxt "block keyword"
 msgid "gallery"
 msgstr ""
 
 #: blocks/image-carousel/block.json
-#: blocks/_new_slider_block/block.json
 #: build/image-carousel/block.json
-#: build/_new_slider_block/block.json
+#: _starter-blocks/_new_slider_block/block.json
 msgctxt "block keyword"
 msgid "picture"
 msgstr ""
@@ -1859,11 +1876,10 @@ msgstr ""
 #: blocks/image-carousel/block.json
 #: blocks/testimonials/block.json
 #: blocks/video-slider/block.json
-#: blocks/_new_slider_block/block.json
 #: build/image-carousel/block.json
 #: build/testimonials/block.json
 #: build/video-slider/block.json
-#: build/_new_slider_block/block.json
+#: _starter-blocks/_new_slider_block/block.json
 msgctxt "block keyword"
 msgid "slider"
 msgstr ""
@@ -1899,25 +1915,22 @@ msgid "Marketing Button"
 msgstr ""
 
 #: blocks/marketing-button/block.json
-#: blocks/_new-block/block.json
 #: build/marketing-button/block.json
-#: build/_new-block/block.json
+#: _starter-blocks/_new-block/block.json
 msgctxt "block keyword"
 msgid "marketing"
 msgstr ""
 
 #: blocks/marketing-button/block.json
-#: blocks/_new-block/block.json
 #: build/marketing-button/block.json
-#: build/_new-block/block.json
+#: _starter-blocks/_new-block/block.json
 msgctxt "block keyword"
 msgid "button"
 msgstr ""
 
 #: blocks/marketing-button/block.json
-#: blocks/_new-block/block.json
 #: build/marketing-button/block.json
-#: build/_new-block/block.json
+#: _starter-blocks/_new-block/block.json
 msgctxt "block keyword"
 msgid "cta"
 msgstr ""
@@ -2104,26 +2117,22 @@ msgctxt "block keyword"
 msgid "mini cart"
 msgstr ""
 
-#: blocks/_new-block/block.json
-#: build/_new-block/block.json
+#: _starter-blocks/_new-block/block.json
 msgctxt "block title"
 msgid "Block-Ons Marketing Button"
 msgstr ""
 
-#: blocks/_tabs/block.json
-#: build/_tabs/block.json
+#: _starter-blocks/_tabs/block.json
 msgctxt "block title"
 msgid "Tabs"
 msgstr ""
 
-#: blocks/_tabs/block.json
-#: build/_tabs/block.json
+#: _starter-blocks/_tabs/block.json
 msgctxt "block keyword"
 msgid "tabs"
 msgstr ""
 
-#: blocks/_tabs/block.json
-#: build/_tabs/block.json
+#: _starter-blocks/_tabs/block.json
 msgctxt "block keyword"
 msgid "tabbed"
 msgstr ""

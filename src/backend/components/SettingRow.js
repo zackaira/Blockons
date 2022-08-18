@@ -1,5 +1,6 @@
 import React from "react";
 import InputToggleSwitch from "./inputs/InputToggleSwitch";
+import SettingTooltip from "./UI/SettingTooltip";
 import { blockonsConvertToSlug } from "../helpers";
 
 import Heading from "./UI/Heading";
@@ -37,6 +38,8 @@ const SettingRow = (props) => {
 							{props.note ? <p className="snNote">{props.note}</p> : ""}
 						</div>
 						<div className="blockons-row-col-right">
+							{props.tooltip && <SettingTooltip tooltip={props.tooltip} />}
+
 							{props.documentation && (
 								<a
 									href={props.documentation}

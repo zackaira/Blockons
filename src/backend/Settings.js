@@ -14,13 +14,12 @@ const Settings = () => {
 	const [loader, setLoader] = useState(false);
 	const [loadSetting, setLoadSetting] = useState(true);
 	// const isPremium = blockonsObject.can_use_premium_code === "1" ? true : false;
+	const wcActive = Boolean(blockonsObject.wcActive);
 	const blockonsDefaults = blockonsObject.blockonsDefaults
 		? JSON.parse(blockonsObject.blockonsDefaults)
 		: {};
 
 	const [blockonsOptions, setBlockonsOptions] = useState({});
-
-	// const wcActive = Boolean(blockonsObject.wcActive);
 
 	// setState dynamically for each setting
 	const handleChange = ({
@@ -172,11 +171,7 @@ const Settings = () => {
 										{__("Settings", "blockons")}
 									</a>
 								</li>
-								<li>
-									<a id="blockonstab-3" className="blockons-tab">
-										{__("Extra", "blockons")}
-									</a>
-								</li>
+
 								<li className="help">
 									<a id="blockonstab-help" className="blockons-tab">
 										{__("Help", "blockons")}
@@ -191,6 +186,18 @@ const Settings = () => {
 										id="blockons-content-1"
 										className="blockons-content active"
 									>
+										<div className="blockons-header">
+											<h3 className="blockons-title">
+												{__("Editor Blocks", "blockons")}
+											</h3>
+											<p>
+												{__(
+													"Choose the blocks you'd like to use when building with the WordPress block editor. You can turn off blocks to optimize for speed & page loading.",
+													"blockons"
+												)}
+											</p>
+										</div>
+
 										<div className="blockons-block-settings">
 											<SettingBlock
 												title={"Accordions"}
@@ -272,6 +279,7 @@ const Settings = () => {
 												description={"Block Three Description"}
 												onChange={handleChange}
 												pluginSpecific="WooCommerce"
+												{...(wcActive ? "" : { disable: true })}
 											/>
 											<SettingBlock
 												title={"Featured Product"}
@@ -281,6 +289,7 @@ const Settings = () => {
 												description={"Block Three Description"}
 												onChange={handleChange}
 												pluginSpecific="WooCommerce"
+												{...(wcActive ? "" : { disable: true })}
 											/>
 											<SettingBlock
 												title={"Mini Cart"}
@@ -290,7 +299,11 @@ const Settings = () => {
 												description={"Block Three Description"}
 												onChange={handleChange}
 												pluginSpecific="WooCommerce"
+												{...(wcActive ? "" : { disable: true })}
 											/>
+										</div>
+										<div className="blockons-more">
+											{__("More Blocks Coming Soon...", "blockons")}
 										</div>
 									</div>
 
@@ -310,7 +323,7 @@ const Settings = () => {
 													slug="global_setting_one"
 													value={blockonsOptions.setting_one}
 													inputType="toggle"
-													description={"Some Description"}
+													tooltip={"Some Description"}
 													onChange={handleChange}
 												/>
 												<SettingRow
@@ -318,19 +331,9 @@ const Settings = () => {
 													slug="global_setting_two"
 													value={blockonsOptions.setting_two}
 													inputType="toggle"
-													description={"Some Description"}
+													tooltip={"Some Description"}
 													onChange={handleChange}
 												/>
-											</tbody>
-										</table>
-									</div>
-
-									<div id="blockons-content-3" className="blockons-content">
-										<table className="form-table" role="presentation">
-											<tbody>
-												<tr>
-													<td>content 3</td>
-												</tr>
 											</tbody>
 										</table>
 									</div>

@@ -102,7 +102,6 @@
 	width: 40px;
 	height: 40px;
 }
-
 @keyframes rotate {
 	from {
 		transform: rotate(0);
@@ -305,18 +304,18 @@ a.blockons-docs::before {
 
 /* -- Table Styling -- */
 .blockonsheading {
-	margin: 40px -10px 0;
+	margin: 40px -10px 20px;
 }
 .blockonsheading.nomargin {
 	margin-top: 0;
 }
 #blockons-content-2 table tr:first-child .blockonsheading {
-	margin-top: 0;
+	margin-top: -11px;
 }
 .blockonsheading-title {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-	color: #289f8d;
-	font-size: 1.25em;
+	font-size: 22px;
+	font-weight: 500;
 	margin: 0;
 	padding: 0 0 8px;
 }
@@ -449,73 +448,7 @@ a.blockons-docs::before {
 	visibility: visible;
 	opacity: 1;
 }
-/* ---- Setting Tooltips ---- */
-.blockonsdoclink {
-	color: #9d9d9d;
-	display: inline-block;
-	font-size: 20px;
-	margin-left: 10px;
-	position: relative;
-	top: -1px;
-	vertical-align: middle;
-	text-decoration: none;
-}
-.blockonsdoclink::before {
-	font-family: "Dashicons";
-	display: block;
-	content: "\f504";
-}
 
-.blockonstooltip {
-	color: #9d9d9d;
-	display: inline-block;
-	font-size: 20px;
-	position: relative;
-	top: -1px;
-	vertical-align: middle;
-}
-.blockonstooltip::before {
-	font-family: "Dashicons";
-	display: block;
-	content: "\f223";
-}
-.blockonstooltip .blockonstooltiptxt {
-	background-color: #404040;
-	border-radius: 4px;
-	bottom: 125%;
-	color: #fff;
-	font-size: 11.5px;
-	line-height: 1.5;
-	letter-spacing: 0.1px;
-	font-weight: 300;
-	left: 50%;
-	margin-left: -85px;
-	opacity: 0;
-	padding: 8px 10px;
-	position: absolute;
-	text-align: center;
-	transition: opacity 0.6s;
-	visibility: hidden;
-	width: 160px;
-	z-index: 1;
-}
-.blockonstooltip .blockonstooltiptxt::after {
-	content: "";
-	position: absolute;
-	top: 100%;
-	left: 50%;
-	margin-left: -10px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: #404040 transparent transparent transparent;
-}
-.blockonstooltip:hover {
-	color: #404040;
-}
-.blockonstooltip:hover .blockonstooltiptxt {
-	visibility: visible;
-	opacity: 1;
-}
 /* -- Toggle Switch -- */
 .toggle-switch {
 	position: relative;
@@ -569,12 +502,37 @@ a.blockons-docs::before {
 	flex-wrap: wrap;
 	margin: 0 -10px;
 }
+.blockons-header {
+	margin: 10px 0 20px;
+}
+.blockons-header .blockons-title {
+	margin: 0 0 8px;
+	padding: 0;
+	font-size: 22px;
+	font-weight: 500;
+	text-align: center;
+}
+.blockons-header p {
+	margin: 0 auto;
+	padding: 0;
+	font-size: 13px;
+	max-width: 520px;
+	text-align: center;
+}
+
+.blockons-more {
+	margin: 20px 0 0;
+	text-align: center;
+	font-size: 18px;
+	color: #787878;
+}
 /* ---- Setting Block - On/Off ---- */
 .blockons-block {
+	box-sizing: border-box;
 	margin: 10px 0;
 	padding: 0 10px;
+	position: relative;
 	width: 25%;
-	box-sizing: border-box;
 }
 .blockons-block-inner {
 	background-color: #fcfcfc;
@@ -618,6 +576,17 @@ a.blockons-docs::before {
 	width: 108px;
 	transform: rotate(35deg);
 	box-sizing: border-box;
+}
+.blockons-block.disabled::before {
+	display: block;
+	content: "";
+	background-color: rgb(255 255 255 / 60%);
+	position: absolute;
+	top: -5px;
+	left: 0;
+	right: 0;
+	bottom: -5px;
+	z-index: 11;
 }
 
 /* -- Color Picker -- */
