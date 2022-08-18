@@ -3,6 +3,8 @@ node_modules
 index.js.map
 blocks
 vendor
+build
+dist
 bundled
 
 # Directories/files that may appear in your environment
