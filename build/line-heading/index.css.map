@@ -1,1 +1,0 @@
-{"version":3,"file":"line-heading/index.css","mappings":";;;AAAA;;;EAGE","sources":["webpack://blockons/./blocks/line-heading/editor.css"],"sourcesContent":["/**\n * Note that these styles are loaded *after* common styles, so that\n * editor-specific styles using the same selectors will take precedence.\n */\n"],"names":[],"sourceRoot":""}
