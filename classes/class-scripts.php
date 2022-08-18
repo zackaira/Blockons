@@ -19,11 +19,18 @@ class Blockons {
 	public $_version; //phpcs:ignore
 
 	/**
+	 * The main plugin file.
+	 */
+	public $file;
+
+	/**
 	 * Constructor funtion
 	 */
 	public function __construct($file = '', $version = BLOCKONS_PLUGIN_VERSION) {
 		$this->file     = $file;
 		$this->_version = $version;
+
+		register_activation_hook( $this->file, array( $this, 'install' ) );
 
 		// Register Scripts for plugin.
 		add_action( 'init', array( $this, 'blockons_register_scripts' ), 10 );
@@ -84,6 +91,7 @@ class Blockons {
 		// $suffix = (defined('WP_DEBUG') && true === WP_DEBUG) ? '' : '.min';
 		// global $kaira_scp_fs;
 		$blockonsOptions = get_option('blockons_options');
+		$blockonsDefaults = get_option('blockons_default_options');
 
 		// Admin CSS
 		wp_register_style( 'blockons-admin-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/admin.css'), array(), BLOCKONS_PLUGIN_VERSION );
@@ -108,7 +116,8 @@ class Blockons {
 		wp_localize_script('blockons-admin-settings-script', 'blockonsObj', array(
 			'apiUrl' => esc_url(home_url('/wp-json')),
 			'nonce' => wp_create_nonce('wp_rest'),
-			'blockonsOptions' => $blockonsOptions
+			'blockonsOptions' => $blockonsOptions,
+			'blockonsDefaults' => $blockonsDefaults
 			// 'wcActive' => defined('WC_VERSION') ? true : false,
 			// 'accountUrl' => esc_url($kaira_scp_fs->get_account_url()),
 			// 'upgradeUrl' => esc_url($kaira_scp_fs->get_upgrade_url()),
@@ -157,4 +166,43 @@ class Blockons {
 
 		return self::$_instance;
 	} // End instance ()
+
+	/**
+	 * Installation. Runs on activation.
+	 */
+	public function install() {
+		$this->_save_initial_settings();
+		$this->_log_version_number();
+	}
+
+	/**
+	 * Save Initial Settings.
+	 */
+	private function _save_initial_settings() { //phpcs:ignore
+		$initialSettings = array(
+			"blocks" => array(
+				"accordions" => true,
+				"icon_list" => true,
+				"image_carousel" => true,
+				"line_heading" => true,
+				"marketing_button" => true,
+				"progress_bars" => true,
+				"search" => true,
+				"testimonials" => true,
+				"video_slider" => true,
+				"wc_account_icon" => true,
+				"wc_featured_product" => true,
+				"wc_mini_cart" => true,
+			)
+		);
+		$settingsObj = (object)$initialSettings;
+
+		update_option('blockons_default_options', json_encode($settingsObj));
+	}
+	/**
+	 * Log the plugin version number.
+	 */
+	private function _log_version_number() { //phpcs:ignore
+		update_option('blockons_plugin_version', BLOCKONS_PLUGIN_VERSION);
+	}
 }

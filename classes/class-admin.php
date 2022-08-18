@@ -12,8 +12,6 @@ class Blockons_Admin {
 	 * Constructor function.
 	 */
 	public function __construct() {
-		// register_activation_hook( $this->file, array( $this, 'install' ) );
-
 		add_action('admin_menu', array( $this, 'blockons_create_admin_menu' ), 10, 1);
 		add_filter('plugin_action_links_blockons/blockons.php', array($this, 'blockons_add_plugins_settings_link'));
 		add_filter('plugin_row_meta', array($this, 'blockons_add_plugins_row_link'), 10, 2);
@@ -318,42 +316,5 @@ class Blockons_Admin {
 	
 	// 	return $classes;
 	// }
-
-	/**
-	 * Installation. Runs on activation.
-	 */
-	public function install() {
-		// $this->_save_initial_settings();
-		$this->_log_version_number();
-	}
-
-	/**
-	 * Save Initial Settings.
-	 */
-	private function _save_initial_settings() { //phpcs:ignore
-		$settings = '{
-			blocks: {
-				accordions: true,
-				icon_list: true,
-				image_carousel: true,
-				line_heading: true,
-				marketing_button: true,
-				progress_bars: true,
-				search: true,
-				testimonials: true,
-				video_slider: true,
-				wc_account_icon: true,
-				wc_featured_product: true,
-				wc_mini_cart: true,
-			},
-		}';
-		update_option('blockons_options', json_encode($settings));
-	}
-	/**
-	 * Log the plugin version number.
-	 */
-	private function _log_version_number() { //phpcs:ignore
-		update_option('blockons_plugin_version', BLOCKONS_PLUGIN_VERSION);
-	}
 }
 new Blockons_Admin();

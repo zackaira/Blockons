@@ -8,29 +8,15 @@ import SettingBlock from "./components/SettingBlock";
 import InfoTab from "./InfoTab";
 import Loader from "./Loader";
 
-const blockonsDefault = {
-	blocks: {
-		accordions: true,
-		icon_list: true,
-		image_carousel: true,
-		line_heading: true,
-		marketing_button: true,
-		progress_bars: true,
-		search: true,
-		testimonials: true,
-		video_slider: true,
-		wc_account_icon: true,
-		wc_featured_product: true,
-		wc_mini_cart: true,
-	},
-};
-
 const Settings = () => {
 	const blockonsObject = blockonsObj;
 	const url = `${blockonsObject.apiUrl}/blcns/v1`;
 	const [loader, setLoader] = useState(false);
 	const [loadSetting, setLoadSetting] = useState(true);
 	// const isPremium = blockonsObject.can_use_premium_code === "1" ? true : false;
+	const blockonsDefaults = blockonsObject.blockonsDefaults
+		? JSON.parse(blockonsObject.blockonsDefaults)
+		: {};
 
 	const [blockonsOptions, setBlockonsOptions] = useState({});
 
@@ -65,7 +51,9 @@ const Settings = () => {
 		});
 	};
 
-	console.log(blockonsOptions);
+	// console.log("-------- Saved Options --------");
+	// console.log(blockonsOptions);
+	// console.log("-------- Saved Options --------");
 
 	// Submit form
 	const handleSubmit = (e) => {
@@ -139,7 +127,7 @@ const Settings = () => {
 						}));
 					}
 				} else {
-					setBlockonsOptions(blockonsDefault); // Set settings to defaults if not found
+					setBlockonsOptions(blockonsDefaults); // Set settings to defaults if not found
 				}
 				// console.log(blockonsOptions);
 			})
@@ -370,12 +358,12 @@ const Settings = () => {
 									<div className="blockonsSettingBarOptions">
 										<div
 											className="blockons-delete"
-											title={__("Delete Settings", "blockons")}
+											title={__("Reset Settings", "blockons")}
 											onClick={confirmDelete}
 										>
 											<div className="blockons-confirm-delete">
 												<a onClick={handleDeleteOptions}>
-													{__("Confirm... Delete Settings!", "blockons")}
+													{__("Confirm... Reset All Settings!", "blockons")}
 												</a>
 											</div>
 										</div>

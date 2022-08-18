@@ -71,22 +71,52 @@ if ( function_exists( 'blockons_fs' ) ) {
 	require_once 'classes/class-rest-api.php';
 	require_once 'classes/class-admin.php';
 
-	// Site Blocks
-	require BLOCKONS_PLUGIN_DIR . 'build/accordions/index.php';
-	require BLOCKONS_PLUGIN_DIR . 'build/search/index.php';
-	require BLOCKONS_PLUGIN_DIR . 'build/icon-list/index.php';
-	require BLOCKONS_PLUGIN_DIR . 'build/line-heading/index.php';
-	require BLOCKONS_PLUGIN_DIR . 'build/image-carousel/index.php';
-	require BLOCKONS_PLUGIN_DIR . 'build/progress-bars/index.php';
-	require BLOCKONS_PLUGIN_DIR . 'build/marketing-button/index.php';
-	require BLOCKONS_PLUGIN_DIR . 'build/testimonials/index.php';
-	require BLOCKONS_PLUGIN_DIR . 'build/video-slider/index.php';
+	$blockonsDefaults = get_option('blockons_default_options');
+	$blockonsOptions = get_option('blockons_options');
+	$blockonsBlocks = $blockonsOptions ? json_decode($blockonsOptions['blockonsOptions']) : json_decode($blockonsDefaults);
 
-	// WooCommerce Blocks
-	if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
-		require BLOCKONS_PLUGIN_DIR . 'build/wc-account-icon/index.php';
-		require BLOCKONS_PLUGIN_DIR . 'build/wc-mini-cart/index.php';
-		require BLOCKONS_PLUGIN_DIR . 'build/wc-featured-product/index.php';
+	// Site Blocks
+	if ($blockonsBlocks) {
+		if ($blockonsBlocks->blocks->accordions) {
+			require BLOCKONS_PLUGIN_DIR . 'build/accordions/index.php';
+		}
+		if ($blockonsBlocks->blocks->search) {
+			require BLOCKONS_PLUGIN_DIR . 'build/search/index.php';
+		}
+		if ($blockonsBlocks->blocks->icon_list) {
+			require BLOCKONS_PLUGIN_DIR . 'build/icon-list/index.php';
+		}
+		if ($blockonsBlocks->blocks->line_heading) {
+			require BLOCKONS_PLUGIN_DIR . 'build/line-heading/index.php';
+		}
+		if ($blockonsBlocks->blocks->image_carousel) {
+			require BLOCKONS_PLUGIN_DIR . 'build/image-carousel/index.php';
+		}
+		if ($blockonsBlocks->blocks->progress_bars) {
+			require BLOCKONS_PLUGIN_DIR . 'build/progress-bars/index.php';
+		}
+		if ($blockonsBlocks->blocks->marketing_button) {
+			require BLOCKONS_PLUGIN_DIR . 'build/marketing-button/index.php';
+		}
+		if ($blockonsBlocks->blocks->testimonials) {
+			require BLOCKONS_PLUGIN_DIR . 'build/testimonials/index.php';
+		}
+		if ($blockonsBlocks->blocks->video_slider) {
+			require BLOCKONS_PLUGIN_DIR . 'build/video-slider/index.php';
+		}
+
+		// WooCommerce Blocks
+		if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
+			if ($blockonsBlocks->blocks->wc_account_icon) {
+				require BLOCKONS_PLUGIN_DIR . 'build/wc-account-icon/index.php';
+			}
+			if ($blockonsBlocks->blocks->wc_mini_cart) {
+				require BLOCKONS_PLUGIN_DIR . 'build/wc-mini-cart/index.php';
+			}
+			if ($blockonsBlocks->blocks->wc_featured_product) {
+				require BLOCKONS_PLUGIN_DIR . 'build/wc-featured-product/index.php';
+			}
+		}
 	}
 
 	/**
