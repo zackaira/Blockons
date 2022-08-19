@@ -1,8 +1,7 @@
 // Localized JS object - blockonsObj
-import { __ } from "@wordpress/i18n";
 import React, { useState, useEffect } from "react";
+import { __ } from "@wordpress/i18n";
 import axios from "axios";
-
 import SettingRow from "./components/SettingRow";
 import SettingBlock from "./components/SettingBlock";
 import InfoTab from "./InfoTab";
@@ -174,7 +173,7 @@ const Settings = () => {
 
 								<li className="help">
 									<a id="blockonstab-help" className="blockons-tab">
-										{__("Help", "blockons")}
+										{__("Welcome", "blockons")}
 									</a>
 								</li>
 							</ul>

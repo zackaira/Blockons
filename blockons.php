@@ -8,8 +8,8 @@
  * Author URI: https://kairaweb.com/
  * Requires at least: 5.0
  * Tested up to: 6.0
- * WC requires at least: 7.3
- * WC tested up to: 7.8
+ * WC requires at least: 3.2
+ * WC tested up to: 6.8
  * Text Domain: blockons
  * Domain Path: /lang/
  *

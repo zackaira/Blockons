@@ -3,7 +3,6 @@ import InputToggleSwitch from "./inputs/InputToggleSwitch";
 import { blockonsConvertToSlug } from "../helpers";
 
 const SettingRow = (props) => {
-	console.log(props.wcActive);
 	return (
 		<React.Fragment>
 			<div className={`blockons-block ${props.disable ? "disabled" : ""}`}>
