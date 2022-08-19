@@ -21,19 +21,19 @@ const InfoTab = (props) => {
 						)}
 					</p>
 					<a
-						href="https://www.blockons.com/"
+						href="https://blockons.com/"
 						target="_blank"
 						className="blockons-button"
 					>
 						Visit Our Website
 					</a>
-					<a
+					{/* <a
 						href="https://www.blockons.com/go-pro"
 						target="_blank"
 						className="blockons-button primary"
 					>
 						View Blockons Pro
-					</a>
+					</a> */}
 				</div>
 
 				<div className="blockons-video addspace">
@@ -68,21 +68,21 @@ const InfoTab = (props) => {
 					</p>
 
 					<a
-						href="http://blockons.com/documentation/"
+						href="https://blockons.com/documentation/"
 						target="_blank"
 						className="blockons-button primary"
 					>
 						Documentation
 					</a>
 					<a
-						href="http://blockons.com/faqs/"
+						href="https://blockons.com/support/faqs/"
 						target="_blank"
 						className="blockons-button"
 					>
 						FAQ's
 					</a>
 					<a
-						href="http://blockons.com/support/"
+						href="https://blockons.com/support/"
 						target="_blank"
 						className="blockons-button"
 					>

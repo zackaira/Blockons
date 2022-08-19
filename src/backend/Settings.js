@@ -146,12 +146,12 @@ const Settings = () => {
 						<a
 							href={blockonsObject.accountUrl}
 							className="blockons-account"
-							title={"My Account"}
+							title={__("My Account", "blockons")}
 						></a>
 						<a
 							href="https://blockons.com/support/"
 							className="blockons-docs"
-							title={"Documentation"}
+							title={__("Documentation", "blockons")}
 							target="_blank"
 						></a>
 					</div>
@@ -199,103 +199,139 @@ const Settings = () => {
 
 										<div className="blockons-block-settings">
 											<SettingBlock
-												title={"Accordions"}
+												title={__("Accordions", "blockons")}
 												slug="blocks_accordions"
 												value={blockonsOptions.blocks?.accordions}
 												inputType="toggle"
-												description={"Block One Description"}
+												description={__(
+													"Display content in smaller areas with collapsible lists",
+													"blockons"
+												)}
 												onChange={handleChange}
 											/>
 											<SettingBlock
-												title={"Icon List"}
+												title={__("Icon List", "blockons")}
 												slug="blocks_icon_list"
 												value={blockonsOptions.blocks?.icon_list}
 												inputType="toggle"
-												description={"Block Two Description"}
+												description={__(
+													"Visually, more attractive list items with icons",
+													"blockons"
+												)}
 												onChange={handleChange}
 											/>
 											<SettingBlock
-												title={"Image Carousel"}
+												title={__("Image Carousel", "blockons")}
 												slug="blocks_image_carousel"
 												value={blockonsOptions.blocks?.image_carousel}
 												inputType="toggle"
-												description={"Block Three Description"}
+												description={__(
+													"Display multiple images in a neat carousel",
+													"blockons"
+												)}
 												onChange={handleChange}
 											/>
 											<SettingBlock
-												title={"Line Heading"}
+												title={__("Line Heading", "blockons")}
 												slug="blocks_line_heading"
 												value={blockonsOptions.blocks?.line_heading}
 												inputType="toggle"
-												description={"Block Three Description"}
+												description={__(
+													"More advanced and customizable line headings",
+													"blockons"
+												)}
 												onChange={handleChange}
 											/>
 											<SettingBlock
-												title={"Marketing Button"}
+												title={__("Marketing Button", "blockons")}
 												slug="blocks_marketing_button"
 												value={blockonsOptions.blocks?.marketing_button}
 												inputType="toggle"
-												description={"Block Three Description"}
+												description={__(
+													"An attractive, more trendy customizable call-to-action",
+													"blockons"
+												)}
 												onChange={handleChange}
 											/>
 											<SettingBlock
-												title={"Progress Bars"}
+												title={__("Progress Bars", "blockons")}
 												slug="blocks_progress_bars"
 												value={blockonsOptions.blocks?.progress_bars}
 												inputType="toggle"
-												description={"Block Three Description"}
+												description={__(
+													"Show progress with beautiful, animated bars",
+													"blockons"
+												)}
 												onChange={handleChange}
 											/>
 											<SettingBlock
-												title={"Search"}
+												title={__("Search", "blockons")}
 												slug="blocks_search"
 												value={blockonsOptions.blocks?.search}
 												inputType="toggle"
-												description={"Block Three Description"}
+												description={__(
+													"A search bar/icon with drop down or popup search",
+													"blockons"
+												)}
 												onChange={handleChange}
 											/>
 											<SettingBlock
-												title={"Testimonials"}
+												title={__("Testimonials", "blockons")}
 												slug="blocks_testimonials"
 												value={blockonsOptions.blocks?.testimonials}
 												inputType="toggle"
-												description={"Block Three Description"}
+												description={__(
+													"Display client testimonials in a slider or carousel",
+													"blockons"
+												)}
 												onChange={handleChange}
 											/>
 											<SettingBlock
-												title={"Video Slider"}
+												title={__("Video Slider", "blockons")}
 												slug="blocks_video_slider"
 												value={blockonsOptions.blocks?.video_slider}
 												inputType="toggle"
-												description={"Block Three Description"}
+												description={__(
+													"Display multiple videos in a neat video slider",
+													"blockons"
+												)}
 												onChange={handleChange}
 											/>
 											<SettingBlock
-												title={"Account Icon"}
+												title={__("Account Icon", "blockons")}
 												slug="blocks_wc_account_icon"
 												value={blockonsOptions.blocks?.wc_account_icon}
 												inputType="toggle"
-												description={"Block Three Description"}
+												description={__(
+													"A simple icon linking to a users WC Account",
+													"blockons"
+												)}
 												onChange={handleChange}
 												pluginSpecific="WooCommerce"
 												{...(wcActive ? "" : { disable: true })}
 											/>
 											<SettingBlock
-												title={"Featured Product"}
+												title={__("Featured Product", "blockons")}
 												slug="blocks_wc_featured_product"
 												value={blockonsOptions.blocks?.wc_featured_product}
 												inputType="toggle"
-												description={"Block Three Description"}
+												description={__(
+													"Display a WC featured product with multple layouts",
+													"blockons"
+												)}
 												onChange={handleChange}
 												pluginSpecific="WooCommerce"
 												{...(wcActive ? "" : { disable: true })}
 											/>
 											<SettingBlock
-												title={"Mini Cart"}
+												title={__("Mini Cart", "blockons")}
 												slug="blocks_wc_mini_cart"
 												value={blockonsOptions.blocks?.wc_mini_cart}
 												inputType="toggle"
-												description={"Block Three Description"}
+												description={__(
+													"A simple WC cart icon with a full cart drop down",
+													"blockons"
+												)}
 												onChange={handleChange}
 												pluginSpecific="WooCommerce"
 												{...(wcActive ? "" : { disable: true })}
@@ -310,7 +346,7 @@ const Settings = () => {
 										<table className="form-table" role="presentation">
 											<tbody>
 												<SettingRow
-													title={"Section Heading"}
+													title={__("Section Heading", "blockons")}
 													description={__(
 														"this is a description for the heading component",
 														"blockons"
@@ -318,19 +354,25 @@ const Settings = () => {
 													inputType="heading"
 												/>
 												<SettingRow
-													title={"My Ssdfetting"}
+													title={__("My Ssdfetting", "blockons")}
 													slug="global_setting_one"
 													value={blockonsOptions.setting_one}
 													inputType="toggle"
-													tooltip={"Some Description"}
+													tooltip={__(
+														"This is the tool tip / hint for this setting",
+														"blockons"
+													)}
 													onChange={handleChange}
 												/>
 												<SettingRow
-													title={"My Settigbfbbng"}
+													title={__("My Settigbfbbng", "blockons")}
 													slug="global_setting_two"
 													value={blockonsOptions.setting_two}
 													inputType="toggle"
-													tooltip={"Some Description"}
+													tooltip={__(
+														"This is the tool tip / hint for this setting",
+														"blockons"
+													)}
 													onChange={handleChange}
 												/>
 											</tbody>

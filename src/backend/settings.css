@@ -303,7 +303,7 @@ a.blockons-docs::before {
 
 /* -- Table Styling -- */
 .blockonsheading {
-	margin: 40px -10px 20px;
+	margin: 40px -10px 0;
 }
 .blockonsheading.nomargin {
 	margin-top: 0;
@@ -495,9 +495,27 @@ a.blockons-docs::before {
 	+ .toggle-switch-slider:before {
 	transform: translateX(26px);
 }
+/* -- Smaller toggle in other settings -- */
+#blockons-content-2 .toggle-switch {
+	width: 40px;
+	height: 24px;
+}
+#blockons-content-2 .toggle-switch-slider:before {
+	height: 18px;
+	width: 18px;
+	left: 3px;
+	bottom: 3px;
+}
+#blockons-content-2
+	.toggle-switch
+	input.toggle-switch-checkbox:checked
+	+ .toggle-switch-slider:before {
+	transform: translateX(16px);
+}
 /* ---- Setting Blocks Wrapper ---- */
 .blockons-block-settings {
 	display: flex;
+	align-items: flex-start;
 	flex-wrap: wrap;
 	margin: 0 -10px;
 }
