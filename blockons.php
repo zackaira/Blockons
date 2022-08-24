@@ -86,8 +86,10 @@ if ( function_exists( 'blockons_fs' ) ) {
 	$blockonsOptions = json_decode( get_option('blockons_options') );
 	$blockonsBlocks = $blockonsOptions ? $blockonsOptions->blocks : $blockonsDefaults->blocks;
 
+	// var_dump($blockonsBlocks);
+
 	// Site Blocks
-	if ($blockonsBlocks) {
+	if ($blockonsBlocks) :
 		// For adding a new block, update here, BLOCKONS_BLOCK_COUNT at the top, AND class-scripts.php -> function '_update_default_settings'
 
 		// if (isset($blockonsBlocks->layout_container)) {
@@ -133,7 +135,7 @@ if ( function_exists( 'blockons_fs' ) ) {
 				require BLOCKONS_PLUGIN_DIR . 'build/wc-featured-product/index.php';
 			}
 		}
-	}
+	endif;
 
 	/**
      * Function to delete all StoreCustomizer data IF set

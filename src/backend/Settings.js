@@ -133,8 +133,8 @@ const Settings = () => {
 		axios
 			.get(url + "/settings")
 			.then((res) => {
-				const blockonsOptions = res.data.blockonsOptions
-					? JSON.parse(res.data.blockonsOptions)
+				const blockonsOptions = res.data
+					? JSON.parse(res.data)
 					: console.log("Blockons Options Empty");
 
 				// setState dynamically for all settings
