@@ -537,15 +537,17 @@ a.blockons-docs::before {
 	padding: 0;
 	font-size: 13px;
 	max-width: 520px;
+	color: #757575;
 }
 .blockons-more {
-	margin: 20px 0 0;
+	margin: 20px 0 12px;
 	text-align: center;
 	font-size: 18px;
 	color: #787878;
 }
 .blockonsInfoTab .blockons-video,
-.blockonsInfoTab .blockons-help {
+.blockonsInfoTab .blockons-help,
+#blockons-content-1 p {
 	text-align: center;
 }
 /* ---- Info Tab ---- */
@@ -559,6 +561,7 @@ a.blockons-docs::before {
 	padding: 12px 20px;
 	font-size: 14px;
 	line-height: 1;
+	min-width: 116px;
 	text-decoration: none;
 	letter-spacing: 0.2px;
 	transition: all 0.25s ease-in-out 0s;

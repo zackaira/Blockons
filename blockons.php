@@ -20,6 +20,9 @@ defined( 'ABSPATH' ) || exit;
 if ( !defined( 'BLOCKONS_PLUGIN_VERSION' ) ) {
 	define('BLOCKONS_PLUGIN_VERSION', '1.0.0');
 }
+if ( !defined( 'BLOCKONS_BLOCKS_COUNT' ) ) { // Update this when ADDING blocks
+	define('BLOCKONS_BLOCKS_COUNT', '12');
+}
 if ( !defined( 'BLOCKONS_PLUGIN_URL' ) ) {
 	define('BLOCKONS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
@@ -34,19 +37,23 @@ if ( function_exists( 'blockons_fs' ) ) {
 		// Create a helper function for easy SDK access.
 		function blockons_fs() {
 			global $blockons_fs;
-
+	
 			if ( ! isset( $blockons_fs ) ) {
 				// Include Freemius SDK.
 				require_once dirname(__FILE__) . '/freemius/start.php';
-
+	
 				$blockons_fs = fs_dynamic_init( array(
 					'id'                  => '10882',
 					'slug'                => 'blockons',
+					'premium_slug'        => 'blockons-pro',
 					'type'                => 'plugin',
 					'public_key'          => 'pk_8cdb47fdecf5c0742694da12b7b0e',
-					'is_premium'          => false,
+					'is_premium'          => true,
+					'premium_suffix'      => 'Pro',
+					// If your plugin is a serviceware, set this option to false.
+					'has_premium_version' => true,
 					'has_addons'          => false,
-					'has_paid_plans'      => false,
+					'has_paid_plans'      => true,
 					'menu'                => array(
 						'slug'           => 'blockons-settings',
 						'contact'        => false,
@@ -55,9 +62,12 @@ if ( function_exists( 'blockons_fs' ) ) {
 							'slug' => 'options-general.php',
 						),
 					),
+					// Set the SDK to work in a sandbox mode (for development & testing).
+					// IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
+					'secret_key'          => 'sk_m$~kLYwaQ;nO{{y[Q.KW8+g8#^)Gy',
 				) );
 			}
-
+	
 			return $blockons_fs;
 		}
 
@@ -70,54 +80,77 @@ if ( function_exists( 'blockons_fs' ) ) {
 	require_once 'classes/class-scripts.php';
 	require_once 'classes/class-rest-api.php';
 	require_once 'classes/class-admin.php';
+	require_once 'classes/class-notices.php';
 
-	$blockonsDefaults = get_option('blockons_default_options');
-	$blockonsOptions = get_option('blockons_options');
-	$blockonsBlocks = $blockonsOptions ? json_decode($blockonsOptions['blockonsOptions']) : json_decode($blockonsDefaults);
+	$blockonsDefaults = json_decode( get_option('blockons_default_options') );
+	$blockonsOptions = json_decode( get_option('blockons_options') );
+	$blockonsBlocks = $blockonsOptions ? $blockonsOptions->blocks : $blockonsDefaults->blocks;
 
 	// Site Blocks
 	if ($blockonsBlocks) {
-		if ($blockonsBlocks->blocks->accordions) {
+		// For adding a new block, update here, BLOCKONS_BLOCK_COUNT at the top, AND class-scripts.php -> function '_update_default_settings'
+
+		// if (isset($blockonsBlocks->layout_container)) {
+		// 	require BLOCKONS_PLUGIN_DIR . 'build/layout-container/index.php';
+		// }
+		if (isset($blockonsBlocks->accordions)) {
 			require BLOCKONS_PLUGIN_DIR . 'build/accordions/index.php';
 		}
-		if ($blockonsBlocks->blocks->search) {
+		if (isset($blockonsBlocks->search)) {
 			require BLOCKONS_PLUGIN_DIR . 'build/search/index.php';
 		}
-		if ($blockonsBlocks->blocks->icon_list) {
+		if (isset($blockonsBlocks->icon_list)) {
 			require BLOCKONS_PLUGIN_DIR . 'build/icon-list/index.php';
 		}
-		if ($blockonsBlocks->blocks->line_heading) {
+		if (isset($blockonsBlocks->line_heading)) {
 			require BLOCKONS_PLUGIN_DIR . 'build/line-heading/index.php';
 		}
-		if ($blockonsBlocks->blocks->image_carousel) {
+		if (isset($blockonsBlocks->image_carousel)) {
 			require BLOCKONS_PLUGIN_DIR . 'build/image-carousel/index.php';
 		}
-		if ($blockonsBlocks->blocks->progress_bars) {
+		if (isset($blockonsBlocks->progress_bars)) {
 			require BLOCKONS_PLUGIN_DIR . 'build/progress-bars/index.php';
 		}
-		if ($blockonsBlocks->blocks->marketing_button) {
+		if (isset($blockonsBlocks->marketing_button)) {
 			require BLOCKONS_PLUGIN_DIR . 'build/marketing-button/index.php';
 		}
-		if ($blockonsBlocks->blocks->testimonials) {
+		if (isset($blockonsBlocks->testimonials)) {
 			require BLOCKONS_PLUGIN_DIR . 'build/testimonials/index.php';
 		}
-		if ($blockonsBlocks->blocks->video_slider) {
+		if (isset($blockonsBlocks->video_slider)) {
 			require BLOCKONS_PLUGIN_DIR . 'build/video-slider/index.php';
 		}
 
 		// WooCommerce Blocks
 		if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
-			if ($blockonsBlocks->blocks->wc_account_icon) {
+			if ($blockonsBlocks->wc_account_icon) {
 				require BLOCKONS_PLUGIN_DIR . 'build/wc-account-icon/index.php';
 			}
-			if ($blockonsBlocks->blocks->wc_mini_cart) {
+			if ($blockonsBlocks->wc_mini_cart) {
 				require BLOCKONS_PLUGIN_DIR . 'build/wc-mini-cart/index.php';
 			}
-			if ($blockonsBlocks->blocks->wc_featured_product) {
+			if ($blockonsBlocks->wc_featured_product) {
 				require BLOCKONS_PLUGIN_DIR . 'build/wc-featured-product/index.php';
 			}
 		}
 	}
+
+	/**
+     * Function to delete all StoreCustomizer data IF set
+     */
+    function blockons_fs_uninstall_cleanup( $section ) {
+		global $wpdb;
+		// Delete all data if setting to delete data is checked
+		if ( $blockonsOptions->delete_all_settings ) {
+			// Delete all Linkt db options.
+			$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'blockons_%';" );
+			// Clear any cached data that has been removed.
+			wp_cache_flush();
+		}
+	}
+    if ( isset($blockonsOptions->delete_all_settings) ) {
+        blockons_fs()->add_action('after_uninstall', 'blockons_fs_uninstall_cleanup');
+    }
 
 	/**
 	 * Main instance of Blockons_Admin to prevent the need to use globals.
@@ -126,7 +159,7 @@ if ( function_exists( 'blockons_fs' ) ) {
 	 * @return object Blockons_Admin
 	 */
 	function blockons() {
-		$instance = Blockons::instance( __FILE__, BLOCKONS_PLUGIN_VERSION );
+		$instance = Blockons::instance( __FILE__, BLOCKONS_PLUGIN_VERSION ); 
 		return $instance;
 	}
 	blockons();

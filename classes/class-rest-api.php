@@ -16,6 +16,11 @@ class Blockons_WC_Rest_Routes {
 			'callback' => [$this, 'blockons_get_settings'],
 			'permission_callback' => [$this, 'blockons_get_settings_permission'],
 		]);
+		// register_rest_route('blcns/v1', '/defaults', [
+		// 	'methods' => 'GET',
+		// 	'callback' => [$this, 'blockons_get_defaults'],
+		// 	'permission_callback' => [$this, 'blockons_get_settings_permission'],
+		// ]);
 		register_rest_route('blcns/v1', '/settings', [
 			'methods' => 'POST',
 			'callback' => [$this, 'blockons_save_settings'],
@@ -54,6 +59,18 @@ class Blockons_WC_Rest_Routes {
 	}
 
 	/*
+	 * Get saved options from database
+	 */
+	// public function blockons_get_defaults() {
+	// 	$blockonsPluginDefaults = get_option('blockons_default_options');
+
+	// 	if (!$blockonsPluginDefaults)
+	// 		return;
+
+	// 	return rest_ensure_response($blockonsPluginDefaults);
+	// }
+
+	/*
 	 * Allow permissions for get options
 	 */
 	public function blockons_get_settings_permission() {
@@ -67,7 +84,7 @@ class Blockons_WC_Rest_Routes {
 		$req = file_get_contents('php://input');
 		$reqData = json_decode($req, true);
 
-		update_option('blockons_options', $reqData);
+		update_option('blockons_options', $reqData['blockonsOptions']);
 
 		return rest_ensure_response('Success!');
 	}

@@ -1,0 +1,46 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/layout-container",
+	"title": "Layout Container",
+	"textdomain": "blockons",
+	"icon": "menu",
+	"category": "blockons-category",
+	"keywords": ["layout", "container", "content", "banner"],
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"blahBlah": {
+			"type": "string",
+			"default": "h4"
+		}
+	},
+	"variations": [
+		{
+			"name": "example",
+			"title": "Example",
+			"attributes": {
+				"message": "This is an example!"
+			},
+			"innerBlocks": [
+				[
+					"blockons/layout-block",
+					"blockons/layout-block",
+					"blockons/layout-block"
+				]
+			]
+		},
+		{
+			"name": "exampdssdle",
+			"title": "Exafffmple",
+			"attributes": {
+				"message": "This is ann nk example!"
+			},
+			"innerBlocks": [["blockons/layout-block", "blockons/layout-block"]]
+		}
+	],
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": ["file:./style-index.css"]
+}

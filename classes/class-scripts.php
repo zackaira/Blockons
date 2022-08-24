@@ -35,6 +35,9 @@ class Blockons {
 		// Register Scripts for plugin.
 		add_action( 'init', array( $this, 'blockons_register_scripts' ), 10 );
 
+		// Update defaults if new settings added
+		add_action( 'plugins_loaded', array( $this, 'blockons_update_plugn_defaults' ) );
+
 		// Load frontend JS & CSS.
 		add_action( 'wp_enqueue_scripts', array( $this, 'blockons_frontend_scripts' ), 10 );
 
@@ -44,6 +47,19 @@ class Blockons {
 		$this->blockons_load_plugin_textdomain();
 		add_action( 'init', array( $this, 'blockons_load_localisation' ), 0 );
 	} // End __construct ()
+
+	/**
+	 * Update the plugin defaults setting if they change
+	 */
+	public function blockons_update_plugn_defaults() {
+		$defaultOptions = (object)$this->blockonsDefaults();
+		$newDefaultOptions = json_encode($defaultOptions);
+
+		if ((get_option('blockons_plugin_version') != BLOCKONS_PLUGIN_VERSION ) && (get_option('blockons_default_options') != $defaultOptions)) {
+			update_option('blockons_default_options', $newDefaultOptions);
+			update_option('blockons_plugin_version', BLOCKONS_PLUGIN_VERSION);
+		}
+	}
 
 	/**
 	 * Register Scripts & Styles
@@ -81,7 +97,6 @@ class Blockons {
 	 */
 	public function blockons_frontend_scripts() {
 		
-
 	} // End blockons_frontend_scripts ()
 
 	/**
@@ -90,9 +105,6 @@ class Blockons {
 	public function blockons_admin_scripts( $hook = '' ) {
 		$adminPage = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
 		// $suffix = (defined('WP_DEBUG') && true === WP_DEBUG) ? '' : '.min';
-		global $blockons_fs;
-		$blockonsOptions = get_option('blockons_options');
-		$blockonsDefaults = get_option('blockons_default_options');
 
 		// Admin CSS
 		wp_register_style( 'blockons-admin-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/admin.css'), array(), BLOCKONS_PLUGIN_VERSION );
@@ -100,11 +112,21 @@ class Blockons {
 
 		// Admin JS
 		wp_register_script( 'blockons-admin-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/admin.js'), array(), BLOCKONS_PLUGIN_VERSION, true );
+		wp_localize_script('blockons-admin-script', 'blockonsObj', array(
+			'apiUrl' => esc_url(home_url('/wp-json')),
+			'nonce' => wp_create_nonce('wp_rest'),
+		));
 		wp_enqueue_script( 'blockons-admin-script');
+
+		wp_set_script_translations('blockons-admin-script', 'blockons', BLOCKONS_PLUGIN_DIR . 'lang');
 
 
 		// Return if not on Settings Page
 		if ('blockons-settings' !== $adminPage) return;
+
+		global $blockons_fs;
+		// $blockonsOptions = get_option('blockons_options');
+		$blockonsDefaults = get_option('blockons_default_options');
 
 		// Settings CSS
 		wp_register_style( 'blockons-admin-settings-style', esc_url(BLOCKONS_PLUGIN_URL . '/dist/settings.css'), array(), BLOCKONS_PLUGIN_VERSION );
@@ -117,12 +139,12 @@ class Blockons {
 		wp_localize_script('blockons-admin-settings-script', 'blockonsObj', array(
 			'apiUrl' => esc_url(home_url('/wp-json')),
 			'nonce' => wp_create_nonce('wp_rest'),
-			'blockonsOptions' => $blockonsOptions,
-			'blockonsDefaults' => $blockonsDefaults,
+			// 'blockonsOptions' => $blockonsOptions,
+			'blockonsDefaults' => json_decode($blockonsDefaults),
 			'accountUrl' => esc_url($blockons_fs->get_account_url()),
 			'wcActive' => defined('WC_VERSION') ? true : false,
 			// 'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
-			// 'can_use_premium_code' => blockons_fs()->can_use_premium_code(),
+			'can_use_premium_code' => blockons_fs()->can_use_premium_code(),
 		));
 		wp_enqueue_script('blockons-admin-settings-script');
 
@@ -167,20 +189,9 @@ class Blockons {
 		return self::$_instance;
 	} // End instance ()
 
-	/**
-	 * Installation. Runs on activation.
-	 */
-	public function install() {
-		$this->_save_initial_settings();
-		$this->_log_version_number();
-	}
-
-	/**
-	 * Save Initial Settings.
-	 */
-	private function _save_initial_settings() { //phpcs:ignore
+	public static function blockonsDefaults() {
 		$initialSettings = array(
-			"blocks" => array(
+			"blocks" => array( // For adding a new block, update this AND blockons.php
 				"accordions" => true,
 				"icon_list" => true,
 				"image_carousel" => true,
@@ -193,16 +204,36 @@ class Blockons {
 				"wc_account_icon" => true,
 				"wc_featured_product" => true,
 				"wc_mini_cart" => true,
-			)
+			),
+			"delete_all_settings" => false,
 		);
-		$settingsObj = (object)$initialSettings;
+		return $initialSettings;
+	}
 
-		update_option('blockons_default_options', json_encode($settingsObj));
+	/**
+	 * Installation. Runs on activation.
+	 */
+	public function install() {
+		$this->_update_default_settings();
+		$this->_log_version_number();
+	}
+
+	/**
+	 * Save Initial Default Settings.
+	 */
+	private function _update_default_settings() { //phpcs:ignore
+		$defaultOptions = (object)$this->blockonsDefaults();
+
+		// $blocksCount = count($initialSettings['blocks']);
+		// update_option('blockons_blocks_count', $blocksCount);
+		
+		update_option('blockons_default_options', json_encode($defaultOptions));
 	}
 	/**
 	 * Log the plugin version number.
 	 */
 	private function _log_version_number() { //phpcs:ignore
 		update_option('blockons_plugin_version', BLOCKONS_PLUGIN_VERSION);
+		// update_option('blockons_block_count', BLOCKONS_BLOCKS_COUNT);
 	}
 }

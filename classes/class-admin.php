@@ -16,10 +16,6 @@ class Blockons_Admin {
 		add_filter('plugin_action_links_blockons/blockons.php', array($this, 'blockons_add_plugins_settings_link'));
 		add_filter('plugin_row_meta', array($this, 'blockons_add_plugins_row_link'), 10, 2);
 
-		// Add a first time, dismissable notice
-		// add_action('admin_init', array($this, 'blockons_install_notice_ignore'), 0);
-		// add_action('admin_notices', array($this, 'blockons_installed_notice'));
-
 		add_filter('block_categories_all', array($this, 'blockons_blocks_custom_category'), 10, 2);
 
 		// Register Post/Page level options
@@ -88,78 +84,6 @@ class Blockons_Admin {
 
 		echo wp_kses($html ,$allowed_html);
 	}
-
-	/**
-	 * ADMIN NOTICES
-	 * 
-	 * Create an Error Notice if no WooCommerce
-	 */
-	public function blockons_installed_notice() {
-		global $pagenow;
-		global $current_user;
-        $blockons_user_id = $current_user->ID;
-        $blockons_page = isset( $_GET['page'] ) ? $pagenow . '?page=' . sanitize_text_field($_GET['page']) . '&' : sanitize_text_field($pagenow) . '?';
-
-		if ( current_user_can( 'manage_options' ) && !get_user_meta( $blockons_user_id, 'blockons_install_notice_dismiss', true ) ) : ?>
-			<div class="notice notice-info blockons-admin-notice">
-                <h3><?php esc_html_e( 'Thank you for trying out Site Chat !', 'blockons' ); ?></h3>
-
-				<?php if ( ! blockons_fs()->can_use_premium_code__premium_only() ) : ?>
-					<p class="blockons-admin-txt"><?php
-						/* translators: 1: 'great launch specials'. */
-						printf( esc_html__( 'We\'ve just released Site Chat so we\'re running %1$s on Site Chat Pro.', 'blockons' ), wp_kses( '<a href="https://blockons.com/purchase/" target="_blank">great launch specials</a>', array( 'a' => array( 'href' => array (), 'target' => array() ) ) ) ); ?>
-					</p>
-				<?php endif; ?>
-				
-				<div class="blockons-notice-cols">
-					<div class="blockons-notice-col">
-						<h5><?php esc_html_e( 'Let\'s set up your Site Chat', 'blockons' ); ?></h5>
-						<p>
-							<?php
-							/* translators: 1: 'Site Chat Settings'. */
-							printf( esc_html__( 'Go to the %1$s page to easily set up your WhatsApp chat box.', 'blockons' ), wp_kses( '<a href="' . esc_url(admin_url('/options-general.php?page=blockons-settings')) . '">Site Chat Settings</a>', array( 'a' => array( 'href' => array () ) ) ) ); ?>
-						</p>
-						<a href="<?php echo esc_url(admin_url('/options-general.php?page=blockons-settings')); ?>" class="blockons-link">
-							<?php esc_html_e( 'Set up Site Chat', 'blockons' ); ?>
-						</a>
-					</div>
-					<div class="blockons-notice-col">
-						<h5><?php esc_html_e( 'Is something not working?', 'blockons' ); ?></h5>
-						<p>
-							<?php
-							/* translators: 1: 'Read our documentation'. */
-							printf( esc_html__( 'Have you found a bug? Are you not sure on how to set it up? %1$s or get help on setting up Site Chat.', 'blockons' ), wp_kses( '<a href="https://blockons.com/documentation/" target="_blank">Read our documentation</a>', array( 'a' => array( 'href' => array (), 'target' => array() ) ) ) ); ?>
-						</p>
-						<a href="https://blockons.com/support/" class="blockons-link" target="_blank">
-							<?php esc_html_e( 'Contact our Support', 'blockons' ); ?>
-						</a>
-					</div>
-					<div class="blockons-notice-col">
-						<h5><?php esc_html_e( 'Help Site Chat', 'blockons' ); ?></h5>
-						<p>
-							<?php esc_html_e( 'If you\'re willing to, please consider giving us a 5 star rating... It\'ll really help us improve Site Chat and gain users trust.', 'blockons' ); ?>
-						</p>
-						<span class="blockons-link blockons-rating-click"><?php esc_html_e( 'Sure, I\'ll rate Site Chat', 'blockons' ); ?></span>
-						<div class="blockons-notice-rate">
-							<p><?php esc_html_e( 'If you\'re not happy, please get in contact and let us help you fix the issue right away.', 'blockons' ); ?></p>
-							<a href="https://wordpress.org/support/plugin/site-chat/reviews/#new-post" class="blockons-link" target="_blank"><?php esc_html_e( 'I\'m happy to give you 5 stars', 'blockons' ); ?></a><br />
-							<a href="https://blockons.com/support/contact/" class="blockons-link" target="_blank"><?php esc_html_e( 'I\'m not happy. Please help!', 'blockons' ); ?></a>
-						</div>
-					</div>
-				</div>
-				<a href="<?php echo esc_url(admin_url($blockons_page . 'blockons_install_notice_ignore')); ?>" class="blockons-notice-close"></a>
-			</div><?php
-		endif;
-	}
-	// Make Notice Dismissable
-	public function blockons_install_notice_ignore() {
-		global $current_user;
-		$blockons_user_id = $current_user->ID;
-	
-		if (isset($_GET['blockons_install_notice_ignore'])) {
-			update_user_meta( $blockons_user_id, 'blockons_install_notice_dismiss', true );
-		}
-    }
 
 	/**
 	 * Create Blockons blocks Category

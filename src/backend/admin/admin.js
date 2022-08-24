@@ -1,24 +1,26 @@
+// import React from "react";
+// import ReactDOM from "react-dom";
+// import UpdateNotice from "./UpdateNotice";
 import "./admin.css";
 /*
  * Blockons Admin JS
  */
 document.addEventListener("DOMContentLoaded", function () {
-	const blockonsRm_FsMenuLinks = document.querySelectorAll(
+	const blockonsRemFsLinks = document.querySelectorAll(
 		".fs-submenu-item.blockons"
 	);
-	if (blockonsRm_FsMenuLinks) {
-		blockonsRm_FsMenuLinks.forEach((item) => {
+	if (blockonsRemFsLinks) {
+		blockonsRemFsLinks.forEach((item) => {
 			item.closest("li").remove();
 		});
 	}
 
-	//   const rateClick = document.querySelector(".wasc-rating-click");
-	//   const rateShow = document.querySelector(".wasc-notice-rate");
+	// const blockonsUpdate = document.getElementById("blockons-update");
 
-	//   if (rateClick) {
-	//     rateClick.addEventListener("click", () => {
-	//       rateClick.style.display = "none";
-	//       rateShow.style.display = "block";
-	//     });
-	//   }
+	// if (typeof blockonsUpdate !== undefined && blockonsUpdate !== null) {
+	// 	ReactDOM.render(
+	// 		<UpdateNotice />,
+	// 		document.getElementById("blockons-update")
+	// 	);
+	// }
 });

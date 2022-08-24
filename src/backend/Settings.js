@@ -7,18 +7,41 @@ import SettingBlock from "./components/SettingBlock";
 import InfoTab from "./InfoTab";
 import Loader from "./Loader";
 
+// const blockonsDefaults = {
+// 	blocks: {
+// 		accordions: true,
+// 		icon_list: true,
+// 		image_carousel: true,
+// 		line_heading: true,
+// 		marketing_button: true,
+// 		progress_bars: true,
+// 		search: true,
+// 		testimonials: true,
+// 		video_slider: true,
+// 		wc_account_icon: true,
+// 		wc_featured_product: true,
+// 		wc_mini_cart: true,
+// 	},
+// 	delete_all_settings: false,
+// };
+
 const Settings = () => {
 	const blockonsObject = blockonsObj;
 	const url = `${blockonsObject.apiUrl}/blcns/v1`;
 	const [loader, setLoader] = useState(false);
 	const [loadSetting, setLoadSetting] = useState(true);
-	// const isPremium = blockonsObject.can_use_premium_code === "1" ? true : false;
+	const isPremium = blockonsObject.can_use_premium_code === "1" ? true : false;
 	const wcActive = Boolean(blockonsObject.wcActive);
-	const blockonsDefaults = blockonsObject.blockonsDefaults
-		? JSON.parse(blockonsObject.blockonsDefaults)
-		: {};
+	const defaults = blockonsObject?.blockonsDefaults;
 
 	const [blockonsOptions, setBlockonsOptions] = useState({});
+
+	console.log("---------------- Defaults -----");
+	console.log(defaults);
+	console.log("---------------- Defaults -----");
+	console.log("---------------- Options > -----");
+	console.log(blockonsOptions);
+	console.log("---------------- Options < -----");
 
 	// setState dynamically for each setting
 	const handleChange = ({
@@ -49,14 +72,11 @@ const Settings = () => {
 		});
 	};
 
-	// console.log("-------- Saved Options --------");
-	// console.log(blockonsOptions);
-	// console.log("-------- Saved Options --------");
-
 	// Submit form
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setLoader(true);
+
 		axios
 			.post(
 				url + "/settings",
@@ -72,6 +92,7 @@ const Settings = () => {
 				}
 			)
 			.then((res) => {
+				console.log(res);
 				// const blockonsOptions = JSON.parse(res.data.blockonsOptions);
 				setLoader(false);
 			});
@@ -125,15 +146,13 @@ const Settings = () => {
 						}));
 					}
 				} else {
-					setBlockonsOptions(blockonsDefaults); // Set settings to defaults if not found
+					setBlockonsOptions(defaults); // Set settings to defaults if not found
+					// document.querySelector(".blockonsSaveBtn").click();
 				}
 				// console.log(blockonsOptions);
 			})
 			.then(() => {
-				// blockonsAdjustSettings();
 				setLoadSetting(false);
-
-				// blockonsAdjustUI(blockonsOptions.add_blockons);
 			});
 	}, []);
 
@@ -142,6 +161,7 @@ const Settings = () => {
 			<div className="blockons-settings">
 				<div className="blockonsSettingBar">
 					<h2>{"Blockons Settings"}</h2>
+					{isPremium && <h4>PREMIUM VERSION !!</h4>}
 					<div className="blockonsSettingBarOptions">
 						<a
 							href={blockonsObject.accountUrl}
@@ -165,7 +185,7 @@ const Settings = () => {
 										{__("Blocks", "blockons")}
 									</a>
 								</li>
-								<li>
+								<li className="blockons-hide">
 									<a id="blockonstab-2" className="blockons-tab">
 										{__("Settings", "blockons")}
 									</a>
@@ -197,6 +217,8 @@ const Settings = () => {
 											</p>
 										</div>
 
+										{!isPremium && <h4>PLEASE UPGRADE NOW !!</h4>}
+
 										<div className="blockons-block-settings">
 											<SettingBlock
 												title={__("Accordions", "blockons")}
@@ -205,6 +227,17 @@ const Settings = () => {
 												inputType="toggle"
 												description={__(
 													"Display content in smaller areas with collapsible lists",
+													"blockons"
+												)}
+												onChange={handleChange}
+											/>
+											<SettingBlock
+												title={__("Layout Container", "blockons")}
+												slug="blocks_layout_container"
+												value={blockonsOptions.blocks?.layout_container}
+												inputType="toggle"
+												description={__(
+													"A more advaced layout block for your pages",
 													"blockons"
 												)}
 												onChange={handleChange}
@@ -340,6 +373,12 @@ const Settings = () => {
 										<div className="blockons-more">
 											{__("More Blocks Coming Soon...", "blockons")}
 										</div>
+										<p>
+											{__(
+												"Get in touch and let us know which blocks you need for your site.",
+												"blockons"
+											)}
+										</p>
 									</div>
 
 									<div id="blockons-content-2" className="blockons-content">
