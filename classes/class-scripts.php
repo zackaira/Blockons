@@ -35,7 +35,7 @@ class Blockons {
 		// Register Scripts for plugin.
 		add_action( 'init', array( $this, 'blockons_register_scripts' ), 10 );
 
-		// Update defaults if new settings added
+		// Update/fix defaults on plugins_loaded hook
 		add_action( 'plugins_loaded', array( $this, 'blockons_update_plugn_defaults' ) );
 
 		// Load frontend JS & CSS.
@@ -47,19 +47,6 @@ class Blockons {
 		$this->blockons_load_plugin_textdomain();
 		add_action( 'init', array( $this, 'blockons_load_localisation' ), 0 );
 	} // End __construct ()
-
-	/**
-	 * Update the plugin defaults setting if they change
-	 */
-	public function blockons_update_plugn_defaults() {
-		$defaultOptions = (object)$this->blockonsDefaults();
-		$newDefaultOptions = json_encode($defaultOptions);
-
-		if ((get_option('blockons_plugin_version') != BLOCKONS_PLUGIN_VERSION ) && (get_option('blockons_default_options') != $defaultOptions)) {
-			update_option('blockons_default_options', $newDefaultOptions);
-			update_option('blockons_plugin_version', BLOCKONS_PLUGIN_VERSION);
-		}
-	}
 
 	/**
 	 * Register Scripts & Styles
@@ -192,22 +179,39 @@ class Blockons {
 	public static function blockonsDefaults() {
 		$initialSettings = array(
 			"blocks" => array( // For adding a new block, update this AND blockons.php
-				"accordions" => true,
-				"icon_list" => true,
-				"image_carousel" => true,
-				"line_heading" => true,
-				"marketing_button" => true,
-				"progress_bars" => true,
-				"search" => true,
-				"testimonials" => true,
-				"video_slider" => true,
-				"wc_account_icon" => true,
-				"wc_featured_product" => true,
-				"wc_mini_cart" => true,
+				"accordions" => true, // 12
+				"icon_list" => true, // 11
+				"image_carousel" => true, // 10
+				"line_heading" => true, // 9
+				"marketing_button" => true, // 8
+				"progress_bars" => true, // 7
+				"search" => true, // 6
+				"testimonials" => true, // 5
+				"video_slider" => true, // 4
+				"wc_account_icon" => true, // 3
+				"wc_featured_product" => true, // 2
+				"wc_mini_cart" => true, // 1
 			),
-			"delete_all_settings" => false,
+			// "delete_all_settings" => false,
 		);
 		return $initialSettings;
+	}
+
+	/**
+	 * Update the plugin defaults setting if they change
+	 */
+	public function blockons_update_plugn_defaults() {
+		$defaultOptions = (object)$this->blockonsDefaults();
+		$newDefaultOptions = json_encode($defaultOptions);
+
+		// Fix saved plugin version if no setting saved
+		if (!get_option('blockons_plugin_version') || (get_option('blockons_plugin_version') != BLOCKONS_PLUGIN_VERSION)) {
+			update_option('blockons_plugin_version', BLOCKONS_PLUGIN_VERSION);
+		}
+		// Fix/Update Defaults if no setting saved or defaults are different
+		if (!get_option('blockons_default_options') || (get_option('blockons_default_options') != $defaultOptions)) {
+			update_option('blockons_default_options', $newDefaultOptions);
+		}
 	}
 
 	/**

@@ -220,6 +220,22 @@ const Settings = () => {
 										{!isPremium && <h4>PLEASE UPGRADE NOW !!</h4>}
 
 										<div className="blockons-block-settings">
+											{console.log(blockonsOptions.blocks)}
+											{/* {blockonsOptions.blocks.map((block) => {
+												<SettingBlock
+													title={__("Accordions", "blockons")}
+													slug={`blocks_accordions`}
+													value={blockonsOptions.blocks?.accordions}
+													inputType="toggle"
+													description={__(
+														"Display content in smaller areas with collapsible lists",
+														"blockons"
+													)}
+													onClick={console.log(block)}
+													onChange={handleChange}
+												/>;
+											})} */}
+
 											<SettingBlock
 												title={__("Accordions", "blockons")}
 												slug="blocks_accordions"

@@ -76,25 +76,27 @@ class Blockons_Notices {
 		if ( !is_admin() )
 			return;
 
-		$settings['update_blocks'] = array(
-			'id'    => '01',
-			'type'  => 'info', // info | error | warning | success
-			'title' => __( 'Update Blocks', 'blockons' ),
-			'text'  => __( 'See our latest blocks added to Blockons and select which ones to enable', 'blockons' ),
+		var_dump(get_option('blockons_default_options'));
+		
+		$settings['new_blocks_added'] = array(
+			'id'    => str_replace(".", "_", BLOCKONS_BLOCKS_COUNT),
+			'type'  => 'error', // info | error | warning | success
+			'title' => __( 'New blocks have been added to the Blockons plugin', 'blockons' ),
+			'text'  => __( 'to enable the new blocks and start using then in the WP editor', 'blockons' ),
 			'link'  => admin_url( 'options-general.php?page=blockons-settings' ),
-			'link_text' => __( 'Go to Settings', 'blockons' ),
-			// 'inline' => true, // To display the link & text inline
+			'link_text' => __( 'Go to the Blockons settings', 'blockons' ),
+			'inline' => true, // To display the link & text inline
 		);
 
-		$settings['new_settings'] = array(
-			'id'    => '02',
-			'type'  => 'info',
-			'title' => __( 'Update Blocks', 'blockons' ),
-			'text'  => __( 'See our latest blocks added to Blockons and select which ones to enable', 'blockons' ),
-			'link'  => admin_url( 'options-general.php?page=blockons-settings' ),
-			'link_text' => __( 'Go to Settings', 'blockons' ),
-			'inline' => true,
-		);
+		// $settings['new_settings'] = array(
+		// 	'id'    => '01',
+		// 	'type'  => 'info',
+		// 	'title' => __( 'Blockons, manually added notice', 'blockons' ),
+		// 	'text'  => __( 'Other notices can be added simply by adding then here in the code', 'blockons' ),
+		// 	// 'link'  => admin_url( 'options-general.php?page=blockons-settings' ),
+		// 	// 'link_text' => __( 'Go to Settings', 'blockons' ),
+		// 	// 'inline' => true,
+		// );
 
 		return $settings;
 	}
