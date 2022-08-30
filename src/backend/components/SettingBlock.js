@@ -1,6 +1,5 @@
 import React from "react";
 import InputToggleSwitch from "./inputs/InputToggleSwitch";
-import { blockonsConvertToSlug } from "../helpers";
 
 const SettingRow = (props) => {
 	return (
@@ -11,8 +10,12 @@ const SettingRow = (props) => {
 						<div className="wcbanner">{props.pluginSpecific}</div>
 					)}
 
-					<h4 className="blockons-block-title">{props.title}</h4>
-					<p className="blockons-block-desc">{props.description}</p>
+					{props.title && (
+						<h4 className="blockons-block-title">{props.title}</h4>
+					)}
+					{props.description && (
+						<p className="blockons-block-desc">{props.description}</p>
+					)}
 					<InputToggleSwitch {...props} />
 				</div>
 			</div>

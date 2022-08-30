@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Blockons
- * Version: 1.0.1
+ * Version: 1.0.0
  * Plugin URI: https://blockons.com/
  * Description: WordPress editor blocks for you to build your website
  * Author: Kaira
@@ -18,10 +18,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( !defined( 'BLOCKONS_PLUGIN_VERSION' ) ) {
-	define('BLOCKONS_PLUGIN_VERSION', '1.0.1');
-}
-if ( !defined( 'BLOCKONS_BLOCKS_COUNT' ) ) { // Update this when ADDING blocks
-	define('BLOCKONS_BLOCKS_COUNT', '12');
+	define('BLOCKONS_PLUGIN_VERSION', '1.0.0');
 }
 if ( !defined( 'BLOCKONS_PLUGIN_URL' ) ) {
 	define('BLOCKONS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -86,25 +83,19 @@ if ( function_exists( 'blockons_fs' ) ) {
 	$blockonsOptions = json_decode( get_option('blockons_options') );
 	$blockonsBlocks = $blockonsOptions ? (array)$blockonsOptions->blocks : (array)$blockonsDefaults->blocks;
 
-
-
-	// WORKING ON ADDING NEW BLOCKS WORKING WITH DATABASE & NOTICE TELLING USERS TO ENABLE THE NEW BLOCKS
-
-
-
 	// Site Blocks
 	if ($blockonsBlocks) :
 		// Loop out blocks
-		$wc_blocks = array();
-
 		foreach ($blockonsBlocks as $blockName => $exists) {
 			$prefix = substr($blockName, 0, 3);
 
-			if ($exists) {
-				if ($prefix != 'wc_') {
+			if ($prefix != 'wc_' && $exists) {
+				if ( file_exists(BLOCKONS_PLUGIN_DIR . 'build/' . str_replace("_", "-", $blockName) . '/index.php') ) {
 					require BLOCKONS_PLUGIN_DIR . 'build/' . str_replace("_", "-", $blockName) . '/index.php';
 				}
-				if ($prefix == 'wc_' && Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' )) {
+			}
+			if ($prefix == 'wc_' && Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) && $exists) {
+				if ( file_exists(BLOCKONS_PLUGIN_DIR . 'build/' . str_replace("_", "-", $blockName) . '/index.php') ) {
 					require BLOCKONS_PLUGIN_DIR . 'build/' . str_replace("_", "-", $blockName) . '/index.php';
 				}
 			}

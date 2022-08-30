@@ -6,24 +6,7 @@ import SettingRow from "./components/SettingRow";
 import SettingBlock from "./components/SettingBlock";
 import InfoTab from "./InfoTab";
 import Loader from "./Loader";
-
-// const blockonsDefaults = {
-// 	blocks: {
-// 		accordions: true,
-// 		icon_list: true,
-// 		image_carousel: true,
-// 		line_heading: true,
-// 		marketing_button: true,
-// 		progress_bars: true,
-// 		search: true,
-// 		testimonials: true,
-// 		video_slider: true,
-// 		wc_account_icon: true,
-// 		wc_featured_product: true,
-// 		wc_mini_cart: true,
-// 	},
-// 	delete_all_settings: false,
-// };
+import { blockonsBlockBlurbs } from "./helpers";
 
 const Settings = () => {
 	const blockonsObject = blockonsObj;
@@ -32,16 +15,9 @@ const Settings = () => {
 	const [loadSetting, setLoadSetting] = useState(true);
 	const isPremium = blockonsObject.can_use_premium_code === "1" ? true : false;
 	const wcActive = Boolean(blockonsObject.wcActive);
-	const defaults = blockonsObject?.blockonsDefaults;
+	const defaults = blockonsObject.blockonsDefaults;
 
 	const [blockonsOptions, setBlockonsOptions] = useState({});
-
-	console.log("---------------- Defaults -----");
-	console.log(defaults);
-	console.log("---------------- Defaults -----");
-	console.log("---------------- Options > -----");
-	console.log(blockonsOptions);
-	console.log("---------------- Options < -----");
 
 	// setState dynamically for each setting
 	const handleChange = ({
@@ -92,7 +68,7 @@ const Settings = () => {
 				}
 			)
 			.then((res) => {
-				console.log(res);
+				// console.log(res);
 				// const blockonsOptions = JSON.parse(res.data.blockonsOptions);
 				setLoader(false);
 			});
@@ -220,171 +196,39 @@ const Settings = () => {
 										{!isPremium && <h4>PLEASE UPGRADE NOW !!</h4>}
 
 										<div className="blockons-block-settings">
-											{console.log(blockonsOptions.blocks)}
-											{/* {blockonsOptions.blocks.map((block) => {
-												<SettingBlock
-													title={__("Accordions", "blockons")}
-													slug={`blocks_accordions`}
-													value={blockonsOptions.blocks?.accordions}
-													inputType="toggle"
-													description={__(
-														"Display content in smaller areas with collapsible lists",
-														"blockons"
-													)}
-													onClick={console.log(block)}
-													onChange={handleChange}
-												/>;
-											})} */}
-
-											<SettingBlock
-												title={__("Accordions", "blockons")}
-												slug="blocks_accordions"
-												value={blockonsOptions.blocks?.accordions}
-												inputType="toggle"
-												description={__(
-													"Display content in smaller areas with collapsible lists",
-													"blockons"
-												)}
-												onChange={handleChange}
-											/>
-											<SettingBlock
-												title={__("Layout Container", "blockons")}
-												slug="blocks_layout_container"
-												value={blockonsOptions.blocks?.layout_container}
-												inputType="toggle"
-												description={__(
-													"A more advaced layout block for your pages",
-													"blockons"
-												)}
-												onChange={handleChange}
-											/>
-											<SettingBlock
-												title={__("Icon List", "blockons")}
-												slug="blocks_icon_list"
-												value={blockonsOptions.blocks?.icon_list}
-												inputType="toggle"
-												description={__(
-													"Visually, more attractive list items with icons",
-													"blockons"
-												)}
-												onChange={handleChange}
-											/>
-											<SettingBlock
-												title={__("Image Carousel", "blockons")}
-												slug="blocks_image_carousel"
-												value={blockonsOptions.blocks?.image_carousel}
-												inputType="toggle"
-												description={__(
-													"Display multiple images in a neat carousel",
-													"blockons"
-												)}
-												onChange={handleChange}
-											/>
-											<SettingBlock
-												title={__("Line Heading", "blockons")}
-												slug="blocks_line_heading"
-												value={blockonsOptions.blocks?.line_heading}
-												inputType="toggle"
-												description={__(
-													"More advanced and customizable line headings",
-													"blockons"
-												)}
-												onChange={handleChange}
-											/>
-											<SettingBlock
-												title={__("Marketing Button", "blockons")}
-												slug="blocks_marketing_button"
-												value={blockonsOptions.blocks?.marketing_button}
-												inputType="toggle"
-												description={__(
-													"An attractive, more trendy customizable call-to-action",
-													"blockons"
-												)}
-												onChange={handleChange}
-											/>
-											<SettingBlock
-												title={__("Progress Bars", "blockons")}
-												slug="blocks_progress_bars"
-												value={blockonsOptions.blocks?.progress_bars}
-												inputType="toggle"
-												description={__(
-													"Show progress with beautiful, animated bars",
-													"blockons"
-												)}
-												onChange={handleChange}
-											/>
-											<SettingBlock
-												title={__("Search", "blockons")}
-												slug="blocks_search"
-												value={blockonsOptions.blocks?.search}
-												inputType="toggle"
-												description={__(
-													"A search bar/icon with drop down or popup search",
-													"blockons"
-												)}
-												onChange={handleChange}
-											/>
-											<SettingBlock
-												title={__("Testimonials", "blockons")}
-												slug="blocks_testimonials"
-												value={blockonsOptions.blocks?.testimonials}
-												inputType="toggle"
-												description={__(
-													"Display client testimonials in a slider or carousel",
-													"blockons"
-												)}
-												onChange={handleChange}
-											/>
-											<SettingBlock
-												title={__("Video Slider", "blockons")}
-												slug="blocks_video_slider"
-												value={blockonsOptions.blocks?.video_slider}
-												inputType="toggle"
-												description={__(
-													"Display multiple videos in a neat video slider",
-													"blockons"
-												)}
-												onChange={handleChange}
-											/>
-											<SettingBlock
-												title={__("Account Icon", "blockons")}
-												slug="blocks_wc_account_icon"
-												value={blockonsOptions.blocks?.wc_account_icon}
-												inputType="toggle"
-												description={__(
-													"A simple icon linking to a users WC Account",
-													"blockons"
-												)}
-												onChange={handleChange}
-												pluginSpecific="WooCommerce"
-												{...(wcActive ? "" : { disable: true })}
-											/>
-											<SettingBlock
-												title={__("Featured Product", "blockons")}
-												slug="blocks_wc_featured_product"
-												value={blockonsOptions.blocks?.wc_featured_product}
-												inputType="toggle"
-												description={__(
-													"Display a WC featured product with multple layouts",
-													"blockons"
-												)}
-												onChange={handleChange}
-												pluginSpecific="WooCommerce"
-												{...(wcActive ? "" : { disable: true })}
-											/>
-											<SettingBlock
-												title={__("Mini Cart", "blockons")}
-												slug="blocks_wc_mini_cart"
-												value={blockonsOptions.blocks?.wc_mini_cart}
-												inputType="toggle"
-												description={__(
-													"A simple WC cart icon with a full cart drop down",
-													"blockons"
-												)}
-												onChange={handleChange}
-												pluginSpecific="WooCommerce"
-												{...(wcActive ? "" : { disable: true })}
-											/>
+											{defaults.blocks &&
+												blockonsOptions &&
+												Object.entries(defaults.blocks).map(([key, value]) => (
+													<SettingBlock
+														key={key}
+														title={key.replaceAll("_", " ").replace("wc", "WC")}
+														slug={`blocks_${key}`}
+														value={
+															// If the setting exists in the saved settings then use it otherwise off by default
+															blockonsOptions && blockonsOptions.blocks
+																? blockonsOptions.blocks[key]
+																: false
+														}
+														inputType="toggle"
+														description={
+															blockonsBlockBlurbs[key]
+																? blockonsBlockBlurbs[key].desc
+																: ""
+														}
+														onChange={handleChange}
+														pluginSpecific={
+															blockonsBlockBlurbs[key]
+																? blockonsBlockBlurbs[key].pluginSpecific
+																: false
+														}
+														{...(blockonsBlockBlurbs[key] &&
+														blockonsBlockBlurbs[key].pluginSpecific ===
+															"WooCommerce" &&
+														!wcActive
+															? { disable: true }
+															: "")}
+													/>
+												))}
 										</div>
 										<div className="blockons-more">
 											{__("More Blocks Coming Soon...", "blockons")}

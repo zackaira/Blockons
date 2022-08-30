@@ -12,13 +12,8 @@ class Blockons_Notices {
 	 * Constructor funtion
 	 */
 	public function __construct() {
-		// if ( get_option('blockons_blocks_count') !== BLOCKONS_BLOCKS_COUNT ) {
-			// $blockonsBlocks = get_option('blockons_clocks_count') ? json_decode(get_option('blockons_clocks_count'))->blocks : array();
-			// $blocksCount = count((array)$blockonsBlocks);
-
-			add_action( 'admin_init', array($this, 'blockons_dismiss_notice' ), 0);
-			add_action( 'admin_notices', array( $this, 'blockons_add_update_notice' ) );
-		// }
+		add_action( 'admin_init', array($this, 'blockons_dismiss_notice' ), 0);
+		add_action( 'admin_notices', array( $this, 'blockons_add_update_notice' ) );
 	} // End __construct ()
 
 	public function blockons_add_update_notice() {
@@ -75,11 +70,9 @@ class Blockons_Notices {
 	private function blockons_notices() {
 		if ( !is_admin() )
 			return;
-
-		var_dump(get_option('blockons_default_options'));
 		
 		$settings['new_blocks_added'] = array(
-			'id'    => str_replace(".", "_", BLOCKONS_BLOCKS_COUNT),
+			'id'    => 'newblocks_001', // Increment this when adding new blocks
 			'type'  => 'error', // info | error | warning | success
 			'title' => __( 'New blocks have been added to the Blockons plugin', 'blockons' ),
 			'text'  => __( 'to enable the new blocks and start using then in the WP editor', 'blockons' ),

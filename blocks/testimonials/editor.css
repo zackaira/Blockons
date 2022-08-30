@@ -23,7 +23,8 @@
 }
 
 /* -- Image Button -- */
-.blockons-upload-button {
+.wp-block-blockons-testimonials .blockons-slider-wrap .blockons-upload-button {
+	box-shadow: none;
 }
 .blockons-upload-remove {
 	background-color: #fff;

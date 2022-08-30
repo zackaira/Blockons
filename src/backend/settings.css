@@ -11,7 +11,7 @@
 	position: relative;
 }
 .blockons-loader-wrap {
-	background-color: rgba(255, 255, 255, 0.55);
+	background-color: #fff;
 	position: absolute;
 	top: -5px;
 	left: -5px;
@@ -604,6 +604,7 @@ a.blockons-docs::before {
 	padding: 0;
 	font-size: 16px;
 	position: relative;
+	text-transform: capitalize;
 	z-index: 4;
 	text-shadow: 0 1px 3px rgb(255 255 255 / 80%);
 }

@@ -16,30 +16,6 @@
 			"default": "h4"
 		}
 	},
-	"variations": [
-		{
-			"name": "example",
-			"title": "Example",
-			"attributes": {
-				"message": "This is an example!"
-			},
-			"innerBlocks": [
-				[
-					"blockons/layout-block",
-					"blockons/layout-block",
-					"blockons/layout-block"
-				]
-			]
-		},
-		{
-			"name": "exampdssdle",
-			"title": "Exafffmple",
-			"attributes": {
-				"message": "This is ann nk example!"
-			},
-			"innerBlocks": [["blockons/layout-block", "blockons/layout-block"]]
-		}
-	],
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": ["file:./style-index.css"]

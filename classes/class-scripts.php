@@ -36,7 +36,7 @@ class Blockons {
 		add_action( 'init', array( $this, 'blockons_register_scripts' ), 10 );
 
 		// Update/fix defaults on plugins_loaded hook
-		add_action( 'plugins_loaded', array( $this, 'blockons_update_plugn_defaults' ) );
+		add_action( 'plugins_loaded', array( $this, 'blockons_update_plugin_defaults' ) );
 
 		// Load frontend JS & CSS.
 		add_action( 'wp_enqueue_scripts', array( $this, 'blockons_frontend_scripts' ), 10 );
@@ -178,7 +178,7 @@ class Blockons {
 
 	public static function blockonsDefaults() {
 		$initialSettings = array(
-			"blocks" => array( // For adding a new block, update this AND blockons.php
+			"blocks" => array( // For adding a new block, update this AND class-notices.php newblocks number
 				"accordions" => true, // 12
 				"icon_list" => true, // 11
 				"image_carousel" => true, // 10
@@ -200,9 +200,9 @@ class Blockons {
 	/**
 	 * Update the plugin defaults setting if they change
 	 */
-	public function blockons_update_plugn_defaults() {
+	public function blockons_update_plugin_defaults() {
 		$defaultOptions = (object)$this->blockonsDefaults();
-		$newDefaultOptions = json_encode($defaultOptions);
+		$objDefaultOptions = json_encode($defaultOptions);
 
 		// Fix saved plugin version if no setting saved
 		if (!get_option('blockons_plugin_version') || (get_option('blockons_plugin_version') != BLOCKONS_PLUGIN_VERSION)) {
@@ -210,7 +210,11 @@ class Blockons {
 		}
 		// Fix/Update Defaults if no setting saved or defaults are different
 		if (!get_option('blockons_default_options') || (get_option('blockons_default_options') != $defaultOptions)) {
-			update_option('blockons_default_options', $newDefaultOptions);
+			update_option('blockons_default_options', $objDefaultOptions);
+		}
+		// Fix saved plugin version if no setting saved
+		if (!get_option('blockons_options')) {
+			update_option('blockons_options', $objDefaultOptions);
 		}
 	}
 
@@ -231,6 +235,7 @@ class Blockons {
 		// $blocksCount = count($initialSettings['blocks']);
 		// update_option('blockons_blocks_count', $blocksCount);
 		
+		update_option('blockons_options', json_encode($defaultOptions));
 		update_option('blockons_default_options', json_encode($defaultOptions));
 	}
 	/**
@@ -238,6 +243,5 @@ class Blockons {
 	 */
 	private function _log_version_number() { //phpcs:ignore
 		update_option('blockons_plugin_version', BLOCKONS_PLUGIN_VERSION);
-		// update_option('blockons_block_count', BLOCKONS_BLOCKS_COUNT);
 	}
 }
