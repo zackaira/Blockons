@@ -198,21 +198,21 @@ class Blockons {
 	}
 
 	/**
-	 * Update the plugin defaults setting if they change
+	 * Update/Save the plugin version, defaults and settings if none exist | Run on 'plugins_loaded' hook
 	 */
 	public function blockons_update_plugin_defaults() {
 		$defaultOptions = (object)$this->blockonsDefaults();
 		$objDefaultOptions = json_encode($defaultOptions);
 
-		// Fix saved plugin version if no setting saved
+		// Saved current Plugin Version if no version is saved
 		if (!get_option('blockons_plugin_version') || (get_option('blockons_plugin_version') != BLOCKONS_PLUGIN_VERSION)) {
 			update_option('blockons_plugin_version', BLOCKONS_PLUGIN_VERSION);
 		}
-		// Fix/Update Defaults if no setting saved or defaults are different
+		// Fix/Update Defaults if no defaults are saved or if defaults are different to previous version defaults
 		if (!get_option('blockons_default_options') || (get_option('blockons_default_options') != $defaultOptions)) {
 			update_option('blockons_default_options', $objDefaultOptions);
 		}
-		// Fix saved plugin version if no setting saved
+		// Save new Plugin Settings from defaults if no settings are saved
 		if (!get_option('blockons_options')) {
 			update_option('blockons_options', $objDefaultOptions);
 		}

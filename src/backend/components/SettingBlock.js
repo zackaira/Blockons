@@ -6,8 +6,9 @@ const SettingRow = (props) => {
 		<React.Fragment>
 			<div className={`blockons-block ${props.disable ? "disabled" : ""}`}>
 				<div className="blockons-block-inner">
+					{props.isNew && <div className="newbanner">{props.isNew}</div>}
 					{props.pluginSpecific && (
-						<div className="wcbanner">{props.pluginSpecific}</div>
+						<div className="pluginbanner">{props.pluginSpecific}</div>
 					)}
 
 					{props.title && (

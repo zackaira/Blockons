@@ -83,9 +83,11 @@ if ( function_exists( 'blockons_fs' ) ) {
 	$blockonsOptions = json_decode( get_option('blockons_options') );
 	$blockonsBlocks = $blockonsOptions ? (array)$blockonsOptions->blocks : (array)$blockonsDefaults->blocks;
 
-	// Site Blocks
+	/**
+	 * Loop through settings and included enabled blocks files
+	 */
 	if ($blockonsBlocks) :
-		// Loop out blocks
+		// Loop out by name and if is enabled / boolean
 		foreach ($blockonsBlocks as $blockName => $exists) {
 			$prefix = substr($blockName, 0, 3);
 
@@ -103,7 +105,7 @@ if ( function_exists( 'blockons_fs' ) ) {
 	endif;
 
 	/**
-	 * Main instance of Blockons_Admin to prevent the need to use globals.
+	 * Main instance of Blockons_Admin to prevent the need to use globals
 	 *
 	 * @since  1.0.0
 	 * @return object Blockons_Admin

@@ -6,7 +6,7 @@ import SettingRow from "./components/SettingRow";
 import SettingBlock from "./components/SettingBlock";
 import InfoTab from "./InfoTab";
 import Loader from "./Loader";
-import { blockonsBlockBlurbs } from "./helpers";
+import { blockListSettings } from "./helpers";
 
 const Settings = () => {
 	const blockonsObject = blockonsObj;
@@ -211,22 +211,27 @@ const Settings = () => {
 														}
 														inputType="toggle"
 														description={
-															blockonsBlockBlurbs[key]
-																? blockonsBlockBlurbs[key].desc
+															blockListSettings[key]
+																? blockListSettings[key].desc
 																: ""
 														}
 														onChange={handleChange}
 														pluginSpecific={
-															blockonsBlockBlurbs[key]
-																? blockonsBlockBlurbs[key].pluginSpecific
+															blockListSettings[key]
+																? blockListSettings[key].pluginSpecific
 																: false
 														}
-														{...(blockonsBlockBlurbs[key] &&
-														blockonsBlockBlurbs[key].pluginSpecific ===
+														{...(blockListSettings[key] &&
+														blockListSettings[key].pluginSpecific ===
 															"WooCommerce" &&
 														!wcActive
 															? { disable: true }
 															: "")}
+														isNew={
+															blockListSettings[key]
+																? blockListSettings[key].isNew
+																: false
+														}
 													/>
 												))}
 										</div>

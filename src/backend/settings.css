@@ -600,7 +600,7 @@ a.blockons-docs::before {
 	box-shadow: 0 0 0 1px rgb(0 0 0 / 28%), 0 1px 8px rgb(0 0 0 / 28%);
 }
 .blockons-block-title {
-	margin: 0 0 8px;
+	margin: 5px 0 8px;
 	padding: 0;
 	font-size: 16px;
 	position: relative;
@@ -614,20 +614,19 @@ a.blockons-docs::before {
 	font-size: 12px;
 	color: #787878;
 }
-.blockons-block-inner .wcbanner {
+.blockons-block-inner .pluginbanner {
 	background-color: #7f54b3;
-	-webkit-box-shadow: 0 1px 4px rgb(0 0 0 / 22%);
 	box-shadow: 0 1px 4px rgb(0 0 0 / 22%);
 	color: #fff;
 	position: absolute;
-	top: 11px;
-	right: -16px;
+	top: 3px;
+	right: -12px;
 	font-size: 9px;
 	letter-spacing: 0.4px;
 	text-align: right;
 	padding: 1px 11px 1px 0;
-	width: 108px;
-	transform: rotate(35deg);
+	width: 130px;
+	transform: rotate(22deg);
 	box-sizing: border-box;
 }
 .blockons-block.disabled::before {
@@ -640,6 +639,21 @@ a.blockons-docs::before {
 	right: 0;
 	bottom: -5px;
 	z-index: 11;
+}
+.blockons-block-inner .newbanner {
+	background-color: #f45b08;
+	box-shadow: 0 1px 4px rgb(0 0 0 / 22%);
+	color: #fff;
+	position: absolute;
+	top: 10px;
+	left: -20px;
+	font-size: 10px;
+	letter-spacing: 0.3px;
+	text-align: center;
+	padding: 1px 0;
+	width: 80px;
+	transform: rotate(-45deg);
+	box-sizing: border-box;
 }
 
 /* -- Color Picker -- */
