@@ -99,8 +99,9 @@ class Blockons {
 
 		// Admin JS
 		wp_register_script( 'blockons-admin-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/admin.js'), array(), BLOCKONS_PLUGIN_VERSION, true );
-		wp_localize_script('blockons-admin-script', 'blockonsObj', array(
+		wp_localize_script('blockons-admin-script', 'siteObj', array(
 			'apiUrl' => esc_url(home_url('/wp-json')),
+			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 			'nonce' => wp_create_nonce('wp_rest'),
 		));
 		wp_enqueue_script( 'blockons-admin-script');
@@ -123,8 +124,9 @@ class Blockons {
 
 		// Settings JS
 		wp_register_script( 'blockons-admin-settings-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/settings.js'), array('wp-i18n'), BLOCKONS_PLUGIN_VERSION, true );
-		wp_localize_script('blockons-admin-settings-script', 'blockonsObj', array(
+		wp_localize_script('blockons-admin-settings-script', 'siteObj', array(
 			'apiUrl' => esc_url(home_url('/wp-json')),
+			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 			'nonce' => wp_create_nonce('wp_rest'),
 			// 'blockonsOptions' => $blockonsOptions,
 			'blockonsDefaults' => json_decode($blockonsDefaults),

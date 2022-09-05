@@ -16,11 +16,11 @@
 }
 
 /* -- Item Level Controls -- */
-.blockons-item-btns {
+.wp-block-blockons-icon-list .blockons-item-btns {
 	display: flex;
 	align-items: stretch;
 	position: absolute;
-	top: 0;
+	top: -4px;
 	right: 0;
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out 0s;

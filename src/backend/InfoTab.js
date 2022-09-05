@@ -3,7 +3,7 @@ import { __ } from "@wordpress/i18n";
 import parse from "html-react-parser";
 
 const InfoTab = (props) => {
-	// const wcActive = Boolean(blockonsObj.wcActive);
+	// const wcActive = Boolean(siteObj.wcActive);
 	const isPremium = props.isPro ? props.isPro : "";
 	const upgradeUrl = props.upgrade ? props.upgrade : "";
 

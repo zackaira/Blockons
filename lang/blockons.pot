@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-18T14:31:03+00:00\n"
+"POT-Creation-Date: 2022-08-31T09:16:26+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: blockons\n"
@@ -43,92 +43,51 @@ msgid_plural "%d items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: classes/class-admin.php:40
-#: classes/class-admin.php:41
+#: classes/class-admin.php:36
+#: classes/class-admin.php:37
 msgid "Blockons Settings"
 msgstr ""
 
-#: classes/class-admin.php:52
-#: dist/settings.js:4855
-#: src/backend/Settings.js:171
+#: classes/class-admin.php:48
+#: dist/settings.js:4873
+#: src/backend/Settings.js:166
 msgid "Settings"
 msgstr ""
 
-#: classes/class-admin.php:64
+#: classes/class-admin.php:60
 msgid "View Blockons documentation"
 msgstr ""
 
-#: classes/class-admin.php:64
-#: dist/settings.js:5112
-#: src/backend/components/SettingRow.js:45
+#: classes/class-admin.php:60
+#: dist/settings.js:4633
+#: dist/settings.js:4854
+#: dist/settings.js:5060
+#: src/backend/components/SettingRow.js:48
+#: src/backend/InfoTab.js:75
+#: src/backend/Settings.js:150
 msgid "Documentation"
 msgstr ""
 
-#: classes/class-admin.php:65
+#: classes/class-admin.php:61
 msgid "Go to Blockons FAQ's"
 msgstr ""
 
-#: classes/class-admin.php:65
+#: classes/class-admin.php:61
+#: dist/settings.js:4637
+#: src/backend/InfoTab.js:82
 msgid "FAQ's"
 msgstr ""
 
-#: classes/class-admin.php:105
-msgid "Thank you for trying out Site Chat !"
+#: classes/class-notices.php:77
+msgid "New blocks have been added to the Blockons plugin"
 msgstr ""
 
-#. translators: 1: 'great launch specials'.
-#: classes/class-admin.php:110
-msgid "We've just released Site Chat so we're running %1$s on Site Chat Pro."
+#: classes/class-notices.php:78
+msgid "To enable the new blocks and start using them in the WordPress editor:"
 msgstr ""
 
-#: classes/class-admin.php:116
-msgid "Let's set up your Site Chat"
-msgstr ""
-
-#. translators: 1: 'Site Chat Settings'.
-#: classes/class-admin.php:120
-msgid "Go to the %1$s page to easily set up your WhatsApp chat box."
-msgstr ""
-
-#: classes/class-admin.php:123
-msgid "Set up Site Chat"
-msgstr ""
-
-#: classes/class-admin.php:127
-msgid "Is something not working?"
-msgstr ""
-
-#. translators: 1: 'Read our documentation'.
-#: classes/class-admin.php:131
-msgid "Have you found a bug? Are you not sure on how to set it up? %1$s or get help on setting up Site Chat."
-msgstr ""
-
-#: classes/class-admin.php:134
-msgid "Contact our Support"
-msgstr ""
-
-#: classes/class-admin.php:138
-msgid "Help Site Chat"
-msgstr ""
-
-#: classes/class-admin.php:140
-msgid "If you're willing to, please consider giving us a 5 star rating... It'll really help us improve Site Chat and gain users trust."
-msgstr ""
-
-#: classes/class-admin.php:142
-msgid "Sure, I'll rate Site Chat"
-msgstr ""
-
-#: classes/class-admin.php:144
-msgid "If you're not happy, please get in contact and let us help you fix the issue right away."
-msgstr ""
-
-#: classes/class-admin.php:145
-msgid "I'm happy to give you 5 stars"
-msgstr ""
-
-#: classes/class-admin.php:146
-msgid "I'm not happy. Please help!"
+#: classes/class-notices.php:80
+msgid "Go to the Blockons settings"
 msgstr ""
 
 #: blocks/accordions/edit.js:33
@@ -141,6 +100,7 @@ msgstr ""
 #: blocks/accordions/single-accordion.js:154
 #: build/accordions/index.js:139
 #: build/accordions/index.js:426
+#: _starter-blocks/layout-container/layout-block.js:69
 #: build/accordions/index.js:92
 #: build/accordions/index.js:352
 msgid "Accordion Design"
@@ -205,12 +165,14 @@ msgstr ""
 
 #: blocks/accordions/single-accordion.js:127
 #: build/accordions/index.js:407
+#: _starter-blocks/layout-container/layout-block.js:54
 #: build/accordions/index.js:325
 msgid "Accordion Settings"
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:131
 #: build/accordions/index.js:410
+#: _starter-blocks/layout-container/layout-block.js:58
 #: build/accordions/index.js:329
 msgid "Label Element"
 msgstr ""
@@ -1714,54 +1676,207 @@ msgstr ""
 msgid "No Products"
 msgstr ""
 
-#: dist/settings.js:4787
-#: src/backend/Settings.js:93
+#: dist/settings.js:4613
+#: src/backend/InfoTab.js:15
+msgid "Welcome to Blockons!"
+msgstr ""
+
+#: dist/settings.js:4613
+#: src/backend/InfoTab.js:18
+msgid "We're building WordPress editor blocks to make it easier for you to build visually appealing and very professional looking pages for your website."
+msgstr ""
+
+#: dist/settings.js:4617
+#: src/backend/InfoTab.js:28
+msgid "Visit Our Website"
+msgstr ""
+
+#: dist/settings.js:4621
+#: src/backend/InfoTab.js:41
+msgid "Watch our video on using the Blockons plugin"
+msgstr ""
+
+#: dist/settings.js:4621
+#: src/backend/InfoTab.js:44
+msgid "Blockons is design to be intuitive and the settings do have help hints, but you can also watch our video to get a better understanding of how the Blockons plugins works. Enjoy!"
+msgstr ""
+
+#: dist/settings.js:4629
+#: src/backend/InfoTab.js:60
+msgid "Support & Documentation"
+msgstr ""
+
+#: dist/settings.js:4629
+#: src/backend/InfoTab.js:64
+msgid "Read through our ever-growing documentation on our website. Read the Frequently Asked Questions for any answers you may be looking for... Or get in contact with our support if you need help with anything regarding the Blockons plugin."
+msgstr ""
+
+#: dist/settings.js:4641
+#: src/backend/InfoTab.js:89
+msgid "Get Support"
+msgstr ""
+
+#: dist/settings.js:4803
+#: src/backend/Settings.js:89
 msgid "Are you sure you want to delete all settings?"
 msgstr ""
 
-#: dist/settings.js:4852
-#: src/backend/Settings.js:166
+#: dist/settings.js:4850
+#: src/backend/Settings.js:145
+msgid "My Account"
+msgstr ""
+
+#: dist/settings.js:4868
+#: src/backend/Settings.js:161
 msgid "Blocks"
 msgstr ""
 
-#: dist/settings.js:4860
-#: src/backend/Settings.js:177
-msgid "Help"
+#: dist/settings.js:4878
+#: src/backend/Settings.js:172
+msgid "Welcome"
 msgstr ""
 
-#: dist/settings.js:4871
-#: src/backend/Settings.js:191
+#: dist/settings.js:4889
+#: src/backend/Settings.js:186
 msgid "Editor Blocks"
 msgstr ""
 
-#: dist/settings.js:4871
-#: src/backend/Settings.js:194
+#: dist/settings.js:4889
+#: src/backend/Settings.js:189
 msgid "Choose the blocks you'd like to use when building with the WordPress block editor. You can turn off blocks to optimize for speed & page loading."
 msgstr ""
 
-#: dist/settings.js:4968
-#: src/backend/Settings.js:306
+#: dist/settings.js:4913
+#: src/backend/Settings.js:239
 msgid "More Blocks Coming Soon..."
 msgstr ""
 
-#: dist/settings.js:4976
-#: src/backend/Settings.js:315
+#: dist/settings.js:4913
+#: src/backend/Settings.js:242
+msgid "Get in touch and let us know which blocks you need for your site."
+msgstr ""
+
+#: dist/settings.js:4920
+#: src/backend/Settings.js:253
+msgid "Section Heading"
+msgstr ""
+
+#: dist/settings.js:4921
+#: src/backend/Settings.js:254
 msgid "this is a description for the heading component"
 msgstr ""
 
-#: dist/settings.js:5004
-#: src/backend/Settings.js:355
+#: dist/settings.js:4924
+#: src/backend/Settings.js:261
+msgid "My Ssdfetting"
+msgstr ""
+
+#: dist/settings.js:4928
+#: dist/settings.js:4935
+#: src/backend/Settings.js:265
+#: src/backend/Settings.js:276
+msgid "This is the tool tip / hint for this setting"
+msgstr ""
+
+#: dist/settings.js:4931
+#: src/backend/Settings.js:272
+msgid "My Settigbfbbng"
+msgstr ""
+
+#: dist/settings.js:4949
+#: src/backend/Settings.js:300
 msgid "Save Settings"
 msgstr ""
 
-#: dist/settings.js:5010
-#: src/backend/Settings.js:364
+#: dist/settings.js:4955
+#: src/backend/Settings.js:309
 msgid "Reset Settings"
 msgstr ""
 
-#: dist/settings.js:5016
-#: src/backend/Settings.js:369
+#: dist/settings.js:4961
+#: src/backend/Settings.js:314
 msgid "Confirm... Reset All Settings!"
+msgstr ""
+
+#: dist/settings.js:5193
+#: src/backend/helpers.js:18
+msgid "Display content in smaller areas with collapsible lists"
+msgstr ""
+
+#: dist/settings.js:5198
+#: src/backend/helpers.js:26
+msgid "Visually, more attractive list items with icons"
+msgstr ""
+
+#: dist/settings.js:5203
+#: src/backend/helpers.js:31
+msgid "Display multiple images in a neat carousel"
+msgstr ""
+
+#: dist/settings.js:5208
+#: src/backend/helpers.js:36
+msgid "More advanced and customizable line headings"
+msgstr ""
+
+#: dist/settings.js:5213
+#: src/backend/helpers.js:41
+msgid "An attractive, more trendy customizable call-to-action"
+msgstr ""
+
+#: dist/settings.js:5218
+#: src/backend/helpers.js:49
+msgid "Show progress with beautiful, animated bars"
+msgstr ""
+
+#: dist/settings.js:5223
+#: src/backend/helpers.js:54
+msgid "A search bar/icon with drop down or popup search"
+msgstr ""
+
+#: dist/settings.js:5228
+#: src/backend/helpers.js:59
+msgid "Display client testimonials in a slider or carousel"
+msgstr ""
+
+#: dist/settings.js:5233
+#: src/backend/helpers.js:64
+msgid "Display multiple videos in a neat video slider"
+msgstr ""
+
+#: dist/settings.js:5239
+#: src/backend/helpers.js:70
+msgid "A simple icon linking to a users WC Account"
+msgstr ""
+
+#: dist/settings.js:5244
+#: src/backend/helpers.js:75
+msgid "Display a WC featured product with multple layouts"
+msgstr ""
+
+#: dist/settings.js:5249
+#: src/backend/helpers.js:80
+msgid "A simple WC cart icon with a full cart drop down"
+msgstr ""
+
+#: dist/settings.js:5254
+#: src/backend/helpers.js:85
+msgid "A more advaced layout block for your pages"
+msgstr ""
+
+#: src/backend/admin/UpdateNotice.js:72
+msgid "Thanks for updating! Please run the updater now"
+msgstr ""
+
+#: src/backend/admin/UpdateNotice.js:79
+msgid "Run Update"
+msgstr ""
+
+#: _starter-blocks/layout-container/edit.js:32
+msgid "Layout Container Settings"
+msgstr ""
+
+#: _starter-blocks/layout-container/layout-block.js:24
+msgid "layout-block"
 msgstr ""
 
 #: _starter-blocks/_tabs/edit.js:72
@@ -1792,6 +1907,7 @@ msgstr ""
 
 #: blocks/accordions/block.json
 #: build/accordions/block.json
+#: _starter-blocks/layout-container/block.json
 #: _starter-blocks/_tabs/block.json
 msgctxt "block keyword"
 msgid "content"
@@ -1937,6 +2053,7 @@ msgstr ""
 
 #: blocks/marketing-button/block.json
 #: build/marketing-button/block.json
+#: _starter-blocks/layout-container/block.json
 msgctxt "block keyword"
 msgid "banner"
 msgstr ""
@@ -2115,6 +2232,21 @@ msgstr ""
 #: build/wc-mini-cart/block.json
 msgctxt "block keyword"
 msgid "mini cart"
+msgstr ""
+
+#: _starter-blocks/layout-container/block.json
+msgctxt "block title"
+msgid "Layout Container"
+msgstr ""
+
+#: _starter-blocks/layout-container/block.json
+msgctxt "block keyword"
+msgid "layout"
+msgstr ""
+
+#: _starter-blocks/layout-container/block.json
+msgctxt "block keyword"
+msgid "container"
 msgstr ""
 
 #: _starter-blocks/_new-block/block.json

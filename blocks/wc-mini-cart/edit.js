@@ -204,7 +204,10 @@ const Edit = (props) => {
 									)}
 								/>
 								<div className="helplink fixmargin">
-									<a href="#" target="_blank">
+									<a
+										href="https://blockons.com/documentation/adding-a-custom-font-awesome-icon-to-the-block/"
+										target="_blank"
+									>
 										{__("Read More")}
 									</a>
 								</div>

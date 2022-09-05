@@ -4,8 +4,8 @@ import axios from "axios";
 import Loader from "../Loader";
 
 const Settings = () => {
-	const blockonsObject = blockonsObj;
-	const url = `${blockonsObject.apiUrl}/blcns/v1`;
+	const siteObject = siteObj;
+	const url = `${siteObject.apiUrl}/blcns/v1`;
 	const [loader, setLoader] = useState(false);
 	const [blockonsDefaults, setBlockonsDefaults] = useState({});
 	const [blockonsOptions, setBlockonsOptions] = useState({});
@@ -55,7 +55,7 @@ const Settings = () => {
 					// Add Nonce to prevent this working elsewhere
 					headers: {
 						"content-type": "application/json",
-						"X-WP-NONCE": blockonsObject.nonce,
+						"X-WP-NONCE": siteObject.nonce,
 					},
 				}
 			)

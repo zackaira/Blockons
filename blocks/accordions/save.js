@@ -7,6 +7,8 @@ const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
 		className: `design-${attributes.accordionDesign} ${
 			attributes.closeAll ? "close-all" : ""
+		} ${attributes.iconFirst ? "icon-first" : ""} ${
+			attributes.centeredLabel ? "centered" : ""
 		}`,
 	});
 

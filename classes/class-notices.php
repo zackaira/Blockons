@@ -75,7 +75,7 @@ class Blockons_Notices {
 			'id'    => 'newblocks_001', // Increment this when adding new blocks
 			'type'  => 'error', // info | error | warning | success
 			'title' => __( 'New blocks have been added to the Blockons plugin', 'blockons' ),
-			'text'  => __( 'to enable the new blocks and start using then in the WP editor', 'blockons' ),
+			'text'  => __( 'To enable the new blocks and start using them in the WordPress editor:', 'blockons' ),
 			'link'  => admin_url( 'options-general.php?page=blockons-settings' ),
 			'link_text' => __( 'Go to the Blockons settings', 'blockons' ),
 			'inline' => true, // To display the link & text inline

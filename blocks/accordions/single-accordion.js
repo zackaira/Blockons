@@ -217,7 +217,7 @@ registerBlockType("blockons/accordion", {
 					style={{ backgroundColor: itemLabelBgColor }}
 				>
 					<RichText
-						tagName="p"
+						tagName="h6"
 						placeholder={__("Accordion Label", "blockons")}
 						value={accordionLabel}
 						multiline={false}

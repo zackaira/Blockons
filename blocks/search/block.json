@@ -10,11 +10,15 @@
 	"attributes": {
 		"alignment": {
 			"type": "string",
-			"default": "none"
+			"default": "left"
+		},
+		"searchWidth": {
+			"type": "number",
+			"default": 240
 		},
 		"searchDisplay": {
 			"type": "string",
-			"default": "dropdown"
+			"default": "default"
 		},
 		"textInput": {
 			"type": "string",
@@ -42,7 +46,7 @@
 		},
 		"searchAlign": {
 			"type": "string",
-			"default": "right"
+			"default": "bottomleft"
 		},
 		"searchBgColor": {
 			"type": "string",

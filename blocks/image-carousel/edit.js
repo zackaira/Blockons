@@ -268,7 +268,7 @@ const Edit = (props) => {
 							<>
 								<br />
 								<SelectControl
-									label={__("Carousel Loop", "blockons")}
+									label={__("Carousel / Slider Type", "blockons")}
 									value={carouselType}
 									options={
 										carouselNumber === 1
@@ -308,7 +308,10 @@ const Edit = (props) => {
 									)}
 								/>
 								<div className="helplink fixmargin">
-									<a href="#" target="_blank">
+									<a
+										href="https://blockons.com/documentation/image-carousel-block-or-image-slider/"
+										target="_blank"
+									>
 										{__("Read More")}
 									</a>
 								</div>

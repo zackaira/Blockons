@@ -1,4 +1,4 @@
-// Localized JS object - blockonsObj
+// Localized JS object - siteObj
 import React, { useState, useEffect } from "react";
 import { __ } from "@wordpress/i18n";
 import axios from "axios";
@@ -9,13 +9,13 @@ import Loader from "./Loader";
 import { blockListSettings } from "./helpers";
 
 const Settings = () => {
-	const blockonsObject = blockonsObj;
-	const url = `${blockonsObject.apiUrl}/blcns/v1`;
+	const siteObject = siteObj;
+	const url = `${siteObject.apiUrl}/blcns/v1`;
 	const [loader, setLoader] = useState(false);
 	const [loadSetting, setLoadSetting] = useState(true);
-	const isPremium = blockonsObject.can_use_premium_code === "1" ? true : false;
-	const wcActive = Boolean(blockonsObject.wcActive);
-	const defaults = blockonsObject.blockonsDefaults;
+	const isPremium = siteObject.can_use_premium_code === "1" ? true : false;
+	const wcActive = Boolean(siteObject.wcActive);
+	const defaults = siteObject.blockonsDefaults;
 
 	const [blockonsOptions, setBlockonsOptions] = useState({});
 
@@ -63,7 +63,7 @@ const Settings = () => {
 					// Add Nonce to prevent this working elsewhere
 					headers: {
 						"content-type": "application/json",
-						"X-WP-NONCE": blockonsObject.nonce,
+						"X-WP-NONCE": siteObject.nonce,
 					},
 				}
 			)
@@ -94,7 +94,7 @@ const Settings = () => {
 			axios
 				.delete(url + "/delete", {
 					headers: {
-						"X-WP-NONCE": blockonsObject.nonce,
+						"X-WP-NONCE": siteObject.nonce,
 					},
 				})
 				.then((res) => {
@@ -140,7 +140,7 @@ const Settings = () => {
 					{isPremium && <h4>PREMIUM VERSION !!</h4>}
 					<div className="blockonsSettingBarOptions">
 						<a
-							href={blockonsObject.accountUrl}
+							href={siteObject.accountUrl}
 							className="blockons-account"
 							title={__("My Account", "blockons")}
 						></a>
@@ -286,7 +286,7 @@ const Settings = () => {
 									<div id="blockons-content-help" className="blockons-content">
 										<InfoTab
 										// isPro={isPremium}
-										// upgrade={blockonsObject.upgradeUrl}
+										// upgrade={siteObject.upgradeUrl}
 										/>
 									</div>
 								</div>

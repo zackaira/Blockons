@@ -50,7 +50,7 @@
 }
 
 /* -- Item Level Controls -- */
-.blockons-item-btns {
+.wp-block-blockons-video-slider .blockons-item-btns {
 	display: flex;
 	align-items: stretch;
 	position: absolute;

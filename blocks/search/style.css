@@ -16,12 +16,47 @@
 	justify-content: center;
 	cursor: pointer;
 	position: relative;
+	overflow: hidden;
 }
-
+.blockons-search-block:hover {
+	overflow: visible;
+}
+.nopad {
+	padding: 0 !important;
+}
+/* -- Default Style -- */
+.blockons-search-default .blockons-search-inner {
+	max-width: 100%;
+	width: 240px;
+	display: flex;
+	align-items: stretch;
+	min-height: 40px;
+	color: inherit;
+}
+.blockons-search-default .blockons-search-input {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 5px 10px;
+	font-size: 15px;
+	color: inherit;
+}
+.blockons-search-default .blockons-search-button {
+	border: 0;
+	width: auto;
+	font-size: 15px;
+	display: flex;
+	align-items: center;
+	background-color: #000;
+	color: #fff;
+	padding: 2px 14px;
+	font-weight: 600;
+	cursor: pointer;
+}
 /* -- Drop Down Style -- */
 .blockons-search-block .blockons-search-dropdown {
 	position: absolute;
-	top: 100%;
 	background-color: #fff;
 	border-radius: 3px;
 	box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
@@ -29,21 +64,38 @@
 	z-index: 95;
 	overflow: hidden;
 	opacity: 0;
-	transition: all 0.2s ease-in-out 0s;
+	transition: all 0.1s ease-in-out 0s;
 }
-.blockons-search-block.right .blockons-search-dropdown {
-	right: 0;
-}
-.blockons-search-block.left .blockons-search-dropdown {
+/* -- Position -- */
+.blockons-search-block.bottomright .blockons-search-dropdown {
+	top: 100%;
 	left: 0;
 }
-.blockons-search-block.center .blockons-search-dropdown {
+.blockons-search-block.bottomleft .blockons-search-dropdown {
+	top: 100%;
+	right: 0;
+}
+.blockons-search-block.bottomcenter .blockons-search-dropdown {
+	top: 100%;
+	left: 50%;
+	margin-left: -120px;
+}
+.blockons-search-block.topright .blockons-search-dropdown {
+	bottom: 100%;
+	left: 0;
+}
+.blockons-search-block.topleft .blockons-search-dropdown {
+	bottom: 100%;
+	right: 0;
+}
+.blockons-search-block.topcenter .blockons-search-dropdown {
+	bottom: 100%;
 	left: 50%;
 	margin-left: -120px;
 }
 
-.blockons-search-dropdown .blockons-search-inner,
-.blockons-search-dropdown .blockons-search-inner form {
+.blockons-search-dropdown .blockons-search-inner {
+	max-width: 100%;
 	width: 240px;
 	display: flex;
 	align-items: stretch;
@@ -117,8 +169,8 @@
 	padding: 5px;
 	cursor: pointer;
 }
-.blockons-search-popup .blockons-search-inner,
-.blockons-search-popup .blockons-search-inner form {
+.blockons-search-popup .blockons-search-inner {
+	max-width: 100%;
 	width: 100%;
 	display: flex;
 	align-items: stretch;

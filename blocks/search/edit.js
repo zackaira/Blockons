@@ -24,6 +24,7 @@ const Edit = (props) => {
 		isSelected,
 		attributes: {
 			alignment,
+			searchWidth,
 			searchDisplay,
 			textInput,
 			textButton,
@@ -63,6 +64,12 @@ const Edit = (props) => {
 		setShowSearch(false);
 	};
 
+	// function SearchBar() {
+	// 	return (
+
+	// 	);
+	// }
+
 	return (
 		<div {...blockProps}>
 			{isSelected && (
@@ -75,8 +82,12 @@ const Edit = (props) => {
 							label={__("Search Display", "blockons")}
 							value={searchDisplay}
 							options={[
-								{ label: __("Drop Down", "blockons"), value: "dropdown" },
-								{ label: __("Popup", "blockons"), value: "popup" },
+								{ label: __("Default", "blockons"), value: "default" },
+								{
+									label: __("Icon with Drop Down", "blockons"),
+									value: "dropdown",
+								},
+								{ label: __("Icon with Popup", "blockons"), value: "popup" },
 							]}
 							onChange={(newDisplay) =>
 								setAttributes({
@@ -84,89 +95,118 @@ const Edit = (props) => {
 										newDisplay === undefined ? "dropdown" : newDisplay,
 								})
 							}
-							__nextHasNoMarginBottom
 						/>
 
-						<ToggleControl // This setting is just for displaying the drop down, value is not saved.
-							label={__("Show Search", "blockons")}
-							checked={showSearch}
-							help={__(
-								"This will always display the search ONLY in the editor",
-								"blockons"
-							)}
-							onChange={() => {
-								setShowSearch((state) => !state);
-							}}
-						/>
+						{(searchDisplay === "default" || searchDisplay === "dropdown") && (
+							<RangeControl
+								label={__("Search Width", "blockons")}
+								value={searchWidth}
+								onChange={(value) =>
+									setAttributes({
+										searchWidth: value === undefined ? 240 : value,
+									})
+								}
+								min={150}
+								max={600}
+							/>
+						)}
 
-						<SelectControl
-							label={__("Align Drop Down Search", "blockons")}
-							value={searchAlign}
-							options={[
-								{ label: __("Right", "blockons"), value: "right" },
-								{ label: __("Left", "blockons"), value: "left" },
-								{ label: __("Center", "blockons"), value: "center" },
-							]}
-							onChange={(value) =>
-								setAttributes({
-									searchAlign: value === undefined ? "right" : value,
-								})
-							}
-							__nextHasNoMarginBottom
-						/>
+						{(searchDisplay === "popup" || searchDisplay === "dropdown") && (
+							<ToggleControl // This setting is just for displaying the drop down, value is not saved.
+								label={__("Show Search", "blockons")}
+								checked={showSearch}
+								help={__(
+									"This will always display the search ONLY in the editor",
+									"blockons"
+								)}
+								onChange={() => {
+									setShowSearch((state) => !state);
+								}}
+							/>
+						)}
+
+						{searchDisplay === "dropdown" && (
+							<SelectControl
+								label={__("Align Drop Down Search", "blockons")}
+								value={searchAlign}
+								options={[
+									{
+										label: __("Bottom Right", "blockons"),
+										value: "bottomright",
+									},
+									{ label: __("Bottom Left", "blockons"), value: "bottomleft" },
+									{
+										label: __("Bottom Center", "blockons"),
+										value: "bottomcenter",
+									},
+									{ label: __("Top Right", "blockons"), value: "topright" },
+									{ label: __("Top Left", "blockons"), value: "topleft" },
+									{ label: __("Top Center", "blockons"), value: "topcenter" },
+								]}
+								onChange={(value) =>
+									setAttributes({
+										searchAlign: value === undefined ? "right" : value,
+									})
+								}
+							/>
+						)}
 					</PanelBody>
 					<PanelBody
 						title={__("Search Design", "blockons")}
 						initialOpen={false}
 					>
-						<RangeControl
-							label={__("Icon Size", "blockons")}
-							value={iconSize}
-							onChange={(value) =>
-								setAttributes({
-									iconSize: value === undefined ? 17 : value,
-								})
-							}
-							min={14}
-							max={50}
-						/>
-						<RangeControl
-							label={__("Icon Padding", "blockons")}
-							value={iconPadding}
-							onChange={(value) =>
-								setAttributes({
-									iconPadding: value === undefined ? 5 : value,
-								})
-							}
-							min={0}
-							max={50}
-						/>
+						{(searchDisplay === "popup" || searchDisplay === "dropdown") && (
+							<>
+								<RangeControl
+									label={__("Icon Size", "blockons")}
+									value={iconSize}
+									onChange={(value) =>
+										setAttributes({
+											iconSize: value === undefined ? 17 : value,
+										})
+									}
+									min={14}
+									max={50}
+								/>
+								<RangeControl
+									label={__("Icon Padding", "blockons")}
+									value={iconPadding}
+									onChange={(value) =>
+										setAttributes({
+											iconPadding: value === undefined ? 5 : value,
+										})
+									}
+									min={0}
+									max={50}
+								/>
+								<BlockonsColorpicker
+									label={__("Icon Background Color", "blockons")}
+									value={iconBgColor}
+									onChange={(colorValue) => {
+										setAttributes({
+											iconBgColor:
+												colorValue === undefined ? "#FFF" : colorValue,
+										});
+									}}
+									paletteColors={colorPickerPalette}
+								/>
 
-						<BlockonsColorpicker
-							label={__("Icon Background Color", "blockons")}
-							value={iconBgColor}
-							onChange={(colorValue) => {
-								setAttributes({
-									iconBgColor: colorValue === undefined ? "#FFF" : colorValue,
-								});
-							}}
-							paletteColors={colorPickerPalette}
-						/>
-
-						<BlockonsColorpicker
-							label={__("Icon Color", "blockons")}
-							value={iconColor}
-							onChange={(colorValue) => {
-								setAttributes({
-									iconColor: colorValue === undefined ? "#000" : colorValue,
-								});
-							}}
-							paletteColors={colorPickerPalette}
-						/>
+								<BlockonsColorpicker
+									label={__("Icon Color", "blockons")}
+									value={iconColor}
+									onChange={(colorValue) => {
+										setAttributes({
+											iconColor: colorValue === undefined ? "#000" : colorValue,
+										});
+									}}
+									paletteColors={colorPickerPalette}
+								/>
+							</>
+						)}
 
 						{searchDisplay === "popup" && (
 							<BlockonsColorpicker
-								label={__("Search Background Color", "blockons")}
+								label={__("Input Background Color", "blockons")}
 								value={searchBgColor}
 								onChange={(colorValue) => {
 									setAttributes({
@@ -179,7 +219,7 @@ const Edit = (props) => {
 						)}
 
 						<BlockonsColorpicker
-							label={__("Search Button Background Color", "blockons")}
+							label={__("Button Background Color", "blockons")}
 							value={searchBtnBgColor}
 							onChange={(colorValue) => {
 								setAttributes({
@@ -191,7 +231,7 @@ const Edit = (props) => {
 						/>
 
 						<BlockonsColorpicker
-							label={__("Search Button Color", "blockons")}
+							label={__("Button Font Color", "blockons")}
 							value={searchBtnColor}
 							onChange={(colorValue) => {
 								setAttributes({
@@ -212,23 +252,67 @@ const Edit = (props) => {
 			<div
 				className={`blockons-search-block ${
 					searchDisplay === "dropdown" && searchAlign ? searchAlign : ""
-				}`}
+				} ${searchDisplay === "default" ? "nopad" : ""}`}
 				style={{
 					backgroundColor: iconBgColor,
 					fontSize: iconSize,
-					padding: iconPadding,
+					...(searchDisplay === "dropdown" || searchDisplay === "popup"
+						? { padding: iconPadding }
+						: ""),
 				}}
 			>
-				<span
-					className="fa-solid fa-magnifying-glass"
-					style={{
-						color: iconColor,
-					}}
-				></span>
+				{searchDisplay === "default" && (
+					<div className="blockons-search-default">
+						<div
+							className="blockons-search-inner"
+							style={{
+								width: searchWidth,
+							}}
+						>
+							<RichText
+								tagName="div"
+								value={textInput}
+								className="blockons-search-input"
+								onChange={onChangeInputText}
+							/>
+							<RichText
+								tagName="div"
+								value={textButton}
+								className="blockons-search-button"
+								onChange={onChangeButtonText}
+								style={{
+									backgroundColor: searchBtnBgColor,
+									color: searchBtnColor,
+								}}
+							/>
+						</div>
+					</div>
+				)}
+
+				{(searchDisplay === "dropdown" || searchDisplay === "popup") && (
+					<span
+						className="fa-solid fa-magnifying-glass"
+						style={{
+							color: iconColor,
+						}}
+					></span>
+				)}
 
 				{searchDisplay === "dropdown" && (
-					<div className="blockons-search-dropdown">
-						<div className="blockons-search-inner">
+					<div
+						className="blockons-search-dropdown"
+						style={{
+							...(searchAlign === "bottomcenter" || searchAlign === "topcenter"
+								? { marginLeft: -searchWidth / 2 }
+								: ""),
+						}}
+					>
+						<div
+							className="blockons-search-inner"
+							style={{
+								width: searchWidth,
+							}}
+						>
 							<RichText
 								tagName="div"
 								value={textInput}
