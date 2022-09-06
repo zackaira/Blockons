@@ -27,21 +27,24 @@
 					"itemText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
 					"itemAuthor": "Joe Soap",
 					"itemAuthorPos": "Owner at Macabee",
-					"itemImg": {}
+					"itemImg": {},
+					"itemRating": 5
 				},
 				{
 					"itemId": 1,
 					"itemText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
 					"itemAuthor": "Jenny Carter",
 					"itemAuthorPos": "Owner at Macabee",
-					"itemImg": {}
+					"itemImg": {},
+					"itemRating": 5
 				},
 				{
 					"itemId": 2,
 					"itemText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
 					"itemAuthor": "John Smith",
 					"itemAuthorPos": "Owner at Macabee",
-					"itemImg": {}
+					"itemImg": {},
+					"itemRating": 5
 				}
 			]
 		},
@@ -68,6 +71,14 @@
 		"controlsOnHover": {
 			"type": "boolean",
 			"default": false
+		},
+		"showStars": {
+			"type": "boolean",
+			"default": true
+		},
+		"starRating": {
+			"type": "number",
+			"default": 5
 		},
 		"authPosition": {
 			"type": "boolean",

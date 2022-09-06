@@ -1,0 +1,67 @@
+/**
+ * Help / Read More Link
+ */
+.helplink {
+	font-size: 12px;
+	font-style: normal;
+	color: rgb(117, 117, 117);
+	margin-bottom: 2em;
+}
+.helplink.fixmargin {
+	margin: -15px 0 25px;
+}
+.helplink a {
+	background-color: #cae4f1;
+	color: #297cba;
+	padding: 3px 7px 4px;
+	border-radius: 3px;
+	box-shadow: 0 1px 5px rgb(0 0 0 / 15%);
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	font-size: 12px;
+	text-decoration: none;
+	margin-right: 5px;
+}
+.helplink a:hover {
+	background-color: #c0deee;
+}
+
+/**
+ * Blockons Color Picker Component
+ */
+.components-dropdown.blockons-colorpicker {
+	width: 100%;
+	margin: 0 0 15px;
+}
+.components-button.blockons-colorpicker-btn {
+	box-shadow: 0 0 0 1px #e0e0e0;
+	padding: 14px 12px;
+	width: 100%;
+	text-decoration: none;
+	color: #545454;
+}
+.components-button.blockons-colorpicker-btn .component-color-indicator {
+	margin: 0 10px 0 0;
+}
+.components-button.blockons-colorpicker-btn:hover {
+	box-shadow: 0 0 0 1px #b9b9b9;
+}
+
+/**
+ * BlockonsNumberRange Component
+ */
+.blockonsNumRange {
+	position: relative;
+}
+.blockonsNumRange-btns {
+	position: absolute;
+	top: 3px;
+	right: 1px;
+	width: 62px;
+	display: flex;
+}
+.blockonsNumRange-btn {
+	font-size: 10px;
+	padding: 5px;
+	flex: 1;
+	justify-content: center;
+}

@@ -51,6 +51,36 @@ const Save = ({ attributes }) => {
 							color: attributes.fontColor,
 						}}
 					>
+						{showStars && (
+							<div className="blockons-star-ratings">
+								<span
+									className={`fa-solid fa-star blockons-star ${
+										slideItem.itemRating >= 1 ? "checked" : ""
+									}`}
+								></span>
+								<span
+									className={`fa-solid fa-star blockons-star ${
+										slideItem.itemRating >= 2 ? "checked" : ""
+									}`}
+								></span>
+								<span
+									className={`fa-solid fa-star blockons-star ${
+										slideItem.itemRating >= 3 ? "checked" : ""
+									}`}
+								></span>
+								<span
+									className={`fa-solid fa-star blockons-star ${
+										slideItem.itemRating >= 4 ? "checked" : ""
+									}`}
+								></span>
+								<span
+									className={`fa-solid fa-star blockons-star ${
+										slideItem.itemRating >= 5 ? "checked" : ""
+									}`}
+								></span>
+							</div>
+						)}
+
 						{attributes.slidesStyle === "three" && (
 							<span
 								className="corner"

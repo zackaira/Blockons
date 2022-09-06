@@ -40,6 +40,7 @@ const Edit = (props) => {
 			slidesLayout,
 			slidesWidth,
 			sliderRewind,
+			showStars,
 			authPosition,
 			authIcon,
 			showQuotes,
@@ -137,6 +138,18 @@ const Edit = (props) => {
 		});
 		setAttributes({ slides: editedSlideItems });
 	};
+	const handleItemRatingChange = (itemRating, itemId) => {
+		const newSlides = [...slides];
+		const editedSlideItems = newSlides.map((obj) => {
+			if (obj.itemId === itemId)
+				return {
+					...obj,
+					itemRating: itemRating,
+				};
+			return obj;
+		});
+		setAttributes({ slides: editedSlideItems });
+	};
 	const handleMediaSelect = (media, itemId) => {
 		const newSlides = [...slides];
 		const editedSlideItems = newSlides.map((obj) => {
@@ -176,6 +189,7 @@ const Edit = (props) => {
 			itemAuthor: "Joe Soap",
 			itemAuthorPos: "Owner at Macabee",
 			itemImg: {},
+			itemRating: 5,
 		});
 		setAttributes({ slides: newSlides });
 	};
@@ -186,7 +200,14 @@ const Edit = (props) => {
 		setAttributes({ slides: newSlides });
 	};
 
-	const handleDuplicateItem = (index, text, author, position, image) => {
+	const handleDuplicateItem = (
+		index,
+		text,
+		author,
+		position,
+		image,
+		rating
+	) => {
 		const newSlides = [...slides];
 		newSlides.splice(index + 1, 0, {
 			itemId: Math.floor(Math.random() * 700) + 1,
@@ -194,6 +215,7 @@ const Edit = (props) => {
 			itemAuthor: author,
 			itemAuthorPos: position,
 			itemImg: image,
+			itemRating: rating,
 		});
 		setAttributes({ slides: newSlides });
 		// instanceRef.current.update();
@@ -222,6 +244,41 @@ const Edit = (props) => {
 								color: fontColor,
 							}}
 						>
+							{showStars && (
+								<div className="blockons-star-ratings">
+									<span
+										className={`fa-solid fa-star blockons-star ${
+											slideItem.itemRating >= 1 ? "checked" : ""
+										}`}
+										onClick={() => handleItemRatingChange(1, slideItem.itemId)}
+									></span>
+									<span
+										className={`fa-solid fa-star blockons-star ${
+											slideItem.itemRating >= 2 ? "checked" : ""
+										}`}
+										onClick={() => handleItemRatingChange(2, slideItem.itemId)}
+									></span>
+									<span
+										className={`fa-solid fa-star blockons-star ${
+											slideItem.itemRating >= 3 ? "checked" : ""
+										}`}
+										onClick={() => handleItemRatingChange(3, slideItem.itemId)}
+									></span>
+									<span
+										className={`fa-solid fa-star blockons-star ${
+											slideItem.itemRating >= 4 ? "checked" : ""
+										}`}
+										onClick={() => handleItemRatingChange(4, slideItem.itemId)}
+									></span>
+									<span
+										className={`fa-solid fa-star blockons-star ${
+											slideItem.itemRating >= 5 ? "checked" : ""
+										}`}
+										onClick={() => handleItemRatingChange(5, slideItem.itemId)}
+									></span>
+								</div>
+							)}
+
 							{slidesStyle === "three" && (
 								<span
 									className="corner"
@@ -360,7 +417,8 @@ const Edit = (props) => {
 										slideItem.itemText,
 										slideItem.itemAuthor,
 										slideItem.itemAuthorPos,
-										slideItem.itemImg
+										slideItem.itemImg,
+										slideItem.itemRating
 									)
 								}
 							/>
@@ -457,6 +515,16 @@ const Edit = (props) => {
 						title={__("Testimonials Design", "blockons")}
 						initialOpen={false}
 					>
+						<ToggleControl
+							label={__("Show Star Rating", "blockons")}
+							checked={showStars}
+							onChange={(value) => setAttributes({ showStars: value })}
+							help={__(
+								"Edit star ratings by clicking on the stars",
+								"blockons"
+							)}
+						/>
+
 						<ToggleControl
 							label={__("Show Author Position", "blockons")}
 							checked={authPosition}
@@ -655,22 +723,34 @@ const Edit = (props) => {
 				id={uniqueId}
 				data-settings={JSON.stringify(sliderOptions)}
 			>
-				<div
-					className={`blockons-slider-wrap ${
-						controlsOnHover ? "on-hover" : ""
-					} arrow-style-${arrowStyle} pagination-${sliderPagDesign}`}
-				>
-					<Splide options={sliderOptions}>{sliderSlideItems}</Splide>
-				</div>
-				{isSelected && (
-					<div
-						className={`blockons-add-new ${
-							sliderSlideItems === undefined ? "no-slides" : "has-slides"
-						}`}
-					>
-						<Button variant="secondary" onClick={handleAddItem}>
-							{__("Add Another Slide", "blockons")}
-						</Button>
+				{sliderSlideItems ? (
+					<>
+						<div
+							className={`blockons-slider-wrap ${
+								controlsOnHover ? "on-hover" : ""
+							} arrow-style-${arrowStyle} pagination-${sliderPagDesign}`}
+						>
+							<Splide options={sliderOptions}>{sliderSlideItems}</Splide>
+						</div>
+						{isSelected && (
+							<div
+								className={`blockons-add-new ${
+									sliderSlideItems === undefined ? "no-slides" : "has-slides"
+								}`}
+							>
+								<Button variant="secondary" onClick={handleAddItem}>
+									{__("Add Another testimonial", "blockons")}
+								</Button>
+							</div>
+						)}
+					</>
+				) : (
+					<div className="blockons-noslides">
+						<div className="blockons-add-new">
+							<Button variant="secondary" onClick={handleAddItem}>
+								{__("Add your first testimonial", "blockons")}
+							</Button>
+						</div>
 					</div>
 				)}
 			</div>

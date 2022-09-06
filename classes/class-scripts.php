@@ -44,6 +44,8 @@ class Blockons {
 		// Load admin JS & CSS.
 		add_action( 'admin_enqueue_scripts', array( $this, 'blockons_admin_scripts' ), 10, 1 );
 
+		add_action( 'enqueue_block_editor_assets', array( $this, 'blockons_block_editor_scripts' ), 10, 1 );
+
 		$this->blockons_load_plugin_textdomain();
 		add_action( 'init', array( $this, 'blockons_load_localisation' ), 0 );
 	} // End __construct ()
@@ -137,8 +139,17 @@ class Blockons {
 		));
 		wp_enqueue_script('blockons-admin-settings-script');
 
+		// Update the language file with this line in the terminal - "wp i18n make-pot ./ lang/blockons.pot"
 		wp_set_script_translations('blockons-admin-settings-script', 'blockons', BLOCKONS_PLUGIN_DIR . 'lang');
 	} // End blockons_admin_scripts ()
+
+	/**
+	 * Load Block Editor Scripts & Styles
+	 */
+	public function blockons_block_editor_scripts() {
+		wp_register_style( 'blockons-admin-editor-style', esc_url(BLOCKONS_PLUGIN_URL . '/dist/editor.css'), array(), BLOCKONS_PLUGIN_VERSION );
+		wp_enqueue_style( 'blockons-admin-editor-style' );
+	} // End blockons_block_editor_scripts ()
 
 	/**
 	 * Load plugin localisation
@@ -194,7 +205,6 @@ class Blockons {
 				"wc_featured_product" => true, // 2
 				"wc_mini_cart" => true, // 1
 			),
-			// "delete_all_settings" => false,
 		);
 		return $initialSettings;
 	}
@@ -233,9 +243,6 @@ class Blockons {
 	 */
 	private function _update_default_settings() { //phpcs:ignore
 		$defaultOptions = (object)$this->blockonsDefaults();
-
-		// $blocksCount = count($initialSettings['blocks']);
-		// update_option('blockons_blocks_count', $blocksCount);
 		
 		update_option('blockons_options', json_encode($defaultOptions));
 		update_option('blockons_default_options', json_encode($defaultOptions));

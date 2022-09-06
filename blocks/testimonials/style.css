@@ -96,6 +96,21 @@
 	margin-top: 3px;
 }
 
+/* ---- Star Ratings ---- */
+.blockons-star-ratings {
+	margin: 0 0 20px;
+	text-align: center;
+}
+.blockons-star {
+	font-size: 16px;
+	margin: 0 1px;
+	color: #999;
+	cursor: pointer;
+}
+.blockons-star.checked {
+	color: #fdc704;
+}
+
 /* ---- Slider Arrows ---- */
 .blockons-slider-wrap .splide__arrow {
 	background-color: #fff;
@@ -282,7 +297,7 @@
 	padding: 10px;
 }
 .wp-block-blockons-testimonials.style-one .blockons-slide-text {
-	padding-right: 30px;
+	padding-right: 0;
 }
 /* -- Style Two -- */
 .wp-block-blockons-testimonials.style-two .splide__track {

@@ -34,6 +34,8 @@
 	color: inherit;
 }
 .blockons-search-default .blockons-search-input {
+	box-shadow: inset 0 0 0 1px #999;
+	border-radius: 3px 0 0 3px;
 	flex: 1;
 	display: flex;
 	align-items: center;
@@ -57,50 +59,21 @@
 /* -- Drop Down Style -- */
 .blockons-search-block .blockons-search-dropdown {
 	position: absolute;
-	background-color: #fff;
-	border-radius: 3px;
-	box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
-	color: inherit;
-	z-index: 95;
-	overflow: hidden;
 	opacity: 0;
 	transition: all 0.1s ease-in-out 0s;
 }
-/* -- Position -- */
-.blockons-search-block.bottomright .blockons-search-dropdown {
-	top: 100%;
-	left: 0;
-}
-.blockons-search-block.bottomleft .blockons-search-dropdown {
-	top: 100%;
-	right: 0;
-}
-.blockons-search-block.bottomcenter .blockons-search-dropdown {
-	top: 100%;
-	left: 50%;
-	margin-left: -120px;
-}
-.blockons-search-block.topright .blockons-search-dropdown {
-	bottom: 100%;
-	left: 0;
-}
-.blockons-search-block.topleft .blockons-search-dropdown {
-	bottom: 100%;
-	right: 0;
-}
-.blockons-search-block.topcenter .blockons-search-dropdown {
-	bottom: 100%;
-	left: 50%;
-	margin-left: -120px;
-}
-
 .blockons-search-dropdown .blockons-search-inner {
 	max-width: 100%;
 	width: 240px;
 	display: flex;
 	align-items: stretch;
 	min-height: 40px;
+	background-color: #fff;
+	border-radius: 3px;
+	box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
 	color: inherit;
+	z-index: 95;
+	overflow: hidden;
 }
 .blockons-search-dropdown .blockons-search-input {
 	flex: 1;
@@ -122,6 +95,50 @@
 	padding: 2px 14px;
 	font-weight: 600;
 	cursor: pointer;
+}
+
+/* -- Position -- */
+.blockons-search-block.bottomright .blockons-search-dropdown {
+	top: 100%;
+	left: 0;
+	padding-top: 5px;
+}
+.blockons-search-block.bottomleft .blockons-search-dropdown {
+	top: 100%;
+	right: 0;
+	padding-top: 5px;
+}
+.blockons-search-block.bottomcenter .blockons-search-dropdown {
+	top: 100%;
+	left: 50%;
+	margin-left: -120px;
+	padding-top: 5px;
+}
+.blockons-search-block.topright .blockons-search-dropdown {
+	bottom: 100%;
+	left: 0;
+	padding-bottom: 5px;
+}
+.blockons-search-block.topleft .blockons-search-dropdown {
+	bottom: 100%;
+	right: 0;
+	padding-bottom: 5px;
+}
+.blockons-search-block.topcenter .blockons-search-dropdown {
+	bottom: 100%;
+	left: 50%;
+	margin-left: -120px;
+	padding-bottom: 5px;
+}
+.blockons-search-block.left .blockons-search-dropdown {
+	top: calc(50% - 20px);
+	right: 100%;
+	padding-right: 5px;
+}
+.blockons-search-block.right .blockons-search-dropdown {
+	top: calc(50% - 20px);
+	left: 100%;
+	padding-left: 5px;
 }
 
 .blockons-search-block:hover .blockons-search-dropdown {

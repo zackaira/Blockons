@@ -4,6 +4,9 @@
  */
 
 /* -- To show the dropdown within the editor -- */
+.wp-block-blockons-search.blockons-show .blockons-search-block {
+	overflow: visible;
+}
 .wp-block-blockons-search.blockons-show .blockons-search-dropdown,
 .wp-block-blockons-search.blockons-show .blockons-search-popup-overlay,
 .wp-block-blockons-search.blockons-show .blockons-search-popup-wrapper {

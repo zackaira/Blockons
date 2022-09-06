@@ -107,7 +107,7 @@ const Edit = (props) => {
 									})
 								}
 								min={150}
-								max={600}
+								max={800}
 							/>
 						)}
 
@@ -142,6 +142,8 @@ const Edit = (props) => {
 									{ label: __("Top Right", "blockons"), value: "topright" },
 									{ label: __("Top Left", "blockons"), value: "topleft" },
 									{ label: __("Top Center", "blockons"), value: "topcenter" },
+									{ label: __("Left", "blockons"), value: "left" },
+									{ label: __("Right", "blockons"), value: "right" },
 								]}
 								onChange={(value) =>
 									setAttributes({

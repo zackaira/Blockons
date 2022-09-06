@@ -11,6 +11,8 @@ const config = {
 		"settings.min": "./src/settings.js",
 		admin: "./src/backend/admin/admin.js",
 		"admin.min": "./src/backend/admin/admin.js",
+		editor: "./src/editor/editor.js",
+		"editor.min": "./src/editor/editor.js",
 	},
 	output: {
 		filename: "[name].js", // Uses the name of the file
