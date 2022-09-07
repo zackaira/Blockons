@@ -279,12 +279,12 @@ const Edit = (props) => {
 													<br />
 													Eg: vimeo.com/
 													<b>
-														<big>722558765</big>
+														<big>230574607</big>
 													</b>
 												</p>
 											)}
 											<TextControl
-												label="Video Url"
+												label="Video ID"
 												value={slideItem.itemUrl}
 												onChange={(newUrl) =>
 													handleItemVideoUrl(newUrl, slideItem.itemId)
@@ -526,7 +526,7 @@ const Edit = (props) => {
 						)}
 					</PanelBody>
 					<PanelBody
-						title={__("Video Slider Slider Controls", "blockons")}
+						title={__("Video Slider Controls", "blockons")}
 						initialOpen={false}
 					>
 						<div className="blockons-icon-text-select">
@@ -606,33 +606,45 @@ const Edit = (props) => {
 					maxWidth: sliderWidth,
 				}}
 			>
-				<div
-					className={`blockons-video-slider-wrap ${
-						controlsOnHover ? "on-hover" : ""
-					} pagination-${sliderPagDesign}`}
-					style={{
-						...(sliderStyle === "three"
-							? {
-									padding: sliderBorderWidth,
-									borderRadius: sliderOuterRound,
-									backgroundColor: sliderBorderColor,
-							  }
-							: ""),
-					}}
-				>
-					<Splide options={sliderOptions} extensions={{ Video }}>
-						{sliderSlideItems}
-					</Splide>
-				</div>
-				{isSelected && (
-					<div
-						className={`blockons-add-new ${
-							sliderSlideItems === undefined ? "no-slides" : "has-slides"
-						}`}
-					>
-						<Button variant="secondary" onClick={handleAddItem}>
-							{__("Add Another Slide", "blockons")}
-						</Button>
+				{sliderSlideItems ? (
+					<>
+						<div
+							className={`blockons-video-slider-wrap ${
+								controlsOnHover ? "on-hover" : ""
+							} pagination-${sliderPagDesign}`}
+							style={{
+								...(sliderStyle === "three"
+									? {
+											padding: sliderBorderWidth,
+											borderRadius: sliderOuterRound,
+											backgroundColor: sliderBorderColor,
+									  }
+									: ""),
+							}}
+						>
+							<Splide options={sliderOptions} extensions={{ Video }}>
+								{sliderSlideItems}
+							</Splide>
+						</div>
+						{isSelected && (
+							<div
+								className={`blockons-add-new ${
+									sliderSlideItems === undefined ? "no-slides" : "has-slides"
+								}`}
+							>
+								<Button variant="secondary" onClick={handleAddItem}>
+									{__("Add Another Slide", "blockons")}
+								</Button>
+							</div>
+						)}
+					</>
+				) : (
+					<div className="blockons-noslides">
+						<div className="blockons-add-new">
+							<Button variant="secondary" onClick={handleAddItem}>
+								{__("Add your first slide", "blockons")}
+							</Button>
+						</div>
 					</div>
 				)}
 			</div>

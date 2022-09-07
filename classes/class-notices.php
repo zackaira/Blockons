@@ -25,32 +25,36 @@ class Blockons_Notices {
 		$notices = $this->blockons_notices();
 
 		if ( $pagenow == 'plugins.php' || $pagenow == 'options-general.php' ) :
-			// Loop over all notices
-			foreach ($notices as $notice) :
 
-				if ( current_user_can( 'manage_options' ) && !get_user_meta( $user_id, 'blockons_notice_' . $notice['id'] . '_dismissed', true ) ) : ?>
-					<div class="blockons-admin-notice notice notice-<?php echo isset($notice['type']) ? sanitize_html_class( $notice['type'] ) : 'info'; ?>">
-						<a href="<?php echo esc_url(admin_url($blockons_page . 'blockons_dismiss_notice&blockons-notice-id=' . $notice['id'])); ?>" class="notice-dismiss"></a>
+			if ( $notices ) :
+				// Loop over all notices
+				foreach ($notices as $notice) :
 
-						<div class="blockons-notice <?php echo isset($notice['inline']) ? sanitize_html_class( 'inline' ) : ''; ?>">
-							<?php if (isset($notice['title'])) : ?>
-								<h4 class="blockons-notice-title"><?php esc_html_e($notice['title']); ?></h4>
-							<?php endif; ?>
+					if ( current_user_can( 'manage_options' ) && !get_user_meta( $user_id, 'blockons_notice_' . $notice['id'] . '_dismissed', true ) ) : ?>
+						<div class="blockons-admin-notice notice notice-<?php echo isset($notice['type']) ? sanitize_html_class( $notice['type'] ) : 'info'; ?>">
+							<a href="<?php echo esc_url(admin_url($blockons_page . 'blockons_dismiss_notice&blockons-notice-id=' . $notice['id'])); ?>" class="notice-dismiss"></a>
 
-							<?php if (isset($notice['text'])) : ?>
-								<p class="blockons-notice-text"><?php echo $notice['text']; ?></p>
-							<?php endif; ?>
+							<div class="blockons-notice <?php echo isset($notice['inline']) ? sanitize_html_class( 'inline' ) : ''; ?>">
+								<?php if (isset($notice['title'])) : ?>
+									<h4 class="blockons-notice-title"><?php esc_html_e($notice['title']); ?></h4>
+								<?php endif; ?>
 
-							<?php if (isset($notice['link']) && isset($notice['link_text'])) : ?>
-								<a href="<?php echo esc_url($notice['link']); ?>" class="blockons-notice-btn">
-									<?php esc_html_e($notice['link_text']); ?>
-								</a>
-							<?php endif; ?>
-						</div>
-					</div><?php
-				endif;
+								<?php if (isset($notice['text'])) : ?>
+									<p class="blockons-notice-text"><?php echo $notice['text']; ?></p>
+								<?php endif; ?>
 
-			endforeach;
+								<?php if (isset($notice['link']) && isset($notice['link_text'])) : ?>
+									<a href="<?php echo esc_url($notice['link']); ?>" class="blockons-notice-btn">
+										<?php esc_html_e($notice['link_text']); ?>
+									</a>
+								<?php endif; ?>
+							</div>
+						</div><?php
+					endif;
+
+				endforeach;
+			endif;
+			
 		endif;
 	}
 	// Make Notice Dismissable
@@ -70,16 +74,18 @@ class Blockons_Notices {
 	private function blockons_notices() {
 		if ( !is_admin() )
 			return;
+
+		$settings = array();
 		
-		$settings['new_blocks_added'] = array(
-			'id'    => 'newblocks_001', // Increment this when adding new blocks
-			'type'  => 'error', // info | error | warning | success
-			'title' => __( 'New blocks have been added to the Blockons plugin', 'blockons' ),
-			'text'  => __( 'To enable the new blocks and start using them in the WordPress editor:', 'blockons' ),
-			'link'  => admin_url( 'options-general.php?page=blockons-settings' ),
-			'link_text' => __( 'Go to the Blockons settings', 'blockons' ),
-			'inline' => true, // To display the link & text inline
-		);
+		// $settings['new_blocks_added'] = array(
+		// 	'id'    => 'newblocks_001', // Increment this when adding new blocks
+		// 	'type'  => 'error', // info | error | warning | success
+		// 	'title' => __( 'New blocks have been added to the Blockons plugin', 'blockons' ),
+		// 	'text'  => __( 'To enable the new blocks and start using them in the WordPress editor:', 'blockons' ),
+		// 	'link'  => admin_url( 'options-general.php?page=blockons-settings' ),
+		// 	'link_text' => __( 'Go to the Blockons settings', 'blockons' ),
+		// 	'inline' => true, // To display the link & text inline
+		// );
 
 		// $settings['new_settings'] = array(
 		// 	'id'    => '01',

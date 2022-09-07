@@ -142,3 +142,15 @@
 	letter-spacing: 0.2px;
 	margin: 0 0 10px;
 }
+
+/* ---- No Slides ---- */
+.blockons-noslides {
+	background-color: #f2f2f2;
+	box-shadow: inset 0 0 0 1px #dbdbdb;
+	border-radius: 3px;
+	padding: 28px;
+	text-align: center;
+}
+.blockons-noslides .blockons-add-new {
+	margin: 0;
+}

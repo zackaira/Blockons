@@ -748,7 +748,7 @@ const Edit = (props) => {
 					<div className="blockons-noslides">
 						<div className="blockons-add-new">
 							<Button variant="secondary" onClick={handleAddItem}>
-								{__("Add your first testimonial", "blockons")}
+								{__("Add your first slide", "blockons")}
 							</Button>
 						</div>
 					</div>
