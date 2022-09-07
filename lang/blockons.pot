@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-09-06T11:09:13+00:00\n"
+"POT-Creation-Date: 2022-09-07T10:13:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: blockons\n"
@@ -37,7 +37,6 @@ msgstr ""
 #. translators: number of items in the mini cart.
 #: assets/blocks/wc-mini-cart/cart.php:38
 #: blocks/wc-mini-cart/index.php:63
-#: build/wc-mini-cart/index.php:63
 msgid "%d item"
 msgid_plural "%d items"
 msgstr[0] ""
@@ -49,7 +48,6 @@ msgid "Blockons Settings"
 msgstr ""
 
 #: classes/class-admin.php:48
-#: dist/settings.js:4873
 #: src/backend/Settings.js:166
 msgid "Settings"
 msgstr ""
@@ -59,9 +57,7 @@ msgid "View Blockons documentation"
 msgstr ""
 
 #: classes/class-admin.php:60
-#: dist/settings.js:4633
-#: dist/settings.js:4854
-#: dist/settings.js:5060
+#: dist/settings.js:8069
 #: src/backend/components/SettingRow.js:48
 #: src/backend/InfoTab.js:75
 #: src/backend/Settings.js:150
@@ -73,131 +69,80 @@ msgid "Go to Blockons FAQ's"
 msgstr ""
 
 #: classes/class-admin.php:61
-#: dist/settings.js:4637
 #: src/backend/InfoTab.js:82
 msgid "FAQ's"
 msgstr ""
 
-#: classes/class-notices.php:77
-msgid "New blocks have been added to the Blockons plugin"
-msgstr ""
-
-#: classes/class-notices.php:78
-msgid "To enable the new blocks and start using them in the WordPress editor:"
-msgstr ""
-
-#: classes/class-notices.php:80
-msgid "Go to the Blockons settings"
-msgstr ""
-
 #: blocks/accordions/edit.js:33
-#: build/accordions/index.js:136
-#: build/accordions/index.js:88
 msgid "Accordions Settings"
 msgstr ""
 
 #: blocks/accordions/edit.js:37
 #: blocks/accordions/single-accordion.js:154
-#: build/accordions/index.js:139
-#: build/accordions/index.js:426
 #: _starter-blocks/layout-container/layout-block.js:69
-#: build/accordions/index.js:92
-#: build/accordions/index.js:354
 msgid "Accordion Design"
 msgstr ""
 
 #: blocks/accordions/edit.js:40
 #: blocks/marketing-button/edit.js:135
-#: build/accordions/index.js:142
-#: build/marketing-button/index.js:482
-#: build/accordions/index.js:95
-#: build/marketing-button/index.js:394
 msgid "Plain"
 msgstr ""
 
 #: blocks/accordions/edit.js:41
-#: build/accordions/index.js:145
-#: build/accordions/index.js:96
 msgid "Underlined"
 msgstr ""
 
 #: blocks/accordions/edit.js:42
-#: build/accordions/index.js:148
-#: build/accordions/index.js:97
 msgid "Outlined"
 msgstr ""
 
 #: blocks/accordions/edit.js:43
-#: build/accordions/index.js:151
-#: build/accordions/index.js:98
 msgid "Side Line"
 msgstr ""
 
 #: blocks/accordions/edit.js:53
-#: build/accordions/index.js:160
-#: build/accordions/index.js:108
 msgid "Icon First"
 msgstr ""
 
 #: blocks/accordions/edit.js:61
-#: build/accordions/index.js:168
-#: build/accordions/index.js:116
 msgid "Centered Label"
 msgstr ""
 
 #: blocks/accordions/edit.js:69
-#: build/accordions/index.js:176
-#: build/accordions/index.js:124
 msgid "Only 1 Accordion open at a time"
 msgstr ""
 
 #: blocks/accordions/edit.js:71
-#: build/accordions/index.js:178
-#: build/accordions/index.js:126
 msgid "Close all other accordions when one is clicked open. This will only work on the front-end and not in the editor."
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:29
-#: build/accordions/index.js:312
-#: build/accordions/index.js:229
 msgid "Accordion"
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:127
-#: build/accordions/index.js:407
 #: _starter-blocks/layout-container/layout-block.js:54
-#: build/accordions/index.js:327
 msgid "Accordion Settings"
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:131
-#: build/accordions/index.js:410
 #: _starter-blocks/layout-container/layout-block.js:58
-#: build/accordions/index.js:331
 msgid "Label Element"
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:142
-#: build/accordions/index.js:417
-#: build/accordions/index.js:342
 msgid "Stay Open"
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:144
-#: build/accordions/index.js:419
-#: build/accordions/index.js:344
 msgid "Expand this panel on initial page load. Also Use this to keep the panel open while editing."
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:157
-#: build/accordions/index.js:428
-#: build/accordions/index.js:357
 msgid "Accordion Spacing"
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:165
-#: build/accordions/index.js:435
-#: build/accordions/index.js:365
 msgid "Accordion Labels"
 msgstr ""
 
@@ -206,37 +151,15 @@ msgstr ""
 #: blocks/image-carousel/edit.js:433
 #: blocks/marketing-button/edit.js:298
 #: blocks/progress-bars/edit.js:230
-#: blocks/testimonials/edit.js:583
+#: blocks/testimonials/edit.js:584
 #: blocks/wc-featured-product/edit.js:203
 #: blocks/wc-mini-cart/edit.js:267
-#: build/accordions/index.js:436
-#: build/accordions/index.js:471
-#: build/image-carousel/index.js:3469
-#: build/marketing-button/index.js:600
-#: build/progress-bars/index.js:534
-#: build/testimonials/index.js:3600
-#: build/wc-featured-product/index.js:4860
-#: build/wc-mini-cart/index.js:531
-#: build/accordions/index.js:367
-#: build/accordions/index.js:405
-#: build/image-carousel/index.js:3444
-#: build/marketing-button/index.js:557
-#: build/progress-bars/index.js:472
-#: build/testimonials/index.js:3594
-#: build/wc-featured-product/index.js:4245
-#: build/wc-mini-cart/index.js:509
 msgid "Background Color"
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:172
 #: blocks/icon-list/edit.js:379
 #: blocks/image-carousel/edit.js:458
-#: build/accordions/index.js:442
-#: build/icon-list/index.js:674
-#: build/image-carousel/index.js:3492
-#: build/accordions/index.js:372
-#: build/icon-list/index.js:638
-#: build/image-carousel/index.js:3469
 msgid "Font Size"
 msgstr ""
 
@@ -244,20 +167,8 @@ msgstr ""
 #: blocks/accordions/single-accordion.js:195
 #: blocks/icon-list/edit.js:386
 #: blocks/image-carousel/edit.js:450
-#: blocks/testimonials/edit.js:595
+#: blocks/testimonials/edit.js:596
 #: blocks/wc-featured-product/edit.js:214
-#: build/accordions/index.js:450
-#: build/accordions/index.js:464
-#: build/icon-list/index.js:682
-#: build/image-carousel/index.js:3485
-#: build/testimonials/index.js:3609
-#: build/wc-featured-product/index.js:4869
-#: build/accordions/index.js:380
-#: build/accordions/index.js:395
-#: build/icon-list/index.js:645
-#: build/image-carousel/index.js:3461
-#: build/testimonials/index.js:3606
-#: build/wc-featured-product/index.js:4256
 msgid "Font Color"
 msgstr ""
 
@@ -267,51 +178,27 @@ msgstr ""
 #: blocks/search/edit.js:163
 #: blocks/wc-account-icon/edit.js:202
 #: blocks/wc-mini-cart/edit.js:244
-#: build/accordions/index.js:456
-#: build/icon-list/index.js:691
-#: build/marketing-button/index.js:557
-#: build/search/index.js:469
-#: build/wc-account-icon/index.js:489
-#: build/wc-mini-cart/index.js:515
-#: build/accordions/index.js:387
-#: build/icon-list/index.js:653
-#: build/marketing-button/index.js:493
-#: build/search/index.js:405
-#: build/wc-account-icon/index.js:444
-#: build/wc-mini-cart/index.js:486
 msgid "Icon Size"
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:203
-#: build/accordions/index.js:470
-#: build/accordions/index.js:403
 msgid "Accordion Content"
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:221
-#: build/accordions/index.js:484
-#: build/accordions/index.js:421
 msgid "Accordion Label"
 msgstr ""
 
 #: blocks/icon-list/edit.js:229
-#: build/icon-list/index.js:579
-#: build/icon-list/index.js:488
 msgid "#ListItem"
 msgstr ""
 
 #: blocks/icon-list/edit.js:245
 #: blocks/progress-bars/edit.js:206
-#: build/icon-list/index.js:597
-#: build/progress-bars/index.js:518
-#: build/icon-list/index.js:504
-#: build/progress-bars/index.js:448
 msgid "List Item Colors"
 msgstr ""
 
 #: blocks/icon-list/edit.js:252
-#: build/icon-list/index.js:602
-#: build/icon-list/index.js:511
 msgid "Text Size & Color"
 msgstr ""
 
@@ -319,20 +206,10 @@ msgstr ""
 #: blocks/marketing-button/edit.js:342
 #: blocks/progress-bars/edit.js:367
 #: blocks/wc-mini-cart/edit.js:277
-#: build/icon-list/index.js:608
-#: build/marketing-button/index.js:636
-#: build/progress-bars/index.js:648
-#: build/wc-mini-cart/index.js:540
-#: build/icon-list/index.js:525
-#: build/marketing-button/index.js:601
-#: build/progress-bars/index.js:609
-#: build/wc-mini-cart/index.js:519
 msgid "Text Color"
 msgstr ""
 
 #: blocks/icon-list/edit.js:278
-#: build/icon-list/index.js:612
-#: build/icon-list/index.js:537
 msgid "Icon Size & Color"
 msgstr ""
 
@@ -342,1567 +219,891 @@ msgstr ""
 #: blocks/search/edit.js:197
 #: blocks/wc-account-icon/edit.js:235
 #: blocks/wc-mini-cart/edit.js:287
-#: build/icon-list/index.js:618
-#: build/icon-list/index.js:701
-#: build/marketing-button/index.js:618
-#: build/search/index.js:494
-#: build/wc-account-icon/index.js:514
-#: build/wc-mini-cart/index.js:549
-#: build/icon-list/index.js:551
-#: build/icon-list/index.js:662
-#: build/marketing-button/index.js:581
-#: build/search/index.js:439
-#: build/wc-account-icon/index.js:477
-#: build/wc-mini-cart/index.js:529
 msgid "Icon Color"
 msgstr ""
 
 #: blocks/icon-list/edit.js:339
-#: build/icon-list/index.js:638
-#: build/icon-list/index.js:598
 msgid "Icon List Settings"
 msgstr ""
 
 #: blocks/icon-list/edit.js:343
-#: build/icon-list/index.js:641
-#: build/icon-list/index.js:602
 msgid "List Layout"
 msgstr ""
 
 #: blocks/icon-list/edit.js:346
-#: build/icon-list/index.js:644
-#: build/icon-list/index.js:605
 msgid "Vertical"
 msgstr ""
 
 #: blocks/icon-list/edit.js:347
-#: build/icon-list/index.js:647
-#: build/icon-list/index.js:606
 msgid "Horizontal"
 msgstr ""
 
 #: blocks/icon-list/edit.js:358
 #: blocks/progress-bars/edit.js:303
-#: build/icon-list/index.js:655
-#: build/progress-bars/index.js:582
-#: build/icon-list/index.js:617
-#: build/progress-bars/index.js:545
 msgid "Item Spacing"
 msgstr ""
 
 #: blocks/icon-list/edit.js:365
-#: build/icon-list/index.js:663
-#: build/icon-list/index.js:624
 msgid "Icon & Text Spacing"
 msgstr ""
 
 #: blocks/icon-list/edit.js:375
-#: build/icon-list/index.js:671
-#: build/icon-list/index.js:634
 msgid "Icon List Design"
 msgstr ""
 
 #: blocks/icon-list/edit.js:427
-#: build/icon-list/index.js:721
-#: build/icon-list/index.js:686
 msgid "Add List Item"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:241
-#: build/image-carousel/index.js:3317
 #: _starter-blocks/_new_slider_block/edit.js:210
-#: build/image-carousel/index.js:3252
 msgid "Image Carousel Settings"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:271
-#: build/image-carousel/index.js:3338
-#: build/image-carousel/index.js:3282
 msgid "Carousel / Slider Type"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:277
 #: blocks/image-carousel/edit.js:291
-#: build/image-carousel/index.js:3341
-#: build/image-carousel/index.js:3350
-#: build/image-carousel/index.js:3288
-#: build/image-carousel/index.js:3302
 msgid "Basic Carousel"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:281
 #: blocks/image-carousel/edit.js:295
-#: build/image-carousel/index.js:3344
-#: build/image-carousel/index.js:3353
-#: build/image-carousel/index.js:3292
-#: build/image-carousel/index.js:3306
 msgid "Loop Carousel"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:285
-#: build/image-carousel/index.js:3347
-#: build/image-carousel/index.js:3296
 msgid "Fade"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:305
-#: build/image-carousel/index.js:3361
-#: build/image-carousel/index.js:3316
 msgid "This setting changes a 'read-only' property in the slider options, if you change this, you will need to 'Save/Update' the post and reload the page to see it work with the new setting."
 msgstr ""
 
 #: blocks/image-carousel/edit.js:321
-#: build/image-carousel/index.js:3368
-#: build/image-carousel/index.js:3332
 msgid "Slides Per View"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:333
-#: build/image-carousel/index.js:3376
-#: build/image-carousel/index.js:3344
 msgid "Rewind Carousel"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:346
-#: build/image-carousel/index.js:3384
 #: _starter-blocks/_new_slider_block/edit.js:216
-#: build/image-carousel/index.js:3357
 msgid "Image Carousel Design"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:350
-#: build/image-carousel/index.js:3387
-#: build/image-carousel/index.js:3361
 msgid "Image Proportions"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:353
-#: build/image-carousel/index.js:3390
-#: build/image-carousel/index.js:3364
 msgid "Actual Image"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:354
-#: build/image-carousel/index.js:3393
-#: build/image-carousel/index.js:3365
 msgid "Square"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:356
-#: build/image-carousel/index.js:3396
-#: build/image-carousel/index.js:3367
 msgid "3:2 Rectangle"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:360
-#: build/image-carousel/index.js:3399
-#: build/image-carousel/index.js:3371
 msgid "4:3 Rectangle"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:364
-#: build/image-carousel/index.js:3402
-#: build/image-carousel/index.js:3375
 msgid "16:9 Panoramic"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:376
-#: build/image-carousel/index.js:3411
-#: build/image-carousel/index.js:3387
 msgid "Border Radius"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:379
-#: build/image-carousel/index.js:3414
-#: build/image-carousel/index.js:3390
 msgid "square"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:380
-#: build/image-carousel/index.js:3417
-#: build/image-carousel/index.js:3391
 msgid "Rounded"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:381
-#: build/image-carousel/index.js:3420
-#: build/image-carousel/index.js:3392
 msgid "More Round"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:382
-#: build/image-carousel/index.js:3423
-#: build/image-carousel/index.js:3393
 msgid "Very Round"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:393
-#: build/image-carousel/index.js:3432
-#: build/image-carousel/index.js:3404
 msgid "Slides Gap"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:403
-#: build/image-carousel/index.js:3440
-#: build/image-carousel/index.js:3414
 msgid "Carousel Side Padding"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:414
-#: build/image-carousel/index.js:3448
-#: build/image-carousel/index.js:3425
 msgid "Display Image Caption"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:417
-#: build/image-carousel/index.js:3451
-#: build/image-carousel/index.js:3428
 msgid "None"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:418
-#: build/image-carousel/index.js:3454
-#: build/image-carousel/index.js:3429
 msgid "Bottom Banner"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:419
-#: build/image-carousel/index.js:3457
-#: build/image-carousel/index.js:3430
 msgid "Over Image"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:420
-#: build/image-carousel/index.js:3460
-#: build/image-carousel/index.js:3431
 msgid "Below Slide"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:439
-#: build/image-carousel/index.js:3476
-#: build/image-carousel/index.js:3450
 msgid "Background Opacity"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:470
-#: build/image-carousel/index.js:3500
-#: build/image-carousel/index.js:3481
 msgid "Show Caption only on Hover"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:477
-#: build/image-carousel/index.js:3506
 #: _starter-blocks/_new_slider_block/edit.js:222
-#: build/image-carousel/index.js:3488
 msgid "Image Carousel Slider Controls"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:481
-#: blocks/testimonials/edit.js:634
-#: build/image-carousel/index.js:3509
-#: build/testimonials/index.js:3639
-#: build/image-carousel/index.js:3492
-#: build/testimonials/index.js:3645
+#: blocks/testimonials/edit.js:635
 msgid "Show Arrows"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:524
-#: blocks/testimonials/edit.js:677
+#: blocks/testimonials/edit.js:678
 #: blocks/video-slider/edit.js:554
-#: build/image-carousel/index.js:3554
-#: build/testimonials/index.js:3684
-#: build/video-slider/index.js:7009
-#: build/image-carousel/index.js:3535
-#: build/testimonials/index.js:3688
-#: build/video-slider/index.js:6985
 msgid "Select Slider Arrow Icons"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:530
-#: blocks/testimonials/edit.js:683
+#: blocks/testimonials/edit.js:684
 #: blocks/video-slider/edit.js:558
-#: build/image-carousel/index.js:3555
-#: build/testimonials/index.js:3685
-#: build/video-slider/index.js:7010
-#: build/image-carousel/index.js:3541
-#: build/testimonials/index.js:3694
-#: build/video-slider/index.js:6989
 msgid "Show Pagination"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:554
-#: blocks/testimonials/edit.js:707
+#: blocks/testimonials/edit.js:708
 #: blocks/video-slider/edit.js:581
-#: build/image-carousel/index.js:3574
-#: build/testimonials/index.js:3704
-#: build/video-slider/index.js:7029
-#: build/image-carousel/index.js:3565
-#: build/testimonials/index.js:3718
-#: build/video-slider/index.js:7012
 msgid "Show Controls only on Hover"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:585
-#: build/image-carousel/index.js:3593
-#: build/image-carousel/index.js:3596
 msgid "Please save the post and refresh the page to see this new setting take place"
 msgstr ""
 
 #: blocks/line-heading/edit.js:52
-#: build/line-heading/index.js:377
-#: build/line-heading/index.js:294
 msgid "Line Heading Settings"
 msgstr ""
 
 #: blocks/line-heading/edit.js:56
-#: build/line-heading/index.js:380
-#: build/line-heading/index.js:298
 msgid "Heading Tag Element"
 msgstr ""
 
 #: blocks/line-heading/edit.js:67
-#: build/line-heading/index.js:387
-#: build/line-heading/index.js:309
 msgid "Heading Width"
 msgstr ""
 
 #: blocks/line-heading/edit.js:81
-#: build/line-heading/index.js:400
-#: build/line-heading/index.js:323
 msgid "Outer Width"
 msgstr ""
 
 #: blocks/line-heading/edit.js:86
-#: build/line-heading/index.js:407
-#: build/line-heading/index.js:328
 msgid "The width set will be the percentage of it's container"
 msgstr ""
 
 #: blocks/line-heading/edit.js:94
-#: build/line-heading/index.js:409
-#: build/line-heading/index.js:336
 msgid "Width"
 msgstr ""
 
 #: blocks/line-heading/edit.js:99
-#: build/line-heading/index.js:416
-#: build/line-heading/index.js:341
 msgid "This will set the pixel width of the heading lines"
 msgstr ""
 
 #: blocks/line-heading/edit.js:107
-#: build/line-heading/index.js:418
-#: build/line-heading/index.js:349
 msgid "Text & Line Vertical Alignment"
 msgstr ""
 
 #: blocks/line-heading/edit.js:123
-#: build/line-heading/index.js:437
-#: build/line-heading/index.js:365
 msgid "Line Heading Design"
 msgstr ""
 
 #: blocks/line-heading/edit.js:127
-#: build/line-heading/index.js:440
-#: build/line-heading/index.js:369
 msgid "Line Style"
 msgstr ""
 
 #: blocks/line-heading/edit.js:141
-#: build/line-heading/index.js:456
-#: build/line-heading/index.js:383
 msgid "Line Thickness"
 msgstr ""
 
 #: blocks/line-heading/edit.js:149
-#: build/line-heading/index.js:464
-#: build/line-heading/index.js:391
 msgid "Heading Font Color"
 msgstr ""
 
 #: blocks/line-heading/edit.js:159
-#: build/line-heading/index.js:473
-#: build/line-heading/index.js:401
 msgid "Line Color"
 msgstr ""
 
 #: blocks/line-heading/edit.js:200
-#: build/line-heading/index.js:508
-#: build/line-heading/index.js:442
 msgid "Heading Title"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:127
-#: build/marketing-button/index.js:473
 #: _starter-blocks/_new-block/edit.js:46
-#: build/marketing-button/index.js:386
 msgid "Marketing Button Settings"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:131
-#: build/marketing-button/index.js:476
-#: build/marketing-button/index.js:390
 msgid "Design"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:134
-#: build/marketing-button/index.js:479
-#: build/marketing-button/index.js:393
 msgid "Bordered"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:146
-#: build/marketing-button/index.js:490
-#: build/marketing-button/index.js:405
 msgid "Min Width"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:157
-#: build/marketing-button/index.js:498
-#: build/marketing-button/index.js:416
 msgid "Min Height"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:169
-#: build/marketing-button/index.js:506
-#: build/marketing-button/index.js:428
 msgid "Add an Icon"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:176
-#: build/marketing-button/index.js:513
-#: build/marketing-button/index.js:435
 msgid "Change the icon by clicking on the Icon within the editor"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:184
-#: build/marketing-button/index.js:515
-#: build/marketing-button/index.js:443
 msgid "Add a custom Icon"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:202
 #: blocks/wc-mini-cart/edit.js:201
-#: build/marketing-button/index.js:530
-#: build/wc-mini-cart/index.js:488
-#: build/marketing-button/index.js:461
-#: build/wc-mini-cart/index.js:443
 msgid "Add your own custom icon by adding the Font Awesome icon name"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:218
-#: build/marketing-button/index.js:537
-#: build/marketing-button/index.js:477
 msgid "Icon Position"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:221
-#: build/marketing-button/index.js:540
-#: build/marketing-button/index.js:480
 msgid "Before Title"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:222
-#: build/marketing-button/index.js:543
-#: build/marketing-button/index.js:481
 msgid "After Title"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:223
-#: build/marketing-button/index.js:546
-#: build/marketing-button/index.js:482
 msgid "Button Left"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:224
-#: build/marketing-button/index.js:549
-#: build/marketing-button/index.js:483
 msgid "Button Right"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:245
-#: build/marketing-button/index.js:565
-#: build/marketing-button/index.js:504
 msgid "Icon Spacing"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:259
-#: build/marketing-button/index.js:573
 #: _starter-blocks/_new-block/edit.js:52
-#: build/marketing-button/index.js:518
 msgid "Marketing Button Design"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:263
-#: build/marketing-button/index.js:576
-#: build/marketing-button/index.js:522
 msgid "Button Roundness"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:275
-#: build/marketing-button/index.js:584
-#: build/marketing-button/index.js:534
 msgid "Vertical Padding"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:286
-#: build/marketing-button/index.js:592
-#: build/marketing-button/index.js:545
 msgid "Horizontal Padding"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:309
 #: blocks/video-slider/edit.js:515
-#: build/marketing-button/index.js:609
-#: build/video-slider/index.js:6974
-#: build/marketing-button/index.js:568
-#: build/video-slider/index.js:6946
 msgid "Border Color"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:332
-#: build/marketing-button/index.js:627
-#: build/marketing-button/index.js:591
 msgid "Title Color"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:373
-#: build/marketing-button/index.js:666
-#: build/marketing-button/index.js:632
 msgid "Button Link"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:379
-#: build/marketing-button/index.js:671
-#: build/marketing-button/index.js:638
 msgid "Search or type url"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:411
-#: build/marketing-button/index.js:701
-#: build/marketing-button/index.js:670
 msgid "Button Title"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:425
-#: build/marketing-button/index.js:718
-#: build/marketing-button/index.js:684
 msgid "Some extra text"
 msgstr ""
 
 #: blocks/progress-bars/edit.js:157
-#: build/progress-bars/index.js:484
-#: build/progress-bars/index.js:399
 msgid "Progress Bar Description"
 msgstr ""
 
 #: blocks/progress-bars/edit.js:222
-#: build/progress-bars/index.js:529
-#: build/progress-bars/index.js:464
 msgid "Progress Bar Color"
 msgstr ""
 
 #: blocks/progress-bars/edit.js:273
-#: build/progress-bars/index.js:554
-#: build/progress-bars/index.js:515
 msgid "Progress Bars Settings"
 msgstr ""
 
 #: blocks/progress-bars/edit.js:277
-#: build/progress-bars/index.js:557
-#: build/progress-bars/index.js:519
 msgid "Progress Bar Container Width"
 msgstr ""
 
 #: blocks/progress-bars/edit.js:285
-#: build/progress-bars/index.js:565
-#: build/progress-bars/index.js:527
 msgid "Display Labels"
 msgstr ""
 
 #: blocks/progress-bars/edit.js:291
-#: build/progress-bars/index.js:571
-#: build/progress-bars/index.js:533
 msgid "Label Font Size"
 msgstr ""
 
 #: blocks/progress-bars/edit.js:312
-#: build/progress-bars/index.js:591
-#: build/progress-bars/index.js:554
 msgid "Height of Progress Bars"
 msgstr ""
 
 #: blocks/progress-bars/edit.js:322
-#: build/progress-bars/index.js:600
-#: build/progress-bars/index.js:564
 msgid "Display Percentage"
 msgstr ""
 
 #: blocks/progress-bars/edit.js:329
-#: build/progress-bars/index.js:606
-#: build/progress-bars/index.js:571
 msgid "Progress Bars Design"
 msgstr ""
 
 #: blocks/progress-bars/edit.js:346
-#: build/progress-bars/index.js:634
-#: build/progress-bars/index.js:588
 msgid "Bar Color"
 msgstr ""
 
 #: blocks/progress-bars/edit.js:356
-#: build/progress-bars/index.js:641
-#: build/progress-bars/index.js:598
 msgid "Bar Background Color"
 msgstr ""
 
 #: blocks/search/edit.js:78
-#: build/search/index.js:400
-#: build/search/index.js:320
 msgid "Search Settings"
 msgstr ""
 
 #: blocks/search/edit.js:82
-#: build/search/index.js:403
-#: build/search/index.js:324
 msgid "Search Display"
 msgstr ""
 
 #: blocks/search/edit.js:85
-#: build/search/index.js:406
-#: build/search/index.js:327
 msgid "Default"
 msgstr ""
 
 #: blocks/search/edit.js:87
-#: build/search/index.js:409
-#: build/search/index.js:329
 msgid "Icon with Drop Down"
 msgstr ""
 
 #: blocks/search/edit.js:90
-#: build/search/index.js:412
-#: build/search/index.js:332
 msgid "Icon with Popup"
 msgstr ""
 
 #: blocks/search/edit.js:102
-#: build/search/index.js:419
-#: build/search/index.js:344
 msgid "Search Width"
 msgstr ""
 
 #: blocks/search/edit.js:116
-#: build/search/index.js:428
-#: build/search/index.js:358
 msgid "Show Search"
 msgstr ""
 
 #: blocks/search/edit.js:118
-#: build/search/index.js:430
-#: build/search/index.js:360
 msgid "This will always display the search ONLY in the editor"
 msgstr ""
 
 #: blocks/search/edit.js:130
-#: build/search/index.js:435
-#: build/search/index.js:372
 msgid "Align Drop Down Search"
 msgstr ""
 
 #: blocks/search/edit.js:134
 #: blocks/wc-mini-cart/edit.js:223
-#: build/search/index.js:438
-#: build/wc-mini-cart/index.js:498
-#: build/search/index.js:376
-#: build/wc-mini-cart/index.js:465
 msgid "Bottom Right"
 msgstr ""
 
 #: blocks/search/edit.js:137
 #: blocks/wc-mini-cart/edit.js:227
-#: build/search/index.js:441
-#: build/wc-mini-cart/index.js:501
-#: build/search/index.js:379
-#: build/wc-mini-cart/index.js:469
 msgid "Bottom Left"
 msgstr ""
 
 #: blocks/search/edit.js:139
-#: build/search/index.js:444
-#: build/search/index.js:381
 msgid "Bottom Center"
 msgstr ""
 
 #: blocks/search/edit.js:142
 #: blocks/wc-mini-cart/edit.js:230
-#: build/search/index.js:447
-#: build/wc-mini-cart/index.js:504
-#: build/search/index.js:384
-#: build/wc-mini-cart/index.js:472
 msgid "Top Right"
 msgstr ""
 
 #: blocks/search/edit.js:143
 #: blocks/wc-mini-cart/edit.js:231
-#: build/search/index.js:450
-#: build/wc-mini-cart/index.js:507
-#: build/search/index.js:385
-#: build/wc-mini-cart/index.js:473
 msgid "Top Left"
 msgstr ""
 
 #: blocks/search/edit.js:144
-#: build/search/index.js:453
-#: build/search/index.js:386
 msgid "Top Center"
 msgstr ""
 
 #: blocks/search/edit.js:145
-#: build/search/index.js:456
-#: build/search/index.js:387
 msgid "Left"
 msgstr ""
 
 #: blocks/search/edit.js:146
-#: build/search/index.js:459
-#: build/search/index.js:388
 msgid "Right"
 msgstr ""
 
 #: blocks/search/edit.js:157
-#: build/search/index.js:466
-#: build/search/index.js:399
 msgid "Search Design"
 msgstr ""
 
 #: blocks/search/edit.js:174
 #: blocks/wc-account-icon/edit.js:213
 #: blocks/wc-mini-cart/edit.js:255
-#: build/search/index.js:477
-#: build/wc-account-icon/index.js:497
-#: build/wc-mini-cart/index.js:523
-#: build/search/index.js:416
-#: build/wc-account-icon/index.js:455
-#: build/wc-mini-cart/index.js:497
 msgid "Icon Padding"
 msgstr ""
 
 #: blocks/search/edit.js:185
 #: blocks/wc-account-icon/edit.js:225
-#: build/search/index.js:485
-#: build/wc-account-icon/index.js:505
-#: build/search/index.js:427
-#: build/wc-account-icon/index.js:467
 msgid "Icon Background Color"
 msgstr ""
 
 #: blocks/search/edit.js:211
-#: build/search/index.js:503
-#: build/search/index.js:453
 msgid "Input Background Color"
 msgstr ""
 
 #: blocks/search/edit.js:224
-#: build/search/index.js:512
-#: build/search/index.js:466
 msgid "Button Background Color"
 msgstr ""
 
 #: blocks/search/edit.js:236
-#: build/search/index.js:521
-#: build/search/index.js:478
 msgid "Button Font Color"
 msgstr ""
 
-#: blocks/testimonials/edit.js:304
-#: build/testimonials/index.js:3396
-#: build/testimonials/index.js:3315
+#: blocks/testimonials/edit.js:305
 msgid "Testimonial Text"
 msgstr ""
 
-#: blocks/testimonials/edit.js:378
-#: build/testimonials/index.js:3441
-#: build/testimonials/index.js:3389
+#: blocks/testimonials/edit.js:379
 msgid "Author"
 msgstr ""
 
-#: blocks/testimonials/edit.js:392
-#: build/testimonials/index.js:3451
-#: build/testimonials/index.js:3403
+#: blocks/testimonials/edit.js:393
 msgid "Position"
 msgstr ""
 
-#: blocks/testimonials/edit.js:442
-#: build/testimonials/index.js:3476
-#: build/testimonials/index.js:3453
+#: blocks/testimonials/edit.js:443
 msgid "Testimonials Settings"
 msgstr ""
 
-#: blocks/testimonials/edit.js:446
-#: build/testimonials/index.js:3479
-#: build/testimonials/index.js:3457
+#: blocks/testimonials/edit.js:447
 msgid "Number of Slides to Show"
 msgstr ""
 
-#: blocks/testimonials/edit.js:469
-#: build/testimonials/index.js:3503
-#: build/testimonials/index.js:3480
+#: blocks/testimonials/edit.js:470
 msgid "Remove Outer Shadow"
 msgstr ""
 
-#: blocks/testimonials/edit.js:486
-#: build/testimonials/index.js:3525
-#: build/testimonials/index.js:3497
+#: blocks/testimonials/edit.js:487
 msgid "Inner Content Width"
 msgstr ""
 
-#: blocks/testimonials/edit.js:498
-#: build/testimonials/index.js:3533
-#: build/testimonials/index.js:3509
+#: blocks/testimonials/edit.js:499
 msgid "Auto Play"
 msgstr ""
 
-#: blocks/testimonials/edit.js:501
-#: build/testimonials/index.js:3538
-#: build/testimonials/index.js:3512
+#: blocks/testimonials/edit.js:502
 msgid "This will only work on the site front-end. Turn on 'Rewind Slider' for an infinite loop"
 msgstr ""
 
-#: blocks/testimonials/edit.js:508
-#: build/testimonials/index.js:3540
-#: build/testimonials/index.js:3519
+#: blocks/testimonials/edit.js:509
 msgid "Rewind Slider"
 msgstr ""
 
-#: blocks/testimonials/edit.js:514
-#: build/testimonials/index.js:3546
-#: build/testimonials/index.js:3525
+#: blocks/testimonials/edit.js:515
 msgid "Testimonials Design"
 msgstr ""
 
-#: blocks/testimonials/edit.js:518
-#: build/testimonials/index.js:3549
-#: build/testimonials/index.js:3529
+#: blocks/testimonials/edit.js:519
 msgid "Show Star Rating"
 msgstr ""
 
-#: blocks/testimonials/edit.js:521
-#: build/testimonials/index.js:3554
-#: build/testimonials/index.js:3532
+#: blocks/testimonials/edit.js:522
 msgid "Edit star ratings by clicking on the stars"
 msgstr ""
 
-#: blocks/testimonials/edit.js:528
-#: build/testimonials/index.js:3556
-#: build/testimonials/index.js:3539
+#: blocks/testimonials/edit.js:529
 msgid "Show Author Position"
 msgstr ""
 
-#: blocks/testimonials/edit.js:533
-#: build/testimonials/index.js:3562
-#: build/testimonials/index.js:3544
+#: blocks/testimonials/edit.js:534
 msgid "Show Author Image / Icon"
 msgstr ""
 
-#: blocks/testimonials/edit.js:538
-#: build/testimonials/index.js:3568
-#: build/testimonials/index.js:3549
+#: blocks/testimonials/edit.js:539
 msgid "Show Quotes"
 msgstr ""
 
-#: blocks/testimonials/edit.js:545
-#: build/testimonials/index.js:3574
-#: build/testimonials/index.js:3556
+#: blocks/testimonials/edit.js:546
 msgid "Quotes Size"
 msgstr ""
 
-#: blocks/testimonials/edit.js:556
-#: build/testimonials/index.js:3582
-#: build/testimonials/index.js:3567
+#: blocks/testimonials/edit.js:557
 msgid "Quotes Color"
 msgstr ""
 
-#: blocks/testimonials/edit.js:567
-#: build/testimonials/index.js:3591
-#: build/testimonials/index.js:3578
+#: blocks/testimonials/edit.js:568
 msgid "Quotes Opacity"
 msgstr ""
 
-#: blocks/testimonials/edit.js:606
-#: build/testimonials/index.js:3618
-#: build/testimonials/index.js:3617
+#: blocks/testimonials/edit.js:607
 msgid "Author Name Color"
 msgstr ""
 
-#: blocks/testimonials/edit.js:618
-#: build/testimonials/index.js:3627
-#: build/testimonials/index.js:3629
+#: blocks/testimonials/edit.js:619
 msgid "Author Position Color"
 msgstr ""
 
-#: blocks/testimonials/edit.js:630
-#: build/testimonials/index.js:3636
-#: build/testimonials/index.js:3641
+#: blocks/testimonials/edit.js:631
 msgid "Testimonials Slider Controls"
 msgstr ""
 
-#: blocks/testimonials/edit.js:739
-#: blocks/video-slider/edit.js:634
-#: build/testimonials/index.js:3725
-#: build/video-slider/index.js:7067
-#: _starter-blocks/_new_slider_block/edit.js:253
-#: build/testimonials/index.js:3750
-#: build/video-slider/index.js:7065
-msgid "Add Another Slide"
+#: blocks/testimonials/edit.js:742
+msgid "Add Another testimonial"
+msgstr ""
+
+#: blocks/testimonials/edit.js:751
+#: blocks/video-slider/edit.js:645
+msgid "Add your first slide"
 msgstr ""
 
 #: blocks/video-slider/edit.js:244
-#: build/video-slider/index.js:6804
-#: build/video-slider/index.js:6675
 msgid "Upload Image and Video"
 msgstr ""
 
 #: blocks/video-slider/edit.js:267
 #: blocks/video-slider/edit.js:278
-#: build/video-slider/index.js:6824
-#: build/video-slider/index.js:6826
-#: build/video-slider/index.js:6698
-#: build/video-slider/index.js:6709
 msgid "Please enter ONLY the video ID"
 msgstr ""
 
 #: blocks/video-slider/edit.js:298
-#: build/video-slider/index.js:6832
-#: build/video-slider/index.js:6729
 msgid "Please ONLY upload mp4 Video"
 msgstr ""
 
 #: blocks/video-slider/edit.js:323
-#: build/video-slider/index.js:6844
-#: build/video-slider/index.js:6754
 msgid "Remove Video"
 msgstr ""
 
 #: blocks/video-slider/edit.js:332
-#: build/video-slider/index.js:6847
-#: build/video-slider/index.js:6763
 msgid "Upload a Custom Video"
 msgstr ""
 
 #: blocks/video-slider/edit.js:377
-#: build/video-slider/index.js:6869
-#: build/video-slider/index.js:6808
 msgid "Slide Cover Image"
 msgstr ""
 
 #: blocks/video-slider/edit.js:399
-#: build/video-slider/index.js:6887
-#: build/video-slider/index.js:6830
 msgid "Remove Cover Image"
 msgstr ""
 
 #: blocks/video-slider/edit.js:408
-#: build/video-slider/index.js:6890
-#: build/video-slider/index.js:6839
 msgid "Upload a Cover Image"
 msgstr ""
 
 #: blocks/video-slider/edit.js:449
-#: build/video-slider/index.js:6908
-#: build/video-slider/index.js:6880
 msgid "Video Slider Settings"
 msgstr ""
 
 #: blocks/video-slider/edit.js:453
-#: build/video-slider/index.js:6911
-#: build/video-slider/index.js:6884
 msgid "Slider Max Width"
 msgstr ""
 
 #: blocks/video-slider/edit.js:476
-#: build/video-slider/index.js:6936
-#: build/video-slider/index.js:6907
 msgid "Video Slider Design"
 msgstr ""
 
 #: blocks/video-slider/edit.js:493
-#: build/video-slider/index.js:6958
-#: build/video-slider/index.js:6924
 msgid "Border Width"
 msgstr ""
 
 #: blocks/video-slider/edit.js:504
-#: build/video-slider/index.js:6966
-#: build/video-slider/index.js:6935
 msgid "Outer Border Radius"
 msgstr ""
 
 #: blocks/video-slider/edit.js:529
-#: build/video-slider/index.js:6983
-#: build/video-slider/index.js:6960
-msgid "Video Slider Slider Controls"
+msgid "Video Slider Controls"
+msgstr ""
+
+#: blocks/video-slider/edit.js:636
+#: _starter-blocks/_new_slider_block/edit.js:253
+msgid "Add Another Slide"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:72
-#: build/wc-account-icon/index.js:393
-#: build/wc-account-icon/index.js:314
 msgid "WC Account Icon Settings"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:76
-#: build/wc-account-icon/index.js:396
-#: build/wc-account-icon/index.js:318
 msgid "Add Drop Down Menu"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:77
-#: build/wc-account-icon/index.js:397
-#: build/wc-account-icon/index.js:319
 msgid "Add a drop down menu on hover to display account page links."
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:91
 #: blocks/wc-mini-cart/edit.js:110
-#: build/wc-account-icon/index.js:406
-#: build/wc-mini-cart/index.js:422
-#: build/wc-account-icon/index.js:333
-#: build/wc-mini-cart/index.js:352
 msgid "Always Show Drop Down"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:93
 #: blocks/wc-mini-cart/edit.js:112
-#: build/wc-account-icon/index.js:408
-#: build/wc-mini-cart/index.js:424
-#: build/wc-account-icon/index.js:335
-#: build/wc-mini-cart/index.js:354
 msgid "This will always display the drop down ONLY in the editor"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:150
-#: build/wc-account-icon/index.js:453
-#: build/wc-account-icon/index.js:392
 msgid "WC Account Icon Design"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:154
 #: blocks/wc-mini-cart/edit.js:156
-#: build/wc-account-icon/index.js:456
-#: build/wc-mini-cart/index.js:456
-#: build/wc-account-icon/index.js:396
-#: build/wc-mini-cart/index.js:398
 msgid "Select an Icon"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:158
-#: build/wc-account-icon/index.js:459
-#: build/wc-account-icon/index.js:400
 msgid "User Outline"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:161
-#: build/wc-account-icon/index.js:462
-#: build/wc-account-icon/index.js:403
 msgid "User"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:163
-#: build/wc-account-icon/index.js:465
-#: build/wc-account-icon/index.js:405
 msgid "Circle User"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:167
-#: build/wc-account-icon/index.js:468
-#: build/wc-account-icon/index.js:409
 msgid "Person"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:170
 #: blocks/wc-mini-cart/edit.js:184
-#: build/wc-account-icon/index.js:471
-#: build/wc-mini-cart/index.js:477
-#: build/wc-account-icon/index.js:412
-#: build/wc-mini-cart/index.js:426
 msgid "Custom Icon"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:182
-#: build/wc-account-icon/index.js:479
-#: build/wc-account-icon/index.js:424
 msgid "Icon Name"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:185
-#: build/wc-account-icon/index.js:482
-#: build/wc-account-icon/index.js:427
 msgid "Add your own custom icon by adding the Font Awesome icon full name"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:246
 #: blocks/wc-mini-cart/edit.js:297
-#: build/wc-account-icon/index.js:523
-#: build/wc-mini-cart/index.js:558
-#: build/wc-account-icon/index.js:488
-#: build/wc-mini-cart/index.js:539
 msgid "Drop Down Background Color"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:256
 #: blocks/wc-mini-cart/edit.js:307
-#: build/wc-account-icon/index.js:532
-#: build/wc-mini-cart/index.js:567
-#: build/wc-account-icon/index.js:498
-#: build/wc-mini-cart/index.js:549
 msgid "Drop Down Font Color"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:301
 #: blocks/wc-account-icon/edit.js:307
-#: build/wc-account-icon/index.js:565
-#: build/wc-account-icon/index.js:568
-#: build/wc-account-icon/index.js:543
-#: build/wc-account-icon/index.js:549
 msgid "Dashboard"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:318
 #: blocks/wc-account-icon/edit.js:324
-#: build/wc-account-icon/index.js:574
-#: build/wc-account-icon/index.js:577
-#: build/wc-account-icon/index.js:560
-#: build/wc-account-icon/index.js:566
 msgid "Orders"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:335
 #: blocks/wc-account-icon/edit.js:341
-#: build/wc-account-icon/index.js:583
-#: build/wc-account-icon/index.js:586
-#: build/wc-account-icon/index.js:577
 msgid "Downloads"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:352
 #: blocks/wc-account-icon/edit.js:358
-#: build/wc-account-icon/index.js:592
-#: build/wc-account-icon/index.js:595
-#: build/wc-account-icon/index.js:594
-#: build/wc-account-icon/index.js:600
 msgid "Addresses"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:369
 #: blocks/wc-account-icon/edit.js:375
-#: build/wc-account-icon/index.js:601
-#: build/wc-account-icon/index.js:604
-#: build/wc-account-icon/index.js:611
-#: build/wc-account-icon/index.js:617
 msgid "Account Details"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:81
-#: build/wc-featured-product/index.js:4767
-#: build/wc-featured-product/index.js:4123
 msgid "WC Featured Product Settings"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:85
 #: blocks/wc-featured-product/edit.js:260
-#: build/wc-featured-product/index.js:4770
-#: build/wc-featured-product/index.js:4899
-#: build/wc-featured-product/index.js:4127
-#: build/wc-featured-product/index.js:4302
 msgid "Select a product to display"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:94
-#: build/wc-featured-product/index.js:4779
-#: build/wc-featured-product/index.js:4136
 msgid "WC Featured Product Layout"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:97
-#: build/wc-featured-product/index.js:4782
-#: build/wc-featured-product/index.js:4139
 msgid "2 Column"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:98
-#: build/wc-featured-product/index.js:4785
-#: build/wc-featured-product/index.js:4140
 msgid "Overlayed Layout"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:109
 #: blocks/wc-mini-cart/edit.js:147
-#: build/wc-featured-product/index.js:4793
-#: build/wc-mini-cart/index.js:448
-#: build/wc-featured-product/index.js:4151
-#: build/wc-mini-cart/index.js:389
 msgid "Switch Layout"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:121
-#: build/wc-featured-product/index.js:4801
-#: build/wc-featured-product/index.js:4163
 msgid "Image Overlay"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:132
-#: build/wc-featured-product/index.js:4809
-#: build/wc-featured-product/index.js:4174
 msgid "Block Padding"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:144
-#: build/wc-featured-product/index.js:4817
-#: build/wc-featured-product/index.js:4186
 msgid "Inner Block Padding"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:157
-#: build/wc-featured-product/index.js:4825
-#: build/wc-featured-product/index.js:4199
 msgid "Show Description"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:166
-#: build/wc-featured-product/index.js:4833
-#: build/wc-featured-product/index.js:4208
 msgid "Show Price"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:175
-#: build/wc-featured-product/index.js:4841
-#: build/wc-featured-product/index.js:4217
 msgid "Show Button"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:185
-#: build/wc-featured-product/index.js:4849
-#: build/wc-featured-product/index.js:4227
 msgid "WC Featured Product Design"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:190
-#: build/wc-featured-product/index.js:4852
-#: build/wc-featured-product/index.js:4232
 msgid "Overlay Opacity"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:227
-#: build/wc-featured-product/index.js:4878
-#: build/wc-featured-product/index.js:4269
 msgid "Product Info Width"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:239
-#: build/wc-featured-product/index.js:4886
-#: build/wc-featured-product/index.js:4281
 msgid "Product Image Height"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:67
-#: build/wc-mini-cart/index.js:392
-#: build/wc-mini-cart/index.js:309
 msgid "WC Mini Cart Settings"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:79
-#: build/wc-mini-cart/index.js:402
-#: build/wc-mini-cart/index.js:321
 msgid "If not set, this defaults to the WooCommerce cart page"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:85
-#: build/wc-mini-cart/index.js:404
-#: build/wc-mini-cart/index.js:327
 msgid "Open in a new tab"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:95
-#: build/wc-mini-cart/index.js:412
-#: build/wc-mini-cart/index.js:337
 msgid "Add Mini Cart"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:96
-#: build/wc-mini-cart/index.js:413
-#: build/wc-mini-cart/index.js:338
 msgid "Add a drop down mini cart to display cart items"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:124
-#: build/wc-mini-cart/index.js:429
-#: build/wc-mini-cart/index.js:366
 msgid "Remove Cart Amount"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:133
-#: build/wc-mini-cart/index.js:437
-#: build/wc-mini-cart/index.js:375
 msgid "Remove Items Count"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:143
-#: build/wc-mini-cart/index.js:445
-#: build/wc-mini-cart/index.js:385
 msgid "WC Mini Cart Design"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:160
-#: build/wc-mini-cart/index.js:459
-#: build/wc-mini-cart/index.js:402
 msgid "Shopping Cart"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:164
-#: build/wc-mini-cart/index.js:462
-#: build/wc-mini-cart/index.js:406
 msgid "Cart Arrow Down"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:168
-#: build/wc-mini-cart/index.js:465
-#: build/wc-mini-cart/index.js:410
 msgid "Shopping Basket"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:172
-#: build/wc-mini-cart/index.js:468
-#: build/wc-mini-cart/index.js:414
 msgid "Shopping Bag"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:176
-#: build/wc-mini-cart/index.js:471
-#: build/wc-mini-cart/index.js:418
 msgid "Shopping Suitcase"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:180
-#: build/wc-mini-cart/index.js:474
-#: build/wc-mini-cart/index.js:422
 msgid "Bucket"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:219
-#: build/wc-mini-cart/index.js:495
-#: build/wc-mini-cart/index.js:461
 msgid "Drop Down Cart Position"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:366
-#: build/wc-mini-cart/index.js:611
-#: build/wc-mini-cart/index.js:608
 msgid "This will display all the items that have been added to cart"
 msgstr ""
 
 #: blocks/_components/GetPostsSelect.js:36
-#: build/wc-featured-product/index.js:4409
-#: build/wc-featured-product/index.js:3827
 msgid "Loading..."
 msgstr ""
 
 #: blocks/_components/GetPostsSelect.js:37
-#: build/wc-featured-product/index.js:4409
-#: build/wc-featured-product/index.js:3828
 msgid "Select..."
 msgstr ""
 
 #: blocks/_components/GetPostsSelect.js:39
-#: build/wc-featured-product/index.js:4410
-#: build/wc-featured-product/index.js:3830
 msgid "No Products"
-msgstr ""
-
-#: dist/settings.js:4613
-#: src/backend/InfoTab.js:15
-msgid "Welcome to Blockons!"
-msgstr ""
-
-#: dist/settings.js:4613
-#: src/backend/InfoTab.js:18
-msgid "We're building WordPress editor blocks to make it easier for you to build visually appealing and very professional looking pages for your website."
-msgstr ""
-
-#: dist/settings.js:4617
-#: src/backend/InfoTab.js:28
-msgid "Visit Our Website"
-msgstr ""
-
-#: dist/settings.js:4621
-#: src/backend/InfoTab.js:41
-msgid "Watch our video on using the Blockons plugin"
-msgstr ""
-
-#: dist/settings.js:4621
-#: src/backend/InfoTab.js:44
-msgid "Blockons is design to be intuitive and the settings do have help hints, but you can also watch our video to get a better understanding of how the Blockons plugins works. Enjoy!"
-msgstr ""
-
-#: dist/settings.js:4629
-#: src/backend/InfoTab.js:60
-msgid "Support & Documentation"
-msgstr ""
-
-#: dist/settings.js:4629
-#: src/backend/InfoTab.js:64
-msgid "Read through our ever-growing documentation on our website. Read the Frequently Asked Questions for any answers you may be looking for... Or get in contact with our support if you need help with anything regarding the Blockons plugin."
-msgstr ""
-
-#: dist/settings.js:4641
-#: src/backend/InfoTab.js:89
-msgid "Get Support"
-msgstr ""
-
-#: dist/settings.js:4803
-#: src/backend/Settings.js:89
-msgid "Are you sure you want to delete all settings?"
-msgstr ""
-
-#: dist/settings.js:4850
-#: src/backend/Settings.js:145
-msgid "My Account"
-msgstr ""
-
-#: dist/settings.js:4868
-#: src/backend/Settings.js:161
-msgid "Blocks"
-msgstr ""
-
-#: dist/settings.js:4878
-#: src/backend/Settings.js:172
-msgid "Welcome"
-msgstr ""
-
-#: dist/settings.js:4889
-#: src/backend/Settings.js:186
-msgid "Editor Blocks"
-msgstr ""
-
-#: dist/settings.js:4889
-#: src/backend/Settings.js:189
-msgid "Choose the blocks you'd like to use when building with the WordPress block editor. You can turn off blocks to optimize for speed & page loading."
-msgstr ""
-
-#: dist/settings.js:4913
-#: src/backend/Settings.js:239
-msgid "More Blocks Coming Soon..."
-msgstr ""
-
-#: dist/settings.js:4913
-#: src/backend/Settings.js:242
-msgid "Get in touch and let us know which blocks you need for your site."
-msgstr ""
-
-#: dist/settings.js:4920
-#: src/backend/Settings.js:253
-msgid "Section Heading"
-msgstr ""
-
-#: dist/settings.js:4921
-#: src/backend/Settings.js:254
-msgid "this is a description for the heading component"
-msgstr ""
-
-#: dist/settings.js:4924
-#: src/backend/Settings.js:261
-msgid "My Ssdfetting"
-msgstr ""
-
-#: dist/settings.js:4928
-#: dist/settings.js:4935
-#: src/backend/Settings.js:265
-#: src/backend/Settings.js:276
-msgid "This is the tool tip / hint for this setting"
-msgstr ""
-
-#: dist/settings.js:4931
-#: src/backend/Settings.js:272
-msgid "My Settigbfbbng"
-msgstr ""
-
-#: dist/settings.js:4949
-#: src/backend/Settings.js:300
-msgid "Save Settings"
-msgstr ""
-
-#: dist/settings.js:4955
-#: src/backend/Settings.js:309
-msgid "Reset Settings"
-msgstr ""
-
-#: dist/settings.js:4961
-#: src/backend/Settings.js:314
-msgid "Confirm... Reset All Settings!"
-msgstr ""
-
-#: dist/settings.js:5193
-#: src/backend/helpers.js:18
-msgid "Display content in smaller areas with collapsible lists"
-msgstr ""
-
-#: dist/settings.js:5198
-#: src/backend/helpers.js:26
-msgid "Visually, more attractive list items with icons"
-msgstr ""
-
-#: dist/settings.js:5203
-#: src/backend/helpers.js:31
-msgid "Display multiple images in a neat carousel"
-msgstr ""
-
-#: dist/settings.js:5208
-#: src/backend/helpers.js:36
-msgid "More advanced and customizable line headings"
-msgstr ""
-
-#: dist/settings.js:5213
-#: src/backend/helpers.js:41
-msgid "An attractive, more trendy customizable call-to-action"
-msgstr ""
-
-#: dist/settings.js:5218
-#: src/backend/helpers.js:49
-msgid "Show progress with beautiful, animated bars"
-msgstr ""
-
-#: dist/settings.js:5223
-#: src/backend/helpers.js:54
-msgid "A search bar/icon with drop down or popup search"
-msgstr ""
-
-#: dist/settings.js:5228
-#: src/backend/helpers.js:59
-msgid "Display client testimonials in a slider or carousel"
-msgstr ""
-
-#: dist/settings.js:5233
-#: src/backend/helpers.js:64
-msgid "Display multiple videos in a neat video slider"
-msgstr ""
-
-#: dist/settings.js:5239
-#: src/backend/helpers.js:70
-msgid "A simple icon linking to a users WC Account"
-msgstr ""
-
-#: dist/settings.js:5244
-#: src/backend/helpers.js:75
-msgid "Display a WC featured product with multple layouts"
-msgstr ""
-
-#: dist/settings.js:5249
-#: src/backend/helpers.js:80
-msgid "A simple WC cart icon with a full cart drop down"
-msgstr ""
-
-#: dist/settings.js:5254
-#: src/backend/helpers.js:85
-msgid "A more advaced layout block for your pages"
 msgstr ""
 
 #: src/backend/admin/UpdateNotice.js:72
@@ -1911,6 +1112,155 @@ msgstr ""
 
 #: src/backend/admin/UpdateNotice.js:79
 msgid "Run Update"
+msgstr ""
+
+#: src/backend/helpers.js:18
+msgid "Display content in smaller areas with collapsible lists"
+msgstr ""
+
+#: src/backend/helpers.js:26
+msgid "Visually, more attractive list items with icons"
+msgstr ""
+
+#: src/backend/helpers.js:31
+msgid "Display multiple images in a neat carousel"
+msgstr ""
+
+#: src/backend/helpers.js:36
+msgid "More advanced and customizable line headings"
+msgstr ""
+
+#: src/backend/helpers.js:41
+msgid "An attractive, more trendy customizable call-to-action"
+msgstr ""
+
+#: src/backend/helpers.js:49
+msgid "Show progress with beautiful, animated bars"
+msgstr ""
+
+#: src/backend/helpers.js:54
+msgid "A search bar/icon with drop down or popup search"
+msgstr ""
+
+#: src/backend/helpers.js:59
+msgid "Display client testimonials in a slider or carousel"
+msgstr ""
+
+#: src/backend/helpers.js:64
+msgid "Display multiple videos in a neat video slider"
+msgstr ""
+
+#: src/backend/helpers.js:70
+msgid "A simple icon linking to a users WC Account"
+msgstr ""
+
+#: src/backend/helpers.js:75
+msgid "Display a WC featured product with multple layouts"
+msgstr ""
+
+#: src/backend/helpers.js:80
+msgid "A simple WC cart icon with a full cart drop down"
+msgstr ""
+
+#: src/backend/helpers.js:85
+msgid "A more advaced layout block for your pages"
+msgstr ""
+
+#: src/backend/InfoTab.js:15
+msgid "Welcome to Blockons!"
+msgstr ""
+
+#: src/backend/InfoTab.js:18
+msgid "We're building WordPress editor blocks to make it easier for you to build visually appealing and very professional looking pages for your website."
+msgstr ""
+
+#: src/backend/InfoTab.js:28
+msgid "Visit Our Website"
+msgstr ""
+
+#: src/backend/InfoTab.js:41
+msgid "Watch our video on using the Blockons plugin"
+msgstr ""
+
+#: src/backend/InfoTab.js:44
+msgid "Blockons is design to be intuitive and the settings do have help hints, but you can also watch our video to get a better understanding of how the Blockons plugins works. Enjoy!"
+msgstr ""
+
+#: src/backend/InfoTab.js:60
+msgid "Support & Documentation"
+msgstr ""
+
+#: src/backend/InfoTab.js:64
+msgid "Read through our ever-growing documentation on our website. Read the Frequently Asked Questions for any answers you may be looking for... Or get in contact with our support if you need help with anything regarding the Blockons plugin."
+msgstr ""
+
+#: src/backend/InfoTab.js:89
+msgid "Get Support"
+msgstr ""
+
+#: src/backend/Settings.js:89
+msgid "Are you sure you want to delete all settings?"
+msgstr ""
+
+#: src/backend/Settings.js:145
+msgid "My Account"
+msgstr ""
+
+#: src/backend/Settings.js:161
+msgid "Blocks"
+msgstr ""
+
+#: src/backend/Settings.js:172
+msgid "Welcome"
+msgstr ""
+
+#: src/backend/Settings.js:186
+msgid "Editor Blocks"
+msgstr ""
+
+#: src/backend/Settings.js:189
+msgid "Choose the blocks you'd like to use when building with the WordPress block editor. You can turn off blocks to optimize for speed & page loading."
+msgstr ""
+
+#: src/backend/Settings.js:239
+msgid "More Blocks Coming Soon..."
+msgstr ""
+
+#: src/backend/Settings.js:242
+msgid "Get in touch and let us know which blocks you need for your site."
+msgstr ""
+
+#: src/backend/Settings.js:253
+msgid "Section Heading"
+msgstr ""
+
+#: src/backend/Settings.js:254
+msgid "this is a description for the heading component"
+msgstr ""
+
+#: src/backend/Settings.js:261
+msgid "My Ssdfetting"
+msgstr ""
+
+#: src/backend/Settings.js:265
+#: src/backend/Settings.js:276
+msgid "This is the tool tip / hint for this setting"
+msgstr ""
+
+#: src/backend/Settings.js:272
+msgid "My Settigbfbbng"
+msgstr ""
+
+#: src/backend/Settings.js:300
+msgid "Save Settings"
+msgstr ""
+
+#: src/backend/Settings.js:309
+msgid "Reset Settings"
+msgstr ""
+
+#: src/backend/Settings.js:314
+msgid "Confirm... Reset All Settings!"
 msgstr ""
 
 #: _starter-blocks/layout-container/edit.js:32
@@ -1930,25 +1280,21 @@ msgid "Tabs Design"
 msgstr ""
 
 #: blocks/accordions/block.json
-#: build/accordions/block.json
 msgctxt "block title"
 msgid "Accordions"
 msgstr ""
 
 #: blocks/accordions/block.json
-#: build/accordions/block.json
 msgctxt "block keyword"
 msgid "accordions"
 msgstr ""
 
 #: blocks/accordions/block.json
-#: build/accordions/block.json
 msgctxt "block keyword"
 msgid "accordionbed"
 msgstr ""
 
 #: blocks/accordions/block.json
-#: build/accordions/block.json
 #: _starter-blocks/layout-container/block.json
 #: _starter-blocks/_tabs/block.json
 msgctxt "block keyword"
@@ -1956,60 +1302,50 @@ msgid "content"
 msgstr ""
 
 #: blocks/accordions/block.json
-#: build/accordions/block.json
 #: _starter-blocks/_tabs/block.json
 msgctxt "block keyword"
 msgid "inner"
 msgstr ""
 
 #: blocks/icon-list/block.json
-#: build/icon-list/block.json
 msgctxt "block title"
 msgid "Icon List"
 msgstr ""
 
 #: blocks/icon-list/block.json
-#: build/icon-list/block.json
 msgctxt "block keyword"
 msgid "list"
 msgstr ""
 
 #: blocks/icon-list/block.json
-#: build/icon-list/block.json
 msgctxt "block keyword"
 msgid "icons"
 msgstr ""
 
 #: blocks/icon-list/block.json
 #: blocks/progress-bars/block.json
-#: build/icon-list/block.json
-#: build/progress-bars/block.json
 msgctxt "block keyword"
 msgid "items"
 msgstr ""
 
 #: blocks/icon-list/block.json
-#: build/icon-list/block.json
 msgctxt "block keyword"
 msgid "links"
 msgstr ""
 
 #: blocks/image-carousel/block.json
-#: build/image-carousel/block.json
 #: _starter-blocks/_new_slider_block/block.json
 msgctxt "block title"
 msgid "Image Carousel"
 msgstr ""
 
 #: blocks/image-carousel/block.json
-#: build/image-carousel/block.json
 #: _starter-blocks/_new_slider_block/block.json
 msgctxt "block keyword"
 msgid "image"
 msgstr ""
 
 #: blocks/image-carousel/block.json
-#: build/image-carousel/block.json
 #: _starter-blocks/_new_slider_block/block.json
 msgctxt "block keyword"
 msgid "carousel"
@@ -2017,15 +1353,12 @@ msgstr ""
 
 #: blocks/image-carousel/block.json
 #: blocks/video-slider/block.json
-#: build/image-carousel/block.json
-#: build/video-slider/block.json
 #: _starter-blocks/_new_slider_block/block.json
 msgctxt "block keyword"
 msgid "gallery"
 msgstr ""
 
 #: blocks/image-carousel/block.json
-#: build/image-carousel/block.json
 #: _starter-blocks/_new_slider_block/block.json
 msgctxt "block keyword"
 msgid "picture"
@@ -2034,104 +1367,86 @@ msgstr ""
 #: blocks/image-carousel/block.json
 #: blocks/testimonials/block.json
 #: blocks/video-slider/block.json
-#: build/image-carousel/block.json
-#: build/testimonials/block.json
-#: build/video-slider/block.json
 #: _starter-blocks/_new_slider_block/block.json
 msgctxt "block keyword"
 msgid "slider"
 msgstr ""
 
 #: blocks/line-heading/block.json
-#: build/line-heading/block.json
 msgctxt "block title"
 msgid "Line Heading"
 msgstr ""
 
 #: blocks/line-heading/block.json
-#: build/line-heading/block.json
 msgctxt "block keyword"
 msgid "line"
 msgstr ""
 
 #: blocks/line-heading/block.json
-#: build/line-heading/block.json
 msgctxt "block keyword"
 msgid "heading"
 msgstr ""
 
 #: blocks/line-heading/block.json
-#: build/line-heading/block.json
 msgctxt "block keyword"
 msgid "title"
 msgstr ""
 
 #: blocks/marketing-button/block.json
-#: build/marketing-button/block.json
 msgctxt "block title"
 msgid "Marketing Button"
 msgstr ""
 
 #: blocks/marketing-button/block.json
-#: build/marketing-button/block.json
 #: _starter-blocks/_new-block/block.json
 msgctxt "block keyword"
 msgid "marketing"
 msgstr ""
 
 #: blocks/marketing-button/block.json
-#: build/marketing-button/block.json
 #: _starter-blocks/_new-block/block.json
 msgctxt "block keyword"
 msgid "button"
 msgstr ""
 
 #: blocks/marketing-button/block.json
-#: build/marketing-button/block.json
 #: _starter-blocks/_new-block/block.json
 msgctxt "block keyword"
 msgid "cta"
 msgstr ""
 
 #: blocks/marketing-button/block.json
-#: build/marketing-button/block.json
 #: _starter-blocks/layout-container/block.json
 msgctxt "block keyword"
 msgid "banner"
 msgstr ""
 
 #: blocks/progress-bars/block.json
-#: build/progress-bars/block.json
 msgctxt "block title"
 msgid "Progress Bars"
 msgstr ""
 
 #: blocks/progress-bars/block.json
-#: build/progress-bars/block.json
 msgctxt "block keyword"
 msgid "progress"
 msgstr ""
 
 #: blocks/progress-bars/block.json
-#: build/progress-bars/block.json
 msgctxt "block keyword"
 msgid "bars"
 msgstr ""
 
 #: blocks/search/block.json
-#: build/search/block.json
 msgctxt "block title"
 msgid "Search Bar/Popup"
 msgstr ""
 
 #: blocks/search/block.json
-#: build/search/block.json
 msgctxt "block keyword"
 msgid "search"
 msgstr ""
 
 #: blocks/search/block.json
-#: build/search/block.json
 msgctxt "block keyword"
 msgid "searchbar"
 msgstr ""
@@ -2139,9 +1454,6 @@ msgstr ""
 #: blocks/search/block.json
 #: blocks/wc-account-icon/block.json
 #: blocks/wc-mini-cart/block.json
-#: build/search/block.json
-#: build/wc-account-icon/block.json
-#: build/wc-mini-cart/block.json
 msgctxt "block keyword"
 msgid "icon"
 msgstr ""
@@ -2150,10 +1462,6 @@ msgstr ""
 #: blocks/wc-account-icon/block.json
 #: blocks/wc-featured-product/block.json
 #: blocks/wc-mini-cart/block.json
-#: build/search/block.json
-#: build/wc-account-icon/block.json
-#: build/wc-featured-product/block.json
-#: build/wc-mini-cart/block.json
 msgctxt "block keyword"
 msgid "woocommerce"
 msgstr ""
@@ -2161,117 +1469,96 @@ msgstr ""
 #: blocks/search/block.json
 #: blocks/wc-account-icon/block.json
 #: blocks/wc-mini-cart/block.json
-#: build/search/block.json
-#: build/wc-account-icon/block.json
-#: build/wc-mini-cart/block.json
 msgctxt "block keyword"
 msgid "header"
 msgstr ""
 
 #: blocks/search/block.json
-#: build/search/block.json
 msgctxt "block keyword"
 msgid "site"
 msgstr ""
 
 #: blocks/testimonials/block.json
-#: build/testimonials/block.json
 msgctxt "block title"
 msgid "Testimonials"
 msgstr ""
 
 #: blocks/testimonials/block.json
-#: build/testimonials/block.json
 msgctxt "block keyword"
 msgid "testimonials"
 msgstr ""
 
 #: blocks/testimonials/block.json
-#: build/testimonials/block.json
 msgctxt "block keyword"
 msgid "quote"
 msgstr ""
 
 #: blocks/testimonials/block.json
-#: build/testimonials/block.json
 msgctxt "block keyword"
 msgid "reviews"
 msgstr ""
 
 #: blocks/testimonials/block.json
-#: build/testimonials/block.json
 msgctxt "block keyword"
 msgid "comments"
 msgstr ""
 
 #: blocks/video-slider/block.json
-#: build/video-slider/block.json
 msgctxt "block title"
 msgid "Video Slider"
 msgstr ""
 
 #: blocks/video-slider/block.json
-#: build/video-slider/block.json
 msgctxt "block keyword"
 msgid "video"
 msgstr ""
 
 #: blocks/video-slider/block.json
-#: build/video-slider/block.json
 msgctxt "block keyword"
 msgid "play"
 msgstr ""
 
 #: blocks/wc-account-icon/block.json
-#: build/wc-account-icon/block.json
 msgctxt "block title"
 msgid "WooCommerce Account Icon"
 msgstr ""
 
 #: blocks/wc-account-icon/block.json
-#: build/wc-account-icon/block.json
 msgctxt "block keyword"
 msgid "account"
 msgstr ""
 
 #: blocks/wc-account-icon/block.json
-#: build/wc-account-icon/block.json
 msgctxt "block keyword"
 msgid "profile"
 msgstr ""
 
 #: blocks/wc-featured-product/block.json
-#: build/wc-featured-product/block.json
 msgctxt "block title"
 msgid "WooCommerce Featured Product"
 msgstr ""
 
 #: blocks/wc-featured-product/block.json
-#: build/wc-featured-product/block.json
 msgctxt "block keyword"
 msgid "featured"
 msgstr ""
 
 #: blocks/wc-featured-product/block.json
-#: build/wc-featured-product/block.json
 msgctxt "block keyword"
 msgid "product"
 msgstr ""
 
 #: blocks/wc-mini-cart/block.json
-#: build/wc-mini-cart/block.json
 msgctxt "block title"
 msgid "WooCommerce Mini Cart"
 msgstr ""
 
 #: blocks/wc-mini-cart/block.json
-#: build/wc-mini-cart/block.json
 msgctxt "block keyword"
 msgid "cart"
 msgstr ""
 
 #: blocks/wc-mini-cart/block.json
-#: build/wc-mini-cart/block.json
 msgctxt "block keyword"
 msgid "mini cart"
 msgstr ""
