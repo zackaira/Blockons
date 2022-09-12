@@ -36,6 +36,9 @@ const Save = ({ attributes }) => {
 					className="blockons-lheading-text"
 					style={{
 						color: attributes.fontColor,
+						...(attributes.headFontSize
+							? { fontSize: attributes.headFontSize + "px" }
+							: ""),
 					}}
 				/>
 				{(attributes.alignment === "left" ||

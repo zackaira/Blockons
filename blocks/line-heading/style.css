@@ -2,16 +2,16 @@
  * Note that these styles are loaded *before* editor styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.blockons-lheading-wrap .blockons-lheading-text {
+.wp-block-blockons-line-heading .blockons-lheading-text {
 	padding: 0 12px;
 	white-space: nowrap;
 	margin: 0;
 	line-height: 1.4;
 }
-.blockons-lheading-wrap.sao-textalign-left .blockons-lheading-text {
+.wp-block-blockons-line-heading.align-left .blockons-lheading-text {
 	padding: 0 12px 0 0;
 }
-.blockons-lheading-wrap.sao-textalign-right .blockons-lheading-text {
+.wp-block-blockons-line-heading.align-right .blockons-lheading-text {
 	padding: 0 0 0 12px;
 }
 .wp-block-blockons-line-heading,

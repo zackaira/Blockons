@@ -5,6 +5,7 @@ import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	AlignmentToolbar,
+	BlockAlignmentToolbar,
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
@@ -23,8 +24,7 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
-import { sliderArrowIcons } from "../block-global";
-import { colorPickerPalette } from "../block-global";
+import { sliderArrowIcons, colorPickerPalette } from "../block-global";
 
 const Edit = (props) => {
 	const {
@@ -32,6 +32,10 @@ const Edit = (props) => {
 		attributes: {
 			uniqueId,
 			alignment,
+			slideAlign,
+			widthBy,
+			widthPercent,
+			widthPixels,
 			slides,
 			carouselType,
 			carouselNumber,
@@ -62,7 +66,7 @@ const Edit = (props) => {
 	const [initCarouselType, setInitCarouselType] = useState(carouselType);
 
 	const blockProps = useBlockProps({
-		className: `align-${alignment} layout-${carouselLayout} style-${carouselStyle} arrows-${carouselArrowIcon} brad-${carouselBRadius}`,
+		className: `align-${alignment} ${slideAlign}-align layout-${carouselLayout} style-${carouselStyle} arrows-${carouselArrowIcon} brad-${carouselBRadius}`,
 	});
 
 	// const sliderType = carouselType === "slide" ? "slide" : carouselType;
@@ -255,7 +259,7 @@ const Edit = (props) => {
 									<>
 										<Button className="blockons-upload-button" onClick={open}>
 											{slides.length
-												? __("Add Images to Carousel")
+												? __("Add / Edit Images")
 												: __("Create Image Carousel Gallery")}
 										</Button>
 									</>
@@ -337,6 +341,46 @@ const Edit = (props) => {
 												carouselRewind: newValue,
 											});
 										}}
+									/>
+								)}
+
+								<SelectControl
+									label={__("Carousel / Slider Width", "blockons")}
+									value={widthBy}
+									options={[
+										{ label: "Width by percentage", value: "percent" },
+										{ label: "Width by pixels", value: "pixels" },
+									]}
+									onChange={(value) =>
+										setAttributes({
+											widthBy: value === undefined ? "percent" : value,
+										})
+									}
+									// help={
+									// 	widthBy === "pixels"
+									// 		? __(
+									// 				"The slider always adjusts to the content size, this max-width will apply for larger screens",
+									// 				"blockons"
+									// 		  )
+									// 		: ""
+									// }
+								/>
+								{widthBy === "percent" && (
+									<RangeControl
+										label={__("Width", "blockons")}
+										value={widthPercent}
+										onChange={(value) => setAttributes({ widthPercent: value })}
+										min={10}
+										max={100}
+									/>
+								)}
+								{widthBy === "pixels" && (
+									<RangeControl
+										label={__("Width", "blockons")}
+										value={widthPixels}
+										onChange={(value) => setAttributes({ widthPixels: value })}
+										min={200}
+										max={1400}
 									/>
 								)}
 							</>
@@ -425,9 +469,7 @@ const Edit = (props) => {
 								});
 							}}
 						/>
-						{(captionPosition === "two" ||
-							captionPosition === "three" ||
-							captionPosition === "four") && (
+						{(captionPosition === "two" || captionPosition === "three") && (
 							<>
 								<BlockonsColorpicker
 									label={__("Background Color", "blockons")}
@@ -445,7 +487,13 @@ const Edit = (props) => {
 									max={1}
 									step={0.01}
 								/>
+							</>
+						)}
 
+						{(captionPosition === "two" ||
+							captionPosition === "three" ||
+							captionPosition === "four") && (
+							<>
 								<BlockonsColorpicker
 									label={__("Font Color", "blockons")}
 									value={captionFontColor}
@@ -561,7 +609,18 @@ const Edit = (props) => {
 			)}
 			{
 				<BlockControls>
-					<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
+					{(captionPosition === "two" || captionPosition === "four") && (
+						<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
+					)}
+					<BlockAlignmentToolbar
+						value={slideAlign}
+						controls={["left", "center", "right"]}
+						onChange={(value) =>
+							setAttributes({
+								alignment: value === undefined ? "left" : value,
+							})
+						}
+					/>
 				</BlockControls>
 			}
 			<div
@@ -569,6 +628,11 @@ const Edit = (props) => {
 				id={uniqueId}
 				data-settings={JSON.stringify(sliderOptions)}
 				data-slides={carouselNumber}
+				style={{
+					...(widthBy === "pixels"
+						? { width: widthPixels + "px" }
+						: { width: widthPercent + "%" }),
+				}}
 			>
 				<div
 					className={`blockons-imgcarousel-wrap ${
@@ -618,9 +682,7 @@ const Edit = (props) => {
 									return (
 										<>
 											<Button className="blockons-upload-button" onClick={open}>
-												{slides.length
-													? __("Add Images to Carousel")
-													: __("Create Image Carousel Gallery")}
+												{__("Create Image Carousel Gallery")}
 											</Button>
 										</>
 									);

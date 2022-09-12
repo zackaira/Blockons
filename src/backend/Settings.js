@@ -137,7 +137,6 @@ const Settings = () => {
 			<div className="blockons-settings">
 				<div className="blockonsSettingBar">
 					<h2>{"Blockons Settings"}</h2>
-					{isPremium && <h4>PREMIUM VERSION !!</h4>}
 					<div className="blockonsSettingBarOptions">
 						<a
 							href={siteObject.accountUrl}
@@ -192,8 +191,6 @@ const Settings = () => {
 												)}
 											</p>
 										</div>
-
-										{!isPremium && <h4>PLEASE UPGRADE NOW !!</h4>}
 
 										<div className="blockons-block-settings">
 											{defaults.blocks &&

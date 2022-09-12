@@ -3,6 +3,16 @@
  * editor-specific styles using the same selectors will take precedence.
  */
 /* ---- Slider ---- */
+.wp-block-blockons-image-carousel {
+	display: flex;
+	align-items: flex-start;
+}
+.wp-block-blockons-image-carousel .blockons-image-carousel-slider {
+	max-width: 100%;
+}
+.wp-block-blockons-image-carousel .blockons-image-carousel-slider img {
+	margin: 0 !important;
+}
 .blockons-imgcarousel-wrap {
 	position: relative;
 }
@@ -11,6 +21,17 @@
 }
 .blockons-imgcarousel-wrap .splide__list {
 	align-items: flex-start;
+}
+
+/* -- Alignment -- */
+.wp-block-blockons-image-carousel.left-align {
+	justify-content: flex-start;
+}
+.wp-block-blockons-image-carousel.center-align {
+	justify-content: center;
+}
+.wp-block-blockons-image-carousel.right-align {
+	justify-content: flex-end;
 }
 
 /* -- Slides -- */
@@ -25,6 +46,7 @@
 	border-radius: 3px;
 	cursor: pointer;
 	display: flex;
+	color: #222;
 	align-items: center;
 	justify-content: center;
 	padding: 10px;
@@ -34,6 +56,8 @@
 	font-size: 20px;
 	margin-top: -20px;
 	overflow: hidden;
+	opacity: 0.8;
+	transition: opacity 0.2s ease-in-out 0s;
 }
 .blockons-imgcarousel-wrap .splide__arrow svg {
 	display: none !important;
@@ -47,6 +71,11 @@
 .blockons-imgcarousel-wrap .splide__arrow:disabled {
 	opacity: 0 !important;
 	pointer-events: none;
+}
+.blockons-imgcarousel-wrap .splide__arrow:hover {
+	background-color: #fff;
+	color: #222;
+	opacity: 1;
 }
 .blockons-imgcarousel-wrap.arrow-style-two .splide__arrow {
 	border-radius: 50%;
@@ -158,13 +187,13 @@
 }
 
 /* -- Alignment -- */
-.wp-block-blockons-image-carousel.align-left .blockons-slide-text {
+.wp-block-blockons-image-carousel.align-left .blockons-imgcaption-inner {
 	text-align: left;
 }
-.wp-block-blockons-image-carousel.align-center .blockons-slide-text {
+.wp-block-blockons-image-carousel.align-center .blockons-imgcaption-inner {
 	text-align: center;
 }
-.wp-block-blockons-image-carousel.align-right .blockons-slide-text {
+.wp-block-blockons-image-carousel.align-right .blockons-imgcaption-inner {
 	text-align: right;
 }
 
@@ -256,8 +285,9 @@
 	opacity: 1;
 }
 /* - Four - */
+.blockons-imgcarousel-wrap.caption-four .blockons-imgcaption-bg {
+	display: none !important;
+}
 .blockons-imgcarousel-wrap.caption-four .blockons-imgcaption {
 	padding: 10px;
-}
-.blockons-imgcarousel-wrap.caption-four .blockons-imgcaption-inner {
 }

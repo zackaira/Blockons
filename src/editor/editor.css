@@ -45,23 +45,3 @@
 .components-button.blockons-colorpicker-btn:hover {
 	box-shadow: 0 0 0 1px #b9b9b9;
 }
-
-/**
- * BlockonsNumberRange Component
- */
-.blockonsNumRange {
-	position: relative;
-}
-.blockonsNumRange-btns {
-	position: absolute;
-	top: 3px;
-	right: 1px;
-	width: 62px;
-	display: flex;
-}
-.blockonsNumRange-btn {
-	font-size: 10px;
-	padding: 5px;
-	flex: 1;
-	justify-content: center;
-}

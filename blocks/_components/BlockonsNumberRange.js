@@ -8,19 +8,19 @@ const BlockonsNumberRange = (props) => {
 		min,
 		max,
 		btnValue,
-		buttonOptions,
-		onBtnClick,
+		btnOptions,
+		btnOnClick,
 	} = props;
 
 	return (
 		<div className="blockonsNumRange">
 			<ButtonGroup className="blockonsNumRange-btns">
-				{buttonOptions.map((btn) => (
+				{btnOptions.map((btn) => (
 					<Button
-						key={btn.key}
+						key={btn}
 						isSmall
 						isPrimary={btnValue === btn}
-						onClick={onBtnClick}
+						onClick={btnOnClick}
 						className="blockonsNumRange-btn"
 						value={btn}
 					>

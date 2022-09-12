@@ -13,7 +13,23 @@
 		},
 		"alignment": {
 			"type": "string",
+			"default": "center"
+		},
+		"slideAlign": {
+			"type": "string",
 			"default": "left"
+		},
+		"widthBy": {
+			"type": "string",
+			"default": "percent"
+		},
+		"widthPercent": {
+			"type": "string",
+			"default": 100
+		},
+		"widthPixels": {
+			"type": "string",
+			"default": 800
 		},
 		"slides": {
 			"type": "array",

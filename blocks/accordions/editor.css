@@ -15,12 +15,9 @@
 .wp-block-blockons-accordions .accordion-label .blockons-fontawesome:hover {
 	box-shadow: 0 0 0 1px #297cba;
 }
-.wp-block-blockons-accordions .accordion-label p {
+.wp-block-blockons-accordions .accordion-label .accordion-label-title {
 	margin: 0;
 	padding: 0;
-}
-.wp-block-blockons-accordions .block-editor-block-list__block {
-	margin: 0;
 }
 .block-editor-block-list__block .accordion-content {
 	/* display: none !important; */

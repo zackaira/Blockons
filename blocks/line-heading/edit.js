@@ -10,7 +10,12 @@ import {
 	BlockAlignmentToolbar,
 	useBlockProps,
 } from "@wordpress/block-editor";
-import { PanelBody, SelectControl, RangeControl } from "@wordpress/components";
+import {
+	PanelBody,
+	SelectControl,
+	RangeControl,
+	TextControl,
+} from "@wordpress/components";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import { elementTags, colorPickerPalette } from "../block-global";
 
@@ -20,6 +25,7 @@ const Edit = (props) => {
 		attributes: {
 			alignment,
 			hTag,
+			headFontSize,
 			headWidthSet,
 			headElementAlign,
 			headOuterWidth,
@@ -123,6 +129,17 @@ const Edit = (props) => {
 						title={__("Line Heading Design", "blockons")}
 						initialOpen={false}
 					>
+						{console.log(headFontSize)}
+						<TextControl
+							label={__("Font Size", "blockons")}
+							value={headFontSize}
+							onChange={(value) => setAttributes({ headFontSize: value })}
+							type="number"
+							help={__(
+								"Clear this setting to take on the heading sizes set by the theme or page builders.",
+								"blockons"
+							)}
+						/>
 						<SelectControl
 							label={__("Line Style", "blockons")}
 							value={lineStyle}
@@ -204,6 +221,7 @@ const Edit = (props) => {
 					onChange={(value) => setAttributes({ headingTitle: value })}
 					style={{
 						color: fontColor,
+						...(headFontSize ? { fontSize: headFontSize + "px" } : ""),
 					}}
 				/>
 				{(alignment === "left" || alignment === "center") && (
