@@ -36,6 +36,7 @@
 }
 .blockons-progressbar-wrap .blockons-progressbar-bar-inner {
 	background-color: #22b0ea;
+	box-sizing: border-box;
 	position: absolute;
 	top: 0;
 	left: 0;

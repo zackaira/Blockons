@@ -16,6 +16,20 @@
 	max-width: 320px;
 	padding: 30px;
 }
+/* -- Remove Button -- */
+.blockons-image-carousel-slider .blockons-item-btns {
+	display: flex;
+	align-items: stretch;
+	position: absolute;
+	top: -4px;
+	right: 0;
+	z-index: 8;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out 0s;
+}
+.blockons-image-carousel-slider .splide__slide:hover .blockons-item-btns {
+	opacity: 1;
+}
 /* -- Disabled - Needs to be reloaded -- */
 .blockons-reload {
 	position: absolute;
@@ -48,8 +62,6 @@
 	visibility: hidden;
 }
 /* -- Image Button -- */
-.blockons-upload-button {
-}
 .blockons-upload-remove {
 	background-color: #fff;
 	position: absolute;

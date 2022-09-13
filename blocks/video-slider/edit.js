@@ -344,7 +344,7 @@ const Edit = (props) => {
 									<div className="blockons-videos-prev">
 										{slideItem.itemType === "youtube" && slideItem.itemUrl && (
 											<iframe
-												src={`https://www.youtube.com/embed/${slideItem.itemUrl}`}
+												src={`//www.youtube.com/embed/${slideItem.itemUrl}`}
 												width="256"
 												height="145"
 												frameborder="0"
@@ -353,7 +353,7 @@ const Edit = (props) => {
 										)}
 										{slideItem.itemType === "vimeo" && slideItem.itemUrl && (
 											<iframe
-												src={`https://player.vimeo.com/video/${slideItem.itemUrl}`}
+												src={`//player.vimeo.com/video/${slideItem.itemUrl}`}
 												width="256"
 												height="145"
 												frameborder="0"
@@ -460,7 +460,12 @@ const Edit = (props) => {
 							min={400}
 							max={1200}
 							allowReset
+							help={__(
+								"Note: When changing live settings, move the slider to make it resize properly again.",
+								"blockons"
+							)}
 						/>
+
 						<SelectControl
 							label="Style"
 							value={sliderStyle}

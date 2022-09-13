@@ -44,6 +44,7 @@
 	border: 0 !important;
 	font-size: 38px;
 	margin-left: 5px;
+	color: #222;
 }
 .blockons-video-slider-wrap .splide-custom-slide:hover .play-button {
 	opacity: 0.9;

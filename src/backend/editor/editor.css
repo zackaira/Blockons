@@ -24,6 +24,15 @@
 .helplink a:hover {
 	background-color: #c0deee;
 }
+/**
+ * Splide resizing note
+ */
+.blockons-size-note {
+	font-size: 12px;
+	font-style: normal;
+	color: rgb(117, 117, 117);
+	margin: 20px 0 0;
+}
 
 /**
  * Blockons Color Picker Component

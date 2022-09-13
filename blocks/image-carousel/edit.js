@@ -118,7 +118,6 @@ const Edit = (props) => {
 
 	// Item Controls Functions
 	const handleMediaUpload = (media) => {
-		console.log(media);
 		const mediaItems = [...media];
 
 		if (mediaItems.length) {
@@ -131,15 +130,15 @@ const Edit = (props) => {
 				};
 			});
 
-			const updatedSlides = [
-				...slides.filter(
-					(slide) =>
-						!editedCarouselItems.find((item) => slide.imageId === item.imageId)
-				),
-				...editedCarouselItems,
-			];
+			// const updatedSlides = [
+			// 	...slides.filter(
+			// 		(slide) =>
+			// 			!editedCarouselItems.find((item) => slide.imageId === item.imageId)
+			// 	),
+			// 	...editedCarouselItems,
+			// ];
 
-			setAttributes({ slides: updatedSlides });
+			setAttributes({ slides: editedCarouselItems });
 		}
 	};
 
@@ -267,6 +266,12 @@ const Edit = (props) => {
 							}}
 						/>
 						<br />
+						<div className="blockons-size-note">
+							{__(
+								"Note: When changing live settings, move the slider to make it resize properly again.",
+								"blockons"
+							)}
+						</div>
 
 						{slides.length >= 2 && (
 							<>
@@ -509,7 +514,7 @@ const Edit = (props) => {
 										setAttributes({ captionFontSize: value })
 									}
 									min={11}
-									max={18}
+									max={32}
 								/>
 							</>
 						)}
@@ -617,7 +622,7 @@ const Edit = (props) => {
 						controls={["left", "center", "right"]}
 						onChange={(value) =>
 							setAttributes({
-								alignment: value === undefined ? "left" : value,
+								slideAlign: value === undefined ? "left" : value,
 							})
 						}
 					/>
@@ -664,6 +669,7 @@ const Edit = (props) => {
 							onMove={(slider) => updateHeight(slider)}
 							onResize={(slider) => updateHeight(slider)}
 							onUpdated={(slider) => updateHeight(slider)}
+							onRefresh={(slider) => updateHeight(slider)}
 						>
 							{sliderSlideItems}
 						</Splide>

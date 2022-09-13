@@ -51,7 +51,7 @@ const Save = ({ attributes }) => {
 							color: attributes.fontColor,
 						}}
 					>
-						{showStars && (
+						{attributes.showStars && (
 							<div className="blockons-star-ratings">
 								<span
 									className={`fa-solid fa-star blockons-star ${

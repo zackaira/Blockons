@@ -64,12 +64,6 @@ const Edit = (props) => {
 		setShowSearch(false);
 	};
 
-	// function SearchBar() {
-	// 	return (
-
-	// 	);
-	// }
-
 	return (
 		<div {...blockProps}>
 			{isSelected && (

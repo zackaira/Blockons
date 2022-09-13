@@ -37,8 +37,8 @@ const Save = ({ attributes }) => {
 		<div {...blockProps}>
 			<div className="blockons-marketing-button-block">
 				<a
-					{...(attributes.linkTo ? { href: attributes.linkTo.url } : "")}
-					{...(attributes.linkTo ? { target: "_blank" } : "")}
+					{...(attributes.linkTo ? { href: attributes.linkTo } : "")}
+					{...(attributes.linkTarget ? { target: "_blank" } : "")}
 					className="blockons-marketing-button"
 					style={{
 						paddingLeft: attributes.horizPad,
@@ -53,6 +53,7 @@ const Save = ({ attributes }) => {
 						backgroundColor: attributes.bgColor,
 						borderColor: attributes.borderColor,
 					}}
+					rel="noopener"
 				>
 					{attributes.hasIcon && attributes.iconPosition === "three" && (
 						<MarketingButtonIcon />

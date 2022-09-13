@@ -9,7 +9,6 @@ import {
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
-	__experimentalLinkControl as LinkControl,
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
@@ -18,7 +17,6 @@ import {
 	SelectControl,
 	TextControl,
 	RangeControl,
-	ToolbarButton,
 } from "@wordpress/components";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
@@ -45,6 +43,7 @@ const Edit = (props) => {
 			iconSize,
 			iconSpacing,
 			linkTo,
+			linkTarget,
 			title,
 			subText,
 			bRadius,
@@ -68,12 +67,6 @@ const Edit = (props) => {
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
 			alignment: newAlignment === undefined ? "none" : newAlignment,
-		});
-	};
-
-	const onChangeLinkUrl = (newValue) => {
-		setAttributes({
-			linkTo: newValue,
 		});
 	};
 
@@ -127,6 +120,26 @@ const Edit = (props) => {
 						title={__("Marketing Button Settings", "blockons")}
 						initialOpen={true}
 					>
+						<TextControl
+							label="Link URL"
+							value={linkTo}
+							onChange={(newValue) => {
+								setAttributes({
+									linkTo: newValue,
+								});
+							}}
+						/>
+						<ToggleControl
+							label={__("Open in new window", "blockons")}
+							checked={linkTarget}
+							onChange={(newValue) => {
+								setAttributes({
+									linkTarget: newValue,
+								});
+							}}
+						/>
+						<br />
+
 						<SelectControl
 							label={__("Design", "blockons")}
 							value={layout}
@@ -363,32 +376,12 @@ const Edit = (props) => {
 							});
 						}}
 					/>
-					<Dropdown
-						className="blockons-item-level-settings"
-						contentClassName="blockons-editor-popup"
-						position="bottom right"
-						renderToggle={({ isOpen, onToggle }) => (
-							<ToolbarButton
-								icon="admin-links"
-								label={__("Button Link", "blockons")}
-								onClick={onToggle}
-							/>
-						)}
-						renderContent={() => (
-							<LinkControl
-								searchInputPlaceholder={__("Search or type url", "blockons")}
-								value={linkTo}
-								onChange={onChangeLinkUrl}
-								withCreateSuggestion={false}
-							/>
-						)}
-					/>
 				</BlockControls>
 			}
 			<div className="blockons-marketing-button-block">
 				<a
-					{...(linkTo ? { href: linkTo.url } : "")}
-					{...(linkTo ? { target: "_blank" } : "")}
+					// {...(linkTo ? { href: linkTo } : "")}
+					// {...(linkTarget ? { target: "_blank" } : "")}
 					className="blockons-marketing-button"
 					style={{
 						paddingLeft: horizPad,
@@ -401,6 +394,7 @@ const Edit = (props) => {
 						backgroundColor: bgColor,
 						borderColor: borderColor,
 					}}
+					rel="noopener"
 				>
 					{hasIcon && iconPosition === "three" && <MarketingButtonIcon />}
 					<div className="blockons-marketing-button-inner">

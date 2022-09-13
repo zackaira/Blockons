@@ -72,20 +72,31 @@ class Blockons {
 			));
 		}
 		// Progress Bars JS
-		wp_register_script( 'blockons-waypoint', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/waypoints.min.js', array(), BLOCKONS_PLUGIN_VERSION );
-		wp_register_script( 'blockons-waypoint-inview', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/inview.min.js', array(), BLOCKONS_PLUGIN_VERSION );
-		wp_register_script( 'blockons-progress-bars', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/progress-bars.js', array( 'blockons-waypoint', 'blockons-waypoint-inview' ), BLOCKONS_PLUGIN_VERSION );
+		wp_register_script( 'blockons-waypoint', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/waypoints.min.js', array(), BLOCKONS_PLUGIN_VERSION, true );
+		wp_register_script( 'blockons-waypoint-inview', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/inview.min.js', array('blockons-waypoint'), BLOCKONS_PLUGIN_VERSION, true );
+		wp_register_script( 'blockons-progress-bars', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/progress-bars.js', array( 'blockons-waypoint', 'blockons-waypoint-inview' ), BLOCKONS_PLUGIN_VERSION, true );
 
 		// Testimonials
 		wp_register_style( 'blockons-splidecss', BLOCKONS_PLUGIN_URL . 'assets/slider/splide.min.css', array(), BLOCKONS_PLUGIN_VERSION );
 		wp_register_script( 'blockons-splidejs', BLOCKONS_PLUGIN_URL . 'assets/slider/splide.min.js', array(), BLOCKONS_PLUGIN_VERSION );
-	} // End blockons_frontend_scripts ()
+	} // End blockons_register_scripts ()
 
 	/**
 	 * Load frontend Scripts & Styles
 	 */
 	public function blockons_frontend_scripts() {
+		// Frontend CSS
+		wp_register_style( 'blockons-admin-editor-style', esc_url(BLOCKONS_PLUGIN_URL . '/dist/frontend.css'), array(), BLOCKONS_PLUGIN_VERSION );
+		wp_enqueue_style( 'blockons-admin-editor-style' );
 		
+		// Frontend JS
+		wp_register_script( 'blockons-frontend-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/frontend.js'), array('wp-i18n'), BLOCKONS_PLUGIN_VERSION, true );
+		wp_localize_script('blockons-frontend-script', 'siteObj', array(
+			'siteUrl' => esc_url(home_url('/')),
+			// 'blockonsOptions' => $blockonsOptions,
+			// 'can_use_premium_code' => blockons_fs()->can_use_premium_code(),
+		));
+		wp_enqueue_script('blockons-frontend-script');
 	} // End blockons_frontend_scripts ()
 
 	/**
