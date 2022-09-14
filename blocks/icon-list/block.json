@@ -6,7 +6,7 @@
 	"textdomain": "blockons",
 	"icon": "editor-ul",
 	"category": "blockons-category",
-	"keywords": ["list", "icons", "items", "links"],
+	"keywords": ["list", "icons", "items"],
 	"attributes": {
 		"alignment": {
 			"type": "string",
@@ -22,7 +22,8 @@
 					"itemTextColor": null,
 					"itemIcon": "check",
 					"itemIconSize": null,
-					"itemIconColor": null
+					"itemIconColor": null,
+					"itemSpacing": ""
 				},
 				{
 					"itemId": 1,
@@ -31,7 +32,8 @@
 					"itemTextColor": null,
 					"itemIcon": "check",
 					"itemIconSize": null,
-					"itemIconColor": null
+					"itemIconColor": null,
+					"itemSpacing": ""
 				}
 			]
 		},
@@ -75,7 +77,8 @@
 					"itemTextColor": null,
 					"itemIcon": "check",
 					"itemIconSize": null,
-					"itemIconColor": null
+					"itemIconColor": null,
+					"itemSpacing": ""
 				},
 				{
 					"itemId": "id2",
@@ -84,7 +87,8 @@
 					"itemTextColor": null,
 					"itemIcon": "check",
 					"itemIconSize": null,
-					"itemIconColor": null
+					"itemIconColor": null,
+					"itemSpacing": ""
 				},
 				{
 					"itemId": "id3",
@@ -93,7 +97,8 @@
 					"itemTextColor": null,
 					"itemIcon": "check",
 					"itemIconSize": null,
-					"itemIconColor": null
+					"itemIconColor": null,
+					"itemSpacing": ""
 				}
 			]
 		}

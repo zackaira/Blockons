@@ -10,24 +10,26 @@ const Save = ({ attributes }) => {
 
 	return (
 		<div {...blockProps}>
-			<div
-				className={`blockons-wc-account-icon-block`}
-				style={{
-					backgroundColor: attributes.iconBgColor,
-					fontSize: attributes.iconSize,
-					padding: attributes.iconPadding,
-				}}
-			>
-				<span
-					className={
-						attributes.customIcon && attributes.icon == "custom"
-							? attributes.customIcon
-							: attributes.icon
-					}
+			<div className={`blockons-wc-account-icon-block`}>
+				<div
+					className={`blockons-wc-account-icon`}
 					style={{
-						color: attributes.iconColor,
+						backgroundColor: attributes.iconBgColor,
+						fontSize: attributes.iconSize,
+						padding: attributes.iconPadding,
 					}}
-				></span>
+				>
+					<span
+						className={
+							attributes.customIcon && attributes.icon == "custom"
+								? attributes.customIcon
+								: attributes.icon
+						}
+						style={{
+							color: attributes.iconColor,
+						}}
+					></span>
+				</div>
 				{attributes.hasDropdown && (
 					<div
 						className="blockons-wc-account-icon-dropdown"

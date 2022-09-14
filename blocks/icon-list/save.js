@@ -28,7 +28,9 @@ const Save = ({ attributes }) => {
 				<div
 					className="blockons-list-item-icon"
 					style={{
-						marginRight: attributes.listItemIconSpacing,
+						marginRight: listItem.itemSpacing
+							? listItem.itemSpacing
+							: attributes.listItemIconSpacing,
 						fontSize: listItem.itemIconSize
 							? listItem.itemIconSize
 							: attributes.listItemIconSize,

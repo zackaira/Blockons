@@ -22,7 +22,6 @@ import BlockonsLoader from "../_components/BlockonsLoader";
 import parse from "html-react-parser";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import { colorPickerPalette } from "../block-global";
-import "./editor.css";
 
 const Edit = (props) => {
 	const site_url = siteObj.apiUrl;
@@ -40,12 +39,6 @@ const Edit = (props) => {
 			showDesc,
 			showPrice,
 			showButton,
-			titleSize,
-			titleColor,
-			priceSize,
-			priceColor,
-			buttonType,
-			buttonTarget,
 			blockBgColor,
 			blockFontColor,
 			buttonText,
@@ -109,6 +102,7 @@ const Edit = (props) => {
 									layout: value === undefined ? "one" : value,
 								})
 							}
+							__nextHasNoMarginBottom
 						/>
 						{layout === "one" && (
 							<ToggleControl
@@ -177,7 +171,6 @@ const Edit = (props) => {
 								});
 							}}
 						/>
-
 						<ToggleControl
 							label={__("Show Button", "blockons")}
 							checked={showButton}
@@ -187,32 +180,6 @@ const Edit = (props) => {
 								});
 							}}
 						/>
-						{showButton && (
-							<>
-								<SelectControl
-									label={__("Button Type", "blockons")}
-									value={buttonType}
-									options={[
-										{ label: __("Link to Product", "blockons"), value: "link" },
-										{ label: __("Add to Cart", "blockons"), value: "atc" },
-									]}
-									onChange={(value) =>
-										setAttributes({
-											buttonType: value === undefined ? "link" : value,
-										})
-									}
-								/>
-								{buttonType === "link" && (
-									<ToggleControl
-										label={__("Open in new window", "blockons")}
-										checked={buttonTarget}
-										onChange={(newValue) =>
-											setAttributes({ buttonTarget: newValue })
-										}
-									/>
-								)}
-							</>
-						)}
 					</PanelBody>
 					<PanelBody
 						title={__("WC Featured Product Design", "blockons")}
@@ -224,12 +191,11 @@ const Edit = (props) => {
 								value={overlayOpacity}
 								onChange={(value) =>
 									setAttributes({
-										overlayOpacity: value === undefined ? 0.35 : value,
+										overlayOpacity: value === undefined ? 35 : value,
 									})
 								}
 								min={0}
-								max={1}
-								step={0.01}
+								max={100}
 							/>
 						)}
 
@@ -244,70 +210,17 @@ const Edit = (props) => {
 							paletteColors={colorPickerPalette}
 						/>
 
-						<RangeControl
-							label={__("Product Title Size", "blockons")}
-							value={titleSize}
-							onChange={(value) =>
-								setAttributes({
-									titleSize: value === undefined ? "" : value,
-								})
-							}
-							min={12}
-							max={68}
-							allowReset
-						/>
 						<BlockonsColorpicker
-							label={__("Product Title Color", "blockons")}
-							value={titleColor}
+							label={__("Font Color", "blockons")}
+							value={blockFontColor}
 							onChange={(colorValue) => {
 								setAttributes({
-									titleColor: colorValue === undefined ? "#444" : colorValue,
+									blockFontColor:
+										colorValue === undefined ? "#444" : colorValue,
 								});
 							}}
 							paletteColors={colorPickerPalette}
 						/>
-
-						{showPrice && (
-							<>
-								<RangeControl
-									label={__("Price Size", "blockons")}
-									value={priceSize}
-									onChange={(value) =>
-										setAttributes({
-											priceSize: value === undefined ? "inherit" : value,
-										})
-									}
-									min={12}
-									max={44}
-									allowReset
-								/>
-								<BlockonsColorpicker
-									label={__("Price Color", "blockons")}
-									value={priceColor}
-									onChange={(colorValue) => {
-										setAttributes({
-											priceColor:
-												colorValue === undefined ? "#444" : colorValue,
-										});
-									}}
-									paletteColors={colorPickerPalette}
-								/>
-							</>
-						)}
-
-						{showDesc && (
-							<BlockonsColorpicker
-								label={__("Description Font Color", "blockons")}
-								value={blockFontColor}
-								onChange={(colorValue) => {
-									setAttributes({
-										blockFontColor:
-											colorValue === undefined ? "#444" : colorValue,
-									});
-								}}
-								paletteColors={colorPickerPalette}
-							/>
-						)}
 
 						{layout === "one" && (
 							<RangeControl
@@ -371,24 +284,12 @@ const Edit = (props) => {
 								padding: innerPadding / 2 + "px " + innerPadding + "px",
 							}}
 						>
-							<h2
-								className="blockons-wc-featured-product-title"
-								style={{
-									...(titleSize ? { fontSize: titleSize } : ""),
-									...(titleColor ? { color: titleColor } : ""),
-								}}
-							>
+							<h2 className="blockons-wc-featured-product-title">
 								{selectedProductDetails.title}
 							</h2>
 
 							{showPrice && (
-								<div
-									className="blockons-wc-featured-product-price"
-									style={{
-										...(priceSize ? { fontSize: priceSize } : ""),
-										...(priceColor ? { color: priceColor } : ""),
-									}}
-								>
+								<div className="blockons-wc-featured-product-price">
 									{selectedProductDetails.price
 										? parse(selectedProductDetails.price)
 										: ""}
@@ -399,22 +300,18 @@ const Edit = (props) => {
 
 							{showButton && (
 								<div className="blockons-wc-featured-product-btn">
-									{buttonType === "atc" ? (
-										<div className="wc-fproduct-btn">Add To Cart</div>
-									) : (
-										<RichText
-											placeholder={__("View Product")}
-											value={buttonText}
-											onChange={(value) =>
-												setAttributes({
-													buttonText:
-														value === undefined ? "View Product" : value,
-												})
-											}
-											// withoutInteractiveFormatting
-											className={"wc-fproduct-btn"}
-										/>
-									)}
+									<RichText
+										placeholder={__("View Product")}
+										value={buttonText}
+										onChange={(value) =>
+											setAttributes({
+												buttonText:
+													value === undefined ? "View Product" : value,
+											})
+										}
+										// withoutInteractiveFormatting
+										className={"wp-block-button__link"}
+									/>
 								</div>
 							)}
 						</div>
@@ -433,7 +330,7 @@ const Edit = (props) => {
 								<div
 									className="img-overlay"
 									style={{
-										opacity: overlayOpacity,
+										opacity: overlayOpacity + "%",
 									}}
 								></div>
 							)}

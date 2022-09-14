@@ -37,7 +37,7 @@
 		},
 		"overlayOpacity": {
 			"type": "number",
-			"default": 0.35
+			"default": 35
 		},
 		"showDesc": {
 			"type": "boolean",
@@ -50,28 +50,6 @@
 		"showButton": {
 			"type": "boolean",
 			"default": true
-		},
-		"buttonType": {
-			"type": "string",
-			"default": "link"
-		},
-		"buttonTarget": {
-			"type": "boolean",
-			"default": false
-		},
-		"titleSize": {
-			"type": "number"
-		},
-		"titleColor": {
-			"type": "string",
-			"default": "#444"
-		},
-		"priceSize": {
-			"type": "number"
-		},
-		"priceColor": {
-			"type": "string",
-			"default": "#444"
 		},
 		"blockBgColor": {
 			"type": "string",

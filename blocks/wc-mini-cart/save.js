@@ -17,7 +17,7 @@ const Save = ({ attributes }) => {
 					attributes.noItems ? "noitems" : ""
 				} ${attributes.noAmount ? "noamount" : ""} ${
 					attributes.layoutSwitch ? "switch" : ""
-				}`}
+				} ${attributes.dropPosition}`}
 				style={{
 					backgroundColor: attributes.iconBgColor,
 				}}

@@ -12,6 +12,10 @@
 			"type": "string",
 			"default": "none"
 		},
+		"accountUrl": {
+			"type": "string",
+			"default": ""
+		},
 		"hasDropdown": {
 			"type": "boolean",
 			"default": false

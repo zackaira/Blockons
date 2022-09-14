@@ -192,7 +192,7 @@ registerBlockType("blockons/accordion", {
 								max={44}
 							/>
 							<BlockonsColorpicker
-								label={__("Font Color", "blockons")}
+								label={__("Icon Color", "blockons")}
 								value={itemLabelIconColor}
 								onChange={(value) =>
 									setAttributes({ itemLabelIconColor: value })

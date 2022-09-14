@@ -112,6 +112,18 @@ const Edit = (props) => {
 		});
 		setAttributes({ listItems: editedListItems });
 	};
+	const handleItemSpacingChange = (itemSpacing, itemId) => {
+		const newListItems = [...listItems];
+		const editedListItems = newListItems.map((obj) => {
+			if (obj.itemId === itemId)
+				return {
+					...obj,
+					itemSpacing: itemSpacing,
+				};
+			return obj;
+		});
+		setAttributes({ listItems: editedListItems });
+	};
 	const handleItemTextChange = (itemText, itemId) => {
 		const newListItems = [...listItems];
 		// Edit the item text and ID (this prevent the edit from editing all instances if the block is duplicated)
@@ -137,6 +149,7 @@ const Edit = (props) => {
 			itemIcon: "check",
 			itemIconSize: null,
 			itemIconColor: null,
+			itemSpacing: 5,
 		});
 		setAttributes({ listItems: newListItems });
 	};
@@ -154,7 +167,8 @@ const Edit = (props) => {
 		textColor,
 		icon,
 		iconSize,
-		iconColor
+		iconColor,
+		spacing
 	) => {
 		const newListItems = [...listItems];
 		newListItems.splice(index + 1, 0, {
@@ -165,6 +179,7 @@ const Edit = (props) => {
 			itemIcon: icon,
 			itemIconSize: iconSize,
 			itemIconColor: iconColor,
+			itemSpacing: spacing,
 		});
 		setAttributes({ listItems: newListItems });
 	};
@@ -192,7 +207,9 @@ const Edit = (props) => {
 					<div
 						className="blockons-list-item-icon"
 						style={{
-							marginRight: listItemIconSpacing,
+							marginRight: listItem.itemSpacing
+								? listItem.itemSpacing
+								: listItemIconSpacing,
 							color: listItem.itemIconColor
 								? listItem.itemIconColor
 								: listItemIconColor,
@@ -300,6 +317,20 @@ const Edit = (props) => {
 										}
 										paletteColors={colorPickerPalette}
 									/>
+
+									<RangeControl
+										label={__("Icon & Text Spacing", "blockons")}
+										value={
+											listItem.itemSpacing
+												? listItem.itemSpacing
+												: listItemIconSpacing
+										}
+										onChange={(itemSpacing) =>
+											handleItemSpacingChange(itemSpacing, listItem.itemId)
+										}
+										min={0}
+										max={80}
+									/>
 								</>
 							)}
 						/>
@@ -315,7 +346,8 @@ const Edit = (props) => {
 									listItem.itemTextColor,
 									listItem.itemIcon,
 									listItem.itemIconSize,
-									listItem.itemIconColor
+									listItem.itemIconColor,
+									listItem.itemSpacing
 								)
 							}
 						/>

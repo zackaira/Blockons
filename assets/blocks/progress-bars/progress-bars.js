@@ -3,22 +3,20 @@
  */
 window.addEventListener("DOMContentLoaded", function () {
 	const progressBars = document.querySelectorAll(".blockons-progressbar");
+	const progressBears = document.getElementsByClassName("blockons-progressbar");
 
-	console.log(progressBars);
-
-	if (progressBars) {
-		for (let i = 0; i < progressBars.length; i++) {
-			const elem = document.querySelector(`.${progressBars[i].classList[0]}`);
-
-			console.log(elem);
-
-			const pBar = new Waypoint.Inview({
-				element: elem,
-				// enter: function( direction ) {
-				enter: function () {
-					progressBars[i].classList.remove("pb-start");
-					console.log(progressBars[i]);
+	if (progressBears.length) {
+		for (const el of progressBears) {
+			const pBar = new Waypoint({
+				element: el,
+				handler: function (direction) {
+					// console.log("Trigger point: " + this.triggerPoint);
+					el.classList.remove("pb-start");
 				},
+				offset: "bottom-in-view",
+				// enter: function () {
+				// 	el.classList.remove("pb-start");
+				// },
 			});
 		}
 

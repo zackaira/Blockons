@@ -162,15 +162,20 @@
 }
 .blockons-search-popup-wrapper {
 	position: fixed;
-	top: 50%;
-	width: 100%;
-	max-width: 820px;
-	margin: -80px 0 0;
-	z-index: 101;
-	padding: 30px;
 	visibility: hidden;
+	margin: 0;
+	padding: 30px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 101;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	opacity: 0;
 	transition: all 0.2s ease-in-out 0s;
+	pointer-events: none;
 }
 .blockons-search-popup {
 	background-color: #fff;
@@ -178,6 +183,9 @@
 	box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
 	padding: inherit;
 	position: relative;
+	width: 100%;
+	max-width: 680px;
+	pointer-events: auto;
 }
 .blockons-close {
 	position: absolute;

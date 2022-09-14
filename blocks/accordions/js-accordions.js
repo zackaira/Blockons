@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 							accPanel.classList.remove("active");
 							accPanelContent.style.maxHeight = null;
 						} else {
+							console.log("sssss");
 							accPanel.classList.add("active");
 							accPanelContent.style.maxHeight =
 								accPanelContent.scrollHeight + "px";

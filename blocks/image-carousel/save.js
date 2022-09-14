@@ -7,11 +7,11 @@ import "@splidejs/react-splide/css";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
-		className: `align-${attributes.alignment} layout-${attributes.carouselLayout} style-${attributes.carouselStyle} arrows-${attributes.carouselArrowIcon}`,
+		className: `align-${attributes.alignment} ${attributes.slideAlign}-align layout-${attributes.carouselLayout} style-${attributes.carouselStyle} arrows-${attributes.carouselArrowIcon}`,
 	});
 
 	const sliderOptions = {
-		type: attributes.carouselType, // slide | loop | fade
+		type: attributes.carouselType,
 		...(attributes.carouselType === "slide"
 			? {
 					rewind: attributes.carouselRewind,
@@ -20,7 +20,7 @@ const Save = ({ attributes }) => {
 					rewind: true,
 			  }),
 		speed: 1000,
-		// padding: "5rem",
+		padding: attributes.carouselSidePadding,
 		...(attributes.carouselType !== "fade" && {
 			perPage: attributes.carouselNumber,
 			perMove: 1,
@@ -47,7 +47,20 @@ const Save = ({ attributes }) => {
 					attributes.captionPosition === "four") &&
 					slideItem.imageCaption && (
 						<div className="blockons-imgcaption">
-							<div className="blockons-imgcaption-inner">
+							<div
+								className="blockons-imgcaption-bg"
+								style={{
+									backgroundColor: attributes.captionBgColor,
+									opacity: attributes.captionBgOpacity,
+								}}
+							></div>
+							<div
+								className="blockons-imgcaption-inner"
+								style={{
+									fontSize: attributes.captionFontSize,
+									color: attributes.captionFontColor,
+								}}
+							>
 								{slideItem.imageCaption}
 							</div>
 						</div>
@@ -63,6 +76,11 @@ const Save = ({ attributes }) => {
 				id={attributes.uniqueId}
 				data-settings={JSON.stringify(sliderOptions)}
 				data-slides={attributes.carouselNumber}
+				style={{
+					...(attributes.widthBy === "pixels"
+						? { width: attributes.widthPixels + "px" }
+						: { width: attributes.widthPercent + "%" }),
+				}}
 			>
 				<div
 					className={`blockons-imgcarousel-wrap ${

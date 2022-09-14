@@ -252,7 +252,7 @@ const Edit = (props) => {
 							max={50}
 						/>
 						<RangeControl
-							label={__("Icon Padding", "blockons")}
+							label={__("Cart Padding", "blockons")}
 							value={iconPadding}
 							onChange={(value) =>
 								setAttributes({

@@ -69,8 +69,6 @@ const Edit = (props) => {
 		className: `align-${alignment} ${slideAlign}-align layout-${carouselLayout} style-${carouselStyle} arrows-${carouselArrowIcon} brad-${carouselBRadius}`,
 	});
 
-	// const sliderType = carouselType === "slide" ? "slide" : carouselType;
-
 	// Slider Settings
 	const sliderOptions = {
 		type: carouselType, // slide | loop | fade
@@ -133,7 +131,7 @@ const Edit = (props) => {
 			// const updatedSlides = [
 			// 	...slides.filter(
 			// 		(slide) =>
-			// 			!editedCarouselItems.find((item) => slide.imageId === item.imageId)
+			// 			// !editedCarouselItems.find((item) => slide.imageId === item.imageId)
 			// 	),
 			// 	...editedCarouselItems,
 			// ];

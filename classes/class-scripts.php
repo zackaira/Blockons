@@ -85,12 +85,14 @@ class Blockons {
 	 * Load frontend Scripts & Styles
 	 */
 	public function blockons_frontend_scripts() {
+		$suffix = (defined('WP_DEBUG') && true === WP_DEBUG) ? '' : '.min';
+
 		// Frontend CSS
-		wp_register_style( 'blockons-admin-editor-style', esc_url(BLOCKONS_PLUGIN_URL . '/dist/frontend.css'), array(), BLOCKONS_PLUGIN_VERSION );
+		wp_register_style( 'blockons-admin-editor-style', esc_url(BLOCKONS_PLUGIN_URL . '/dist/frontend' . $suffix . '.css'), array(), BLOCKONS_PLUGIN_VERSION );
 		wp_enqueue_style( 'blockons-admin-editor-style' );
 		
 		// Frontend JS
-		wp_register_script( 'blockons-frontend-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/frontend.js'), array('wp-i18n'), BLOCKONS_PLUGIN_VERSION, true );
+		wp_register_script( 'blockons-frontend-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/frontend' . $suffix . '.js'), array('wp-i18n'), BLOCKONS_PLUGIN_VERSION, true );
 		wp_localize_script('blockons-frontend-script', 'siteObj', array(
 			'siteUrl' => esc_url(home_url('/')),
 			// 'blockonsOptions' => $blockonsOptions,
@@ -104,14 +106,14 @@ class Blockons {
 	 */
 	public function blockons_admin_scripts( $hook = '' ) {
 		$adminPage = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
-		// $suffix = (defined('WP_DEBUG') && true === WP_DEBUG) ? '' : '.min';
+		$suffix = (defined('WP_DEBUG') && true === WP_DEBUG) ? '' : '.min';
 
 		// Admin CSS
-		wp_register_style( 'blockons-admin-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/admin.css'), array(), BLOCKONS_PLUGIN_VERSION );
+		wp_register_style( 'blockons-admin-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/admin' . $suffix . '.css'), array(), BLOCKONS_PLUGIN_VERSION );
 		wp_enqueue_style( 'blockons-admin-script' );
 
 		// Admin JS
-		wp_register_script( 'blockons-admin-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/admin.js'), array(), BLOCKONS_PLUGIN_VERSION, true );
+		wp_register_script( 'blockons-admin-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/admin' . $suffix . '.js'), array(), BLOCKONS_PLUGIN_VERSION, true );
 		wp_localize_script('blockons-admin-script', 'siteObj', array(
 			'apiUrl' => esc_url(home_url('/wp-json')),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
@@ -130,13 +132,13 @@ class Blockons {
 		$blockonsDefaults = get_option('blockons_default_options');
 
 		// Settings CSS
-		wp_register_style( 'blockons-admin-settings-style', esc_url(BLOCKONS_PLUGIN_URL . '/dist/settings.css'), array(), BLOCKONS_PLUGIN_VERSION );
+		wp_register_style( 'blockons-admin-settings-style', esc_url(BLOCKONS_PLUGIN_URL . '/dist/settings' . $suffix . '.css'), array(), BLOCKONS_PLUGIN_VERSION );
 		wp_enqueue_style( 'blockons-admin-settings-style' );
 
 		// wp_enqueue_media();
 
 		// Settings JS
-		wp_register_script( 'blockons-admin-settings-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/settings.js'), array('wp-i18n'), BLOCKONS_PLUGIN_VERSION, true );
+		wp_register_script( 'blockons-admin-settings-script', esc_url(BLOCKONS_PLUGIN_URL . '/dist/settings' . $suffix . '.js'), array('wp-i18n'), BLOCKONS_PLUGIN_VERSION, true );
 		wp_localize_script('blockons-admin-settings-script', 'siteObj', array(
 			'apiUrl' => esc_url(home_url('/wp-json')),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
@@ -158,7 +160,9 @@ class Blockons {
 	 * Load Block Editor Scripts & Styles
 	 */
 	public function blockons_block_editor_scripts() {
-		wp_register_style( 'blockons-admin-editor-style', esc_url(BLOCKONS_PLUGIN_URL . '/dist/editor.css'), array(), BLOCKONS_PLUGIN_VERSION );
+		$suffix = (defined('WP_DEBUG') && true === WP_DEBUG) ? '' : '.min';
+		
+		wp_register_style( 'blockons-admin-editor-style', esc_url(BLOCKONS_PLUGIN_URL . '/dist/editor' . $suffix . '.css'), array(), BLOCKONS_PLUGIN_VERSION );
 		wp_enqueue_style( 'blockons-admin-editor-style' );
 	} // End blockons_block_editor_scripts ()
 

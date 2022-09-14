@@ -117,6 +117,7 @@
 	border-radius: 3px;
 	cursor: pointer;
 	display: flex;
+	color: #222;
 	align-items: center;
 	justify-content: center;
 	padding: 10px;
@@ -126,6 +127,8 @@
 	font-size: 20px;
 	margin-top: -20px;
 	overflow: hidden;
+	opacity: 0.8;
+	transition: opacity 0.2s ease-in-out 0s;
 }
 .blockons-slider-wrap .splide__arrow svg {
 	display: none !important;
@@ -146,6 +149,12 @@
 .blockons-slider-wrap.arrow-style-three .splide__arrow {
 	background-color: transparent !important;
 	box-shadow: none !important;
+}
+.blockons-slider-wrap .splide__arrow:hover,
+.blockons-slider-wrap .splide__arrow:focus {
+	background-color: #fff;
+	color: #222;
+	opacity: 1;
 }
 /* - Font Awesome Overrides - */
 .wp-block-blockons-testimonials.arrows-arrow-right

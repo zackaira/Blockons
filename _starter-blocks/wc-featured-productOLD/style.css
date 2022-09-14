@@ -1,5 +1,6 @@
 /**
- * The following styles get applied both on the front of your site and in the editor.
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
  */
 .blockons-wc-featured-product-block {
 	background-color: #fff;
@@ -9,6 +10,10 @@
 	align-items: center;
 	padding: 15px;
 	overflow: hidden;
+}
+.blockons-wc-featured-product-block a {
+	color: inherit !important;
+	text-decoration: none !important;
 }
 .blockons-wc-featured-product-detail .blockons-wc-featured-product-title {
 	color: inherit;
@@ -27,45 +32,11 @@
 .blockons-wc-featured-product-btn {
 	margin: 20px 0 0;
 }
-.blockons-wc-featured-product-btn p.woocommerce.add_to_cart_inline {
-	margin: 0;
-	border: 0 !important;
-	padding: 0 !important;
-}
 .blockons-wc-featured-product-detail
 	.blockons-wc-featured-product-btn
-	.wc-fproduct-btn,
-.blockons-wc-featured-product-detail
-	.blockons-wc-featured-product-btn
-	.wc-fproduct-button
-	a.add_to_cart_button {
-	margin: 0;
-	padding: 12px 24px;
-	font-size: 16px;
-	display: inline-block;
-	background-color: #af2dbf;
-	border-radius: 3px;
-	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 20%), 0 1px 6px rgb(0 0 0 / 20%);
-	color: #fff;
-	letter-spacing: 0.2px;
-	line-height: 1.4;
-	text-shadow: 0 0 3px rgb(255 255 255 / 10%);
-	text-decoration: none;
-}
-.blockons-wc-featured-product-detail
-	.blockons-wc-featured-product-btn
-	.wc-fproduct-btn:hover,
-.blockons-wc-featured-product-detail
-	.blockons-wc-featured-product-btn
-	.wc-fproduct-button
-	a.add_to_cart_button:hover {
-	opacity: 0.8;
-}
-.blockons-wc-featured-product-detail
-	.blockons-wc-featured-product-btn
-	.wc-fproduct-button
-	a.added_to_cart {
-	display: none !important;
+	.wp-block-button__link {
+	padding: 0.6em 1.1em;
+	font-size: 1.1em;
 }
 .blockons-wc-featured-product-image {
 	background-position: center center;

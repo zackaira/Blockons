@@ -26,6 +26,7 @@ const Edit = (props) => {
 		isSelected,
 		attributes: {
 			alignment,
+			accountUrl,
 			hasDropdown,
 			showDashboard,
 			showOrders,
@@ -72,6 +73,21 @@ const Edit = (props) => {
 						title={__("WC Account Icon Settings", "blockons")}
 						initialOpen={true}
 					>
+						<TextControl
+							label="Account Page Url"
+							value={accountUrl}
+							onChange={(value) => {
+								setAttributes({
+									accountUrl:
+										value === undefined ? cartIconObj.wcAccountUrl : value,
+								});
+							}}
+							help={__(
+								"If not set, this defaults to the WooCommerce Account page",
+								"blockons"
+							)}
+						/>
+
 						<ToggleControl
 							label={__("Add Drop Down Menu", "blockons")}
 							help={__(
@@ -242,26 +258,32 @@ const Edit = (props) => {
 							paletteColors={colorPickerPalette}
 						/>
 
-						<BlockonsColorpicker
-							label={__("Drop Down Background Color", "blockons")}
-							value={dropBgColor}
-							onChange={(colorValue) => {
-								setAttributes({
-									dropBgColor: colorValue === undefined ? "#FFF" : colorValue,
-								});
-							}}
-							paletteColors={colorPickerPalette}
-						/>
-						<BlockonsColorpicker
-							label={__("Drop Down Font Color", "blockons")}
-							value={dropColor}
-							onChange={(colorValue) => {
-								setAttributes({
-									dropColor: colorValue === undefined ? "#747474" : colorValue,
-								});
-							}}
-							paletteColors={colorPickerPalette}
-						/>
+						{hasDropdown && (
+							<>
+								<BlockonsColorpicker
+									label={__("Drop Down Background Color", "blockons")}
+									value={dropBgColor}
+									onChange={(colorValue) => {
+										setAttributes({
+											dropBgColor:
+												colorValue === undefined ? "#FFF" : colorValue,
+										});
+									}}
+									paletteColors={colorPickerPalette}
+								/>
+								<BlockonsColorpicker
+									label={__("Drop Down Font Color", "blockons")}
+									value={dropColor}
+									onChange={(colorValue) => {
+										setAttributes({
+											dropColor:
+												colorValue === undefined ? "#747474" : colorValue,
+										});
+									}}
+									paletteColors={colorPickerPalette}
+								/>
+							</>
+						)}
 					</PanelBody>
 				</InspectorControls>
 			)}
@@ -274,18 +296,22 @@ const Edit = (props) => {
 				className={`blockons-wc-account-icon-block ${
 					isSelected && showDropDown ? "show" : ""
 				}`}
-				style={{
-					backgroundColor: iconBgColor,
-					fontSize: iconSize,
-					padding: iconPadding,
-				}}
 			>
-				<span
-					className={customIcon && icon == "custom" ? customIcon : icon}
+				<div
+					className={`blockons-wc-account-icon`}
 					style={{
-						color: iconColor,
+						backgroundColor: iconBgColor,
+						fontSize: iconSize,
+						padding: iconPadding,
 					}}
-				></span>
+				>
+					<span
+						className={customIcon && icon == "custom" ? customIcon : icon}
+						style={{
+							color: iconColor,
+						}}
+					></span>
+				</div>
 				{hasDropdown && (
 					<div
 						className="blockons-wc-account-icon-dropdown"
