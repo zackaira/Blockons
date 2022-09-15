@@ -40,6 +40,7 @@ const Edit = (props) => {
 			iconColor,
 			dropBgColor,
 			dropColor,
+			dropBtns,
 		},
 		setAttributes,
 	} = props;
@@ -190,7 +191,6 @@ const Edit = (props) => {
 									icon: newIcon === undefined ? "cart-shopping" : newIcon,
 								})
 							}
-							__nextHasNoMarginBottom
 						/>
 						{icon === "custom" && (
 							<>
@@ -220,23 +220,37 @@ const Edit = (props) => {
 								value={dropPosition}
 								options={[
 									{
-										label: __("Bottom Right", "blockons"),
-										value: "bottom-right",
-									},
-									{
 										label: __("Bottom Left", "blockons"),
 										value: "bottom-left",
 									},
-									{ label: __("Top Right", "blockons"), value: "top-right" },
+									{
+										label: __("Bottom Center", "blockons"),
+										value: "bottom-center",
+									},
+									{
+										label: __("Bottom Right", "blockons"),
+										value: "bottom-right",
+									},
 									{ label: __("Top Left", "blockons"), value: "top-left" },
+									{ label: __("Top Center", "blockons"), value: "top-center" },
+									{ label: __("Top Right", "blockons"), value: "top-right" },
+									{ label: __("Left Top", "blockons"), value: "left-top" },
+									{
+										label: __("Left Bottom", "blockons"),
+										value: "left-bottom",
+									},
+									{ label: __("Right Top", "blockons"), value: "right-top" },
+									{
+										label: __("Right Bottom", "blockons"),
+										value: "right-bottom",
+									},
 								]}
 								onChange={(newPosition) =>
 									setAttributes({
 										dropPosition:
-											newPosition === undefined ? "bottom-right" : newPosition,
+											newPosition === undefined ? "bottom-left" : newPosition,
 									})
 								}
-								__nextHasNoMarginBottom
 							/>
 						)}
 
@@ -293,26 +307,45 @@ const Edit = (props) => {
 							}}
 							paletteColors={colorPickerPalette}
 						/>
-						<BlockonsColorpicker
-							label={__("Drop Down Background Color", "blockons")}
-							value={dropBgColor}
-							onChange={(colorValue) => {
-								setAttributes({
-									dropBgColor: colorValue === undefined ? "#FFF" : colorValue,
-								});
-							}}
-							paletteColors={colorPickerPalette}
-						/>
-						<BlockonsColorpicker
-							label={__("Drop Down Font Color", "blockons")}
-							value={dropColor}
-							onChange={(colorValue) => {
-								setAttributes({
-									dropColor: colorValue === undefined ? "#747474" : colorValue,
-								});
-							}}
-							paletteColors={colorPickerPalette}
-						/>
+
+						{hasDropdown && (
+							<>
+								<BlockonsColorpicker
+									label={__("Drop Down Background Color", "blockons")}
+									value={dropBgColor}
+									onChange={(colorValue) => {
+										setAttributes({
+											dropBgColor:
+												colorValue === undefined ? "#FFF" : colorValue,
+										});
+									}}
+									paletteColors={colorPickerPalette}
+								/>
+								<BlockonsColorpicker
+									label={__("Drop Down Font Color", "blockons")}
+									value={dropColor}
+									onChange={(colorValue) => {
+										setAttributes({
+											dropColor: colorValue === undefined ? "#000" : colorValue,
+										});
+									}}
+									paletteColors={colorPickerPalette}
+								/>
+								<SelectControl
+									label={__("Button Colors", "blockons")}
+									value={dropBtns}
+									options={[
+										{ label: __("Dark", "blockons"), value: "dark" },
+										{ label: __("Light", "blockons"), value: "light" },
+									]}
+									onChange={(newValue) =>
+										setAttributes({
+											dropBtns: newValue === undefined ? "dark" : newValue,
+										})
+									}
+								/>
+							</>
+						)}
 					</PanelBody>
 				</InspectorControls>
 			)}
@@ -356,7 +389,7 @@ const Edit = (props) => {
 				</a>
 				{hasDropdown && (
 					<div
-						className="blockons-wc-mini-cart-dropdown"
+						className={`blockons-wc-mini-cart-dropdown btns-${dropBtns}`}
 						style={{
 							backgroundColor: dropBgColor,
 							color: dropColor,

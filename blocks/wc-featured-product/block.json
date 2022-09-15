@@ -77,6 +77,10 @@
 			"type": "string",
 			"default": "#FFF"
 		},
+		"blockDetailColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
 		"blockFontColor": {
 			"type": "string",
 			"default": "#444"

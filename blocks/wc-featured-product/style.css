@@ -6,26 +6,32 @@
 	box-shadow: 0 0 0 1px rgb(0 0 0 / 10%), 0 0 8px rgb(0 0 0 / 12%);
 	border-radius: 3px;
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	padding: 15px;
 	overflow: hidden;
 }
+.blockons-wc-featured-product-detail {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
 .blockons-wc-featured-product-detail .blockons-wc-featured-product-title {
 	color: inherit;
-	line-height: 1.2;
-	margin: 0 0 20px;
+	line-height: 1;
+	margin: 0 0 15px;
 	padding: 0;
 }
 .blockons-wc-featured-product-detail p {
 	color: inherit;
-	margin: 15px 0 0;
+	margin: 0 0 15px;
 	padding: 0;
 }
 .blockons-wc-featured-product-detail .blockons-wc-featured-product-price {
 	font-weight: bold;
+	margin: 0 0 15px;
 }
 .blockons-wc-featured-product-btn {
-	margin: 20px 0 0;
+	margin: 0;
 }
 .blockons-wc-featured-product-btn p.woocommerce.add_to_cart_inline {
 	margin: 0;

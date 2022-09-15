@@ -25,7 +25,7 @@
 		},
 		"dropPosition": {
 			"type": "string",
-			"default": "bottom-right"
+			"default": "bottom-left"
 		},
 		"noItems": {
 			"type": "boolean",
@@ -73,7 +73,11 @@
 		},
 		"dropColor": {
 			"type": "string",
-			"default": "#747474"
+			"default": "#000"
+		},
+		"dropBtns": {
+			"type": "string",
+			"default": "dark"
 		}
 	},
 	"editorScript": "file:./index.js",

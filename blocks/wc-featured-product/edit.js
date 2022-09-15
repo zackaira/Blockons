@@ -47,6 +47,7 @@ const Edit = (props) => {
 			buttonType,
 			buttonTarget,
 			blockBgColor,
+			blockDetailColor,
 			blockFontColor,
 			buttonText,
 			detailWidth,
@@ -147,7 +148,7 @@ const Edit = (props) => {
 						/>
 						{layout === "one" && (
 							<RangeControl
-								label={__("Inner Block Padding", "blockons")}
+								label={__("Product Padding", "blockons")}
 								value={innerPadding}
 								onChange={(value) =>
 									setAttributes({
@@ -234,11 +235,22 @@ const Edit = (props) => {
 						)}
 
 						<BlockonsColorpicker
-							label={__("Background Color", "blockons")}
+							label={__("Block Background Color", "blockons")}
 							value={blockBgColor}
 							onChange={(colorValue) => {
 								setAttributes({
 									blockBgColor: colorValue === undefined ? "#FFF" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
+						/>
+						<BlockonsColorpicker
+							label={__("Product Background Color", "blockons")}
+							value={blockDetailColor}
+							onChange={(colorValue) => {
+								setAttributes({
+									blockDetailColor:
+										colorValue === undefined ? "#FFF" : colorValue,
 								});
 							}}
 							paletteColors={colorPickerPalette}
@@ -363,6 +375,7 @@ const Edit = (props) => {
 						<div
 							className="blockons-wc-featured-product-detail"
 							style={{
+								backgroundColor: blockDetailColor,
 								color:
 									layout === "two" && blockFontColor === "inherit"
 										? "#FFF"

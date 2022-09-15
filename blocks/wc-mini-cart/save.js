@@ -47,7 +47,7 @@ const Save = ({ attributes }) => {
 				</a>
 				{attributes.hasDropdown && (
 					<div
-						className="blockons-wc-mini-cart-dropdown"
+						className={`blockons-wc-mini-cart-dropdown btns-${attributes.dropBtns}`}
 						style={{
 							backgroundColor: attributes.dropBgColor,
 							color: attributes.dropColor,

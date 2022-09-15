@@ -19,13 +19,13 @@ $featured_image_alt = get_post_meta($product_id, '_wp_attachment_image_alt', tru
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes(['class' => $custom_classes]) ); ?>>
 	<div class="blockons-wc-featured-product-block <?php echo ($attributes['layoutSwitch'] == "one" && isset($attributes['layoutSwitch'])) ? sanitize_html_class('switch') : sanitize_html_class('noswitch'); ?>" style="background-color: <?php echo isset($attributes['blockBgColor']) ? esc_attr($attributes['blockBgColor']) : '#FFF'; ?>; padding: <?php echo isset($attributes['padding']) ? esc_attr($attributes['padding'] . "px") : '15px'; ?>">
-		<div class="blockons-wc-featured-product-detail" style="color: <?php echo ($attributes['layout'] == "two" && $attributes['blockFontColor'] == "inherit") ? esc_attr('#FFF') : esc_attr($attributes['blockFontColor']); ?>; width: <?php echo $attributes['layout'] == "one" ? esc_attr($attributes['detailWidth'] . "%") : esc_attr("auto");?>; padding: <?php echo isset($attributes['innerPadding']) ? esc_attr(floor((int)$attributes['innerPadding'] / 2) . "px " . (int)$attributes['innerPadding'] . "px") : '30px'; ?>;">
-			<h2 class="blockons-wc-featured-product-title">
+		<div class="blockons-wc-featured-product-detail" style="background-color: <?php echo isset($attributes['blockDetailColor']) ? esc_attr($attributes['blockDetailColor']) : '#FFF'; ?>; color: <?php echo ($attributes['layout'] == "two" && $attributes['blockFontColor'] == "inherit") ? esc_attr('#FFF') : esc_attr($attributes['blockFontColor']); ?>; width: <?php echo $attributes['layout'] == "one" ? esc_attr($attributes['detailWidth'] . "%") : esc_attr("auto");?>; padding: <?php echo isset($attributes['innerPadding']) ? esc_attr(floor((int)$attributes['innerPadding'] / 2) . "px " . (int)$attributes['innerPadding'] . "px") : '30px'; ?>;">
+			<h2 class="blockons-wc-featured-product-title" style="<?php echo isset($attributes['titleColor']) ? esc_attr('color: ' . $attributes['titleColor']) . ';' : ''; ?> <?php echo isset($attributes['titleSize']) ? esc_attr('font-size: ' . $attributes['titleSize'] . 'px;') : ''; ?>">
 				<?php echo esc_html( $product->get_title() ); ?>
 			</h2>
 
 			<?php if ($attributes['showPrice']) : ?>
-				<div class="blockons-wc-featured-product-price">
+				<div class="blockons-wc-featured-product-price" style="<?php echo isset($attributes['priceColor']) ? esc_attr('color: ' . $attributes['priceColor']) . ';' : ''; ?> <?php echo isset($attributes['priceSize']) ? esc_attr('font-size: ' . $attributes['priceSize'] . 'px;') : ''; ?>">
 					<?php echo $product->get_price_html(); ?>
 				</div>
 			<?php endif; ?>
@@ -59,8 +59,3 @@ $featured_image_alt = get_post_meta($product_id, '_wp_attachment_image_alt', tru
 		</div>
 	</div>
 </div>
-
-<?php
-var_dump('<pre>');
-var_dump($attributes);
-var_dump('</pre>'); ?>
