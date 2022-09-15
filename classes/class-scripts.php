@@ -60,6 +60,7 @@ class Blockons {
 		// JS URLs file/object for featured product, video slider, image carousel
 		wp_register_script( 'blockons-file', BLOCKONS_PLUGIN_URL . 'assets/blocks/featured-product/file.js', array(), BLOCKONS_PLUGIN_VERSION );
 		wp_localize_script( 'blockons-file', 'siteObj', array(
+			'siteUrl' => esc_url( home_url('/') ),
 			'apiUrl' => esc_url( home_url('/wp-json') ),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 		));

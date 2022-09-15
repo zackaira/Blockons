@@ -8,6 +8,10 @@ const Save = ({ attributes }) => {
 		className: attributes.alignment,
 	});
 
+	const siteUrl = wp.data.select("core").getSite().url;
+
+	console.log(siteUrl);
+
 	return (
 		<div {...blockProps}>
 			<div
@@ -30,6 +34,7 @@ const Save = ({ attributes }) => {
 						<form
 							role="search"
 							method="get"
+							action={siteObj.siteUrl}
 							className="blockons-search-inner"
 							style={{
 								width: attributes.searchWidth,
@@ -79,6 +84,7 @@ const Save = ({ attributes }) => {
 						<form
 							role="search"
 							method="get"
+							action={siteObj.siteUrl}
 							className="blockons-search-inner"
 							style={{
 								width: attributes.searchWidth,
@@ -120,6 +126,7 @@ const Save = ({ attributes }) => {
 							<form
 								role="search"
 								method="get"
+								action={siteObj.siteUrl}
 								className="blockons-search-inner"
 							>
 								<input

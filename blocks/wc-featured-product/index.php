@@ -13,16 +13,15 @@
  * Registers all block assets so that they can be enqueued through Gutenberg in
  * the corresponding context.
  */
-function gutenberg_examples_dynamic_block_block_init() {
-
+function blockons_wc_featured_product_register_block() {
 	register_block_type(
 		__DIR__,
 		array(
-			'render_callback' => 'gutenberg_examples_dynamic_block_render_callback',
+			'render_callback' => 'blockons_wc_featured_product_render_callback',
 		)
 	);
 }
-add_action( 'init', 'gutenberg_examples_dynamic_block_block_init' );
+add_action( 'init', 'blockons_wc_featured_product_register_block' );
 
 
 /**
@@ -32,10 +31,9 @@ add_action( 'init', 'gutenberg_examples_dynamic_block_block_init' );
  * @param string   $content        Rendered block output. ie. <InnerBlocks.Content />.
  * @param WP_Block $block_instance The instance of the WP_Block class that represents the block being rendered.
  */
-function gutenberg_examples_dynamic_block_render_callback( $attributes, $content, $block_instance ) {
+function blockons_wc_featured_product_render_callback( $attributes, $content, $block_instance ) {
 	ob_start();
 	/**
-	 * Keeping the markup to be returned in a separate file is sometimes better, especially if there is very complicated markup.
 	 * All of passed parameters are still accessible in the file.
 	 */
 	require plugin_dir_path( __FILE__ ) . 'template.php';
