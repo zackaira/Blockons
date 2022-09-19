@@ -7,9 +7,8 @@ const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
 		className: attributes.alignment,
 	});
-	const siteUrl = wp.data.select("core").getSite();
-
-	console.log(siteUrl.url);
+	const siteInfo = wp.data.select("core").getSite();
+	const siteUrl = siteInfo ? siteInfo : "";
 
 	return (
 		<div {...blockProps}>
