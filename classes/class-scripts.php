@@ -58,8 +58,8 @@ class Blockons {
 		wp_register_style( 'blockons-fontawesome', BLOCKONS_PLUGIN_URL . 'assets/font-awesome/css/all.min.css', array(), BLOCKONS_PLUGIN_VERSION );
 
 		// JS URLs file/object for featured product, video slider, image carousel
-		wp_register_script( 'blockons-file', BLOCKONS_PLUGIN_URL . 'assets/blocks/featured-product/file.js', array(), BLOCKONS_PLUGIN_VERSION );
-		wp_localize_script( 'blockons-file', 'siteObj', array(
+		wp_register_script( 'blockons-js', BLOCKONS_PLUGIN_URL . 'assets/blocks/blockons.js', array(), BLOCKONS_PLUGIN_VERSION );
+		wp_localize_script( 'blockons-js', 'siteObj', array(
 			'siteUrl' => esc_url( home_url('/') ),
 			'apiUrl' => esc_url( home_url('/wp-json') ),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
@@ -76,7 +76,7 @@ class Blockons {
 		wp_register_script( 'blockons-waypoint', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/waypoints.min.js', array(), BLOCKONS_PLUGIN_VERSION, true );
 		wp_register_script( 'blockons-waypoint-inview', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/inview.min.js', array('blockons-waypoint'), BLOCKONS_PLUGIN_VERSION, true );
 		wp_register_script( 'blockons-progress-bars', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/progress-bars.js', array( 'blockons-waypoint', 'blockons-waypoint-inview' ), BLOCKONS_PLUGIN_VERSION, true );
-
+		
 		// Testimonials
 		wp_register_style( 'blockons-splidecss', BLOCKONS_PLUGIN_URL . 'assets/slider/splide.min.css', array(), BLOCKONS_PLUGIN_VERSION );
 		wp_register_script( 'blockons-splidejs', BLOCKONS_PLUGIN_URL . 'assets/slider/splide.min.js', array(), BLOCKONS_PLUGIN_VERSION );

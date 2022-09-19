@@ -21,6 +21,5 @@ function blockons_search_register_block() {
 	if ( function_exists( 'wp_set_script_translations' ) ) {
 		wp_set_script_translations( 'blockons-search-editor-script', 'blockons', BLOCKONS_PLUGIN_DIR . 'lang' );
 	}
-
 }
 add_action( 'init', 'blockons_search_register_block' );

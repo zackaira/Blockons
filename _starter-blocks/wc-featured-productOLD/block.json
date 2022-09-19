@@ -75,6 +75,6 @@
 	"example": {},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"script": "blockons-file",
+	"script": "blockons-js",
 	"style": ["file:./style-index.css", "blockons-fontawesome"]
 }
