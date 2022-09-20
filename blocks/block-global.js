@@ -201,8 +201,3 @@ export const minimalRichText = [
 	"core/superscript",
 	"core/strikethrough",
 ];
-
-export const widthUnits = [
-	{ value: "px", label: "px", default: 300 },
-	{ value: "%", label: "%", default: 50 },
-];

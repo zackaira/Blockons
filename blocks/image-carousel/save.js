@@ -7,7 +7,7 @@ import "@splidejs/react-splide/css";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
-		className: `align-${attributes.alignment} ${attributes.slideAlign}-align layout-${attributes.carouselLayout} style-${attributes.carouselStyle} arrows-${attributes.carouselArrowIcon}`,
+		className: `align-${attributes.alignment} ${attributes.slideAlign}-align layout-${attributes.carouselLayout} style-${attributes.carouselStyle} arrows-${attributes.carouselArrowIcon} brad-${attributes.carouselBRadius}`,
 	});
 
 	const sliderOptions = {
@@ -37,9 +37,35 @@ const Save = ({ attributes }) => {
 	const sliderSlideItems = attributes.slides.map((slideItem, index) => {
 		return (
 			<SplideSlide>
-				<div className="blockons-imgcarousel-inner">
-					{slideItem.imageUrl && (
-						<img src={slideItem.imageUrl} alt={slideItem.alt} />
+				<div
+					className={`blockons-imgcarousel-inner ${
+						attributes.imageProportion === "square" ||
+						attributes.imageProportion === "32rectangle" ||
+						attributes.imageProportion === "43rectangle" ||
+						attributes.imageProportion === "169panoramic"
+							? "imgbg"
+							: ""
+					}`}
+					style={{
+						...(attributes.imageProportion === "square" ||
+						attributes.imageProportion === "32rectangle" ||
+						attributes.imageProportion === "43rectangle" ||
+						attributes.imageProportion === "169panoramic"
+							? {
+									background: `url("${slideItem.imageUrl}") center center / cover no-repeat`,
+							  }
+							: ""),
+					}}
+				>
+					{attributes.imageProportion === "actual" ? (
+						slideItem.imageUrl && (
+							<img src={slideItem.imageUrl} alt={slideItem.alt} />
+						)
+					) : (
+						<img
+							src={`${siteObj.pluginUrl}assets/images/${attributes.imageProportion}.png`}
+							alt={slideItem.alt}
+						/>
 					)}
 				</div>
 				{(attributes.captionPosition === "two" ||
@@ -77,9 +103,7 @@ const Save = ({ attributes }) => {
 				data-settings={JSON.stringify(sliderOptions)}
 				data-slides={attributes.carouselNumber}
 				style={{
-					...(attributes.widthBy === "pixels"
-						? { width: attributes.widthPixels + "px" }
-						: { width: attributes.widthPercent + "%" }),
+					width: attributes.sliderWidth,
 				}}
 			>
 				<div

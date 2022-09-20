@@ -29,8 +29,7 @@
 			"default": "outer"
 		},
 		"headOuterWidth": {
-			"type": "number",
-			"default": 100
+			"type": "number"
 		},
 		"headLineWidth": {
 			"type": "number",

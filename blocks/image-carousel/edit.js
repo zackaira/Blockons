@@ -18,6 +18,7 @@ import {
 	SelectControl,
 	RangeControl,
 	Button,
+	__experimentalUnitControl as UnitControl,
 } from "@wordpress/components";
 import { v4 as uuidv4 } from "uuid";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
@@ -33,9 +34,7 @@ const Edit = (props) => {
 			uniqueId,
 			alignment,
 			slideAlign,
-			widthBy,
-			widthPercent,
-			widthPixels,
+			sliderWidth,
 			slides,
 			carouselType,
 			carouselNumber,
@@ -161,6 +160,8 @@ const Edit = (props) => {
 	// Image Carousel Items
 	let sliderSlideItems;
 
+	console.log(imageProportion);
+
 	if (slides.length) {
 		sliderSlideItems = slides.map((slideItem, index) => {
 			return (
@@ -246,7 +247,6 @@ const Edit = (props) => {
 							className="components-icon-button components-toolbar__control"
 							addToGallery={true}
 							allowedTypes={["image"]}
-							// value={slides}
 							value={slides.map((img) => img.imageId)}
 							gallery={true}
 							onSelect={handleMediaUpload}
@@ -323,6 +323,21 @@ const Edit = (props) => {
 									</a>
 								</div>
 
+								<UnitControl
+									label={__("Carousel / Slider Width", "blockons")}
+									value={sliderWidth ? sliderWidth : "100%"}
+									onChange={(value) =>
+										setAttributes({
+											sliderWidth: value,
+										})
+									}
+									units={[
+										{ value: "%", label: "%", default: 100 },
+										{ value: "px", label: "px", default: 800 },
+									]}
+									isResetValueOnUnitChange
+								/>
+
 								{carouselType !== "fade" && (
 									<RangeControl
 										label={__("Slides Per View", "blockons")}
@@ -344,46 +359,6 @@ const Edit = (props) => {
 												carouselRewind: newValue,
 											});
 										}}
-									/>
-								)}
-
-								<SelectControl
-									label={__("Carousel / Slider Width", "blockons")}
-									value={widthBy}
-									options={[
-										{ label: "Width by percentage", value: "percent" },
-										{ label: "Width by pixels", value: "pixels" },
-									]}
-									onChange={(value) =>
-										setAttributes({
-											widthBy: value === undefined ? "percent" : value,
-										})
-									}
-									// help={
-									// 	widthBy === "pixels"
-									// 		? __(
-									// 				"The slider always adjusts to the content size, this max-width will apply for larger screens",
-									// 				"blockons"
-									// 		  )
-									// 		: ""
-									// }
-								/>
-								{widthBy === "percent" && (
-									<RangeControl
-										label={__("Width", "blockons")}
-										value={widthPercent}
-										onChange={(value) => setAttributes({ widthPercent: value })}
-										min={10}
-										max={100}
-									/>
-								)}
-								{widthBy === "pixels" && (
-									<RangeControl
-										label={__("Width", "blockons")}
-										value={widthPixels}
-										onChange={(value) => setAttributes({ widthPixels: value })}
-										min={200}
-										max={1400}
 									/>
 								)}
 							</>
@@ -632,9 +607,7 @@ const Edit = (props) => {
 				data-settings={JSON.stringify(sliderOptions)}
 				data-slides={carouselNumber}
 				style={{
-					...(widthBy === "pixels"
-						? { width: widthPixels + "px" }
-						: { width: widthPercent + "%" }),
+					width: sliderWidth,
 				}}
 			>
 				<div

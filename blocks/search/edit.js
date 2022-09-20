@@ -19,7 +19,7 @@ import {
 	__experimentalUnitControl as UnitControl,
 } from "@wordpress/components";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
-import { colorPickerPalette, widthUnits } from "../block-global";
+import { colorPickerPalette } from "../block-global";
 
 const Edit = (props) => {
 	const {
@@ -115,9 +115,11 @@ const Edit = (props) => {
 										searchWidthDefault: value,
 									})
 								}
-								units={widthUnits}
+								units={[
+									{ value: "px", label: "px", default: 300 },
+									{ value: "%", label: "%", default: 50 },
+								]}
 								isResetValueOnUnitChange
-								{...(searchDisplay === "default" ? {} : { disableUnits: true })}
 							/>
 						)}
 

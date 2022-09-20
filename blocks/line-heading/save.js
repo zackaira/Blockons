@@ -5,7 +5,7 @@ import { RichText, useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
-		className: `align-${attributes.alignment} headalign-${attributes.headVertAlign} ${attributes.headElementAlign}-align`,
+		className: `align-${attributes.alignment} headalign-${attributes.headVertAlign} ${attributes.headElementAlign}-align width-${attributes.headWidthSet}`,
 	});
 
 	return (

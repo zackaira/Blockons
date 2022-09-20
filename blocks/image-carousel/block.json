@@ -19,17 +19,8 @@
 			"type": "string",
 			"default": "left"
 		},
-		"widthBy": {
-			"type": "string",
-			"default": "percent"
-		},
-		"widthPercent": {
-			"type": "string",
-			"default": 100
-		},
-		"widthPixels": {
-			"type": "string",
-			"default": 800
+		"sliderWidth": {
+			"type": "number"
 		},
 		"slides": {
 			"type": "array",

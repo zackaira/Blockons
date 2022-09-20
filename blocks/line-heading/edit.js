@@ -15,6 +15,7 @@ import {
 	SelectControl,
 	RangeControl,
 	TextControl,
+	__experimentalUnitControl as UnitControl,
 } from "@wordpress/components";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import { elementTags, colorPickerPalette } from "../block-global";
@@ -41,7 +42,7 @@ const Edit = (props) => {
 	} = props;
 
 	const blockProps = useBlockProps({
-		className: `align-${alignment} headalign-${headVertAlign} ${headElementAlign}-align`,
+		className: `align-${alignment} headalign-${headVertAlign} ${headElementAlign}-align width-${headWidthSet}`,
 	});
 
 	const onChangeAlignment = (newAlignment) => {
@@ -83,21 +84,24 @@ const Edit = (props) => {
 							}
 						/>
 						{headWidthSet === "outer" && (
-							<RangeControl
+							<UnitControl
 								label={__("Outer Width", "blockons")}
-								value={headOuterWidth}
-								onChange={(value) => setAttributes({ headOuterWidth: value })}
-								min={10}
-								max={100}
-								help={__(
-									"The width set will be the percentage of it's container",
-									"blockons"
-								)}
+								value={headOuterWidth ? headOuterWidth : "100%"}
+								onChange={(value) =>
+									setAttributes({
+										headOuterWidth: value,
+									})
+								}
+								units={[
+									{ value: "%", label: "%", default: 100 },
+									{ value: "px", label: "px", default: 600 },
+								]}
+								isResetValueOnUnitChange
 							/>
 						)}
 						{headWidthSet === "line" && (
 							<RangeControl
-								label={__("Width", "blockons")}
+								label={__("Line Width", "blockons")}
 								value={headLineWidth}
 								onChange={(value) => setAttributes({ headLineWidth: value })}
 								min={10}
@@ -200,7 +204,7 @@ const Edit = (props) => {
 			<div
 				className={`blockons-lheading-wrap`}
 				style={{
-					...(headWidthSet === "outer" ? { width: headOuterWidth + "%" } : ""),
+					...(headWidthSet === "outer" ? { width: headOuterWidth } : ""),
 				}}
 			>
 				{(alignment === "right" || alignment === "center") && (

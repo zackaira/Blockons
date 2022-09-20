@@ -8,6 +8,7 @@
 	align-items: flex-start;
 }
 .wp-block-blockons-image-carousel .blockons-image-carousel-slider {
+	width: 100%;
 	max-width: 100%;
 }
 .wp-block-blockons-image-carousel .blockons-image-carousel-slider img {
