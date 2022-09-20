@@ -2,6 +2,25 @@
  * Functionality to show/hide the Blockons Search
  */
 document.addEventListener("DOMContentLoaded", function () {
+	// Drop Down Search
+	const blockFocus = document.querySelectorAll(
+		".blockons-search-block.dropdown .blockons-search-input"
+	);
+
+	if (!blockFocus) return;
+
+	blockFocus.forEach((item) => {
+		item.addEventListener("focus", () => {
+			const searchBlockParent = item.closest(".blockons-search-block");
+			searchBlockParent.classList.add("search-on");
+		});
+		item.addEventListener("blur", () => {
+			const searchBlockParent = item.closest(".blockons-search-block");
+			searchBlockParent.classList.remove("search-on");
+		});
+	});
+
+	// Popup Search
 	const blockSearches = document.querySelectorAll(
 		".blockons-search-block.popup"
 	);

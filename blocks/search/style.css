@@ -2,7 +2,7 @@
  * Note that these styles are loaded *before* editor styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.wp-block-blockons-search {
+.wp-block-blockons-search.icon-search {
 	display: flex;
 }
 .blockons-search-block {
@@ -13,12 +13,13 @@
 	padding: 15px;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	cursor: pointer;
 	position: relative;
 	overflow: hidden;
 }
-.blockons-search-block:hover {
+.blockons-search-block:hover,
+.blockons-search-block.search-on {
 	overflow: visible;
 }
 .nopad {
@@ -26,8 +27,7 @@
 }
 /* -- Default Style -- */
 .blockons-search-default .blockons-search-inner {
-	max-width: 100%;
-	width: 240px;
+	width: 100%;
 	display: flex;
 	align-items: stretch;
 	min-height: 40px;
@@ -64,8 +64,7 @@
 	transition: all 0.1s ease-in-out 0s;
 }
 .blockons-search-dropdown .blockons-search-inner {
-	max-width: 100%;
-	width: 240px;
+	width: 100%;
 	display: flex;
 	align-items: stretch;
 	min-height: 40px;
@@ -142,7 +141,8 @@
 	padding-left: 5px;
 }
 
-.blockons-search-block:hover .blockons-search-dropdown {
+.blockons-search-block:hover .blockons-search-dropdown,
+.blockons-search-block.dropdown.search-on .blockons-search-dropdown {
 	visibility: visible;
 	opacity: 1;
 }
@@ -184,7 +184,8 @@
 	padding: inherit;
 	position: relative;
 	width: 100%;
-	max-width: 680px;
+	max-width: 94%;
+	min-width: 280px;
 	pointer-events: auto;
 }
 .blockons-close {
@@ -237,9 +238,11 @@
 }
 
 /* -- Alignment -- */
-.align-center {
+.wp-block-blockons-search.align-center.default-search .blockons-search-block,
+.wp-block-blockons-search.align-center.icon-search {
 	justify-content: center;
 }
-.align-right {
+.wp-block-blockons-search.align-right.default-search .blockons-search-block,
+.wp-block-blockons-search.align-right.icon-search {
 	justify-content: flex-end;
 }

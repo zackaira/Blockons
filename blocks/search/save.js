@@ -5,10 +5,10 @@ import { RichText, useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
-		className: attributes.alignment,
+		className: `align-${attributes.alignment} ${
+			attributes.searchDisplay === "default" ? "default-search" : "icon-search"
+		}`,
 	});
-	const siteInfo = wp.data.select("core").getSite();
-	const siteUrl = siteInfo ? siteInfo : "";
 
 	return (
 		<div {...blockProps}>
@@ -28,15 +28,17 @@ const Save = ({ attributes }) => {
 				}}
 			>
 				{attributes.searchDisplay === "default" && (
-					<div className="blockons-search-default">
+					<div
+						className="blockons-search-default"
+						style={{
+							width: attributes.searchWidthDefault,
+						}}
+					>
 						<form
 							role="search"
 							method="get"
-							action={siteUrl.url}
 							className="blockons-search-inner"
-							style={{
-								width: attributes.searchWidth,
-							}}
+							{...(attributes.baseUrl ? { action: attributes.baseUrl } : {})}
 						>
 							<input
 								type="text"
@@ -44,6 +46,7 @@ const Save = ({ attributes }) => {
 								className="blockons-search-input"
 								placeholder={attributes.textInput}
 								required
+								autoComplete="off"
 							/>
 							<button
 								type="submit"
@@ -73,20 +76,20 @@ const Save = ({ attributes }) => {
 					<div
 						className="blockons-search-dropdown"
 						style={{
+							width: attributes.searchWidthDropdown + "px",
 							...(attributes.searchAlign === "bottomcenter" ||
 							attributes.searchAlign === "topcenter"
-								? { marginLeft: -attributes.searchWidth / 2 }
+								? {
+										marginLeft: "-" + attributes.searchWidthDropdown / 2 + "px",
+								  }
 								: ""),
 						}}
 					>
 						<form
 							role="search"
 							method="get"
-							action={siteUrl.url}
 							className="blockons-search-inner"
-							style={{
-								width: attributes.searchWidth,
-							}}
+							{...(attributes.baseUrl ? { action: attributes.baseUrl } : {})}
 						>
 							<input
 								type="text"
@@ -94,6 +97,7 @@ const Save = ({ attributes }) => {
 								className="blockons-search-input"
 								placeholder={attributes.textInput}
 								required
+								autoComplete="off"
 							/>
 							<button
 								type="submit"
@@ -117,6 +121,7 @@ const Save = ({ attributes }) => {
 						<div
 							className="blockons-search-popup"
 							style={{
+								width: attributes.searchWidthPopup + "px",
 								backgroundColor: attributes.searchBgColor,
 							}}
 						>
@@ -124,8 +129,8 @@ const Save = ({ attributes }) => {
 							<form
 								role="search"
 								method="get"
-								action={siteUrl.url}
 								className="blockons-search-inner"
+								{...(attributes.baseUrl ? { action: attributes.baseUrl } : {})}
 							>
 								<input
 									type="text"
@@ -133,6 +138,7 @@ const Save = ({ attributes }) => {
 									className="blockons-search-input"
 									placeholder={attributes.textInput}
 									required
+									autoComplete="off"
 								/>
 								<button
 									type="submit"

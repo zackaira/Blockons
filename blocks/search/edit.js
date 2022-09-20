@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useState } from "@wordpress/element";
+import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	RichText,
@@ -13,18 +13,23 @@ import {
 import {
 	PanelBody,
 	ToggleControl,
+	TextControl,
 	SelectControl,
 	RangeControl,
+	__experimentalUnitControl as UnitControl,
 } from "@wordpress/components";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
-import { colorPickerPalette } from "../block-global";
+import { colorPickerPalette, widthUnits } from "../block-global";
 
 const Edit = (props) => {
 	const {
 		isSelected,
 		attributes: {
 			alignment,
-			searchWidth,
+			baseUrl,
+			searchWidthDefault,
+			searchWidthDropdown,
+			searchWidthPopup,
 			searchDisplay,
 			textInput,
 			textButton,
@@ -43,14 +48,24 @@ const Edit = (props) => {
 	const [showSearch, setShowSearch] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: `${alignment} ${
+		className: `align-${alignment} ${
 			isSelected && showSearch ? "blockons-show" : ""
-		}`,
+		} ${searchDisplay === "default" ? "default-search" : "icon-search"}`,
 	});
+
+	const siteInfo = wp.data.select("core").getSite();
+
+	useEffect(() => {
+		if (!baseUrl && siteInfo) {
+			setAttributes({
+				baseUrl: siteInfo.url,
+			});
+		}
+	}, []);
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
-			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
+			alignment: newAlignment === undefined ? "left" : newAlignment,
 		});
 	};
 	const onChangeInputText = (value) => {
@@ -91,17 +106,44 @@ const Edit = (props) => {
 							}
 						/>
 
-						{(searchDisplay === "default" || searchDisplay === "dropdown") && (
-							<RangeControl
+						{searchDisplay === "default" && (
+							<UnitControl
 								label={__("Search Width", "blockons")}
-								value={searchWidth}
+								value={searchWidthDefault}
 								onChange={(value) =>
 									setAttributes({
-										searchWidth: value === undefined ? 240 : value,
+										searchWidthDefault: value,
 									})
 								}
-								min={150}
-								max={800}
+								units={widthUnits}
+								isResetValueOnUnitChange
+								{...(searchDisplay === "default" ? {} : { disableUnits: true })}
+							/>
+						)}
+
+						{searchDisplay === "dropdown" && (
+							<TextControl
+								label={__("Search Width D", "blockons")}
+								value={searchWidthDropdown}
+								onChange={(value) =>
+									setAttributes({
+										searchWidthDropdown: value,
+									})
+								}
+								type="number"
+							/>
+						)}
+
+						{searchDisplay === "popup" && (
+							<TextControl
+								label={__("Search Width P", "blockons")}
+								value={searchWidthPopup}
+								onChange={(value) =>
+									setAttributes({
+										searchWidthPopup: value,
+									})
+								}
+								type="number"
 							/>
 						)}
 
@@ -202,7 +244,7 @@ const Edit = (props) => {
 
 						{searchDisplay === "popup" && (
 							<BlockonsColorpicker
-								label={__("Input Background Color", "blockons")}
+								label={__("Search Background Color", "blockons")}
 								value={searchBgColor}
 								onChange={(colorValue) => {
 									setAttributes({
@@ -258,18 +300,20 @@ const Edit = (props) => {
 				}}
 			>
 				{searchDisplay === "default" && (
-					<div className="blockons-search-default">
-						<div
-							className="blockons-search-inner"
-							style={{
-								width: searchWidth,
-							}}
-						>
+					<div
+						className="blockons-search-default"
+						style={{
+							width: searchWidthDefault,
+						}}
+					>
+						<div className="blockons-search-inner">
 							<RichText
 								tagName="div"
 								value={textInput}
 								className="blockons-search-input"
 								onChange={onChangeInputText}
+								allowedFormats={["core/bold", "core/italic"]}
+								placeholder={__("Add Placeholder...", "blockons")}
 							/>
 							<RichText
 								tagName="div"
@@ -280,6 +324,7 @@ const Edit = (props) => {
 									backgroundColor: searchBtnBgColor,
 									color: searchBtnColor,
 								}}
+								allowedFormats={["core/bold", "core/italic"]}
 							/>
 						</div>
 					</div>
@@ -298,22 +343,20 @@ const Edit = (props) => {
 					<div
 						className="blockons-search-dropdown"
 						style={{
+							width: searchWidthDropdown + "px",
 							...(searchAlign === "bottomcenter" || searchAlign === "topcenter"
-								? { marginLeft: -searchWidth / 2 }
+								? { marginLeft: "-" + searchWidthDropdown / 2 + "px" }
 								: ""),
 						}}
 					>
-						<div
-							className="blockons-search-inner"
-							style={{
-								width: searchWidth,
-							}}
-						>
+						<div className="blockons-search-inner">
 							<RichText
 								tagName="div"
 								value={textInput}
 								className="blockons-search-input"
 								onChange={onChangeInputText}
+								allowedFormats={["core/bold", "core/italic"]}
+								placeholder={__("Add Placeholder...", "blockons")}
 							/>
 							<RichText
 								tagName="div"
@@ -324,6 +367,7 @@ const Edit = (props) => {
 									backgroundColor: searchBtnBgColor,
 									color: searchBtnColor,
 								}}
+								allowedFormats={["core/bold", "core/italic"]}
 							/>
 						</div>
 					</div>
@@ -340,6 +384,7 @@ const Edit = (props) => {
 						<div
 							className="blockons-search-popup"
 							style={{
+								width: searchWidthPopup + "px",
 								backgroundColor: searchBgColor,
 							}}
 						>
@@ -353,6 +398,8 @@ const Edit = (props) => {
 									value={textInput}
 									className="blockons-search-input"
 									onChange={onChangeInputText}
+									allowedFormats={["core/bold", "core/italic"]}
+									placeholder={__("Add Placeholder...", "blockons")}
 								/>
 								<RichText
 									tagName="div"
@@ -363,6 +410,7 @@ const Edit = (props) => {
 										backgroundColor: searchBtnBgColor,
 										color: searchBtnColor,
 									}}
+									allowedFormats={["core/bold", "core/italic"]}
 								/>
 							</div>
 						</div>

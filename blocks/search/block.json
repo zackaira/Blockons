@@ -12,9 +12,21 @@
 			"type": "string",
 			"default": "left"
 		},
-		"searchWidth": {
+		"baseUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"searchWidthDefault": {
 			"type": "number",
-			"default": 240
+			"default": 300
+		},
+		"searchWidthDropdown": {
+			"type": "number",
+			"default": 280
+		},
+		"searchWidthPopup": {
+			"type": "number",
+			"default": 680
 		},
 		"searchDisplay": {
 			"type": "string",
@@ -22,7 +34,7 @@
 		},
 		"textInput": {
 			"type": "string",
-			"default": "Search..."
+			"default": ""
 		},
 		"textButton": {
 			"type": "string",
