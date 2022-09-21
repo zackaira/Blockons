@@ -60,8 +60,6 @@ const Edit = (props) => {
 		setAttributes({ customIcon: value });
 	};
 
-	console.log(wcCartObj);
-
 	return (
 		<div {...blockProps}>
 			{isSelected && (
