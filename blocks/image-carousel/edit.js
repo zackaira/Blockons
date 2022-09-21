@@ -93,8 +93,6 @@ const Edit = (props) => {
 		},
 	};
 
-	// console.log(sliderOptions);
-
 	useEffect(() => {
 		setInitCarouselType(carouselType);
 		setAttributes({
@@ -159,8 +157,6 @@ const Edit = (props) => {
 
 	// Image Carousel Items
 	let sliderSlideItems;
-
-	console.log(imageProportion);
 
 	if (slides.length) {
 		sliderSlideItems = slides.map((slideItem, index) => {

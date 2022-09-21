@@ -8,7 +8,7 @@ const Save = ({ attributes }) => {
 		className: attributes.alignment,
 	});
 
-	// const ajaxObj = cartIconObj ? cartIconObj : {}
+	// const ajaxObj = wcObj ? wcObj : {}
 
 	return (
 		<div {...blockProps}>
@@ -25,7 +25,7 @@ const Save = ({ attributes }) => {
 				<a
 					{...(attributes.cartLink
 						? { href: attributes.cartLink }
-						: { href: cartIconObj.wcCartUrl })}
+						: { href: wcObj.wcCartUrl })}
 					{...(attributes.cartLinkNewTab ? { target: "_blank" } : "")}
 					className="blockons-wc-mini-cart-block-icon"
 					style={{

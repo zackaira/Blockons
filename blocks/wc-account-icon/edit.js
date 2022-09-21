@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useState } from "@wordpress/element";
+import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	RichText,
@@ -33,11 +33,13 @@ const Edit = (props) => {
 			showDownloads,
 			showAddresses,
 			showAccountDetails,
+			showLogout,
 			textDashboard,
 			textOrders,
 			textDownloads,
 			textAddresses,
 			textAccountDetails,
+			textLogout,
 			icon,
 			iconSize,
 			iconPadding,
@@ -53,12 +55,20 @@ const Edit = (props) => {
 	const [showDropDown, setShowDropDown] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: alignment,
+		className: `align-${alignment}`,
 	});
+
+	useEffect(() => {
+		if (!accountUrl && wcAccObj) {
+			setAttributes({
+				accountUrl: wcAccObj.wcAccountUrl,
+			});
+		}
+	}, []);
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
-			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
+			alignment: newAlignment === undefined ? "left" : newAlignment,
 		});
 	};
 	const onChangeCustomIcon = (value) => {
@@ -79,11 +89,11 @@ const Edit = (props) => {
 							onChange={(value) => {
 								setAttributes({
 									accountUrl:
-										value === undefined ? cartIconObj.wcAccountUrl : value,
+										value === undefined ? wcAccObj.wcAccountUrl : value,
 								});
 							}}
 							help={__(
-								"If not set, this defaults to the WooCommerce Account page",
+								"Please ensure the account URL is correct, incase the original URL was changed",
 								"blockons"
 							)}
 						/>
@@ -156,6 +166,15 @@ const Edit = (props) => {
 									onChange={(newValue) => {
 										setAttributes({
 											showAccountDetails: newValue,
+										});
+									}}
+								/>
+								<CheckboxControl
+									label="Logout"
+									checked={showLogout}
+									onChange={(newValue) => {
+										setAttributes({
+											showLogout: newValue,
 										});
 									}}
 								/>
@@ -399,6 +418,23 @@ const Edit = (props) => {
 											textAccountDetails:
 												newValue === undefined
 													? __("Account Details", "blockons")
+													: newValue,
+										})
+									}
+								/>
+							</div>
+						)}
+						{showLogout && (
+							<div className="blockons-wc-account-icon-item">
+								<RichText
+									tagName="div"
+									placeholder={__("Logout", "blockons")}
+									value={textLogout}
+									onChange={(newValue) =>
+										setAttributes({
+											textLogout:
+												newValue === undefined
+													? __("Logout", "blockons")
 													: newValue,
 										})
 									}

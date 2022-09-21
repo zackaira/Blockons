@@ -65,11 +65,18 @@ class Blockons {
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 		));
 
-		// Cart Icon Block JS
+		// WC Cart Icon Block JS
 		wp_register_script( 'blockons-wc-mini-cart', BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-mini-cart/cart.js', array(), BLOCKONS_PLUGIN_VERSION );
 		if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
-			wp_localize_script( 'blockons-wc-mini-cart', 'cartIconObj', array(
+			wp_localize_script( 'blockons-wc-mini-cart', 'wcCartObj', array(
 				'wcCartUrl' => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
+			));
+		}
+		// WC Account Icon Block JS
+		wp_register_script( 'blockons-wc-account-icon', BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-account-icon/account.js', array(), BLOCKONS_PLUGIN_VERSION );
+		if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
+			wp_localize_script( 'blockons-wc-account-icon', 'wcAccObj', array(
+				'wcAccountUrl' => esc_url( wc_get_page_permalink( 'myaccount' ) ),
 			));
 		}
 		// Progress Bars JS

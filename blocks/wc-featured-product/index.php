@@ -20,6 +20,10 @@ function blockons_wc_featured_product_register_block() {
 			'render_callback' => 'blockons_wc_featured_product_render_callback',
 		)
 	);
+
+	if ( function_exists( 'wp_set_script_translations' ) ) {
+		wp_set_script_translations( 'blockons-wc-featured-product-editor-script', 'blockons', BLOCKONS_PLUGIN_DIR . 'lang' );
+	}
 }
 add_action( 'init', 'blockons_wc_featured_product_register_block' );
 

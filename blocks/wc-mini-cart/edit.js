@@ -74,7 +74,7 @@ const Edit = (props) => {
 							onChange={(newValue) => {
 								setAttributes({
 									cartLink:
-										newValue === undefined ? cartIconObj.wcCartUrl : newValue,
+										newValue === undefined ? wcCartObj.wcCartUrl : newValue,
 								});
 							}}
 							help={__(
@@ -365,7 +365,7 @@ const Edit = (props) => {
 				}}
 			>
 				<a
-					// {...(cartLink ? { href: cartLink } : { href: cartIconObj.wcCartUrl })}
+					// {...(cartLink ? { href: cartLink } : { href: wcCartObj.wcCartUrl })}
 					{...(cartLinkNewTab ? { target: "_blank" } : "")}
 					className="blockons-wc-mini-cart-block-icon"
 					style={{

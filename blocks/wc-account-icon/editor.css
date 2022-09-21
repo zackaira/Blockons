@@ -8,9 +8,10 @@
 	display: block;
 	text-decoration: none;
 	font-size: 14px;
-	width: 150px;
+	min-width: 160px !important;
 	padding: 6px 10px;
 	color: inherit;
+	white-space: nowrap !important;
 }
 
 /* -- To show the dropdown within the editor -- */

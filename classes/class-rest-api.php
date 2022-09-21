@@ -16,11 +16,11 @@ class Blockons_WC_Rest_Routes {
 			'callback' => [$this, 'blockons_get_settings'],
 			'permission_callback' => [$this, 'blockons_get_settings_permission'],
 		]);
-		// register_rest_route('blcns/v1', '/defaults', [
-		// 	'methods' => 'GET',
-		// 	'callback' => [$this, 'blockons_get_defaults'],
-		// 	'permission_callback' => [$this, 'blockons_get_settings_permission'],
-		// ]);
+		register_rest_route('blcns/v1', '/site-info', [
+			'methods' => 'GET',
+			'callback' => [$this, 'blockons_get_site_info'],
+			'permission_callback' => [$this, 'blockons_get_settings_permission'],
+		]);
 		register_rest_route('blcns/v1', '/settings', [
 			'methods' => 'POST',
 			'callback' => [$this, 'blockons_save_settings'],
@@ -33,6 +33,11 @@ class Blockons_WC_Rest_Routes {
 		]);
 		
 		if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
+			register_rest_route('blcns/v1', '/wc-info', [
+				'methods' => 'GET',
+				'callback' => [$this, 'blockons_get_wc_info'],
+				'permission_callback' => [$this, 'blockons_get_settings_permission'],
+			]);
 			register_rest_route( 'blcns/v1', '/products', [
 				'methods' => 'GET',
 				'callback' => [$this, 'blockons_get_wc_products'],
@@ -59,16 +64,37 @@ class Blockons_WC_Rest_Routes {
 	}
 
 	/*
-	 * Get saved options from database
+	 * Get Site Info for blocks
 	 */
-	// public function blockons_get_defaults() {
-	// 	$blockonsPluginDefaults = get_option('blockons_default_options');
+	public function blockons_get_site_info() {
+		$siteInfo = array(
+			'siteUrl' => esc_url( home_url('/') ),
+			'apiUrl' => esc_url( home_url('/wp-json') ),
+			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
+		);
 
-	// 	if (!$blockonsPluginDefaults)
-	// 		return;
+		return rest_ensure_response($siteInfo);
+	}
 
-	// 	return rest_ensure_response($blockonsPluginDefaults);
-	// }
+	/*
+	 * Get WC Info for blocks
+	 */
+	public function blockons_get_wc_info() {
+		if ( ! Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) )
+			return;
+		
+		$wcInfo = array(
+			'siteUrl' => esc_url( home_url('/') ),
+			'wcAccountUrl' => wc_get_page_permalink( 'myaccount' ),
+			'wcAccOrdersUrl' => wc_get_page_permalink( 'orders' ),
+			'wcAccDownloadsUrl' => wc_get_page_permalink( 'downloads' ),
+			'wcAccAddressesUrl' => wc_get_page_permalink( 'edit-address' ),
+			'wcAccAccDetailsUrl' => wc_customer_edit_account_url(),
+			'wcLogoutUrl' => wc_logout_url(),
+		);
+
+		return rest_ensure_response($wcInfo);
+	}
 
 	/*
 	 * Allow permissions for get options

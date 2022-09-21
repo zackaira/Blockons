@@ -41,8 +41,7 @@ $featured_image_alt = get_post_meta($product_id, '_wp_attachment_image_alt', tru
 						<?php echo do_shortcode("[add_to_cart id='" . $product_id . "' show_price='false' class='wc-fproduct-button']"); ?>
 					<?php else : ?>
 						<a href="<?php echo esc_url(get_permalink($product_id)); ?>" class="wc-fproduct-btn" <?php echo isset($attributes['buttonTarget']) && $attributes['buttonTarget'] == true ? 'target="_blank"' : ''; ?>>
-							<?php
-							echo esc_html($attributes['buttonText']); ?>
+							<?php echo esc_html($attributes['buttonText']); ?>
 						</a>
 					<?php endif; ?>
 

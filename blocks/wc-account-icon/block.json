@@ -10,7 +10,7 @@
 	"attributes": {
 		"alignment": {
 			"type": "string",
-			"default": "none"
+			"default": "left"
 		},
 		"accountUrl": {
 			"type": "string",
@@ -40,6 +40,10 @@
 			"type": "boolean",
 			"default": true
 		},
+		"showLogout": {
+			"type": "boolean",
+			"default": true
+		},
 		"textDashboard": {
 			"type": "string",
 			"default": "Dashboard"
@@ -59,6 +63,10 @@
 		"textAccountDetails": {
 			"type": "string",
 			"default": "Account Details"
+		},
+		"textLogout": {
+			"type": "string",
+			"default": "Logout"
 		},
 		"icon": {
 			"type": "string",
@@ -95,5 +103,6 @@
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
+	"script": "blockons-wc-account-icon",
 	"style": ["file:./style-index.css", "blockons-fontawesome"]
 }
