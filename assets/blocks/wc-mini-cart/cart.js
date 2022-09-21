@@ -1,6 +1,6 @@
 /**
  * Little JS hack to display the Cart amount and Mini Cart in the Cart Icon Block
- * Also localizes wcObj for edit.js
+ * Also localizes wcCartObj for edit.js
  */
 document.addEventListener("DOMContentLoaded", function () {
 	const cartIcons = document.querySelectorAll(
@@ -23,3 +23,5 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	}
 });
+
+console.log("Here");

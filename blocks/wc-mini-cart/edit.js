@@ -48,17 +48,19 @@ const Edit = (props) => {
 	const [showMiniCart, setShowMiniCart] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: alignment,
+		className: `align-${alignment}`,
 	});
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
-			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
+			alignment: newAlignment === undefined ? "left" : newAlignment,
 		});
 	};
 	const onChangeCustomIcon = (value) => {
 		setAttributes({ customIcon: value });
 	};
+
+	console.log(wcCartObj);
 
 	return (
 		<div {...blockProps}>

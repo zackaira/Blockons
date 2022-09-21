@@ -5,10 +5,8 @@ import { useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
-		className: attributes.alignment,
+		className: `align-${attributes.alignment}`,
 	});
-
-	// const ajaxObj = wcObj ? wcObj : {}
 
 	return (
 		<div {...blockProps}>
@@ -25,7 +23,7 @@ const Save = ({ attributes }) => {
 				<a
 					{...(attributes.cartLink
 						? { href: attributes.cartLink }
-						: { href: wcObj.wcCartUrl })}
+						: { href: wcCartObj.wcCartUrl })}
 					{...(attributes.cartLinkNewTab ? { target: "_blank" } : "")}
 					className="blockons-wc-mini-cart-block-icon"
 					style={{
