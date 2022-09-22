@@ -29,7 +29,8 @@
 			"default": "outer"
 		},
 		"headOuterWidth": {
-			"type": "number"
+			"type": "string",
+			"default": "100%"
 		},
 		"headLineWidth": {
 			"type": "number",

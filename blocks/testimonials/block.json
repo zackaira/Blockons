@@ -9,7 +9,8 @@
 	"keywords": ["testimonials", "quote", "reviews", "comments", "slider"],
 	"attributes": {
 		"uniqueId": {
-			"type": "string"
+			"type": "string",
+			"default": ""
 		},
 		"alignment": {
 			"type": "string",

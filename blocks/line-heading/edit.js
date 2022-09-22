@@ -71,10 +71,10 @@ const Edit = (props) => {
 						/>
 
 						<SelectControl
-							label={__("Heading Width", "blockons")}
+							label={__("Set Heading width by", "blockons")}
 							value={headWidthSet}
 							options={[
-								{ label: "Outer Width by percentage", value: "outer" },
+								{ label: "Outer Width", value: "outer" },
 								{ label: "Line Width by pixels", value: "line" },
 							]}
 							onChange={(value) =>
@@ -86,7 +86,7 @@ const Edit = (props) => {
 						{headWidthSet === "outer" && (
 							<UnitControl
 								label={__("Outer Width", "blockons")}
-								value={headOuterWidth ? headOuterWidth : "100%"}
+								value={headOuterWidth}
 								onChange={(value) =>
 									setAttributes({
 										headOuterWidth: value,

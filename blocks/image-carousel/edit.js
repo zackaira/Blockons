@@ -321,7 +321,7 @@ const Edit = (props) => {
 
 								<UnitControl
 									label={__("Carousel / Slider Width", "blockons")}
-									value={sliderWidth ? sliderWidth : "100%"}
+									value={sliderWidth}
 									onChange={(value) =>
 										setAttributes({
 											sliderWidth: value,
@@ -482,7 +482,7 @@ const Edit = (props) => {
 									onChange={(value) =>
 										setAttributes({ captionFontSize: value })
 									}
-									min={11}
+									min={10}
 									max={32}
 								/>
 							</>

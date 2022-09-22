@@ -9,7 +9,8 @@
 	"keywords": ["image", "carousel", "gallery", "picture", "slider"],
 	"attributes": {
 		"uniqueId": {
-			"type": "string"
+			"type": "string",
+			"default": ""
 		},
 		"alignment": {
 			"type": "string",
@@ -20,7 +21,8 @@
 			"default": "left"
 		},
 		"sliderWidth": {
-			"type": "number"
+			"type": "string",
+			"default": "100%"
 		},
 		"slides": {
 			"type": "array",
@@ -108,7 +110,7 @@
 		},
 		"captionFontSize": {
 			"type": "number",
-			"default": 13
+			"default": 11
 		}
 	},
 	"editorScript": "file:./index.js",

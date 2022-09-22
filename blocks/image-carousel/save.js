@@ -103,7 +103,7 @@ const Save = ({ attributes }) => {
 				data-settings={JSON.stringify(sliderOptions)}
 				data-slides={attributes.carouselNumber}
 				style={{
-					width: attributes.sliderWidth,
+					width: attributes.sliderWidth ? attributes.sliderWidth : "100%",
 				}}
 			>
 				<div

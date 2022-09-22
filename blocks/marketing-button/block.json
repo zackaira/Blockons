@@ -25,7 +25,8 @@
 			"default": 50
 		},
 		"linkTo": {
-			"type": "string"
+			"type": "string",
+			"default": ""
 		},
 		"linkTarget": {
 			"type": "boolean",

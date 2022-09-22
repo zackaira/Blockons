@@ -16,6 +16,20 @@
 }
 .blockons-video-slider {
 	flex: 1;
+	min-width: 260px;
+}
+.wp-block-blockons-video-slider .splide__slide {
+	background: none !important;
+	height: auto !important;
+}
+.wp-block-blockons-video-slider .splide-custom-slide {
+	height: 100%;
+}
+.wp-block-blockons-video-slider .splide__slide img {
+	display: block !important;
+	width: 100%;
+	height: auto;
+	visibility: hidden;
 }
 /* ---- Slider Arrows ---- */
 .blockons-video-slider-wrap .splide__arrow {

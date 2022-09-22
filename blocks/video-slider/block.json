@@ -9,11 +9,16 @@
 	"keywords": ["video", "slider", "play", "gallery"],
 	"attributes": {
 		"uniqueId": {
-			"type": "string"
+			"type": "string",
+			"default": ""
 		},
 		"sliderWidth": {
-			"type": "number",
+			"type": "string",
 			"default": "100%"
+		},
+		"sliderRewind": {
+			"type": "boolean",
+			"default": false
 		},
 		"sliderAlign": {
 			"type": "string",

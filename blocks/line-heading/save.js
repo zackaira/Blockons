@@ -14,7 +14,7 @@ const Save = ({ attributes }) => {
 				className={`blockons-lheading-wrap`}
 				style={{
 					...(attributes.headWidthSet === "outer"
-						? { width: attributes.headOuterWidth + "%" }
+						? { width: attributes.headOuterWidth }
 						: ""),
 				}}
 			>

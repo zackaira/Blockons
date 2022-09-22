@@ -13,7 +13,8 @@
 			"default": "left"
 		},
 		"selectedProduct": {
-			"type": "object"
+			"type": "object",
+			"default": {}
 		},
 		"padding": {
 			"type": "number",
@@ -60,14 +61,16 @@
 			"default": false
 		},
 		"titleSize": {
-			"type": "number"
+			"type": "number",
+			"default": ""
 		},
 		"titleColor": {
 			"type": "string",
 			"default": "#444"
 		},
 		"priceSize": {
-			"type": "number"
+			"type": "number",
+			"default": ""
 		},
 		"priceColor": {
 			"type": "string",

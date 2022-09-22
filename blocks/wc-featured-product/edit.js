@@ -57,12 +57,12 @@ const Edit = (props) => {
 	} = props;
 
 	const blockProps = useBlockProps({
-		className: `${alignment} layout-${layout}`,
+		className: `align-${alignment} layout-${layout}`,
 	});
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
-			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
+			alignment: newAlignment === undefined ? "left" : newAlignment,
 		});
 	};
 

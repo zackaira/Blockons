@@ -7,13 +7,13 @@ import "@splidejs/react-splide/css";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
-		className: `playbtn-one style-${attributes.sliderStyle} arrows-${attributes.sliderArrowIcon} rn-${attributes.sliderRoundNess}`,
+		className: `${attributes.sliderAlign}-align playbtn-one style-${attributes.sliderStyle} arrows-${attributes.sliderArrowIcon} rn-${attributes.sliderRoundNess}`,
 	});
 
 	const sliderOptions = {
 		heightRatio: 0.5625,
 		cover: true,
-		rewind: true,
+		rewind: attributes.sliderRewind,
 		speed: 1000,
 		video: {
 			loop: true,
@@ -55,13 +55,9 @@ const Save = ({ attributes }) => {
 					<div className="play-button"></div>
 				</div>
 
-				{slideItem.itemImage && slideItem.itemImage.url ? (
-					<img src={slideItem.itemImage.url} />
-				) : (
-					<img
-						src={`${siteObj.pluginUrl}assets/images/videoslider-placeholder.jpg`}
-					/>
-				)}
+				<img
+					src={`${siteObj.pluginUrl}assets/images/videoslider-placeholder.jpg`}
+				/>
 			</li>
 		);
 	});

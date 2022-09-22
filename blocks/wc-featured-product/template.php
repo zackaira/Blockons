@@ -13,7 +13,7 @@ $product_id = isset($attributes['selectedProduct']) ? $attributes['selectedProdu
 if (!$product_id) return null;
 
 $product = wc_get_product( $product_id );
-$custom_classes = $attributes['alignment'] . " layout-" . $attributes['layout'];
+$custom_classes = 'align-' . $attributes['alignment'] . " layout-" . $attributes['layout'];
 $featured_image_url = wp_get_attachment_url( get_post_thumbnail_id($product_id), 'full' );
 $featured_image_alt = get_post_meta($product_id, '_wp_attachment_image_alt', true);
 ?>

@@ -9,7 +9,8 @@
 	"keywords": ["cart", "icon", "mini cart", "woocommerce", "header"],
 	"attributes": {
 		"cartLink": {
-			"type": "string"
+			"type": "string",
+			"default": ""
 		},
 		"cartLinkNewTab": {
 			"type": "boolean",

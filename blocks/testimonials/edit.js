@@ -85,9 +85,11 @@ const Edit = (props) => {
 	};
 
 	useEffect(() => {
-		setAttributes({
-			uniqueId: uuidv4(),
-		});
+		if (!uniqueId) {
+			setAttributes({
+				uniqueId: uuidv4(),
+			});
+		}
 	}, []);
 
 	const onChangeAlignment = (newAlignment) => {
