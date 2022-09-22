@@ -32,6 +32,9 @@
 			"default": false
 		}
 	},
+	"providesContext": {
+		"blockons/iconFirst": "iconFirst"
+	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"viewScript": "file:./js-accordions.js",

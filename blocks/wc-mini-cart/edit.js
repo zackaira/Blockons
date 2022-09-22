@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-import { useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	AlignmentToolbar,
@@ -44,8 +43,6 @@ const Edit = (props) => {
 		},
 		setAttributes,
 	} = props;
-
-	const [showMiniCart, setShowMiniCart] = useState(false);
 
 	const blockProps = useBlockProps({
 		className: `align-${alignment}`,
@@ -105,21 +102,6 @@ const Edit = (props) => {
 								});
 							}}
 						/>
-						{hasDropdown && (
-							<>
-								<ToggleControl // This setting is just for displaying the drop down, value is not saved.
-									label={__("Always Show Drop Down", "blockons")}
-									checked={showMiniCart}
-									help={__(
-										"This will always display the drop down ONLY in the editor",
-										"blockons"
-									)}
-									onChange={() => {
-										setShowMiniCart((state) => !state);
-									}}
-								/>
-							</>
-						)}
 
 						<ToggleControl
 							label={__("Remove Cart Amount", "blockons")}
@@ -355,11 +337,9 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 			<div
-				className={`blockons-wc-mini-cart-block ${
-					isSelected && showMiniCart ? "show" : ""
-				} ${noItems ? "noitems" : ""} ${noAmount ? "noamount" : ""} ${
-					layoutSwitch ? "switch" : ""
-				} ${dropPosition}`}
+				className={`blockons-wc-mini-cart-block ${noItems ? "noitems" : ""} ${
+					noAmount ? "noamount" : ""
+				} ${layoutSwitch ? "switch" : ""} ${dropPosition}`}
 				style={{
 					backgroundColor: iconBgColor,
 				}}

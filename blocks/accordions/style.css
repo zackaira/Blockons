@@ -110,14 +110,18 @@
 	padding-left: 16px;
 }
 
-/* ---- Icon First ---- */
-.wp-block-blockons-accordions.icon-first
+/* ---- Icon End ---- */
+.wp-block-blockons-accordions.icon-end .accordion-label .accordion-icon {
+	margin-right: 0 !important;
+}
+/* ---- Icon Start ---- */
+.wp-block-blockons-accordions.icon-start
 	.accordion-label
 	.accordion-label-title {
 	order: 2;
 	flex: 1;
 }
-.wp-block-blockons-accordions.icon-first .accordion-label .accordion-icon {
+.wp-block-blockons-accordions.icon-start .accordion-label .accordion-icon {
 	order: 1;
 	margin-right: 10px;
 }
@@ -133,7 +137,7 @@
 	margin-right: 0;
 	margin-left: 10px;
 }
-.wp-block-blockons-accordions.icon-first.centered
+.wp-block-blockons-accordions.icon-start.centered
 	.accordion-label
 	.accordion-icon {
 	margin-right: 10px;

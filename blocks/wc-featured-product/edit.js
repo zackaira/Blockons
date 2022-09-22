@@ -354,13 +354,14 @@ const Edit = (props) => {
 					<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
 				</BlockControls>
 			}
-			{!selectedProduct && (
+
+			{Object.keys(selectedProduct).length < 1 && (
 				<div className="no-selected-product">
 					{__("Select a product to display", "blockons")}
 				</div>
 			)}
 
-			{selectedProduct &&
+			{Object.keys(selectedProduct).length > 0 &&
 				(loadingProductDetails ? (
 					<div className="loading-product">
 						{loadingProductDetails && <BlockonsLoader />}

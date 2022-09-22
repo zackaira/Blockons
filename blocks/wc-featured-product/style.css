@@ -30,6 +30,14 @@
 	font-weight: bold;
 	margin: 0 0 15px;
 }
+.blockons-wc-featured-product-detail .blockons-wc-featured-product-price ins {
+	background: none;
+	text-decoration: none;
+}
+.blockons-wc-featured-product-detail .blockons-wc-featured-product-price del {
+	font-size: 0.9em;
+	opacity: 0.75;
+}
 .blockons-wc-featured-product-btn {
 	margin: 0;
 }

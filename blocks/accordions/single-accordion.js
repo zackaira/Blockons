@@ -29,7 +29,6 @@ registerBlockType("blockons/accordion", {
 	title: __("Accordion", "blockons"),
 	icon: "welcome-add-page",
 	parent: ["blockons/accordions"],
-	// category: "design",
 	attributes: {
 		labelTag: {
 			type: "string",
@@ -46,6 +45,10 @@ registerBlockType("blockons/accordion", {
 		accordionIcon: {
 			type: "string",
 			default: "arrow-right",
+		},
+		labelSpacing: {
+			type: "number",
+			default: 10,
 		},
 		itemSpacing: {
 			type: "number",
@@ -76,6 +79,7 @@ registerBlockType("blockons/accordion", {
 			default: "#FFF",
 		},
 	},
+	usesContext: ["blockons/iconFirst"],
 	/**
 	 *
 	 * Edit function for Child Accordion Block
@@ -90,6 +94,7 @@ registerBlockType("blockons/accordion", {
 				stayOpen,
 				accordionLabel,
 				accordionIcon,
+				labelSpacing,
 				itemSpacing,
 				itemLabelBgColor,
 				labelFontSize,
@@ -99,6 +104,7 @@ registerBlockType("blockons/accordion", {
 				itemContentBgColor,
 			},
 			setAttributes,
+			context,
 		} = props;
 
 		const onChangeAccordionLabel = (newAccordionLabel) => {
@@ -200,6 +206,19 @@ registerBlockType("blockons/accordion", {
 								paletteColors={colorPickerPalette}
 							/>
 
+							{context["blockons/iconFirst"] && (
+								<>
+									<br />
+									<p>{__("Icon & Label Spacing", "blockons")}</p>
+									<RangeControl
+										value={labelSpacing}
+										onChange={(value) => setAttributes({ labelSpacing: value })}
+										min={0}
+										max={200}
+									/>
+								</>
+							)}
+
 							<h4>{__("Accordion Content", "blockons")}</h4>
 							<BlockonsColorpicker
 								label={__("Background Color", "blockons")}
@@ -229,7 +248,7 @@ registerBlockType("blockons/accordion", {
 						}}
 					/>
 
-					<div className="accordion-icon">
+					<div className="accordion-icon" style={{ marginRight: labelSpacing }}>
 						<Dropdown
 							className="blockons-icon-selecter"
 							contentClassName="blockons-editor-popup"
@@ -302,7 +321,12 @@ registerBlockType("blockons/accordion", {
 						}}
 					/>
 
-					<div className="accordion-icon">
+					<div
+						className="accordion-icon"
+						style={{
+							marginRight: attributes.labelSpacing,
+						}}
+					>
 						<FontAwesomeIcon
 							icon={attributes.accordionIcon}
 							iconSize={attributes.labelIconSize}

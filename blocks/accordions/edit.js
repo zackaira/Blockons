@@ -21,7 +21,7 @@ const Edit = (props) => {
 	// Block Props
 	const blockProps = useBlockProps({
 		className: `design-${accordionDesign} ${closeAll ? "close-all" : ""} ${
-			iconFirst ? "icon-first" : ""
+			iconFirst ? "icon-start" : "icon-end"
 		} ${centeredLabel ? "centered" : ""}`,
 	});
 
