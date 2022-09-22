@@ -8,6 +8,10 @@
 	"category": "blockons-category",
 	"keywords": ["cart", "icon", "mini cart", "woocommerce", "header"],
 	"attributes": {
+		"cartLinkTo": {
+			"type": "string",
+			"default": "cartpage"
+		},
 		"cartLink": {
 			"type": "string",
 			"default": ""

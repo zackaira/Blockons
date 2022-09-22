@@ -69,6 +69,7 @@ class Blockons {
 		wp_register_script( 'blockons-wc-mini-cart', BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-mini-cart/cart.js', array(), BLOCKONS_PLUGIN_VERSION );
 		if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
 			wp_localize_script( 'blockons-wc-mini-cart', 'wcCartObj', array(
+				'isPremium' => blockons_fs()->can_use_premium_code__premium_only(),
 				'wcCartUrl' => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
 			));
 		}
@@ -77,6 +78,13 @@ class Blockons {
 		if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
 			wp_localize_script( 'blockons-wc-account-icon', 'wcAccObj', array(
 				'wcAccountUrl' => esc_url( wc_get_page_permalink( 'myaccount' ) ),
+			));
+		}
+		// Search JS
+		wp_register_script( 'blockons-search', BLOCKONS_PLUGIN_URL . 'assets/blocks/search/search.js', array(), BLOCKONS_PLUGIN_VERSION );
+		if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
+			wp_localize_script( 'blockons-search', 'searchObj', array(
+				'isPremium' => blockons_fs()->can_use_premium_code__premium_only(),
 			));
 		}
 		// Progress Bars JS

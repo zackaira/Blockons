@@ -46,6 +46,7 @@ const Edit = (props) => {
 	} = props;
 
 	const [showSearch, setShowSearch] = useState(false);
+	const isPremium = searchObj.isPremium === "1" ? true : false;
 
 	const blockProps = useBlockProps({
 		className: `align-${alignment} ${
@@ -79,6 +80,8 @@ const Edit = (props) => {
 		setShowSearch(false);
 	};
 
+	console.log(isPremium);
+
 	return (
 		<div {...blockProps}>
 			{isSelected && (
@@ -87,6 +90,18 @@ const Edit = (props) => {
 						title={__("Search Settings", "blockons")}
 						initialOpen={true}
 					>
+						{isPremium ? (
+							<>
+								<div>premium features EXPLAINED here</div>
+								<br />
+							</>
+						) : (
+							<>
+								<div>A NOTE ABOUT premium features here</div>
+								<br />
+							</>
+						)}
+
 						<SelectControl
 							label={__("Search Display", "blockons")}
 							value={searchDisplay}
@@ -125,7 +140,7 @@ const Edit = (props) => {
 
 						{searchDisplay === "dropdown" && (
 							<TextControl
-								label={__("Search Width D", "blockons")}
+								label={__("Search Width", "blockons")}
 								value={searchWidthDropdown}
 								onChange={(value) =>
 									setAttributes({
@@ -138,7 +153,7 @@ const Edit = (props) => {
 
 						{searchDisplay === "popup" && (
 							<TextControl
-								label={__("Search Width P", "blockons")}
+								label={__("Search Width", "blockons")}
 								value={searchWidthPopup}
 								onChange={(value) =>
 									setAttributes({
@@ -150,45 +165,54 @@ const Edit = (props) => {
 						)}
 
 						{(searchDisplay === "popup" || searchDisplay === "dropdown") && (
-							<ToggleControl // This setting is just for displaying the drop down, value is not saved.
-								label={__("Show Search", "blockons")}
-								checked={showSearch}
-								help={__(
-									"This will always display the search ONLY in the editor",
-									"blockons"
-								)}
-								onChange={() => {
-									setShowSearch((state) => !state);
-								}}
-							/>
+							<>
+								<div className="blockons-divider"></div>
+								<ToggleControl // This setting is just for displaying the drop down, value is not saved.
+									label={__("Show Search", "blockons")}
+									checked={showSearch}
+									help={__(
+										"This will always display the search ONLY in the editor",
+										"blockons"
+									)}
+									onChange={() => {
+										setShowSearch((state) => !state);
+									}}
+								/>
+							</>
 						)}
 
 						{searchDisplay === "dropdown" && (
-							<SelectControl
-								label={__("Align Drop Down Search", "blockons")}
-								value={searchAlign}
-								options={[
-									{
-										label: __("Bottom Right", "blockons"),
-										value: "bottomright",
-									},
-									{ label: __("Bottom Left", "blockons"), value: "bottomleft" },
-									{
-										label: __("Bottom Center", "blockons"),
-										value: "bottomcenter",
-									},
-									{ label: __("Top Right", "blockons"), value: "topright" },
-									{ label: __("Top Left", "blockons"), value: "topleft" },
-									{ label: __("Top Center", "blockons"), value: "topcenter" },
-									{ label: __("Left", "blockons"), value: "left" },
-									{ label: __("Right", "blockons"), value: "right" },
-								]}
-								onChange={(value) =>
-									setAttributes({
-										searchAlign: value === undefined ? "right" : value,
-									})
-								}
-							/>
+							<>
+								<div className="blockons-divider"></div>
+								<SelectControl
+									label={__("Align Drop Down Search", "blockons")}
+									value={searchAlign}
+									options={[
+										{
+											label: __("Bottom Right", "blockons"),
+											value: "bottomright",
+										},
+										{
+											label: __("Bottom Left", "blockons"),
+											value: "bottomleft",
+										},
+										{
+											label: __("Bottom Center", "blockons"),
+											value: "bottomcenter",
+										},
+										{ label: __("Top Right", "blockons"), value: "topright" },
+										{ label: __("Top Left", "blockons"), value: "topleft" },
+										{ label: __("Top Center", "blockons"), value: "topcenter" },
+										{ label: __("Left", "blockons"), value: "left" },
+										{ label: __("Right", "blockons"), value: "right" },
+									]}
+									onChange={(value) =>
+										setAttributes({
+											searchAlign: value === undefined ? "right" : value,
+										})
+									}
+								/>
+							</>
 						)}
 					</PanelBody>
 					<PanelBody
@@ -219,6 +243,8 @@ const Edit = (props) => {
 									min={0}
 									max={50}
 								/>
+								<div className="blockons-divider"></div>
+
 								<BlockonsColorpicker
 									label={__("Icon Background Color", "blockons")}
 									value={iconBgColor}

@@ -22,6 +22,7 @@ const Edit = (props) => {
 	const {
 		isSelected,
 		attributes: {
+			cartLinkTo,
 			cartLink,
 			cartLinkNewTab,
 			alignment,
@@ -43,6 +44,7 @@ const Edit = (props) => {
 		},
 		setAttributes,
 	} = props;
+	const isPremium = wcCartObj.isPremium === "1" ? true : false;
 
 	const blockProps = useBlockProps({
 		className: `align-${alignment}`,
@@ -57,6 +59,8 @@ const Edit = (props) => {
 		setAttributes({ customIcon: value });
 	};
 
+	console.log(isPremium);
+
 	return (
 		<div {...blockProps}>
 			{isSelected && (
@@ -65,6 +69,18 @@ const Edit = (props) => {
 						title={__("WC Mini Cart Settings", "blockons")}
 						initialOpen={true}
 					>
+						{isPremium ? (
+							<>
+								<div>premium features EXPLAINED here</div>
+								<br />
+							</>
+						) : (
+							<>
+								<div>A NOTE ABOUT premium features here</div>
+								<br />
+							</>
+						)}
+
 						<TextControl
 							label="Cart Page Url"
 							value={cartLink}
@@ -88,21 +104,17 @@ const Edit = (props) => {
 								});
 							}}
 						/>
+						<div className="blockons-divider"></div>
 
 						<ToggleControl
-							label={__("Add Mini Cart", "blockons")}
-							help={__(
-								"Add a drop down mini cart to display cart items",
-								"blockons"
-							)}
-							checked={hasDropdown}
+							label={__("Switch Layout", "blockons")}
+							checked={layoutSwitch}
 							onChange={(newValue) => {
 								setAttributes({
-									hasDropdown: newValue,
+									layoutSwitch: newValue,
 								});
 							}}
 						/>
-
 						<ToggleControl
 							label={__("Remove Cart Amount", "blockons")}
 							checked={noAmount}
@@ -127,14 +139,20 @@ const Edit = (props) => {
 						initialOpen={false}
 					>
 						<ToggleControl
-							label={__("Switch Layout", "blockons")}
-							checked={layoutSwitch}
+							label={__("Add Drop Down Cart", "blockons")}
+							help={__(
+								"Add a drop down cart to display cart items",
+								"blockons"
+							)}
+							checked={hasDropdown}
 							onChange={(newValue) => {
 								setAttributes({
-									layoutSwitch: newValue,
+									hasDropdown: newValue,
 								});
 							}}
 						/>
+						<div className="blockons-divider"></div>
+
 						<SelectControl
 							label={__("Select an Icon", "blockons")}
 							value={icon}
@@ -292,6 +310,7 @@ const Edit = (props) => {
 
 						{hasDropdown && (
 							<>
+								<div className="blockons-divider"></div>
 								<BlockonsColorpicker
 									label={__("Drop Down Background Color", "blockons")}
 									value={dropBgColor}
