@@ -16,11 +16,11 @@ class Blockons_WC_Rest_Routes {
 			'callback' => [$this, 'blockons_get_settings'],
 			'permission_callback' => [$this, 'blockons_get_settings_permission'],
 		]);
-		register_rest_route('blcns/v1', '/site-info', [
-			'methods' => 'GET',
-			'callback' => [$this, 'blockons_get_site_info'],
-			'permission_callback' => [$this, 'blockons_get_settings_permission'],
-		]);
+		// register_rest_route('blcns/v1', '/site-info', [
+		// 	'methods' => 'GET',
+		// 	'callback' => [$this, 'blockons_get_site_info'],
+		// 	'permission_callback' => [$this, 'blockons_get_settings_permission'],
+		// ]);
 		register_rest_route('blcns/v1', '/settings', [
 			'methods' => 'POST',
 			'callback' => [$this, 'blockons_save_settings'],
@@ -31,13 +31,19 @@ class Blockons_WC_Rest_Routes {
 			'callback' => [$this, 'blockons_delete_settings'],
 			'permission_callback' => [$this, 'blockons_save_settings_permission'],
 		]);
+
+		register_rest_route( 'blcns/v1', '/search', [
+			'methods' => 'GET',
+			'callback' => [$this, 'blockons_get_search_results'],
+			'permission_callback' => [$this, 'blockons_get_settings_permission'],
+		]);
 		
 		if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
-			register_rest_route('blcns/v1', '/wc-info', [
-				'methods' => 'GET',
-				'callback' => [$this, 'blockons_get_wc_info'],
-				'permission_callback' => [$this, 'blockons_get_settings_permission'],
-			]);
+			// register_rest_route('blcns/v1', '/wc-info', [
+			// 	'methods' => 'GET',
+			// 	'callback' => [$this, 'blockons_get_wc_info'],
+			// 	'permission_callback' => [$this, 'blockons_get_settings_permission'],
+			// ]);
 			register_rest_route( 'blcns/v1', '/products', [
 				'methods' => 'GET',
 				'callback' => [$this, 'blockons_get_wc_products'],
@@ -49,6 +55,32 @@ class Blockons_WC_Rest_Routes {
 				'permission_callback' => [$this, 'blockons_get_settings_permission'],
 			]);
 		}
+
+		// Add Excerpt to Search Results
+		register_rest_field( 'search-result', 'extras', array(
+			'get_callback' => function ( $post_arr ) {
+				$post_id =  $post_arr['id'];
+
+				if ($post_arr['subtype'] == 'product') {
+					$product = wc_get_product($post_id);
+
+					$extras = array(
+						"image" => get_the_post_thumbnail_url($post_id, 'thumbnail'),
+						"excerpt" => $product->get_short_description(),
+						"price" => $product->get_price_html(),
+						"sku" => $product->get_sku(),
+					);
+					return (object)$extras;
+				} else {
+					$extras = array(
+						"image" => get_the_post_thumbnail_url($post_id, 'thumbnail'),
+						"excerpt" => get_the_excerpt($post_id),
+					);
+					return (object)$extras;
+					// return get_the_excerpt($post_arr['id']);
+				}
+			},
+		) );
 	}
 
 	/*
@@ -66,35 +98,35 @@ class Blockons_WC_Rest_Routes {
 	/*
 	 * Get Site Info for blocks
 	 */
-	public function blockons_get_site_info() {
-		$siteInfo = array(
-			'siteUrl' => esc_url( home_url('/') ),
-			'apiUrl' => esc_url( home_url('/wp-json') ),
-			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
-		);
+	// public function blockons_get_site_info() {
+	// 	$siteInfo = array(
+	// 		'siteUrl' => esc_url( home_url('/') ),
+	// 		'apiUrl' => esc_url( home_url('/wp-json') ),
+	// 		'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
+	// 	);
 
-		return rest_ensure_response($siteInfo);
-	}
+	// 	return rest_ensure_response($siteInfo);
+	// }
 
 	/*
 	 * Get WC Info for blocks
 	 */
-	public function blockons_get_wc_info() {
-		if ( ! Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) )
-			return;
+	// public function blockons_get_wc_info() {
+	// 	if ( ! Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) )
+	// 		return;
 		
-		$wcInfo = array(
-			'siteUrl' => esc_url( home_url('/') ),
-			'wcAccountUrl' => wc_get_page_permalink( 'myaccount' ),
-			'wcAccOrdersUrl' => wc_get_page_permalink( 'orders' ),
-			'wcAccDownloadsUrl' => wc_get_page_permalink( 'downloads' ),
-			'wcAccAddressesUrl' => wc_get_page_permalink( 'edit-address' ),
-			'wcAccAccDetailsUrl' => wc_customer_edit_account_url(),
-			'wcLogoutUrl' => wc_logout_url(),
-		);
+	// 	$wcInfo = array(
+	// 		'siteUrl' => esc_url( home_url('/') ),
+	// 		'wcAccountUrl' => wc_get_page_permalink( 'myaccount' ),
+	// 		'wcAccOrdersUrl' => wc_get_page_permalink( 'orders' ),
+	// 		'wcAccDownloadsUrl' => wc_get_page_permalink( 'downloads' ),
+	// 		'wcAccAddressesUrl' => wc_get_page_permalink( 'edit-address' ),
+	// 		'wcAccAccDetailsUrl' => wc_customer_edit_account_url(),
+	// 		'wcLogoutUrl' => wc_logout_url(),
+	// 	);
 
-		return rest_ensure_response($wcInfo);
-	}
+	// 	return rest_ensure_response($wcInfo);
+	// }
 
 	/*
 	 * Allow permissions for get options
@@ -179,6 +211,20 @@ class Blockons_WC_Rest_Routes {
 		);
 
 		return $product_data;
+	}
+
+	/*
+	 * Get Image by ID for InputMediaUpload Component
+	 */
+	function blockons_get_search_results($request) {
+		$req = file_get_contents('php://input');
+		$reqData = json_decode($req, true);
+
+		var_dump($reqData);
+
+		// $blockonsSearch = $reqData['blockonsSearch'];
+
+		return rest_ensure_response($req);
 	}
 }
 new Blockons_WC_Rest_Routes();

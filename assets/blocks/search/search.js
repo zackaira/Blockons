@@ -1,15 +1,35 @@
 /**
  * Functionality to show/hide the Blockons Search
+ *
+ * FREE
  */
 document.addEventListener("DOMContentLoaded", function () {
+	// Default Search
+	const blockDefaultFocus = document.querySelectorAll(
+		".blockons-search-block.default .blockons-search-input"
+	);
+
+	if (!blockDefaultFocus) return;
+
+	blockDefaultFocus.forEach((item) => {
+		item.addEventListener("focus", () => {
+			const searchBlockParent = item.closest(".blockons-search-block");
+			searchBlockParent.classList.add("search-on");
+		});
+		item.addEventListener("blur", () => {
+			const searchBlockParent = item.closest(".blockons-search-block");
+			searchBlockParent.classList.remove("search-on");
+		});
+	});
+
 	// Drop Down Search
-	const blockFocus = document.querySelectorAll(
+	const blockDropdownFocus = document.querySelectorAll(
 		".blockons-search-block.dropdown .blockons-search-input"
 	);
 
-	if (!blockFocus) return;
+	if (!blockDropdownFocus) return;
 
-	blockFocus.forEach((item) => {
+	blockDropdownFocus.forEach((item) => {
 		item.addEventListener("focus", () => {
 			const searchBlockParent = item.closest(".blockons-search-block");
 			searchBlockParent.classList.add("search-on");
@@ -21,13 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	// Popup Search
-	const blockSearches = document.querySelectorAll(
-		".blockons-search-block.popup"
-	);
+	const blockPopups = document.querySelectorAll(".blockons-search-block.popup");
 
-	if (!blockSearches) return;
+	if (!blockPopups) return;
 
-	blockSearches.forEach((searchItem) => {
+	blockPopups.forEach((searchItem) => {
 		searchItem.addEventListener("click", () => {
 			const searchBlock = searchItem.parentElement;
 

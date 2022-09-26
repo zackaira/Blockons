@@ -9,6 +9,7 @@ const Save = ({ attributes }) => {
 			attributes.searchDisplay === "default" ? "default-search" : "icon-search"
 		}`,
 	});
+	const isPremium = searchObj.isPremium === "1" ? true : false;
 
 	return (
 		<div {...blockProps}>
@@ -59,6 +60,7 @@ const Save = ({ attributes }) => {
 								<RichText.Content value={attributes.textButton} />
 							</button>
 						</form>
+						{isPremium && <div id="blockons-search-results-wrap"></div>}
 					</div>
 				)}
 
@@ -110,6 +112,7 @@ const Save = ({ attributes }) => {
 								<RichText.Content value={attributes.textButton} />
 							</button>
 						</form>
+						{isPremium && <div id="blockons-search-results-wrap"></div>}
 					</div>
 				)}
 			</div>
@@ -151,6 +154,7 @@ const Save = ({ attributes }) => {
 									<RichText.Content value={attributes.textButton} />
 								</button>
 							</form>
+							{isPremium && <div id="blockons-search-results-wrap"></div>}
 						</div>
 					</div>
 				</>

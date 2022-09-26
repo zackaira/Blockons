@@ -14,18 +14,21 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	cursor: pointer;
 	position: relative;
-	overflow: hidden;
-}
-.blockons-search-block:hover,
-.blockons-search-block.search-on {
-	overflow: visible;
 }
 .nopad {
 	padding: 0 !important;
 }
 /* -- Default Style -- */
+.blockons-search-default {
+	overflow: hidden;
+	min-width: 200px;
+	position: relative;
+}
+.blockons-search-block .blockons-search-default:hover,
+.blockons-search-block.search-on .blockons-search-default {
+	overflow: visible;
+}
 .blockons-search-default .blockons-search-inner {
 	width: 100%;
 	display: flex;
@@ -245,4 +248,66 @@
 .wp-block-blockons-search.align-right.default-search .blockons-search-block,
 .wp-block-blockons-search.align-right.icon-search {
 	justify-content: flex-end;
+}
+
+/* -- PREMIUM Styling -- */
+#blockons-search-results-wrap {
+	position: relative;
+}
+.blockons-search-results-block {
+	background-color: #fff;
+	box-shadow: 0 1px 8px rgb(0 0 0 / 14%);
+	border-radius: 0 0 3px 3px;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	z-index: 999;
+	max-height: 400px;
+	overflow-y: scroll;
+}
+.blockons-sresult {
+	display: flex;
+	align-items: center;
+	box-shadow: 0 1px 0 rgb(0 0 0 / 20%);
+	text-decoration: none;
+	padding: 5px;
+}
+.blockons-sresult:last-child {
+	box-shadow: none;
+}
+.blockons-sresult-left {
+	width: 50px;
+}
+.blockons-sresult-left img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.blockons-sresult-center {
+	flex: 1;
+	padding: 0 8px 0 8px;
+}
+.blockons-sresult-right {
+	width: 50px;
+	font-size: 11px;
+	padding: 0 0 0 8px;
+	text-align: center;
+}
+.blockons-sresult-title {
+	margin: 0;
+	padding: 0;
+	font-size: 13px;
+	font-weight: 500;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.blockons-sresult-desc {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

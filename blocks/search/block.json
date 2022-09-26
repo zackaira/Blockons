@@ -17,7 +17,7 @@
 			"default": ""
 		},
 		"searchWidthDefault": {
-			"type": "number",
+			"type": "string",
 			"default": 300
 		},
 		"searchWidthDropdown": {
@@ -71,6 +71,46 @@
 		"searchBtnColor": {
 			"type": "string",
 			"default": "#FFF"
+		},
+		"searchPro": {
+			"type": "boolean",
+			"default": false
+		},
+		"searchPro_key": {
+			"type": "string",
+			"default": ""
+		},
+		"searchPro_secret": {
+			"type": "string",
+			"default": ""
+		},
+		"searchProTypes": {
+			"type": "array",
+			"default": ["post"]
+		},
+		"searchProCats": {
+			"type": "boolean",
+			"default": false
+		},
+		"searchProTags": {
+			"type": "boolean",
+			"default": false
+		},
+		"searchProImage": {
+			"type": "boolean",
+			"default": true
+		},
+		"searchProDesc": {
+			"type": "boolean",
+			"default": false
+		},
+		"searchProPrice": {
+			"type": "boolean",
+			"default": true
+		},
+		"searchProMore": {
+			"type": "string",
+			"default": "all"
 		}
 	},
 	"editorScript": "file:./index.js",

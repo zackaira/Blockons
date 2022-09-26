@@ -41,12 +41,23 @@ const Edit = (props) => {
 			searchBgColor,
 			searchBtnBgColor,
 			searchBtnColor,
+			searchPro,
+			searchPro_key,
+			searchPro_secret,
+			searchProTypes,
+			searchProCats,
+			searchProTags,
+			searchProImage,
+			searchProDesc,
+			searchProPrice,
+			searchProMore,
 		},
 		setAttributes,
 	} = props;
 
 	const [showSearch, setShowSearch] = useState(false);
 	const isPremium = searchObj.isPremium === "1" ? true : false;
+	const [showSearchPreview, setShowSearchPreview] = useState(false);
 
 	const blockProps = useBlockProps({
 		className: `align-${alignment} ${
@@ -80,8 +91,6 @@ const Edit = (props) => {
 		setShowSearch(false);
 	};
 
-	console.log(isPremium);
-
 	return (
 		<div {...blockProps}>
 			{isSelected && (
@@ -90,18 +99,6 @@ const Edit = (props) => {
 						title={__("Search Settings", "blockons")}
 						initialOpen={true}
 					>
-						{isPremium ? (
-							<>
-								<div>premium features EXPLAINED here</div>
-								<br />
-							</>
-						) : (
-							<>
-								<div>A NOTE ABOUT premium features here</div>
-								<br />
-							</>
-						)}
-
 						<SelectControl
 							label={__("Search Display", "blockons")}
 							value={searchDisplay}
@@ -167,7 +164,7 @@ const Edit = (props) => {
 						{(searchDisplay === "popup" || searchDisplay === "dropdown") && (
 							<>
 								<div className="blockons-divider"></div>
-								<ToggleControl // This setting is just for displaying the drop down, value is not saved.
+								<ToggleControl
 									label={__("Show Search", "blockons")}
 									checked={showSearch}
 									help={__(
@@ -308,6 +305,174 @@ const Edit = (props) => {
 							paletteColors={colorPickerPalette}
 						/>
 					</PanelBody>
+
+					{isPremium && (
+						<PanelBody
+							title={__("Predictive Search", "blockons")}
+							initialOpen={false}
+						>
+							<ToggleControl
+								label={__("Enable Predictive Search", "blockons")}
+								checked={searchPro}
+								onChange={(newValue) => {
+									setAttributes({
+										searchPro: newValue,
+									});
+								}}
+							/>
+
+							{searchPro && (
+								<>
+									<div className="blockons-divider"></div>
+									<ToggleControl
+										label={__("Show Preview", "blockons")}
+										checked={showSearchPreview}
+										onChange={() => {
+											setShowSearchPreview((state) => !state);
+										}}
+										help={__(
+											"Please check the frontend search for real life testing.",
+											"blockons"
+										)}
+									/>
+									<SelectControl
+										label={__("Search For:", "blockons")}
+										value={searchProTypes}
+										options={[
+											{ label: __("Posts", "blockons"), value: "post" },
+											{ label: __("Pages", "blockons"), value: "page" },
+											{ label: __("Products", "blockons"), value: "products" },
+										]}
+										onChange={(newValue) =>
+											setAttributes({
+												searchProTypes:
+													newValue === undefined ? "['post']" : newValue,
+											})
+										}
+										// multiple={true}
+										// className="blockons-multiselect"
+									/>
+
+									{
+										// searchProTypes.includes("products") && (
+										searchProTypes === "products" && (
+											<>
+												<div className="helplink fixmargin">
+													{__(
+														"To search Products, we need an API key. Please create an API key and enter the Consumer key and secret below.",
+														"blockons"
+													)}
+													<br />
+													<br />
+													<a
+														href={
+															searchObj.adminUrl +
+															"/admin.php?page=wc-settings&tab=advanced&section=keys"
+														}
+														target="_blank"
+													>
+														{__("Create an API key", "blockons")}
+													</a>
+												</div>
+												<TextControl
+													label={__("Consumer Key", "blockons")}
+													value={searchPro_key}
+													onChange={(value) =>
+														setAttributes({
+															searchPro_key: value,
+														})
+													}
+													type="string"
+												/>
+												<TextControl
+													label={__("Consumer Key", "blockons")}
+													value={searchPro_secret}
+													onChange={(value) =>
+														setAttributes({
+															searchPro_secret: value,
+														})
+													}
+													type="string"
+												/>
+											</>
+										)
+									}
+
+									<div className="blockons-divider"></div>
+									<ToggleControl
+										label={__("Show Categories in Search", "blockons")}
+										checked={searchProCats}
+										onChange={(newValue) => {
+											setAttributes({
+												searchProCats: newValue,
+											});
+										}}
+									/>
+									<ToggleControl
+										label={__("Show Tags in Search", "blockons")}
+										checked={searchProTags}
+										onChange={(newValue) => {
+											setAttributes({
+												searchProTags: newValue,
+											});
+										}}
+									/>
+
+									<div className="blockons-divider"></div>
+									<ToggleControl
+										label={__("Show Image", "blockons")}
+										checked={searchProImage}
+										onChange={(newValue) => {
+											setAttributes({
+												searchProImage: newValue,
+											});
+										}}
+									/>
+									<ToggleControl
+										label={
+											searchProTypes === "products"
+												? __("Show Product Short Description", "blockons")
+												: __("Show Post Excerpt", "blockons")
+										}
+										checked={searchProDesc}
+										onChange={(newValue) => {
+											setAttributes({
+												searchProDesc: newValue,
+											});
+										}}
+									/>
+									{searchProTypes === "products" && (
+										<ToggleControl
+											label={__("Show Product Price", "blockons")}
+											checked={searchProPrice}
+											onChange={(newValue) => {
+												setAttributes({
+													searchProPrice: newValue,
+												});
+											}}
+										/>
+									)}
+
+									<div className="blockons-divider"></div>
+									<SelectControl
+										label={__("See All / More Link", "blockons")}
+										value={searchProMore}
+										options={[
+											{ label: __("See All", "blockons"), value: "all" },
+											{ label: __("Load More", "blockons"), value: "more" },
+											{ label: __("None", "blockons"), value: "none" },
+										]}
+										onChange={(newValue) =>
+											setAttributes({
+												searchProMore:
+													newValue === undefined ? "all" : newValue,
+											})
+										}
+									/>
+								</>
+							)}
+						</PanelBody>
+					)}
 				</InspectorControls>
 			)}
 			{
@@ -318,7 +483,9 @@ const Edit = (props) => {
 			<div
 				className={`blockons-search-block ${
 					searchDisplay === "dropdown" && searchAlign ? searchAlign : ""
-				} ${searchDisplay === "default" ? "nopad" : ""}`}
+				} ${searchDisplay === "default" ? "nopad" : ""} ${
+					showSearchPreview ? "search-on" : ""
+				}`}
 				style={{
 					backgroundColor: iconBgColor,
 					fontSize: iconSize,
@@ -355,6 +522,9 @@ const Edit = (props) => {
 								allowedFormats={["core/bold", "core/italic"]}
 							/>
 						</div>
+						{isPremium && isSelected && showSearchPreview && (
+							<div id="blockons-search-results-wrap"></div>
+						)}
 					</div>
 				)}
 
@@ -398,6 +568,9 @@ const Edit = (props) => {
 								allowedFormats={["core/bold", "core/italic"]}
 							/>
 						</div>
+						{isPremium && isSelected && showSearchPreview && (
+							<div id="blockons-search-results-wrap"></div>
+						)}
 					</div>
 				)}
 			</div>
@@ -441,6 +614,9 @@ const Edit = (props) => {
 									allowedFormats={["core/bold", "core/italic"]}
 								/>
 							</div>
+							{isPremium && isSelected && showSearchPreview && (
+								<div id="blockons-search-results-wrap"></div>
+							)}
 						</div>
 					</div>
 				</>

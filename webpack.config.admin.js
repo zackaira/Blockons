@@ -15,9 +15,16 @@ const config = {
 		"editor.min": "./src/backend/editor/editor.js",
 		frontend: "./src/frontend/frontend.js",
 		"frontend.min": "./src/frontend/frontend.js",
+		// Premium Files
+		"search-pro.min": "./assets/blocks/search/pro/search.js",
 	},
 	output: {
-		filename: "[name].js", // Uses the name of the file
+		// filename: "[name].js", // Uses the name of the file
+		filename: (pathData) => {
+			return pathData.chunk.name === "search-pro.min"
+				? "pro/[name].js"
+				: "[name].js";
+		},
 		// path: path.resolve(process.cwd(), "dist"),
 		path: path.resolve(__dirname, "dist"),
 	},
@@ -38,6 +45,11 @@ const config = {
 		// new CleanWebpackPlugin(),
 		new MiniCSSExtractPlugin({
 			filename: "[name].css",
+			// filename: (pathData) => {
+			// 	return pathData.chunkFilename.name === "search-pro.min"
+			// 		? "pro/[name].css"
+			// 		: "[name].css";
+			// },
 		}),
 	],
 	devtool: false, // "cheap-module-source-map", // https://webpack.js.org/configuration/devtool/

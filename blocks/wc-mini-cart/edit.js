@@ -59,7 +59,7 @@ const Edit = (props) => {
 		setAttributes({ customIcon: value });
 	};
 
-	console.log(isPremium);
+	// console.log(isPremium);
 
 	return (
 		<div {...blockProps}>

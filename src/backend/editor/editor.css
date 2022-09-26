@@ -71,3 +71,17 @@
 .components-button.blockons-colorpicker-btn:hover {
 	box-shadow: 0 0 0 1px #b9b9b9;
 }
+
+/**
+ * SelectControl Multiple
+ */
+.components-select-control.blockons-multiselect
+	select.components-select-control__input {
+	height: auto;
+	padding: 0;
+}
+.components-select-control.blockons-multiselect
+	select.components-select-control__input
+	option {
+	padding: 5px 6px;
+}
