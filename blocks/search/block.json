@@ -12,6 +12,10 @@
 			"type": "string",
 			"default": "left"
 		},
+		"searchId": {
+			"type": "string",
+			"default": ""
+		},
 		"baseUrl": {
 			"type": "string",
 			"default": ""
@@ -72,21 +76,17 @@
 			"type": "string",
 			"default": "#FFF"
 		},
+		"searchProId": {
+			"type": "string",
+			"default": ""
+		},
 		"searchPro": {
 			"type": "boolean",
 			"default": false
 		},
-		"searchPro_key": {
-			"type": "string",
-			"default": ""
-		},
-		"searchPro_secret": {
-			"type": "string",
-			"default": ""
-		},
 		"searchProTypes": {
-			"type": "array",
-			"default": ["post"]
+			"type": "string",
+			"default": "post"
 		},
 		"searchProCats": {
 			"type": "boolean",
@@ -107,10 +107,6 @@
 		"searchProPrice": {
 			"type": "boolean",
 			"default": true
-		},
-		"searchProMore": {
-			"type": "string",
-			"default": "all"
 		}
 	},
 	"editorScript": "file:./index.js",

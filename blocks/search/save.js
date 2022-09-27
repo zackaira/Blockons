@@ -11,6 +11,16 @@ const Save = ({ attributes }) => {
 	});
 	const isPremium = searchObj.isPremium === "1" ? true : false;
 
+	const searchProOptions = {
+		searchPro: attributes.searchPro,
+		searchProTypes: attributes.searchProTypes,
+		searchProCats: attributes.searchProCats,
+		searchProTags: attributes.searchProTags,
+		searchProImage: attributes.searchProImage,
+		searchProDesc: attributes.searchProDesc,
+		searchProPrice: attributes.searchProPrice,
+	};
+
 	return (
 		<div {...blockProps}>
 			<div
@@ -19,6 +29,7 @@ const Save = ({ attributes }) => {
 						? attributes.searchAlign
 						: ""
 				} ${attributes.searchDisplay === "default" ? "nopad" : ""}`}
+				id={attributes.searchId}
 				style={{
 					backgroundColor: attributes.iconBgColor,
 					fontSize: attributes.iconSize,
@@ -60,7 +71,13 @@ const Save = ({ attributes }) => {
 								<RichText.Content value={attributes.textButton} />
 							</button>
 						</form>
-						{isPremium && <div id="blockons-search-results-wrap"></div>}
+						{isPremium && (
+							<div
+								className="blockons-search-results-wrap"
+								id={attributes.searchProId}
+								data-settings={JSON.stringify(searchProOptions)}
+							></div>
+						)}
 					</div>
 				)}
 
@@ -112,7 +129,13 @@ const Save = ({ attributes }) => {
 								<RichText.Content value={attributes.textButton} />
 							</button>
 						</form>
-						{isPremium && <div id="blockons-search-results-wrap"></div>}
+						{isPremium && (
+							<div
+								className="blockons-search-results-wrap"
+								id={attributes.searchProId}
+								data-settings={JSON.stringify(searchProOptions)}
+							></div>
+						)}
 					</div>
 				)}
 			</div>
@@ -154,7 +177,13 @@ const Save = ({ attributes }) => {
 									<RichText.Content value={attributes.textButton} />
 								</button>
 							</form>
-							{isPremium && <div id="blockons-search-results-wrap"></div>}
+							{isPremium && (
+								<div
+									className="blockons-search-results-wrap"
+									id={attributes.searchProId}
+									data-settings={JSON.stringify(searchProOptions)}
+								></div>
+							)}
 						</div>
 					</div>
 				</>

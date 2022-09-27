@@ -18,6 +18,7 @@ import {
 	RangeControl,
 	__experimentalUnitControl as UnitControl,
 } from "@wordpress/components";
+import { v4 as uuidv4 } from "uuid";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import { colorPickerPalette } from "../block-global";
 
@@ -26,6 +27,7 @@ const Edit = (props) => {
 		isSelected,
 		attributes: {
 			alignment,
+			searchId,
 			baseUrl,
 			searchWidthDefault,
 			searchWidthDropdown,
@@ -41,22 +43,21 @@ const Edit = (props) => {
 			searchBgColor,
 			searchBtnBgColor,
 			searchBtnColor,
+			searchProId,
 			searchPro,
-			searchPro_key,
-			searchPro_secret,
 			searchProTypes,
 			searchProCats,
 			searchProTags,
 			searchProImage,
 			searchProDesc,
 			searchProPrice,
-			searchProMore,
 		},
 		setAttributes,
 	} = props;
 
 	const [showSearch, setShowSearch] = useState(false);
 	const isPremium = searchObj.isPremium === "1" ? true : false;
+	const wcActive = Boolean(searchObj.wcActive);
 	const [showSearchPreview, setShowSearchPreview] = useState(false);
 
 	const blockProps = useBlockProps({
@@ -67,10 +68,32 @@ const Edit = (props) => {
 
 	const siteInfo = wp.data.select("core").getSite();
 
+	const searchProOptions = {
+		searchProId,
+		searchPro,
+		searchProTypes,
+		searchProCats,
+		searchProTags,
+		searchProImage,
+		searchProDesc,
+		searchProPrice,
+	};
+
 	useEffect(() => {
 		if (!baseUrl && siteInfo) {
 			setAttributes({
 				baseUrl: siteInfo.url,
+			});
+		}
+
+		if (!searchId) {
+			setAttributes({
+				searchId: "id" + uuidv4(),
+			});
+		}
+		if (!searchProId) {
+			setAttributes({
+				searchProId: "id" + uuidv4(),
 			});
 		}
 	}, []);
@@ -331,72 +354,32 @@ const Edit = (props) => {
 											setShowSearchPreview((state) => !state);
 										}}
 										help={__(
-											"Please check the frontend search for real life testing.",
+											"Please see the frontend for actual results.",
 											"blockons"
 										)}
 									/>
+
 									<SelectControl
 										label={__("Search For:", "blockons")}
 										value={searchProTypes}
 										options={[
 											{ label: __("Posts", "blockons"), value: "post" },
 											{ label: __("Pages", "blockons"), value: "page" },
-											{ label: __("Products", "blockons"), value: "products" },
+											{
+												label: __("Products", "blockons"),
+												value: "product",
+												disabled: wcActive ? false : true,
+											},
 										]}
 										onChange={(newValue) =>
 											setAttributes({
 												searchProTypes:
-													newValue === undefined ? "['post']" : newValue,
+													newValue === undefined ? "post" : newValue,
 											})
 										}
 										// multiple={true}
 										// className="blockons-multiselect"
 									/>
-
-									{
-										// searchProTypes.includes("products") && (
-										searchProTypes === "products" && (
-											<>
-												<div className="helplink fixmargin">
-													{__(
-														"To search Products, we need an API key. Please create an API key and enter the Consumer key and secret below.",
-														"blockons"
-													)}
-													<br />
-													<br />
-													<a
-														href={
-															searchObj.adminUrl +
-															"/admin.php?page=wc-settings&tab=advanced&section=keys"
-														}
-														target="_blank"
-													>
-														{__("Create an API key", "blockons")}
-													</a>
-												</div>
-												<TextControl
-													label={__("Consumer Key", "blockons")}
-													value={searchPro_key}
-													onChange={(value) =>
-														setAttributes({
-															searchPro_key: value,
-														})
-													}
-													type="string"
-												/>
-												<TextControl
-													label={__("Consumer Key", "blockons")}
-													value={searchPro_secret}
-													onChange={(value) =>
-														setAttributes({
-															searchPro_secret: value,
-														})
-													}
-													type="string"
-												/>
-											</>
-										)
-									}
 
 									<div className="blockons-divider"></div>
 									<ToggleControl
@@ -430,7 +413,7 @@ const Edit = (props) => {
 									/>
 									<ToggleControl
 										label={
-											searchProTypes === "products"
+											searchProTypes === "product"
 												? __("Show Product Short Description", "blockons")
 												: __("Show Post Excerpt", "blockons")
 										}
@@ -441,7 +424,7 @@ const Edit = (props) => {
 											});
 										}}
 									/>
-									{searchProTypes === "products" && (
+									{searchProTypes === "product" && (
 										<ToggleControl
 											label={__("Show Product Price", "blockons")}
 											checked={searchProPrice}
@@ -452,23 +435,6 @@ const Edit = (props) => {
 											}}
 										/>
 									)}
-
-									<div className="blockons-divider"></div>
-									<SelectControl
-										label={__("See All / More Link", "blockons")}
-										value={searchProMore}
-										options={[
-											{ label: __("See All", "blockons"), value: "all" },
-											{ label: __("Load More", "blockons"), value: "more" },
-											{ label: __("None", "blockons"), value: "none" },
-										]}
-										onChange={(newValue) =>
-											setAttributes({
-												searchProMore:
-													newValue === undefined ? "all" : newValue,
-											})
-										}
-									/>
 								</>
 							)}
 						</PanelBody>
@@ -486,6 +452,7 @@ const Edit = (props) => {
 				} ${searchDisplay === "default" ? "nopad" : ""} ${
 					showSearchPreview ? "search-on" : ""
 				}`}
+				id={searchId}
 				style={{
 					backgroundColor: iconBgColor,
 					fontSize: iconSize,
@@ -509,6 +476,7 @@ const Edit = (props) => {
 								onChange={onChangeInputText}
 								allowedFormats={["core/bold", "core/italic"]}
 								placeholder={__("Add Placeholder...", "blockons")}
+								multiline={false}
 							/>
 							<RichText
 								tagName="div"
@@ -520,10 +488,15 @@ const Edit = (props) => {
 									color: searchBtnColor,
 								}}
 								allowedFormats={["core/bold", "core/italic"]}
+								multiline={false}
 							/>
 						</div>
 						{isPremium && isSelected && showSearchPreview && (
-							<div id="blockons-search-results-wrap"></div>
+							<div
+								className="blockons-search-results-wrap"
+								id={searchProId}
+								data-settings={JSON.stringify(searchProOptions)}
+							></div>
 						)}
 					</div>
 				)}
@@ -555,6 +528,7 @@ const Edit = (props) => {
 								onChange={onChangeInputText}
 								allowedFormats={["core/bold", "core/italic"]}
 								placeholder={__("Add Placeholder...", "blockons")}
+								multiline={false}
 							/>
 							<RichText
 								tagName="div"
@@ -566,10 +540,15 @@ const Edit = (props) => {
 									color: searchBtnColor,
 								}}
 								allowedFormats={["core/bold", "core/italic"]}
+								multiline={false}
 							/>
 						</div>
 						{isPremium && isSelected && showSearchPreview && (
-							<div id="blockons-search-results-wrap"></div>
+							<div
+								className="blockons-search-results-wrap"
+								id={searchProId}
+								data-settings={JSON.stringify(searchProOptions)}
+							></div>
 						)}
 					</div>
 				)}
@@ -601,6 +580,7 @@ const Edit = (props) => {
 									onChange={onChangeInputText}
 									allowedFormats={["core/bold", "core/italic"]}
 									placeholder={__("Add Placeholder...", "blockons")}
+									multiline={false}
 								/>
 								<RichText
 									tagName="div"
@@ -612,10 +592,15 @@ const Edit = (props) => {
 										color: searchBtnColor,
 									}}
 									allowedFormats={["core/bold", "core/italic"]}
+									multiline={false}
 								/>
 							</div>
 							{isPremium && isSelected && showSearchPreview && (
-								<div id="blockons-search-results-wrap"></div>
+								<div
+									className="blockons-search-results-wrap"
+									id={searchProId}
+									data-settings={JSON.stringify(searchProOptions)}
+								></div>
 							)}
 						</div>
 					</div>

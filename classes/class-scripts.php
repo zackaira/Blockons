@@ -93,6 +93,7 @@ class Blockons {
 				'isPremium' => blockons_fs()->can_use_premium_code__premium_only(),
 				'apiUrl' => esc_url( home_url('/wp-json') ),
 				'adminUrl' => esc_url( admin_url() ),
+				'wcActive' => Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ),
 			));
 		}
 		// Progress Bars JS
