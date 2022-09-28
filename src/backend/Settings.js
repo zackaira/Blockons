@@ -10,7 +10,7 @@ import { blockListSettings } from "./helpers";
 
 const Settings = () => {
 	const siteObject = siteObj;
-	const url = `${siteObject.apiUrl}/blcns/v1`;
+	const url = `${siteObject.apiUrl}blcns/v1`;
 	const [loader, setLoader] = useState(false);
 	const [loadSetting, setLoadSetting] = useState(true);
 	const isPremium = siteObject.can_use_premium_code === "1" ? true : false;

@@ -5,7 +5,7 @@ import Loader from "../Loader";
 
 const Settings = () => {
 	const siteObject = siteObj;
-	const url = `${siteObject.apiUrl}/blcns/v1`;
+	const url = `${siteObject.apiUrl}blcns/v1`;
 	const [loader, setLoader] = useState(false);
 	const [blockonsDefaults, setBlockonsDefaults] = useState({});
 	const [blockonsOptions, setBlockonsOptions] = useState({});

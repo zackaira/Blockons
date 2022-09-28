@@ -15,20 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	if (searchElements) {
 		searchElements.forEach((searchBlock) => {
+			const searchId = searchBlock.closest(".wp-block-blockons-search").id;
 			const searchSettings = JSON.parse(
 				searchBlock.getAttribute("data-settings")
 			);
 
 			if (!searchSettings.searchPro) return;
 
-			// console.log("SearchBlock:", searchBlock);
-
 			if (typeof searchElements !== undefined && searchElements !== null) {
 				ReactDOM.render(
-					<SearchResults
-						searchId={searchBlock.getAttribute("id")}
-						searchSettings={searchSettings}
-					/>,
+					<SearchResults searchId={searchId} searchSettings={searchSettings} />,
 					searchBlock
 				);
 			}

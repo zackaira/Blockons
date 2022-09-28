@@ -86,10 +86,10 @@ const Edit = (props) => {
 						<TextControl
 							label="Account Page Url"
 							value={accountUrl}
-							onChange={(value) => {
+							onChange={(newValue) => {
 								setAttributes({
 									accountUrl:
-										value === undefined ? wcAccObj.wcAccountUrl : value,
+										newValue === undefined ? wcAccObj.wcAccountUrl : newValue,
 								});
 							}}
 							help={__(
@@ -105,11 +105,7 @@ const Edit = (props) => {
 								"blockons"
 							)}
 							checked={hasDropdown}
-							onChange={(newValue) => {
-								setAttributes({
-									hasDropdown: newValue,
-								});
-							}}
+							onChange={(newValue) => setAttributes({ hasDropdown: newValue })}
 						/>
 						{hasDropdown && (
 							<>
@@ -127,56 +123,44 @@ const Edit = (props) => {
 								<CheckboxControl
 									label="Dashboard"
 									checked={showDashboard}
-									onChange={(newValue) => {
-										setAttributes({
-											showDashboard: newValue,
-										});
-									}}
+									onChange={(newValue) =>
+										setAttributes({ showDashboard: newValue })
+									}
 								/>
 								<CheckboxControl
 									label="Orders"
 									checked={showOrders}
-									onChange={(newValue) => {
-										setAttributes({
-											showOrders: newValue,
-										});
-									}}
+									onChange={(newValue) =>
+										setAttributes({ showOrders: newValue })
+									}
 								/>
 								<CheckboxControl
 									label="Downloads"
 									checked={showDownloads}
-									onChange={(newValue) => {
-										setAttributes({
-											showDownloads: newValue,
-										});
-									}}
+									onChange={(newValue) =>
+										setAttributes({ showDownloads: newValue })
+									}
 								/>
 								<CheckboxControl
 									label="Addresses"
 									checked={showAddresses}
-									onChange={(newValue) => {
-										setAttributes({
-											showAddresses: newValue,
-										});
-									}}
+									onChange={(newValue) =>
+										setAttributes({ showAddresses: newValue })
+									}
 								/>
 								<CheckboxControl
 									label="Account Details"
 									checked={showAccountDetails}
-									onChange={(newValue) => {
-										setAttributes({
-											showAccountDetails: newValue,
-										});
-									}}
+									onChange={(newValue) =>
+										setAttributes({ showAccountDetails: newValue })
+									}
 								/>
 								<CheckboxControl
 									label="Logout"
 									checked={showLogout}
-									onChange={(newValue) => {
-										setAttributes({
-											showLogout: newValue,
-										});
-									}}
+									onChange={(newValue) =>
+										setAttributes({ showLogout: newValue })
+									}
 								/>
 							</>
 						)}
@@ -236,9 +220,9 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Icon Size", "blockons")}
 							value={iconSize}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									iconSize: value === undefined ? 20 : value,
+									iconSize: newValue === undefined ? 20 : parseInt(newValue),
 								})
 							}
 							min={14}
@@ -247,9 +231,9 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Icon Padding", "blockons")}
 							value={iconPadding}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									iconPadding: value === undefined ? 20 : value,
+									iconPadding: newValue === undefined ? 20 : parseInt(newValue),
 								})
 							}
 							min={0}

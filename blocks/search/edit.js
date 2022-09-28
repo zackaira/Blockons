@@ -46,8 +46,13 @@ const Edit = (props) => {
 			searchProId,
 			searchPro,
 			searchProTypes,
+			searchProAmnt,
 			searchProCats,
+			searchProCatsTitle,
+			searchProCatsAmnt,
 			searchProTags,
+			searchProTagsTitle,
+			searchProTagsAmnt,
 			searchProImage,
 			searchProDesc,
 			searchProPrice,
@@ -64,20 +69,30 @@ const Edit = (props) => {
 		className: `align-${alignment} ${
 			isSelected && showSearch ? "blockons-show" : ""
 		} ${searchDisplay === "default" ? "default-search" : "icon-search"}`,
+		id: searchId,
 	});
+
+	console.log("Premium: ", isPremium);
 
 	const siteInfo = wp.data.select("core").getSite();
 
-	const searchProOptions = {
-		searchProId,
-		searchPro,
-		searchProTypes,
-		searchProCats,
-		searchProTags,
-		searchProImage,
-		searchProDesc,
-		searchProPrice,
-	};
+	const searchProOptions = isPremium
+		? {
+				searchProId,
+				searchPro,
+				searchProTypes,
+				searchProAmnt,
+				searchProCats,
+				searchProCatsTitle,
+				searchProCatsAmnt,
+				searchProTags,
+				searchProTagsTitle,
+				searchProTagsAmnt,
+				searchProImage,
+				searchProDesc,
+				searchProPrice,
+		  }
+		: { searchPro };
 
 	useEffect(() => {
 		if (!baseUrl && siteInfo) {
@@ -103,11 +118,11 @@ const Edit = (props) => {
 			alignment: newAlignment === undefined ? "left" : newAlignment,
 		});
 	};
-	const onChangeInputText = (value) => {
-		setAttributes({ textInput: value });
+	const onChangeInputText = (newValue) => {
+		setAttributes({ textInput: newValue });
 	};
-	const onChangeButtonText = (value) => {
-		setAttributes({ textButton: value });
+	const onChangeButtonText = (newValue) => {
+		setAttributes({ textButton: newValue });
 	};
 
 	const closePopup = () => {
@@ -145,10 +160,8 @@ const Edit = (props) => {
 							<UnitControl
 								label={__("Search Width", "blockons")}
 								value={searchWidthDefault}
-								onChange={(value) =>
-									setAttributes({
-										searchWidthDefault: value,
-									})
+								onChange={(newValue) =>
+									setAttributes({ searchWidthDefault: newValue })
 								}
 								units={[
 									{ value: "px", label: "px", default: 300 },
@@ -162,10 +175,8 @@ const Edit = (props) => {
 							<TextControl
 								label={__("Search Width", "blockons")}
 								value={searchWidthDropdown}
-								onChange={(value) =>
-									setAttributes({
-										searchWidthDropdown: value,
-									})
+								onChange={(newValue) =>
+									setAttributes({ searchWidthDropdown: parseInt(newValue) })
 								}
 								type="number"
 							/>
@@ -175,10 +186,8 @@ const Edit = (props) => {
 							<TextControl
 								label={__("Search Width", "blockons")}
 								value={searchWidthPopup}
-								onChange={(value) =>
-									setAttributes({
-										searchWidthPopup: value,
-									})
+								onChange={(newValue) =>
+									setAttributes({ searchWidthPopup: parseInt(newValue) })
 								}
 								type="number"
 							/>
@@ -226,9 +235,9 @@ const Edit = (props) => {
 										{ label: __("Left", "blockons"), value: "left" },
 										{ label: __("Right", "blockons"), value: "right" },
 									]}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											searchAlign: value === undefined ? "right" : value,
+											searchAlign: newValue === undefined ? "right" : newValue,
 										})
 									}
 								/>
@@ -244,9 +253,9 @@ const Edit = (props) => {
 								<RangeControl
 									label={__("Icon Size", "blockons")}
 									value={iconSize}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											iconSize: value === undefined ? 17 : value,
+											iconSize: newValue === undefined ? 17 : newValue,
 										})
 									}
 									min={14}
@@ -255,9 +264,9 @@ const Edit = (props) => {
 								<RangeControl
 									label={__("Icon Padding", "blockons")}
 									value={iconPadding}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											iconPadding: value === undefined ? 5 : value,
+											iconPadding: newValue === undefined ? 5 : newValue,
 										})
 									}
 									min={0}
@@ -338,9 +347,7 @@ const Edit = (props) => {
 								label={__("Enable Predictive Search", "blockons")}
 								checked={searchPro}
 								onChange={(newValue) => {
-									setAttributes({
-										searchPro: newValue,
-									});
+									setAttributes({ searchPro: newValue });
 								}}
 							/>
 
@@ -380,35 +387,81 @@ const Edit = (props) => {
 										// multiple={true}
 										// className="blockons-multiselect"
 									/>
+									<TextControl
+										label={__("Results Amount to Display", "blockons")}
+										value={searchProAmnt}
+										onChange={(newValue) =>
+											setAttributes({ searchProAmnt: parseInt(newValue) })
+										}
+										type="number"
+									/>
 
 									<div className="blockons-divider"></div>
 									<ToggleControl
 										label={__("Show Categories in Search", "blockons")}
 										checked={searchProCats}
 										onChange={(newValue) => {
-											setAttributes({
-												searchProCats: newValue,
-											});
+											setAttributes({ searchProCats: newValue });
 										}}
 									/>
+									{searchProCats && (
+										<>
+											<TextControl
+												label={__("Results Title", "blockons")}
+												value={searchProCatsTitle}
+												onChange={(newValue) =>
+													setAttributes({ searchProCatsTitle: newValue })
+												}
+											/>
+											<TextControl
+												label={__("Amount to Display", "blockons")}
+												value={searchProCatsAmnt}
+												onChange={(newValue) =>
+													setAttributes({
+														searchProCatsAmnt: parseInt(newValue),
+													})
+												}
+												type="number"
+											/>
+											<div className="blockons-divider"></div>
+										</>
+									)}
+
 									<ToggleControl
 										label={__("Show Tags in Search", "blockons")}
 										checked={searchProTags}
 										onChange={(newValue) => {
-											setAttributes({
-												searchProTags: newValue,
-											});
+											setAttributes({ searchProTags: newValue });
 										}}
 									/>
+									{searchProTags && (
+										<>
+											<TextControl
+												label={__("Results Title", "blockons")}
+												value={searchProTagsTitle}
+												onChange={(newValue) =>
+													setAttributes({ searchProTagsTitle: newValue })
+												}
+											/>
+											<TextControl
+												label={__("Amount to Display", "blockons")}
+												value={searchProTagsAmnt}
+												onChange={(newValue) =>
+													setAttributes({
+														searchProTagsAmnt: parseInt(newValue),
+													})
+												}
+												type="number"
+											/>
+										</>
+									)}
 
 									<div className="blockons-divider"></div>
 									<ToggleControl
 										label={__("Show Image", "blockons")}
 										checked={searchProImage}
 										onChange={(newValue) => {
-											setAttributes({
-												searchProImage: newValue,
-											});
+											setAttributes({ searchProImage: newValue });
 										}}
 									/>
 									<ToggleControl
@@ -452,12 +505,13 @@ const Edit = (props) => {
 				} ${searchDisplay === "default" ? "nopad" : ""} ${
 					showSearchPreview ? "search-on" : ""
 				}`}
-				id={searchId}
 				style={{
-					backgroundColor: iconBgColor,
-					fontSize: iconSize,
 					...(searchDisplay === "dropdown" || searchDisplay === "popup"
-						? { padding: iconPadding }
+						? {
+								backgroundColor: iconBgColor,
+								padding: iconPadding,
+								fontSize: iconSize,
+						  }
 						: ""),
 				}}
 			>
@@ -491,7 +545,8 @@ const Edit = (props) => {
 								multiline={false}
 							/>
 						</div>
-						{isPremium && isSelected && showSearchPreview && (
+
+						{isSelected && (
 							<div
 								className="blockons-search-results-wrap"
 								id={searchProId}
@@ -543,7 +598,7 @@ const Edit = (props) => {
 								multiline={false}
 							/>
 						</div>
-						{isPremium && isSelected && showSearchPreview && (
+						{isPremium && (
 							<div
 								className="blockons-search-results-wrap"
 								id={searchProId}
@@ -595,7 +650,8 @@ const Edit = (props) => {
 									multiline={false}
 								/>
 							</div>
-							{isPremium && isSelected && showSearchPreview && (
+
+							{isSelected && (
 								<div
 									className="blockons-search-results-wrap"
 									id={searchProId}

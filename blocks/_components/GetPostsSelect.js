@@ -14,7 +14,7 @@ const GetPostsSelect = (props) => {
 		if (!siteurl) return;
 
 		setLoadingProducts(true);
-		axios.get(siteurl + "/blcns/v1/products").then((result) => {
+		axios.get(siteurl + "blcns/v1/products").then((result) => {
 			setAllProducts(result.data);
 			setLoadingProducts(false);
 		});

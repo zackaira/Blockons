@@ -55,8 +55,8 @@ const Edit = (props) => {
 			alignment: newAlignment === undefined ? "left" : newAlignment,
 		});
 	};
-	const onChangeCustomIcon = (value) => {
-		setAttributes({ customIcon: value });
+	const onChangeCustomIcon = (newValue) => {
+		setAttributes({ customIcon: newValue });
 	};
 
 	// console.log(isPremium);
@@ -84,12 +84,12 @@ const Edit = (props) => {
 						<TextControl
 							label="Cart Page Url"
 							value={cartLink}
-							onChange={(newValue) => {
+							onChange={(newValue) =>
 								setAttributes({
 									cartLink:
 										newValue === undefined ? wcCartObj.wcCartUrl : newValue,
-								});
-							}}
+								})
+							}
 							help={__(
 								"If not set, this defaults to the WooCommerce cart page",
 								"blockons"
@@ -98,40 +98,26 @@ const Edit = (props) => {
 						<ToggleControl
 							label={__("Open in a new tab", "blockons")}
 							checked={cartLinkNewTab}
-							onChange={(newValue) => {
-								setAttributes({
-									cartLinkNewTab: newValue,
-								});
-							}}
+							onChange={(newValue) =>
+								setAttributes({ cartLinkNewTab: newValue })
+							}
 						/>
 						<div className="blockons-divider"></div>
 
 						<ToggleControl
 							label={__("Switch Layout", "blockons")}
 							checked={layoutSwitch}
-							onChange={(newValue) => {
-								setAttributes({
-									layoutSwitch: newValue,
-								});
-							}}
+							onChange={(newValue) => setAttributes({ layoutSwitch: newValue })}
 						/>
 						<ToggleControl
 							label={__("Remove Cart Amount", "blockons")}
 							checked={noAmount}
-							onChange={(newValue) => {
-								setAttributes({
-									noAmount: newValue,
-								});
-							}}
+							onChange={(newValue) => setAttributes({ noAmount: newValue })}
 						/>
 						<ToggleControl
 							label={__("Remove Items Count", "blockons")}
 							checked={noItems}
-							onChange={(newValue) => {
-								setAttributes({
-									noItems: newValue,
-								});
-							}}
+							onChange={(newValue) => setAttributes({ noItems: newValue })}
 						/>
 					</PanelBody>
 					<PanelBody
@@ -145,11 +131,7 @@ const Edit = (props) => {
 								"blockons"
 							)}
 							checked={hasDropdown}
-							onChange={(newValue) => {
-								setAttributes({
-									hasDropdown: newValue,
-								});
-							}}
+							onChange={(newValue) => setAttributes({ hasDropdown: newValue })}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -257,9 +239,9 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Icon Size", "blockons")}
 							value={iconSize}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									iconSize: value === undefined ? 17 : value,
+									iconSize: newValue === undefined ? 17 : parseInt(newValue),
 								})
 							}
 							min={14}
@@ -268,9 +250,9 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Cart Padding", "blockons")}
 							value={iconPadding}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									iconPadding: value === undefined ? 5 : value,
+									iconPadding: newValue === undefined ? 5 : parseInt(newValue),
 								})
 							}
 							min={0}

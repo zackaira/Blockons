@@ -101,7 +101,7 @@ class Blockons_WC_Rest_Routes {
 	// public function blockons_get_site_info() {
 	// 	$siteInfo = array(
 	// 		'siteUrl' => esc_url( home_url('/') ),
-	// 		'apiUrl' => esc_url( home_url('/wp-json') ),
+	// 		'apiUrl' => esc_url( get_rest_url() ),
 	// 		'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 	// 	);
 

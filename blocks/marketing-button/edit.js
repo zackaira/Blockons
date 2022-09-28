@@ -147,9 +147,9 @@ const Edit = (props) => {
 								{ label: __("Bordered", "blockons"), value: "one" },
 								{ label: __("Plain", "blockons"), value: "two" },
 							]}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									layout: value === undefined ? "one" : value,
+									layout: newValue === undefined ? "one" : newValue,
 								})
 							}
 							__nextHasNoMarginBottom
@@ -158,9 +158,9 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Min Width", "blockons")}
 							value={mbMinWidth}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									mbMinWidth: value === undefined ? 200 : value,
+									mbMinWidth: newValue === undefined ? 200 : parseInt(newValue),
 								})
 							}
 							min={200}
@@ -169,9 +169,9 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Min Height", "blockons")}
 							value={mbMinHeight}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									mbMinHeight: value === undefined ? 50 : value,
+									mbMinHeight: newValue === undefined ? 50 : parseInt(newValue),
 								})
 							}
 							min={50}
@@ -236,9 +236,9 @@ const Edit = (props) => {
 										{ label: __("Button Left", "blockons"), value: "three" },
 										{ label: __("Button Right", "blockons"), value: "four" },
 									]}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											iconPosition: value === undefined ? "one" : value,
+											iconPosition: newValue === undefined ? "one" : newValue,
 										})
 									}
 									__nextHasNoMarginBottom
@@ -246,9 +246,10 @@ const Edit = (props) => {
 								<RangeControl
 									label={__("Icon Size", "blockons")}
 									value={iconSize}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											iconSize: value === undefined ? 16 : value,
+											iconSize:
+												newValue === undefined ? 16 : parseInt(newValue),
 										})
 									}
 									min={10}
@@ -257,9 +258,10 @@ const Edit = (props) => {
 								<RangeControl
 									label={__("Icon Spacing", "blockons")}
 									value={iconSpacing}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											iconSpacing: value === undefined ? 8 : value,
+											iconSpacing:
+												newValue === undefined ? 8 : parseInt(newValue),
 										})
 									}
 									min={0}
@@ -275,9 +277,9 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Button Roundness", "blockons")}
 							value={bRadius}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									bRadius: value === undefined ? 3 : value,
+									bRadius: newValue === undefined ? 3 : parseInt(newValue),
 								})
 							}
 							min={0}
@@ -287,9 +289,9 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Vertical Padding", "blockons")}
 							value={vertPad}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									vertPad: value === undefined ? 15 : value,
+									vertPad: newValue === undefined ? 15 : parseInt(newValue),
 								})
 							}
 							min={0}
@@ -298,9 +300,9 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Horizontal Padding", "blockons")}
 							value={horizPad}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									horizPad: value === undefined ? 18 : value,
+									horizPad: newValue === undefined ? 18 : parseInt(newValue),
 								})
 							}
 							min={0}
@@ -370,9 +372,9 @@ const Edit = (props) => {
 					<BlockAlignmentToolbar
 						value={buttonAlign}
 						controls={["left", "center", "right"]}
-						onChange={(value) => {
+						onChange={(newValue) => {
 							setAttributes({
-								buttonAlign: value === undefined ? "none" : value,
+								buttonAlign: newValue === undefined ? "left" : newValue,
 							});
 						}}
 					/>

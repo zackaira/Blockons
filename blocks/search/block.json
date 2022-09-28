@@ -88,13 +88,33 @@
 			"type": "string",
 			"default": "post"
 		},
+		"searchProAmnt": {
+			"type": "number",
+			"default": 6
+		},
 		"searchProCats": {
 			"type": "boolean",
 			"default": false
 		},
+		"searchProCatsTitle": {
+			"type": "string",
+			"default": "Categories"
+		},
+		"searchProCatsAmnt": {
+			"type": "number",
+			"default": 4
+		},
 		"searchProTags": {
 			"type": "boolean",
 			"default": false
+		},
+		"searchProTagsTitle": {
+			"type": "string",
+			"default": "Tags"
+		},
+		"searchProTagsAmnt": {
+			"type": "number",
+			"default": 4
 		},
 		"searchProImage": {
 			"type": "boolean",

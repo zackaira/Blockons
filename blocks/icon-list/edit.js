@@ -14,7 +14,6 @@ import {
 	Dropdown,
 	SelectControl,
 	RangeControl,
-	ColorPalette,
 	Button,
 } from "@wordpress/components";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
@@ -378,9 +377,10 @@ const Edit = (props) => {
 								{ label: __("Vertical", "blockons"), value: "vertical" },
 								{ label: __("Horizontal", "blockons"), value: "horizontal" },
 							]}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									listItemsLayout: value === undefined ? "vertical" : value,
+									listItemsLayout:
+										newValue === undefined ? "vertical" : newValue,
 								})
 							}
 							__nextHasNoMarginBottom
@@ -389,15 +389,17 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Item Spacing", "blockons")}
 							value={listItemSpacing}
-							onChange={(value) => setAttributes({ listItemSpacing: value })}
+							onChange={(newValue) =>
+								setAttributes({ listItemSpacing: parseInt(newValue) })
+							}
 							min={0}
 							max={100}
 						/>
 						<RangeControl
 							label={__("Icon & Text Spacing", "blockons")}
 							value={listItemIconSpacing}
-							onChange={(value) =>
-								setAttributes({ listItemIconSpacing: value })
+							onChange={(newValue) =>
+								setAttributes({ listItemIconSpacing: parseInt(newValue) })
 							}
 							min={0}
 							max={80}
@@ -410,7 +412,9 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Font Size", "blockons")}
 							value={listItemFontSize}
-							onChange={(value) => setAttributes({ listItemFontSize: value })}
+							onChange={(newValue) =>
+								setAttributes({ listItemFontSize: parseInt(newValue) })
+							}
 							min={10}
 							max={64}
 						/>

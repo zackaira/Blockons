@@ -137,9 +137,9 @@ registerBlockType("blockons/accordion", {
 								label={__("Label Element", "blockons")}
 								value={labelTag}
 								options={elementTags}
-								onChange={(value) =>
+								onChange={(newValue) =>
 									setAttributes({
-										labelTag: value === undefined ? "h4" : value,
+										labelTag: newValue === undefined ? "h4" : newValue,
 									})
 								}
 							/>
@@ -163,7 +163,7 @@ registerBlockType("blockons/accordion", {
 							<p>{__("Accordion Spacing", "blockons")}</p>
 							<RangeControl
 								value={itemSpacing}
-								onChange={(value) => setAttributes({ itemSpacing: value })}
+								onChange={(newalue) => setAttributes({ itemSpacing: newalue })}
 								min={0}
 								max={100}
 							/>
@@ -172,36 +172,42 @@ registerBlockType("blockons/accordion", {
 							<BlockonsColorpicker
 								label={__("Background Color", "blockons")}
 								value={itemLabelBgColor}
-								onChange={(value) => setAttributes({ itemLabelBgColor: value })}
+								onChange={(newValue) =>
+									setAttributes({ itemLabelBgColor: newValue })
+								}
 								paletteColors={colorPickerPalette}
 							/>
 							<p>{__("Font Size", "blockons")}</p>
 							<RangeControl
 								value={labelFontSize}
-								onChange={(value) => setAttributes({ labelFontSize: value })}
+								onChange={(newValue) =>
+									setAttributes({ labelFontSize: parseInt(newValue) })
+								}
 								min={11}
 								max={44}
 							/>
 							<BlockonsColorpicker
 								label={__("Font Color", "blockons")}
 								value={itemLabelFontColor}
-								onChange={(value) =>
-									setAttributes({ itemLabelFontColor: value })
+								onChange={(newValue) =>
+									setAttributes({ itemLabelFontColor: newValue })
 								}
 								paletteColors={colorPickerPalette}
 							/>
 							<p>{__("Icon Size", "blockons")}</p>
 							<RangeControl
 								value={labelIconSize}
-								onChange={(value) => setAttributes({ labelIconSize: value })}
+								onChange={(newValue) =>
+									setAttributes({ labelIconSize: parseInt(newValue) })
+								}
 								min={11}
 								max={44}
 							/>
 							<BlockonsColorpicker
 								label={__("Icon Color", "blockons")}
 								value={itemLabelIconColor}
-								onChange={(value) =>
-									setAttributes({ itemLabelIconColor: value })
+								onChange={(newValue) =>
+									setAttributes({ itemLabelIconColor: newValue })
 								}
 								paletteColors={colorPickerPalette}
 							/>
@@ -212,7 +218,9 @@ registerBlockType("blockons/accordion", {
 									<p>{__("Icon & Label Spacing", "blockons")}</p>
 									<RangeControl
 										value={labelSpacing}
-										onChange={(value) => setAttributes({ labelSpacing: value })}
+										onChange={(newValue) =>
+											setAttributes({ labelSpacing: parseInt(newValue) })
+										}
 										min={0}
 										max={200}
 									/>

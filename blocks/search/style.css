@@ -265,7 +265,7 @@
 	width: 100%;
 	z-index: 999;
 }
-.blockons-search-results.no-results,
+.blockons-search-results-block.no-results,
 .blockons-search-results-block.loading {
 	border-radius: 0 0 3px 3px;
 	padding: 15px;

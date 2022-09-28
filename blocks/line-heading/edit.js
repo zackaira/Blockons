@@ -63,9 +63,9 @@ const Edit = (props) => {
 							label={__("Heading Tag Element", "blockons")}
 							value={hTag}
 							options={elementTags}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									hTag: value === undefined ? "h3" : value,
+									hTag: newValue === undefined ? "h3" : newValue,
 								})
 							}
 						/>
@@ -77,9 +77,9 @@ const Edit = (props) => {
 								{ label: "Outer Width", value: "outer" },
 								{ label: "Line Width by pixels", value: "line" },
 							]}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									headWidthSet: value === undefined ? "outer" : value,
+									headWidthSet: newValue === undefined ? "outer" : newValue,
 								})
 							}
 						/>
@@ -103,7 +103,9 @@ const Edit = (props) => {
 							<RangeControl
 								label={__("Line Width", "blockons")}
 								value={headLineWidth}
-								onChange={(value) => setAttributes({ headLineWidth: value })}
+								onChange={(newValue) =>
+									setAttributes({ headLineWidth: parseInt(newValue) })
+								}
 								min={10}
 								max={1000}
 								help={__(
@@ -122,9 +124,9 @@ const Edit = (props) => {
 								{ label: "Base", value: "basealign" },
 								{ label: "Bottom", value: "bottomalign" },
 							]}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									headVertAlign: value === undefined ? "solid" : value,
+									headVertAlign: newValue === undefined ? "solid" : newValue,
 								})
 							}
 						/>
@@ -137,7 +139,9 @@ const Edit = (props) => {
 						<TextControl
 							label={__("Font Size", "blockons")}
 							value={headFontSize}
-							onChange={(value) => setAttributes({ headFontSize: value })}
+							onChange={(newValue) =>
+								setAttributes({ headFontSize: parseInt(newValue) })
+							}
 							type="number"
 							help={__(
 								"Clear this setting to take on the heading sizes set by the theme or page builders.",
@@ -195,8 +199,8 @@ const Edit = (props) => {
 					<BlockAlignmentToolbar
 						value={headElementAlign}
 						controls={["left", "center", "right"]}
-						onChange={(value) => {
-							setAttributes({ headElementAlign: value });
+						onChange={(newValue) => {
+							setAttributes({ headElementAlign: newValue });
 						}}
 					/>
 				</BlockControls>

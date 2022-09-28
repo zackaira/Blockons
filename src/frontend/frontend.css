@@ -17,21 +17,21 @@
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	border: 3px solid #b1b5d52b;
+	border: 2px solid #b1b5d52b;
 	mix-blend-mode: overlay;
 }
 
 .blockons-loader-sector-pink {
 	animation: rotate 2s ease-out infinite;
-	border-top: 3px solid #8b8b8b;
+	border-top: 2px solid #8b8b8b;
 }
 .blockons-loader-sector-blue {
 	animation: rotate 2.5s ease-in infinite;
-	border-top: 3px solid #404040;
+	border-top: 2px solid #404040;
 }
 .blockons-loader-sector-purple {
 	animation: rotate 1.5s ease-in-out infinite;
-	border-top: 3px solid #c6c6c6;
+	border-top: 2px solid #c6c6c6;
 }
 .blockonsSaveBtnLoader {
 	width: 56px;

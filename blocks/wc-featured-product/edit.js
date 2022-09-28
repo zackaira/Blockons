@@ -75,7 +75,7 @@ const Edit = (props) => {
 		if (!id) return;
 
 		setLoadingProductDetails(true);
-		await axios.get(site_url + "/blcns/v1/product/" + id).then((res) => {
+		await axios.get(site_url + "blcns/v1/product/" + id).then((res) => {
 			setSelectedProductDetails(res.data);
 			setLoadingProductDetails(false);
 		});
@@ -92,9 +92,9 @@ const Edit = (props) => {
 						<GetPostsSelect
 							label={__("Select a product to display", "blockons")}
 							value={selectedProduct}
-							onChange={(value) => {
-								setAttributes({ selectedProduct: value });
-							}}
+							onChange={(newValue) =>
+								setAttributes({ selectedProduct: newValue })
+							}
 							siteurl={site_url}
 						/>
 						<br />
@@ -105,9 +105,9 @@ const Edit = (props) => {
 								{ label: __("2 Column", "blockons"), value: "one" },
 								{ label: __("Overlayed Layout", "blockons"), value: "two" },
 							]}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									layout: value === undefined ? "one" : value,
+									layout: newValue === undefined ? "one" : newValue,
 								})
 							}
 						/>
@@ -115,11 +115,9 @@ const Edit = (props) => {
 							<ToggleControl
 								label={__("Switch Layout", "blockons")}
 								checked={layoutSwitch}
-								onChange={(newValue) => {
-									setAttributes({
-										layoutSwitch: newValue,
-									});
-								}}
+								onChange={(newValue) =>
+									setAttributes({ layoutSwitch: newValue })
+								}
 							/>
 						)}
 
@@ -127,20 +125,18 @@ const Edit = (props) => {
 							<ToggleControl
 								label={__("Image Overlay", "blockons")}
 								checked={layoutTwoOverlay}
-								onChange={(newValue) => {
-									setAttributes({
-										layoutTwoOverlay: newValue,
-									});
-								}}
+								onChange={(newValue) =>
+									setAttributes({ layoutTwoOverlay: newValue })
+								}
 							/>
 						)}
 
 						<RangeControl
 							label={__("Block Padding", "blockons")}
 							value={padding}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									padding: value === undefined ? 15 : value,
+									padding: newValue === undefined ? 15 : parseInt(newValue),
 								})
 							}
 							min={0}
@@ -150,9 +146,10 @@ const Edit = (props) => {
 							<RangeControl
 								label={__("Product Padding", "blockons")}
 								value={innerPadding}
-								onChange={(value) =>
+								onChange={(newValue) =>
 									setAttributes({
-										innerPadding: value === undefined ? 30 : value,
+										innerPadding:
+											newValue === undefined ? 30 : parseInt(newValue),
 									})
 								}
 								min={0}
@@ -163,30 +160,18 @@ const Edit = (props) => {
 						<ToggleControl
 							label={__("Show Description", "blockons")}
 							checked={showDesc}
-							onChange={(newValue) => {
-								setAttributes({
-									showDesc: newValue,
-								});
-							}}
+							onChange={(newValue) => setAttributes({ showDesc: newValue })}
 						/>
 						<ToggleControl
 							label={__("Show Price", "blockons")}
 							checked={showPrice}
-							onChange={(newValue) => {
-								setAttributes({
-									showPrice: newValue,
-								});
-							}}
+							onChange={(newValue) => setAttributes({ showPrice: newValue })}
 						/>
 
 						<ToggleControl
 							label={__("Show Button", "blockons")}
 							checked={showButton}
-							onChange={(newValue) => {
-								setAttributes({
-									showButton: newValue,
-								});
-							}}
+							onChange={(newValue) => setAttributes({ showButton: newValue })}
 						/>
 						{showButton && (
 							<>
@@ -197,9 +182,9 @@ const Edit = (props) => {
 										{ label: __("Link to Product", "blockons"), value: "link" },
 										{ label: __("Add to Cart", "blockons"), value: "atc" },
 									]}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											buttonType: value === undefined ? "link" : value,
+											buttonType: newValue === undefined ? "link" : newValue,
 										})
 									}
 								/>
@@ -259,9 +244,9 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Product Title Size", "blockons")}
 							value={titleSize}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									titleSize: value === undefined ? "" : value,
+									titleSize: newValue === undefined ? "" : parseInt(newValue),
 								})
 							}
 							min={12}
@@ -284,9 +269,10 @@ const Edit = (props) => {
 								<RangeControl
 									label={__("Price Size", "blockons")}
 									value={priceSize}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											priceSize: value === undefined ? "inherit" : value,
+											priceSize:
+												newValue === undefined ? "inherit" : parseInt(newValue),
 										})
 									}
 									min={12}
@@ -296,12 +282,12 @@ const Edit = (props) => {
 								<BlockonsColorpicker
 									label={__("Price Color", "blockons")}
 									value={priceColor}
-									onChange={(colorValue) => {
+									onChange={(colorValue) =>
 										setAttributes({
 											priceColor:
 												colorValue === undefined ? "#444" : colorValue,
-										});
-									}}
+										})
+									}
 									paletteColors={colorPickerPalette}
 								/>
 							</>
@@ -325,9 +311,10 @@ const Edit = (props) => {
 							<RangeControl
 								label={__("Product Info Width", "blockons")}
 								value={detailWidth}
-								onChange={(value) =>
+								onChange={(newValue) =>
 									setAttributes({
-										detailWidth: value === undefined ? 50 : value,
+										detailWidth:
+											newValue === undefined ? 50 : parseInt(newValue),
 									})
 								}
 								min={20}
@@ -337,9 +324,10 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Product Image Height", "blockons")}
 							value={imgHeight}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									imgHeight: value === undefined ? "auto" : value,
+									imgHeight:
+										newValue === undefined ? "auto" : parseInt(newValue),
 								})
 							}
 							min={100}

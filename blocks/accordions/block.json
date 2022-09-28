@@ -11,10 +11,6 @@
 		"html": false
 	},
 	"attributes": {
-		"labelTag": {
-			"type": "string",
-			"default": "h4"
-		},
 		"accordionDesign": {
 			"type": "string",
 			"default": "one"

@@ -42,9 +42,9 @@ const Edit = (props) => {
 								{ label: __("Outlined", "blockons"), value: "three" },
 								{ label: __("Side Line", "blockons"), value: "four" },
 							]}
-							onChange={(value) => {
+							onChange={(newValue) => {
 								setAttributes({
-									accordionDesign: value === undefined ? "one" : value,
+									accordionDesign: newValue === undefined ? "one" : newValue,
 								});
 							}}
 						/>

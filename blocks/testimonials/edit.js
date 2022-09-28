@@ -448,9 +448,9 @@ const Edit = (props) => {
 						<RangeControl
 							label={__("Number of Slides to Show", "blockons")}
 							value={slidesNumber}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									slidesNumber: value === undefined ? 1 : value,
+									slidesNumber: newValue === undefined ? 1 : parseInt(newValue),
 								})
 							}
 							min={1}
@@ -465,13 +465,13 @@ const Edit = (props) => {
 								{ label: "Drop Shadows", value: "two" },
 								{ label: "Bubble", value: "three" },
 							]}
-							onChange={(value) => setAttributes({ slidesStyle: value })}
+							onChange={(newValue) => setAttributes({ slidesStyle: newValue })}
 						/>
 						{slidesStyle === "two" && (
 							<ToggleControl
 								label={__("Remove Outer Shadow", "blockons")}
 								checked={noShadow}
-								onChange={(value) => setAttributes({ noShadow: value })}
+								onChange={(newValue) => setAttributes({ noShadow: newValue })}
 							/>
 						)}
 						<SelectControl
@@ -482,15 +482,15 @@ const Edit = (props) => {
 								{ label: "Side Layout", value: "two" },
 								{ label: "Author Top Layout", value: "three" },
 							]}
-							onChange={(value) => setAttributes({ slidesLayout: value })}
+							onChange={(newValue) => setAttributes({ slidesLayout: newValue })}
 						/>
 
 						<RangeControl
 							label={__("Inner Content Width", "blockons")}
 							value={slidesWidth}
-							onChange={(value) =>
+							onChange={(newValue) =>
 								setAttributes({
-									slidesWidth: value === undefined ? 75 : value,
+									slidesWidth: newValue === undefined ? 75 : parseInt(newValue),
 								})
 							}
 							min={30}
@@ -500,7 +500,7 @@ const Edit = (props) => {
 						<ToggleControl
 							label={__("Auto Play", "blockons")}
 							checked={sliderAuto}
-							onChange={(value) => setAttributes({ sliderAuto: value })}
+							onChange={(newValue) => setAttributes({ sliderAuto: newValue })}
 							help={__(
 								"This will only work on the site front-end. Turn on 'Rewind Slider' for an infinite loop",
 								"blockons"
@@ -510,7 +510,7 @@ const Edit = (props) => {
 						<ToggleControl
 							label={__("Rewind Slider", "blockons")}
 							checked={sliderRewind}
-							onChange={(value) => setAttributes({ sliderRewind: value })}
+							onChange={(newValue) => setAttributes({ sliderRewind: newValue })}
 						/>
 					</PanelBody>
 					<PanelBody
@@ -520,7 +520,7 @@ const Edit = (props) => {
 						<ToggleControl
 							label={__("Show Star Rating", "blockons")}
 							checked={showStars}
-							onChange={(value) => setAttributes({ showStars: value })}
+							onChange={(newValue) => setAttributes({ showStars: newValue })}
 							help={__(
 								"Edit star ratings by clicking on the stars",
 								"blockons"
@@ -530,26 +530,27 @@ const Edit = (props) => {
 						<ToggleControl
 							label={__("Show Author Position", "blockons")}
 							checked={authPosition}
-							onChange={(value) => setAttributes({ authPosition: value })}
+							onChange={(newValue) => setAttributes({ authPosition: newValue })}
 						/>
 						<ToggleControl
 							label={__("Show Author Image / Icon", "blockons")}
 							checked={authIcon}
-							onChange={(value) => setAttributes({ authIcon: value })}
+							onChange={(newValue) => setAttributes({ authIcon: newValue })}
 						/>
 						<ToggleControl
 							label={__("Show Quotes", "blockons")}
 							checked={showQuotes}
-							onChange={(value) => setAttributes({ showQuotes: value })}
+							onChange={(newValue) => setAttributes({ showQuotes: newValue })}
 						/>
 						{showQuotes && (
 							<>
 								<RangeControl
 									label={__("Quotes Size", "blockons")}
 									value={quoteSize}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											quoteSize: value === undefined ? 24 : value,
+											quoteSize:
+												newValue === undefined ? 24 : parseInt(newValue),
 										})
 									}
 									min={18}
@@ -569,9 +570,9 @@ const Edit = (props) => {
 								<RangeControl
 									label={__("Quotes Opacity", "blockons")}
 									value={quotesOpacity}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											quotesOpacity: value === undefined ? 0.4 : value,
+											quotesOpacity: newValue === undefined ? 0.4 : newValue,
 										})
 									}
 									min={0}
@@ -636,7 +637,7 @@ const Edit = (props) => {
 						<ToggleControl
 							label={__("Show Arrows", "blockons")}
 							checked={sliderArrows}
-							onChange={(value) => setAttributes({ sliderArrows: value })}
+							onChange={(newValue) => setAttributes({ sliderArrows: newValue })}
 						/>
 
 						{sliderArrows && (
@@ -650,7 +651,9 @@ const Edit = (props) => {
 											{ label: "Round", value: "two" },
 											{ label: "Icon Only", value: "three" },
 										]}
-										onChange={(value) => setAttributes({ arrowStyle: value })}
+										onChange={(newValue) =>
+											setAttributes({ arrowStyle: newValue })
+										}
 									/>
 								)}
 								<div className="blockons-icon-text-select">
@@ -685,7 +688,9 @@ const Edit = (props) => {
 						<ToggleControl
 							label={__("Show Pagination", "blockons")}
 							checked={sliderPagination}
-							onChange={(value) => setAttributes({ sliderPagination: value })}
+							onChange={(newValue) =>
+								setAttributes({ sliderPagination: newValue })
+							}
 						/>
 						{sliderPagination && (
 							<>
@@ -696,9 +701,10 @@ const Edit = (props) => {
 										{ label: "Dots", value: "dots" },
 										{ label: "Numbers", value: "numbers" },
 									]}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											sliderPagDesign: value === undefined ? "dots" : value,
+											sliderPagDesign:
+												newValue === undefined ? "dots" : newValue,
 										})
 									}
 								/>
@@ -709,7 +715,9 @@ const Edit = (props) => {
 							<ToggleControl
 								label={__("Show Controls only on Hover", "blockons")}
 								checked={controlsOnHover}
-								onChange={(value) => setAttributes({ controlsOnHover: value })}
+								onChange={(newValue) =>
+									setAttributes({ controlsOnHover: newValue })
+								}
 							/>
 						)}
 					</PanelBody>

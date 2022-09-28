@@ -460,7 +460,7 @@ const Edit = (props) => {
 						<ToggleControl
 							label={__("Rewind Slider", "blockons")}
 							checked={sliderRewind}
-							onChange={(value) => setAttributes({ sliderRewind: value })}
+							onChange={(newValue) => setAttributes({ sliderRewind: newValue })}
 						/>
 
 						<SelectControl
@@ -471,7 +471,7 @@ const Edit = (props) => {
 								{ label: "Drop Shadows", value: "two" },
 								{ label: "Bordered", value: "three" },
 							]}
-							onChange={(value) => setAttributes({ sliderStyle: value })}
+							onChange={(newValue) => setAttributes({ sliderStyle: newValue })}
 						/>
 					</PanelBody>
 					<PanelBody
@@ -487,16 +487,19 @@ const Edit = (props) => {
 								{ label: "More Round", value: "rounder" },
 								{ label: "Very Round", value: "round" },
 							]}
-							onChange={(value) => setAttributes({ sliderRoundNess: value })}
+							onChange={(newValue) =>
+								setAttributes({ sliderRoundNess: newValue })
+							}
 						/>
 						{sliderStyle === "three" && (
 							<>
 								<RangeControl
 									label={__("Border Width", "blockons")}
 									value={sliderBorderWidth}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											sliderBorderWidth: value === undefined ? 10 : value,
+											sliderBorderWidth:
+												newValue === undefined ? 10 : parseInt(newValue),
 										})
 									}
 									min={2}
@@ -505,9 +508,10 @@ const Edit = (props) => {
 								<RangeControl
 									label={__("Outer Border Radius", "blockons")}
 									value={sliderOuterRound}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											sliderOuterRound: value === undefined ? 4 : value,
+											sliderOuterRound:
+												newValue === undefined ? 4 : parseInt(newValue),
 										})
 									}
 									min={0}
@@ -559,7 +563,9 @@ const Edit = (props) => {
 						<ToggleControl
 							label={__("Show Pagination", "blockons")}
 							checked={sliderPagination}
-							onChange={(value) => setAttributes({ sliderPagination: value })}
+							onChange={(newValue) =>
+								setAttributes({ sliderPagination: newValue })
+							}
 						/>
 						{sliderPagination && (
 							<>
@@ -570,9 +576,10 @@ const Edit = (props) => {
 										{ label: "Dots", value: "dots" },
 										{ label: "Numbers", value: "numbers" },
 									]}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											sliderPagDesign: value === undefined ? "dots" : value,
+											sliderPagDesign:
+												newValue === undefined ? "dots" : newValue,
 										})
 									}
 								/>
@@ -582,7 +589,9 @@ const Edit = (props) => {
 						<ToggleControl
 							label={__("Show Controls only on Hover", "blockons")}
 							checked={controlsOnHover}
-							onChange={(value) => setAttributes({ controlsOnHover: value })}
+							onChange={(newValue) =>
+								setAttributes({ controlsOnHover: newValue })
+							}
 						/>
 					</PanelBody>
 				</InspectorControls>
@@ -592,9 +601,9 @@ const Edit = (props) => {
 					<BlockAlignmentToolbar
 						value={sliderAlign}
 						controls={["left", "center", "right"]}
-						onChange={(value) => {
+						onChange={(newValue) => {
 							setAttributes({
-								sliderAlign: value === undefined ? "left" : value,
+								sliderAlign: newValue === undefined ? "left" : newValue,
 							});
 						}}
 					/>

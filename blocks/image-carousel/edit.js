@@ -300,9 +300,9 @@ const Edit = (props) => {
 													},
 											  ]
 									}
-									onChange={(value) => {
+									onChange={(newValue) => {
 										setAttributes({
-											carouselType: value === undefined ? "none" : value,
+											carouselType: newValue === undefined ? "none" : newValue,
 										});
 									}}
 									help={__(
@@ -322,10 +322,8 @@ const Edit = (props) => {
 								<UnitControl
 									label={__("Carousel / Slider Width", "blockons")}
 									value={sliderWidth}
-									onChange={(value) =>
-										setAttributes({
-											sliderWidth: value,
-										})
+									onChange={(newValue) =>
+										setAttributes({ sliderWidth: newValue })
 									}
 									units={[
 										{ value: "%", label: "%", default: 100 },
@@ -338,8 +336,8 @@ const Edit = (props) => {
 									<RangeControl
 										label={__("Slides Per View", "blockons")}
 										value={carouselNumber}
-										onChange={(value) =>
-											setAttributes({ carouselNumber: value })
+										onChange={(newValue) =>
+											setAttributes({ carouselNumber: parseInt(newValue) })
 										}
 										min={1}
 										max={slides.length <= 4 ? slides.length : 5}
@@ -383,9 +381,9 @@ const Edit = (props) => {
 									value: "169panoramic",
 								},
 							]}
-							onChange={(value) => {
+							onChange={(newValue) => {
 								setAttributes({
-									imageProportion: value === undefined ? "actual" : value,
+									imageProportion: newValue === undefined ? "actual" : newValue,
 								});
 							}}
 						/>
@@ -399,9 +397,9 @@ const Edit = (props) => {
 								{ label: __("More Round", "blockons"), value: "three" },
 								{ label: __("Very Round", "blockons"), value: "four" },
 							]}
-							onChange={(value) => {
+							onChange={(newValue) => {
 								setAttributes({
-									carouselBRadius: value === undefined ? "one" : value,
+									carouselBRadius: newValue === undefined ? "one" : newValue,
 								});
 							}}
 						/>
@@ -410,7 +408,9 @@ const Edit = (props) => {
 							<RangeControl
 								label={__("Slides Gap", "blockons")}
 								value={carouselGap}
-								onChange={(value) => setAttributes({ carouselGap: value })}
+								onChange={(newValue) =>
+									setAttributes({ carouselGap: parseInt(newValue) })
+								}
 								min={0}
 								max={100}
 							/>
@@ -420,8 +420,8 @@ const Edit = (props) => {
 							<RangeControl
 								label={__("Carousel Side Padding", "blockons")}
 								value={carouselSidePadding}
-								onChange={(value) =>
-									setAttributes({ carouselSidePadding: value })
+								onChange={(newValue) =>
+									setAttributes({ carouselSidePadding: parseInt(newValue) })
 								}
 								min={0}
 								max={200}
@@ -437,9 +437,9 @@ const Edit = (props) => {
 								{ label: __("Over Image", "blockons"), value: "three" },
 								{ label: __("Below Slide", "blockons"), value: "four" },
 							]}
-							onChange={(value) => {
+							onChange={(newValue) => {
 								setAttributes({
-									captionPosition: value === undefined ? "one" : value,
+									captionPosition: newValue === undefined ? "one" : newValue,
 								});
 							}}
 						/>
@@ -448,14 +448,16 @@ const Edit = (props) => {
 								<BlockonsColorpicker
 									label={__("Background Color", "blockons")}
 									value={captionBgColor}
-									onChange={(value) => setAttributes({ captionBgColor: value })}
+									onChange={(newColor) =>
+										setAttributes({ captionBgColor: newColor })
+									}
 									paletteColors={colorPickerPalette}
 								/>
 								<RangeControl
 									label={__("Background Opacity", "blockons")}
 									value={captionBgOpacity}
-									onChange={(value) =>
-										setAttributes({ captionBgOpacity: value })
+									onChange={(newValue) =>
+										setAttributes({ captionBgOpacity: newValue })
 									}
 									min={0}
 									max={1}
@@ -471,16 +473,16 @@ const Edit = (props) => {
 								<BlockonsColorpicker
 									label={__("Font Color", "blockons")}
 									value={captionFontColor}
-									onChange={(value) =>
-										setAttributes({ captionFontColor: value })
+									onChange={(newColor) =>
+										setAttributes({ captionFontColor: newColor })
 									}
 									paletteColors={colorPickerPalette}
 								/>
 								<RangeControl
 									label={__("Font Size", "blockons")}
 									value={captionFontSize}
-									onChange={(value) =>
-										setAttributes({ captionFontSize: value })
+									onChange={(newValue) =>
+										setAttributes({ captionFontSize: parseInt(newValue) })
 									}
 									min={10}
 									max={32}
@@ -491,7 +493,9 @@ const Edit = (props) => {
 							<ToggleControl
 								label={__("Show Caption only on Hover", "blockons")}
 								checked={captionOnHover}
-								onChange={(value) => setAttributes({ captionOnHover: value })}
+								onChange={(newValue) =>
+									setAttributes({ captionOnHover: newValue })
+								}
 							/>
 						)}
 					</PanelBody>
@@ -502,7 +506,9 @@ const Edit = (props) => {
 						<ToggleControl
 							label={__("Show Arrows", "blockons")}
 							checked={carouselArrows}
-							onChange={(value) => setAttributes({ carouselArrows: value })}
+							onChange={(newValue) =>
+								setAttributes({ carouselArrows: newValue })
+							}
 						/>
 
 						{carouselArrows && (
@@ -516,7 +522,9 @@ const Edit = (props) => {
 											{ label: "Round", value: "two" },
 											{ label: "Icon Only", value: "three" },
 										]}
-										onChange={(value) => setAttributes({ arrowStyle: value })}
+										onChange={(newValue) =>
+											setAttributes({ arrowStyle: newValue })
+										}
 									/>
 								)}
 								<div className="blockons-icon-text-select">
@@ -562,9 +570,10 @@ const Edit = (props) => {
 										{ label: "Dots", value: "dots" },
 										{ label: "Numbers", value: "numbers" },
 									]}
-									onChange={(value) =>
+									onChange={(newValue) =>
 										setAttributes({
-											carouselPagDesign: value === undefined ? "dots" : value,
+											carouselPagDesign:
+												newValue === undefined ? "dots" : newValue,
 										})
 									}
 								/>
@@ -575,7 +584,9 @@ const Edit = (props) => {
 							<ToggleControl
 								label={__("Show Controls only on Hover", "blockons")}
 								checked={controlsOnHover}
-								onChange={(value) => setAttributes({ controlsOnHover: value })}
+								onChange={(newValue) =>
+									setAttributes({ controlsOnHover: newValue })
+								}
 							/>
 						)}
 					</PanelBody>
@@ -589,9 +600,9 @@ const Edit = (props) => {
 					<BlockAlignmentToolbar
 						value={slideAlign}
 						controls={["left", "center", "right"]}
-						onChange={(value) =>
+						onChange={(newValue) =>
 							setAttributes({
-								slideAlign: value === undefined ? "left" : value,
+								slideAlign: newValue === undefined ? "left" : newValue,
 							})
 						}
 					/>

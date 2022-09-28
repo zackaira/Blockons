@@ -8,18 +8,27 @@ const Save = ({ attributes }) => {
 		className: `align-${attributes.alignment} ${
 			attributes.searchDisplay === "default" ? "default-search" : "icon-search"
 		}`,
+		id: attributes.searchId,
 	});
 	const isPremium = searchObj.isPremium === "1" ? true : false;
 
-	const searchProOptions = {
-		searchPro: attributes.searchPro,
-		searchProTypes: attributes.searchProTypes,
-		searchProCats: attributes.searchProCats,
-		searchProTags: attributes.searchProTags,
-		searchProImage: attributes.searchProImage,
-		searchProDesc: attributes.searchProDesc,
-		searchProPrice: attributes.searchProPrice,
-	};
+	const searchProOptions = isPremium
+		? {
+				searchProId: attributes.searchProId,
+				searchPro: attributes.searchPro,
+				searchProTypes: attributes.searchProTypes,
+				searchProAmnt: attributes.searchProAmnt,
+				searchProCats: attributes.searchProCats,
+				searchProCatsTitle: attributes.searchProCatsTitle,
+				searchProCatsAmnt: attributes.searchProCatsAmnt,
+				searchProTags: attributes.searchProTags,
+				searchProTagsTitle: attributes.searchProTagsTitle,
+				searchProTagsAmnt: attributes.searchProTagsAmnt,
+				searchProImage: attributes.searchProImage,
+				searchProDesc: attributes.searchProDesc,
+				searchProPrice: attributes.searchProPrice,
+		  }
+		: { searchPro: attributes.searchPro };
 
 	return (
 		<div {...blockProps}>
@@ -29,13 +38,14 @@ const Save = ({ attributes }) => {
 						? attributes.searchAlign
 						: ""
 				} ${attributes.searchDisplay === "default" ? "nopad" : ""}`}
-				id={attributes.searchId}
 				style={{
-					backgroundColor: attributes.iconBgColor,
-					fontSize: attributes.iconSize,
 					...(attributes.searchDisplay === "dropdown" ||
 					attributes.searchDisplay === "popup"
-						? { padding: attributes.iconPadding }
+						? {
+								backgroundColor: attributes.iconBgColor,
+								padding: attributes.iconPadding,
+								fontSize: attributes.iconSize,
+						  }
 						: ""),
 				}}
 			>

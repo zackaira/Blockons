@@ -8,10 +8,8 @@ import { __ } from "@wordpress/i18n";
 const SearchResults = ({ searchId, searchSettings }) => {
 	const restUrl = searchObj.apiUrl;
 	const set = searchSettings ? searchSettings : "";
-	const element = document.getElementById(searchId);
-	const searchParentId = "#" + element.closest(".blockons-search-block").id;
 	const searchInput = document.querySelector(
-		searchParentId + " .blockons-search-input"
+		`#${searchId} .blockons-search-input`
 	);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [searchResults, setSearchResults] = useState([]);
@@ -44,58 +42,47 @@ const SearchResults = ({ searchId, searchSettings }) => {
 
 			if (searchQuery != currentQuery) {
 				timeout = setTimeout(() => {
-					let getPosts =
-						restUrl +
-						`/wp/v2/search?search=${searchQuery}&subtype=${set.searchProTypes}&per_page=5&page=1`;
-					let getCats =
-						restUrl +
-						`/wp/v2/search?search=${searchQuery}&type=term&subtype=${
-							set.searchProTypes === "product" ? "product_cat" : "category"
-						}&per_page=5&page=1`;
-					let getTags =
-						restUrl +
-						`/wp/v2/search?search=${searchQuery}&type=term&subtype=${
-							set.searchProTypes === "product" ? "product_tag" : "post_tag"
-						}&per_page=5&page=1`;
+					setSearchResults([]);
+					setSearchCats([]);
+					setSearchTags([]);
 
-					const requestMain = axios.get(getPosts);
-					const requestCats = axios.get(getCats);
-					const requestTags = axios.get(getTags);
+					let endpoints = [
+						restUrl +
+							`wp/v2/search?search=${searchQuery}&subtype=${set.searchProTypes}&per_page=${set.searchProAmnt}&page=1`,
+						restUrl +
+							`wp/v2/search?search=${searchQuery}&type=term&subtype=${
+								set.searchProTypes === "product" ? "product_cat" : "category"
+							}&per_page=${set.searchProCatsAmnt}&page=1`,
+						restUrl +
+							`wp/v2/search?search=${searchQuery}&type=term&subtype=${
+								set.searchProTypes === "product" ? "product_tag" : "post_tag"
+							}&per_page=${set.searchProTagsAmnt}&page=1`,
+					];
 
 					axios
-						.all([requestMain, requestCats, requestTags])
+						.all(endpoints.map((promise) => axios.get(promise)))
 						.then(
-							axios.spread((...responses) => {
+							axios.spread(({ data: main }, { data: cats }, { data: tags }) => {
 								currentQuery = searchQuery;
 
-								setSearchResults(responses[0].data);
-								setSearchCats(responses[1].data);
-								setSearchTags(responses[2].data);
+								setSearchResults(main);
+								if (cats && set.searchProCats) {
+									setSearchCats(cats);
+								}
+								if (tags && set.searchProTags) {
+									setSearchTags(tags);
+								}
 							})
 						)
 						.then(() => setIsLoading(false))
 						.catch((errors) => {
 							console.error(errors);
-							// react on errors.
 						});
-
-					// axios
-					// 	.get(
-					// 		restUrl +
-					// 			`/wp/v2/search?search=${searchQuery}&subtype[]=${set.searchProTypes}&per_page=20&page=1`
-					// 	)
-					// 	.then((res) => {
-					// 		currentQuery = query;
-					// 		setSearchResults(res.data);
-					// 		// console.log(res.data);
-					// 	})
-					// 	.then(() => {
-					// 		setIsLoading(false);
-					// 	});
-				}, 500);
+				}, 800);
 			}
 		} else {
 			setIsLoading(false);
+
 			setSearchResults([]);
 			setSearchCats([]);
 			setSearchTags([]);
@@ -104,11 +91,6 @@ const SearchResults = ({ searchId, searchSettings }) => {
 			timeout = false;
 		}
 	}
-
-	console.log("Main:", searchResults);
-	console.log("Cats:", searchCats);
-	console.log("Tags:", searchTags);
-	console.log("Query:", searchQuery);
 
 	if (isLoading)
 		return (
@@ -119,13 +101,13 @@ const SearchResults = ({ searchId, searchSettings }) => {
 
 	return (
 		<React.Fragment>
-			{(searchCats.length > 0 ||
-				searchTags.length > 0 ||
-				searchResults.length > 0) && (
+			{searchQuery.length >= 3 && searchResults && (
 				<div className="blockons-search-results-block">
 					{searchCats.length > 0 && set.searchProCats && (
 						<div className="blockons-sresult-catags">
-							<h6 className="blockons-sresult-head">{`Categories`}</h6>
+							<h6 className="blockons-sresult-head">
+								{set.searchProCatsTitle}
+							</h6>
 							{searchCats.map((item) => (
 								<a
 									href={item.url}
@@ -141,7 +123,9 @@ const SearchResults = ({ searchId, searchSettings }) => {
 
 					{searchTags.length > 0 && set.searchProTags && (
 						<div className="blockons-sresult-catags">
-							<h6 className="blockons-sresult-head">{`Tags`}</h6>
+							<h6 className="blockons-sresult-head">
+								{set.searchProTagsTitle}
+							</h6>
 							{searchTags.map((item) => (
 								<a
 									href={item.url}
@@ -161,7 +145,7 @@ const SearchResults = ({ searchId, searchSettings }) => {
 								<h6 className="blockons-sresult-head">{`${set.searchProTypes}s`}</h6>
 							)}
 
-							{searchResults.length > 0 ? (
+							{searchResults.length > 0 &&
 								searchResults.map((item) => (
 									<a
 										href={item.url}
@@ -190,14 +174,17 @@ const SearchResults = ({ searchId, searchSettings }) => {
 											</div>
 										)}
 									</a>
-								))
-							) : (
-								<div className="blockons-search-results no-results">
-									{__("No Results", "blockons")}
-								</div>
-							)}
+								))}
 						</div>
 					)}
+
+					{searchResults.length === 0 &&
+						searchCats.length === 0 &&
+						searchTags.length === 0 && (
+							<div className="blockons-search-results-block no-results">
+								{__("No Results", "blockons")}
+							</div>
+						)}
 				</div>
 			)}
 		</React.Fragment>
