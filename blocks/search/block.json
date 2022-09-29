@@ -80,6 +80,10 @@
 			"type": "string",
 			"default": ""
 		},
+		"isPremium": {
+			"type": "boolean",
+			"default": false
+		},
 		"searchPro": {
 			"type": "boolean",
 			"default": false

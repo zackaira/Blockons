@@ -44,6 +44,7 @@ const Edit = (props) => {
 			searchBtnBgColor,
 			searchBtnColor,
 			searchProId,
+			isPremium,
 			searchPro,
 			searchProTypes,
 			searchProAmnt,
@@ -61,7 +62,7 @@ const Edit = (props) => {
 	} = props;
 
 	const [showSearch, setShowSearch] = useState(false);
-	const isPremium = searchObj.isPremium === "1" ? true : false;
+	const isPro = Boolean(searchObj.isPremium);
 	const wcActive = Boolean(searchObj.wcActive);
 	const [showSearchPreview, setShowSearchPreview] = useState(false);
 
@@ -71,8 +72,6 @@ const Edit = (props) => {
 		} ${searchDisplay === "default" ? "default-search" : "icon-search"}`,
 		id: searchId,
 	});
-
-	console.log("Premium: ", isPremium);
 
 	const siteInfo = wp.data.select("core").getSite();
 
@@ -95,12 +94,13 @@ const Edit = (props) => {
 		: { searchPro };
 
 	useEffect(() => {
+		setAttributes({ isPremium: isPro }); // SETS PREMIUM
+
 		if (!baseUrl && siteInfo) {
 			setAttributes({
 				baseUrl: siteInfo.url,
 			});
 		}
-
 		if (!searchId) {
 			setAttributes({
 				searchId: "id" + uuidv4(),
@@ -128,6 +128,8 @@ const Edit = (props) => {
 	const closePopup = () => {
 		setShowSearch(false);
 	};
+
+	console.log("Premium: ", isPremium);
 
 	return (
 		<div {...blockProps}>
@@ -296,6 +298,7 @@ const Edit = (props) => {
 									}}
 									paletteColors={colorPickerPalette}
 								/>
+								<div className="blockons-divider"></div>
 							</>
 						)}
 
@@ -546,7 +549,7 @@ const Edit = (props) => {
 							/>
 						</div>
 
-						{isSelected && (
+						{isPremium && searchPro && (
 							<div
 								className="blockons-search-results-wrap"
 								id={searchProId}
@@ -598,7 +601,7 @@ const Edit = (props) => {
 								multiline={false}
 							/>
 						</div>
-						{isPremium && (
+						{isPremium && searchPro && (
 							<div
 								className="blockons-search-results-wrap"
 								id={searchProId}
@@ -651,7 +654,7 @@ const Edit = (props) => {
 								/>
 							</div>
 
-							{isSelected && (
+							{isPremium && searchPro && (
 								<div
 									className="blockons-search-results-wrap"
 									id={searchProId}

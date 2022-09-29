@@ -10,9 +10,10 @@ const Save = ({ attributes }) => {
 		}`,
 		id: attributes.searchId,
 	});
-	const isPremium = searchObj.isPremium === "1" ? true : false;
 
-	const searchProOptions = isPremium
+	console.log("Pro:", attributes.isPremium);
+
+	const searchProOptions = attributes.isPremium
 		? {
 				searchProId: attributes.searchProId,
 				searchPro: attributes.searchPro,
@@ -81,7 +82,7 @@ const Save = ({ attributes }) => {
 								<RichText.Content value={attributes.textButton} />
 							</button>
 						</form>
-						{isPremium && (
+						{attributes.isPremium && attributes.searchPro && (
 							<div
 								className="blockons-search-results-wrap"
 								id={attributes.searchProId}
@@ -139,7 +140,7 @@ const Save = ({ attributes }) => {
 								<RichText.Content value={attributes.textButton} />
 							</button>
 						</form>
-						{isPremium && (
+						{attributes.isPremium && attributes.searchPro && (
 							<div
 								className="blockons-search-results-wrap"
 								id={attributes.searchProId}
@@ -187,7 +188,7 @@ const Save = ({ attributes }) => {
 									<RichText.Content value={attributes.textButton} />
 								</button>
 							</form>
-							{isPremium && (
+							{attributes.isPremium && attributes.searchPro && (
 								<div
 									className="blockons-search-results-wrap"
 									id={attributes.searchProId}
