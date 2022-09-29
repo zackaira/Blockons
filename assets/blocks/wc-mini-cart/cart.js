@@ -6,23 +6,31 @@
  * FREE
  */
 document.addEventListener("DOMContentLoaded", function () {
-	const cartIcons = document.querySelectorAll(
+	const blockonsCartItems = document.querySelectorAll(
 		".blockons-wc-mini-cart-block-icon"
 	);
 
-	if (cartIcons) {
-		cartIcons.forEach((item) => {
+	if (blockonsCartItems) {
+		blockonsCartItems.forEach((item) => {
 			const cartItem = document.querySelector(".blockons-cart-amnt");
 			if (cartItem) item.appendChild(cartItem.cloneNode(true));
 		});
 	}
 
-	const miniCarts = document.querySelectorAll(".blockons-wc-mini-cart-inner");
+	const blockonsDropDownCarts = document.querySelectorAll(
+		".wp-block-blockons-wc-mini-cart.cart-dropdown"
+	);
 
-	if (miniCarts) {
-		miniCarts.forEach((item) => {
-			const miniCart = document.querySelector(".blockons-mini-crt");
-			if (miniCart) item.appendChild(miniCart.cloneNode(true));
+	if (blockonsDropDownCarts) {
+		blockonsDropDownCarts.forEach((item) => {
+			const miniCartParent = document.querySelector(
+				`.${item.classList[0]} .blockons-wc-mini-cart-inner`
+			);
+
+			if (miniCartParent) {
+				const miniCart = document.querySelector(".blockons-mini-crt");
+				if (miniCart) miniCartParent.appendChild(miniCart.cloneNode(true));
+			}
 		});
 	}
 });

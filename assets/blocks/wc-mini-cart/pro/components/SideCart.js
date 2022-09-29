@@ -7,16 +7,18 @@ const SideCart = () => {
 	// const set = searchSettings ? searchSettings : "";
 	const [isLoading, setIsLoading] = useState(false);
 
-	if (isLoading)
-		return (
-			<div className="blockons-side-cart-block loading">
-				<Loader />
-			</div>
-		);
-
 	return (
 		<React.Fragment>
-			<div className="blockons-side-cart-block">SIDE CART</div>
+			<div className="blockons-side-cart-block">
+				<div className="blockons-side-cart-block-inner">
+					<div className="blockons-side-cart-header">Your Cart</div>
+
+					<div className="blockons-side-cart-content blockons-wc-mini-cart-block"></div>
+
+					<div className="blockons-side-cart-footer"></div>
+				</div>
+			</div>
+			<div className="blockons-side-cart-overlay"></div>
 		</React.Fragment>
 	);
 };

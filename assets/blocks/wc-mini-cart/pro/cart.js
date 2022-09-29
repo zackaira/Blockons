@@ -10,11 +10,33 @@ import SideCart from "./components/SideCart";
 import "../cart";
 
 document.addEventListener("DOMContentLoaded", () => {
-	const cartLinkElement = document.querySelector(
+	const blockonsSideCart = document.querySelector(
 		".wp-block-blockons-wc-mini-cart.cart-sidecart"
 	);
 
-	if (cartLinkElement) {
+	if (typeof blockonsSideCart !== undefined && blockonsSideCart !== null) {
+		// const sidecartSettings = blockonsSideCart.getAttribute("data-settings");
+
+		ReactDOM.render(
+			<SideCart />,
+			document.getElementById("blockons-side-cart")
+		);
+	}
+
+	if (blockonsSideCart) {
+		console.log(blockonsSideCart.classList[0]);
+
+		const sideCartParent = document.querySelector(
+			".blockons-side-cart-block .blockons-side-cart-content"
+		);
+
+		if (sideCartParent) {
+			const miniCart = document.querySelector(".blockons-mini-crt");
+			if (miniCart) sideCartParent.appendChild(miniCart.cloneNode(true));
+		}
+	}
+
+	if (blockonsSideCart) {
 		const sideCartClick = document.getElementById("blockons-sidecart-click");
 
 		if (sideCartClick) {
@@ -28,15 +50,13 @@ document.addEventListener("DOMContentLoaded", () => {
 					body.classList.add("blockons-show-sidecart");
 				}
 			});
-		}
 
-		if (typeof cartLinkElement !== undefined && cartLinkElement !== null) {
-			// const sidecartSettings = cartLinkElement.getAttribute("data-settings");
-
-			ReactDOM.render(
-				<SideCart />,
-				document.getElementById("blockons-side-cart")
+			const overlayClick = document.querySelector(
+				".blockons-side-cart-overlay"
 			);
+
+			if (overlayClick)
+				overlayClick.addEventListener("click", (e) => sideCartClick.click());
 		}
 	}
 });

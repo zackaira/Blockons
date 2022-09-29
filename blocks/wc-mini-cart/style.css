@@ -116,8 +116,11 @@
 }
 
 /* -- Mini Cart Styling -- */
-.blockons-wc-mini-cart-block .blockons-mini-crt {
+.blockons-wc-mini-cart-inner {
 	width: 300px;
+}
+.blockons-wc-mini-cart-block .blockons-mini-crt {
+	width: 100%;
 	font-size: 14px;
 }
 .blockons-wc-mini-cart-block
@@ -274,17 +277,46 @@
 }
 
 /* -- PREMIUM Side Cart -- */
+.blockons-side-cart-overlay {
+	background-color: #000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0.6;
+	z-index: 998;
+	display: none;
+}
 .blockons-side-cart-block {
 	background-color: #fff;
 	box-shadow: 0 0 8px rgb(0 0 0 / 45%);
+	display: flex;
+	align-items: stretch;
 	position: fixed;
 	top: 0;
 	right: -280px;
 	bottom: 0;
 	width: 280px;
-	z-index: 99;
+	z-index: 999;
 	transition: right 0.3s ease-in-out 0.05s;
+}
+body.admin-bar .blockons-side-cart-block {
+	top: 32px;
+}
+body.blockons-show-sidecart .blockons-side-cart-overlay {
+	display: block;
 }
 body.blockons-show-sidecart .blockons-side-cart-block {
 	right: 0;
+}
+
+.blockons-side-cart-block-inner {
+	flex: 1;
+}
+
+@media only screen and (max-width: 782px) {
+	body.admin-bar .blockons-side-cart-block {
+		top: 46px;
+	}
 }
