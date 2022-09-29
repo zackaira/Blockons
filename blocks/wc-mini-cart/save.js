@@ -5,8 +5,13 @@ import { useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
-		className: `align-${attributes.alignment}`,
+		className: `align-${attributes.alignment} cart-${attributes.cartType}`,
 	});
+	const cartPageLink = attributes.cartLink
+		? attributes.cartLink
+		: wcCartObj.wcCartUrl;
+
+	console.log("PREMIUM save.js", attributes.isPremium);
 
 	return (
 		<div {...blockProps}>
@@ -21,10 +26,9 @@ const Save = ({ attributes }) => {
 				}}
 			>
 				<a
-					{...(attributes.cartLink
-						? { href: attributes.cartLink }
-						: { href: wcCartObj.wcCartUrl })}
-					{...(attributes.cartLinkNewTab ? { target: "_blank" } : "")}
+					{...(attributes.cartType === "sidecart"
+						? { id: "blockons-sidecart-click" }
+						: { href: cartPageLink })}
 					className="blockons-wc-mini-cart-block-icon"
 					style={{
 						fontSize: attributes.iconSize,
@@ -43,7 +47,7 @@ const Save = ({ attributes }) => {
 						}}
 					></span>
 				</a>
-				{attributes.hasDropdown && (
+				{attributes.cartType === "dropdown" && (
 					<div
 						className={`blockons-wc-mini-cart-dropdown btns-${attributes.dropBtns}`}
 						style={{

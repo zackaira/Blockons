@@ -1,6 +1,9 @@
 /**
+ * Functionality to show/hide the Blockons WC Mini Cart
  * Little JS hack to display the Cart amount and Mini Cart in the Cart Icon Block
  * Also localizes wcCartObj for edit.js
+ *
+ * FREE
  */
 document.addEventListener("DOMContentLoaded", function () {
 	const cartIcons = document.querySelectorAll(

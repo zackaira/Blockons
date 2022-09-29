@@ -22,6 +22,7 @@
 	justify-content: center;
 	font-size: 17px;
 	text-decoration: none !important;
+	cursor: pointer;
 }
 .blockons-wc-mini-cart-block-icon .icon {
 	margin: 0 10px 0 0;
@@ -270,4 +271,20 @@
 /* -- Hide the WC mini cart elements -- */
 .blockons-hidden {
 	display: none !important;
+}
+
+/* -- PREMIUM Side Cart -- */
+.blockons-side-cart-block {
+	background-color: #fff;
+	box-shadow: 0 0 8px rgb(0 0 0 / 45%);
+	position: fixed;
+	top: 0;
+	right: -280px;
+	bottom: 0;
+	width: 280px;
+	z-index: 99;
+	transition: right 0.3s ease-in-out 0.05s;
+}
+body.blockons-show-sidecart .blockons-side-cart-block {
+	right: 0;
 }

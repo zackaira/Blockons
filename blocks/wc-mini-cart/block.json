@@ -8,25 +8,17 @@
 	"category": "blockons-category",
 	"keywords": ["cart", "icon", "mini cart", "woocommerce", "header"],
 	"attributes": {
-		"cartLinkTo": {
-			"type": "string",
-			"default": "cartpage"
-		},
 		"cartLink": {
 			"type": "string",
 			"default": ""
-		},
-		"cartLinkNewTab": {
-			"type": "boolean",
-			"default": false
 		},
 		"alignment": {
 			"type": "string",
 			"default": "left"
 		},
-		"hasDropdown": {
-			"type": "boolean",
-			"default": false
+		"cartType": {
+			"type": "string",
+			"default": "none"
 		},
 		"dropPosition": {
 			"type": "string",
@@ -83,6 +75,10 @@
 		"dropBtns": {
 			"type": "string",
 			"default": "dark"
+		},
+		"isPremium": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"editorScript": "file:./index.js",

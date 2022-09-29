@@ -11,8 +11,6 @@ const Save = ({ attributes }) => {
 		id: attributes.searchId,
 	});
 
-	console.log("Pro:", attributes.isPremium);
-
 	const searchProOptions = attributes.isPremium
 		? {
 				searchProId: attributes.searchProId,

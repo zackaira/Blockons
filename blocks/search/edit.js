@@ -129,8 +129,6 @@ const Edit = (props) => {
 		setShowSearch(false);
 	};
 
-	console.log("Premium: ", isPremium);
-
 	return (
 		<div {...blockProps}>
 			{isSelected && (

@@ -16,12 +16,14 @@ const config = {
 		frontend: "./src/frontend/frontend.js",
 		"frontend.min": "./src/frontend/frontend.js",
 		// Premium Files
+		"cart-pro.min": "./assets/blocks/wc-mini-cart/pro/cart.js",
 		"search-pro.min": "./assets/blocks/search/pro/search.js",
 	},
 	output: {
 		// filename: "[name].js", // Uses the name of the file
 		filename: (pathData) => {
-			return pathData.chunk.name === "search-pro.min"
+			return pathData.chunk.name === "search-pro.min" ||
+				pathData.chunk.name === "cart-pro.min"
 				? "pro/[name].js"
 				: "[name].js";
 		},

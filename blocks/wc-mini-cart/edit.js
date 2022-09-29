@@ -1,6 +1,7 @@
 /**
  * WordPress dependencies
  */
+import { useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	AlignmentToolbar,
@@ -22,11 +23,9 @@ const Edit = (props) => {
 	const {
 		isSelected,
 		attributes: {
-			cartLinkTo,
 			cartLink,
-			cartLinkNewTab,
 			alignment,
-			hasDropdown,
+			cartType,
 			dropPosition,
 			noItems,
 			noAmount,
@@ -41,13 +40,22 @@ const Edit = (props) => {
 			dropBgColor,
 			dropColor,
 			dropBtns,
+			isPremium,
 		},
 		setAttributes,
 	} = props;
-	const isPremium = wcCartObj.isPremium === "1" ? true : false;
+	const isPro = Boolean(wcCartObj.isPremium);
+
+	useEffect(() => {
+		setAttributes({ isPremium: isPro }); // SETS PREMIUM
+
+		if (!cartLink) {
+			setAttributes({ cartLink: wcCartObj.wcCartUrl });
+		}
+	}, []);
 
 	const blockProps = useBlockProps({
-		className: `align-${alignment}`,
+		className: `align-${alignment} cart-${cartType}`,
 	});
 
 	const onChangeAlignment = (newAlignment) => {
@@ -59,28 +67,17 @@ const Edit = (props) => {
 		setAttributes({ customIcon: newValue });
 	};
 
-	// console.log(isPremium);
+	console.log("PREMIUM edit.js", isPremium);
+	console.log("cartLink", cartLink);
 
 	return (
 		<div {...blockProps}>
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody
-						title={__("WC Mini Cart Settings", "blockons")}
+						title={__("Mini Cart Settings", "blockons")}
 						initialOpen={true}
 					>
-						{isPremium ? (
-							<>
-								<div>premium features EXPLAINED here</div>
-								<br />
-							</>
-						) : (
-							<>
-								<div>A NOTE ABOUT premium features here</div>
-								<br />
-							</>
-						)}
-
 						<TextControl
 							label="Cart Page Url"
 							value={cartLink}
@@ -94,13 +91,6 @@ const Edit = (props) => {
 								"If not set, this defaults to the WooCommerce cart page",
 								"blockons"
 							)}
-						/>
-						<ToggleControl
-							label={__("Open in a new tab", "blockons")}
-							checked={cartLinkNewTab}
-							onChange={(newValue) =>
-								setAttributes({ cartLinkNewTab: newValue })
-							}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -118,20 +108,6 @@ const Edit = (props) => {
 							label={__("Remove Items Count", "blockons")}
 							checked={noItems}
 							onChange={(newValue) => setAttributes({ noItems: newValue })}
-						/>
-					</PanelBody>
-					<PanelBody
-						title={__("WC Mini Cart Design", "blockons")}
-						initialOpen={false}
-					>
-						<ToggleControl
-							label={__("Add Drop Down Cart", "blockons")}
-							help={__(
-								"Add a drop down cart to display cart items",
-								"blockons"
-							)}
-							checked={hasDropdown}
-							onChange={(newValue) => setAttributes({ hasDropdown: newValue })}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -195,47 +171,92 @@ const Edit = (props) => {
 								</div>
 							</>
 						)}
+					</PanelBody>
 
-						{hasDropdown && (
-							<SelectControl
-								label={__("Drop Down Cart Position", "blockons")}
-								value={dropPosition}
-								options={[
-									{
-										label: __("Bottom Left", "blockons"),
-										value: "bottom-left",
-									},
-									{
-										label: __("Bottom Center", "blockons"),
-										value: "bottom-center",
-									},
-									{
-										label: __("Bottom Right", "blockons"),
-										value: "bottom-right",
-									},
-									{ label: __("Top Left", "blockons"), value: "top-left" },
-									{ label: __("Top Center", "blockons"), value: "top-center" },
-									{ label: __("Top Right", "blockons"), value: "top-right" },
-									{ label: __("Left Top", "blockons"), value: "left-top" },
-									{
-										label: __("Left Bottom", "blockons"),
-										value: "left-bottom",
-									},
-									{ label: __("Right Top", "blockons"), value: "right-top" },
-									{
-										label: __("Right Bottom", "blockons"),
-										value: "right-bottom",
-									},
-								]}
-								onChange={(newPosition) =>
-									setAttributes({
-										dropPosition:
-											newPosition === undefined ? "bottom-left" : newPosition,
-									})
-								}
-							/>
+					<PanelBody
+						title={__("Full Cart Settings", "blockons")}
+						initialOpen={false}
+					>
+						<SelectControl
+							label={__("Display Full Cart", "blockons")}
+							value={cartType}
+							options={[
+								{ label: __("None", "blockons"), value: "none" },
+								{ label: __("Drop Down Cart", "blockons"), value: "dropdown" },
+								{
+									label: __("Side Cart", "blockons"),
+									value: "sidecart",
+									disabled: !isPremium ? true : false,
+								},
+							]}
+							onChange={(newValue) =>
+								setAttributes({
+									cartType: newValue === undefined ? "none" : newValue,
+								})
+							}
+						/>
+
+						{cartType === "dropdown" && (
+							<>
+								<div className="blockons-divider"></div>
+								<SelectControl
+									label={__("Drop Down Cart Position", "blockons")}
+									value={dropPosition}
+									options={[
+										{
+											label: __("Bottom Left", "blockons"),
+											value: "bottom-left",
+										},
+										{
+											label: __("Bottom Center", "blockons"),
+											value: "bottom-center",
+										},
+										{
+											label: __("Bottom Right", "blockons"),
+											value: "bottom-right",
+										},
+										{ label: __("Top Left", "blockons"), value: "top-left" },
+										{
+											label: __("Top Center", "blockons"),
+											value: "top-center",
+										},
+										{ label: __("Top Right", "blockons"), value: "top-right" },
+										{ label: __("Left Top", "blockons"), value: "left-top" },
+										{
+											label: __("Left Bottom", "blockons"),
+											value: "left-bottom",
+										},
+										{ label: __("Right Top", "blockons"), value: "right-top" },
+										{
+											label: __("Right Bottom", "blockons"),
+											value: "right-bottom",
+										},
+									]}
+									onChange={(newPosition) =>
+										setAttributes({
+											dropPosition:
+												newPosition === undefined ? "bottom-left" : newPosition,
+										})
+									}
+								/>
+							</>
 						)}
 
+						{cartType === "sidecart" && (
+							<div className="helplink">
+								{__(
+									"Side Cart is a global element added to the footer, so you can edit all the settings in the main settings area.",
+									"blockons"
+								)}
+								<a href="#">{__("Edit Settings", "blockons")}</a>
+							</div>
+						)}
+					</PanelBody>
+
+					<PanelBody
+						title={__("Mini Cart Design Settings", "blockons")}
+						initialOpen={false}
+					>
 						<RangeControl
 							label={__("Icon Size", "blockons")}
 							value={iconSize}
@@ -258,6 +279,7 @@ const Edit = (props) => {
 							min={0}
 							max={50}
 						/>
+						<div className="blockons-divider"></div>
 
 						<BlockonsColorpicker
 							label={__("Background Color", "blockons")}
@@ -290,7 +312,7 @@ const Edit = (props) => {
 							paletteColors={colorPickerPalette}
 						/>
 
-						{hasDropdown && (
+						{cartType === "dropdown" && (
 							<>
 								<div className="blockons-divider"></div>
 								<BlockonsColorpicker
@@ -347,7 +369,6 @@ const Edit = (props) => {
 			>
 				<a
 					// {...(cartLink ? { href: cartLink } : { href: wcCartObj.wcCartUrl })}
-					{...(cartLinkNewTab ? { target: "_blank" } : "")}
 					className="blockons-wc-mini-cart-block-icon"
 					style={{
 						fontSize: iconSize,
@@ -368,7 +389,7 @@ const Edit = (props) => {
 						<span className="count">(2 items)</span>
 					</div>
 				</a>
-				{hasDropdown && (
+				{cartType === "dropdown" && (
 					<div
 						className={`blockons-wc-mini-cart-dropdown btns-${dropBtns}`}
 						style={{

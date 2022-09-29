@@ -58,7 +58,6 @@ class Blockons {
 
 		// Font Awesome Free
 		wp_register_style( 'blockons-fontawesome', BLOCKONS_PLUGIN_URL . 'assets/font-awesome/css/all.min.css', array(), BLOCKONS_PLUGIN_VERSION );
-
 		// JS URLs file/object for featured product, video slider, image carousel
 		wp_register_script( 'blockons-js', BLOCKONS_PLUGIN_URL . 'assets/blocks/blockons.js', array(), BLOCKONS_PLUGIN_VERSION );
 		wp_localize_script( 'blockons-js', 'siteObj', array(
@@ -66,14 +65,19 @@ class Blockons {
 			'apiUrl' => esc_url( get_rest_url() ),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 		));
-
 		// WC Cart Icon Block JS
-		wp_register_script( 'blockons-wc-mini-cart', BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-mini-cart/cart.js', array(), BLOCKONS_PLUGIN_VERSION );
+		if ($isPro) {
+			wp_register_script( 'blockons-wc-mini-cart', BLOCKONS_PLUGIN_URL . 'dist/pro/cart-pro.min.js', array(), BLOCKONS_PLUGIN_VERSION );
+		} else {
+			wp_register_script( 'blockons-wc-mini-cart', BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-mini-cart/cart.js', array(), BLOCKONS_PLUGIN_VERSION );
+		}
 		if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
-			wp_localize_script( 'blockons-wc-mini-cart', 'wcCartObj', array(
-				'isPremium' => blockons_fs()->can_use_premium_code__premium_only(),
-				'wcCartUrl' => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
-			));
+			if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
+				wp_localize_script( 'blockons-wc-mini-cart', 'wcCartObj', array(
+					'isPremium' => blockons_fs()->can_use_premium_code__premium_only(),
+					'wcCartUrl' => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
+				));
+			}
 		}
 		// WC Account Icon Block JS
 		wp_register_script( 'blockons-wc-account-icon', BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-account-icon/account.js', array(), BLOCKONS_PLUGIN_VERSION );
@@ -84,7 +88,7 @@ class Blockons {
 		}
 		// Search JS - FREE & PREMIUM
 		if ($isPro) {
-			wp_register_script( 'blockons-search', BLOCKONS_PLUGIN_URL . 'dist/pro/search-pro.min.js', array('react', 'react-dom', 'wp-data'), BLOCKONS_PLUGIN_VERSION );
+			wp_register_script( 'blockons-search', BLOCKONS_PLUGIN_URL . 'dist/pro/search-pro.min.js', array(), BLOCKONS_PLUGIN_VERSION );
 		} else {
 			wp_register_script( 'blockons-search', BLOCKONS_PLUGIN_URL . 'assets/blocks/search/search.js', array(), BLOCKONS_PLUGIN_VERSION );
 		}
@@ -100,7 +104,6 @@ class Blockons {
 		wp_register_script( 'blockons-waypoint', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/waypoints.min.js', array(), BLOCKONS_PLUGIN_VERSION, true );
 		wp_register_script( 'blockons-waypoint-inview', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/inview.min.js', array('blockons-waypoint'), BLOCKONS_PLUGIN_VERSION, true );
 		wp_register_script( 'blockons-progress-bars', BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/progress-bars.js', array( 'blockons-waypoint', 'blockons-waypoint-inview' ), BLOCKONS_PLUGIN_VERSION, true );
-		
 		// Testimonials
 		wp_register_style( 'blockons-splidecss', BLOCKONS_PLUGIN_URL . 'assets/slider/splide.min.css', array(), BLOCKONS_PLUGIN_VERSION );
 		wp_register_script( 'blockons-splidejs', BLOCKONS_PLUGIN_URL . 'assets/slider/splide.min.js', array(), BLOCKONS_PLUGIN_VERSION );
@@ -173,7 +176,7 @@ class Blockons {
 			'accountUrl' => esc_url($blockons_fs->get_account_url()),
 			'wcActive' => defined('WC_VERSION') ? true : false,
 			// 'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
-			'can_use_premium_code' => blockons_fs()->can_use_premium_code(),
+			'isPremium' => blockons_fs()->can_use_premium_code(),
 		));
 		wp_enqueue_script('blockons-admin-settings-script');
 

@@ -13,7 +13,7 @@ const Settings = () => {
 	const url = `${siteObject.apiUrl}blcns/v1`;
 	const [loader, setLoader] = useState(false);
 	const [loadSetting, setLoadSetting] = useState(true);
-	const isPremium = siteObject.can_use_premium_code === "1" ? true : false;
+	const isPremium = Boolean(siteObject.isPremium);
 	const wcActive = Boolean(siteObject.wcActive);
 	const defaults = siteObject.blockonsDefaults;
 
@@ -47,6 +47,8 @@ const Settings = () => {
 				  }),
 		});
 	};
+
+	console.log(blockonsOptions);
 
 	// Submit form
 	const handleSubmit = (e) => {
@@ -165,6 +167,13 @@ const Settings = () => {
 										{__("Settings", "blockons")}
 									</a>
 								</li>
+								{isPremium && (
+									<li>
+										<a id="blockonstab-3" className="blockons-tab">
+											{__("Premium Features", "blockons")}
+										</a>
+									</li>
+								)}
 
 								<li className="help">
 									<a id="blockonstab-help" className="blockons-tab">
@@ -279,6 +288,40 @@ const Settings = () => {
 											</tbody>
 										</table>
 									</div>
+
+									{isPremium && (
+										<div id="blockons-content-3" className="blockons-content">
+											<table className="form-table" role="presentation">
+												<tbody>
+													<SettingRow
+														title={__("WooCommerce Side Cart", "blockons")}
+														description={__(
+															"Add a slide-out cart to your WooCommerce Mini Cart blocks",
+															"blockons"
+														)}
+														inputType="heading"
+													/>
+													<SettingRow
+														title={__("Enable Side Cart", "blockons")}
+														slug="sidecart_enabled"
+														value={blockonsOptions.sidecart?.enabled}
+														inputType="toggle"
+														onChange={handleChange}
+													/>
+
+													{blockonsOptions.sidecart?.enabled && (
+														<SettingRow
+															title={__("Another Setting", "blockons")}
+															slug="sidecart_another"
+															value={blockonsOptions.sidecart?.another}
+															inputType="toggle"
+															onChange={handleChange}
+														/>
+													)}
+												</tbody>
+											</table>
+										</div>
+									)}
 
 									<div id="blockons-content-help" className="blockons-content">
 										<InfoTab
