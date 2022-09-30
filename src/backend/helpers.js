@@ -87,3 +87,41 @@ export const blockListSettings = {
 		isNew: false,
 	},
 };
+
+export const blockonsGroupSettings = () => {
+	const groupBtns = document.querySelectorAll(".blockons-group-btn");
+
+	if (groupBtns) {
+		groupBtns.forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const btnParent = btn.parentElement;
+
+				groupBtns.forEach((btnItem) => {
+					btnItem.parentElement.removeAttribute("id", "openGroup");
+					btnItem.parentElement.classList.remove("blockons-show");
+				});
+
+				// Add / Remove .blockons-show class
+				if (btnParent.classList.contains("blockons-show")) {
+					btnParent.removeAttribute("id", "openGroup");
+					btnParent.classList.remove("blockons-show");
+				} else {
+					btnParent.setAttribute("id", "openGroup");
+					btnParent.classList.add("blockons-show");
+				}
+			});
+		});
+	}
+
+	// Close on click outside
+	window.addEventListener("click", function (e) {
+		const openGroup = document.getElementById("openGroup");
+
+		if (openGroup) {
+			if (!e.target == openGroup || !openGroup.contains(e.target)) {
+				openGroup.removeAttribute("id");
+				openGroup.classList.remove("blockons-show");
+			}
+		}
+	});
+};

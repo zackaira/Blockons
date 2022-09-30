@@ -4,16 +4,23 @@ import { __ } from "@wordpress/i18n";
 
 const SideCart = () => {
 	const restUrl = wcCartObj.apiUrl;
-	// const set = searchSettings ? searchSettings : "";
+	const sidecart = wcCartObj.sidecart ? wcCartObj.sidecart : { enabled: false };
 	const [isLoading, setIsLoading] = useState(false);
+
+	if (!sidecart?.enabled) return null;
 
 	return (
 		<React.Fragment>
-			<div id="blockons-sidecart-icon" className="blockons-side-cart-icon">
-				<span className="fa-solid fa-cart-shopping"></span>
-			</div>
+			{sidecart.has_icon && (
+				<div
+					id="blockons-sidecart-icon"
+					className={`blockons-side-cart-icon ${sidecart.position}`}
+				>
+					<span className="fa-solid fa-cart-shopping"></span>
+				</div>
+			)}
 
-			<div className="blockons-side-cart-block">
+			<div className={`blockons-side-cart-block ${sidecart.position}`}>
 				<div className="blockons-side-cart-block-inner">
 					<div className="blockons-side-cart-header">
 						<div>Your Cart (10 items)</div>

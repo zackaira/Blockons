@@ -56,6 +56,9 @@ class Blockons {
 	public function blockons_register_scripts() {
 		$isPro = blockons_fs()->can_use_premium_code__premium_only() ? true : false;
 
+		$blockonsSavedOptions = get_option('blockons_options');
+		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
+
 		// Font Awesome Free
 		wp_register_style( 'blockons-fontawesome', BLOCKONS_PLUGIN_URL . 'assets/font-awesome/css/all.min.css', array(), BLOCKONS_PLUGIN_VERSION );
 		// JS URLs file/object for featured product, video slider, image carousel
@@ -66,18 +69,18 @@ class Blockons {
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 		));
 		// WC Cart Icon Block JS
-		if ($isPro) {
-			wp_register_script( 'blockons-wc-mini-cart', BLOCKONS_PLUGIN_URL . 'dist/pro/cart-pro.min.js', array(), BLOCKONS_PLUGIN_VERSION );
-		} else {
-			wp_register_script( 'blockons-wc-mini-cart', BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-mini-cart/cart.js', array(), BLOCKONS_PLUGIN_VERSION );
-		}
 		if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
-			if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {
-				wp_localize_script( 'blockons-wc-mini-cart', 'wcCartObj', array(
-					'isPremium' => blockons_fs()->can_use_premium_code__premium_only(),
-					'wcCartUrl' => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
-				));
+			if ($isPro) {
+				wp_register_script( 'blockons-wc-mini-cart', BLOCKONS_PLUGIN_URL . 'dist/pro/cart-pro.min.js', array(), BLOCKONS_PLUGIN_VERSION );
+			} else {
+				wp_register_script( 'blockons-wc-mini-cart', BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-mini-cart/cart.js', array(), BLOCKONS_PLUGIN_VERSION );
 			}
+			
+			wp_localize_script( 'blockons-wc-mini-cart', 'wcCartObj', array(
+				'isPremium' => blockons_fs()->can_use_premium_code__premium_only(),
+				'wcCartUrl' => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
+				'sidecart' => isset($blockonsOptions->sidecart) ? $blockonsOptions->sidecart : null,
+			));
 		}
 		// WC Account Icon Block JS
 		wp_register_script( 'blockons-wc-account-icon', BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-account-icon/account.js', array(), BLOCKONS_PLUGIN_VERSION );
@@ -248,6 +251,13 @@ class Blockons {
 				"wc_featured_product" => true, // 2
 				"wc_mini_cart" => true, // 1
 			),
+			"sidecart" => array(
+				"enabled" => false,
+				"position" => 'right',
+				"has_icon" => true,
+				"icon_bgcolor" => '#FFF',
+				"icon_color" => '#333',
+			)
 		);
 		return $initialSettings;
 	}

@@ -6,7 +6,7 @@ import SettingRow from "./components/SettingRow";
 import SettingBlock from "./components/SettingBlock";
 import InfoTab from "./InfoTab";
 import Loader from "./Loader";
-import { blockListSettings } from "./helpers";
+import { blockonsGroupSettings, blockListSettings } from "./helpers";
 
 const Settings = () => {
 	const siteObject = siteObj;
@@ -49,6 +49,10 @@ const Settings = () => {
 	};
 
 	console.log(blockonsOptions);
+
+	useEffect(() => {
+		blockonsGroupSettings();
+	}, [blockonsOptions]);
 
 	// Submit form
 	const handleSubmit = (e) => {
@@ -164,7 +168,7 @@ const Settings = () => {
 								</li>
 								<li className="blockons-hide">
 									<a id="blockonstab-2" className="blockons-tab">
-										{__("Settings", "blockons")}
+										{__("Site Add-Ons", "blockons")}
 									</a>
 								</li>
 								{isPremium && (
@@ -263,28 +267,6 @@ const Settings = () => {
 													)}
 													inputType="heading"
 												/>
-												<SettingRow
-													title={__("My Ssdfetting", "blockons")}
-													slug="global_setting_one"
-													value={blockonsOptions.setting_one}
-													inputType="toggle"
-													tooltip={__(
-														"This is the tool tip / hint for this setting",
-														"blockons"
-													)}
-													onChange={handleChange}
-												/>
-												<SettingRow
-													title={__("My Settigbfbbng", "blockons")}
-													slug="global_setting_two"
-													value={blockonsOptions.setting_two}
-													inputType="toggle"
-													tooltip={__(
-														"This is the tool tip / hint for this setting",
-														"blockons"
-													)}
-													onChange={handleChange}
-												/>
 											</tbody>
 										</table>
 									</div>
@@ -300,6 +282,7 @@ const Settings = () => {
 															"blockons"
 														)}
 														inputType="heading"
+														nomargin
 													/>
 													<SettingRow
 														title={__("Enable Side Cart", "blockons")}
@@ -324,7 +307,7 @@ const Settings = () => {
 															/>
 
 															<SettingRow
-																title={__("Show Side Cart Icon", "blockons")}
+																title={__("Remove Side Cart Icon", "blockons")}
 																slug="sidecart_has_icon"
 																value={blockonsOptions.sidecart?.has_icon}
 																inputType="toggle"
@@ -332,18 +315,53 @@ const Settings = () => {
 															/>
 
 															{blockonsOptions.sidecart?.has_icon && (
-																<>
-																	<SettingRow
-																		title={__("Background Color", "blockons")}
-																		slug="sidecart_icon_bgcolor"
-																		value={
-																			blockonsOptions.sidecart?.icon_bgcolor
-																		}
-																		inputType="colorpicker"
-																		defaultValue="#FFF"
-																		onChange={handleChange}
-																	/>
-																</>
+																<tr>
+																	<th>{__("Edit Icon", "blockons")}</th>
+																	<td>
+																		<div className="blockons-group">
+																			<a className="blockons-group-btn">
+																				<span className="dashicons dashicons-edit"></span>
+																			</a>
+																			<div className="blockons-group-container">
+																				<table
+																					className="form-table"
+																					role="presentation"
+																				>
+																					<tbody>
+																						<SettingRow
+																							title={__(
+																								"Background Color",
+																								"blockons"
+																							)}
+																							slug="sidecart_icon_bgcolor"
+																							value={
+																								blockonsOptions.sidecart
+																									?.icon_bgcolor
+																							}
+																							inputType="colorpicker"
+																							defaultValue="#FFF"
+																							onChange={handleChange}
+																						/>
+																						<SettingRow
+																							title={__(
+																								"Icon Color",
+																								"blockons"
+																							)}
+																							slug="sidecart_icon_color"
+																							value={
+																								blockonsOptions.sidecart
+																									?.icon_color
+																							}
+																							inputType="colorpicker"
+																							defaultValue="#333"
+																							onChange={handleChange}
+																						/>
+																					</tbody>
+																				</table>
+																			</div>
+																		</div>
+																	</td>
+																</tr>
 															)}
 														</>
 													)}
