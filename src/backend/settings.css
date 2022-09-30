@@ -660,7 +660,7 @@ a.blockons-docs::before {
 }
 
 /* -- Color Picker -- */
-/* .blockonsColorPicker {
+.blockonsColorPicker {
 	overflow: hidden;
 	position: relative;
 	max-width: 226px;
@@ -718,7 +718,7 @@ a.blockons-docs::before {
 	display: block;
 	border: 1px solid #acacac;
 	color: #747474;
-} */
+}
 /* -- Multi Checkbox Inputs -- */
 /* .blockons-multioption {
 	display: inline-block;

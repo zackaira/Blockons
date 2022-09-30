@@ -310,13 +310,42 @@ const Settings = () => {
 													/>
 
 													{blockonsOptions.sidecart?.enabled && (
-														<SettingRow
-															title={__("Another Setting", "blockons")}
-															slug="sidecart_another"
-															value={blockonsOptions.sidecart?.another}
-															inputType="toggle"
-															onChange={handleChange}
-														/>
+														<>
+															<SettingRow
+																title={__("Position", "blockons")}
+																slug="sidecart_position"
+																value={blockonsOptions.sidecart?.position}
+																inputType="select"
+																options={{
+																	right: "Right",
+																	left: "Left",
+																}}
+																onChange={handleChange}
+															/>
+
+															<SettingRow
+																title={__("Show Side Cart Icon", "blockons")}
+																slug="sidecart_has_icon"
+																value={blockonsOptions.sidecart?.has_icon}
+																inputType="toggle"
+																onChange={handleChange}
+															/>
+
+															{blockonsOptions.sidecart?.has_icon && (
+																<>
+																	<SettingRow
+																		title={__("Background Color", "blockons")}
+																		slug="sidecart_icon_bgcolor"
+																		value={
+																			blockonsOptions.sidecart?.icon_bgcolor
+																		}
+																		inputType="colorpicker"
+																		defaultValue="#FFF"
+																		onChange={handleChange}
+																	/>
+																</>
+															)}
+														</>
 													)}
 												</tbody>
 											</table>

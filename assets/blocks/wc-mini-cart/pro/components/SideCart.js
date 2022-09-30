@@ -9,13 +9,17 @@ const SideCart = () => {
 
 	return (
 		<React.Fragment>
+			<div id="blockons-sidecart-icon" className="blockons-side-cart-icon">
+				<span className="fa-solid fa-cart-shopping"></span>
+			</div>
+
 			<div className="blockons-side-cart-block">
 				<div className="blockons-side-cart-block-inner">
-					<div className="blockons-side-cart-header">Your Cart</div>
-
+					<div className="blockons-side-cart-header">
+						<div>Your Cart (10 items)</div>
+						<div>Spend $10 more to get free shipping</div>
+					</div>
 					<div className="blockons-side-cart-content blockons-wc-mini-cart-block"></div>
-
-					<div className="blockons-side-cart-footer"></div>
 				</div>
 			</div>
 			<div className="blockons-side-cart-overlay"></div>

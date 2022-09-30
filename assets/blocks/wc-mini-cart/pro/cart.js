@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	if (blockonsSideCart) {
 		const sideCartClick = document.getElementById("blockons-sidecart-click");
+		const sideCartIcon = document.getElementById("blockons-sidecart-icon");
 
 		if (sideCartClick) {
 			sideCartClick.addEventListener("click", (e) => {
@@ -54,6 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			const overlayClick = document.querySelector(
 				".blockons-side-cart-overlay"
 			);
+
+			if (sideCartIcon)
+				sideCartIcon.addEventListener("click", (e) => sideCartClick.click());
 
 			if (overlayClick)
 				overlayClick.addEventListener("click", (e) => sideCartClick.click());
