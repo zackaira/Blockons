@@ -67,9 +67,6 @@ const Edit = (props) => {
 		setAttributes({ customIcon: newValue });
 	};
 
-	console.log("PREMIUM edit.js", isPremium);
-	console.log("cartLink", cartLink);
-
 	return (
 		<div {...blockProps}>
 			{isSelected && (
@@ -369,7 +366,9 @@ const Edit = (props) => {
 			>
 				<a
 					// {...(cartLink ? { href: cartLink } : { href: wcCartObj.wcCartUrl })}
-					className="blockons-wc-mini-cart-block-icon"
+					className={`blockons-wc-mini-cart-block-icon ${
+						cartType === "sidecart" ? "blockons-opencart" : ""
+					}`}
 					style={{
 						fontSize: iconSize,
 						padding: iconPadding,

@@ -1,6 +1,8 @@
 import React from "react";
 import InputToggleSwitch from "./inputs/InputToggleSwitch";
 import InputSelect from "./inputs/InputSelect";
+import InputText from "./inputs/InputText";
+import InputRange from "./inputs/InputRange";
 import ColorPicker from "./inputs/ColorPicker";
 import SettingTooltip from "./UI/SettingTooltip";
 import { blockonsConvertToSlug } from "../helpers";
@@ -17,6 +19,8 @@ const SettingRow = (props) => {
 		theInput = <InputToggleSwitch {...props} />;
 	} else if (props.inputType === "select") {
 		theInput = <InputSelect {...props} />;
+	} else if (props.inputType === "range") {
+		theInput = <InputRange {...props} />;
 	} else if (props.inputType === "colorpicker") {
 		theInput = <ColorPicker {...props} />;
 	} else if (props.inputType === "heading") {
@@ -27,6 +31,8 @@ const SettingRow = (props) => {
 				</td>
 			</tr>
 		);
+	} else {
+		theInput = <InputText {...props} />;
 	}
 
 	return (

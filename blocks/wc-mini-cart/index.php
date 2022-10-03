@@ -77,11 +77,3 @@ function blockons_wc_minicart_item() {
 					</div>';
 	return $mini_cart;
 }
-
-/**
- * PREMIUM: Add element for Side Cart
- */
-function blockons_pro_add_footer_sidecart() {
-	echo '<div id="blockons-side-cart" class="blockons-side-cart-wrap"></div>';
-}
-add_filter( 'wp_footer', 'blockons_pro_add_footer_sidecart' );

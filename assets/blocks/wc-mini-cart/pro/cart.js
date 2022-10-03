@@ -10,9 +10,7 @@ import SideCart from "./components/SideCart";
 import "../cart";
 
 document.addEventListener("DOMContentLoaded", () => {
-	const blockonsSideCart = document.querySelector(
-		".wp-block-blockons-wc-mini-cart.cart-sidecart"
-	);
+	const blockonsSideCart = document.getElementById("blockons-side-cart");
 
 	if (typeof blockonsSideCart !== undefined && blockonsSideCart !== null) {
 		// const sidecartSettings = blockonsSideCart.getAttribute("data-settings");
@@ -37,30 +35,25 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	if (blockonsSideCart) {
-		const sideCartClick = document.getElementById("blockons-sidecart-click");
-		const sideCartIcon = document.getElementById("blockons-sidecart-icon");
+		const sideCartOpen = document.querySelectorAll(".blockons-opencart");
 
-		if (sideCartClick) {
-			sideCartClick.addEventListener("click", (e) => {
-				e.preventDefault();
-				const body = document.body;
+		if (sideCartOpen) {
+			sideCartOpen.forEach((item) => {
+				item.addEventListener("click", (e) => {
+					e.preventDefault();
+					const body = document.body;
 
-				if (body.classList.contains("blockons-show-sidecart")) {
-					body.classList.remove("blockons-show-sidecart");
-				} else {
-					body.classList.add("blockons-show-sidecart");
-				}
+					if (body.classList.contains("blockons-show-sidecart")) {
+						body.classList.remove("blockons-show-sidecart");
+					} else {
+						body.classList.add("blockons-show-sidecart");
+					}
+				});
 			});
 
 			const overlayClick = document.querySelector(
 				".blockons-side-cart-overlay"
 			);
-
-			if (sideCartIcon)
-				sideCartIcon.addEventListener("click", (e) => sideCartClick.click());
-
-			if (overlayClick)
-				overlayClick.addEventListener("click", (e) => sideCartClick.click());
 		}
 	}
 });

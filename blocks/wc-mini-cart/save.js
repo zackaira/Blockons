@@ -11,8 +11,6 @@ const Save = ({ attributes }) => {
 		? attributes.cartLink
 		: wcCartObj.wcCartUrl;
 
-	console.log("PREMIUM save.js", attributes.isPremium);
-
 	return (
 		<div {...blockProps}>
 			<div
@@ -27,9 +25,11 @@ const Save = ({ attributes }) => {
 			>
 				<a
 					{...(attributes.cartType === "sidecart"
-						? { id: "blockons-sidecart-click" }
+						? {}
 						: { href: cartPageLink })}
-					className="blockons-wc-mini-cart-block-icon"
+					className={`blockons-wc-mini-cart-block-icon blockons-opencart ${
+						attributes.cartType === "sidecart" ? "blockons-opencart" : ""
+					}`}
 					style={{
 						fontSize: attributes.iconSize,
 						padding: attributes.iconPadding,

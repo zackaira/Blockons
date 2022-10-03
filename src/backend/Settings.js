@@ -3,10 +3,12 @@ import React, { useState, useEffect } from "react";
 import { __ } from "@wordpress/i18n";
 import axios from "axios";
 import SettingRow from "./components/SettingRow";
+import SettingGroup from "./components/SettingGroup";
 import SettingBlock from "./components/SettingBlock";
 import InfoTab from "./InfoTab";
 import Loader from "./Loader";
 import { blockonsGroupSettings, blockListSettings } from "./helpers";
+import BackToTop from "../frontend/site-addons/BackToTop";
 
 const Settings = () => {
 	const siteObject = siteObj;
@@ -16,6 +18,8 @@ const Settings = () => {
 	const isPremium = Boolean(siteObject.isPremium);
 	const wcActive = Boolean(siteObject.wcActive);
 	const defaults = siteObject.blockonsDefaults;
+
+	const [showBttbPreview, setShowBttbPreview] = useState(false);
 
 	const [blockonsOptions, setBlockonsOptions] = useState({});
 
@@ -166,15 +170,10 @@ const Settings = () => {
 										{__("Blocks", "blockons")}
 									</a>
 								</li>
-								<li className="blockons-hide">
-									<a id="blockonstab-2" className="blockons-tab">
-										{__("Site Add-Ons", "blockons")}
-									</a>
-								</li>
 								{isPremium && (
 									<li>
-										<a id="blockonstab-3" className="blockons-tab">
-											{__("Premium Features", "blockons")}
+										<a id="blockonstab-2" className="blockons-tab">
+											{__("Site Add-Ons", "blockons")}
 										</a>
 									</li>
 								)}
@@ -260,115 +259,347 @@ const Settings = () => {
 										<table className="form-table" role="presentation">
 											<tbody>
 												<SettingRow
-													title={__("Section Heading", "blockons")}
+													title={__("Back To Top Button", "blockons")}
 													description={__(
-														"this is a description for the heading component",
+														"Add a back to top button to your website",
 														"blockons"
 													)}
 													inputType="heading"
+													nomargin
 												/>
-											</tbody>
-										</table>
-									</div>
+												<SettingRow
+													title={__("Enable Back To Top Button", "blockons")}
+													slug="bttb_enabled"
+													value={blockonsOptions.bttb?.enabled}
+													inputType="toggle"
+													onChange={handleChange}
+												/>
 
-									{isPremium && (
-										<div id="blockons-content-3" className="blockons-content">
-											<table className="form-table" role="presentation">
-												<tbody>
-													<SettingRow
-														title={__("WooCommerce Side Cart", "blockons")}
-														description={__(
-															"Add a slide-out cart to your WooCommerce Mini Cart blocks",
-															"blockons"
-														)}
-														inputType="heading"
-														nomargin
-													/>
-													<SettingRow
-														title={__("Enable Side Cart", "blockons")}
-														slug="sidecart_enabled"
-														value={blockonsOptions.sidecart?.enabled}
-														inputType="toggle"
-														onChange={handleChange}
-													/>
+												{blockonsOptions.bttb?.enabled && (
+													<>
+														<SettingRow
+															title={__("Show Preview", "blockons")}
+															slug="bttb_preview"
+															value={showBttbPreview}
+															inputType="toggle"
+															onChange={() =>
+																setShowBttbPreview((state) => !state)
+															}
+														/>
 
-													{blockonsOptions.sidecart?.enabled && (
-														<>
+														<SettingRow
+															title={__("Position", "blockons")}
+															slug="bttb_position"
+															value={blockonsOptions.bttb?.position}
+															inputType="select"
+															options={{
+																right: "Right",
+																left: "Left",
+															}}
+															onChange={handleChange}
+														/>
+
+														<SettingGroup label={__("Edit Button", "blockons")}>
 															<SettingRow
-																title={__("Position", "blockons")}
-																slug="sidecart_position"
-																value={blockonsOptions.sidecart?.position}
+																title={__("Select Icon", "blockons")}
+																slug="bttb_icon"
+																value={blockonsOptions.bttb?.icon}
 																inputType="select"
 																options={{
-																	right: "Right",
-																	left: "Left",
+																	"arrow-up": "Arrow Up",
+																	"circle-up": "Circle Up",
+																	"caret-up": "Caret Up",
+																	"chevron-up": "Chevron Up",
+																	"angles-up": "Angles Up",
+																	"square-caret-up": "Square Caret Up",
+																	"up-long": "Up Long",
 																}}
 																onChange={handleChange}
 															/>
 
 															<SettingRow
-																title={__("Remove Side Cart Icon", "blockons")}
-																slug="sidecart_has_icon"
-																value={blockonsOptions.sidecart?.has_icon}
-																inputType="toggle"
+																title={__("Width / Height", "blockons")}
+																slug="bttb_size"
+																value={blockonsOptions.bttb?.size}
+																inputType="range"
+																defaultValue={50}
+																min={30}
+																max={100}
+																suffix="px"
+																onChange={handleChange}
+															/>
+															<SettingRow
+																title={__("Size", "blockons")}
+																slug="bttb_icon_size"
+																value={blockonsOptions.bttb?.icon_size}
+																inputType="range"
+																defaultValue={22}
+																min={12}
+																max={72}
+																// step={0.01}
+																suffix="px"
 																onChange={handleChange}
 															/>
 
-															{blockonsOptions.sidecart?.has_icon && (
-																<tr>
-																	<th>{__("Edit Icon", "blockons")}</th>
-																	<td>
-																		<div className="blockons-group">
-																			<a className="blockons-group-btn">
-																				<span className="dashicons dashicons-edit"></span>
-																			</a>
-																			<div className="blockons-group-container">
-																				<table
-																					className="form-table"
-																					role="presentation"
-																				>
-																					<tbody>
-																						<SettingRow
-																							title={__(
-																								"Background Color",
-																								"blockons"
-																							)}
-																							slug="sidecart_icon_bgcolor"
-																							value={
-																								blockonsOptions.sidecart
-																									?.icon_bgcolor
-																							}
-																							inputType="colorpicker"
-																							defaultValue="#FFF"
-																							onChange={handleChange}
-																						/>
-																						<SettingRow
-																							title={__(
-																								"Icon Color",
-																								"blockons"
-																							)}
-																							slug="sidecart_icon_color"
-																							value={
-																								blockonsOptions.sidecart
-																									?.icon_color
-																							}
-																							inputType="colorpicker"
-																							defaultValue="#333"
-																							onChange={handleChange}
-																						/>
-																					</tbody>
-																				</table>
-																			</div>
-																		</div>
-																	</td>
-																</tr>
+															<SettingRow
+																title={
+																	blockonsOptions.bttb?.position === "left"
+																		? __("Position from Left", "blockons")
+																		: __("Position from Right", "blockons")
+																}
+																slug="bttb_side_position"
+																value={blockonsOptions.bttb?.side_position}
+																inputType="range"
+																defaultValue={12}
+																min={0}
+																max={200}
+																suffix="px"
+																onChange={handleChange}
+															/>
+															<SettingRow
+																title={__("Position from Bottom", "blockons")}
+																slug="bttb_bottom_position"
+																value={blockonsOptions.bttb?.bottom_position}
+																inputType="range"
+																defaultValue={12}
+																min={0}
+																max={200}
+																suffix="px"
+																onChange={handleChange}
+															/>
+														</SettingGroup>
+
+														<SettingGroup
+															label={__("Edit Button Colors", "blockons")}
+														>
+															<SettingRow
+																title={__("Has Background", "blockons")}
+																slug="bttb_has_bg"
+																value={blockonsOptions.bttb?.has_bg}
+																inputType="toggle"
+																onChange={handleChange}
+															/>
+															{blockonsOptions.bttb?.has_bg && (
+																<SettingRow
+																	title={__("Background Color", "blockons")}
+																	slug="bttb_bgcolor"
+																	value={blockonsOptions.bttb?.bgcolor}
+																	inputType="colorpicker"
+																	defaultValue="#000"
+																	onChange={handleChange}
+																/>
 															)}
-														</>
-													)}
-												</tbody>
-											</table>
+															<SettingRow
+																title={__("Icon Color", "blockons")}
+																slug="bttb_color"
+																value={blockonsOptions.bttb?.color}
+																inputType="colorpicker"
+																defaultValue="#FFF"
+																onChange={handleChange}
+															/>
+														</SettingGroup>
+													</>
+												)}
+
+												{isPremium && (
+													<>
+														<SettingRow
+															title={__("WooCommerce Side Cart", "blockons")}
+															description={__(
+																"Add a slide-out cart to your WooCommerce Mini Cart blocks",
+																"blockons"
+															)}
+															inputType="heading"
+															// nomargin
+														/>
+														<SettingRow
+															title={__("Enable Side Cart", "blockons")}
+															slug="sidecart_enabled"
+															value={blockonsOptions.sidecart?.enabled}
+															inputType="toggle"
+															onChange={handleChange}
+														/>
+
+														{blockonsOptions.sidecart?.enabled && (
+															<>
+																<SettingRow
+																	title={__("Position", "blockons")}
+																	slug="sidecart_position"
+																	value={blockonsOptions.sidecart?.position}
+																	inputType="select"
+																	options={{
+																		right: "Right",
+																		left: "Left",
+																	}}
+																	onChange={handleChange}
+																/>
+
+																<SettingGroup
+																	label={__("Edit Side Cart Icon", "blockons")}
+																>
+																	<SettingRow
+																		title={__("Enable Icon", "blockons")}
+																		slug="sidecart_has_icon"
+																		value={blockonsOptions.sidecart?.has_icon}
+																		inputType="toggle"
+																		onChange={handleChange}
+																	/>
+
+																	{blockonsOptions.sidecart?.has_icon && (
+																		<>
+																			<SettingRow
+																				title={__("Select Icon", "blockons")}
+																				slug="sidecart_icon"
+																				value={blockonsOptions.sidecart?.icon}
+																				inputType="select"
+																				options={{
+																					"cart-shopping": "Shopping Cart",
+																					"cart-arrow-down": "Cart Arrow Down",
+																					"basket-shopping": "Shopping Basket",
+																					suitcase: "Shopping Suitcase",
+																					bucket: "Bucket",
+																				}}
+																				onChange={handleChange}
+																			/>
+
+																			<SettingRow
+																				title={__(
+																					"Background Color",
+																					"blockons"
+																				)}
+																				slug="sidecart_icon_bgcolor"
+																				value={
+																					blockonsOptions.sidecart?.icon_bgcolor
+																				}
+																				inputType="colorpicker"
+																				defaultValue="#FFF"
+																				onChange={handleChange}
+																			/>
+																			<SettingRow
+																				title={__("Icon Color", "blockons")}
+																				slug="sidecart_icon_color"
+																				value={
+																					blockonsOptions.sidecart?.icon_color
+																				}
+																				inputType="colorpicker"
+																				defaultValue="#333"
+																				onChange={handleChange}
+																			/>
+
+																			<SettingRow
+																				title={__("Width / Height", "blockons")}
+																				slug="sidecart_icon_padding"
+																				value={
+																					blockonsOptions.sidecart?.icon_padding
+																				}
+																				inputType="range"
+																				defaultValue={60}
+																				min={40}
+																				max={100}
+																				suffix="px"
+																				onChange={handleChange}
+																			/>
+																			<SettingRow
+																				title={__("Size", "blockons")}
+																				slug="sidecart_icon_size"
+																				value={
+																					blockonsOptions.sidecart?.icon_size
+																				}
+																				inputType="range"
+																				defaultValue={24}
+																				min={12}
+																				max={72}
+																				// step={0.01}
+																				suffix="px"
+																				onChange={handleChange}
+																			/>
+																		</>
+																	)}
+																</SettingGroup>
+
+																<SettingGroup
+																	label={__("Edit Side Cart", "blockons")}
+																>
+																	<SettingRow
+																		title={__("Header Title")}
+																		slug="sidecart_header_title"
+																		value={
+																			blockonsOptions.sidecart?.header_title
+																		}
+																		placeholder="Your Cart"
+																		inputType="text"
+																		onChange={handleChange}
+																	/>
+																	<SettingRow
+																		title={__("Header text")}
+																		slug="sidecart_header_text"
+																		value={
+																			blockonsOptions.sidecart?.header_text
+																		}
+																		placeholder="Your Cart"
+																		inputType="text"
+																		onChange={handleChange}
+																	/>
+
+																	<SettingRow
+																		title={__("Background Color", "blockons")}
+																		slug="sidecart_bgcolor"
+																		value={blockonsOptions.sidecart?.bgcolor}
+																		inputType="colorpicker"
+																		defaultValue="#FFF"
+																		onChange={handleChange}
+																	/>
+																	<SettingRow
+																		title={__("Font Color", "blockons")}
+																		slug="sidecart_color"
+																		value={blockonsOptions.sidecart?.fcolor}
+																		inputType="colorpicker"
+																		defaultValue="#333"
+																		onChange={handleChange}
+																	/>
+
+																	<SettingRow
+																		title={__("Overlay Color", "blockons")}
+																		slug="sidecart_overlay_color"
+																		value={
+																			blockonsOptions.sidecart?.overlay_color
+																		}
+																		inputType="colorpicker"
+																		defaultValue="#000"
+																		onChange={handleChange}
+																	/>
+																	<SettingRow
+																		title={__("Opacity", "blockons")}
+																		slug="sidecart_overlay_opacity"
+																		value={
+																			blockonsOptions.sidecart?.overlay_opacity
+																		}
+																		inputType="range"
+																		defaultValue={0.6}
+																		min={0}
+																		max={1}
+																		step={0.01}
+																		onChange={handleChange}
+																		suffix=""
+																	/>
+																</SettingGroup>
+															</>
+														)}
+													</>
+												)}
+											</tbody>
+										</table>
+
+										<div className="blockons-more">
+											{__("More Add-Ons Coming Soon...", "blockons")}
 										</div>
-									)}
+										<p>
+											{__(
+												"Get in touch and let us know which add-ons you need for your site.",
+												"blockons"
+											)}
+										</p>
+									</div>
 
 									<div id="blockons-content-help" className="blockons-content">
 										<InfoTab
@@ -408,6 +639,8 @@ const Settings = () => {
 						</div>
 					</form>
 				</div>
+
+				{showBttbPreview && <BackToTop bttOptions={blockonsOptions.bttb} />}
 			</div>
 		</React.Fragment>
 	);
