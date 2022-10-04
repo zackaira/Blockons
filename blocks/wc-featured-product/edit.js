@@ -25,7 +25,7 @@ import { colorPickerPalette } from "../block-global";
 import "./editor.css";
 
 const Edit = (props) => {
-	const site_url = siteObj.apiUrl;
+	const site_url = blockonsObj.apiUrl;
 	const {
 		isSelected,
 		attributes: {

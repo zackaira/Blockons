@@ -43,6 +43,26 @@
 }
 
 /**
+ * Website Page Loader
+ */
+.blockons-page-loader {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 22%;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 9999;
+}
+
+.blockons-settings .blockons-page-loader {
+	box-shadow: -1px 0 5px rgb(0 0 0 / 20%);
+}
+
+/**
  * Back To Top Button
  */
 .blockons-bttbtn {
@@ -69,6 +89,9 @@
 	background: none !important;
 	box-shadow: none !important;
 }
+.blockons-bttbtn:hover {
+	filter: brightness(96%);
+}
 .blockons-bttbtn.right {
 	right: 12px;
 }
@@ -80,7 +103,119 @@
 	opacity: 1;
 	pointer-events: initial;
 }
+
+/* -- Progress Button -- */
+.blockons-bttbtn-progress {
+	display: flex;
+	flex-flow: row;
+	margin: 0 auto;
+	justify-content: center;
+	position: fixed;
+	bottom: 12px;
+	font-size: 22px;
+	z-index: 99;
+	cursor: pointer;
+}
+.blockons-bttbtn-progress:hover {
+	filter: brightness(96%);
+}
+.blockons-bttbtn-progress.right {
+	right: 12px;
+}
+.blockons-bttbtn-progress.left {
+	left: 12px;
+}
+.blockons-bttbtn-progress.completed .progress-bar {
+	stroke-dashoffset: 0 !important;
+}
+.blockons-bttbtn-progress svg {
+	position: sticky;
+	transform: rotate(-90deg);
+}
+.blockons-bttbtn-progress svg circle {
+	stroke: rgb(0 0 0 / 18%);
+	stroke-width: 2px;
+	/* stroke-linecap: round; */
+	fill: #fff;
+}
+.blockons-bttbtn-progress.nobg svg circle {
+	fill: none !important;
+}
+.blockons-bttbtn-progress svg .progress-bar {
+	transition: stroke-dashoffset 0 ease-in-out;
+	stroke: #000;
+	stroke-width: 2px;
+}
+.blockons-bttbtn-progress .pct {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: 0;
+	z-index: 4;
+	color: inherit;
+	transform: translate(-50%, -50%);
+	font-feature-settings: "tnum";
+	font-variant-numeric: tabular-nums;
+}
+
 /* -- Settings Overrides -- */
-.blockons-settings .blockons-bttbtn.left {
-	left: auto;
+.blockons-settings .blockons-bttbtn.left,
+.blockons-settings .blockons-bttbtn-progress.left {
+	z-index: 9999;
+}
+
+/**
+ * Scroll Indicator
+ */
+.blockons-scroll-indicator {
+	background: #ccc;
+	height: 6px;
+}
+.blockons-scroll-indicator.nobg {
+	background: none !important;
+}
+.blockons-scroll-indicator {
+	position: fixed;
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: 999;
+}
+.blockons-scroll-indicator.bottom {
+	bottom: 0;
+}
+.blockons-scroll-indicator.top {
+	top: 0;
+}
+.blockons-scroll-indicator .progressbar {
+	height: 6px;
+	background: #af2dbf;
+	width: 0%;
+}
+/* -- Settings Overrides -- */
+body.wp-admin.admin-bar .blockons-settings .blockons-scroll-indicator {
+	position: fixed;
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: 9999;
+}
+.blockons-settings .blockons-scroll-indicator.top {
+	top: 0;
+}
+.blockons-settings .blockons-scroll-indicator.bottom {
+	bottom: 0;
+}
+body.wp-admin.admin-bar .blockons-settings .blockons-scroll-indicator.top,
+body.wp-admin.admin-bar .blockons-settings .blockons-page-loader {
+	top: 32px;
+}
+.blockons-settings .blockons-scroll-indicator {
+	z-index: 9999;
+}
+@media only screen and (max-width: 782px) {
+	body.wp-admin.admin-bar .blockons-settings .blockons-scroll-indicator.top,
+	body.wp-admin.admin-bar .blockons-settings .blockons-page-loader {
+		top: 46px;
+	}
 }

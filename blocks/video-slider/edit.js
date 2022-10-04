@@ -219,7 +219,7 @@ const Edit = (props) => {
 					</div>
 
 					<img
-						src={`${siteObj.pluginUrl}assets/images/videoslider-placeholder.jpg`}
+						src={`${blockonsObj.pluginUrl}assets/images/videoslider-placeholder.jpg`}
 					/>
 
 					{isSelected && (

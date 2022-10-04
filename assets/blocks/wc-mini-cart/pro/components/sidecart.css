@@ -96,9 +96,13 @@ body.blockons-show-sidecart .blockons-side-cart-block.left {
 	margin: 0;
 	padding: 0;
 	font-size: inherit;
+	color: inherit;
 }
 .blockons-side-cart-header h6 {
 	font-size: 1.2em;
+}
+.blockons-side-cart-header p {
+	opacity: 0.75;
 }
 .blockons-side-cart-content {
 	background-color: inherit;
@@ -160,16 +164,18 @@ body.blockons-show-sidecart .blockons-side-cart-block.left {
 	height: 25px;
 	position: absolute;
 	top: 50%;
-	left: 0;
-	right: auto;
 	margin: -10px 0 0;
-	font-size: 16px;
-	font-weight: 700;
 	text-decoration: none;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: #cecece !important;
+	left: auto;
+	right: 0;
+	font-family: "Font Awesome 6 Free";
+	font-weight: 900;
+	font-size: 0;
+	color: inherit !important;
+	opacity: 0.4;
 }
 .blockons-side-cart-content
 	.blockons-mini-crt
@@ -211,17 +217,6 @@ body.blockons-show-sidecart .blockons-side-cart-block.left {
 	a {
 	font-size: 16px;
 	margin: 0 0 5px;
-}
-.blockons-side-cart-content
-	.blockons-mini-crt
-	ul.woocommerce-mini-cart.cart_list
-	li.woocommerce-mini-cart-item
-	a.remove {
-	left: auto;
-	right: 0;
-	font-family: "Font Awesome 6 Free";
-	font-weight: 900;
-	font-size: 0;
 }
 .blockons-side-cart-content
 	.blockons-mini-crt

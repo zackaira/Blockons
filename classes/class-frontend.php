@@ -21,6 +21,24 @@ class Blockons_Frontend {
 		if (isset($blockonsOptions->bttb->enabled) && $blockonsOptions->bttb->enabled == true) {
 			add_action('wp_footer', array( $this, 'blockons_add_footer_bttb' ), 10, 1);
 		}
+		if (isset($blockonsOptions->scrollindicator->enabled) && $blockonsOptions->scrollindicator->enabled == true) {
+			if (isset($blockonsOptions->scrollindicator->position) && $blockonsOptions->scrollindicator->enabled == 'bottom') {
+				add_action('wp_footer', array( $this, 'blockons_add_scroll_indicator' ), 10, 1);
+			} else {
+				add_action('wp_body_open', array( $this, 'blockons_add_scroll_indicator' ), 10, 1);
+			}
+		}
+		if (isset($blockonsOptions->pageloader->enabled) && $blockonsOptions->pageloader->enabled == true) {
+			add_action('wp_footer', array( $this, 'blockons_add_footer_page_loader' ), 10, 1);
+		}
+	}
+
+	/**
+	 * Add Back to Top Button
+	 */
+	public function blockons_add_footer_page_loader() {
+		// Add Side Cart Element
+		echo '<div id="blockons-pageloader"></div>';
 	}
 
 	/**
@@ -29,6 +47,14 @@ class Blockons_Frontend {
 	public function blockons_add_footer_bttb() {
 		// Add Side Cart Element
 		echo '<div id="blockons-bttb"></div>';
+	}
+
+	/**
+	 * Add Back to Top Button
+	 */
+	public function blockons_add_scroll_indicator() {
+		// Add Side Cart Element
+		echo '<div id="blockons-scroll-indicator"></div>';
 	}
 
 	/**

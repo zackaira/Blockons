@@ -1,4 +1,4 @@
 /*
- * Empty file to localize siteObj.apiUrl, used in edit.js
+ * Empty file to localize blockonsObj.apiUrl, used in edit.js
  */
-// console.log(siteObj);
+// console.log(blockonsObj);

@@ -63,7 +63,7 @@ class Blockons {
 		wp_register_style( 'blockons-fontawesome', BLOCKONS_PLUGIN_URL . 'assets/font-awesome/css/all.min.css', array(), BLOCKONS_PLUGIN_VERSION );
 		// JS URLs file/object for featured product, video slider, image carousel
 		wp_register_script( 'blockons-js', BLOCKONS_PLUGIN_URL . 'assets/blocks/blockons.js', array(), BLOCKONS_PLUGIN_VERSION );
-		wp_localize_script( 'blockons-js', 'siteObj', array(
+		wp_localize_script( 'blockons-js', 'blockonsObj', array(
 			'siteUrl' => esc_url( home_url('/') ),
 			'apiUrl' => esc_url( get_rest_url() ),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
@@ -128,10 +128,10 @@ class Blockons {
 		
 		// Frontend JS
 		wp_register_script( 'blockons-frontend-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.js'), array('wp-i18n'), BLOCKONS_PLUGIN_VERSION, true );
-		wp_localize_script('blockons-frontend-script', 'siteObj', array(
+		wp_localize_script('blockons-frontend-script', 'blockonsObj', array(
 			'siteUrl' => esc_url(home_url('/')),
 			'blockonsOptions' => $blockonsOptions,
-			// 'can_use_premium_code' => blockons_fs()->can_use_premium_code(),
+			'isPremium' => blockons_fs()->can_use_premium_code(),
 		));
 		wp_enqueue_script('blockons-frontend-script');
 
@@ -160,7 +160,7 @@ class Blockons {
 
 		// Admin JS
 		wp_register_script( 'blockons-admin-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/admin' . $suffix . '.js'), array(), BLOCKONS_PLUGIN_VERSION, true );
-		wp_localize_script('blockons-admin-script', 'siteObj', array(
+		wp_localize_script('blockons-admin-script', 'blockonsObj', array(
 			'apiUrl' => esc_url( get_rest_url() ),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 			'nonce' => wp_create_nonce('wp_rest'),
@@ -185,7 +185,7 @@ class Blockons {
 
 		// Settings JS
 		wp_register_script( 'blockons-admin-settings-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/settings' . $suffix . '.js'), array('wp-i18n'), BLOCKONS_PLUGIN_VERSION, true );
-		wp_localize_script('blockons-admin-settings-script', 'siteObj', array(
+		wp_localize_script('blockons-admin-settings-script', 'blockonsObj', array(
 			'apiUrl' => esc_url( get_rest_url() ),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 			'nonce' => wp_create_nonce('wp_rest'),
@@ -269,8 +269,19 @@ class Blockons {
 				"wc_featured_product" => true, // 2
 				"wc_mini_cart" => true, // 1
 			),
+			"pageloader" => array(
+				"enabled" => false,
+			),
 			"bttb" => array(
 				"enabled" => false,
+				"position" => "right",
+				"type" => "plain",
+				"has_bg" => true,
+			),
+			"scrollindicator" => array(
+				"enabled" => false,
+				"position" => "top",
+				"height" => 6,
 				"has_bg" => true,
 			),
 			"sidecart" => array(

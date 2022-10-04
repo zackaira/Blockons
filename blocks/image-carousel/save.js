@@ -63,7 +63,7 @@ const Save = ({ attributes }) => {
 						)
 					) : (
 						<img
-							src={`${siteObj.pluginUrl}assets/images/${attributes.imageProportion}.png`}
+							src={`${blockonsObj.pluginUrl}assets/images/${attributes.imageProportion}.png`}
 							alt={slideItem.alt}
 						/>
 					)}

@@ -1,4 +1,4 @@
-// Localized JS object - siteObj
+// Localized JS object - blockonsObj
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Loader from "../../../../../src/backend/Loader";

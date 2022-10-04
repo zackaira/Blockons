@@ -1,4 +1,4 @@
-// Localized JS object - siteObj
+// Localized JS object - blockonsObj
 import React, { useState, useEffect } from "react";
 import { __ } from "@wordpress/i18n";
 import axios from "axios";
@@ -8,18 +8,22 @@ import SettingBlock from "./components/SettingBlock";
 import InfoTab from "./InfoTab";
 import Loader from "./Loader";
 import { blockonsGroupSettings, blockListSettings } from "./helpers";
+import PageLoader from "../frontend/site-addons/PageLoader";
 import BackToTop from "../frontend/site-addons/BackToTop";
+import ScrollIndicator from "../frontend/site-addons/ScrollIndicator";
 
 const Settings = () => {
-	const siteObject = siteObj;
-	const url = `${siteObject.apiUrl}blcns/v1`;
+	const blockonsObject = blockonsObj;
+	const url = `${blockonsObject.apiUrl}blcns/v1`;
 	const [loader, setLoader] = useState(false);
 	const [loadSetting, setLoadSetting] = useState(true);
-	const isPremium = Boolean(siteObject.isPremium);
-	const wcActive = Boolean(siteObject.wcActive);
-	const defaults = siteObject.blockonsDefaults;
+	const isPremium = Boolean(blockonsObject.isPremium);
+	const wcActive = Boolean(blockonsObject.wcActive);
+	const defaults = blockonsObject.blockonsDefaults;
 
+	const [showPageLoaderPreview, setShowPageLoaderPreview] = useState(false);
 	const [showBttbPreview, setShowBttbPreview] = useState(false);
+	const [showScrollIndPreview, setShowScrollIndPreview] = useState(false);
 
 	const [blockonsOptions, setBlockonsOptions] = useState({});
 
@@ -73,7 +77,7 @@ const Settings = () => {
 					// Add Nonce to prevent this working elsewhere
 					headers: {
 						"content-type": "application/json",
-						"X-WP-NONCE": siteObject.nonce,
+						"X-WP-NONCE": blockonsObject.nonce,
 					},
 				}
 			)
@@ -104,7 +108,7 @@ const Settings = () => {
 			axios
 				.delete(url + "/delete", {
 					headers: {
-						"X-WP-NONCE": siteObject.nonce,
+						"X-WP-NONCE": blockonsObject.nonce,
 					},
 				})
 				.then((res) => {
@@ -149,7 +153,7 @@ const Settings = () => {
 					<h2>{"Blockons Settings"}</h2>
 					<div className="blockonsSettingBarOptions">
 						<a
-							href={siteObject.accountUrl}
+							href={blockonsObject.accountUrl}
 							className="blockons-account"
 							title={__("My Account", "blockons")}
 						></a>
@@ -170,13 +174,11 @@ const Settings = () => {
 										{__("Blocks", "blockons")}
 									</a>
 								</li>
-								{isPremium && (
-									<li>
-										<a id="blockonstab-2" className="blockons-tab">
-											{__("Site Add-Ons", "blockons")}
-										</a>
-									</li>
-								)}
+								<li>
+									<a id="blockonstab-2" className="blockons-tab">
+										{__("Site Add-Ons", "blockons")}
+									</a>
+								</li>
 
 								<li className="help">
 									<a id="blockonstab-help" className="blockons-tab">
@@ -259,6 +261,135 @@ const Settings = () => {
 										<table className="form-table" role="presentation">
 											<tbody>
 												<SettingRow
+													title={__("Website Page Loader", "blockons")}
+													description={__(
+														"Add a global loader that displays while your page loads.",
+														"blockons"
+													)}
+													inputType="heading"
+												/>
+												<SettingRow
+													title={__("Enable Page Loader", "blockons")}
+													slug="pageloader_enabled"
+													value={blockonsOptions.pageloader?.enabled}
+													inputType="toggle"
+													onChange={handleChange}
+												/>
+
+												{blockonsOptions.pageloader?.enabled && (
+													<>
+														<SettingRow
+															title={__("Show Preview", "blockons")}
+															slug="pageloader_preview"
+															value={showPageLoaderPreview}
+															inputType="toggle"
+															onChange={() =>
+																setShowPageLoaderPreview((state) => !state)
+															}
+														/>
+														<SettingRow
+															title={__("Loader Style", "blockons")}
+															slug="scrollindicator_style"
+															value={blockonsOptions.scrollindicator?.style}
+															inputType="select"
+															options={{
+																one: "Circular",
+																two: "Spinning",
+																three: "Another",
+																four: "A Round One",
+																five: "Different Type",
+																six: "Going Around",
+															}}
+															onChange={handleChange}
+														/>
+													</>
+												)}
+
+												<SettingRow
+													title={__("Page Scroll Indicator", "blockons")}
+													description={__(
+														"Add a scroll progress indicator bar to your website.",
+														"blockons"
+													)}
+													inputType="heading"
+												/>
+												<SettingRow
+													title={__("Enable Scroll Indicator", "blockons")}
+													slug="scrollindicator_enabled"
+													value={blockonsOptions.scrollindicator?.enabled}
+													inputType="toggle"
+													onChange={handleChange}
+												/>
+
+												{blockonsOptions.scrollindicator?.enabled && (
+													<>
+														<SettingRow
+															title={__("Show Preview", "blockons")}
+															slug="scrollindicator_preview"
+															value={showScrollIndPreview}
+															inputType="toggle"
+															onChange={() =>
+																setShowScrollIndPreview((state) => !state)
+															}
+														/>
+
+														<SettingRow
+															title={__("Position", "blockons")}
+															slug="scrollindicator_position"
+															value={blockonsOptions.scrollindicator?.position}
+															inputType="select"
+															options={{
+																top: "Top of Website",
+																bottom: "Bottom of Website",
+															}}
+															onChange={handleChange}
+														/>
+														<SettingGroup
+															label={__("Edit Scroll Indicator", "blockons")}
+														>
+															<SettingRow
+																title={__("Height", "blockons")}
+																slug="scrollindicator_height"
+																value={blockonsOptions.scrollindicator?.height}
+																inputType="range"
+																defaultValue={6}
+																min={1}
+																max={20}
+																suffix="px"
+																onChange={handleChange}
+															/>
+															<SettingRow
+																title={__("Has Background", "blockons")}
+																slug="scrollindicator_has_bg"
+																value={blockonsOptions.scrollindicator?.has_bg}
+																inputType="toggle"
+																onChange={handleChange}
+															/>
+															{blockonsOptions.scrollindicator?.has_bg && (
+																<SettingRow
+																	title={__("Background Color", "blockons")}
+																	slug="scrollindicator_bgcolor"
+																	value={
+																		blockonsOptions.scrollindicator?.bgcolor
+																	}
+																	inputType="colorpicker"
+																	defaultValue="#ebebeb"
+																	onChange={handleChange}
+																/>
+															)}
+															<SettingRow
+																title={__("Scroll Indicator Color", "blockons")}
+																slug="scrollindicator_color"
+																value={blockonsOptions.scrollindicator?.color}
+																inputType="colorpicker"
+																defaultValue="#AF2DBF"
+																onChange={handleChange}
+															/>
+														</SettingGroup>
+													</>
+												)}
+
+												<SettingRow
 													title={__("Back To Top Button", "blockons")}
 													description={__(
 														"Add a back to top button to your website",
@@ -286,6 +417,30 @@ const Settings = () => {
 																setShowBttbPreview((state) => !state)
 															}
 														/>
+
+														<SettingRow
+															title={__("Type", "blockons")}
+															slug="bttb_type"
+															value={blockonsOptions.bttb?.type}
+															inputType="select"
+															options={{
+																plain: "plain",
+																scroll: "Scroll Progress",
+															}}
+															onChange={handleChange}
+														/>
+
+														{!isPremium &&
+															blockonsOptions.bttb?.type === "scroll" && (
+																<SettingRow
+																	title={__("Premium Feature", "blockons")}
+																	desc={__(
+																		"This will add a Back To Top button with a Scroll Progress Indicator, visually showing the user how far they have scrolled on the page. This feature is only available in Blockons Pro.",
+																		"blockons"
+																	)}
+																	inputType="pronote"
+																/>
+															)}
 
 														<SettingRow
 															title={__("Position", "blockons")}
@@ -322,14 +477,33 @@ const Settings = () => {
 																slug="bttb_size"
 																value={blockonsOptions.bttb?.size}
 																inputType="range"
-																defaultValue={50}
+																defaultValue={
+																	blockonsOptions.bttb?.type === "scroll"
+																		? 60
+																		: 45
+																}
 																min={30}
 																max={100}
 																suffix="px"
 																onChange={handleChange}
 															/>
+															{blockonsOptions.bttb?.type === "plain" && (
+																<SettingRow
+																	title={__("Border Radius", "blockons")}
+																	slug="bttb_bradius"
+																	value={blockonsOptions.bttb?.bradius}
+																	inputType="range"
+																	defaultValue={4}
+																	min={0}
+																	max={blockonsOptions.bttb?.size}
+																	// step={0.01}
+																	suffix="px"
+																	onChange={handleChange}
+																/>
+															)}
+
 															<SettingRow
-																title={__("Size", "blockons")}
+																title={__("Icon Size", "blockons")}
 																slug="bttb_icon_size"
 																value={blockonsOptions.bttb?.icon_size}
 																inputType="range"
@@ -385,7 +559,7 @@ const Settings = () => {
 																	slug="bttb_bgcolor"
 																	value={blockonsOptions.bttb?.bgcolor}
 																	inputType="colorpicker"
-																	defaultValue="#000"
+																	defaultValue="#FFF"
 																	onChange={handleChange}
 																/>
 															)}
@@ -394,9 +568,32 @@ const Settings = () => {
 																slug="bttb_color"
 																value={blockonsOptions.bttb?.color}
 																inputType="colorpicker"
-																defaultValue="#FFF"
+																defaultValue="#000"
 																onChange={handleChange}
 															/>
+															{blockonsOptions.bttb?.type === "scroll" && (
+																<>
+																	<SettingRow
+																		title={__("Stroke Color", "blockons")}
+																		slug="bttb_strcolor"
+																		value={blockonsOptions.bttb?.strcolor}
+																		inputType="colorpicker"
+																		defaultValue="#000"
+																		onChange={handleChange}
+																	/>
+																	<SettingRow
+																		title={__("Stroke Width", "blockons")}
+																		slug="bttb_strwidth"
+																		value={blockonsOptions.bttb?.strwidth}
+																		inputType="range"
+																		defaultValue={2}
+																		min={1}
+																		max={6}
+																		suffix="px"
+																		onChange={handleChange}
+																	/>
+																</>
+															)}
 														</SettingGroup>
 													</>
 												)}
@@ -418,6 +615,14 @@ const Settings = () => {
 															value={blockonsOptions.sidecart?.enabled}
 															inputType="toggle"
 															onChange={handleChange}
+															note={
+																blockonsOptions.sidecart?.enabled
+																	? __(
+																			'Add the CSS class "blockons-opencart" to any element(s) to trigger the Side Cart open or close, or use the WC Mini Cart block with the Side Cart option.',
+																			"blockons"
+																	  )
+																	: ""
+															}
 														/>
 
 														{blockonsOptions.sidecart?.enabled && (
@@ -604,7 +809,7 @@ const Settings = () => {
 									<div id="blockons-content-help" className="blockons-content">
 										<InfoTab
 										// isPro={isPremium}
-										// upgrade={siteObject.upgradeUrl}
+										// upgrade={blockonsObject.upgradeUrl}
 										/>
 									</div>
 								</div>
@@ -640,7 +845,18 @@ const Settings = () => {
 					</form>
 				</div>
 
-				{showBttbPreview && <BackToTop bttOptions={blockonsOptions.bttb} />}
+				{showPageLoaderPreview && (
+					<PageLoader
+						pageLoaderOptions={blockonsOptions.pageloader}
+						isPro={isPremium}
+					/>
+				)}
+				{showBttbPreview && (
+					<BackToTop bttOptions={blockonsOptions.bttb} isPro={isPremium} />
+				)}
+				{showScrollIndPreview && (
+					<ScrollIndicator scrollInOptions={blockonsOptions.scrollindicator} />
+				)}
 			</div>
 		</React.Fragment>
 	);

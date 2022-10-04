@@ -188,7 +188,7 @@ const Edit = (props) => {
 							)
 						) : (
 							<img
-								src={`${siteObj.pluginUrl}assets/images/${imageProportion}.png`}
+								src={`${blockonsObj.pluginUrl}assets/images/${imageProportion}.png`}
 								alt={slideItem.alt}
 							/>
 						)}

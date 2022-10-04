@@ -25,9 +25,19 @@ const SettingRow = (props) => {
 		theInput = <ColorPicker {...props} />;
 	} else if (props.inputType === "heading") {
 		return (
-			<tr className={"blockons-row"}>
+			<tr className="blockons-row heading">
 				<td colSpan={2}>
 					<Heading {...props} />
+				</td>
+			</tr>
+		);
+	} else if (props.inputType === "pronote") {
+		return (
+			<tr className="blockons-row pronote">
+				<th>&nbsp;</th>
+				<td>
+					{props.title && <h6>{props.title}:</h6>}
+					{props.desc && <p>{props.desc}</p>}
 				</td>
 			</tr>
 		);
@@ -37,7 +47,7 @@ const SettingRow = (props) => {
 
 	return (
 		<React.Fragment>
-			<tr className={"blockons-row"}>
+			<tr className="blockons-row">
 				<th scope="row">
 					<label htmlFor={props.parent != "" ? theTitleSlug : props.value}>
 						{props.title}

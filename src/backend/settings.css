@@ -306,7 +306,7 @@ a.blockons-docs::before {
 
 /* -- Table Styling -- */
 .blockonsheading {
-	margin: 40px -10px 0;
+	margin: 25px -10px 0;
 }
 .blockonsheading.nomargin {
 	margin-top: 0;
@@ -318,6 +318,7 @@ a.blockons-docs::before {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 	font-size: 22px;
 	font-weight: 500;
+	color: #af2dbf;
 	margin: 0;
 	padding: 0 0 8px;
 }
@@ -449,6 +450,28 @@ a.blockons-docs::before {
 .blockons-row:hover .blockons-row-col-right {
 	visibility: visible;
 	opacity: 1;
+}
+.blockons-row.heading th,
+.blockons-row.heading td {
+	padding-bottom: 0;
+}
+.blockons-row.pronote th {
+	padding: 0 10px 0 0;
+}
+.blockons-row.pronote td {
+	padding: 0 15px;
+}
+.blockons-row.pronote h6 {
+	margin: 0;
+	padding: 0;
+	color: #af2dbf;
+	font-size: 16px;
+	font-weight: 500;
+}
+.blockons-row.pronote p {
+	margin: 2px 0 10px;
+	opacity: 0.6;
+	font-size: 12px;
 }
 
 /* -- Toggle Switch -- */
@@ -722,6 +745,7 @@ a.blockons-docs::before {
 .blockons-group-container .blockons-row input[type="number"] {
 	padding: 2px 8px;
 }
+
 /* -- Range Input -- */
 .blockonsRange {
 	max-width: 440px;
