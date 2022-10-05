@@ -289,19 +289,84 @@ const Settings = () => {
 														/>
 														<SettingRow
 															title={__("Loader Style", "blockons")}
-															slug="scrollindicator_style"
-															value={blockonsOptions.scrollindicator?.style}
+															slug="pageloader_style"
+															value={blockonsOptions.pageloader?.style}
 															inputType="select"
 															options={{
-																one: "Circular",
-																two: "Spinning",
-																three: "Another",
-																four: "A Round One",
-																five: "Different Type",
-																six: "Going Around",
+																one: "Dual Ring Spinner",
+																two: "Loading Bars",
+																three: "Circular Ripple",
+																four: "Loading Ring Spinner",
+																five: "Clock Spinner",
+																six: "Circle Roller",
 															}}
 															onChange={handleChange}
 														/>
+
+														<SettingGroup
+															label={__("Edit Page Loader", "blockons")}
+														>
+															<SettingRow
+																title={__("Add Loading Text", "blockons")}
+																slug="pageloader_has_text"
+																value={blockonsOptions.pageloader?.has_text}
+																inputType="toggle"
+																onChange={handleChange}
+															/>
+															{blockonsOptions.pageloader?.has_text && (
+																<>
+																	<SettingRow
+																		title={__("Text")}
+																		slug="pageloader_text"
+																		value={blockonsOptions.pageloader?.text}
+																		placeholder="Loading Website..."
+																		inputType="text"
+																		onChange={handleChange}
+																	/>
+																	<SettingRow
+																		title={__("Position", "blockons")}
+																		slug="pageloader_text_position"
+																		value={
+																			blockonsOptions.pageloader?.text_position
+																		}
+																		inputType="select"
+																		options={{
+																			one: "Top Center",
+																			two: "Bottom Center",
+																			three: "Above Loader",
+																			four: "Below Loader",
+																		}}
+																		onChange={handleChange}
+																	/>
+																</>
+															)}
+															<SettingRow
+																title={__("Background Color", "blockons")}
+																slug="pageloader_bgcolor"
+																value={blockonsOptions.pageloader?.bgcolor}
+																inputType="colorpicker"
+																defaultValue="#FFF"
+																onChange={handleChange}
+															/>
+															<SettingRow
+																title={__("Loader Color", "blockons")}
+																slug="pageloader_loadcolor"
+																value={blockonsOptions.pageloader?.loadcolor}
+																inputType="colorpicker"
+																defaultValue="#AF2DBF"
+																onChange={handleChange}
+															/>
+															{blockonsOptions.pageloader?.has_text && (
+																<SettingRow
+																	title={__("Font Color", "blockons")}
+																	slug="pageloader_fcolor"
+																	value={blockonsOptions.pageloader?.fcolor}
+																	inputType="colorpicker"
+																	defaultValue="#222"
+																	onChange={handleChange}
+																/>
+															)}
+														</SettingGroup>
 													</>
 												)}
 
@@ -396,7 +461,6 @@ const Settings = () => {
 														"blockons"
 													)}
 													inputType="heading"
-													nomargin
 												/>
 												<SettingRow
 													title={__("Enable Back To Top Button", "blockons")}
@@ -757,7 +821,7 @@ const Settings = () => {
 																	<SettingRow
 																		title={__("Font Color", "blockons")}
 																		slug="sidecart_color"
-																		value={blockonsOptions.sidecart?.fcolor}
+																		value={blockonsOptions.sidecart?.color}
 																		inputType="colorpicker"
 																		defaultValue="#333"
 																		onChange={handleChange}

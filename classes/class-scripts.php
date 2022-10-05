@@ -271,6 +271,10 @@ class Blockons {
 			),
 			"pageloader" => array(
 				"enabled" => false,
+				"style" => "one",
+				"has_text" => false,
+				"text" => "Loading Website...",
+				"text_position" => "one",
 			),
 			"bttb" => array(
 				"enabled" => false,

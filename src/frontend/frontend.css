@@ -55,9 +55,31 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-direction: column;
 	z-index: 9999;
 }
-
+.blockons-pageloader-text {
+	width: 100%;
+	text-align: center;
+}
+.blockons-pageloader-text.one {
+	position: absolute;
+	top: 20px;
+}
+.blockons-pageloader-text.two {
+	position: absolute;
+	bottom: 20px;
+}
+.blockons-pageloader-text.three {
+	margin: 0 0 20px;
+}
+.blockons-pageloader-text.four {
+	margin: 20px 0 0;
+}
+.blockons-pageloader-txt {
+	font-size: 14px;
+	color: #222;
+}
 .blockons-settings .blockons-page-loader {
 	box-shadow: -1px 0 5px rgb(0 0 0 / 20%);
 }
