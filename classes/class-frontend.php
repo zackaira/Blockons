@@ -29,15 +29,25 @@ class Blockons_Frontend {
 			}
 		}
 		if (isset($blockonsOptions->pageloader->enabled) && $blockonsOptions->pageloader->enabled == true) {
-			add_action('wp_footer', array( $this, 'blockons_add_footer_page_loader' ), 10, 1);
+			add_filter('body_class', array( $this, 'blockons_add_loader_body_class' ));
+			add_action('wp_head', array( $this, 'blockons_add_header_loader_style' ));
+			add_action('wp_body_open', array( $this, 'blockons_add_footer_page_loader' ), 10, 1);
 		}
 	}
 
 	/**
-	 * Add Back to Top Button
+	 * Add Page Loader Functionality
 	 */
+	public function blockons_add_loader_body_class( $classes ) {
+		$classes[] = 'blockons-page-loading';
+		return $classes;
+	}
+	public function blockons_add_header_loader_style() {
+		$blockonsSavedOptions = get_option('blockons_options');
+		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : ''; ?>
+		<style type="text/css">body.blockons-page-loading { background-color: <?php echo (isset($blockonsOptions->pageloader->enabled)) ? $blockonsOptions->pageloader->bgcolor : 'inherit'; ?>; }</style><?php
+	}
 	public function blockons_add_footer_page_loader() {
-		// Add Side Cart Element
 		echo '<div id="blockons-pageloader"></div>';
 	}
 
@@ -45,7 +55,6 @@ class Blockons_Frontend {
 	 * Add Back to Top Button
 	 */
 	public function blockons_add_footer_bttb() {
-		// Add Side Cart Element
 		echo '<div id="blockons-bttb"></div>';
 	}
 
@@ -53,7 +62,6 @@ class Blockons_Frontend {
 	 * Add Back to Top Button
 	 */
 	public function blockons_add_scroll_indicator() {
-		// Add Side Cart Element
 		echo '<div id="blockons-scroll-indicator"></div>';
 	}
 

@@ -92,7 +92,7 @@
 }
 .blockons-pageloader-three div.bpl {
 	position: absolute;
-	border: 5px solid #af2dbf;
+	border: 3px solid #af2dbf;
 	opacity: 1;
 	border-radius: 50%;
 	animation: blockons-pageloader-three 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;

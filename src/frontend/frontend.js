@@ -1,20 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import PageLoader from "./site-addons/PageLoader";
 import BackToTop from "./site-addons/BackToTop";
 import ScrollIndicator from "./site-addons/ScrollIndicator";
 import "./frontend.css";
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 	// Website Page Loader
 	const blockonsPageLoader = document.getElementById("blockons-pageloader");
 	if (typeof blockonsPageLoader !== undefined && blockonsPageLoader !== null) {
 		ReactDOM.render(
-			<BackToTop
-				bttOptions={blockonsObj.blockonsOptions?.pageloader}
+			<PageLoader
+				pageLoaderOptions={blockonsObj.blockonsOptions?.pageloader}
 				isPro={blockonsObj.isPremium}
 			/>,
 			document.getElementById("blockons-pageloader")
 		);
+
+		setTimeout(() => {
+			document.body.classList.remove("blockons-page-loading");
+
+			setTimeout(() => {
+				document.getElementById("blockons-pageloader").remove();
+			}, 400);
+		}, 200);
 	}
 
 	// Back To Top Button

@@ -45,18 +45,41 @@
 /**
  * Website Page Loader
  */
+body.blockons-page-loading {
+	overflow: hidden;
+}
+body.blockons-page-loading::before {
+	display: block;
+	content: " ";
+	background-color: inherit;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 9998;
+}
 .blockons-page-loader {
 	position: fixed;
 	top: 0;
 	right: 0;
+	left: 0;
 	bottom: 0;
-	width: 22%;
+	width: 100%;
 	background-color: #fff;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	z-index: 9999;
+	opacity: 0;
+	transition: opacity 0.4s ease-in-out 0s;
+}
+body.blockons-page-loading .blockons-page-loader {
+	opacity: 1;
+}
+body.blockons-page-loading.blockons-page-loaded {
+	opacity: 0;
 }
 .blockons-pageloader-text {
 	width: 100%;
@@ -82,6 +105,19 @@
 }
 .blockons-settings .blockons-page-loader {
 	box-shadow: -1px 0 5px rgb(0 0 0 / 20%);
+	opacity: 1 !important;
+}
+.blockons-settings .blockons-page-loader {
+	width: 22%;
+	left: auto;
+}
+body.admin-bar .blockons-page-loader {
+	top: 32px;
+}
+@media only screen and (max-width: 782px) {
+	body.admin-bar .blockons-page-loader {
+		top: 46px;
+	}
 }
 
 /**
