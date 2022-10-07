@@ -135,7 +135,6 @@ const Edit = (props) => {
 						title={__("Line Heading Design", "blockons")}
 						initialOpen={false}
 					>
-						{console.log(headFontSize)}
 						<TextControl
 							label={__("Font Size", "blockons")}
 							value={headFontSize}

@@ -531,7 +531,7 @@ const Edit = (props) => {
 								onChange={onChangeInputText}
 								allowedFormats={["core/bold", "core/italic"]}
 								placeholder={__("Add Placeholder...", "blockons")}
-								multiline={false}
+								disableLineBreaks
 							/>
 							<RichText
 								tagName="div"
@@ -543,7 +543,7 @@ const Edit = (props) => {
 									color: searchBtnColor,
 								}}
 								allowedFormats={["core/bold", "core/italic"]}
-								multiline={false}
+								disableLineBreaks
 							/>
 						</div>
 
@@ -584,7 +584,7 @@ const Edit = (props) => {
 								onChange={onChangeInputText}
 								allowedFormats={["core/bold", "core/italic"]}
 								placeholder={__("Add Placeholder...", "blockons")}
-								multiline={false}
+								disableLineBreaks
 							/>
 							<RichText
 								tagName="div"
@@ -596,7 +596,7 @@ const Edit = (props) => {
 									color: searchBtnColor,
 								}}
 								allowedFormats={["core/bold", "core/italic"]}
-								multiline={false}
+								disableLineBreaks
 							/>
 						</div>
 						{isPremium && searchPro && (
@@ -636,7 +636,7 @@ const Edit = (props) => {
 									onChange={onChangeInputText}
 									allowedFormats={["core/bold", "core/italic"]}
 									placeholder={__("Add Placeholder...", "blockons")}
-									multiline={false}
+									disableLineBreaks
 								/>
 								<RichText
 									tagName="div"
@@ -648,7 +648,7 @@ const Edit = (props) => {
 										color: searchBtnColor,
 									}}
 									allowedFormats={["core/bold", "core/italic"]}
-									multiline={false}
+									disableLineBreaks
 								/>
 							</div>
 

@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	if (typeof blockonsScrollInd !== undefined && blockonsScrollInd !== null) {
 		ReactDOM.render(
 			<ScrollIndicator
-				bttOptions={blockonsObj.blockonsOptions?.scrollindicator}
+				scrollInOptions={blockonsObj.blockonsOptions?.scrollindicator}
 				isPro={blockonsObj.isPremium}
 			/>,
 			document.getElementById("blockons-scroll-indicator")

@@ -305,7 +305,7 @@
 	padding: 5px 0 10px;
 	font-size: 13px;
 }
-.blockons-sresult-head {
+.blockons-search-results .blockons-sresult-head {
 	box-shadow: 0 1px 0 rgb(0 0 0 / 12%);
 	font-size: 11px;
 	margin: 0 0 5px;
@@ -320,11 +320,13 @@
 	width: 50px;
 	flex: none;
 }
-.blockons-sresult-left img {
+.blockons-search-results .blockons-sresult .blockons-sresult-left img {
+	box-shadow: none !important;
 	display: block;
-	width: 100%;
 	height: auto;
-	padding: 0 8px 0 0;
+	padding: 0 8px 0 0 !important;
+	margin: 0 !important;
+	width: 100%;
 }
 .blockons-sresult-center {
 	flex: 1;
@@ -344,17 +346,21 @@
 	font-size: 0.9em;
 	opacity: 0.55;
 }
-.blockons-sresult-title {
+.blockons-sresult-right ins {
+	background: none;
+}
+.blockons-search-results .blockons-sresult .blockons-sresult-title {
 	margin: 0 0 3px;
 	padding: 0;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: 500;
+	line-height: 1;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	color: #000;
 }
-.blockons-sresult-desc {
+.blockons-search-results .blockons-sresult .blockons-sresult-desc {
 	margin: 0;
 	padding: 0;
 	font-size: 12px;

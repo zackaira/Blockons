@@ -250,6 +250,14 @@ body.admin-bar .blockons-page-loader {
 	background: #af2dbf;
 	width: 0%;
 }
+body.admin-bar .blockons-scroll-indicator.top {
+	top: 32px;
+}
+@media only screen and (max-width: 782px) {
+	body.admin-bar .blockons-scroll-indicator.top {
+		top: 46px;
+	}
+}
 /* -- Settings Overrides -- */
 body.wp-admin.admin-bar .blockons-settings .blockons-scroll-indicator {
 	position: fixed;
