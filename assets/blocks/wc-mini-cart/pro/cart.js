@@ -22,8 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	if (blockonsSideCart) {
-		console.log(blockonsSideCart.classList[0]);
-
 		const sideCartParent = document.querySelector(
 			".blockons-side-cart-block .blockons-side-cart-content"
 		);

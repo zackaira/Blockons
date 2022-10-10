@@ -20,8 +20,6 @@ const PageLoader = ({ pageLoaderOptions }) => {
 			: {}),
 	};
 
-	console.log("where is it?");
-
 	return (
 		<React.Fragment>
 			<div

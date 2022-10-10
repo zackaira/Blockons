@@ -260,7 +260,7 @@ class Blockons {
 				"icon_list" => true, // 11
 				"image_carousel" => true, // 10
 				"line_heading" => true, // 9
-				"marketing_button" => true, // 8
+				// "marketing_button" => true, // 8
 				"progress_bars" => true, // 7
 				"search" => true, // 6
 				"testimonials" => true, // 5

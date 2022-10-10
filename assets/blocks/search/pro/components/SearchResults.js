@@ -18,7 +18,6 @@ const SearchResults = ({ searchId, searchSettings }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	let currentQuery = "";
 	const timeout = false;
-	//const searchSettings = document.getElementById('blockons-search-results-wrap');
 
 	// Search Input Event Listener
 	searchInput.addEventListener("keyup", () => {

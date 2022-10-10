@@ -48,21 +48,30 @@ class Blockons_Frontend {
 		<style type="text/css">body.blockons-page-loading { background-color: <?php echo (isset($blockonsOptions->pageloader->enabled)) ? $blockonsOptions->pageloader->bgcolor : 'inherit'; ?>; }</style><?php
 	}
 	public function blockons_add_footer_page_loader() {
-		echo '<div id="blockons-pageloader"></div>';
+		$allowed_html = array( 'div' => array('id' => array()) );
+		$html = '<div id="blockons-pageloader"></div>';
+	
+		echo wp_kses($html ,$allowed_html);
 	}
 
 	/**
 	 * Add Back to Top Button
 	 */
 	public function blockons_add_footer_bttb() {
-		echo '<div id="blockons-bttb"></div>';
+		$allowed_html = array( 'div' => array('id' => array()) );
+		$html = '<div id="blockons-bttb"></div>';
+	
+		echo wp_kses($html ,$allowed_html);
 	}
 
 	/**
 	 * Add Back to Top Button
 	 */
 	public function blockons_add_scroll_indicator() {
-		echo '<div id="blockons-scroll-indicator"></div>';
+		$allowed_html = array( 'div' => array('id' => array()) );
+		$html = '<div id="blockons-scroll-indicator"></div>';
+	
+		echo wp_kses($html ,$allowed_html);
 	}
 
 	/**
