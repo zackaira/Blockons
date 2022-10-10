@@ -9,6 +9,7 @@
 	position: relative;
 }
 .blockons-wc-account-icon {
+	display: block;
 	border-radius: 3px;
 	color: #000;
 	background-color: #fff;
@@ -21,8 +22,6 @@
 .blockons-wc-account-icon-dropdown {
 	color: inherit;
 	position: absolute;
-	right: 0;
-	top: 100%;
 	background-color: #fff;
 	border-radius: 3px;
 	box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
@@ -50,6 +49,24 @@
 .blockons-wc-account-icon-block:hover .blockons-wc-account-icon-dropdown {
 	visibility: visible;
 	opacity: 1;
+}
+
+/* -- Drop Down Position -- */
+.blockons-wc-account-icon-block.topleft .blockons-wc-account-icon-dropdown {
+	right: 0;
+	bottom: 100%;
+}
+.blockons-wc-account-icon-block.topright .blockons-wc-account-icon-dropdown {
+	left: 0;
+	bottom: 100%;
+}
+.blockons-wc-account-icon-block.bottomleft .blockons-wc-account-icon-dropdown {
+	right: 0;
+	top: 100%;
+}
+.blockons-wc-account-icon-block.bottomright .blockons-wc-account-icon-dropdown {
+	left: 0;
+	top: 100%;
 }
 
 /* -- Alignment -- */

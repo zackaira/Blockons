@@ -28,6 +28,7 @@ const Edit = (props) => {
 			alignment,
 			accountUrl,
 			hasDropdown,
+			dropPosition,
 			showDashboard,
 			showOrders,
 			showDownloads,
@@ -107,8 +108,32 @@ const Edit = (props) => {
 							checked={hasDropdown}
 							onChange={(newValue) => setAttributes({ hasDropdown: newValue })}
 						/>
+
 						{hasDropdown && (
 							<>
+								<SelectControl
+									label={__("Drop Down Position", "blockons")}
+									value={dropPosition}
+									options={[
+										{
+											label: __("Bottom Right", "blockons"),
+											value: "bottomright",
+										},
+										{
+											label: __("Bottom Left", "blockons"),
+											value: "bottomleft",
+										},
+										{ label: __("Top Right", "blockons"), value: "topright" },
+										{ label: __("Top Left", "blockons"), value: "topleft" },
+									]}
+									onChange={(newValue) =>
+										setAttributes({
+											dropPosition:
+												newValue === undefined ? "bottomleft" : newValue,
+										})
+									}
+								/>
+
 								<ToggleControl // This setting is just for displaying the drop down, value is not saved.
 									label={__("Always Show Drop Down", "blockons")}
 									checked={showDropDown}
@@ -298,9 +323,9 @@ const Edit = (props) => {
 			<div
 				className={`blockons-wc-account-icon-block ${
 					isSelected && showDropDown ? "show" : ""
-				}`}
+				} ${dropPosition ? dropPosition : "bottomleft"}`}
 			>
-				<div
+				<a
 					className={`blockons-wc-account-icon`}
 					style={{
 						backgroundColor: iconBgColor,
@@ -314,7 +339,7 @@ const Edit = (props) => {
 							color: iconColor,
 						}}
 					></span>
-				</div>
+				</a>
 				{hasDropdown && (
 					<div
 						className="blockons-wc-account-icon-dropdown"

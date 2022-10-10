@@ -237,7 +237,8 @@ const Edit = (props) => {
 									]}
 									onChange={(newValue) =>
 										setAttributes({
-											searchAlign: newValue === undefined ? "right" : newValue,
+											searchAlign:
+												newValue === undefined ? "bottomleft" : newValue,
 										})
 									}
 								/>

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-10-10T08:26:20+00:00\n"
+"POT-Creation-Date: 2022-10-10T09:19:33+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: blockons\n"
@@ -269,22 +269,22 @@ msgstr ""
 #: blocks/accordions/single-accordion.js:197
 #: blocks/icon-list/edit.js:430
 #: blocks/marketing-button/edit.js:247
-#: blocks/search/edit.js:254
-#: blocks/wc-account-icon/edit.js:221
+#: blocks/search/edit.js:255
+#: blocks/wc-account-icon/edit.js:246
 #: blocks/wc-mini-cart/edit.js:258
 #: build/accordions/index.js:462
 #: build/icon-list/index.js:712
 #: build/marketing-button/index.js:566
 #: build/search/index.js:555
-#: build/wc-account-icon/index.js:502
+#: build/wc-account-icon/index.js:522
 #: build/wc-mini-cart/index.js:538
 #: dist/settings.js:5269
 #: src/backend/Settings.js:570
 #: build/accordions/index.js:397
 #: build/icon-list/index.js:689
 #: build/marketing-button/index.js:506
-#: build/search/index.js:496
-#: build/wc-account-icon/index.js:463
+#: build/search/index.js:497
+#: build/wc-account-icon/index.js:488
 #: build/wc-mini-cart/index.js:500
 msgid "Icon Size"
 msgstr ""
@@ -293,15 +293,15 @@ msgstr ""
 #: blocks/icon-list/edit.js:308
 #: blocks/icon-list/edit.js:439
 #: blocks/marketing-button/edit.js:337
-#: blocks/search/edit.js:290
-#: blocks/wc-account-icon/edit.js:254
+#: blocks/search/edit.js:291
+#: blocks/wc-account-icon/edit.js:279
 #: blocks/wc-mini-cart/edit.js:302
 #: build/accordions/index.js:470
 #: build/icon-list/index.js:633
 #: build/icon-list/index.js:722
 #: build/marketing-button/index.js:627
 #: build/search/index.js:582
-#: build/wc-account-icon/index.js:527
+#: build/wc-account-icon/index.js:547
 #: build/wc-mini-cart/index.js:574
 #: dist/settings.js:5315
 #: dist/settings.js:5389
@@ -311,8 +311,8 @@ msgstr ""
 #: build/icon-list/index.js:567
 #: build/icon-list/index.js:698
 #: build/marketing-button/index.js:596
-#: build/search/index.js:532
-#: build/wc-account-icon/index.js:496
+#: build/search/index.js:533
+#: build/wc-account-icon/index.js:521
 #: build/wc-mini-cart/index.js:544
 msgid "Icon Color"
 msgstr ""
@@ -1054,19 +1054,25 @@ msgid "Align Drop Down Search"
 msgstr ""
 
 #: blocks/search/edit.js:221
+#: blocks/wc-account-icon/edit.js:119
 #: blocks/wc-mini-cart/edit.js:212
 #: build/search/index.js:524
+#: build/wc-account-icon/index.js:426
 #: build/wc-mini-cart/index.js:503
 #: build/search/index.js:463
+#: build/wc-account-icon/index.js:361
 #: build/wc-mini-cart/index.js:454
 msgid "Bottom Right"
 msgstr ""
 
 #: blocks/search/edit.js:225
+#: blocks/wc-account-icon/edit.js:123
 #: blocks/wc-mini-cart/edit.js:204
 #: build/search/index.js:527
+#: build/wc-account-icon/index.js:429
 #: build/wc-mini-cart/index.js:497
 #: build/search/index.js:467
+#: build/wc-account-icon/index.js:365
 #: build/wc-mini-cart/index.js:446
 msgid "Bottom Left"
 msgstr ""
@@ -1081,19 +1087,25 @@ msgid "Bottom Center"
 msgstr ""
 
 #: blocks/search/edit.js:232
+#: blocks/wc-account-icon/edit.js:126
 #: blocks/wc-mini-cart/edit.js:220
 #: build/search/index.js:533
+#: build/wc-account-icon/index.js:432
 #: build/wc-mini-cart/index.js:512
 #: build/search/index.js:474
+#: build/wc-account-icon/index.js:368
 #: build/wc-mini-cart/index.js:462
 msgid "Top Right"
 msgstr ""
 
 #: blocks/search/edit.js:233
+#: blocks/wc-account-icon/edit.js:127
 #: blocks/wc-mini-cart/edit.js:215
 #: build/search/index.js:536
+#: build/wc-account-icon/index.js:435
 #: build/wc-mini-cart/index.js:506
 #: build/search/index.js:475
+#: build/wc-account-icon/index.js:369
 #: build/wc-mini-cart/index.js:457
 msgid "Top Left"
 msgstr ""
@@ -1119,61 +1131,61 @@ msgstr ""
 msgid "Right"
 msgstr ""
 
-#: blocks/search/edit.js:248
+#: blocks/search/edit.js:249
 #: build/search/index.js:552
-#: build/search/index.js:490
+#: build/search/index.js:491
 msgid "Search Design"
 msgstr ""
 
-#: blocks/search/edit.js:265
-#: blocks/wc-account-icon/edit.js:232
+#: blocks/search/edit.js:266
+#: blocks/wc-account-icon/edit.js:257
 #: build/search/index.js:563
-#: build/wc-account-icon/index.js:510
-#: build/search/index.js:507
-#: build/wc-account-icon/index.js:474
+#: build/wc-account-icon/index.js:530
+#: build/search/index.js:508
+#: build/wc-account-icon/index.js:499
 msgid "Icon Padding"
 msgstr ""
 
-#: blocks/search/edit.js:278
-#: blocks/wc-account-icon/edit.js:244
+#: blocks/search/edit.js:279
+#: blocks/wc-account-icon/edit.js:269
 #: build/search/index.js:573
-#: build/wc-account-icon/index.js:518
-#: build/search/index.js:520
-#: build/wc-account-icon/index.js:486
+#: build/wc-account-icon/index.js:538
+#: build/search/index.js:521
+#: build/wc-account-icon/index.js:511
 msgid "Icon Background Color"
 msgstr ""
 
-#: blocks/search/edit.js:305
+#: blocks/search/edit.js:306
 #: build/search/index.js:593
-#: build/search/index.js:547
+#: build/search/index.js:548
 msgid "Search Background Color"
 msgstr ""
 
-#: blocks/search/edit.js:318
+#: blocks/search/edit.js:319
 #: build/search/index.js:602
-#: build/search/index.js:560
+#: build/search/index.js:561
 msgid "Button Background Color"
 msgstr ""
 
-#: blocks/search/edit.js:330
+#: blocks/search/edit.js:331
 #: build/search/index.js:611
-#: build/search/index.js:572
+#: build/search/index.js:573
 msgid "Button Font Color"
 msgstr ""
 
-#: blocks/search/edit.js:344
+#: blocks/search/edit.js:345
 #: build/search/index.js:620
-#: build/search/index.js:586
+#: build/search/index.js:587
 msgid "Predictive Search"
 msgstr ""
 
-#: blocks/search/edit.js:348
+#: blocks/search/edit.js:349
 #: build/search/index.js:623
-#: build/search/index.js:590
+#: build/search/index.js:591
 msgid "Enable Predictive Search"
 msgstr ""
 
-#: blocks/search/edit.js:359
+#: blocks/search/edit.js:360
 #: build/search/index.js:633
 #: dist/settings.js:5053
 #: dist/settings.js:5135
@@ -1181,109 +1193,109 @@ msgstr ""
 #: src/backend/Settings.js:282
 #: src/backend/Settings.js:392
 #: src/backend/Settings.js:476
-#: build/search/index.js:601
+#: build/search/index.js:602
 msgid "Show Preview"
 msgstr ""
 
-#: blocks/search/edit.js:364
+#: blocks/search/edit.js:365
 #: build/search/index.js:638
-#: build/search/index.js:606
+#: build/search/index.js:607
 msgid "Please see the frontend for actual results."
 msgstr ""
 
-#: blocks/search/edit.js:371
+#: blocks/search/edit.js:372
 #: build/search/index.js:640
-#: build/search/index.js:613
+#: build/search/index.js:614
 msgid "Search For:"
 msgstr ""
 
-#: blocks/search/edit.js:374
+#: blocks/search/edit.js:375
 #: build/search/index.js:643
-#: build/search/index.js:616
+#: build/search/index.js:617
 msgid "Posts"
 msgstr ""
 
-#: blocks/search/edit.js:375
+#: blocks/search/edit.js:376
 #: build/search/index.js:646
-#: build/search/index.js:617
+#: build/search/index.js:618
 msgid "Pages"
 msgstr ""
 
-#: blocks/search/edit.js:377
+#: blocks/search/edit.js:378
 #: build/search/index.js:649
-#: build/search/index.js:619
+#: build/search/index.js:620
 msgid "Products"
 msgstr ""
 
-#: blocks/search/edit.js:392
+#: blocks/search/edit.js:393
 #: build/search/index.js:659
-#: build/search/index.js:634
+#: build/search/index.js:635
 msgid "Results Amount to Display"
 msgstr ""
 
-#: blocks/search/edit.js:402
+#: blocks/search/edit.js:403
 #: build/search/index.js:668
-#: build/search/index.js:644
+#: build/search/index.js:645
 msgid "Show Categories in Search"
 msgstr ""
 
-#: blocks/search/edit.js:411
-#: blocks/search/edit.js:441
+#: blocks/search/edit.js:412
+#: blocks/search/edit.js:442
 #: build/search/index.js:676
 #: build/search/index.js:699
-#: build/search/index.js:653
-#: build/search/index.js:683
+#: build/search/index.js:654
+#: build/search/index.js:684
 msgid "Results Title"
 msgstr ""
 
-#: blocks/search/edit.js:418
-#: blocks/search/edit.js:448
+#: blocks/search/edit.js:419
+#: blocks/search/edit.js:449
 #: build/search/index.js:682
 #: build/search/index.js:705
-#: build/search/index.js:660
-#: build/search/index.js:690
+#: build/search/index.js:661
+#: build/search/index.js:691
 msgid "Amount to Display"
 msgstr ""
 
-#: blocks/search/edit.js:432
+#: blocks/search/edit.js:433
 #: build/search/index.js:691
-#: build/search/index.js:674
+#: build/search/index.js:675
 msgid "Show Tags in Search"
 msgstr ""
 
-#: blocks/search/edit.js:462
+#: blocks/search/edit.js:463
 #: build/search/index.js:714
-#: build/search/index.js:704
+#: build/search/index.js:705
 msgid "Show Image"
-msgstr ""
-
-#: blocks/search/edit.js:471
-#: build/search/index.js:722
-#: build/search/index.js:713
-msgid "Show Product Short Description"
 msgstr ""
 
 #: blocks/search/edit.js:472
 #: build/search/index.js:722
 #: build/search/index.js:714
+msgid "Show Product Short Description"
+msgstr ""
+
+#: blocks/search/edit.js:473
+#: build/search/index.js:722
+#: build/search/index.js:715
 msgid "Show Post Excerpt"
 msgstr ""
 
-#: blocks/search/edit.js:483
+#: blocks/search/edit.js:484
 #: build/search/index.js:730
-#: build/search/index.js:725
+#: build/search/index.js:726
 msgid "Show Product Price"
 msgstr ""
 
-#: blocks/search/edit.js:533
-#: blocks/search/edit.js:586
-#: blocks/search/edit.js:638
+#: blocks/search/edit.js:534
+#: blocks/search/edit.js:587
+#: blocks/search/edit.js:639
 #: build/search/index.js:761
 #: build/search/index.js:799
 #: build/search/index.js:838
-#: build/search/index.js:775
-#: build/search/index.js:828
-#: build/search/index.js:880
+#: build/search/index.js:776
+#: build/search/index.js:829
+#: build/search/index.js:881
 msgid "Add Placeholder..."
 msgstr ""
 
@@ -1553,170 +1565,176 @@ msgstr ""
 msgid "Add Another Slide"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:83
-#: build/wc-account-icon/index.js:403
-#: build/wc-account-icon/index.js:325
+#: blocks/wc-account-icon/edit.js:84
+#: build/wc-account-icon/index.js:404
+#: build/wc-account-icon/index.js:326
 msgid "WC Account Icon Settings"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:95
-#: build/wc-account-icon/index.js:413
-#: build/wc-account-icon/index.js:337
+#: blocks/wc-account-icon/edit.js:96
+#: build/wc-account-icon/index.js:414
+#: build/wc-account-icon/index.js:338
 msgid "Please ensure the account URL is correct, incase the original URL was changed"
-msgstr ""
-
-#: blocks/wc-account-icon/edit.js:102
-#: build/wc-account-icon/index.js:415
-#: build/wc-account-icon/index.js:344
-msgid "Add Drop Down Menu"
 msgstr ""
 
 #: blocks/wc-account-icon/edit.js:103
 #: build/wc-account-icon/index.js:416
 #: build/wc-account-icon/index.js:345
+msgid "Add Drop Down Menu"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:104
+#: build/wc-account-icon/index.js:417
+#: build/wc-account-icon/index.js:346
 msgid "Add a drop down menu on hover to display account page links."
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:113
+#: blocks/wc-account-icon/edit.js:115
 #: build/wc-account-icon/index.js:423
-#: build/wc-account-icon/index.js:355
+#: build/wc-account-icon/index.js:357
+msgid "Drop Down Position"
+msgstr ""
+
+#: blocks/wc-account-icon/edit.js:138
+#: build/wc-account-icon/index.js:443
+#: build/wc-account-icon/index.js:380
 msgid "Always Show Drop Down"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:115
-#: build/wc-account-icon/index.js:425
-#: build/wc-account-icon/index.js:357
+#: blocks/wc-account-icon/edit.js:140
+#: build/wc-account-icon/index.js:445
+#: build/wc-account-icon/index.js:382
 msgid "This will always display the drop down ONLY in the editor"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:169
-#: build/wc-account-icon/index.js:466
-#: build/wc-account-icon/index.js:411
+#: blocks/wc-account-icon/edit.js:194
+#: build/wc-account-icon/index.js:486
+#: build/wc-account-icon/index.js:436
 msgid "WC Account Icon Design"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:173
+#: blocks/wc-account-icon/edit.js:198
 #: blocks/wc-mini-cart/edit.js:112
-#: build/wc-account-icon/index.js:469
+#: build/wc-account-icon/index.js:489
 #: build/wc-mini-cart/index.js:434
-#: build/wc-account-icon/index.js:415
+#: build/wc-account-icon/index.js:440
 #: build/wc-mini-cart/index.js:354
 msgid "Select an Icon"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:177
-#: build/wc-account-icon/index.js:472
-#: build/wc-account-icon/index.js:419
+#: blocks/wc-account-icon/edit.js:202
+#: build/wc-account-icon/index.js:492
+#: build/wc-account-icon/index.js:444
 msgid "User Outline"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:180
-#: build/wc-account-icon/index.js:475
-#: build/wc-account-icon/index.js:422
+#: blocks/wc-account-icon/edit.js:205
+#: build/wc-account-icon/index.js:495
+#: build/wc-account-icon/index.js:447
 msgid "User"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:182
-#: build/wc-account-icon/index.js:478
-#: build/wc-account-icon/index.js:424
+#: blocks/wc-account-icon/edit.js:207
+#: build/wc-account-icon/index.js:498
+#: build/wc-account-icon/index.js:449
 msgid "Circle User"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:186
-#: build/wc-account-icon/index.js:481
-#: build/wc-account-icon/index.js:428
+#: blocks/wc-account-icon/edit.js:211
+#: build/wc-account-icon/index.js:501
+#: build/wc-account-icon/index.js:453
 msgid "Person"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:189
+#: blocks/wc-account-icon/edit.js:214
 #: blocks/wc-mini-cart/edit.js:140
-#: build/wc-account-icon/index.js:484
+#: build/wc-account-icon/index.js:504
 #: build/wc-mini-cart/index.js:455
-#: build/wc-account-icon/index.js:431
+#: build/wc-account-icon/index.js:456
 #: build/wc-mini-cart/index.js:382
 msgid "Custom Icon"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:201
-#: build/wc-account-icon/index.js:492
-#: build/wc-account-icon/index.js:443
+#: blocks/wc-account-icon/edit.js:226
+#: build/wc-account-icon/index.js:512
+#: build/wc-account-icon/index.js:468
 msgid "Icon Name"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:204
-#: build/wc-account-icon/index.js:495
-#: build/wc-account-icon/index.js:446
+#: blocks/wc-account-icon/edit.js:229
+#: build/wc-account-icon/index.js:515
+#: build/wc-account-icon/index.js:471
 msgid "Add your own custom icon by adding the Font Awesome icon full name"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:267
+#: blocks/wc-account-icon/edit.js:292
 #: blocks/wc-mini-cart/edit.js:316
-#: build/wc-account-icon/index.js:536
+#: build/wc-account-icon/index.js:556
 #: build/wc-mini-cart/index.js:585
-#: build/wc-account-icon/index.js:509
+#: build/wc-account-icon/index.js:534
 #: build/wc-mini-cart/index.js:558
 msgid "Drop Down Background Color"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:278
+#: blocks/wc-account-icon/edit.js:303
 #: blocks/wc-mini-cart/edit.js:327
-#: build/wc-account-icon/index.js:545
+#: build/wc-account-icon/index.js:565
 #: build/wc-mini-cart/index.js:594
-#: build/wc-account-icon/index.js:520
+#: build/wc-account-icon/index.js:545
 #: build/wc-mini-cart/index.js:569
 msgid "Drop Down Font Color"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:330
-#: blocks/wc-account-icon/edit.js:336
-#: build/wc-account-icon/index.js:580
-#: build/wc-account-icon/index.js:583
-#: build/wc-account-icon/index.js:572
-#: build/wc-account-icon/index.js:578
+#: blocks/wc-account-icon/edit.js:355
+#: blocks/wc-account-icon/edit.js:361
+#: build/wc-account-icon/index.js:600
+#: build/wc-account-icon/index.js:603
+#: build/wc-account-icon/index.js:597
 msgid "Dashboard"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:347
-#: blocks/wc-account-icon/edit.js:353
-#: build/wc-account-icon/index.js:589
-#: build/wc-account-icon/index.js:592
-#: build/wc-account-icon/index.js:595
+#: blocks/wc-account-icon/edit.js:372
+#: blocks/wc-account-icon/edit.js:378
+#: build/wc-account-icon/index.js:609
+#: build/wc-account-icon/index.js:612
+#: build/wc-account-icon/index.js:614
+#: build/wc-account-icon/index.js:620
 msgid "Orders"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:364
-#: blocks/wc-account-icon/edit.js:370
-#: build/wc-account-icon/index.js:598
-#: build/wc-account-icon/index.js:601
-#: build/wc-account-icon/index.js:606
-#: build/wc-account-icon/index.js:612
+#: blocks/wc-account-icon/edit.js:389
+#: blocks/wc-account-icon/edit.js:395
+#: build/wc-account-icon/index.js:618
+#: build/wc-account-icon/index.js:621
+#: build/wc-account-icon/index.js:631
+#: build/wc-account-icon/index.js:637
 msgid "Downloads"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:381
-#: blocks/wc-account-icon/edit.js:387
-#: build/wc-account-icon/index.js:607
-#: build/wc-account-icon/index.js:610
-#: build/wc-account-icon/index.js:623
-#: build/wc-account-icon/index.js:629
+#: blocks/wc-account-icon/edit.js:406
+#: blocks/wc-account-icon/edit.js:412
+#: build/wc-account-icon/index.js:627
+#: build/wc-account-icon/index.js:630
+#: build/wc-account-icon/index.js:648
+#: build/wc-account-icon/index.js:654
 msgid "Addresses"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:398
-#: blocks/wc-account-icon/edit.js:404
-#: build/wc-account-icon/index.js:616
-#: build/wc-account-icon/index.js:619
-#: build/wc-account-icon/index.js:640
-#: build/wc-account-icon/index.js:646
+#: blocks/wc-account-icon/edit.js:423
+#: blocks/wc-account-icon/edit.js:429
+#: build/wc-account-icon/index.js:636
+#: build/wc-account-icon/index.js:639
+#: build/wc-account-icon/index.js:665
+#: build/wc-account-icon/index.js:671
 msgid "Account Details"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:415
-#: blocks/wc-account-icon/edit.js:421
-#: build/wc-account-icon/index.js:625
-#: build/wc-account-icon/index.js:628
-#: build/wc-account-icon/index.js:657
-#: build/wc-account-icon/index.js:663
+#: blocks/wc-account-icon/edit.js:440
+#: blocks/wc-account-icon/edit.js:446
+#: build/wc-account-icon/index.js:645
+#: build/wc-account-icon/index.js:648
+#: build/wc-account-icon/index.js:682
+#: build/wc-account-icon/index.js:688
 msgid "Logout"
 msgstr ""
 
