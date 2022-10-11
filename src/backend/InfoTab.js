@@ -36,13 +36,13 @@ const InfoTab = (props) => {
 					</a> */}
 				</div>
 
-				<div className="blockons-video addspace">
+				<div className="blockons-video addspace blockons-hide">
 					<h3 className="blockons-title">
 						{__("Watch our video on using the Blockons plugin", "blockons")}
 					</h3>
 					<p>
 						{__(
-							"Blockons is design to be intuitive and the settings do have help hints, but you can also watch our video to get a better understanding of how the Blockons plugins works. Enjoy!",
+							"Blockons is designed to be very intuitive or the settings do also have help hints, but you can also watch our video to get a better understanding of how the Blockons plugins works. Enjoy!",
 							"blockons"
 						)}
 					</p>
@@ -51,7 +51,7 @@ const InfoTab = (props) => {
 						target="_blank"
 						className="blockons-button primary"
 					>
-						Video Embed
+						{__("Watch Blockons Video", "blockons")}
 					</a>
 				</div>
 

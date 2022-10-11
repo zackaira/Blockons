@@ -36,7 +36,9 @@ const Save = ({ attributes }) => {
 					attributes.searchDisplay === "dropdown" && attributes.searchAlign
 						? attributes.searchAlign
 						: ""
-				} ${attributes.searchDisplay === "default" ? "nopad" : ""}`}
+				} ${attributes.searchDisplay === "default" ? "nopad" : ""} ${
+					attributes.hasBtn ? "hasBtn" : "noBtn"
+				}`}
 				style={{
 					...(attributes.searchDisplay === "dropdown" ||
 					attributes.searchDisplay === "popup"
@@ -68,17 +70,24 @@ const Save = ({ attributes }) => {
 								placeholder={attributes.textInput}
 								required
 								autoComplete="off"
-							/>
-							<button
-								type="submit"
-								className="blockons-search-button"
 								style={{
-									backgroundColor: attributes.searchBtnBgColor,
-									color: attributes.searchBtnColor,
+									backgroundColor: attributes.searchInputBgColor,
+									borderColor: attributes.searchInputBorderColor,
+									color: attributes.searchInputColor,
 								}}
-							>
-								<RichText.Content value={attributes.textButton} />
-							</button>
+							/>
+							{attributes.hasBtn && (
+								<button
+									type="submit"
+									className="blockons-search-button"
+									style={{
+										backgroundColor: attributes.searchBtnBgColor,
+										color: attributes.searchBtnColor,
+									}}
+								>
+									<RichText.Content value={attributes.textButton} />
+								</button>
+							)}
 						</form>
 						{attributes.isPremium && attributes.searchPro && (
 							<div
@@ -126,17 +135,24 @@ const Save = ({ attributes }) => {
 								placeholder={attributes.textInput}
 								required
 								autoComplete="off"
-							/>
-							<button
-								type="submit"
-								className="blockons-search-button"
 								style={{
-									backgroundColor: attributes.searchBtnBgColor,
-									color: attributes.searchBtnColor,
+									backgroundColor: attributes.searchInputBgColor,
+									borderColor: attributes.searchInputBorderColor,
+									color: attributes.searchInputColor,
 								}}
-							>
-								<RichText.Content value={attributes.textButton} />
-							</button>
+							/>
+							{attributes.hasBtn && (
+								<button
+									type="submit"
+									className="blockons-search-button"
+									style={{
+										backgroundColor: attributes.searchBtnBgColor,
+										color: attributes.searchBtnColor,
+									}}
+								>
+									<RichText.Content value={attributes.textButton} />
+								</button>
+							)}
 						</form>
 						{attributes.isPremium && attributes.searchPro && (
 							<div
@@ -174,17 +190,24 @@ const Save = ({ attributes }) => {
 									placeholder={attributes.textInput}
 									required
 									autoComplete="off"
-								/>
-								<button
-									type="submit"
-									className="blockons-search-button"
 									style={{
-										backgroundColor: attributes.searchBtnBgColor,
-										color: attributes.searchBtnColor,
+										backgroundColor: attributes.searchInputBgColor,
+										borderColor: attributes.searchInputBorderColor,
+										color: attributes.searchInputColor,
 									}}
-								>
-									<RichText.Content value={attributes.textButton} />
-								</button>
+								/>
+								{attributes.hasBtn && (
+									<button
+										type="submit"
+										className="blockons-search-button"
+										style={{
+											backgroundColor: attributes.searchBtnBgColor,
+											color: attributes.searchBtnColor,
+										}}
+									>
+										<RichText.Content value={attributes.textButton} />
+									</button>
+								)}
 							</form>
 							{attributes.isPremium && attributes.searchPro && (
 								<div

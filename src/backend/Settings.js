@@ -56,7 +56,7 @@ const Settings = () => {
 		});
 	};
 
-	console.log(blockonsOptions);
+	// console.log(blockonsOptions);
 
 	useEffect(() => {
 		blockonsGroupSettings();
@@ -489,7 +489,7 @@ const Settings = () => {
 															inputType="select"
 															options={{
 																plain: "plain",
-																scroll: "Scroll Progress",
+																// scroll: "Scroll Progress",
 															}}
 															onChange={handleChange}
 														/>

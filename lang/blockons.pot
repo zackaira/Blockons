@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Blockons plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Blockons 1.0.6\n"
+"Project-Id-Version: Blockons 1.0.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/blockons\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-10-10T09:19:33+00:00\n"
+"POT-Creation-Date: 2022-10-11T13:46:18+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: blockons\n"
@@ -269,13 +269,13 @@ msgstr ""
 #: blocks/accordions/single-accordion.js:197
 #: blocks/icon-list/edit.js:430
 #: blocks/marketing-button/edit.js:247
-#: blocks/search/edit.js:255
+#: blocks/search/edit.js:259
 #: blocks/wc-account-icon/edit.js:246
 #: blocks/wc-mini-cart/edit.js:258
 #: build/accordions/index.js:462
 #: build/icon-list/index.js:712
 #: build/marketing-button/index.js:566
-#: build/search/index.js:555
+#: build/search/index.js:559
 #: build/wc-account-icon/index.js:522
 #: build/wc-mini-cart/index.js:538
 #: dist/settings.js:5269
@@ -283,7 +283,7 @@ msgstr ""
 #: build/accordions/index.js:397
 #: build/icon-list/index.js:689
 #: build/marketing-button/index.js:506
-#: build/search/index.js:497
+#: build/search/index.js:501
 #: build/wc-account-icon/index.js:488
 #: build/wc-mini-cart/index.js:500
 msgid "Icon Size"
@@ -293,14 +293,14 @@ msgstr ""
 #: blocks/icon-list/edit.js:308
 #: blocks/icon-list/edit.js:439
 #: blocks/marketing-button/edit.js:337
-#: blocks/search/edit.js:291
+#: blocks/search/edit.js:295
 #: blocks/wc-account-icon/edit.js:279
 #: blocks/wc-mini-cart/edit.js:302
 #: build/accordions/index.js:470
 #: build/icon-list/index.js:633
 #: build/icon-list/index.js:722
 #: build/marketing-button/index.js:627
-#: build/search/index.js:582
+#: build/search/index.js:586
 #: build/wc-account-icon/index.js:547
 #: build/wc-mini-cart/index.js:574
 #: dist/settings.js:5315
@@ -311,7 +311,7 @@ msgstr ""
 #: build/icon-list/index.js:567
 #: build/icon-list/index.js:698
 #: build/marketing-button/index.js:596
-#: build/search/index.js:533
+#: build/search/index.js:537
 #: build/wc-account-icon/index.js:521
 #: build/wc-mini-cart/index.js:544
 msgid "Icon Color"
@@ -993,309 +993,333 @@ msgstr ""
 msgid "Bar Background Color"
 msgstr ""
 
-#: blocks/search/edit.js:137
-#: build/search/index.js:461
-#: build/search/index.js:379
+#: blocks/search/edit.js:141
+#: build/search/index.js:465
+#: build/search/index.js:383
 msgid "Search Settings"
 msgstr ""
 
-#: blocks/search/edit.js:141
-#: build/search/index.js:464
-#: build/search/index.js:383
+#: blocks/search/edit.js:145
+#: build/search/index.js:468
+#: build/search/index.js:387
 msgid "Search Display"
 msgstr ""
 
-#: blocks/search/edit.js:144
-#: build/search/index.js:467
-#: build/search/index.js:386
+#: blocks/search/edit.js:148
+#: build/search/index.js:471
+#: build/search/index.js:390
 msgid "Default"
 msgstr ""
 
-#: blocks/search/edit.js:146
-#: build/search/index.js:470
-#: build/search/index.js:388
+#: blocks/search/edit.js:150
+#: build/search/index.js:474
+#: build/search/index.js:392
 msgid "Icon with Drop Down"
 msgstr ""
 
-#: blocks/search/edit.js:149
-#: build/search/index.js:473
-#: build/search/index.js:391
+#: blocks/search/edit.js:153
+#: build/search/index.js:477
+#: build/search/index.js:395
 msgid "Icon with Popup"
 msgstr ""
 
-#: blocks/search/edit.js:161
-#: blocks/search/edit.js:176
-#: blocks/search/edit.js:187
-#: build/search/index.js:480
-#: build/search/index.js:496
-#: build/search/index.js:503
-#: build/search/index.js:403
-#: build/search/index.js:418
-#: build/search/index.js:429
+#: blocks/search/edit.js:165
+#: blocks/search/edit.js:180
+#: blocks/search/edit.js:191
+#: build/search/index.js:484
+#: build/search/index.js:500
+#: build/search/index.js:507
+#: build/search/index.js:407
+#: build/search/index.js:422
+#: build/search/index.js:433
 msgid "Search Width"
 msgstr ""
 
-#: blocks/search/edit.js:200
-#: build/search/index.js:512
-#: build/search/index.js:442
+#: blocks/search/edit.js:204
+#: build/search/index.js:516
+#: build/search/index.js:446
 msgid "Show Search"
 msgstr ""
 
-#: blocks/search/edit.js:202
-#: build/search/index.js:514
-#: build/search/index.js:444
+#: blocks/search/edit.js:206
+#: build/search/index.js:518
+#: build/search/index.js:448
 msgid "This will always display the search ONLY in the editor"
 msgstr ""
 
-#: blocks/search/edit.js:217
-#: build/search/index.js:521
-#: build/search/index.js:459
+#: blocks/search/edit.js:221
+#: build/search/index.js:525
+#: build/search/index.js:463
 msgid "Align Drop Down Search"
 msgstr ""
 
-#: blocks/search/edit.js:221
+#: blocks/search/edit.js:225
 #: blocks/wc-account-icon/edit.js:119
 #: blocks/wc-mini-cart/edit.js:212
-#: build/search/index.js:524
+#: build/search/index.js:528
 #: build/wc-account-icon/index.js:426
 #: build/wc-mini-cart/index.js:503
-#: build/search/index.js:463
+#: build/search/index.js:467
 #: build/wc-account-icon/index.js:361
 #: build/wc-mini-cart/index.js:454
 msgid "Bottom Right"
 msgstr ""
 
-#: blocks/search/edit.js:225
+#: blocks/search/edit.js:229
 #: blocks/wc-account-icon/edit.js:123
 #: blocks/wc-mini-cart/edit.js:204
-#: build/search/index.js:527
+#: build/search/index.js:531
 #: build/wc-account-icon/index.js:429
 #: build/wc-mini-cart/index.js:497
-#: build/search/index.js:467
+#: build/search/index.js:471
 #: build/wc-account-icon/index.js:365
 #: build/wc-mini-cart/index.js:446
 msgid "Bottom Left"
 msgstr ""
 
-#: blocks/search/edit.js:229
+#: blocks/search/edit.js:233
 #: blocks/wc-mini-cart/edit.js:208
-#: build/search/index.js:530
+#: build/search/index.js:534
 #: build/wc-mini-cart/index.js:500
-#: build/search/index.js:471
+#: build/search/index.js:475
 #: build/wc-mini-cart/index.js:450
 msgid "Bottom Center"
 msgstr ""
 
-#: blocks/search/edit.js:232
+#: blocks/search/edit.js:236
 #: blocks/wc-account-icon/edit.js:126
 #: blocks/wc-mini-cart/edit.js:220
-#: build/search/index.js:533
+#: build/search/index.js:537
 #: build/wc-account-icon/index.js:432
 #: build/wc-mini-cart/index.js:512
-#: build/search/index.js:474
+#: build/search/index.js:478
 #: build/wc-account-icon/index.js:368
 #: build/wc-mini-cart/index.js:462
 msgid "Top Right"
 msgstr ""
 
-#: blocks/search/edit.js:233
+#: blocks/search/edit.js:237
 #: blocks/wc-account-icon/edit.js:127
 #: blocks/wc-mini-cart/edit.js:215
-#: build/search/index.js:536
+#: build/search/index.js:540
 #: build/wc-account-icon/index.js:435
 #: build/wc-mini-cart/index.js:506
-#: build/search/index.js:475
+#: build/search/index.js:479
 #: build/wc-account-icon/index.js:369
 #: build/wc-mini-cart/index.js:457
 msgid "Top Left"
 msgstr ""
 
-#: blocks/search/edit.js:234
+#: blocks/search/edit.js:238
 #: blocks/wc-mini-cart/edit.js:217
-#: build/search/index.js:539
+#: build/search/index.js:543
 #: build/wc-mini-cart/index.js:509
-#: build/search/index.js:476
+#: build/search/index.js:480
 #: build/wc-mini-cart/index.js:459
 msgid "Top Center"
 msgstr ""
 
-#: blocks/search/edit.js:235
-#: build/search/index.js:542
-#: build/search/index.js:477
+#: blocks/search/edit.js:239
+#: build/search/index.js:546
+#: build/search/index.js:481
 msgid "Left"
 msgstr ""
 
-#: blocks/search/edit.js:236
-#: build/search/index.js:545
-#: build/search/index.js:478
+#: blocks/search/edit.js:240
+#: build/search/index.js:549
+#: build/search/index.js:482
 msgid "Right"
 msgstr ""
 
-#: blocks/search/edit.js:249
-#: build/search/index.js:552
-#: build/search/index.js:491
+#: blocks/search/edit.js:253
+#: build/search/index.js:556
+#: build/search/index.js:495
 msgid "Search Design"
 msgstr ""
 
-#: blocks/search/edit.js:266
+#: blocks/search/edit.js:270
 #: blocks/wc-account-icon/edit.js:257
-#: build/search/index.js:563
+#: build/search/index.js:567
 #: build/wc-account-icon/index.js:530
-#: build/search/index.js:508
+#: build/search/index.js:512
 #: build/wc-account-icon/index.js:499
 msgid "Icon Padding"
 msgstr ""
 
-#: blocks/search/edit.js:279
+#: blocks/search/edit.js:283
 #: blocks/wc-account-icon/edit.js:269
-#: build/search/index.js:573
+#: build/search/index.js:577
 #: build/wc-account-icon/index.js:538
-#: build/search/index.js:521
+#: build/search/index.js:525
 #: build/wc-account-icon/index.js:511
 msgid "Icon Background Color"
 msgstr ""
 
-#: blocks/search/edit.js:306
-#: build/search/index.js:593
-#: build/search/index.js:548
+#: blocks/search/edit.js:311
+#: build/search/index.js:597
+#: build/search/index.js:553
 msgid "Search Background Color"
 msgstr ""
 
-#: blocks/search/edit.js:319
-#: build/search/index.js:602
-#: build/search/index.js:561
+#: blocks/search/edit.js:326
+#: build/search/index.js:608
+#: build/search/index.js:568
+msgid "Input Background Color"
+msgstr ""
+
+#: blocks/search/edit.js:337
+#: build/search/index.js:617
+#: build/search/index.js:579
+msgid "Input Border Color"
+msgstr ""
+
+#: blocks/search/edit.js:348
+#: build/search/index.js:626
+#: build/search/index.js:590
+msgid "Input Font Color"
+msgstr ""
+
+#: blocks/search/edit.js:361
+#: build/search/index.js:637
+#: build/search/index.js:603
+msgid "Has Button"
+msgstr ""
+
+#: blocks/search/edit.js:371
+#: build/search/index.js:645
+#: build/search/index.js:613
 msgid "Button Background Color"
 msgstr ""
 
-#: blocks/search/edit.js:331
-#: build/search/index.js:611
-#: build/search/index.js:573
+#: blocks/search/edit.js:383
+#: build/search/index.js:654
+#: build/search/index.js:625
 msgid "Button Font Color"
 msgstr ""
 
-#: blocks/search/edit.js:345
-#: build/search/index.js:620
-#: build/search/index.js:587
+#: blocks/search/edit.js:399
+#: build/search/index.js:663
+#: build/search/index.js:641
 msgid "Predictive Search"
 msgstr ""
 
-#: blocks/search/edit.js:349
-#: build/search/index.js:623
-#: build/search/index.js:591
+#: blocks/search/edit.js:403
+#: build/search/index.js:666
+#: build/search/index.js:645
 msgid "Enable Predictive Search"
 msgstr ""
 
-#: blocks/search/edit.js:360
-#: build/search/index.js:633
+#: blocks/search/edit.js:414
+#: build/search/index.js:676
 #: dist/settings.js:5053
 #: dist/settings.js:5135
 #: dist/settings.js:5197
 #: src/backend/Settings.js:282
 #: src/backend/Settings.js:392
 #: src/backend/Settings.js:476
-#: build/search/index.js:602
+#: build/search/index.js:656
 msgid "Show Preview"
 msgstr ""
 
-#: blocks/search/edit.js:365
-#: build/search/index.js:638
-#: build/search/index.js:607
+#: blocks/search/edit.js:419
+#: build/search/index.js:681
+#: build/search/index.js:661
 msgid "Please see the frontend for actual results."
 msgstr ""
 
-#: blocks/search/edit.js:372
-#: build/search/index.js:640
-#: build/search/index.js:614
+#: blocks/search/edit.js:426
+#: build/search/index.js:683
+#: build/search/index.js:668
 msgid "Search For:"
 msgstr ""
 
-#: blocks/search/edit.js:375
-#: build/search/index.js:643
-#: build/search/index.js:617
+#: blocks/search/edit.js:429
+#: build/search/index.js:686
+#: build/search/index.js:671
 msgid "Posts"
 msgstr ""
 
-#: blocks/search/edit.js:376
-#: build/search/index.js:646
-#: build/search/index.js:618
+#: blocks/search/edit.js:430
+#: build/search/index.js:689
+#: build/search/index.js:672
 msgid "Pages"
 msgstr ""
 
-#: blocks/search/edit.js:378
-#: build/search/index.js:649
-#: build/search/index.js:620
+#: blocks/search/edit.js:432
+#: build/search/index.js:692
+#: build/search/index.js:674
 msgid "Products"
 msgstr ""
 
-#: blocks/search/edit.js:393
-#: build/search/index.js:659
-#: build/search/index.js:635
+#: blocks/search/edit.js:447
+#: build/search/index.js:702
+#: build/search/index.js:689
 msgid "Results Amount to Display"
 msgstr ""
 
-#: blocks/search/edit.js:403
-#: build/search/index.js:668
-#: build/search/index.js:645
+#: blocks/search/edit.js:457
+#: build/search/index.js:711
+#: build/search/index.js:699
 msgid "Show Categories in Search"
 msgstr ""
 
-#: blocks/search/edit.js:412
-#: blocks/search/edit.js:442
-#: build/search/index.js:676
-#: build/search/index.js:699
-#: build/search/index.js:654
-#: build/search/index.js:684
+#: blocks/search/edit.js:466
+#: blocks/search/edit.js:496
+#: build/search/index.js:719
+#: build/search/index.js:742
+#: build/search/index.js:708
+#: build/search/index.js:738
 msgid "Results Title"
 msgstr ""
 
-#: blocks/search/edit.js:419
-#: blocks/search/edit.js:449
-#: build/search/index.js:682
-#: build/search/index.js:705
-#: build/search/index.js:661
-#: build/search/index.js:691
+#: blocks/search/edit.js:473
+#: blocks/search/edit.js:503
+#: build/search/index.js:725
+#: build/search/index.js:748
+#: build/search/index.js:715
+#: build/search/index.js:745
 msgid "Amount to Display"
 msgstr ""
 
-#: blocks/search/edit.js:433
-#: build/search/index.js:691
-#: build/search/index.js:675
+#: blocks/search/edit.js:487
+#: build/search/index.js:734
+#: build/search/index.js:729
 msgid "Show Tags in Search"
 msgstr ""
 
-#: blocks/search/edit.js:463
-#: build/search/index.js:714
-#: build/search/index.js:705
+#: blocks/search/edit.js:517
+#: build/search/index.js:757
+#: build/search/index.js:759
 msgid "Show Image"
 msgstr ""
 
-#: blocks/search/edit.js:472
-#: build/search/index.js:722
-#: build/search/index.js:714
+#: blocks/search/edit.js:526
+#: build/search/index.js:765
+#: build/search/index.js:768
 msgid "Show Product Short Description"
 msgstr ""
 
-#: blocks/search/edit.js:473
-#: build/search/index.js:722
-#: build/search/index.js:715
+#: blocks/search/edit.js:527
+#: build/search/index.js:765
+#: build/search/index.js:769
 msgid "Show Post Excerpt"
 msgstr ""
 
-#: blocks/search/edit.js:484
-#: build/search/index.js:730
-#: build/search/index.js:726
+#: blocks/search/edit.js:538
+#: build/search/index.js:773
+#: build/search/index.js:780
 msgid "Show Product Price"
 msgstr ""
 
-#: blocks/search/edit.js:534
-#: blocks/search/edit.js:587
-#: blocks/search/edit.js:639
-#: build/search/index.js:761
-#: build/search/index.js:799
-#: build/search/index.js:838
-#: build/search/index.js:776
-#: build/search/index.js:829
-#: build/search/index.js:881
+#: blocks/search/edit.js:588
+#: blocks/search/edit.js:648
+#: blocks/search/edit.js:707
+#: build/search/index.js:804
+#: build/search/index.js:847
+#: build/search/index.js:891
+#: build/search/index.js:830
+#: build/search/index.js:890
+#: build/search/index.js:949
 msgid "Add Placeholder..."
 msgstr ""
 
@@ -2102,7 +2126,12 @@ msgstr ""
 
 #: dist/settings.js:4717
 #: src/backend/InfoTab.js:44
-msgid "Blockons is design to be intuitive and the settings do have help hints, but you can also watch our video to get a better understanding of how the Blockons plugins works. Enjoy!"
+msgid "Blockons is designed to be very intuitive or the settings do also have help hints, but you can also watch our video to get a better understanding of how the Blockons plugins works. Enjoy!"
+msgstr ""
+
+#: dist/settings.js:4721
+#: src/backend/InfoTab.js:54
+msgid "Watch Blockons Video"
 msgstr ""
 
 #: dist/settings.js:4725

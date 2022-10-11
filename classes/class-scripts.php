@@ -260,7 +260,7 @@ class Blockons {
 				"icon_list" => true, // 11
 				"image_carousel" => true, // 10
 				"line_heading" => true, // 9
-				// "marketing_button" => true, // 8
+				"marketing_button" => true, // 8
 				"progress_bars" => true, // 7
 				"search" => true, // 6
 				"testimonials" => true, // 5
@@ -314,6 +314,9 @@ class Blockons {
 	public function blockons_update_plugin_defaults() {
 		$defaultOptions = (object)$this->blockonsDefaults();
 		$objDefaultOptions = json_encode($defaultOptions);
+
+		// var_dump(get_option('blockons_options'));
+		// var_dump(get_option('blockons_default_options'));
 
 		// Saved current Plugin Version if no version is saved
 		if (!get_option('blockons_plugin_version') || (get_option('blockons_plugin_version') != BLOCKONS_PLUGIN_VERSION)) {

@@ -68,6 +68,22 @@
 			"type": "string",
 			"default": "#FFF"
 		},
+		"searchInputBgColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"searchInputBorderColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"searchInputColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"hasBtn": {
+			"type": "boolean",
+			"default": true
+		},
 		"searchBtnBgColor": {
 			"type": "string",
 			"default": "#000"

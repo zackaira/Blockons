@@ -17,6 +17,42 @@
 	position: relative;
 	z-index: 4;
 }
+.blockons-search-block .blockons-search-input,
+.blockons-search-popup .blockons-search-input {
+	box-shadow: none;
+	background-color: #fff;
+	border: 1px solid rgb(0 0 0 / 25%);
+	border-radius: 3px 0 0 3px;
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 5px 10px;
+	font-size: 15px;
+	color: inherit;
+}
+.blockons-search-block.hasBtn .blockons-search-input,
+.blockons-search-popup.hasBtn .blockons-search-input {
+	border-right: 0;
+}
+.blockons-search-block.noBtn .blockons-search-input,
+.blockons-search-popup.noBtn .blockons-search-input {
+	border-radius: 3px;
+}
+.blockons-search-block .blockons-search-button,
+.blockons-search-popup .blockons-search-button {
+	border: 0;
+	width: auto;
+	font-size: 15px;
+	border-radius: 0 3px 3px 0;
+	display: flex;
+	align-items: center;
+	background-color: #000;
+	color: #fff;
+	padding: 2px 14px;
+	font-weight: 600;
+	cursor: pointer;
+}
 .nopad {
 	padding: 0 !important;
 }
@@ -37,30 +73,10 @@
 	min-height: 40px;
 	color: inherit;
 }
-.blockons-search-default .blockons-search-input {
-	box-shadow: inset 0 0 0 1px #999;
-	border-radius: 3px 0 0 3px;
-	flex: 1;
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	padding: 5px 10px;
-	font-size: 15px;
-	color: inherit;
-}
-.blockons-search-default .blockons-search-button {
-	border: 0;
-	width: auto;
-	font-size: 15px;
-	display: flex;
-	align-items: center;
-	background-color: #000;
-	color: #fff;
-	padding: 2px 14px;
-	font-weight: 600;
+/* -- Drop Down Style -- */
+.blockons-search-block.dropdown {
 	cursor: pointer;
 }
-/* -- Drop Down Style -- */
 .blockons-search-block .blockons-search-dropdown {
 	position: absolute;
 	z-index: 98;
@@ -78,27 +94,6 @@
 	color: inherit;
 	z-index: 95;
 	overflow: hidden;
-}
-.blockons-search-dropdown .blockons-search-input {
-	flex: 1;
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	padding: 5px 10px;
-	font-size: 15px;
-	color: inherit;
-}
-.blockons-search-dropdown .blockons-search-button {
-	border: 0;
-	width: auto;
-	font-size: 15px;
-	display: flex;
-	align-items: center;
-	background-color: #000;
-	color: #fff;
-	padding: 2px 14px;
-	font-weight: 600;
-	cursor: pointer;
 }
 
 /* -- Position -- */
@@ -152,6 +147,9 @@
 }
 
 /* -- Popup Style -- */
+.blockons-search-block.popup {
+	cursor: pointer;
+}
 .blockons-search-popup-overlay {
 	background-color: rgb(0 0 0 / 35%);
 	position: fixed;
@@ -212,29 +210,6 @@
 	border-radius: 3px;
 	overflow: hidden;
 }
-.blockons-search-popup .blockons-search-input {
-	background-color: #fff;
-	flex: 1;
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	padding: 5px 10px;
-	font-size: 15px;
-	color: inherit;
-}
-.blockons-search-popup .blockons-search-button {
-	border: 0;
-	width: auto;
-	font-size: 15px;
-	display: flex;
-	align-items: center;
-	background-color: #000;
-	color: #fff;
-	padding: 2px 14px;
-	font-weight: 600;
-	cursor: pointer;
-}
-
 .wp-block-blockons-search.blockons-show .blockons-search-popup-overlay,
 .wp-block-blockons-search.blockons-show .blockons-search-popup-wrapper {
 	visibility: visible;
@@ -305,7 +280,7 @@
 	padding: 5px 0 10px;
 	font-size: 13px;
 }
-.blockons-search-results .blockons-sresult-head {
+.blockons-search-results-block .blockons-sresult-head {
 	box-shadow: 0 1px 0 rgb(0 0 0 / 12%);
 	font-size: 11px;
 	margin: 0 0 5px;
@@ -320,7 +295,7 @@
 	width: 50px;
 	flex: none;
 }
-.blockons-search-results .blockons-sresult .blockons-sresult-left img {
+.blockons-search-results-block .blockons-sresult .blockons-sresult-left img {
 	box-shadow: none !important;
 	display: block;
 	height: auto;
@@ -349,7 +324,7 @@
 .blockons-sresult-right ins {
 	background: none;
 }
-.blockons-search-results .blockons-sresult .blockons-sresult-title {
+.blockons-search-results-block .blockons-sresult .blockons-sresult-title {
 	margin: 0 0 3px;
 	padding: 0;
 	font-size: 14px;
@@ -360,7 +335,7 @@
 	text-overflow: ellipsis;
 	color: #000;
 }
-.blockons-search-results .blockons-sresult .blockons-sresult-desc {
+.blockons-search-results-block .blockons-sresult .blockons-sresult-desc {
 	margin: 0;
 	padding: 0;
 	font-size: 12px;

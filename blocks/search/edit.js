@@ -41,6 +41,10 @@ const Edit = (props) => {
 			iconColor,
 			searchAlign,
 			searchBgColor,
+			searchInputBgColor,
+			searchInputBorderColor,
+			searchInputColor,
+			hasBtn,
 			searchBtnBgColor,
 			searchBtnColor,
 			searchProId,
@@ -302,42 +306,92 @@ const Edit = (props) => {
 						)}
 
 						{searchDisplay === "popup" && (
-							<BlockonsColorpicker
-								label={__("Search Background Color", "blockons")}
-								value={searchBgColor}
-								onChange={(colorValue) => {
-									setAttributes({
-										searchBgColor:
-											colorValue === undefined ? "#FFF" : colorValue,
-									});
-								}}
-								paletteColors={colorPickerPalette}
-							/>
+							<>
+								<BlockonsColorpicker
+									label={__("Search Background Color", "blockons")}
+									value={searchBgColor}
+									onChange={(colorValue) => {
+										setAttributes({
+											searchBgColor:
+												colorValue === undefined ? "#FFF" : colorValue,
+										});
+									}}
+									paletteColors={colorPickerPalette}
+								/>
+								<div className="blockons-divider"></div>
+							</>
 						)}
 
 						<BlockonsColorpicker
-							label={__("Button Background Color", "blockons")}
-							value={searchBtnBgColor}
+							label={__("Input Background Color", "blockons")}
+							value={searchInputBgColor}
 							onChange={(colorValue) => {
 								setAttributes({
-									searchBtnBgColor:
+									searchInputBgColor:
+										colorValue === undefined ? "#FFF" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
+						/>
+						<BlockonsColorpicker
+							label={__("Input Border Color", "blockons")}
+							value={searchInputBorderColor}
+							onChange={(colorValue) => {
+								setAttributes({
+									searchInputBorderColor:
+										colorValue === undefined ? "#000" : colorValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
+						/>
+						<BlockonsColorpicker
+							label={__("Input Font Color", "blockons")}
+							value={searchInputColor}
+							onChange={(colorValue) => {
+								setAttributes({
+									searchInputColor:
 										colorValue === undefined ? "#000" : colorValue,
 								});
 							}}
 							paletteColors={colorPickerPalette}
 						/>
 
-						<BlockonsColorpicker
-							label={__("Button Font Color", "blockons")}
-							value={searchBtnColor}
-							onChange={(colorValue) => {
-								setAttributes({
-									searchBtnColor:
-										colorValue === undefined ? "#FFF" : colorValue,
-								});
+						<div className="blockons-divider"></div>
+						<ToggleControl
+							label={__("Has Button", "blockons")}
+							checked={hasBtn}
+							onChange={(newValue) => {
+								setAttributes({ hasBtn: newValue });
 							}}
-							paletteColors={colorPickerPalette}
 						/>
+
+						{hasBtn && (
+							<>
+								<BlockonsColorpicker
+									label={__("Button Background Color", "blockons")}
+									value={searchBtnBgColor}
+									onChange={(colorValue) => {
+										setAttributes({
+											searchBtnBgColor:
+												colorValue === undefined ? "#000" : colorValue,
+										});
+									}}
+									paletteColors={colorPickerPalette}
+								/>
+
+								<BlockonsColorpicker
+									label={__("Button Font Color", "blockons")}
+									value={searchBtnColor}
+									onChange={(colorValue) => {
+										setAttributes({
+											searchBtnColor:
+												colorValue === undefined ? "#FFF" : colorValue,
+										});
+									}}
+									paletteColors={colorPickerPalette}
+								/>
+							</>
+						)}
 					</PanelBody>
 
 					{isPremium && (
@@ -506,7 +560,7 @@ const Edit = (props) => {
 					searchDisplay === "dropdown" && searchAlign ? searchAlign : ""
 				} ${searchDisplay === "default" ? "nopad" : ""} ${
 					showSearchPreview ? "search-on" : ""
-				}`}
+				} ${hasBtn ? "hasBtn" : "noBtn"}`}
 				style={{
 					...(searchDisplay === "dropdown" || searchDisplay === "popup"
 						? {
@@ -533,19 +587,26 @@ const Edit = (props) => {
 								allowedFormats={["core/bold", "core/italic"]}
 								placeholder={__("Add Placeholder...", "blockons")}
 								disableLineBreaks
-							/>
-							<RichText
-								tagName="div"
-								value={textButton}
-								className="blockons-search-button"
-								onChange={onChangeButtonText}
 								style={{
-									backgroundColor: searchBtnBgColor,
-									color: searchBtnColor,
+									backgroundColor: searchInputBgColor,
+									borderColor: searchInputBorderColor,
+									color: searchInputColor,
 								}}
-								allowedFormats={["core/bold", "core/italic"]}
-								disableLineBreaks
 							/>
+							{hasBtn && (
+								<RichText
+									tagName="div"
+									value={textButton}
+									className="blockons-search-button"
+									onChange={onChangeButtonText}
+									allowedFormats={["core/bold", "core/italic"]}
+									disableLineBreaks
+									style={{
+										backgroundColor: searchBtnBgColor,
+										color: searchBtnColor,
+									}}
+								/>
+							)}
 						</div>
 
 						{isPremium && searchPro && (
@@ -586,19 +647,26 @@ const Edit = (props) => {
 								allowedFormats={["core/bold", "core/italic"]}
 								placeholder={__("Add Placeholder...", "blockons")}
 								disableLineBreaks
-							/>
-							<RichText
-								tagName="div"
-								value={textButton}
-								className="blockons-search-button"
-								onChange={onChangeButtonText}
 								style={{
-									backgroundColor: searchBtnBgColor,
-									color: searchBtnColor,
+									backgroundColor: searchInputBgColor,
+									borderColor: searchInputBorderColor,
+									color: searchInputColor,
 								}}
-								allowedFormats={["core/bold", "core/italic"]}
-								disableLineBreaks
 							/>
+							{hasBtn && (
+								<RichText
+									tagName="div"
+									value={textButton}
+									className="blockons-search-button"
+									onChange={onChangeButtonText}
+									allowedFormats={["core/bold", "core/italic"]}
+									disableLineBreaks
+									style={{
+										backgroundColor: searchBtnBgColor,
+										color: searchBtnColor,
+									}}
+								/>
+							)}
 						</div>
 						{isPremium && searchPro && (
 							<div
@@ -638,19 +706,26 @@ const Edit = (props) => {
 									allowedFormats={["core/bold", "core/italic"]}
 									placeholder={__("Add Placeholder...", "blockons")}
 									disableLineBreaks
-								/>
-								<RichText
-									tagName="div"
-									value={textButton}
-									className="blockons-search-button"
-									onChange={onChangeButtonText}
 									style={{
-										backgroundColor: searchBtnBgColor,
-										color: searchBtnColor,
+										backgroundColor: searchInputBgColor,
+										borderColor: searchInputBorderColor,
+										color: searchInputColor,
 									}}
-									allowedFormats={["core/bold", "core/italic"]}
-									disableLineBreaks
 								/>
+								{hasBtn && (
+									<RichText
+										tagName="div"
+										value={textButton}
+										className="blockons-search-button"
+										onChange={onChangeButtonText}
+										allowedFormats={["core/bold", "core/italic"]}
+										disableLineBreaks
+										style={{
+											backgroundColor: searchBtnBgColor,
+											color: searchBtnColor,
+										}}
+									/>
+								)}
 							</div>
 
 							{isPremium && searchPro && (

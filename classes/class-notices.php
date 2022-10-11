@@ -79,7 +79,7 @@ class Blockons_Notices {
 		
 		// $settings['new_blocks_added'] = array(
 		// 	'id'    => 'newblocks_001', // Increment this when adding new blocks
-		// 	'type'  => 'error', // info | error | warning | success
+		// 	'type'  => 'info', // info | error | warning | success
 		// 	'title' => __( 'New blocks have been added to the Blockons plugin', 'blockons' ),
 		// 	'text'  => __( 'To enable the new blocks and start using them in the WordPress editor:', 'blockons' ),
 		// 	'link'  => admin_url( 'options-general.php?page=blockons-settings' ),
