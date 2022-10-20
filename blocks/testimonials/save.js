@@ -16,13 +16,20 @@ const Save = ({ attributes }) => {
 	});
 
 	const sliderOptions = {
-		type: "slide", // slide | loop | fade
-		rewind: attributes.sliderRewind,
+		type: attributes.sliderType,
+		...(attributes.sliderType === "slide"
+			? {
+					rewind: attributes.sliderRewind,
+			  }
+			: {
+					rewind: true,
+			  }),
 		speed: 1000,
 		perPage: attributes.slidesNumber,
 		perView: 1,
 		gap: 10,
-		autoplay: false,
+		autoplay: attributes.sliderAuto,
+		interval: 3500,
 		arrows: attributes.sliderArrows,
 		pagination: attributes.sliderPagination,
 		classes: {

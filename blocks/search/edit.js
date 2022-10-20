@@ -68,7 +68,6 @@ const Edit = (props) => {
 	const [showSearch, setShowSearch] = useState(false);
 	const isPro = Boolean(searchObj.isPremium);
 	const wcActive = Boolean(searchObj.wcActive);
-	const [showSearchPreview, setShowSearchPreview] = useState(false);
 
 	const blockProps = useBlockProps({
 		className: `align-${alignment} ${
@@ -409,19 +408,6 @@ const Edit = (props) => {
 
 							{searchPro && (
 								<>
-									<div className="blockons-divider"></div>
-									<ToggleControl
-										label={__("Show Preview", "blockons")}
-										checked={showSearchPreview}
-										onChange={() => {
-											setShowSearchPreview((state) => !state);
-										}}
-										help={__(
-											"Please see the frontend for actual results.",
-											"blockons"
-										)}
-									/>
-
 									<SelectControl
 										label={__("Search For:", "blockons")}
 										value={searchProTypes}
@@ -559,8 +545,8 @@ const Edit = (props) => {
 				className={`blockons-search-block ${
 					searchDisplay === "dropdown" && searchAlign ? searchAlign : ""
 				} ${searchDisplay === "default" ? "nopad" : ""} ${
-					showSearchPreview ? "search-on" : ""
-				} ${hasBtn ? "hasBtn" : "noBtn"}`}
+					hasBtn ? "hasBtn" : "noBtn"
+				}`}
 				style={{
 					...(searchDisplay === "dropdown" || searchDisplay === "popup"
 						? {

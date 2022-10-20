@@ -15,9 +15,6 @@ class Blockons_Frontend {
 		$blockonsSavedOptions = get_option('blockons_options');
 		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
 
-		if (isset($blockonsOptions->sidecart->enabled) && $blockonsOptions->sidecart->enabled == true) {
-			add_action('wp_footer', array( $this, 'blockons_pro_add_footer_sidecart' ), 10, 1);
-		}
 		if (isset($blockonsOptions->bttb->enabled) && $blockonsOptions->bttb->enabled == true) {
 			add_action('wp_footer', array( $this, 'blockons_add_footer_bttb' ), 10, 1);
 		}
@@ -32,6 +29,12 @@ class Blockons_Frontend {
 			add_filter('body_class', array( $this, 'blockons_add_loader_body_class' ));
 			add_action('wp_head', array( $this, 'blockons_add_header_loader_style' ));
 			add_action('wp_body_open', array( $this, 'blockons_add_footer_page_loader' ), 10, 1);
+		}
+
+		if (Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' )) {
+			if (isset($blockonsOptions->sidecart->enabled) && $blockonsOptions->sidecart->enabled == true) {
+				add_action('wp_footer', array( $this, 'blockons_pro_add_footer_sidecart' ), 10, 1);
+			}
 		}
 	}
 

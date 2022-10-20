@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useEffect } from "@wordpress/element";
+import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	RichText,
@@ -33,6 +33,7 @@ const Edit = (props) => {
 		attributes: {
 			uniqueId,
 			alignment,
+			sliderType,
 			slidesNumber,
 			slides,
 			slidesStyle,
@@ -68,15 +69,25 @@ const Edit = (props) => {
 		} arrows-${sliderArrowIcon}`,
 	});
 
+	const [needsReload, setNeedsReload] = useState(false);
+	const [initCarouselType, setInitCarouselType] = useState(sliderType);
+
 	// Slider Settings
 	const sliderOptions = {
-		type: "slide", // slide | loop | fade
-		rewind: sliderRewind,
+		type: sliderType, // slide | loop | fade
+		...(sliderType === "slide"
+			? {
+					rewind: sliderRewind,
+			  }
+			: {
+					rewind: true,
+			  }),
 		speed: 1000,
 		perPage: slidesNumber,
 		perView: 1,
 		gap: 10,
 		autoplay: false,
+		interval: 3500,
 		arrows: sliderArrows,
 		pagination: sliderPagination,
 		classes: {
@@ -85,12 +96,18 @@ const Edit = (props) => {
 	};
 
 	useEffect(() => {
+		setInitCarouselType(sliderType);
 		if (!uniqueId) {
 			setAttributes({
 				uniqueId: uuidv4(),
 			});
 		}
 	}, []);
+
+	useEffect(() => {
+		const toReload = sliderType !== initCarouselType ? true : false;
+		setNeedsReload(toReload);
+	}, [sliderType]);
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
@@ -445,17 +462,61 @@ const Edit = (props) => {
 						title={__("Testimonials Settings", "blockons")}
 						initialOpen={true}
 					>
-						<RangeControl
-							label={__("Number of Slides to Show", "blockons")}
-							value={slidesNumber}
-							onChange={(newValue) =>
-								setAttributes({
-									slidesNumber: newValue === undefined ? 1 : parseInt(newValue),
-								})
+						<SelectControl
+							label={__("Slider Type", "blockons")}
+							value={sliderType}
+							options={
+								slidesNumber === 1
+									? [
+											{
+												label: __("Slide", "blockons"),
+												value: "slide",
+											},
+											{
+												label: __("Infinite Loop", "blockons"),
+												value: "loop",
+											},
+											{
+												label: __("Fade", "blockons"),
+												value: "fade",
+											},
+									  ]
+									: [
+											{
+												label: __("Slide", "blockons"),
+												value: "slide",
+											},
+											{
+												label: __("Infinite Loop", "blockons"),
+												value: "loop",
+											},
+									  ]
 							}
-							min={1}
-							max={4}
+							onChange={(newValue) => {
+								setAttributes({
+									sliderType: newValue === undefined ? "none" : newValue,
+								});
+							}}
+							help={__(
+								"This setting changes a 'read-only' property in the slider options, if you change this, you will need to 'Save/Update' the post and reload the page to see it work with the new setting.",
+								"blockons"
+							)}
 						/>
+
+						{sliderType !== "fade" && (
+							<RangeControl
+								label={__("Slides Per View", "blockons")}
+								value={slidesNumber}
+								onChange={(newValue) =>
+									setAttributes({
+										slidesNumber:
+											newValue === undefined ? 1 : parseInt(newValue),
+									})
+								}
+								min={1}
+								max={slides.length < 4 ? slides.length : 4}
+							/>
+						)}
 
 						<SelectControl
 							label="Style"
@@ -501,17 +562,18 @@ const Edit = (props) => {
 							label={__("Auto Play", "blockons")}
 							checked={sliderAuto}
 							onChange={(newValue) => setAttributes({ sliderAuto: newValue })}
-							help={__(
-								"This will only work on the site front-end. Turn on 'Rewind Slider' for an infinite loop",
-								"blockons"
-							)}
+							help={__("This will only work on the frontend.", "blockons")}
 						/>
 
-						<ToggleControl
-							label={__("Rewind Slider", "blockons")}
-							checked={sliderRewind}
-							onChange={(newValue) => setAttributes({ sliderRewind: newValue })}
-						/>
+						{sliderType === "slide" && (
+							<ToggleControl
+								label={__("Rewind Slider", "blockons")}
+								checked={sliderRewind}
+								onChange={(newValue) =>
+									setAttributes({ sliderRewind: newValue })
+								}
+							/>
+						)}
 					</PanelBody>
 					<PanelBody
 						title={__("Testimonials Design", "blockons")}
@@ -738,8 +800,20 @@ const Edit = (props) => {
 						<div
 							className={`blockons-slider-wrap ${
 								controlsOnHover ? "on-hover" : ""
-							} arrow-style-${arrowStyle} pagination-${sliderPagDesign}`}
+							} arrow-style-${arrowStyle} pagination-${sliderPagDesign} ${
+								needsReload ? "reload-fix" : ""
+							}`}
 						>
+							{needsReload && (
+								<div className="blockons-reload">
+									<div className="blockons-reload-block">
+										{__(
+											"Please save the post and refresh the page to see this new setting take place",
+											"blockons"
+										)}
+									</div>
+								</div>
+							)}
 							<Splide options={sliderOptions}>{sliderSlideItems}</Splide>
 						</div>
 						{isSelected && (

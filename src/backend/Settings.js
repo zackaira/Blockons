@@ -196,7 +196,7 @@ const Settings = () => {
 									>
 										<div className="blockons-header">
 											<h3 className="blockons-title">
-												{__("Editor Blocks", "blockons")}
+												{__("Blockons Editor Blocks", "blockons")}
 											</h3>
 											<p>
 												{__(
@@ -662,7 +662,7 @@ const Settings = () => {
 													</>
 												)}
 
-												{isPremium && (
+												{isPremium && wcActive && (
 													<>
 														<SettingRow
 															title={__("WooCommerce Side Cart", "blockons")}

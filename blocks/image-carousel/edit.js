@@ -39,6 +39,7 @@ const Edit = (props) => {
 			carouselType,
 			carouselNumber,
 			carouselRewind,
+			carouselAuto,
 			carouselGap,
 			captionPosition,
 			captionOnHover,
@@ -86,6 +87,7 @@ const Edit = (props) => {
 			gap: carouselNumber >= 2 ? carouselGap : 0,
 		}),
 		autoplay: false,
+		interval: 3500,
 		arrows: carouselArrows,
 		pagination: carouselPagination,
 		classes: {
@@ -101,8 +103,8 @@ const Edit = (props) => {
 	}, []);
 
 	useEffect(() => {
-		const hahha = carouselType !== initCarouselType ? true : false;
-		setNeedsReload(hahha);
+		const toReload = carouselType !== initCarouselType ? true : false;
+		setNeedsReload(toReload);
 	}, [carouselType]);
 
 	const onChangeAlignment = (newAlignment) => {
@@ -271,17 +273,17 @@ const Edit = (props) => {
 							<>
 								<br />
 								<SelectControl
-									label={__("Carousel / Slider Type", "blockons")}
+									label={__("Slider Type", "blockons")}
 									value={carouselType}
 									options={
 										carouselNumber === 1
 											? [
 													{
-														label: __("Basic Carousel", "blockons"),
+														label: __("Slide", "blockons"),
 														value: "slide",
 													},
 													{
-														label: __("Loop Carousel", "blockons"),
+														label: __("Infinite Loop", "blockons"),
 														value: "loop",
 													},
 													{
@@ -291,18 +293,18 @@ const Edit = (props) => {
 											  ]
 											: [
 													{
-														label: __("Basic Carousel", "blockons"),
+														label: __("Slide", "blockons"),
 														value: "slide",
 													},
 													{
-														label: __("Loop Carousel", "blockons"),
+														label: __("Infinite Loop", "blockons"),
 														value: "loop",
 													},
 											  ]
 									}
 									onChange={(newValue) => {
 										setAttributes({
-											carouselType: newValue === undefined ? "none" : newValue,
+											carouselType: newValue === undefined ? "slide" : newValue,
 										});
 									}}
 									help={__(
@@ -346,7 +348,7 @@ const Edit = (props) => {
 
 								{carouselType === "slide" && (
 									<ToggleControl
-										label={__("Rewind Carousel", "blockons")}
+										label={__("Rewind Slider", "blockons")}
 										checked={carouselRewind}
 										onChange={(newValue) => {
 											setAttributes({
@@ -355,6 +357,15 @@ const Edit = (props) => {
 										}}
 									/>
 								)}
+
+								<ToggleControl
+									label={__("Auto Play", "blockons")}
+									checked={carouselAuto}
+									onChange={(newValue) =>
+										setAttributes({ carouselAuto: newValue })
+									}
+									help={__("This will only work on the frontend.", "blockons")}
+								/>
 							</>
 						)}
 					</PanelBody>

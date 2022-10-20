@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Blockons
- * Version: 1.0.7
+ * Version: 1.0.8
  * Plugin URI: https://blockons.com/
  * Description: WordPress editor blocks for you to build your website
  * Author: Kaira
@@ -9,16 +9,18 @@
  * Requires at least: 5.0
  * Tested up to: 6.0
  * WC requires at least: 3.2
- * WC tested up to: 6.9
+ * WC tested up to: 7.0
  * Text Domain: blockons
  * Domain Path: /lang/
+ * 
+ * @fs_premium_only /dist/pro/, /assets/blocks/search/pro/, /assets/blocks/wc-mini-cart/pro/
  *
  * @package blockons
  */
 defined( 'ABSPATH' ) || exit;
 
 if ( !defined( 'BLOCKONS_PLUGIN_VERSION' ) ) {
-	define('BLOCKONS_PLUGIN_VERSION', '1.0.7');
+	define('BLOCKONS_PLUGIN_VERSION', '1.0.8');
 }
 if ( !defined( 'BLOCKONS_PLUGIN_URL' ) ) {
 	define('BLOCKONS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

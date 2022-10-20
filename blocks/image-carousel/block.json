@@ -40,6 +40,10 @@
 			"type": "boolean",
 			"default": false
 		},
+		"carouselAuto": {
+			"type": "boolean",
+			"default": false
+		},
 		"carouselGap": {
 			"type": "number",
 			"default": 15

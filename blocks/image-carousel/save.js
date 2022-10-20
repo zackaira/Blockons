@@ -26,7 +26,8 @@ const Save = ({ attributes }) => {
 			perMove: 1,
 			gap: attributes.carouselNumber >= 2 ? attributes.carouselGap : 0,
 		}),
-		autoplay: false,
+		autoplay: attributes.carouselAuto,
+		interval: 3500,
 		arrows: attributes.carouselArrows,
 		pagination: attributes.carouselPagination,
 		classes: {

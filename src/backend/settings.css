@@ -275,6 +275,7 @@ a.blockons-docs::before {
 }
 .blockons-content-wrap-inner {
 	position: relative;
+	z-index: 24;
 }
 .blockons-content {
 	display: none;

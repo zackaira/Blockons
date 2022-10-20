@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: blocks, page builder, site builder, woocommerce
 Requires at least: 5.0
 Tested up to: 6.0
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ WordPress editor blocks for you to build your website.
 
 == Description ==
 
-Blockons! It's free, it's customizable, and it's built for you!
+[Blockons](https://blockons.com/go/website/)! It's free, it's customizable, and it's built for you!
 
 Add powerful and advanced blocks to your website to enhance the WordPress editor (previously known as Gutenberg), so you can easily create engaging and visually attractive website pages.
 
@@ -59,6 +59,21 @@ Add a product standout featured block for a selected product, with multiple disp
 &#128312; We don't have the block you need? We're going to be working on adding lots more blocks... Send us some ideas and maybe we can add on the blocks you need next!
 
 
+= Blockons Offers the following Site Add-ons =
+
+&#9989; **Website Page Loader**
+Display a neat loader while your images and page contents are loading... This prevents the website viewers seeing any broken layouts or images before they are loaded. Customize the loader background and colors to suit your website.
+
+&#9989; **Page Scroll Indicator**
+Add a scroll progress bar to the top or bottom of your website pages which indicates to the website viewers how far they have scrolled, or how far they have left to scroll on the page. This gives users a visual indication of how far they are on the page which is useful when users are reading blog posts or long website pages.
+
+&#9989; **Back To Top Button**
+Add a customizable Back to Top button to your website to let users easily and quickly scroll back to the start of the page with one click.
+
+
+&#128312; We'll be adding on more useful site add-ons you might like... Contact us if you have any ideas of website features to add.
+
+
 = Fast & Intuitive =
 
 Blockons is built to be a fast & lightweight, and easy to work with, for building your WordPress and WooCommerce website.
@@ -75,19 +90,19 @@ Blockons is built with the newest methods (and technologies) for building WordPr
 
 = We're here to help! =
 
-We want to offer the best plugin out there, and the best support... Bugs do happen, so please forgive us, but if you find a bug or anything not working as you need then please [reach out to us](https://blockons.com/go/contact-us/) to help.
+We want to offer the best plugin out there, and the best support... Bugs do happen, so please forgive us, but if you find a bug or anything not working as you need then please [reach out to us](https://blockons.com/go/contact/) to help.
 
 
 = Translations =
 
-We're always needing new translations, so please [contact us here](https://blockons.com/go/contact-us/) if you are willing to help translate Blockons into a language that we don't have.
+We're always needing new translations, so please [contact us here](https://blockons.com/go/contact/) if you are willing to help translate Blockons into a language that we don't have.
 
 
 == Installation ==
 
 = Requirements =
 
-Blockons does now require any other plugins, but Blockons offers extra WooCommerce blocks if you have the [WooCommerce](https://wordpress.org/plugins/woocommerce/) plugin installed and active.
+Blockons does not require any other plugins, but Blockons offers extra WooCommerce blocks if you have the [WooCommerce](https://wordpress.org/plugins/woocommerce/) plugin installed and active.
 
 
 = Installation =
@@ -108,7 +123,7 @@ Installing Blockons can be done either by searching for "Blockons" via `Plugins 
 == Frequently Asked Questions ==
 
 = Will Blockons work with my theme?
-It should work with ALL themes! But as themes and plugins add their own CSS or Javascript which might affect any plugin from working perfectly... We're here to help... [Let us know](https://blockons.com/go/contact-us/) if something doesn't work and we'll help you fix it.
+It should work with ALL themes! But as themes and plugins add their own CSS or Javascript which might affect any plugin from working perfectly... We're here to help... [Let us know](https://blockons.com/go/contact/) if something doesn't work and we'll help you fix it.
 
 = Where are the Blockons settings?
 The Blockons manager settings and Site Add-Ons are found in the WordPress Dashboard under Dashboard -> Settings -> Blockons Settings.
@@ -126,13 +141,13 @@ We don't want to auto-turn them on, so you'll need to go to Dashboard -> Setting
 You should receive a 'We've added new blocks' notice (which is dismissable) when we add new blocks.
 
 = I found a bug... What do I do?
-Please [contact us](https://blockons.com/go/contact-us/) so we can post a fix and get it working for you.
+Please [contact us](https://blockons.com/go/contact/) so we can post a fix and get it working for you.
 
 = Something doesn't look right or is slightly out in the design?
-This could be from the theme you're using, or another plugin. Again, please [contact us](https://blockons.com/go/contact-us/) so we can post a fix or give you custom CSS to fix it.
+This could be from the theme you're using, or another plugin. Again, please [contact us](https://blockons.com/go/contact/) so we can post a fix or give you custom CSS to fix it.
 
 
 == Changelog ==
 
-= 1.0.7 =
+= 1.0.8 =
 * Initial release

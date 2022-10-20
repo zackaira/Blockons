@@ -74,8 +74,14 @@ const SearchResults = ({ searchId, searchSettings }) => {
 							})
 						)
 						.then(() => setIsLoading(false))
-						.catch((errors) => {
-							console.error(errors);
+						.catch((err) => {
+							setSearchResults([]);
+							setSearchCats([]);
+							setSearchTags([]);
+
+							setIsLoading(false);
+
+							console.log("There was a problem or request was cancelled.");
 						});
 				}, 800);
 			}

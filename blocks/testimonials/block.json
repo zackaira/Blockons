@@ -16,6 +16,10 @@
 			"type": "string",
 			"default": "left"
 		},
+		"sliderType": {
+			"type": "string",
+			"default": "slide"
+		},
 		"slidesNumber": {
 			"type": "number",
 			"default": 1

@@ -5,7 +5,6 @@
 .blockons-testimonials-slider:hover .blockons-slider-wrap {
 	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
 }
-
 .blockons-icon-text-select {
 	display: flex;
 	align-items: center;
@@ -20,6 +19,37 @@
 }
 .blockons-icon-text-select:hover .blockons-icon-selecter {
 	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
+}
+/* -- Disabled - Needs to be reloaded -- */
+.blockons-reload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 15;
+	background-color: rgb(255 255 255 / 35%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.blockons-reload .blockons-reload-block {
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 0 1px 5px rgb(0 0 0 / 30%);
+	padding: 15px;
+	font-size: 14px;
+	max-width: 310px;
+	text-align: center;
+}
+.blockons-slider-wrap.reload-fix > .splide {
+	height: 400px !important;
+	background-color: #f0f0f0;
+}
+.blockons-slider-wrap.reload-fix .splide__track {
+	visibility: hidden;
 }
 
 /* -- Image Button -- */

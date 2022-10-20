@@ -3,7 +3,7 @@ import React from "react";
 const SettingGroup = ({ label, children }) => {
 	return (
 		<React.Fragment>
-			<tr>
+			<tr className="blockons-row blockons-group-row">
 				<th>{label}</th>
 				<td>
 					<div className="blockons-group">
