@@ -27,6 +27,7 @@ const Save = ({ attributes }) => {
 		speed: 1000,
 		perPage: attributes.slidesNumber,
 		perView: 1,
+		perMove: 1,
 		gap: 10,
 		autoplay: attributes.sliderAuto,
 		interval: 3500,

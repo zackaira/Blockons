@@ -76,6 +76,7 @@ class Blockons {
 				wp_register_script( 'blockons-wc-mini-cart', BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-mini-cart/cart.js', array(), BLOCKONS_PLUGIN_VERSION );
 			}
 			wp_localize_script( 'blockons-wc-mini-cart', 'wcCartObj', array(
+				'adminUrl' => esc_url( admin_url() ),
 				'isPremium' => blockons_fs()->can_use_premium_code__premium_only(),
 				'wcCartUrl' => esc_url( get_permalink( wc_get_page_id( 'cart' ) ) ),
 				'sidecart' => isset($blockonsOptions->sidecart) ? $blockonsOptions->sidecart : null,

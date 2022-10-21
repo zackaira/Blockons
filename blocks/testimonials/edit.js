@@ -84,6 +84,7 @@ const Edit = (props) => {
 			  }),
 		speed: 1000,
 		perPage: slidesNumber,
+		perMove: 1,
 		perView: 1,
 		gap: 10,
 		autoplay: false,

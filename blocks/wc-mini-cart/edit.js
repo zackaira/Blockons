@@ -242,10 +242,20 @@ const Edit = (props) => {
 						{cartType === "sidecart" && (
 							<div className="helplink">
 								{__(
-									"Side Cart is a global element added to the footer, so you can edit all the settings in the main settings area.",
+									"Side Cart is added in the main settings area. Click to enable and edit the Side Cart settings.",
 									"blockons"
 								)}
-								<a href="#">{__("Edit Settings", "blockons")}</a>
+								<br />
+								<br />
+								<a
+									href={
+										wcCartObj.adminUrl +
+										"options-general.php?page=blockons-settings"
+									}
+									target="_blank"
+								>
+									{__("Enable Side Cart", "blockons")}
+								</a>
 							</div>
 						)}
 					</PanelBody>
