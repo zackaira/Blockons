@@ -198,6 +198,9 @@
 	content: "\f101";
 }
 /* ---- Slider Pagination ---- */
+.blockons-slider-wrap .splide__pagination {
+	bottom: 0;
+}
 .blockons-slider-wrap.pagination-dots
 	.splide__pagination
 	button.splide__pagination__page {
