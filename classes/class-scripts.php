@@ -294,6 +294,7 @@ class Blockons {
 				"icon_bgcolor" => "#FFF",
 				"icon_color" => "#333",
 				"icon_padding" => 60,
+				"has_amount" => true,
 				"header_title" => __("Your Shopping Cart", "blockons"),
 				"header_text" => __("Spend $100 to get FREE shipping!", "blockons"),
 				"bgcolor" => "#FFF",

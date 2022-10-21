@@ -11,10 +11,11 @@ import "../cart";
 
 document.addEventListener("DOMContentLoaded", () => {
 	const blockonsSideCart = document.getElementById("blockons-side-cart");
+	// const cartAmnt = document.querySelector(".blockons-cart-amnt .count");
+	// let hahahah = cartAmnt.cloneNode(true);
+	//.innerText.replace(/[^0-9]/g, "");
 
 	if (typeof blockonsSideCart !== undefined && blockonsSideCart !== null) {
-		// const sidecartSettings = blockonsSideCart.getAttribute("data-settings");
-
 		ReactDOM.render(
 			<SideCart />,
 			document.getElementById("blockons-side-cart")
@@ -29,6 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (sideCartParent) {
 			const miniCart = document.querySelector(".blockons-mini-crt");
 			if (miniCart) sideCartParent.appendChild(miniCart.cloneNode(true));
+		}
+
+		// NOTIFICATION
+		const cartNotif = document.querySelector(".blockons-notification");
+		if (cartNotif) {
+			const cartAmnt = document.querySelector(".blockons-crtamnt");
+			if (cartAmnt) cartNotif.appendChild(cartAmnt.cloneNode(true));
 		}
 	}
 
@@ -48,10 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
 					}
 				});
 			});
-
-			const overlayClick = document.querySelector(
-				".blockons-side-cart-overlay"
-			);
 		}
 	}
 });

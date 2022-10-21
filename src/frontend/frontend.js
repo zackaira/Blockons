@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import PageLoader from "./site-addons/PageLoader";
-import BackToTop from "./site-addons/BackToTop";
-import ScrollIndicator from "./site-addons/ScrollIndicator";
+import PageLoader from "./site-addons/pageloader/PageLoader";
+import BackToTop from "./site-addons/backtotop/BackToTop";
+import ScrollIndicator from "./site-addons/scrollindicator/ScrollIndicator";
 import "./frontend.css";
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -3,7 +3,6 @@ import { __ } from "@wordpress/i18n";
 import "./sidecart.css";
 
 const SideCart = () => {
-	// const restUrl = wcCartObj.apiUrl;
 	const sidecart = wcCartObj.sidecart ? wcCartObj.sidecart : { enabled: false };
 
 	if (!sidecart?.enabled) return null;
@@ -32,6 +31,19 @@ const SideCart = () => {
 							: {}),
 					}}
 				>
+					{sidecart.has_amount && (
+						<span
+							className="blockons-notification"
+							style={{
+								...(sidecart.amount_bgcolor !== "#000"
+									? { backgroundColor: sidecart.amount_bgcolor }
+									: {}),
+								...(sidecart.amount_fcolor !== "#FFF"
+									? { color: sidecart.amount_fcolor }
+									: {}),
+							}}
+						></span>
+					)}
 					<span
 						className={`fa-solid fa-${
 							sidecart.icon ? sidecart.icon : "cart-shopping"

@@ -8,9 +8,9 @@ import SettingBlock from "./components/SettingBlock";
 import InfoTab from "./InfoTab";
 import Loader from "./Loader";
 import { blockonsGroupSettings, blockListSettings } from "./helpers";
-import PageLoader from "../frontend/site-addons/PageLoader";
-import BackToTop from "../frontend/site-addons/BackToTop";
-import ScrollIndicator from "../frontend/site-addons/ScrollIndicator";
+import PageLoader from "../frontend/site-addons/pageloader/PageLoader";
+import BackToTop from "../frontend/site-addons/backtotop/BackToTop";
+import ScrollIndicator from "../frontend/site-addons/scrollindicator/ScrollIndicator";
 
 const Settings = () => {
 	const blockonsObject = blockonsObj;
@@ -782,6 +782,48 @@ const Settings = () => {
 																				suffix="px"
 																				onChange={handleChange}
 																			/>
+
+																			<SettingRow
+																				title={__(
+																					"Show Cart Amount",
+																					"blockons"
+																				)}
+																				slug="sidecart_has_amount"
+																				value={
+																					blockonsOptions.sidecart?.has_amount
+																				}
+																				inputType="toggle"
+																				onChange={handleChange}
+																			/>
+																			{blockonsOptions.sidecart?.has_amount && (
+																				<>
+																					<SettingRow
+																						title={__(
+																							"Background Color",
+																							"blockons"
+																						)}
+																						slug="sidecart_amount_bgcolor"
+																						value={
+																							blockonsOptions.sidecart
+																								?.amount_bgcolor
+																						}
+																						inputType="colorpicker"
+																						defaultValue="#000"
+																						onChange={handleChange}
+																					/>
+																					<SettingRow
+																						title={__("Font Color", "blockons")}
+																						slug="sidecart_amount_fcolor"
+																						value={
+																							blockonsOptions.sidecart
+																								?.amount_fcolor
+																						}
+																						inputType="colorpicker"
+																						defaultValue="#FFF"
+																						onChange={handleChange}
+																					/>
+																				</>
+																			)}
 																		</>
 																	)}
 																</SettingGroup>
