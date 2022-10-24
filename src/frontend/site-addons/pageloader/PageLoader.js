@@ -2,8 +2,10 @@ import React from "react";
 import { __ } from "@wordpress/i18n";
 import "./pageloader.css";
 
-const PageLoader = ({ pageLoaderOptions }) => {
+const PageLoader = ({ pageLoaderOptions, isPro, isAdmin }) => {
 	const pageLoader = pageLoaderOptions ? pageLoaderOptions : { enabled: false };
+	const isPremium = isPro ? isPro : false;
+	const inAdmin = isAdmin ? isAdmin : false;
 
 	if (!pageLoader.enabled) return null;
 
@@ -51,24 +53,45 @@ const PageLoader = ({ pageLoaderOptions }) => {
 						</div>
 					)}
 
-				<div
-					className={`blockons-pageloader-${
-						pageLoader.style ? pageLoader.style : "one"
-					}`}
-				>
-					<div className="bpl one" style={StyleLoaderColor}></div>
-					<div className="bpl two" style={StyleLoaderColor}></div>
-					<div className="bpl three" style={StyleLoaderColor}></div>
-					<div className="bpl four" style={StyleLoaderColor}></div>
-					<div className="bpl five" style={StyleLoaderColor}></div>
-					<div className="bpl six" style={StyleLoaderColor}></div>
-					<div className="bpl seven" style={StyleLoaderColor}></div>
-					<div className="bpl eight" style={StyleLoaderColor}></div>
-					<div className="bpl nine" style={StyleLoaderColor}></div>
-					<div className="bpl ten" style={StyleLoaderColor}></div>
-					<div className="bpl eleven" style={StyleLoaderColor}></div>
-					<div className="bpl twelve" style={StyleLoaderColor}></div>
-				</div>
+				{isPremium ? (
+					<div
+						className={`blockons-pageloader-${
+							pageLoader.style ? pageLoader.style : "one"
+						}`}
+					>
+						<div className="bpl one" style={StyleLoaderColor}></div>
+						<div className="bpl two" style={StyleLoaderColor}></div>
+						<div className="bpl three" style={StyleLoaderColor}></div>
+						<div className="bpl four" style={StyleLoaderColor}></div>
+						<div className="bpl five" style={StyleLoaderColor}></div>
+						<div className="bpl six" style={StyleLoaderColor}></div>
+						<div className="bpl seven" style={StyleLoaderColor}></div>
+						<div className="bpl eight" style={StyleLoaderColor}></div>
+						<div className="bpl nine" style={StyleLoaderColor}></div>
+						<div className="bpl ten" style={StyleLoaderColor}></div>
+						<div className="bpl eleven" style={StyleLoaderColor}></div>
+						<div className="bpl twelve" style={StyleLoaderColor}></div>
+					</div>
+				) : (
+					<div
+						className={`blockons-pageloader-${
+							inAdmin && pageLoader.style ? pageLoader.style : "one"
+						}`}
+					>
+						<div className="bpl one" style={StyleLoaderColor}></div>
+						<div className="bpl two" style={StyleLoaderColor}></div>
+						<div className="bpl three" style={StyleLoaderColor}></div>
+						<div className="bpl four" style={StyleLoaderColor}></div>
+						<div className="bpl five" style={StyleLoaderColor}></div>
+						<div className="bpl six" style={StyleLoaderColor}></div>
+						<div className="bpl seven" style={StyleLoaderColor}></div>
+						<div className="bpl eight" style={StyleLoaderColor}></div>
+						<div className="bpl nine" style={StyleLoaderColor}></div>
+						<div className="bpl ten" style={StyleLoaderColor}></div>
+						<div className="bpl eleven" style={StyleLoaderColor}></div>
+						<div className="bpl twelve" style={StyleLoaderColor}></div>
+					</div>
+				)}
 
 				{pageLoader.has_text &&
 					(pageLoader.text_position === "two" ||

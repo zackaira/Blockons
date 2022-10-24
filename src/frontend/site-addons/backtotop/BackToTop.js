@@ -3,7 +3,7 @@ import { __ } from "@wordpress/i18n";
 
 const BackToTop = ({ bttOptions, isPro }) => {
 	const bttb = bttOptions ? bttOptions : { enabled: false };
-	const isPremium = isPro ? isPro : blockonsObj.isPremium;
+	const isPremium = isPro ? isPro : false;
 
 	if (!bttb.enabled) return null;
 

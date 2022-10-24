@@ -294,14 +294,26 @@ const Settings = () => {
 															inputType="select"
 															options={{
 																one: "Dual Ring Spinner",
-																two: "Loading Bars",
-																three: "Circular Ripple",
-																four: "Loading Ring Spinner",
-																five: "Clock Spinner",
-																six: "Circle Roller",
+																// two: "Loading Bars",
+																// three: "Circular Ripple",
+																// four: "Loading Ring Spinner",
+																// five: "Clock Spinner",
+																// six: "Circle Roller",
 															}}
 															onChange={handleChange}
+															note={__("More Coming Soon", "blockons")}
 														/>
+														{!isPremium &&
+															blockonsOptions.pageloader?.style !== "one" && (
+																<SettingRow
+																	title={__("Premium Feature", "blockons")}
+																	desc={__(
+																		"Change the loader style. The Dual Ring Spinner is the default and the other spinners are only available in Blockons Pro.",
+																		"blockons"
+																	)}
+																	inputType="pronote"
+																/>
+															)}
 
 														<SettingGroup
 															label={__("Edit Page Loader", "blockons")}
@@ -488,10 +500,11 @@ const Settings = () => {
 															value={blockonsOptions.bttb?.type}
 															inputType="select"
 															options={{
-																plain: "plain",
+																plain: "Simple Button",
 																// scroll: "Scroll Progress",
 															}}
 															onChange={handleChange}
+															note={__("More Coming Soon", "blockons")}
 														/>
 
 														{!isPremium &&
@@ -955,6 +968,7 @@ const Settings = () => {
 					<PageLoader
 						pageLoaderOptions={blockonsOptions.pageloader}
 						isPro={isPremium}
+						isAdmin={true}
 					/>
 				)}
 				{showBttbPreview && (
