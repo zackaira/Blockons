@@ -173,7 +173,7 @@ const Edit = (props) => {
 							checked={showButton}
 							onChange={(newValue) => setAttributes({ showButton: newValue })}
 						/>
-						{showButton && (
+						{/* {showButton && (
 							<>
 								<SelectControl
 									label={__("Button Type", "blockons")}
@@ -198,7 +198,7 @@ const Edit = (props) => {
 									/>
 								)}
 							</>
-						)}
+						)} */}
 					</PanelBody>
 					<PanelBody
 						title={__("WC Featured Product Design", "blockons")}
@@ -402,7 +402,9 @@ const Edit = (props) => {
 							{showButton && (
 								<div className="blockons-wc-featured-product-btn">
 									{buttonType === "atc" ? (
-										<div className="wc-fproduct-btn">Add To Cart</div>
+										<div className="wc-fproduct-btn">
+											{__("Add To Cart", "blockons")}
+										</div>
 									) : (
 										<RichText
 											placeholder={__("View Product")}

@@ -54,7 +54,7 @@ $featured_image_alt = get_post_meta($product_id, '_wp_attachment_image_alt', tru
 				<div class="img-overlay" <?php echo isset($attributes['overlayOpacity']) ? 'style="opacity: ' . esc_attr($attributes['overlayOpacity']) . '"' : ''; ?>></div>
 			<?php endif; ?>
 
-			<img src="<?php echo esc_url($featured_image_url); ?>" <?php echo $featured_image_alt ? 'alt="' . esc_attr($featured_image_alt) . '"' : ''; ?> style="height: <?php echo $attributes['imgHeight'] != "auto" ? esc_attr($attributes['imgHeight'] . "px") : esc_attr("auto"); ?>" />
+			<img src="<?php echo esc_url($featured_image_url); ?>" <?php echo esc_attr($featured_image_alt) ? 'alt="' . esc_attr($featured_image_alt) . '"' : ''; ?> style="height: <?php echo $attributes['imgHeight'] != "auto" ? esc_attr($attributes['imgHeight'] . "px") : esc_attr("auto"); ?>" />
 		</div>
 	</div>
 </div>

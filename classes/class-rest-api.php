@@ -61,7 +61,6 @@ class Blockons_WC_Rest_Routes {
 						"excerpt" => get_the_excerpt($post_id),
 					);
 					return (object)$extras;
-					// return get_the_excerpt($post_arr['id']);
 				}
 			},
 		) );
@@ -124,7 +123,6 @@ class Blockons_WC_Rest_Routes {
 			'post_type' => 'product',
 			'numberposts' => -1,
 			'post_status' => 'publish',
-			// 'fields' => 'ids',
 	   	) );
 
 		foreach ( $products as $product ) {
@@ -141,7 +139,7 @@ class Blockons_WC_Rest_Routes {
 	 * Get Image by ID for InputMediaUpload Component
 	 */
 	function blockons_get_wc_product_by_id($request) {
-		$product_id = $request->get_param( 'id' );
+		$product_id = esc_attr($request->get_param( 'id' ));
 		$product = wc_get_product( $product_id );
 
 		$product_image = wp_get_attachment_url( $product->get_image_id() );

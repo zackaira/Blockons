@@ -89,7 +89,7 @@ class Blockons_Admin {
 			array(
 				array(
 					"slug" => "blockons-category",
-					"title" => __("Blockons Blocks", "arcane"),
+					"title" => __("Blockons Blocks", "blockons"),
 					// "icon" => "wordpress",
 				)
 			)

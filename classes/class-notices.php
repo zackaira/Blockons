@@ -31,16 +31,16 @@ class Blockons_Notices {
 				foreach ($notices as $notice) :
 
 					if ( current_user_can( 'manage_options' ) && !get_user_meta( $user_id, 'blockons_notice_' . $notice['id'] . '_dismissed', true ) ) : ?>
-						<div class="blockons-admin-notice notice notice-<?php echo isset($notice['type']) ? sanitize_html_class( $notice['type'] ) : 'info'; ?>">
+						<div class="blockons-admin-notice notice notice-<?php echo isset($notice['type']) ? sanitize_html_class($notice['type']) : 'info'; ?>">
 							<a href="<?php echo esc_url(admin_url($blockons_page . 'blockons_dismiss_notice&blockons-notice-id=' . $notice['id'])); ?>" class="notice-dismiss"></a>
 
-							<div class="blockons-notice <?php echo isset($notice['inline']) ? sanitize_html_class( 'inline' ) : ''; ?>">
+							<div class="blockons-notice <?php echo isset($notice['inline']) ? esc_attr( 'inline' ) : ''; ?>">
 								<?php if (isset($notice['title'])) : ?>
 									<h4 class="blockons-notice-title"><?php esc_html_e($notice['title']); ?></h4>
 								<?php endif; ?>
 
 								<?php if (isset($notice['text'])) : ?>
-									<p class="blockons-notice-text"><?php echo $notice['text']; ?></p>
+									<p class="blockons-notice-text"><?php esc_html_e($notice['text']); ?></p>
 								<?php endif; ?>
 
 								<?php if (isset($notice['link']) && isset($notice['link_text'])) : ?>
@@ -63,7 +63,7 @@ class Blockons_Notices {
 		$user_id = $current_user->ID;
 
 		if ( isset( $_GET['blockons_dismiss_notice'] ) ) {
-			$blockons_notice_id = $_GET['blockons-notice-id'];
+			$blockons_notice_id = sanitize_text_field( $_GET['blockons-notice-id'] );
 			add_user_meta( $user_id, 'blockons_notice_' .$blockons_notice_id. '_dismissed', 'true', true );
 		}
     }

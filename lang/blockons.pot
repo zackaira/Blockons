@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Blockons plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Blockons 1.0.0\n"
+"Project-Id-Version: Blockons 1.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/blockons\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-10-24T08:22:37+00:00\n"
+"POT-Creation-Date: 2022-11-01T09:46:37+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: blockons\n"
@@ -35,8 +35,8 @@ msgid "https://kairaweb.com/"
 msgstr ""
 
 #. translators: number of items in the mini cart.
-#: blocks/wc-mini-cart/index.php:73
-#: build/wc-mini-cart/index.php:73
+#: blocks/wc-mini-cart/index.php:74
+#: build/wc-mini-cart/index.php:74
 msgid "%d item"
 msgid_plural "%d items"
 msgstr[0] ""
@@ -75,11 +75,15 @@ msgstr ""
 msgid "FAQ's"
 msgstr ""
 
-#: classes/class-scripts.php:299
+#: classes/class-admin.php:92
+msgid "Blockons Blocks"
+msgstr ""
+
+#: classes/class-scripts.php:298
 msgid "Your Shopping Cart"
 msgstr ""
 
-#: classes/class-scripts.php:300
+#: classes/class-scripts.php:299
 msgid "Spend $100 to get FREE shipping!"
 msgstr ""
 
@@ -835,11 +839,8 @@ msgid "Marketing Button Settings"
 msgstr ""
 
 #: blocks/marketing-button/edit.js:133
-#: blocks/wc-featured-product/edit.js:193
 #: build/marketing-button/index.js:477
-#: build/wc-featured-product/index.js:4858
 #: build/marketing-button/index.js:392
-#: build/wc-featured-product/index.js:4235
 msgid "Open in new window"
 msgstr ""
 
@@ -1781,7 +1782,7 @@ msgstr ""
 #: blocks/wc-featured-product/edit.js:93
 #: blocks/wc-featured-product/edit.js:348
 #: build/wc-featured-product/index.js:4779
-#: build/wc-featured-product/index.js:4958
+#: build/wc-featured-product/index.js:4939
 #: build/wc-featured-product/index.js:4135
 #: build/wc-featured-product/index.js:4390
 msgid "Select a product to display"
@@ -1850,88 +1851,76 @@ msgstr ""
 msgid "Show Button"
 msgstr ""
 
-#: blocks/wc-featured-product/edit.js:179
-#: build/wc-featured-product/index.js:4845
-#: build/wc-featured-product/index.js:4221
-msgid "Button Type"
-msgstr ""
-
-#: blocks/wc-featured-product/edit.js:182
-#: build/wc-featured-product/index.js:4848
-#: build/wc-featured-product/index.js:4224
-msgid "Link to Product"
-msgstr ""
-
-#: blocks/wc-featured-product/edit.js:183
-#: build/wc-featured-product/index.js:4851
-#: build/wc-featured-product/index.js:4225
-msgid "Add to Cart"
-msgstr ""
-
 #: blocks/wc-featured-product/edit.js:204
-#: build/wc-featured-product/index.js:4864
+#: build/wc-featured-product/index.js:4845
 #: build/wc-featured-product/index.js:4246
 msgid "WC Featured Product Design"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:209
-#: build/wc-featured-product/index.js:4867
+#: build/wc-featured-product/index.js:4848
 #: build/wc-featured-product/index.js:4251
 msgid "Overlay Opacity"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:223
-#: build/wc-featured-product/index.js:4876
+#: build/wc-featured-product/index.js:4857
 #: build/wc-featured-product/index.js:4265
 msgid "Block Background Color"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:233
-#: build/wc-featured-product/index.js:4885
+#: build/wc-featured-product/index.js:4866
 #: build/wc-featured-product/index.js:4275
 msgid "Product Background Color"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:245
-#: build/wc-featured-product/index.js:4894
+#: build/wc-featured-product/index.js:4875
 #: build/wc-featured-product/index.js:4287
 msgid "Product Title Size"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:257
-#: build/wc-featured-product/index.js:4903
+#: build/wc-featured-product/index.js:4884
 #: build/wc-featured-product/index.js:4299
 msgid "Product Title Color"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:270
-#: build/wc-featured-product/index.js:4912
+#: build/wc-featured-product/index.js:4893
 #: build/wc-featured-product/index.js:4312
 msgid "Price Size"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:283
-#: build/wc-featured-product/index.js:4921
+#: build/wc-featured-product/index.js:4902
 #: build/wc-featured-product/index.js:4325
 msgid "Price Color"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:298
-#: build/wc-featured-product/index.js:4928
+#: build/wc-featured-product/index.js:4909
 #: build/wc-featured-product/index.js:4340
 msgid "Description Font Color"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:312
-#: build/wc-featured-product/index.js:4937
+#: build/wc-featured-product/index.js:4918
 #: build/wc-featured-product/index.js:4354
 msgid "Product Info Width"
 msgstr ""
 
 #: blocks/wc-featured-product/edit.js:325
-#: build/wc-featured-product/index.js:4945
+#: build/wc-featured-product/index.js:4926
 #: build/wc-featured-product/index.js:4367
 msgid "Product Image Height"
+msgstr ""
+
+#: blocks/wc-featured-product/edit.js:406
+#: build/wc-featured-product/index.js:4977
+#: build/wc-featured-product/index.js:4448
+msgid "Add To Cart"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:75

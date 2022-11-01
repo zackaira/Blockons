@@ -42,13 +42,13 @@ class Blockons_Frontend {
 	 * Add Page Loader Functionality
 	 */
 	public function blockons_add_loader_body_class( $classes ) {
-		$classes[] = 'blockons-page-loading';
+		$classes[] = sanitize_html_class('blockons-page-loading');
 		return $classes;
 	}
 	public function blockons_add_header_loader_style() {
 		$blockonsSavedOptions = get_option('blockons_options');
 		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : ''; ?>
-		<style type="text/css">body.blockons-page-loading { background-color: <?php echo (isset($blockonsOptions->pageloader->enabled)) ? $blockonsOptions->pageloader->bgcolor : 'inherit'; ?>; }</style><?php
+		<style type="text/css">body.blockons-page-loading { background-color: <?php echo (isset($blockonsOptions->pageloader->enabled)) ? esc_attr($blockonsOptions->pageloader->bgcolor) : esc_attr('inherit'); ?>; }</style><?php
 	}
 	public function blockons_add_footer_page_loader() {
 		$allowed_html = array( 'div' => array('id' => array()) );
@@ -81,26 +81,29 @@ class Blockons_Frontend {
 	 * PREMIUM: Side Cart Elements
 	 */
 	public function blockons_pro_add_footer_sidecart() {
+		$allowed_html = array(
+			'div' => array('class' => array(), 'id' => array(), 'style' => array()),
+			'a' => array('class' => array(), 'href' => array()),
+			'span' => array('class' => array()),
+		);
+		
 		if (!has_block('blockons/wc-mini-cart')) {
-			$allowed_html = array(
-				'div' => array('class' => array(), 'id' => array(), 'style' => array()),
-				'a' => array('class' => array(), 'href' => array()),
-				'span' => array('class' => array()),
-			);
 			$html = '<div class="blockons-hidden" style="width: 0; height: 0; overflow: hidden;">' . blockons_wc_minicart_item() . '</div>';
 		
 			// Add Cart & Mini Cart to site footer
 			echo wp_kses($html ,$allowed_html);
-		
-			echo '<div class="blockons-hidden" style="width: 0; height: 0; overflow: hidden;">' . blockons_wc_cart_amount() . '<div class="blockons-mini-crt">';
-				echo '<div class="widget_shopping_cart_content">';
-					woocommerce_mini_cart();
-				echo '</div>';
-			echo '</div></div>';
+
+			$html2 = '<div class="blockons-hidden" style="width: 0; height: 0; overflow: hidden;">' . blockons_wc_cart_amount() . '<div class="blockons-mini-crt"><div class="widget_shopping_cart_content">';
+			$html3 = '</div></div></div>';
+
+			echo wp_kses($html2 ,$allowed_html);
+				woocommerce_mini_cart();
+			echo wp_kses($html3 ,$allowed_html);
 		}
 		
 		// Add Side Cart Element
-		echo '<div id="blockons-side-cart" class="blockons-side-cart-wrap"></div>';
+		$html4 = '<div id="blockons-side-cart" class="blockons-side-cart-wrap"></div>';
+		echo wp_kses($html4 ,$allowed_html);
 	}
 
 }
