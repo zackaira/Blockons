@@ -1,7 +1,7 @@
-=== Blockons - WordPress editor blocks for you to build your website. ===
+=== Blockons - WordPress editor blocks plugin ===
 Contributors: Kaira
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PFZGBM92T8XSE&source=url
-Tags: blocks, page builder, site builder, woocommerce
+Tags: blocks, block editor, gutenberg, addons, page builder
 Requires at least: 5.0
 Tested up to: 6.0
 Stable tag: 1.0.1
@@ -17,10 +17,10 @@ WordPress editor blocks for you to build your website.
 
 Add powerful and advanced blocks to your website to enhance the WordPress editor (previously known as Gutenberg), so you can easily create engaging and visually attractive website pages.
 
-We only have 12 blocks available at the moment, but we're working on more... And we want to build what the you need, to be able to build a complete website using 1 blocks plugin.
+We have 12 blocks available at the moment, but we're working on more... And we want to build what the you need, to be able to build a complete website using 1 blocks plugin.
 
 
-= Blockons Offers the following blocks =
+## Blockons Offers the following blocks
 
 &#9989; **Search Bar / Icon** block
 The Search Bar / Icon block was originally designed for Full Site Editing, to be added to the site header or footer, but the search icon block can be used as a normal search bar, and used anywhere on your website. It will add an editable search bar or an icon with a search bar drop down or popup for your site viewers to search for content on your website.
@@ -56,10 +56,11 @@ Add a customizable WooCommerce cart to your site header or footer, or anywhere y
 Add a product standout featured block for a selected product, with multiple display and design settings, bring attention to a product for your viewers to see. Let the viewers click through to the WooCommerce product or Add to Cart from the featured product block.
 
 
-&#128312; We don't have the block you need? We're going to be working on adding lots more blocks... Send us some ideas and maybe we can add on the blocks you need next!
+&#128312; Can't find the blocks you need?
+We're working on adding lots more blocks... Send us some ideas and maybe we can add on the blocks you need next!
 
 
-= Blockons Offers the following Site Add-ons =
+## Blockons Offers the following Site Add-ons
 
 &#9989; **Website Page Loader**
 Display a neat loader while your images and page contents are loading... This prevents the website viewers seeing any broken layouts or images before they are loaded. Customize the loader background and colors to suit your website.
@@ -71,10 +72,11 @@ Add a scroll progress bar to the top or bottom of your website pages which indic
 Add a customizable Back to Top button to your website to let users easily and quickly scroll back to the start of the page with one click.
 
 
-&#128312; We'll be adding on more useful site add-ons you might like... Contact us if you have any ideas of website features to add.
+&#128312; We're working on more site add-ons too!
+Contact us if you have any ideas of cool website features to add.
 
 
-= Fast & Intuitive =
+## Fast & Intuitive
 
 Blockons is built to be a fast & lightweight, and easy to work with, for building your WordPress and WooCommerce website.
 
@@ -88,7 +90,7 @@ We'd even bet our editor blocks are a lot more customizable than other block plu
 Blockons is built with the newest methods (and technologies) for building WordPress blocks... Meaning it doesn't have old deprecated ways of adding blocks like when the new WordPress editor first got added, it's reached an established way of building blocks, and that's the way we're doing it!
 
 
-= We're here to help! =
+## We're here to help!
 
 We want to offer the best plugin out there, and the best support... Bugs do happen, so please forgive us, but if you find a bug or anything not working as you need then please [reach out to us](https://blockons.com/go/contact/) to help.
 
@@ -116,8 +118,8 @@ Installing Blockons can be done either by searching for "Blockons" via `Plugins 
 
 == Screenshots ==
 
-1. **Blockons Settings Page** - Placed neatly in the Dashboard under WooCommerce -> Blockons.
-2. **Blockons Free Settings** - Edit all WooCommerce pages + many more useful features.
+1. **Blockons Blocks Manager** - Select which blocks to enable or disable
+2. **Blockons Site Add-Ons** - Add extra features to your WordPress website
 
 
 == Frequently Asked Questions ==
