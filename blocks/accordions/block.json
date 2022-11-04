@@ -6,7 +6,7 @@
 	"textdomain": "blockons",
 	"icon": "menu",
 	"category": "blockons-category",
-	"keywords": ["accordions", "accordionbed", "content", "inner"],
+	"keywords": ["accordions", "accordion", "content", "collapsible"],
 	"supports": {
 		"html": false
 	},

@@ -1,3 +1,10 @@
+body.wp-admin.plugins-php
+	.wp-list-table
+	#the-list
+	tr[data-plugin*="blockons/blockons.php"]
+	span.upgrade {
+	display: none !important;
+}
 /* ---- Update Notice Styling ---- */
 .blockons-admin-notice {
 	position: relative;

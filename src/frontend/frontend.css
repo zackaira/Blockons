@@ -285,3 +285,22 @@ body.wp-admin.admin-bar .blockons-settings .blockons-page-loader {
 		top: 46px;
 	}
 }
+
+/**
+ * Visibility Settings added to all blocks
+ */
+@media only screen and (min-width: 1100px) {
+	.hide-on-desktop {
+		display: none !important;
+	}
+}
+@media all and (min-width: 500px) and (max-width: 1100px) {
+	.hide-on-tablet {
+		display: none !important;
+	}
+}
+@media screen and (max-width: 500px) {
+	.hide-on-mobile {
+		display: none !important;
+	}
+}

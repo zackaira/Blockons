@@ -34,9 +34,13 @@ const BackToTop = ({ bttOptions, isPro }) => {
 
 	window.addEventListener("load", () => {
 		const container = document.querySelector(".blockons-bttbtn-progress");
+
+		if (!container) return;
+
 		const progressBar = document.querySelector(
 			".blockons-bttbtn-progress .progress-bar"
 		);
+
 		const pct = document.querySelector(".blockons-bttbtn-progress .pct");
 		const totalLength = progressBar.getTotalLength();
 

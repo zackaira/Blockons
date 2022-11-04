@@ -85,3 +85,131 @@
 	option {
 	padding: 5px 6px;
 }
+
+/**
+ * Visibility Settings added to all blocks
+ */
+@media only screen and (min-width: 1100px) {
+	.hide-on-desktop {
+		box-shadow: 0 0 0 1px rgb(155 103 106 / 45%);
+	}
+	.hide-on-desktop::before {
+		display: block;
+		box-shadow: 0 0 0 1px #9b676a;
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 28;
+		background: repeating-linear-gradient(
+			-45deg,
+			#c59396 0px,
+			#c59396 10px,
+			#9b676a 10px,
+			#9b676a 15px
+		);
+		opacity: 0.18;
+	}
+	.hide-on-desktop::after {
+		display: block;
+		background-color: #c59396;
+		box-shadow: none !important;
+		content: "Hidden on Desktop" !important;
+		position: absolute !important;
+		top: 1px !important;
+		right: 1px !important;
+		left: auto !important;
+		font-size: 11px;
+		font-weight: 600;
+		color: #fff;
+		padding: 2px 5px;
+		letter-spacing: 0.3px;
+		z-index: 29 !important;
+		width: fit-content;
+		height: fit-content;
+	}
+}
+@media all and (min-width: 500px) and (max-width: 1100px) {
+	.hide-on-tablet {
+		box-shadow: 0 0 0 1px rgb(155 103 106 / 45%);
+	}
+	.hide-on-tablet::before {
+		display: block;
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 28;
+		background: repeating-linear-gradient(
+			-45deg,
+			#c59396 0px,
+			#c59396 10px,
+			#9b676a 10px,
+			#9b676a 15px
+		);
+		opacity: 0.18;
+	}
+	.hide-on-tablet::after {
+		display: block;
+		background-color: #c59396;
+		box-shadow: none !important;
+		content: "Hidden on Tablet" !important;
+		position: absolute !important;
+		top: 1px !important;
+		right: 1px !important;
+		left: auto !important;
+		font-size: 11px;
+		font-weight: 600;
+		color: #fff;
+		padding: 2px 5px;
+		letter-spacing: 0.3px;
+		z-index: 29 !important;
+		width: fit-content;
+		height: fit-content;
+	}
+}
+@media screen and (max-width: 500px) {
+	.hide-on-mobile {
+		box-shadow: 0 0 0 1px rgb(155 103 106 / 45%);
+	}
+	.hide-on-mobile::before {
+		display: block;
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 28;
+		background: repeating-linear-gradient(
+			-45deg,
+			#c59396 0px,
+			#c59396 10px,
+			#9b676a 10px,
+			#9b676a 15px
+		);
+		opacity: 0.18;
+	}
+	.hide-on-mobile::after {
+		display: block;
+		background-color: #c59396;
+		box-shadow: none !important;
+		content: "Hidden on Mobile" !important;
+		position: absolute !important;
+		top: 1px !important;
+		right: 1px !important;
+		left: auto !important;
+		font-size: 11px;
+		font-weight: 600;
+		color: #fff;
+		padding: 2px 5px;
+		letter-spacing: 0.3px;
+		z-index: 29 !important;
+		width: fit-content;
+		height: fit-content;
+	}
+}

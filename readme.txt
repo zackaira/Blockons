@@ -1,9 +1,9 @@
 === Blockons - WordPress editor blocks plugin ===
 Contributors: Kaira
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PFZGBM92T8XSE&source=url
-Tags: blocks, block editor, gutenberg, addons, page builder
+Tags: blocks, editor, block, gutenberg blocks, woocommerce blocks
 Requires at least: 5.0
-Tested up to: 6.0
+Tested up to: 6.1
 Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -13,14 +13,16 @@ WordPress editor blocks for you to build your website.
 
 == Description ==
 
-[Blockons](https://blockons.com/go/website/)! It's free, it's customizable, and it's built for you!
+[Blockons](https://blockons.com/go/website/)! Editor Blocks & Site Addons... It's free, it's customizable, and it's built for you!
 
-Add powerful and advanced blocks to your website to enhance the WordPress editor (previously known as Gutenberg), so you can easily create engaging and visually attractive website pages.
+Add powerful and advanced blocks to your website to enhance the WordPress editor (previously known as the Gutenberg editor), so you can easily create engaging and visually attractive website pages.
 
-We have 12 blocks available at the moment, but we're working on more... And we want to build what the you need, to be able to build a complete website using 1 blocks plugin.
+We have 12 editor blocks available at the moment (includes 3 WooCommerce blocks), but we're working on more... And we want to build gutenberg blocks that you need... We want to offer a complete blocks solution to building your website.
 
 
 ## Blockons Offers the following blocks
+
+Use any of the following gutenberg blocks to build your website.
 
 &#9989; **Search Bar / Icon** block
 The Search Bar / Icon block was originally designed for Full Site Editing, to be added to the site header or footer, but the search icon block can be used as a normal search bar, and used anywhere on your website. It will add an editable search bar or an icon with a search bar drop down or popup for your site viewers to search for content on your website.
@@ -46,13 +48,18 @@ Display customer star rated feedback or user comments in a neat testimonial slid
 &#9989; **Video Slider** block
 Neatly display any Youtube, Vimeo or custom hosted Videos in a powerful video slider or carousel block. Customize the colors and cover image. The Videos will play when a user clicks on the slide they want to watch.
 
-&#9989; **Account Icon** WooCommerce block
+= WooCommerce Blocks =
+
+Do you have the WooCommerce plugin activated?
+If you do, Blockons also includes the following WooCommerce blocks for your online store.
+
+&#9989; **WooCommerce Account Icon** - WooCommerce block
 Add a simple icon to your header or footer to let users quickly access their account or login to your website. Select from different account icons and change the colors as you like, and when the user is logged in, you can display quick links to the different WooCommerce account pages.
 
-&#9989; **WooCommerce Mini Cart** block
+&#9989; **WooCommerce Mini Cart** - WooCommerce block
 Add a customizable WooCommerce cart to your site header or footer, or anywhere you like, with an optional drop down basket so your users can edit their cart, or simply Go to Cart and/or Checkout to complete their purchase. 
 
-&#9989; **Featured Product** WooCommerce block
+&#9989; **WooCommerce Featured Product** - WooCommerce block
 Add a product standout featured block for a selected product, with multiple display and design settings, bring attention to a product for your viewers to see. Let the viewers click through to the WooCommerce product or Add to Cart from the featured product block.
 
 
@@ -76,23 +83,23 @@ Add a customizable Back to Top button to your website to let users easily and qu
 Contact us if you have any ideas of cool website features to add.
 
 
-## Fast & Intuitive
+## We're here to help!
+
+We want to offer the best plugin out there, and the best support... Bugs do happen, so please forgive us, but if you find a bug or anything not working as you need then please [reach out to us](https://blockons.com/go/contact/) to help.
+
+
+= Fast & Intuitive =
 
 Blockons is built to be a fast & lightweight, and easy to work with, for building your WordPress and WooCommerce website.
 
-Blockons is built with the latest methods and technologies for creating blocks for the WordPress block editor... It's built the WordPress way, so it's fast and offers very powerful and advanced blocks.
+Blockons blocks are built with the latest methods and technologies for creating gutenberg blocks for the WordPress block editor... Our editor blocks are built the WordPress way, so it's super fast and offers very powerful and advanced editor blocks.
 
-We'd even bet our editor blocks are a lot more customizable than other block plugins out there.
+We'd even bet our gutenberg editor blocks are a lot more customizable than other block plugins out there.
 
 
 = We're concerned about bloat code! =
 
-Blockons is built with the newest methods (and technologies) for building WordPress blocks... Meaning it doesn't have old deprecated ways of adding blocks like when the new WordPress editor first got added, it's reached an established way of building blocks, and that's the way we're doing it!
-
-
-## We're here to help!
-
-We want to offer the best plugin out there, and the best support... Bugs do happen, so please forgive us, but if you find a bug or anything not working as you need then please [reach out to us](https://blockons.com/go/contact/) to help.
+Blockons blocks are built with the newest methods (and technologies) for building WordPress editor blocks... Meaning it doesn't have old deprecated ways of adding blocks like when the new WordPress (or Gutenberg) editor first got added, it's reached an established way of building blocks, and that's the way we're doing it!
 
 
 = Translations =
@@ -125,7 +132,7 @@ Installing Blockons can be done either by searching for "Blockons" via `Plugins 
 == Frequently Asked Questions ==
 
 = Will Blockons work with my theme?
-It should work with ALL themes! But as themes and plugins add their own CSS or Javascript which might affect any plugin from working perfectly... We're here to help... [Let us know](https://blockons.com/go/contact/) if something doesn't work and we'll help you fix it.
+Blockons should work with ALL themes! But as themes and plugins add their own CSS or Javascript which might affect any plugin from working perfectly... We're here to help... [Let us know](https://blockons.com/go/contact/) if something doesn't work and we'll help you fix it.
 
 = Where are the Blockons settings?
 The Blockons manager settings and Site Add-Ons are found in the WordPress Dashboard under Dashboard -> Settings -> Blockons Settings.
@@ -135,12 +142,22 @@ Blocks Settings - As you add each block you will be able to edit the block live 
 = I don't see the WooCommerce blocks?
 For the WooCommerce blocks (Account Icon, Featured Products & Mini Cart) you need to have the WooCommerce plugin activated.
 
+= Will Blockons work with other block plugins?
+We've tested with lots of different gutenberg blocks plugins like CoBlocks, Ultimate Blocks, Spectra, GenerateBlocks, Otter page builder blocks & Gutenverse gutenberg blocks to name a few... Blockons should not affect or be affected by other blocks plugins or page builders.
+
 = I don't see the same amount of blocks?
 When we add new blocks, by default they are turned off... This is encase you've manually turned blocks off for site speed and loading.
 
 We don't want to auto-turn them on, so you'll need to go to Dashboard -> Settings -> Blockons Settings -> Blocks and turn on the new blocks that you want to use.
 
 You should receive a 'We've added new blocks' notice (which is dismissable) when we add new blocks.
+
+= This block contains unexpected or invalid content
+This is most likely from a latest update adding new settings to the block, and so WordPress displays this warning because the blocks editor version looks slightly different to the saved frontend version of the block.
+
+Clicking "Attempt Block Recovery" should fix the block.
+
+[Read more](https://blockons.com/documentation/how-to-recover-a-broken-block/) on block recovery here.
 
 = I found a bug... What do I do?
 Please [contact us](https://blockons.com/go/contact/) so we can post a fix and get it working for you.
@@ -150,6 +167,12 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 
 == Changelog ==
+
+= 1.0.2 =
+* Styling tweaks/fixes
+* JS fix for back to top button
+* Version compatibility bump for WP 6.1
+* 
 
 = 1.0.1 =
 * Initial release
