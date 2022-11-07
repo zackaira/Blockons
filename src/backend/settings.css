@@ -312,7 +312,8 @@ a.blockons-docs::before {
 .blockonsheading.nomargin {
 	margin-top: 0;
 }
-#blockons-content-2 table tr:first-child .blockonsheading {
+#blockons-content-2 table tr:first-child .blockonsheading,
+#blockons-content-3 table tr:first-child .blockonsheading {
 	margin-top: -11px;
 }
 .blockonsheading-title {
@@ -329,6 +330,9 @@ a.blockons-docs::before {
 	font-size: 12px;
 	font-weight: normal;
 	color: #979797;
+}
+.blockons-row .blockonsheading-desc p {
+	max-width: none;
 }
 
 /* ---- Setting Tooltips ---- */
@@ -479,8 +483,8 @@ a.blockons-docs::before {
 .toggle-switch {
 	position: relative;
 	display: inline-block;
-	width: 60px;
-	height: 34px;
+	width: 40px;
+	height: 24px;
 }
 .toggle-switch input.toggle-switch-checkbox {
 	opacity: 0;
@@ -502,10 +506,10 @@ a.blockons-docs::before {
 	border-radius: 34px;
 	position: absolute;
 	content: "";
-	height: 26px;
-	width: 26px;
-	left: 4px;
-	bottom: 4px;
+	height: 18px;
+	width: 18px;
+	left: 3px;
+	bottom: 3px;
 	background-color: white;
 	transition: all 0.18s ease-in-out 0s;
 }
@@ -520,24 +524,24 @@ a.blockons-docs::before {
 .toggle-switch
 	input.toggle-switch-checkbox:checked
 	+ .toggle-switch-slider:before {
-	transform: translateX(26px);
+	transform: translateX(16px);
 }
-/* -- Smaller toggle in other settings -- */
-#blockons-content-2 .toggle-switch {
-	width: 40px;
-	height: 24px;
+/* -- Larger toggle in block settings -- */
+.blockons-block-settings .toggle-switch {
+	width: 60px;
+	height: 34px;
 }
-#blockons-content-2 .toggle-switch-slider:before {
-	height: 18px;
-	width: 18px;
-	left: 3px;
-	bottom: 3px;
+.blockons-block-settings .toggle-switch-slider:before {
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
 }
-#blockons-content-2
+.blockons-block-settings
 	.toggle-switch
 	input.toggle-switch-checkbox:checked
 	+ .toggle-switch-slider:before {
-	transform: translateX(16px);
+	transform: translateX(26px);
 }
 /* ---- Setting Blocks Wrapper ---- */
 .blockons-block-settings {

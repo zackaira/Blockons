@@ -287,20 +287,20 @@ body.wp-admin.admin-bar .blockons-settings .blockons-page-loader {
 }
 
 /**
- * Visibility Settings added to all blocks
+ * Visibility Settings added to all blocks - PRO
  */
 @media only screen and (min-width: 1100px) {
-	.hide-on-desktop {
+	body.blockons-pro .hide-on-desktop {
 		display: none !important;
 	}
 }
 @media all and (min-width: 500px) and (max-width: 1100px) {
-	.hide-on-tablet {
+	body.blockons-pro .hide-on-tablet {
 		display: none !important;
 	}
 }
 @media screen and (max-width: 500px) {
-	.hide-on-mobile {
+	body.blockons-pro .hide-on-mobile {
 		display: none !important;
 	}
 }

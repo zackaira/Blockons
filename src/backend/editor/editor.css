@@ -90,12 +90,11 @@
  * Visibility Settings added to all blocks
  */
 @media only screen and (min-width: 1100px) {
-	.hide-on-desktop {
-		box-shadow: 0 0 0 1px rgb(155 103 106 / 45%);
+	body.blockons-pro .hide-on-desktop {
+		box-shadow: 0 0 0 1px #454545;
 	}
-	.hide-on-desktop::before {
+	body.blockons-pro .hide-on-desktop::before {
 		display: block;
-		box-shadow: 0 0 0 1px #9b676a;
 		content: "";
 		position: absolute;
 		top: 0;
@@ -105,16 +104,16 @@
 		z-index: 28;
 		background: repeating-linear-gradient(
 			-45deg,
-			#c59396 0px,
-			#c59396 10px,
-			#9b676a 10px,
-			#9b676a 15px
+			#c2c2c2 0px,
+			#c2c2c2 10px,
+			#454545 10px,
+			#454545 15px
 		);
 		opacity: 0.18;
 	}
-	.hide-on-desktop::after {
+	body.blockons-pro .hide-on-desktop::after {
 		display: block;
-		background-color: #c59396;
+		background-color: #c39ac8;
 		box-shadow: none !important;
 		content: "Hidden on Desktop" !important;
 		position: absolute !important;
@@ -132,10 +131,10 @@
 	}
 }
 @media all and (min-width: 500px) and (max-width: 1100px) {
-	.hide-on-tablet {
+	body.blockons-pro .hide-on-tablet {
 		box-shadow: 0 0 0 1px rgb(155 103 106 / 45%);
 	}
-	.hide-on-tablet::before {
+	body.blockons-pro .hide-on-tablet::before {
 		display: block;
 		content: "";
 		position: absolute;
@@ -146,16 +145,16 @@
 		z-index: 28;
 		background: repeating-linear-gradient(
 			-45deg,
-			#c59396 0px,
-			#c59396 10px,
-			#9b676a 10px,
-			#9b676a 15px
+			#c2c2c2 0px,
+			#c2c2c2 10px,
+			#454545 10px,
+			#454545 15px
 		);
 		opacity: 0.18;
 	}
-	.hide-on-tablet::after {
+	body.blockons-pro .hide-on-tablet::after {
 		display: block;
-		background-color: #c59396;
+		background-color: #c39ac8;
 		box-shadow: none !important;
 		content: "Hidden on Tablet" !important;
 		position: absolute !important;
@@ -173,10 +172,10 @@
 	}
 }
 @media screen and (max-width: 500px) {
-	.hide-on-mobile {
+	body.blockons-pro .hide-on-mobile {
 		box-shadow: 0 0 0 1px rgb(155 103 106 / 45%);
 	}
-	.hide-on-mobile::before {
+	body.blockons-pro .hide-on-mobile::before {
 		display: block;
 		content: "";
 		position: absolute;
@@ -187,16 +186,16 @@
 		z-index: 28;
 		background: repeating-linear-gradient(
 			-45deg,
-			#c59396 0px,
-			#c59396 10px,
-			#9b676a 10px,
-			#9b676a 15px
+			#c2c2c2 0px,
+			#c2c2c2 10px,
+			#454545 10px,
+			#454545 15px
 		);
 		opacity: 0.18;
 	}
-	.hide-on-mobile::after {
+	body.blockons-pro .hide-on-mobile::after {
 		display: block;
-		background-color: #c59396;
+		background-color: #c39ac8;
 		box-shadow: none !important;
 		content: "Hidden on Mobile" !important;
 		position: absolute !important;

@@ -5,31 +5,36 @@ const { assign, merge } = lodash;
 import classnames from "classnames";
 const { createHigherOrderComponent } = wp.compose;
 const isPremium = Boolean(blockonsEditorObj.isPremium);
+const blockOptions = blockonsEditorObj.blockonsOptions;
+
+console.log(blockOptions);
+console.log(blockOptions.blockvisibility?.enabled);
 
 /**
  * Add New Attributes to all blocks
  */
 function blockonsAddCustomAttributes(settings, name) {
 	// console.log({ settings, name });
+	// console.log(blockOptions);
 
-	// if (name === "core/button") {
-	return assign({}, settings, {
-		attributes: merge(settings.attributes, {
-			hideOnDesktop: {
-				type: "boolean",
-				default: false,
-			},
-			hideOnTablet: {
-				type: "boolean",
-				default: false,
-			},
-			hideOnMobile: {
-				type: "boolean",
-				default: false,
-			},
-		}),
-	});
-	// }
+	if (blockOptions.blockvisibility?.enabled === true) {
+		return assign({}, settings, {
+			attributes: merge(settings.attributes, {
+				hideOnDesktop: {
+					type: "boolean",
+					default: false,
+				},
+				hideOnTablet: {
+					type: "boolean",
+					default: false,
+				},
+				hideOnMobile: {
+					type: "boolean",
+					default: false,
+				},
+			}),
+		});
+	}
 
 	return settings;
 }
@@ -50,29 +55,34 @@ const blockonsAddInspectorControls = createHigherOrderComponent((BlockEdit) => {
 		return (
 			<Fragment>
 				<BlockEdit {...props} />
-				<InspectorControls>
-					<PanelBody
-						// icon="visibility"
-						title={__("Blockons Visibility", "blockons")}
-						initialOpen={false}
-					>
-						<ToggleControl
-							checked={hideOnDesktop}
-							label={__("Hide on desktop", "blockons")}
-							onChange={() => setAttributes({ hideOnDesktop: !hideOnDesktop })}
-						/>
-						<ToggleControl
-							checked={hideOnTablet}
-							label={__("Hide on tablet", "blockons")}
-							onChange={() => setAttributes({ hideOnTablet: !hideOnTablet })}
-						/>
-						<ToggleControl
-							checked={hideOnMobile}
-							label={__("Hide on mobile", "blockons")}
-							onChange={() => setAttributes({ hideOnMobile: !hideOnMobile })}
-						/>
-					</PanelBody>
-				</InspectorControls>
+
+				{blockOptions.blockvisibility?.enabled === true && (
+					<InspectorControls>
+						<PanelBody
+							// icon="visibility"
+							title={__("Blockons Visibility", "blockons")}
+							initialOpen={false}
+						>
+							<ToggleControl
+								checked={hideOnDesktop}
+								label={__("Hide on desktop", "blockons")}
+								onChange={() =>
+									setAttributes({ hideOnDesktop: !hideOnDesktop })
+								}
+							/>
+							<ToggleControl
+								checked={hideOnTablet}
+								label={__("Hide on tablet", "blockons")}
+								onChange={() => setAttributes({ hideOnTablet: !hideOnTablet })}
+							/>
+							<ToggleControl
+								checked={hideOnMobile}
+								label={__("Hide on mobile", "blockons")}
+								onChange={() => setAttributes({ hideOnMobile: !hideOnMobile })}
+							/>
+						</PanelBody>
+					</InspectorControls>
+				)}
 			</Fragment>
 		);
 	};
@@ -89,19 +99,20 @@ const blockonsAddFrontendClasses = createHigherOrderComponent(
 				name,
 			} = props;
 
-			//   if (name !== 'core/button') {
-			// 	return <BlockListBlock {...props} />;
-			//   }
+			const newClassnames =
+				blockOptions.blockvisibility?.enabled === true
+					? classnames(
+							className,
+							`${hideOnDesktop ? "hide-on-desktop" : ""} ${
+								hideOnTablet ? "hide-on-tablet" : ""
+							} ${hideOnMobile ? "hide-on-mobile" : ""}`
+					  )
+					: className;
 
 			return (
 				<BlockListBlock
 					{...props}
-					className={classnames(
-						className,
-						`${hideOnDesktop ? "hide-on-desktop" : ""} ${
-							hideOnTablet ? "hide-on-tablet" : ""
-						} ${hideOnMobile ? "hide-on-mobile" : ""}`
-					)}
+					className={newClassnames}
 					// wrapperProps={{ "data-teeeeest": "yesssssssss" }} // TO ADD AOS SCROLL ANIMATIONS
 				/>
 			);
@@ -114,6 +125,8 @@ const blockonsAddFrontendClasses = createHigherOrderComponent(
  */
 const blockonsAddVisibilityClasses = (extraProps, blockType, attributes) => {
 	const { hideOnDesktop, hideOnTablet, hideOnMobile } = attributes;
+
+	if (!blockOptions.blockvisibility?.enabled === true) return extraProps;
 
 	extraProps.className = classnames(extraProps.className, {
 		"hide-on-desktop": hideOnDesktop,

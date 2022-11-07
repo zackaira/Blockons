@@ -17,6 +17,8 @@ class Blockons_Admin {
 		add_filter('plugin_row_meta', array($this, 'blockons_add_plugins_row_link'), 10, 2);
 
 		add_filter('block_categories_all', array($this, 'blockons_blocks_custom_category'), 10, 2);
+
+		add_filter('admin_body_class', array($this, 'blockons_admin_body_classes'));
 	}
 
 	/**
@@ -118,6 +120,18 @@ class Blockons_Admin {
 			$plugin_filenames[] = $filename;
 		}
 		return in_array($plugin_name, $plugin_filenames);
+	}
+
+	/**
+	 * Function to check for active plugins
+	 */
+	public function blockons_admin_body_classes($admin_classes) {
+		if ( blockons_fs()->can_use_premium_code__premium_only() ) {
+			$admin_classes .= sanitize_html_class('blockons-pro');
+		} else {
+			$admin_classes .= sanitize_html_class('blockons-free');
+		}
+		return $admin_classes;
 	}
 }
 new Blockons_Admin();

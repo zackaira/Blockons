@@ -5,6 +5,7 @@ import axios from "axios";
 import SettingRow from "./components/SettingRow";
 import SettingGroup from "./components/SettingGroup";
 import SettingBlock from "./components/SettingBlock";
+import SettingHeader from "./components/SettingHeader";
 import InfoTab from "./InfoTab";
 import Loader from "./Loader";
 import { blockonsGroupSettings, blockListSettings } from "./helpers";
@@ -56,7 +57,7 @@ const Settings = () => {
 		});
 	};
 
-	// console.log(blockonsOptions);
+	console.log(blockonsOptions);
 
 	useEffect(() => {
 		blockonsGroupSettings();
@@ -174,9 +175,16 @@ const Settings = () => {
 										{__("Blocks", "blockons")}
 									</a>
 								</li>
+								{isPremium && (
+									<li>
+										<a id="blockonstab-2" className="blockons-tab">
+											{__("Block Extensions", "blockons")}
+										</a>
+									</li>
+								)}
 								<li>
-									<a id="blockonstab-2" className="blockons-tab">
-										{__("Site Add-Ons", "blockons")}
+									<a id="blockonstab-3" className="blockons-tab">
+										{__("Site Addons", "blockons")}
 									</a>
 								</li>
 
@@ -194,17 +202,13 @@ const Settings = () => {
 										id="blockons-content-1"
 										className="blockons-content active"
 									>
-										<div className="blockons-header">
-											<h3 className="blockons-title">
-												{__("Blockons Editor Blocks", "blockons")}
-											</h3>
-											<p>
-												{__(
-													"Choose the blocks you'd like to use when building with the WordPress block editor. You can turn off blocks to optimize for speed & page loading.",
-													"blockons"
-												)}
-											</p>
-										</div>
+										<SettingHeader
+											title={__("Blockons Editor Blocks", "blockons")}
+											description={__(
+												"Choose the blocks you'd like to use when building with the WordPress block editor. You can turn off blocks to optimize for speed & page loading.",
+												"blockons"
+											)}
+										/>
 
 										<div className="blockons-block-settings">
 											{defaults.blocks &&
@@ -257,7 +261,87 @@ const Settings = () => {
 										</p>
 									</div>
 
-									<div id="blockons-content-2" className="blockons-content">
+									{isPremium && (
+										<div id="blockons-content-2" className="blockons-content">
+											<SettingHeader
+												title={__("Blockons Block Extensions", "blockons")}
+												description={__(
+													"Adding or extending the functionality of your website editor blocks",
+													"blockons"
+												)}
+											/>
+
+											<table className="form-table" role="presentation">
+												<tbody>
+													<SettingRow
+														title={__("Block Visibility", "blockons")}
+														description={__(
+															"Add a Blockons Visibility settings panel to each block and select to show or hide any blocks per device - Desktop, Tablet & Mobile",
+															"blockons"
+														)}
+														inputType="heading"
+													/>
+													<SettingRow
+														title={__("Enable Block Visibility", "blockons")}
+														slug="blockvisibility_enabled"
+														value={blockonsOptions.blockvisibility?.enabled}
+														inputType="toggle"
+														onChange={handleChange}
+													/>
+													{blockonsOptions.blockvisibility?.enabled && (
+														<>
+															<SettingRow
+																title={__("Desktop")}
+																slug="blockvisibility_desktop"
+																value={blockonsOptions.blockvisibility?.desktop}
+																placeholder="1100"
+																inputType="number"
+																onChange={handleChange}
+															/>
+														</>
+													)}
+
+													<SettingRow
+														title={__("Block Animations", "blockons")}
+														description={__(
+															"Animate your blocks as they appear on screen when scrolling down the page",
+															"blockons"
+														)}
+														inputType="heading"
+													/>
+													<SettingRow
+														title={__("Enable Block Animations", "blockons")}
+														slug="blockanimation_enabled"
+														value={blockonsOptions.blockanimation?.enabled}
+														inputType="toggle"
+														onChange={handleChange}
+													/>
+													{blockonsOptions.blockanimation?.enabled && (
+														<>
+															<SettingRow
+																title={__("Wahoo yeah!")}
+																slug="blockanimation_blahblah"
+																value={blockonsOptions.blockanimation?.blahblah}
+																placeholder="1100"
+																inputType="number"
+																onChange={handleChange}
+															/>
+														</>
+													)}
+												</tbody>
+											</table>
+										</div>
+									)}
+
+									<div id="blockons-content-3" className="blockons-content">
+										<SettingHeader
+											title={__("Blockons Site Addons", "blockons")}
+											description={__(
+												"Add extra, useful features to your WordPress website",
+												"blockons"
+											)}
+										/>
+
 										<table className="form-table" role="presentation">
 											<tbody>
 												<SettingRow

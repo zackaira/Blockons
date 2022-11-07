@@ -1,7 +1,7 @@
 === Blockons - WordPress editor blocks plugin ===
 Contributors: Kaira
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PFZGBM92T8XSE&source=url
-Tags: blocks, editor, block, gutenberg blocks, woocommerce blocks
+Tags: blocks, editor blocks, block, gutenberg blocks, woocommerce blocks
 Requires at least: 5.0
 Tested up to: 6.1
 Stable tag: 1.0.1

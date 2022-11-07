@@ -15,6 +15,8 @@ class Blockons_Frontend {
 		$blockonsSavedOptions = get_option('blockons_options');
 		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
 
+		add_filter('body_class', array( $this, 'blockons_frontend_body_classes' ));
+
 		if (isset($blockonsOptions->bttb->enabled) && $blockonsOptions->bttb->enabled == true) {
 			add_action('wp_footer', array( $this, 'blockons_add_footer_bttb' ), 10, 1);
 		}
@@ -38,10 +40,23 @@ class Blockons_Frontend {
 		}
 	}
 
+
+	/**
+	 * Function to check for active plugins
+	 */
+	public function blockons_frontend_body_classes($classes) {
+		if ( blockons_fs()->can_use_premium_code__premium_only() ) {
+			$classes[] = sanitize_html_class('blockons-pro');
+		} else {
+			$classes[] = sanitize_html_class('blockons-free');
+		}
+		return $classes;
+	}
+
 	/**
 	 * Add Page Loader Functionality
 	 */
-	public function blockons_add_loader_body_class( $classes ) {
+	public function blockons_add_loader_body_class($classes) {
 		$classes[] = sanitize_html_class('blockons-page-loading');
 		return $classes;
 	}

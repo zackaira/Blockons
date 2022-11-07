@@ -18,7 +18,7 @@
 		"eslint-plugin-prettier": "^4.0.0",
 		"gulp": "^4.0.2",
 		"gulp-zip": "^5.1.0",
-		"prettier": "npm:wp-prettier@2.2.1-beta-1"
+		"prettier": "^2.7.1"
 	},
 	"scripts": {
 		"start": "wp-scripts start --mode=development --webpack-copy-php --webpack-src-dir=blocks",
@@ -29,6 +29,7 @@
 		"@splidejs/react-splide": "^0.7.10",
 		"@splidejs/splide": "^4.0.17",
 		"@splidejs/splide-extension-video": "^0.8.0",
+		"aos": "^3.0.0-beta.6",
 		"axios": "^0.27.2",
 		"css-minimizer-webpack-plugin": "^4.0.0",
 		"html-react-parser": "^1.4.14",

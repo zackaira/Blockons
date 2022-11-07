@@ -207,6 +207,9 @@ class Blockons {
 	 */
 	public function blockons_block_editor_scripts() {
 		$suffix = (defined('WP_DEBUG') && true === WP_DEBUG) ? '' : '.min';
+
+		$blockonsSavedOptions = get_option('blockons_options');
+		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
 		
 		wp_register_style( 'blockons-admin-editor-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/editor' . $suffix . '.css'), array(), BLOCKONS_PLUGIN_VERSION );
 		wp_enqueue_style( 'blockons-admin-editor-style' );
@@ -214,6 +217,7 @@ class Blockons {
 		wp_register_script( 'blockons-admin-editor-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/editor' . $suffix . '.js'), array('wp-edit-post'), BLOCKONS_PLUGIN_VERSION, true );
 		wp_localize_script('blockons-admin-editor-script', 'blockonsEditorObj', array(
 			'isPremium' => blockons_fs()->can_use_premium_code(),
+			'blockonsOptions' => $blockonsOptions,
 		));
 		wp_enqueue_script('blockons-admin-editor-script');
 	} // End blockons_block_editor_scripts ()
