@@ -253,7 +253,7 @@ const Settings = () => {
 										<div className="blockons-more">
 											{__("More Blocks Coming Soon...", "blockons")}
 										</div>
-										<p>
+										<p className="center">
 											{__(
 												"Get in touch and let us know which blocks you need for your site.",
 												"blockons"
@@ -291,12 +291,22 @@ const Settings = () => {
 													{blockonsOptions.blockvisibility?.enabled && (
 														<>
 															<SettingRow
-																title={__("Desktop")}
-																slug="blockvisibility_desktop"
-																value={blockonsOptions.blockvisibility?.desktop}
-																placeholder="1100"
+																title={__("Tablet Breakpoint")}
+																slug="blockvisibility_tablet"
+																value={blockonsOptions.blockvisibility?.tablet}
+																placeholder="980"
 																inputType="number"
 																onChange={handleChange}
+																suffix="px"
+															/>
+															<SettingRow
+																title={__("Mobile Breakpoint")}
+																slug="blockvisibility_mobile"
+																value={blockonsOptions.blockvisibility?.mobile}
+																placeholder="767"
+																inputType="number"
+																onChange={handleChange}
+																suffix="px"
 															/>
 														</>
 													)}
@@ -1001,7 +1011,7 @@ const Settings = () => {
 										<div className="blockons-more">
 											{__("More Add-Ons Coming Soon...", "blockons")}
 										</div>
-										<p>
+										<p className="center">
 											{__(
 												"Get in touch and let us know which add-ons you need for your site.",
 												"blockons"

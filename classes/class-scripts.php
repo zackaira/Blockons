@@ -123,6 +123,19 @@ class Blockons {
 		// Frontend CSS
 		wp_register_style( 'blockons-addons-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.css'), array(), BLOCKONS_PLUGIN_VERSION );
 		wp_enqueue_style( 'blockons-addons-style' );
+
+		if (blockons_fs()->can_use_premium_code__premium_only()) {
+			// Block Extension - Visibility CSS
+			if (isset($blockonsOptions->blockvisibility->enabled) && $blockonsOptions->blockvisibility->enabled == true) {
+				$blockons_tablet = isset($blockonsOptions->blockvisibility->tablet) ? $blockonsOptions->blockvisibility->tablet : '980';
+				$blockons_mobile = isset($blockonsOptions->blockvisibility->mobile) ? $blockonsOptions->blockvisibility->mobile : '767';
+
+				$blockons_visibility_css = "@media only screen and (min-width: " . $blockons_tablet . "px) { body.blockons-pro .hide-on-desktop { display: none !important; } }
+				@media all and (min-width: " . $blockons_mobile . "px) and (max-width: " . $blockons_tablet . "px) { body.blockons-pro .hide-on-tablet { display: none !important; } }
+				@media screen and (max-width: " . $blockons_mobile . "px) { body.blockons-pro .hide-on-mobile { display: none !important; } }";
+				wp_add_inline_style( 'blockons-addons-style', $blockons_visibility_css );
+			}
+		}
 		
 		// Frontend JS
 		wp_register_script( 'blockons-frontend-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.js'), array('wp-i18n'), BLOCKONS_PLUGIN_VERSION, true );
@@ -275,6 +288,11 @@ class Blockons {
 				"wc_account_icon" => true, // 3
 				"wc_featured_product" => true, // 2
 				"wc_mini_cart" => true, // 1
+			),
+			"blockvisibility" => array(
+				"enabled" => false,
+				"tablet" => "980",
+				"mobile" => "767",
 			),
 			"pageloader" => array(
 				"enabled" => false,

@@ -318,11 +318,13 @@ a.blockons-docs::before {
 }
 .blockonsheading-title {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-	font-size: 22px;
+	font-size: 17px;
 	font-weight: 500;
+	letter-spacing: 0.4px;
 	color: #af2dbf;
 	margin: 0;
 	padding: 0 0 8px;
+	text-transform: uppercase;
 }
 .blockons-row .blockonsheading-desc {
 	margin: 8px 0 0;
@@ -330,8 +332,6 @@ a.blockons-docs::before {
 	font-size: 12px;
 	font-weight: normal;
 	color: #979797;
-}
-.blockons-row .blockonsheading-desc p {
 	max-width: none;
 }
 
@@ -578,7 +578,7 @@ a.blockons-docs::before {
 }
 .blockonsInfoTab .blockons-video,
 .blockonsInfoTab .blockons-help,
-#blockons-content-1 p {
+.center {
 	text-align: center;
 }
 /* ---- Info Tab ---- */

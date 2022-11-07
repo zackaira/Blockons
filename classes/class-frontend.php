@@ -40,7 +40,6 @@ class Blockons_Frontend {
 		}
 	}
 
-
 	/**
 	 * Function to check for active plugins
 	 */
