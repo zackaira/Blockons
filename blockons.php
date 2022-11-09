@@ -9,11 +9,11 @@
  * Requires at least: 5.0
  * Tested up to: 6.1
  * WC requires at least: 3.2
- * WC tested up to: 7.0
+ * WC tested up to: 7.1
  * Text Domain: blockons
  * Domain Path: /lang/
  * 
- * @fs_premium_only /dist/pro/, /assets/blocks/search/pro/, /assets/blocks/wc-mini-cart/pro/
+ * @fs_premium_only /dist/pro/, /assets/blocks/search/pro/, /assets/blocks/wc-mini-cart/pro/, /assets/aos/
  *
  * @package blockons
  */

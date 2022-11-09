@@ -1,8 +1,18 @@
-body.wp-admin.plugins-php
+body.wp-admin.blockons-free.plugins-php
 	.wp-list-table
 	#the-list
 	tr[data-plugin*="blockons/blockons.php"]
-	span.upgrade {
+	span.upgrade,
+body.wp-admin.blockons-free.plugins-php
+	.wp-list-table
+	#the-list
+	tr[data-plugin*="blockons/blockons.php"]
+	span.activate-license,
+body.wp-admin.blockons-free.plugins-php
+	.wp-list-table
+	#the-list
+	tr[data-plugin*="blockons/blockons.php"]
+	span.opt-in-or-opt-out {
 	display: none !important;
 }
 /* ---- Update Notice Styling ---- */

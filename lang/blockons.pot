@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-11-01T09:46:37+00:00\n"
+"POT-Creation-Date: 2022-11-09T15:29:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: blockons\n"
@@ -42,48 +42,48 @@ msgid_plural "%d items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: classes/class-admin.php:31
-#: classes/class-admin.php:32
+#: classes/class-admin.php:33
+#: classes/class-admin.php:34
 msgid "Blockons Settings"
 msgstr ""
 
-#: classes/class-admin.php:43
+#: classes/class-admin.php:45
 msgid "Settings"
 msgstr ""
 
-#: classes/class-admin.php:55
+#: classes/class-admin.php:57
 msgid "View Blockons documentation"
 msgstr ""
 
-#: classes/class-admin.php:55
+#: classes/class-admin.php:57
 #: dist/settings.js:4729
-#: dist/settings.js:4979
-#: dist/settings.js:5681
+#: dist/settings.js:4981
+#: dist/settings.js:5772
 #: src/backend/components/SettingRow.js:70
 #: src/backend/InfoTab.js:75
-#: src/backend/Settings.js:163
+#: src/backend/Settings.js:164
 msgid "Documentation"
 msgstr ""
 
-#: classes/class-admin.php:56
+#: classes/class-admin.php:58
 msgid "Go to Blockons FAQ's"
 msgstr ""
 
-#: classes/class-admin.php:56
+#: classes/class-admin.php:58
 #: dist/settings.js:4733
 #: src/backend/InfoTab.js:82
 msgid "FAQ's"
 msgstr ""
 
-#: classes/class-admin.php:92
+#: classes/class-admin.php:94
 msgid "Blockons Blocks"
 msgstr ""
 
-#: classes/class-scripts.php:298
+#: classes/class-scripts.php:336
 msgid "Your Shopping Cart"
 msgstr ""
 
-#: classes/class-scripts.php:299
+#: classes/class-scripts.php:337
 msgid "Spend $100 to get FREE shipping!"
 msgstr ""
 
@@ -216,18 +216,18 @@ msgstr ""
 #: build/progress-bars/index.js:534
 #: build/testimonials/index.js:3654
 #: build/wc-mini-cart/index.js:557
-#: dist/settings.js:5109
-#: dist/settings.js:5178
-#: dist/settings.js:5314
-#: dist/settings.js:5388
-#: dist/settings.js:5429
-#: dist/settings.js:5459
-#: src/backend/Settings.js:356
-#: src/backend/Settings.js:447
-#: src/backend/Settings.js:635
-#: src/backend/Settings.js:748
-#: src/backend/Settings.js:814
-#: src/backend/Settings.js:869
+#: dist/settings.js:5170
+#: dist/settings.js:5239
+#: dist/settings.js:5375
+#: dist/settings.js:5449
+#: dist/settings.js:5490
+#: dist/settings.js:5520
+#: src/backend/Settings.js:450
+#: src/backend/Settings.js:541
+#: src/backend/Settings.js:729
+#: src/backend/Settings.js:842
+#: src/backend/Settings.js:908
+#: src/backend/Settings.js:963
 #: build/accordions/index.js:373
 #: build/accordions/index.js:432
 #: build/image-carousel/index.js:3482
@@ -261,12 +261,12 @@ msgstr ""
 #: build/icon-list/index.js:703
 #: build/image-carousel/index.js:3526
 #: build/testimonials/index.js:3663
-#: dist/settings.js:5123
-#: dist/settings.js:5436
-#: dist/settings.js:5466
-#: src/backend/Settings.js:373
-#: src/backend/Settings.js:828
-#: src/backend/Settings.js:877
+#: dist/settings.js:5184
+#: dist/settings.js:5497
+#: dist/settings.js:5527
+#: src/backend/Settings.js:467
+#: src/backend/Settings.js:922
+#: src/backend/Settings.js:971
 #: build/accordions/index.js:390
 #: build/icon-list/index.js:681
 #: build/image-carousel/index.js:3507
@@ -286,8 +286,8 @@ msgstr ""
 #: build/search/index.js:558
 #: build/wc-account-icon/index.js:522
 #: build/wc-mini-cart/index.js:539
-#: dist/settings.js:5275
-#: src/backend/Settings.js:583
+#: dist/settings.js:5336
+#: src/backend/Settings.js:677
 #: build/accordions/index.js:397
 #: build/icon-list/index.js:689
 #: build/marketing-button/index.js:506
@@ -311,10 +311,10 @@ msgstr ""
 #: build/search/index.js:585
 #: build/wc-account-icon/index.js:547
 #: build/wc-mini-cart/index.js:575
-#: dist/settings.js:5321
-#: dist/settings.js:5395
-#: src/backend/Settings.js:644
-#: src/backend/Settings.js:761
+#: dist/settings.js:5382
+#: dist/settings.js:5456
+#: src/backend/Settings.js:738
+#: src/backend/Settings.js:855
 #: build/accordions/index.js:407
 #: build/icon-list/index.js:567
 #: build/icon-list/index.js:698
@@ -599,8 +599,8 @@ msgstr ""
 
 #: blocks/image-carousel/edit.js:403
 #: build/image-carousel/index.js:3452
-#: dist/settings.js:5264
-#: src/backend/Settings.js:569
+#: dist/settings.js:5325
+#: src/backend/Settings.js:663
 #: build/image-carousel/index.js:3425
 msgid "Border Radius"
 msgstr ""
@@ -1374,14 +1374,14 @@ msgstr ""
 
 #: blocks/testimonials/edit.js:413
 #: build/testimonials/index.js:3480
-#: dist/settings.js:5097
-#: dist/settings.js:5150
-#: dist/settings.js:5227
-#: dist/settings.js:5357
-#: src/backend/Settings.js:339
-#: src/backend/Settings.js:414
-#: src/backend/Settings.js:523
-#: src/backend/Settings.js:708
+#: dist/settings.js:5158
+#: dist/settings.js:5211
+#: dist/settings.js:5288
+#: dist/settings.js:5418
+#: src/backend/Settings.js:433
+#: src/backend/Settings.js:508
+#: src/backend/Settings.js:617
+#: src/backend/Settings.js:802
 #: build/testimonials/index.js:3435
 msgid "Position"
 msgstr ""
@@ -2045,8 +2045,8 @@ msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:257
 #: build/wc-mini-cart/index.js:535
-#: dist/settings.js:5350
-#: src/backend/Settings.js:690
+#: dist/settings.js:5411
+#: src/backend/Settings.js:784
 #: build/wc-mini-cart/index.js:499
 msgid "Enable Side Cart"
 msgstr ""
@@ -2105,6 +2105,92 @@ msgstr ""
 msgid "No Products"
 msgstr ""
 
+#: dist/editor.js:287
+#: dist/settings.js:5052
+#: src/backend/editor/editor.js:117
+#: src/backend/Settings.js:277
+msgid "Block Visibility"
+msgstr ""
+
+#: dist/editor.js:291
+#: src/backend/editor/editor.js:122
+msgid "Hide on desktop"
+msgstr ""
+
+#: dist/editor.js:299
+#: src/backend/editor/editor.js:129
+msgid "Hide on tablet"
+msgstr ""
+
+#: dist/editor.js:307
+#: src/backend/editor/editor.js:136
+msgid "Hide on mobile"
+msgstr ""
+
+#: dist/editor.js:314
+#: dist/settings.js:5078
+#: src/backend/editor/editor.js:148
+#: src/backend/Settings.js:315
+msgid "Block Animations"
+msgstr ""
+
+#: dist/editor.js:318
+#: dist/settings.js:5082
+#: src/backend/editor/editor.js:153
+#: src/backend/Settings.js:323
+msgid "Enable Block Animations"
+msgstr ""
+
+#: dist/editor.js:387
+#: src/backend/editor/editor.js:209
+msgid "Duration"
+msgstr ""
+
+#: dist/editor.js:397
+#: src/backend/editor/editor.js:219
+msgid "How long the animation takes - 1000 = 1 second"
+msgstr ""
+
+#: dist/editor.js:399
+#: src/backend/editor/editor.js:225
+msgid "Delay"
+msgstr ""
+
+#: dist/editor.js:409
+#: src/backend/editor/editor.js:235
+msgid "The milliseconds before the animation starts - 1000 = 1 second"
+msgstr ""
+
+#: dist/editor.js:411
+#: src/backend/editor/editor.js:241
+msgid "Offset"
+msgstr ""
+
+#: dist/editor.js:421
+#: src/backend/editor/editor.js:251
+msgid "The offset in pixels from the bottom of the window"
+msgstr ""
+
+#: dist/editor.js:424
+#: src/backend/editor/editor.js:258
+msgid "Animate Once"
+msgstr ""
+
+#: dist/editor.js:430
+#: src/backend/editor/editor.js:262
+msgid "Whether animation should happen only once - while scrolling down"
+msgstr ""
+
+#: dist/editor.js:433
+#: src/backend/editor/editor.js:269
+msgid "Mirror Animations"
+msgstr ""
+
+#: dist/editor.js:439
+#: src/backend/editor/editor.js:273
+msgid "Whether elements should animate out while scrolling past them"
+msgstr ""
+
 #: dist/settings.js:4709
 #: src/backend/InfoTab.js:15
 msgid "Welcome to Blockons!"
@@ -2150,366 +2236,406 @@ msgstr ""
 msgid "Get Support"
 msgstr ""
 
-#: dist/settings.js:4928
-#: src/backend/Settings.js:103
+#: dist/settings.js:4930
+#: src/backend/Settings.js:104
 msgid "Are you sure you want to delete all settings?"
 msgstr ""
 
-#: dist/settings.js:4975
-#: src/backend/Settings.js:158
+#: dist/settings.js:4977
+#: src/backend/Settings.js:159
 msgid "My Account"
 msgstr ""
 
-#: dist/settings.js:4993
-#: src/backend/Settings.js:174
+#: dist/settings.js:4995
+#: src/backend/Settings.js:175
 msgid "Blocks"
 msgstr ""
 
-#: dist/settings.js:4996
-#: src/backend/Settings.js:179
-msgid "Site Add-Ons"
+#: dist/settings.js:4998
+#: src/backend/Settings.js:181
+msgid "Block Extensions"
 msgstr ""
 
 #: dist/settings.js:5001
-#: src/backend/Settings.js:185
+#: src/backend/Settings.js:187
+msgid "Site Addons"
+msgstr ""
+
+#: dist/settings.js:5006
+#: src/backend/Settings.js:193
 msgid "Welcome"
 msgstr ""
 
-#: dist/settings.js:5012
-#: src/backend/Settings.js:199
+#: dist/settings.js:5014
+#: src/backend/Settings.js:206
 msgid "Blockons Editor Blocks"
 msgstr ""
 
-#: dist/settings.js:5012
-#: src/backend/Settings.js:202
+#: dist/settings.js:5015
+#: src/backend/Settings.js:207
 msgid "Choose the blocks you'd like to use when building with the WordPress block editor. You can turn off blocks to optimize for speed & page loading."
 msgstr ""
 
-#: dist/settings.js:5036
-#: src/backend/Settings.js:250
+#: dist/settings.js:5040
+#: src/backend/Settings.js:254
 msgid "More Blocks Coming Soon..."
 msgstr ""
 
-#: dist/settings.js:5036
-#: src/backend/Settings.js:253
+#: dist/settings.js:5042
+#: src/backend/Settings.js:257
 msgid "Get in touch and let us know which blocks you need for your site."
 msgstr ""
 
-#: dist/settings.js:5043
-#: src/backend/Settings.js:264
-msgid "Website Page Loader"
-msgstr ""
-
-#: dist/settings.js:5044
-#: src/backend/Settings.js:265
-msgid "Add a global loader that displays while your page loads."
+#: dist/settings.js:5046
+#: src/backend/Settings.js:267
+msgid "Blockons Block Extensions"
 msgstr ""
 
 #: dist/settings.js:5047
-#: src/backend/Settings.js:272
-msgid "Enable Page Loader"
+#: src/backend/Settings.js:268
+msgid "Adding or extending the functionality of your website editor blocks"
 msgstr ""
 
 #: dist/settings.js:5053
-#: dist/settings.js:5140
-#: dist/settings.js:5202
-#: src/backend/Settings.js:282
-#: src/backend/Settings.js:404
-#: src/backend/Settings.js:488
-msgid "Show Preview"
+#: src/backend/Settings.js:278
+msgid "Add a Blockons Visibility settings panel to each block and select to show or hide any blocks per device - Desktop, Tablet & Mobile"
 msgstr ""
 
-#: dist/settings.js:5063
-#: src/backend/Settings.js:291
-msgid "Loader Style"
-msgstr ""
-
-#: dist/settings.js:5076
-#: dist/settings.js:5221
-#: src/backend/Settings.js:304
-#: src/backend/Settings.js:507
-msgid "More Coming Soon"
-msgstr ""
-
-#: dist/settings.js:5078
-#: dist/settings.js:5223
-#: src/backend/Settings.js:309
-#: src/backend/Settings.js:513
-msgid "Premium Feature"
+#: dist/settings.js:5056
+#: src/backend/Settings.js:285
+msgid "Enable Block Visibility"
 msgstr ""
 
 #: dist/settings.js:5079
-#: src/backend/Settings.js:310
+#: src/backend/Settings.js:316
+msgid "Animate your blocks as they appear on screen when scrolling down the page"
+msgstr ""
+
+#: dist/settings.js:5098
+#: src/backend/Settings.js:348
+msgid "Blockons Site Addons"
+msgstr ""
+
+#: dist/settings.js:5099
+#: src/backend/Settings.js:349
+msgid "Add extra, useful features to your WordPress website"
+msgstr ""
+
+#: dist/settings.js:5104
+#: src/backend/Settings.js:358
+msgid "Website Page Loader"
+msgstr ""
+
+#: dist/settings.js:5105
+#: src/backend/Settings.js:359
+msgid "Add a global loader that displays while your page loads."
+msgstr ""
+
+#: dist/settings.js:5108
+#: src/backend/Settings.js:366
+msgid "Enable Page Loader"
+msgstr ""
+
+#: dist/settings.js:5114
+#: dist/settings.js:5201
+#: dist/settings.js:5263
+#: src/backend/Settings.js:376
+#: src/backend/Settings.js:498
+#: src/backend/Settings.js:582
+msgid "Show Preview"
+msgstr ""
+
+#: dist/settings.js:5124
+#: src/backend/Settings.js:385
+msgid "Loader Style"
+msgstr ""
+
+#: dist/settings.js:5137
+#: dist/settings.js:5282
+#: src/backend/Settings.js:398
+#: src/backend/Settings.js:601
+msgid "More Coming Soon"
+msgstr ""
+
+#: dist/settings.js:5139
+#: dist/settings.js:5284
+#: src/backend/Settings.js:403
+#: src/backend/Settings.js:607
+msgid "Premium Feature"
+msgstr ""
+
+#: dist/settings.js:5140
+#: src/backend/Settings.js:404
 msgid "Change the loader style. The Dual Ring Spinner is the default and the other spinners are only available in Blockons Pro."
 msgstr ""
 
-#: dist/settings.js:5082
-#: src/backend/Settings.js:319
+#: dist/settings.js:5143
+#: src/backend/Settings.js:413
 msgid "Edit Page Loader"
 msgstr ""
 
-#: dist/settings.js:5084
-#: src/backend/Settings.js:322
+#: dist/settings.js:5145
+#: src/backend/Settings.js:416
 msgid "Add Loading Text"
 msgstr ""
 
-#: dist/settings.js:5116
-#: src/backend/Settings.js:364
+#: dist/settings.js:5177
+#: src/backend/Settings.js:458
 msgid "Loader Color"
 msgstr ""
 
-#: dist/settings.js:5130
-#: src/backend/Settings.js:386
+#: dist/settings.js:5191
+#: src/backend/Settings.js:480
 msgid "Page Scroll Indicator"
 msgstr ""
 
-#: dist/settings.js:5131
-#: src/backend/Settings.js:387
+#: dist/settings.js:5192
+#: src/backend/Settings.js:481
 msgid "Add a scroll progress indicator bar to your website."
 msgstr ""
 
-#: dist/settings.js:5134
-#: src/backend/Settings.js:394
+#: dist/settings.js:5195
+#: src/backend/Settings.js:488
 msgid "Enable Scroll Indicator"
 msgstr ""
 
-#: dist/settings.js:5160
-#: src/backend/Settings.js:425
+#: dist/settings.js:5221
+#: src/backend/Settings.js:519
 msgid "Edit Scroll Indicator"
 msgstr ""
 
-#: dist/settings.js:5162
-#: src/backend/Settings.js:428
+#: dist/settings.js:5223
+#: src/backend/Settings.js:522
 msgid "Height"
 msgstr ""
 
-#: dist/settings.js:5172
-#: dist/settings.js:5308
-#: src/backend/Settings.js:439
-#: src/backend/Settings.js:627
+#: dist/settings.js:5233
+#: dist/settings.js:5369
+#: src/backend/Settings.js:533
+#: src/backend/Settings.js:721
 msgid "Has Background"
 msgstr ""
 
-#: dist/settings.js:5185
-#: src/backend/Settings.js:458
+#: dist/settings.js:5246
+#: src/backend/Settings.js:552
 msgid "Scroll Indicator Color"
 msgstr ""
 
-#: dist/settings.js:5192
-#: src/backend/Settings.js:470
+#: dist/settings.js:5253
+#: src/backend/Settings.js:564
 msgid "Back To Top Button"
 msgstr ""
 
-#: dist/settings.js:5193
-#: src/backend/Settings.js:471
+#: dist/settings.js:5254
+#: src/backend/Settings.js:565
 msgid "Add a back to top button to your website"
 msgstr ""
 
-#: dist/settings.js:5196
-#: src/backend/Settings.js:478
+#: dist/settings.js:5257
+#: src/backend/Settings.js:572
 msgid "Enable Back To Top Button"
 msgstr ""
 
-#: dist/settings.js:5212
-#: src/backend/Settings.js:498
+#: dist/settings.js:5273
+#: src/backend/Settings.js:592
 msgid "Type"
 msgstr ""
 
-#: dist/settings.js:5224
-#: src/backend/Settings.js:514
+#: dist/settings.js:5285
+#: src/backend/Settings.js:608
 msgid "This will add a Back To Top button with a Scroll Progress Indicator, visually showing the user how far they have scrolled on the page. This feature is only available in Blockons Pro."
 msgstr ""
 
-#: dist/settings.js:5237
-#: src/backend/Settings.js:534
+#: dist/settings.js:5298
+#: src/backend/Settings.js:628
 msgid "Edit Button"
 msgstr ""
 
-#: dist/settings.js:5239
-#: dist/settings.js:5375
-#: src/backend/Settings.js:536
-#: src/backend/Settings.js:733
+#: dist/settings.js:5300
+#: dist/settings.js:5436
+#: src/backend/Settings.js:630
+#: src/backend/Settings.js:827
 msgid "Select Icon"
 msgstr ""
 
-#: dist/settings.js:5254
-#: dist/settings.js:5402
-#: src/backend/Settings.js:553
-#: src/backend/Settings.js:772
+#: dist/settings.js:5315
+#: dist/settings.js:5463
+#: src/backend/Settings.js:647
+#: src/backend/Settings.js:866
 msgid "Width / Height"
 msgstr ""
 
-#: dist/settings.js:5286
-#: src/backend/Settings.js:598
+#: dist/settings.js:5347
+#: src/backend/Settings.js:692
 msgid "Position from Left"
 msgstr ""
 
-#: dist/settings.js:5286
-#: src/backend/Settings.js:599
+#: dist/settings.js:5347
+#: src/backend/Settings.js:693
 msgid "Position from Right"
 msgstr ""
 
-#: dist/settings.js:5296
-#: src/backend/Settings.js:611
+#: dist/settings.js:5357
+#: src/backend/Settings.js:705
 msgid "Position from Bottom"
 msgstr ""
 
-#: dist/settings.js:5306
-#: src/backend/Settings.js:624
+#: dist/settings.js:5367
+#: src/backend/Settings.js:718
 msgid "Edit Button Colors"
 msgstr ""
 
-#: dist/settings.js:5328
-#: src/backend/Settings.js:654
+#: dist/settings.js:5389
+#: src/backend/Settings.js:748
 msgid "Stroke Color"
 msgstr ""
 
-#: dist/settings.js:5335
-#: src/backend/Settings.js:662
+#: dist/settings.js:5396
+#: src/backend/Settings.js:756
 msgid "Stroke Width"
 msgstr ""
 
-#: dist/settings.js:5345
-#: src/backend/Settings.js:681
+#: dist/settings.js:5406
+#: src/backend/Settings.js:775
 msgid "WooCommerce Side Cart"
 msgstr ""
 
-#: dist/settings.js:5346
-#: src/backend/Settings.js:682
+#: dist/settings.js:5407
+#: src/backend/Settings.js:776
 msgid "Add a slide-out cart to your WooCommerce Mini Cart blocks"
 msgstr ""
 
-#: dist/settings.js:5355
-#: src/backend/Settings.js:697
+#: dist/settings.js:5416
+#: src/backend/Settings.js:791
 msgid "Add the CSS class \"blockons-opencart\" to any element(s) to trigger the Side Cart open or close, or use the WC Mini Cart block with the Side Cart option."
 msgstr ""
 
-#: dist/settings.js:5367
-#: src/backend/Settings.js:720
+#: dist/settings.js:5428
+#: src/backend/Settings.js:814
 msgid "Edit Side Cart Icon"
 msgstr ""
 
-#: dist/settings.js:5369
-#: src/backend/Settings.js:723
+#: dist/settings.js:5430
+#: src/backend/Settings.js:817
 msgid "Enable Icon"
 msgstr ""
 
-#: dist/settings.js:5412
-#: src/backend/Settings.js:785
+#: dist/settings.js:5473
+#: src/backend/Settings.js:879
 msgid "Size"
 msgstr ""
 
-#: dist/settings.js:5423
-#: src/backend/Settings.js:800
+#: dist/settings.js:5484
+#: src/backend/Settings.js:894
 msgid "Show Cart Amount"
 msgstr ""
 
-#: dist/settings.js:5443
-#: src/backend/Settings.js:845
+#: dist/settings.js:5504
+#: src/backend/Settings.js:939
 msgid "Edit Side Cart"
 msgstr ""
 
-#: dist/settings.js:5473
-#: src/backend/Settings.js:886
+#: dist/settings.js:5534
+#: src/backend/Settings.js:980
 msgid "Overlay Color"
 msgstr ""
 
-#: dist/settings.js:5480
-#: src/backend/Settings.js:896
+#: dist/settings.js:5541
+#: src/backend/Settings.js:990
 msgid "Opacity"
 msgstr ""
 
-#: dist/settings.js:5492
-#: src/backend/Settings.js:918
+#: dist/settings.js:5553
+#: src/backend/Settings.js:1012
 msgid "More Add-Ons Coming Soon..."
 msgstr ""
 
-#: dist/settings.js:5492
-#: src/backend/Settings.js:921
+#: dist/settings.js:5555
+#: src/backend/Settings.js:1015
 msgid "Get in touch and let us know which add-ons you need for your site."
 msgstr ""
 
-#: dist/settings.js:5504
-#: src/backend/Settings.js:942
+#: dist/settings.js:5567
+#: src/backend/Settings.js:1036
 msgid "Save Settings"
 msgstr ""
 
-#: dist/settings.js:5510
-#: src/backend/Settings.js:951
+#: dist/settings.js:5573
+#: src/backend/Settings.js:1045
 msgid "Reset Settings"
 msgstr ""
 
-#: dist/settings.js:5516
-#: src/backend/Settings.js:956
+#: dist/settings.js:5579
+#: src/backend/Settings.js:1050
 msgid "Confirm... Reset All Settings!"
 msgstr ""
 
-#: dist/settings.js:5865
+#: dist/settings.js:5956
 #: src/backend/components/inputs/ColorPicker.js:82
 msgid "Select Color"
 msgstr ""
 
-#: dist/settings.js:6133
+#: dist/settings.js:6224
 #: src/backend/helpers.js:18
 msgid "Display content in smaller areas with collapsible lists"
 msgstr ""
 
-#: dist/settings.js:6138
+#: dist/settings.js:6229
 #: src/backend/helpers.js:26
 msgid "Visually, more attractive list items with icons"
 msgstr ""
 
-#: dist/settings.js:6143
+#: dist/settings.js:6234
 #: src/backend/helpers.js:31
 msgid "Display multiple images in a neat carousel"
 msgstr ""
 
-#: dist/settings.js:6148
+#: dist/settings.js:6239
 #: src/backend/helpers.js:36
 msgid "More advanced and customizable line headings"
 msgstr ""
 
-#: dist/settings.js:6153
+#: dist/settings.js:6244
 #: src/backend/helpers.js:41
 msgid "An attractive, more trendy customizable call-to-action"
 msgstr ""
 
-#: dist/settings.js:6158
+#: dist/settings.js:6249
 #: src/backend/helpers.js:49
 msgid "Show progress with beautiful, animated bars"
 msgstr ""
 
-#: dist/settings.js:6163
+#: dist/settings.js:6254
 #: src/backend/helpers.js:54
 msgid "A search bar/icon with drop down or popup search"
 msgstr ""
 
-#: dist/settings.js:6168
+#: dist/settings.js:6259
 #: src/backend/helpers.js:59
 msgid "Display client testimonials in a slider or carousel"
 msgstr ""
 
-#: dist/settings.js:6173
+#: dist/settings.js:6264
 #: src/backend/helpers.js:64
 msgid "Display multiple videos in a neat video slider"
 msgstr ""
 
-#: dist/settings.js:6179
+#: dist/settings.js:6270
 #: src/backend/helpers.js:70
 msgid "A simple icon linking to a users WC Account"
 msgstr ""
 
-#: dist/settings.js:6184
+#: dist/settings.js:6275
 #: src/backend/helpers.js:75
 msgid "Display a WC featured product with multple layouts"
 msgstr ""
 
-#: dist/settings.js:6189
+#: dist/settings.js:6280
 #: src/backend/helpers.js:80
 msgid "A simple WC cart icon with a full cart drop down"
 msgstr ""
 
-#: dist/settings.js:6194
+#: dist/settings.js:6285
 #: src/backend/helpers.js:85
 msgid "A more advaced layout block for your pages"
 msgstr ""
@@ -2553,7 +2679,7 @@ msgstr ""
 #: blocks/accordions/block.json
 #: build/accordions/block.json
 msgctxt "block keyword"
-msgid "accordionbed"
+msgid "accordion"
 msgstr ""
 
 #: blocks/accordions/block.json
@@ -2566,9 +2692,8 @@ msgstr ""
 
 #: blocks/accordions/block.json
 #: build/accordions/block.json
-#: _starter-blocks/_tabs/block.json
 msgctxt "block keyword"
-msgid "inner"
+msgid "collapsible"
 msgstr ""
 
 #: blocks/icon-list/block.json
@@ -2912,4 +3037,9 @@ msgstr ""
 #: _starter-blocks/_tabs/block.json
 msgctxt "block keyword"
 msgid "tabbed"
+msgstr ""
+
+#: _starter-blocks/_tabs/block.json
+msgctxt "block keyword"
+msgid "inner"
 msgstr ""
