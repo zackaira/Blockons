@@ -14,7 +14,10 @@ const ScrollIndicator = ({ scrollInOptions }) => {
 			document.documentElement.clientHeight;
 		const scrolled = (winScroll / height) * 100;
 
-		document.getElementById("blockons-scrollind").style.width = scrolled + "%";
+		const scrollIndicator = document.getElementById("blockons-scrollind");
+		if (scrollIndicator) {
+			scrollIndicator.style.width = scrolled + "%";
+		}
 	}
 	window.addEventListener("scroll", blockonsScrollProgress);
 

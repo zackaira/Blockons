@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: blocks, editor blocks, block, gutenberg blocks, woocommerce blocks
 Requires at least: 5.0
 Tested up to: 6.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -171,8 +171,8 @@ This could be from the theme you're using, or another plugin. Again, please [con
 = 1.0.2 =
 * Styling tweaks/fixes
 * JS fix for back to top button
-* Version compatibility bump for WP 6.1
-* 
+* Version compatibility bump for WP 6.1 & WC 7.1
+* Updated the language .pot file
 
 = 1.0.1 =
 * Initial release

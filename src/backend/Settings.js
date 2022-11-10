@@ -57,7 +57,7 @@ const Settings = () => {
 		});
 	};
 
-	console.log(blockonsOptions);
+	// console.log(blockonsOptions);
 
 	useEffect(() => {
 		blockonsGroupSettings();
@@ -146,6 +146,8 @@ const Settings = () => {
 				setLoadSetting(false);
 			});
 	}, []);
+
+	console.log(blockonsObject, isPremium, wcActive);
 
 	return (
 		<React.Fragment>

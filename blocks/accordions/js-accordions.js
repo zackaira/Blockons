@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			if (accPanels) {
 				accPanels.forEach((accPanel, i) => {
-					const panelHeight = accPanel.querySelector(".accordion-content")
-						.scrollHeight;
+					const panelHeight =
+						accPanel.querySelector(".accordion-content").scrollHeight;
 
 					if (accPanel.classList.contains("active")) {
 						accPanel.querySelector(".accordion-content").style.maxHeight =
@@ -31,15 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
 							});
 						}
 
-						const accPanelContent = accPanel.querySelector(
-							".accordion-content"
-						);
+						const accPanelContent =
+							accPanel.querySelector(".accordion-content");
 
 						if (accPanel.classList.contains("active")) {
 							accPanel.classList.remove("active");
 							accPanelContent.style.maxHeight = null;
 						} else {
-							console.log("sssss");
 							accPanel.classList.add("active");
 							accPanelContent.style.maxHeight =
 								accPanelContent.scrollHeight + "px";

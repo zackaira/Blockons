@@ -180,11 +180,11 @@ const Edit = (props) => {
 							options={[
 								{ label: __("None", "blockons"), value: "none" },
 								{ label: __("Drop Down Cart", "blockons"), value: "dropdown" },
-								{
-									label: __("Side Cart", "blockons"),
-									value: "sidecart",
-									disabled: !isPremium ? true : false,
-								},
+								// {
+								// 	label: __("Side Cart", "blockons"),
+								// 	value: "sidecart",
+								// 	disabled: !isPremium ? true : false,
+								// },
 							]}
 							onChange={(newValue) =>
 								setAttributes({

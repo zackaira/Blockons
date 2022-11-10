@@ -18,8 +18,10 @@
 	flex: 1;
 	min-width: 260px;
 }
-.wp-block-blockons-video-slider .splide__slide {
+.wp-block-blockons-video-slider .splide__slide.splide__slide--has-video {
 	background: none !important;
+}
+.wp-block-blockons-video-slider .splide__slide {
 	height: auto !important;
 }
 .wp-block-blockons-video-slider .splide-custom-slide {

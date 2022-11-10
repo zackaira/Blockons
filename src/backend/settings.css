@@ -660,6 +660,15 @@ a.blockons-docs::before {
 	transform: rotate(22deg);
 	box-sizing: border-box;
 }
+.blockons-block.disabled .blockons-block-inner {
+	min-height: 125px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.blockons-block.disabled label.toggle-switch {
+	display: none !important;
+}
 .blockons-block.disabled::before {
 	display: block;
 	content: "";
