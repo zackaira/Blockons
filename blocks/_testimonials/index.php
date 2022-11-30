@@ -1,32 +1,19 @@
 <?php
 /**
- * Plugin Name: Testimonials
+ * Plugin Name: Testimonials Block
  * Plugin URI: https://github.com/WordPress/blockons
- * Description: Testimonials Slider Block.
+ * Description: An Testimonials Block.
  * Version: 1.1.0
  * Author: Kaira
  *
  * @package blockons
  */
-
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Load all translations for our plugin from the MO file.
- */
-function blockons_testimonials_load_textdomain() {
-	load_plugin_textdomain( 'blockons', false, basename( __DIR__ ) . '/languages' );
-}
-add_action( 'init', 'blockons_testimonials_load_textdomain' );
-
-/**
- * Registers all block assets so that they can be enqueued through Gutenberg in
- * the corresponding context.
- *
- * Passes translations to JavaScript.
+ * Register Block Assets
  */
 function blockons_testimonials_register_block() {
-
 	// Register the block by passing the location of block.json.
 	register_block_type(
 		__DIR__,

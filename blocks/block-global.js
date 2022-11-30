@@ -169,6 +169,7 @@ export const marketingButtonIcons = {
  * Font Awesome Icons used for slider arrows
  */
 export const sliderArrowIcons = {
+	ban: "default",
 	"arrow-right": "arrow-right",
 	"arrow-right-long": "arrow-right-long",
 	"angle-right": "angle-right",

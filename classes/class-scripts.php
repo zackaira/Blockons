@@ -124,6 +124,11 @@ class Blockons {
 		wp_register_style('blockons-splidecss', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/splide.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
 		wp_register_script('blockons-splidejs', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/splide.min.js'), array(), BLOCKONS_PLUGIN_VERSION);
 
+		// SLIDERS
+		wp_register_style('blockons-slider', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
+		wp_register_script('blockons-swiper', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-slider', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.js'), array('blockons-swiper'), BLOCKONS_PLUGIN_VERSION, true);
+
 		// Block Extension - AOS Animations
 		if (blockons_fs()->can_use_premium_code__premium_only()) {
 			wp_register_style('blockons-aos-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/aos/aos.css'), array(), BLOCKONS_PLUGIN_VERSION);
@@ -288,6 +293,7 @@ class Blockons {
 	public static function blockonsDefaults() {
 		$initialSettings = array(
 			"blocks" => array( // For adding a new block, update this AND class-notices.php newblocks number
+				"slider" => true, // TESTING NEW SLIDER
 				"accordions" => true, // 12
 				"icon_list" => true, // 11
 				"image_carousel" => true, // 10

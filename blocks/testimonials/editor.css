@@ -2,135 +2,53 @@
  * Note that these styles are loaded *after* common styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.blockons-testimonials-slider:hover .blockons-slider-wrap {
-	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
+.wp-block-blockons-testimonials {
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 20%);
+	position: relative;
 }
-.blockons-icon-text-select {
+/* -- Slide Settings -- */
+.blockons-slider-btns {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	z-index: 20;
+}
+/* -- Settings -- */
+.blockons-icon-select {
 	display: flex;
 	align-items: center;
-	margin-bottom: 24px;
 }
-.blockons-icon-text-select p {
-	margin: 0 0 0 12px;
+.blockons-icon-select p {
+	margin: 0 0 0 10px;
 }
-.blockons-icon-text-select .blockons-icon-selecter {
-	padding: 5px;
-	cursor: pointer;
+.blockons-editor-popup.icon-selector .components-popover__content {
+	display: flex;
+	flex-wrap: wrap;
+	width: 145px;
 }
-.blockons-icon-text-select:hover .blockons-icon-selecter {
-	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
+.blockons-slide-author .blockons-slide-author-img button {
+	box-shadow: none;
 }
-/* -- Disabled - Needs to be reloaded -- */
-.blockons-reload {
+/* -- Settings Need Reload -- */
+.blockons-slider-reload {
+	background-color: #f0f0f0;
 	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 15;
-	background-color: rgb(255 255 255 / 35%);
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	z-index: 45;
 }
-.blockons-reload .blockons-reload-block {
+.blockons-slider-reload-inner {
 	background-color: #fff;
+	box-shadow: 0 1px 5px rgb(0 0 0 / 14%);
 	border-radius: 4px;
-	box-shadow: 0 1px 5px rgb(0 0 0 / 30%);
-	padding: 15px;
-	font-size: 14px;
-	max-width: 310px;
+	padding: 12px 15px;
+	font-size: 13px;
+	color: #000;
 	text-align: center;
-}
-.blockons-slider-wrap.reload-fix > .splide {
-	height: 400px !important;
-	background-color: #f0f0f0;
-}
-.blockons-slider-wrap.reload-fix .splide__track {
-	visibility: hidden;
-}
-
-/* -- Image Button -- */
-.wp-block-blockons-testimonials .blockons-slider-wrap .blockons-upload-button {
-	box-shadow: none;
-}
-.blockons-upload-remove {
-	background-color: #fff;
-	position: absolute;
-	border-radius: 20px;
-	top: -22px;
-	right: -10px;
-	box-shadow: 0 0 0 1px #000;
-	font-size: 12px !important;
-	padding: 0 !important;
-	width: 18px;
-	height: 18px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	opacity: 0;
-	transition: opacity 0.3s ease-in-out 0.2s;
-}
-.blockons-slider-wrap:hover
-	.blockons-slide-author
-	span.blockons-fontawesome.fa-user::before {
-	content: "\f093";
-}
-/* -- Item Level Controls -- */
-.blockons-item-btns {
-	display: flex;
-	align-items: stretch;
-	position: absolute;
-	top: 0;
-	right: 0;
-	opacity: 0;
-	transition: opacity 0.3s ease-in-out 0s;
-}
-.blockons-slider-wrap .splide__slide:hover .blockons-item-btns,
-.blockons-slider-wrap:hover .blockons-upload-remove {
-	opacity: 1;
-}
-
-/* -- Item level controls popup box -- */
-.blockons-editor-popup .components-popover__content {
-	width: 274px;
-}
-.blockons-editor-popup.arrow-selector .components-popover__content {
-	width: 185px;
-}
-.blockons-editor-popup .components-popover__content > div {
-	display: flex;
-	flex-wrap: wrap;
-}
-.blockons-editor-popup .components-popover__content .blockons-fontawesome {
-	width: 32px;
-	height: 32px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.blockons-editor-popup
-	.components-popover__content
-	.blockons-fontawesome:hover {
-	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
-}
-/* -- Make editor controls span full with of popup box -- */
-.blockons-editor-popup .components-popover__content > div > div {
-	width: 100%;
-}
-.blockons-add-new {
-	margin: 15px 0 0;
-}
-/* ---- No Slides ---- */
-.blockons-noslides {
-	background-color: #f2f2f2;
-	box-shadow: inset 0 0 0 1px #dbdbdb;
-	border-radius: 3px;
-	padding: 28px;
-	text-align: center;
-}
-.blockons-noslides .blockons-add-new {
-	margin: 0;
+	max-width: 300px;
 }

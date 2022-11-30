@@ -20,12 +20,12 @@ import {
 	Button,
 } from "@wordpress/components";
 import { v4 as uuidv4 } from "uuid";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
 import { slugify, sliderArrowIcons } from "../block-global";
 import { colorPickerPalette } from "../block-global";
+import { Navigation, Pagination, EffectFade, EffectCoverflow } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const Edit = (props) => {
 	const {
@@ -33,71 +33,43 @@ const Edit = (props) => {
 		attributes: {
 			uniqueId,
 			alignment,
-			sliderType,
-			slidesNumber,
-			slides,
-			slidesStyle,
-			noShadow,
-			slidesLayout,
-			slidesWidth,
-			sliderRewind,
+			sliderSlides,
+			testStyle,
+			testLayout,
 			showStars,
-			authPosition,
-			authIcon,
 			showQuotes,
+			showPosition,
+			showIcon,
 			quoteSize,
-			controlsOnHover,
-			sliderAuto,
-			sliderArrows,
-			arrowStyle,
-			sliderArrowIcon,
-			sliderPagination,
-			sliderPagDesign,
 			bgColor,
 			fontColor,
 			quotesColor,
 			quotesOpacity,
 			nameColor,
 			posColor,
+			transition,
+			perView,
+			mode,
+			spaceBetween,
+			navigation,
+			navigationStyle,
+			navigationColor,
+			navigationArrow,
+			pagination,
+			paginationStyle,
+			paginationColor,
+			showOnHover,
 		},
 		setAttributes,
 	} = props;
 
 	const blockProps = useBlockProps({
-		className: `align-${alignment} layout-${slidesLayout} style-${slidesStyle} ${
-			noShadow ? "no-outer" : ""
-		} arrows-${sliderArrowIcon}`,
+		className: `align-${alignment} layout-${testLayout} style-${testStyle}`,
 	});
-
 	const [needsReload, setNeedsReload] = useState(false);
-	const [initCarouselType, setInitCarouselType] = useState(sliderType);
-
-	// Slider Settings
-	const sliderOptions = {
-		type: sliderType, // slide | loop | fade
-		...(sliderType === "slide"
-			? {
-					rewind: sliderRewind,
-			  }
-			: {
-					rewind: true,
-			  }),
-		speed: 1000,
-		perPage: slidesNumber,
-		perMove: 1,
-		perView: 1,
-		gap: 10,
-		autoplay: false,
-		interval: 3500,
-		arrows: sliderArrows,
-		pagination: sliderPagination,
-		classes: {
-			arrow: "splide__arrow fa-solid",
-		},
-	};
+	const [reloads, setReloads] = useState({ transition, mode });
 
 	useEffect(() => {
-		setInitCarouselType(sliderType);
 		if (!uniqueId) {
 			setAttributes({
 				uniqueId: uuidv4(),
@@ -105,10 +77,24 @@ const Edit = (props) => {
 		}
 	}, []);
 
-	useEffect(() => {
-		const toReload = sliderType !== initCarouselType ? true : false;
-		setNeedsReload(toReload);
-	}, [sliderType]);
+	const sliderOptions = {
+		modules: [Navigation, Pagination, EffectFade, EffectCoverflow],
+		autoHeight: true,
+		effect: transition,
+		slidesPerView: transition === "slide" ? perView : 1,
+		spaceBetween: spaceBetween,
+		loop: mode === "loop" ? true : false,
+		rewind: mode === "rewind" ? true : false,
+		simulateTouch: false,
+		navigation: navigation,
+		pagination: pagination
+			? {
+					type: paginationStyle === "fraction" ? "fraction" : "bullets",
+					dynamicBullets: paginationStyle === "dynamicBullets" ? true : false,
+					clickable: true,
+			  }
+			: false,
+	};
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
@@ -116,67 +102,95 @@ const Edit = (props) => {
 		});
 	};
 
+	const handleAddItem = () => {
+		const newSlides = [...sliderSlides];
+		newSlides.push({
+			id: newSlides.length + 1,
+			title:
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
+			author: "Joe Soap",
+			authorPos: "Owner at Macabee",
+			authorImg: {},
+			rating: 5,
+		});
+		setAttributes({ sliderSlides: newSlides });
+	};
+	const handleDuplicateItem = (index, slideItem) => {
+		const newSlides = [...sliderSlides];
+		newSlides.splice(index + 1, 0, {
+			id: Math.floor(Math.random() * 700) + 1,
+			title: slideItem.title,
+			author: slideItem.author,
+			authorPos: slideItem.authorPos,
+			authorImg: slideItem.authorImg,
+			rating: slideItem.rating,
+		});
+		setAttributes({ sliderSlides: newSlides });
+	};
+	const handleDeleteItem = (index) => {
+		const newSlides = [...sliderSlides];
+		newSlides.splice(index, 1);
+		setAttributes({ sliderSlides: newSlides });
+	};
+
 	// Item Controls Functions
-	const handleItemAuthorChange = (itemAuthor, itemId) => {
-		const newSlides = [...slides];
+	const handleItemAuthorChange = (author, id) => {
+		const newSlides = [...sliderSlides];
 		// Edit the item text and ID (this prevent the edit from editing all instances if the block is duplicated)
 		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.itemId === itemId)
+			if (obj.id === id)
 				return {
 					...obj,
-					itemId:
-						itemId === ""
-							? Math.floor(Math.random() * 800)
-							: slugify(itemAuthor),
-					itemAuthor: itemAuthor,
+					id: id === "" ? Math.floor(Math.random() * 800) : slugify(author),
+					author: author,
 				};
 			return obj;
 		});
-		setAttributes({ slides: editedSlideItems });
+		setAttributes({ sliderSlides: editedSlideItems });
 	};
-	const handleItemTextChange = (itemText, itemId) => {
-		const newSlides = [...slides];
+	const handleItemTextChange = (title, id) => {
+		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.itemId === itemId)
+			if (obj.id === id)
 				return {
 					...obj,
-					itemText: itemText,
+					title: title,
 				};
 			return obj;
 		});
-		setAttributes({ slides: editedSlideItems });
+		setAttributes({ sliderSlides: editedSlideItems });
 	};
-	const handleItemAuthorPosChange = (itemAuthorPos, itemId) => {
-		const newSlides = [...slides];
+	const handleItemAuthorPosChange = (authorPos, id) => {
+		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.itemId === itemId)
+			if (obj.id === id)
 				return {
 					...obj,
-					itemAuthorPos: itemAuthorPos,
+					authorPos: authorPos,
 				};
 			return obj;
 		});
-		setAttributes({ slides: editedSlideItems });
+		setAttributes({ sliderSlides: editedSlideItems });
 	};
-	const handleItemRatingChange = (itemRating, itemId) => {
-		const newSlides = [...slides];
+	const handleItemRatingChange = (rating, id) => {
+		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.itemId === itemId)
+			if (obj.id === id)
 				return {
 					...obj,
-					itemRating: itemRating,
+					rating: rating,
 				};
 			return obj;
 		});
-		setAttributes({ slides: editedSlideItems });
+		setAttributes({ sliderSlides: editedSlideItems });
 	};
-	const handleMediaSelect = (media, itemId) => {
-		const newSlides = [...slides];
+	const handleMediaSelect = (media, id) => {
+		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.itemId === itemId)
+			if (obj.id === id)
 				return {
 					...obj,
-					itemImg: {
+					authorImg: {
 						id: media.id,
 						url: media.url,
 						alt: media.alt,
@@ -184,402 +198,297 @@ const Edit = (props) => {
 				};
 			return obj;
 		});
-		setAttributes({ slides: editedSlideItems });
+		setAttributes({ sliderSlides: editedSlideItems });
 	};
-	const handleMediaRemove = (itemId) => {
-		const newSlides = [...slides];
+	const handleMediaRemove = (id) => {
+		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.itemId === itemId)
+			if (obj.id === id)
 				return {
 					...obj,
-					itemImg: {},
+					authorImg: {},
 				};
 			return obj;
 		});
-		setAttributes({ slides: editedSlideItems });
+		setAttributes({ sliderSlides: editedSlideItems });
 	};
 
-	// Add Slide
-	const handleAddItem = () => {
-		const newSlides = [...slides];
-		newSlides.push({
-			itemId: newSlides.length + 1,
-			itemText:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
-			itemAuthor: "Joe Soap",
-			itemAuthorPos: "Owner at Macabee",
-			itemImg: {},
-			itemRating: 5,
-		});
-		setAttributes({ slides: newSlides });
-	};
+	const slides = sliderSlides.map((slideItem, index) => (
+		<div className="swiper-slide-inner">
+			<div
+				className="blockons-slide-text"
+				style={{
+					...(testStyle === "three" ? { backgroundColor: bgColor } : ""),
+					color: fontColor,
+				}}
+			>
+				{showStars && (
+					<div className="blockons-star-ratings">
+						<span
+							className={`fa-solid fa-star blockons-star ${
+								slideItem.rating >= 1 ? "checked" : ""
+							}`}
+							onClick={() => handleItemRatingChange(1, slideItem.id)}
+						></span>
+						<span
+							className={`fa-solid fa-star blockons-star ${
+								slideItem.rating >= 2 ? "checked" : ""
+							}`}
+							onClick={() => handleItemRatingChange(2, slideItem.id)}
+						></span>
+						<span
+							className={`fa-solid fa-star blockons-star ${
+								slideItem.rating >= 3 ? "checked" : ""
+							}`}
+							onClick={() => handleItemRatingChange(3, slideItem.id)}
+						></span>
+						<span
+							className={`fa-solid fa-star blockons-star ${
+								slideItem.rating >= 4 ? "checked" : ""
+							}`}
+							onClick={() => handleItemRatingChange(4, slideItem.id)}
+						></span>
+						<span
+							className={`fa-solid fa-star blockons-star ${
+								slideItem.rating >= 5 ? "checked" : ""
+							}`}
+							onClick={() => handleItemRatingChange(5, slideItem.id)}
+						></span>
+					</div>
+				)}
 
-	const handleRemoveItem = (index) => {
-		const newSlides = [...slides];
-		newSlides.splice(index, 1);
-		setAttributes({ slides: newSlides });
-	};
-
-	const handleDuplicateItem = (
-		index,
-		text,
-		author,
-		position,
-		image,
-		rating
-	) => {
-		const newSlides = [...slides];
-		newSlides.splice(index + 1, 0, {
-			itemId: Math.floor(Math.random() * 700) + 1,
-			itemText: text,
-			itemAuthor: author,
-			itemAuthorPos: position,
-			itemImg: image,
-			itemRating: rating,
-		});
-		setAttributes({ slides: newSlides });
-		// instanceRef.current.update();
-	};
-
-	// Testimonials Items
-	let sliderSlideItems;
-
-	if (slides.length) {
-		sliderSlideItems = slides.map((slideItem, index) => {
-			return (
-				<SplideSlide>
-					<div
-						className="blockons-slide-inner"
+				{testStyle === "two" && (
+					<span
+						className="corner"
 						style={{
-							width: slidesWidth + "%",
-							...(slidesStyle === "two" ? { backgroundColor: bgColor } : ""),
+							...(testStyle === "two" ? { borderColor: bgColor } : ""),
+						}}
+					></span>
+				)}
+
+				{showQuotes && (
+					<FontAwesomeIcon
+						iconSize={quoteSize}
+						icon="quote-left"
+						style={{
+							color: quotesColor,
+							opacity: quotesOpacity,
+						}}
+					/>
+				)}
+				<RichText
+					tagName="div"
+					placeholder={__("Testimonial Text", "blockons")}
+					value={slideItem.title}
+					multiline={false}
+					className="blockons-slide-text-txt"
+					onChange={(newText) => handleItemTextChange(newText, slideItem.id)}
+				/>
+				{showQuotes && (
+					<FontAwesomeIcon
+						iconSize={quoteSize}
+						icon="quote-right"
+						style={{
+							color: quotesColor,
+							opacity: quotesOpacity,
+						}}
+					/>
+				)}
+			</div>
+			<div className="blockons-slide-author">
+				{showIcon && (
+					<div
+						className={`blockons-slide-author-img ${
+							slideItem.authorImg && slideItem.authorImg.url
+								? "hasimg"
+								: "noimg"
+						}`}
+						style={{
+							...(slideItem.authorImg && slideItem.authorImg.url
+								? { backgroundImage: `url(${slideItem.authorImg.url})` }
+								: ""),
 						}}
 					>
-						<div
-							className="blockons-slide-text"
-							style={{
-								...(slidesStyle === "three"
-									? { backgroundColor: bgColor }
-									: ""),
-								color: fontColor,
+						<MediaUpload
+							className="components-icon-button components-toolbar__control"
+							allowedTypes={["image"]}
+							value={slideItem.authorImg}
+							onSelect={(media) => handleMediaSelect(media, slideItem.id)}
+							render={({ open }) => {
+								return (
+									<>
+										{slideItem.authorImg && slideItem.authorImg.url && (
+											<Button
+												className="blockons-upload-remove"
+												onClick={() => handleMediaRemove(slideItem.id)}
+											>
+												X
+											</Button>
+										)}
+										{slideItem.authorImg && !slideItem.authorImg.url && (
+											<Button className="blockons-upload-button" onClick={open}>
+												<FontAwesomeIcon
+													icon="user"
+													iconSize={18}
+													color={"inherit"}
+												/>
+											</Button>
+										)}
+									</>
+								);
 							}}
-						>
-							{showStars && (
-								<div className="blockons-star-ratings">
-									<span
-										className={`fa-solid fa-star blockons-star ${
-											slideItem.itemRating >= 1 ? "checked" : ""
-										}`}
-										onClick={() => handleItemRatingChange(1, slideItem.itemId)}
-									></span>
-									<span
-										className={`fa-solid fa-star blockons-star ${
-											slideItem.itemRating >= 2 ? "checked" : ""
-										}`}
-										onClick={() => handleItemRatingChange(2, slideItem.itemId)}
-									></span>
-									<span
-										className={`fa-solid fa-star blockons-star ${
-											slideItem.itemRating >= 3 ? "checked" : ""
-										}`}
-										onClick={() => handleItemRatingChange(3, slideItem.itemId)}
-									></span>
-									<span
-										className={`fa-solid fa-star blockons-star ${
-											slideItem.itemRating >= 4 ? "checked" : ""
-										}`}
-										onClick={() => handleItemRatingChange(4, slideItem.itemId)}
-									></span>
-									<span
-										className={`fa-solid fa-star blockons-star ${
-											slideItem.itemRating >= 5 ? "checked" : ""
-										}`}
-										onClick={() => handleItemRatingChange(5, slideItem.itemId)}
-									></span>
-								</div>
-							)}
-
-							{slidesStyle === "three" && (
-								<span
-									className="corner"
-									style={{
-										...(slidesStyle === "three"
-											? { borderColor: bgColor }
-											: ""),
-									}}
-								></span>
-							)}
-
-							{showQuotes && (
-								<FontAwesomeIcon
-									iconSize={quoteSize}
-									icon="quote-left"
-									style={{
-										color: quotesColor,
-										opacity: quotesOpacity,
-									}}
-								/>
-							)}
-							<RichText
-								tagName="div"
-								placeholder={__("Testimonial Text", "blockons")}
-								value={slideItem.itemText}
-								multiline={false}
-								className="blockons-slide-text-txt"
-								onChange={(newText) =>
-									handleItemTextChange(newText, slideItem.itemId)
-								}
-							/>
-							{showQuotes && (
-								<FontAwesomeIcon
-									iconSize={quoteSize}
-									icon="quote-right"
-									style={{
-										color: quotesColor,
-										opacity: quotesOpacity,
-									}}
-								/>
-							)}
-						</div>
-						<div className="blockons-slide-author">
-							{authIcon && (
-								<div
-									className={`blockons-slide-author-img ${
-										slideItem.itemImg && slideItem.itemImg.url
-											? "hasimg"
-											: "noimg"
-									}`}
-									style={{
-										...(slideItem.itemImg && slideItem.itemImg.url
-											? { backgroundImage: `url(${slideItem.itemImg.url})` }
-											: ""),
-									}}
-								>
-									<MediaUpload
-										className="components-icon-button components-toolbar__control"
-										allowedTypes={["image"]}
-										value={slideItem.itemImg}
-										onSelect={(media) =>
-											handleMediaSelect(media, slideItem.itemId)
-										}
-										render={({ open }) => {
-											return (
-												<>
-													{slideItem.itemImg && slideItem.itemImg.url && (
-														<Button
-															className="blockons-upload-remove"
-															onClick={() =>
-																handleMediaRemove(slideItem.itemId)
-															}
-														>
-															X
-														</Button>
-													)}
-													{slideItem.itemImg && !slideItem.itemImg.url && (
-														<Button
-															className="blockons-upload-button"
-															onClick={open}
-														>
-															<FontAwesomeIcon
-																icon="user"
-																iconSize={18}
-																color={"inherit"}
-															/>
-														</Button>
-													)}
-												</>
-											);
-										}}
-									/>
-								</div>
-							)}
-							<div className="blockons-slide-author-txt">
-								<RichText
-									tagName="div"
-									placeholder={__("Author", "blockons")}
-									value={slideItem.itemAuthor}
-									multiline={false}
-									className="blockons-slide-author-txt-auth"
-									onChange={(newName) =>
-										handleItemAuthorChange(newName, slideItem.itemId)
-									}
-									style={{
-										color: nameColor,
-									}}
-								/>
-								{authPosition && (
-									<RichText
-										tagName="div"
-										placeholder={__("Position", "blockons")}
-										value={slideItem.itemAuthorPos}
-										multiline={false}
-										className="blockons-slide-author-txt-pos"
-										onChange={(newAuthorPos) =>
-											handleItemAuthorPosChange(newAuthorPos, slideItem.itemId)
-										}
-										style={{
-											color: posColor,
-										}}
-									/>
-								)}
-							</div>
-						</div>
+						/>
 					</div>
-					{isSelected && (
-						<div className="blockons-item-btns">
-							<Button
-								className="blockons-duplicate-item"
-								icon="admin-page"
-								label="Duplicate Item"
-								onClick={() =>
-									handleDuplicateItem(
-										index,
-										slideItem.itemText,
-										slideItem.itemAuthor,
-										slideItem.itemAuthorPos,
-										slideItem.itemImg,
-										slideItem.itemRating
-									)
-								}
-							/>
-							<Button
-								className="blockons-remove-item"
-								icon="no-alt"
-								label="Delete Item"
-								onClick={() => handleRemoveItem(index)}
-							/>
-						</div>
+				)}
+				<div className="blockons-slide-author-txt">
+					<RichText
+						tagName="div"
+						placeholder={__("Author", "blockons")}
+						value={slideItem.author}
+						multiline={false}
+						className="blockons-slide-author-txt-auth"
+						onChange={(newName) =>
+							handleItemAuthorChange(newName, slideItem.id)
+						}
+						style={{
+							color: nameColor,
+						}}
+					/>
+					{showPosition && (
+						<RichText
+							tagName="div"
+							placeholder={__("Position", "blockons")}
+							value={slideItem.authorPos}
+							multiline={false}
+							className="blockons-slide-author-txt-pos"
+							onChange={(newAuthorPos) =>
+								handleItemAuthorPosChange(newAuthorPos, slideItem.id)
+							}
+							style={{
+								color: posColor,
+							}}
+						/>
 					)}
-				</SplideSlide>
-			);
-		});
-	}
+				</div>
+			</div>
+
+			<div className="blockons-slider-btns">
+				<Button
+					className="blockons-slide-add"
+					icon="plus-alt"
+					label="Add New Slide"
+					onClick={() => handleAddItem(index)}
+				/>
+				<Button
+					className="blockons-slide-duplicate"
+					icon="admin-page"
+					label="Duplicate Slide"
+					onClick={() => handleDuplicateItem(index, slideItem)}
+				/>
+				<Button
+					className="blockons-slide-delete"
+					icon="no-alt"
+					label="Delete Slide"
+					onClick={() => handleDeleteItem(index)}
+				/>
+			</div>
+		</div>
+	));
 
 	return (
 		<div {...blockProps}>
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody
-						title={__("Testimonials Settings", "blockons")}
+						title={__("Slider Settings", "blockons")}
 						initialOpen={true}
 					>
 						<SelectControl
-							label={__("Slider Type", "blockons")}
-							value={sliderType}
-							options={
-								slidesNumber === 1
-									? [
-											{
-												label: __("Slide", "blockons"),
-												value: "slide",
-											},
-											{
-												label: __("Infinite Loop", "blockons"),
-												value: "loop",
-											},
-											{
-												label: __("Fade", "blockons"),
-												value: "fade",
-											},
-									  ]
-									: [
-											{
-												label: __("Slide", "blockons"),
-												value: "slide",
-											},
-											{
-												label: __("Infinite Loop", "blockons"),
-												value: "loop",
-											},
-									  ]
-							}
+							label="Transition Type"
+							value={transition}
+							options={[
+								{ label: "Slide", value: "slide" },
+								{ label: "Fade", value: "fade" },
+								{ label: "Coverflow", value: "coverflow" },
+							]}
 							onChange={(newValue) => {
-								setAttributes({
-									sliderType: newValue === undefined ? "none" : newValue,
-								});
-							}}
-							help={__(
-								"This setting changes a 'read-only' property in the slider options, if you change this, you will need to 'Save/Update' the post and reload the page to see it work with the new setting.",
-								"blockons"
-							)}
-						/>
+								newValue === reloads.transition
+									? setNeedsReload(false)
+									: setNeedsReload(true);
 
-						{sliderType !== "fade" && (
+								setAttributes({ transition: newValue });
+							}}
+						/>
+						{transition !== "fade" && (
 							<RangeControl
 								label={__("Slides Per View", "blockons")}
-								value={slidesNumber}
+								value={perView}
 								onChange={(newValue) =>
 									setAttributes({
-										slidesNumber:
-											newValue === undefined ? 1 : parseInt(newValue),
+										perView: newValue === undefined ? 1 : parseInt(newValue),
 									})
 								}
 								min={1}
-								max={slides.length < 4 ? slides.length : 4}
+								max={sliderSlides.length < 4 ? sliderSlides.length : 4}
 							/>
 						)}
 
 						<SelectControl
-							label="Style"
-							value={slidesStyle}
+							label="Slider Mode"
+							value={mode}
 							options={[
-								{ label: "Plain", value: "one" },
-								{ label: "Drop Shadows", value: "two" },
-								{ label: "Bubble", value: "three" },
+								{ label: "Default", value: "default" },
+								{ label: "Rewind", value: "rewind" },
+								{ label: "Infinite Loop", value: "loop" },
 							]}
-							onChange={(newValue) => setAttributes({ slidesStyle: newValue })}
-						/>
-						{slidesStyle === "two" && (
-							<ToggleControl
-								label={__("Remove Outer Shadow", "blockons")}
-								checked={noShadow}
-								onChange={(newValue) => setAttributes({ noShadow: newValue })}
-							/>
-						)}
-						<SelectControl
-							label="Layout"
-							value={slidesLayout}
-							options={[
-								{ label: "Default Layout", value: "one" },
-								{ label: "Side Layout", value: "two" },
-								{ label: "Author Top Layout", value: "three" },
-							]}
-							onChange={(newValue) => setAttributes({ slidesLayout: newValue })}
-						/>
+							onChange={(newValue) => {
+								newValue === reloads.mode
+									? setNeedsReload(false)
+									: setNeedsReload(true);
 
+								setAttributes({ mode: newValue });
+							}}
+						/>
 						<RangeControl
-							label={__("Inner Content Width", "blockons")}
-							value={slidesWidth}
+							label={__("Space Between Slides", "blockons")}
+							value={spaceBetween}
 							onChange={(newValue) =>
 								setAttributes({
-									slidesWidth: newValue === undefined ? 75 : parseInt(newValue),
+									spaceBetween: newValue === undefined ? 0 : parseInt(newValue),
 								})
 							}
-							min={30}
-							max={100}
+							min={0}
+							max={200}
+							step={10}
 						/>
 
-						<ToggleControl
-							label={__("Auto Play", "blockons")}
-							checked={sliderAuto}
-							onChange={(newValue) => setAttributes({ sliderAuto: newValue })}
-							help={__("This will only work on the frontend.", "blockons")}
-						/>
-
-						{sliderType === "slide" && (
-							<ToggleControl
-								label={__("Rewind Slider", "blockons")}
-								checked={sliderRewind}
-								onChange={(newValue) =>
-									setAttributes({ sliderRewind: newValue })
-								}
-							/>
-						)}
+						<div className="blockons-divider"></div>
 					</PanelBody>
 					<PanelBody
 						title={__("Testimonials Design", "blockons")}
 						initialOpen={false}
 					>
+						<SelectControl
+							label="Style"
+							value={testStyle}
+							options={[
+								{ label: "Plain", value: "one" },
+								{ label: "Bubble", value: "two" },
+							]}
+							onChange={(newValue) => setAttributes({ testStyle: newValue })}
+						/>
+
+						<SelectControl
+							label="Layout"
+							value={testLayout}
+							options={[
+								{ label: "Default Layout", value: "one" },
+								{ label: "Side Layout", value: "two" },
+								{ label: "Author Top Layout", value: "three" },
+							]}
+							onChange={(newValue) => setAttributes({ testLayout: newValue })}
+						/>
+
 						<ToggleControl
 							label={__("Show Star Rating", "blockons")}
 							checked={showStars}
@@ -592,13 +501,13 @@ const Edit = (props) => {
 
 						<ToggleControl
 							label={__("Show Author Position", "blockons")}
-							checked={authPosition}
-							onChange={(newValue) => setAttributes({ authPosition: newValue })}
+							checked={showPosition}
+							onChange={(newValue) => setAttributes({ showPosition: newValue })}
 						/>
 						<ToggleControl
 							label={__("Show Author Image / Icon", "blockons")}
-							checked={authIcon}
-							onChange={(newValue) => setAttributes({ authIcon: newValue })}
+							checked={showIcon}
+							onChange={(newValue) => setAttributes({ showIcon: newValue })}
 						/>
 						<ToggleControl
 							label={__("Show Quotes", "blockons")}
@@ -645,7 +554,7 @@ const Edit = (props) => {
 							</>
 						)}
 
-						{(slidesStyle === "two" || slidesStyle === "three") && (
+						{testStyle === "two" && (
 							<BlockonsColorpicker
 								label={__("Background Color", "blockons")}
 								value={bgColor}
@@ -680,7 +589,7 @@ const Edit = (props) => {
 							paletteColors={colorPickerPalette}
 						/>
 
-						{authPosition && (
+						{showPosition && (
 							<BlockonsColorpicker
 								label={__("Author Position Color", "blockons")}
 								value={posColor}
@@ -694,39 +603,50 @@ const Edit = (props) => {
 						)}
 					</PanelBody>
 					<PanelBody
-						title={__("Testimonials Slider Controls", "blockons")}
+						title={__("Slider Controls", "blockons")}
 						initialOpen={false}
 					>
 						<ToggleControl
-							label={__("Show Arrows", "blockons")}
-							checked={sliderArrows}
-							onChange={(newValue) => setAttributes({ sliderArrows: newValue })}
+							label={__("Show Navigation", "blockons")}
+							checked={navigation}
+							onChange={(newValue) => setAttributes({ navigation: newValue })}
 						/>
 
-						{sliderArrows && (
+						{navigation && (
 							<>
-								{(slidesStyle === "two" || slidesStyle === "three") && (
-									<SelectControl
-										label="Style"
-										value={arrowStyle}
-										options={[
-											{ label: "Default", value: "one" },
-											{ label: "Round", value: "two" },
-											{ label: "Icon Only", value: "three" },
-										]}
-										onChange={(newValue) =>
-											setAttributes({ arrowStyle: newValue })
-										}
-									/>
-								)}
-								<div className="blockons-icon-text-select">
+								<SelectControl
+									label="Style"
+									value={navigationStyle}
+									options={[
+										{ label: "Default", value: "default" },
+										{ label: "Round", value: "round" },
+										{ label: "Rounded", value: "rounded" },
+										{ label: "Square", value: "square" },
+									]}
+									onChange={(newValue) =>
+										setAttributes({ navigationStyle: newValue })
+									}
+								/>
+								<SelectControl
+									label="Color"
+									value={navigationColor}
+									options={[
+										{ label: "Dark", value: "dark" },
+										{ label: "Light", value: "light" },
+									]}
+									onChange={(newValue) =>
+										setAttributes({ navigationColor: newValue })
+									}
+								/>
+
+								<div className="blockons-icon-select">
 									<Dropdown
-										className="blockons-icon-selecter"
-										contentClassName="blockons-editor-popup arrow-selector"
-										position="bottom left"
+										className="blockons-icon-selector"
+										contentClassName="blockons-editor-popup icon-selector"
+										position="bottom right"
 										renderToggle={({ isOpen, onToggle }) => (
 											<FontAwesomeIcon
-												icon={sliderArrowIcon}
+												icon={navigationArrow}
 												iconSize={24}
 												onClick={onToggle}
 											/>
@@ -737,7 +657,7 @@ const Edit = (props) => {
 													icon={icon}
 													iconSize={20}
 													onClick={() =>
-														setAttributes({ sliderArrowIcon: icon })
+														setAttributes({ navigationArrow: icon })
 													}
 												/>
 											))
@@ -748,40 +668,60 @@ const Edit = (props) => {
 							</>
 						)}
 
+						<div className="blockons-divider"></div>
+
 						<ToggleControl
 							label={__("Show Pagination", "blockons")}
-							checked={sliderPagination}
-							onChange={(newValue) =>
-								setAttributes({ sliderPagination: newValue })
-							}
+							checked={pagination}
+							onChange={(newValue) => setAttributes({ pagination: newValue })}
 						/>
-						{sliderPagination && (
+						{pagination && (
 							<>
 								<SelectControl
-									label="Testimonials Layout"
-									value={sliderPagDesign}
+									label={__("Pagination Type", "blockons")}
+									value={paginationStyle}
 									options={[
-										{ label: "Dots", value: "dots" },
+										{ label: "Bullets", value: "bullets" },
+										{ label: "Dynamic Bullets", value: "dynamicBullets" },
 										{ label: "Numbers", value: "numbers" },
+										{ label: "Fraction", value: "fraction" },
 									]}
 									onChange={(newValue) =>
 										setAttributes({
-											sliderPagDesign:
-												newValue === undefined ? "dots" : newValue,
+											paginationStyle:
+												newValue === undefined ? "bullets" : newValue,
 										})
+									}
+									help={__(
+										"Turn the Pagination off and on again to see this change",
+										"blockons"
+									)}
+								/>
+								<SelectControl
+									label="Color"
+									value={paginationColor}
+									options={[
+										{ label: "Dark", value: "dark" },
+										{ label: "Light", value: "light" },
+									]}
+									onChange={(newValue) =>
+										setAttributes({ paginationColor: newValue })
 									}
 								/>
 							</>
 						)}
 
-						{(sliderArrows || sliderPagination) && (
-							<ToggleControl
-								label={__("Show Controls only on Hover", "blockons")}
-								checked={controlsOnHover}
-								onChange={(newValue) =>
-									setAttributes({ controlsOnHover: newValue })
-								}
-							/>
+						{(navigation || pagination) && (
+							<>
+								<div className="blockons-divider"></div>
+								<ToggleControl
+									label={__("Show Controls on Hover", "blockons")}
+									checked={showOnHover}
+									onChange={(newValue) =>
+										setAttributes({ showOnHover: newValue })
+									}
+								/>
+							</>
 						)}
 					</PanelBody>
 				</InspectorControls>
@@ -792,52 +732,25 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 			<div
-				className={`blockons-testimonials-slider`}
+				className={`blockons-slider ${
+					showOnHover ? "controlsOnHover" : ""
+				} navigation-${navigationStyle} navigation-${navigationColor} pagination-${paginationStyle} pagination-${paginationColor} ${
+					navigationArrow === "ban" ? "default-icon" : "custom-icon"
+				} arrows-${navigationArrow}`}
 				id={uniqueId}
-				data-settings={JSON.stringify(sliderOptions)}
 			>
-				{sliderSlideItems ? (
-					<>
-						<div
-							className={`blockons-slider-wrap ${
-								controlsOnHover ? "on-hover" : ""
-							} arrow-style-${arrowStyle} pagination-${sliderPagDesign} ${
-								needsReload ? "reload-fix" : ""
-							}`}
-						>
-							{needsReload && (
-								<div className="blockons-reload">
-									<div className="blockons-reload-block">
-										{__(
-											"Please save the post and refresh the page to see this new setting take place",
-											"blockons"
-										)}
-									</div>
-								</div>
-							)}
-							<Splide options={sliderOptions}>{sliderSlideItems}</Splide>
-						</div>
-						{isSelected && (
-							<div
-								className={`blockons-add-new ${
-									sliderSlideItems === undefined ? "no-slides" : "has-slides"
-								}`}
-							>
-								<Button variant="secondary" onClick={handleAddItem}>
-									{__("Add Another testimonial", "blockons")}
-								</Button>
-							</div>
-						)}
-					</>
-				) : (
-					<div className="blockons-noslides">
-						<div className="blockons-add-new">
-							<Button variant="secondary" onClick={handleAddItem}>
-								{__("Add your first slide", "blockons")}
-							</Button>
+				{needsReload && (
+					<div className="blockons-slider-reload">
+						<div className="blockons-slider-reload-inner">
+							{__("Please Save or Update and reload the page", "blockons")}
 						</div>
 					</div>
 				)}
+				<Swiper {...sliderOptions}>
+					{slides.map((slideContent, index) => (
+						<SwiperSlide>{slideContent}</SwiperSlide>
+					))}
+				</Swiper>
 			</div>
 		</div>
 	);

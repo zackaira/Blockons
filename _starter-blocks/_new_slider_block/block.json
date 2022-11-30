@@ -1,12 +1,12 @@
 {
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
-	"name": "blockons/image-carousel",
-	"title": "Image Carousel",
+	"name": "blockons/slider-newblock",
+	"title": "Slider Block",
 	"textdomain": "blockons",
-	"icon": "format-image",
+	"icon": "heart",
 	"category": "blockons-category",
-	"keywords": ["image", "carousel", "gallery", "picture", "slider"],
+	"keywords": ["test", "slider", "carousel"],
 	"attributes": {
 		"uniqueId": {
 			"type": "string"
@@ -15,118 +15,74 @@
 			"type": "string",
 			"default": "left"
 		},
-		"slidesNumber": {
-			"type": "number",
-			"default": 1
-		},
-		"slides": {
+		"sliderSlides": {
 			"type": "array",
 			"default": [
 				{
-					"itemId": 0,
-					"itemImg": {}
+					"id": "slide-one",
+					"title": "Slide One"
 				},
 				{
-					"itemId": 1,
-					"itemImg": {}
+					"id": "slide-two",
+					"title": "Slide Two"
+				},
+				{
+					"id": "slide-three",
+					"title": "Slide Three"
 				}
 			]
 		},
-		"slidesStyle": {
+		"transition": {
 			"type": "string",
-			"default": "one"
+			"default": "slide"
 		},
-		"noShadow": {
-			"type": "boolean",
-			"default": false
-		},
-		"slidesLayout": {
-			"type": "string",
-			"default": "vertical"
-		},
-		"slidesWidth": {
+		"perView": {
 			"type": "number",
-			"default": 75
+			"default": 1
 		},
-		"sliderRewind": {
-			"type": "boolean",
-			"default": false
+		"mode": {
+			"type": "string",
+			"default": "default"
 		},
-		"controlsOnHover": {
-			"type": "boolean",
-			"default": false
-		},
-		"authPosition": {
-			"type": "boolean",
-			"default": true
-		},
-		"authIcon": {
-			"type": "boolean",
-			"default": true
-		},
-		"showQuotes": {
-			"type": "boolean",
-			"default": true
-		},
-		"quoteSize": {
+		"spaceBetween": {
 			"type": "number",
-			"default": 28
+			"default": 0
 		},
-		"sliderAuto": {
+		"navigation": {
+			"type": "boolean",
+			"default": true
+		},
+		"navigationStyle": {
+			"type": "string",
+			"default": "default"
+		},
+		"navigationColor": {
+			"type": "string",
+			"default": "dark"
+		},
+		"navigationArrow": {
+			"type": "string",
+			"default": "ban"
+		},
+		"pagination": {
+			"type": "boolean",
+			"default": true
+		},
+		"paginationStyle": {
+			"type": "string",
+			"default": "bullets"
+		},
+		"paginationColor": {
+			"type": "string",
+			"default": "dark"
+		},
+		"showOnHover": {
 			"type": "boolean",
 			"default": false
-		},
-		"sliderArrows": {
-			"type": "boolean",
-			"default": true
-		},
-		"arrowStyle": {
-			"type": "string",
-			"default": "one"
-		},
-		"sliderArrowIcon": {
-			"type": "string",
-			"default": "arrow-right"
-		},
-		"sliderPagination": {
-			"type": "boolean",
-			"default": true
-		},
-		"sliderPagDesign": {
-			"type": "string",
-			"default": "dots"
-		},
-		"bgColor": {
-			"type": "string",
-			"default": "#f9f9f9"
-		},
-		"fontColor": {
-			"type": "string",
-			"default": "#4f4f4f"
-		},
-		"quotesColor": {
-			"type": "string",
-			"default": "#000"
-		},
-		"quotesOpacity": {
-			"type": "number",
-			"default": 0.4
-		},
-		"nameColor": {
-			"type": "string",
-			"default": "#4f4f4f"
-		},
-		"posColor": {
-			"type": "string",
-			"default": "#4f4f4f"
 		}
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"viewScript": "file:./splide.js",
-	"style": [
-		"file:./style-index.css",
-		"blockons-fontawesome",
-		"blockons-splidecss"
-	]
+	"viewScript": "blockons-slider",
+	"style": ["file:./style-index.css", "blockons-fontawesome", "blockons-slider"]
 }

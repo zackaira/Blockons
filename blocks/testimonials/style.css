@@ -2,26 +2,266 @@
  * Note that these styles are loaded *before* editor styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-/* ---- Slider ---- */
-.blockons-slider-wrap {
+.wp-block-blockons-testimonials {
 	position: relative;
 }
-.blockons-slider-wrap .splide__list {
-	border-radius: 3px;
+/* ---- Slider ---- */
+.wp-block-blockons-testimonials .swiper-slide {
+	background-color: #fafafa;
+	text-align: center;
+	padding: 25px 50px;
 	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-self: stretch;
+}
+.wp-block-blockons-testimonials .swiper-slide h4 {
+	margin: 80px 0;
+}
+/* -- Navigation -- */
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-round
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-round
+	.swiper-button-next,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-rounded
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-rounded
+	.swiper-button-next,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-square
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-square
+	.swiper-button-next {
+	box-shadow: 0 1px 4px rgb(0 0 0 / 14%), inset 0 0 0 1px rgb(0 0 0 / 18%);
+	width: 46px;
+	height: 46px;
+	margin-top: -23px;
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-round
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-round
+	.swiper-button-next {
+	border-radius: 50px;
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-rounded
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-rounded
+	.swiper-button-next {
+	border-radius: 8px;
 }
 
-/* -- Slides -- */
-.blockons-slider-wrap .splide.splide--slide {
-	padding: 0 0 30px;
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-dark
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-dark
+	.swiper-button-next {
+	color: #222;
 }
-.blockons-slider-wrap .splide__slide {
-	display: flex;
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-light
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-light
+	.swiper-button-next {
+	color: #fff;
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-dark.navigation-round
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-dark.navigation-round
+	.swiper-button-next,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-dark.navigation-rounded
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-dark.navigation-rounded
+	.swiper-button-next,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-dark.navigation-square
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-dark.navigation-square
+	.swiper-button-next {
+	background-color: #222;
+	color: #fff;
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-light.navigation-round
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-light.navigation-round
+	.swiper-button-next,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-light.navigation-rounded
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-light.navigation-rounded
+	.swiper-button-next,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-light.navigation-square
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.navigation-light.navigation-square
+	.swiper-button-next {
+	background-color: #fff;
+	color: #222;
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.default-icon.navigation-round
+	.swiper-button-prev::after,
+.wp-block-blockons-testimonials
+	.blockons-slider.default-icon.navigation-round
+	.swiper-button-next::after,
+.wp-block-blockons-testimonials
+	.blockons-slider.default-icon.navigation-rounded
+	.swiper-button-prev::after,
+.wp-block-blockons-testimonials
+	.blockons-slider.default-icon.navigation-rounded
+	.swiper-button-next::after,
+.wp-block-blockons-testimonials
+	.blockons-slider.default-icon.navigation-square
+	.swiper-button-prev::after,
+.wp-block-blockons-testimonials
+	.blockons-slider.default-icon.navigation-square
+	.swiper-button-next::after {
+	font-size: 30px;
+}
+/* - Arrows - */
+.wp-block-blockons-testimonials
+	.blockons-slider.custom-icon
+	.swiper-button-prev::after,
+.wp-block-blockons-testimonials
+	.blockons-slider.custom-icon
+	.swiper-button-next::after {
+	font-family: "Font Awesome 6 Free";
+	font-weight: 900;
+	font-size: 32px;
+}
+/* - Font Awesome Overrides - */
+.wp-block-blockons-testimonials
+	.blockons-slider.custom-icon.arrows-arrow-right
+	.swiper-button-prev::after {
+	content: "\f060";
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.custom-icon.arrows-arrow-right
+	.swiper-button-next::after {
+	content: "\f061";
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.custom-icon.arrows-arrow-right-long
+	.swiper-button-prev::after {
+	content: "\f177";
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.custom-icon.arrows-arrow-right-long
+	.swiper-button-next::after {
+	content: "\f178";
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.custom-icon.arrows-angle-right
+	.swiper-button-prev::after {
+	content: "\f104";
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.custom-icon.arrows-angle-right
+	.swiper-button-next::after {
+	content: "\f105";
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.custom-icon.arrows-caret-right
+	.swiper-button-prev::after {
+	content: "\f0d9";
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.custom-icon.arrows-caret-right
+	.swiper-button-next::after {
+	content: "\f0da";
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.custom-icon.arrows-angles-right
+	.swiper-button-prev::after {
+	content: "\f100";
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.custom-icon.arrows-angles-right
+	.swiper-button-next::after {
+	content: "\f101";
+}
+/* -- Pagination -- */
+.wp-block-blockons-testimonials
+	.blockons-slider.pagination-dark
+	.swiper-pagination
+	.swiper-pagination-bullet.swiper-pagination-bullet-active {
+	background-color: #222;
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.pagination-light
+	.swiper-pagination
+	.swiper-pagination-bullet.swiper-pagination-bullet-active {
+	background-color: #fff;
+	box-shadow: 0 0 0 1px #c6c6c6;
+	color: #111;
+}
+.wp-block-blockons-testimonials .blockons-slider.pagination-numbers {
+	counter-reset: blockons-slider-counter;
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.pagination-numbers
+	.swiper-pagination-bullet {
+	color: #fff;
+	font-size: 11px;
+	font-weight: bold;
+	width: 16px;
+	height: 16px;
+	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 25px 10px;
 }
-.blockons-slide-inner {
+.wp-block-blockons-testimonials
+	.blockons-slider.pagination-numbers
+	.swiper-pagination-bullet::before {
+	counter-increment: blockons-slider-counter;
+	content: counter(blockons-slider-counter);
+}
+
+.wp-block-blockons-testimonials
+	.blockons-slider.controlsOnHover
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.controlsOnHover
+	.swiper-button-next,
+.wp-block-blockons-testimonials
+	.blockons-slider.controlsOnHover
+	.swiper-pagination {
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out 0s;
+}
+.wp-block-blockons-testimonials
+	.blockons-slider.controlsOnHover:hover
+	.swiper-button-prev,
+.wp-block-blockons-testimonials
+	.blockons-slider.controlsOnHover:hover
+	.swiper-button-next,
+.wp-block-blockons-testimonials
+	.blockons-slider.controlsOnHover:hover
+	.swiper-pagination {
+	opacity: 1;
+}
+/* -- Testimonials Design -- */
+.swiper-slide-inner {
 	width: 75%;
 }
 .blockons-slide-text {
@@ -95,7 +335,16 @@
 	letter-spacing: 0.2px;
 	margin-top: 3px;
 }
-
+/* -- Alignment -- */
+.wp-block-blockons-testimonials.align-left .blockons-slide-text {
+	text-align: left;
+}
+.wp-block-blockons-testimonials.align-center .blockons-slide-text {
+	text-align: center;
+}
+.wp-block-blockons-testimonials.align-right .blockons-slide-text {
+	text-align: right;
+}
 /* ---- Star Ratings ---- */
 .blockons-star-ratings {
 	margin: 0 0 20px;
@@ -110,166 +359,13 @@
 .blockons-star.checked {
 	color: #fdc704;
 }
-
-/* ---- Slider Arrows ---- */
-.blockons-slider-wrap .splide__arrow {
-	background-color: #fff;
-	border-radius: 3px;
-	cursor: pointer;
-	display: flex;
-	color: #222;
-	align-items: center;
-	justify-content: center;
-	padding: 10px;
-	position: absolute;
-	top: 50%;
-	z-index: 11;
-	font-size: 20px;
-	margin-top: -20px;
-	overflow: hidden;
-	opacity: 0.8;
-	transition: opacity 0.2s ease-in-out 0s;
-}
-.blockons-slider-wrap .splide__arrow svg {
-	display: none !important;
-}
-.blockons-slider-wrap .splide__arrow--prev {
-	left: 10px;
-}
-.blockons-slider-wrap .splide__arrow--next {
-	right: 10px;
-}
-.blockons-slider-wrap .splide__arrow:disabled {
-	opacity: 0 !important;
-	pointer-events: none;
-}
-.blockons-slider-wrap.arrow-style-two .splide__arrow {
-	border-radius: 50%;
-}
-.blockons-slider-wrap.arrow-style-three .splide__arrow {
-	background-color: transparent !important;
-	box-shadow: none !important;
-}
-.blockons-slider-wrap .splide__arrow:hover,
-.blockons-slider-wrap .splide__arrow:focus {
-	background-color: #fff;
-	color: #222;
-	opacity: 1;
-}
-/* - Font Awesome Overrides - */
-.wp-block-blockons-testimonials.arrows-arrow-right
-	.splide__arrow--prev::before {
-	content: "\f060";
-}
-.wp-block-blockons-testimonials.arrows-arrow-right
-	.splide__arrow--next::before {
-	content: "\f061";
-}
-.wp-block-blockons-testimonials.arrows-arrow-right-long
-	.splide__arrow--prev::before {
-	content: "\f177";
-}
-.wp-block-blockons-testimonials.arrows-arrow-right-long
-	.splide__arrow--next::before {
-	content: "\f178";
-}
-.wp-block-blockons-testimonials.arrows-angle-right
-	.splide__arrow--prev::before {
-	content: "\f104";
-}
-.wp-block-blockons-testimonials.arrows-angle-right
-	.splide__arrow--next::before {
-	content: "\f105";
-}
-.wp-block-blockons-testimonials.arrows-caret-right
-	.splide__arrow--prev::before {
-	content: "\f0d9";
-}
-.wp-block-blockons-testimonials.arrows-caret-right
-	.splide__arrow--next::before {
-	content: "\f0da";
-}
-.wp-block-blockons-testimonials.arrows-angles-right
-	.splide__arrow--prev::before {
-	content: "\f100";
-}
-.wp-block-blockons-testimonials.arrows-angles-right
-	.splide__arrow--next::before {
-	content: "\f101";
-}
-/* ---- Slider Pagination ---- */
-.blockons-slider-wrap .splide__pagination {
-	bottom: 0;
-}
-.blockons-slider-wrap.pagination-dots
-	.splide__pagination
-	button.splide__pagination__page {
-	width: 10px;
-	height: 10px;
-	border: 0;
-	box-shadow: inset 0 0 0 1px #000;
-	border-radius: 10px;
-	background-color: #fff;
-	margin: 0 3px;
-	cursor: pointer;
-}
-.blockons-slider-wrap.pagination-dots
-	.splide__pagination
-	button.splide__pagination__page.is-active {
-	background-color: #000;
-	color: #fff;
-}
-.blockons-slider-wrap
-	.splide__pagination
-	button.splide__pagination__page.is-active {
-	box-shadow: 0 1px 5px rgb(0 0 0 / 12%);
-	transform: scale(1.1);
-}
-
-.blockons-slider-wrap.on-hover .splide__arrow--prev,
-.blockons-slider-wrap.on-hover .splide__arrow--next,
-.blockons-slider-wrap.on-hover .splide__pagination {
-	opacity: 0;
-	transition: opacity 0.3s ease-in-out 0s;
-}
-.blockons-slider-wrap.on-hover:hover .splide__arrow--prev,
-.blockons-slider-wrap.on-hover:hover .splide__arrow--next,
-.blockons-slider-wrap.on-hover:hover .splide__pagination {
-	opacity: 1;
-}
-
-.blockons-slider-wrap.pagination-numbers .splide__pagination {
-	counter-reset: pagination-num;
-}
-.blockons-slider-wrap.pagination-numbers .splide__pagination__page {
-	width: 18px;
-	height: 18px;
-	font-size: 11px;
-	font-weight: 600;
-}
-.blockons-slider-wrap.pagination-numbers .splide__pagination__page:before {
-	counter-increment: pagination-num;
-	content: counter(pagination-num);
-}
-
-/* -- Alignment -- */
-.wp-block-blockons-testimonials.align-left .blockons-slide-text {
-	text-align: left;
-}
-.wp-block-blockons-testimonials.align-center .blockons-slide-text {
-	text-align: center;
-}
-.wp-block-blockons-testimonials.align-right .blockons-slide-text {
-	text-align: right;
-}
-
-/* -- Design One -- */
+/* -- Layout One -- */
 .wp-block-blockons-testimonials.layout-one .blockons-slide-inner {
 	display: flex;
 	flex-direction: column;
 }
 
-/* -- Design Two -- */
+/* -- Layout Two -- */
 .wp-block-blockons-testimonials.layout-two .blockons-slide-inner {
 	display: flex;
 	align-items: center;
@@ -287,7 +383,7 @@
 	text-align: center;
 }
 
-/* -- Design Three -- */
+/* -- Layout Three -- */
 .wp-block-blockons-testimonials.layout-three .blockons-slide-inner {
 	display: flex;
 	flex-direction: column-reverse;
@@ -312,40 +408,13 @@
 	padding-right: 0;
 }
 /* -- Style Two -- */
-.wp-block-blockons-testimonials.style-two .splide__track {
-	padding: 15px;
-}
-.wp-block-blockons-testimonials.style-two .blockons-slide-inner {
-	box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
-	padding: 25px 25px 25px 45px;
-}
-.wp-block-blockons-testimonials.style-two.no-outer .blockons-slide-inner {
-	box-shadow: none;
-}
 .wp-block-blockons-testimonials.style-two .blockons-slide-text {
-	padding-right: 30px;
-}
-.wp-block-blockons-testimonials.style-two
-	.splide__pagination
-	button.splide__pagination__page {
-	box-shadow: inset 0 0 0 1px #000, 0 1px 5px rgb(0 0 0 / 20%);
-}
-.wp-block-blockons-testimonials.style-two .blockons-slide-author-img,
-.wp-block-blockons-testimonials.style-two .splide__arrow,
-.wp-block-blockons-testimonials.style-two
-	.splide__pagination
-	button.splide__pagination__page.is-active {
-	box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
-}
-
-/* -- Style Three -- */
-.wp-block-blockons-testimonials.style-three .blockons-slide-text {
 	background-color: #f0f0f0;
 	border-radius: 8px;
 	padding: 25px 40px;
 	position: relative;
 }
-.wp-block-blockons-testimonials.style-three .blockons-slide-text span.corner {
+.wp-block-blockons-testimonials.style-two .blockons-slide-text span.corner {
 	display: block;
 	width: 0;
 	height: 0;
@@ -359,7 +428,7 @@
 	bottom: -15px;
 	right: 65px;
 }
-.wp-block-blockons-testimonials.layout-two.style-three
+.wp-block-blockons-testimonials.layout-two.style-two
 	.blockons-slide-text
 	span.corner {
 	width: 0;
@@ -374,29 +443,28 @@
 	right: 100%;
 	margin-bottom: -7px;
 }
-.wp-block-blockons-testimonials.layout-three.style-three
+.wp-block-blockons-testimonials.layout-three.style-two
 	.blockons-slide-text
 	span.corner {
 	display: none;
 }
-.wp-block-blockons-testimonials.layout-three.style-three
-	.blockons-slide-author {
+.wp-block-blockons-testimonials.layout-three.style-two .blockons-slide-author {
 	margin-bottom: 20px;
 }
-.wp-block-blockons-testimonials.style-three .blockons-slide-author-img,
-.wp-block-blockons-testimonials.style-three .splide__arrow,
-.wp-block-blockons-testimonials.style-three
+.wp-block-blockons-testimonials.style-two .blockons-slide-author-img,
+.wp-block-blockons-testimonials.style-two .splide__arrow,
+.wp-block-blockons-testimonials.style-two
 	.splide__pagination
 	button.splide__pagination__page.is-active {
 	box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
 }
-.wp-block-blockons-testimonials.style-three
+.wp-block-blockons-testimonials.style-two
 	.blockons-slide-text
 	.blockons-fontawesome.fa-quote-left::before {
 	top: 5px;
 	left: 10px;
 }
-.wp-block-blockons-testimonials.style-three
+.wp-block-blockons-testimonials.style-two
 	.blockons-slide-text
 	.blockons-fontawesome.fa-quote-right::before {
 	bottom: 18px;

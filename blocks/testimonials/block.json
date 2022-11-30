@@ -9,87 +9,50 @@
 	"keywords": ["testimonials", "quote", "reviews", "comments", "slider"],
 	"attributes": {
 		"uniqueId": {
-			"type": "string",
-			"default": ""
+			"type": "string"
 		},
 		"alignment": {
 			"type": "string",
 			"default": "left"
 		},
-		"sliderType": {
-			"type": "string",
-			"default": "slide"
-		},
-		"slidesNumber": {
-			"type": "number",
-			"default": 1
-		},
-		"slides": {
+		"sliderSlides": {
 			"type": "array",
 			"default": [
 				{
-					"itemId": 0,
-					"itemText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
-					"itemAuthor": "Joe Soap",
-					"itemAuthorPos": "Owner at Macabee",
-					"itemImg": {},
-					"itemRating": 5
+					"id": "slide-one",
+					"title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
+					"author": "Joe Soap",
+					"authorPos": "Owner at Macabee",
+					"authorImg": {},
+					"rating": 5
 				},
 				{
-					"itemId": 1,
-					"itemText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
-					"itemAuthor": "Jenny Carter",
-					"itemAuthorPos": "Owner at Macabee",
-					"itemImg": {},
-					"itemRating": 5
+					"id": "slide-two",
+					"title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
+					"author": "Joe Soap",
+					"authorPos": "Owner at Macabee",
+					"authorImg": {},
+					"rating": 5
 				},
 				{
-					"itemId": 2,
-					"itemText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
-					"itemAuthor": "John Smith",
-					"itemAuthorPos": "Owner at Macabee",
-					"itemImg": {},
-					"itemRating": 5
+					"id": "slide-three",
+					"title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
+					"author": "Joe Soap",
+					"authorPos": "Owner at Macabee",
+					"authorImg": {},
+					"rating": 5
 				}
 			]
 		},
-		"slidesStyle": {
+		"testStyle": {
 			"type": "string",
 			"default": "one"
 		},
-		"noShadow": {
-			"type": "boolean",
-			"default": false
-		},
-		"slidesLayout": {
+		"testLayout": {
 			"type": "string",
-			"default": "vertical"
-		},
-		"slidesWidth": {
-			"type": "number",
-			"default": 75
-		},
-		"sliderRewind": {
-			"type": "boolean",
-			"default": false
-		},
-		"controlsOnHover": {
-			"type": "boolean",
-			"default": false
+			"default": "one"
 		},
 		"showStars": {
-			"type": "boolean",
-			"default": true
-		},
-		"starRating": {
-			"type": "number",
-			"default": 5
-		},
-		"authPosition": {
-			"type": "boolean",
-			"default": true
-		},
-		"authIcon": {
 			"type": "boolean",
 			"default": true
 		},
@@ -97,33 +60,17 @@
 			"type": "boolean",
 			"default": true
 		},
+		"showPosition": {
+			"type": "boolean",
+			"default": true
+		},
+		"showIcon": {
+			"type": "boolean",
+			"default": true
+		},
 		"quoteSize": {
 			"type": "number",
 			"default": 28
-		},
-		"sliderAuto": {
-			"type": "boolean",
-			"default": false
-		},
-		"sliderArrows": {
-			"type": "boolean",
-			"default": true
-		},
-		"arrowStyle": {
-			"type": "string",
-			"default": "one"
-		},
-		"sliderArrowIcon": {
-			"type": "string",
-			"default": "arrow-right"
-		},
-		"sliderPagination": {
-			"type": "boolean",
-			"default": true
-		},
-		"sliderPagDesign": {
-			"type": "string",
-			"default": "dots"
 		},
 		"bgColor": {
 			"type": "string",
@@ -148,14 +95,58 @@
 		"posColor": {
 			"type": "string",
 			"default": "#4f4f4f"
+		},
+		"transition": {
+			"type": "string",
+			"default": "slide"
+		},
+		"perView": {
+			"type": "number",
+			"default": 1
+		},
+		"mode": {
+			"type": "string",
+			"default": "default"
+		},
+		"spaceBetween": {
+			"type": "number",
+			"default": 0
+		},
+		"navigation": {
+			"type": "boolean",
+			"default": true
+		},
+		"navigationStyle": {
+			"type": "string",
+			"default": "default"
+		},
+		"navigationColor": {
+			"type": "string",
+			"default": "dark"
+		},
+		"navigationArrow": {
+			"type": "string",
+			"default": "ban"
+		},
+		"pagination": {
+			"type": "boolean",
+			"default": true
+		},
+		"paginationStyle": {
+			"type": "string",
+			"default": "bullets"
+		},
+		"paginationColor": {
+			"type": "string",
+			"default": "dark"
+		},
+		"showOnHover": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"viewScript": "file:./splide.js",
-	"style": [
-		"file:./style-index.css",
-		"blockons-fontawesome",
-		"blockons-splidecss"
-	]
+	"viewScript": "blockons-slider",
+	"style": ["file:./style-index.css", "blockons-fontawesome", "blockons-slider"]
 }
