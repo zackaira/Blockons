@@ -2,23 +2,33 @@
  * Note that these styles are loaded *after* common styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.blockons-testimonials-slider:hover .blockons-slider-wrap {
+.blockons-image-carousel-slider:hover .blockons-imgcarousel-wrap {
 	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
 }
-.blockons-icon-text-select {
+.blockons-imgcarousel-empty {
+	background-color: #f0f0f0;
+	padding: 40px;
 	display: flex;
-	align-items: center;
-	margin-bottom: 24px;
+	justify-content: center;
 }
-.blockons-icon-text-select p {
-	margin: 0 0 0 12px;
+.blockons-imgcarousel-empty .blockons-upload-button {
+	background-color: #fff;
+	max-width: 320px;
+	padding: 30px;
 }
-.blockons-icon-text-select .blockons-icon-selecter {
-	padding: 5px;
-	cursor: pointer;
+/* -- Remove Button -- */
+.blockons-image-carousel-slider .blockons-item-btns {
+	display: flex;
+	align-items: stretch;
+	position: absolute;
+	top: -4px;
+	right: 0;
+	z-index: 8;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out 0s;
 }
-.blockons-icon-text-select:hover .blockons-icon-selecter {
-	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
+.blockons-image-carousel-slider .splide__slide:hover .blockons-item-btns {
+	opacity: 1;
 }
 /* -- Disabled - Needs to be reloaded -- */
 .blockons-reload {
@@ -44,18 +54,14 @@
 	max-width: 310px;
 	text-align: center;
 }
-.blockons-slider-wrap.reload-fix > .splide {
+.blockons-imgcarousel-wrap.reload-fix > .splide {
 	height: 400px !important;
 	background-color: #f0f0f0;
 }
-.blockons-slider-wrap.reload-fix .splide__track {
+.blockons-imgcarousel-wrap.reload-fix .splide__track {
 	visibility: hidden;
 }
-
 /* -- Image Button -- */
-.wp-block-blockons-testimonials .blockons-slider-wrap .blockons-upload-button {
-	box-shadow: none;
-}
 .blockons-upload-remove {
 	background-color: #fff;
 	position: absolute;
@@ -73,24 +79,10 @@
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out 0.2s;
 }
-.blockons-slider-wrap:hover
+.blockons-imgcarousel-wrap:hover
 	.blockons-slide-author
 	span.blockons-fontawesome.fa-user::before {
 	content: "\f093";
-}
-/* -- Item Level Controls -- */
-.blockons-item-btns {
-	display: flex;
-	align-items: stretch;
-	position: absolute;
-	top: 0;
-	right: 0;
-	opacity: 0;
-	transition: opacity 0.3s ease-in-out 0s;
-}
-.blockons-slider-wrap .splide__slide:hover .blockons-item-btns,
-.blockons-slider-wrap:hover .blockons-upload-remove {
-	opacity: 1;
 }
 
 /* -- Item level controls popup box -- */
@@ -116,21 +108,14 @@
 	.blockons-fontawesome:hover {
 	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
 }
-/* -- Make editor controls span full with of popup box -- */
-.blockons-editor-popup .components-popover__content > div > div {
-	width: 100%;
+
+/* -- Roundness -- */
+.wp-block-blockons-image-carousel.brad-two .blockons-item-btns {
+	right: 10px;
 }
-.blockons-add-new {
-	margin: 15px 0 0;
+.wp-block-blockons-image-carousel.brad-three .blockons-item-btns {
+	right: 50px;
 }
-/* ---- No Slides ---- */
-.blockons-noslides {
-	background-color: #f2f2f2;
-	box-shadow: inset 0 0 0 1px #dbdbdb;
-	border-radius: 3px;
-	padding: 28px;
-	text-align: center;
-}
-.blockons-noslides .blockons-add-new {
-	margin: 0;
+.wp-block-blockons-image-carousel.brad-four .blockons-item-btns {
+	right: 105px;
 }

@@ -96,6 +96,8 @@ const Edit = (props) => {
 			: false,
 	};
 
+	useEffect(() => {}, []);
+
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
 			alignment: newAlignment === undefined ? "left" : newAlignment,
@@ -218,7 +220,7 @@ const Edit = (props) => {
 			<div
 				className="blockons-slide-text"
 				style={{
-					...(testStyle === "three" ? { backgroundColor: bgColor } : ""),
+					...(testStyle === "two" ? { backgroundColor: bgColor } : ""),
 					color: fontColor,
 				}}
 			>
@@ -261,7 +263,7 @@ const Edit = (props) => {
 					<span
 						className="corner"
 						style={{
-							...(testStyle === "two" ? { borderColor: bgColor } : ""),
+							borderColor: bgColor,
 						}}
 					></span>
 				)}
@@ -419,20 +421,23 @@ const Edit = (props) => {
 								setAttributes({ transition: newValue });
 							}}
 						/>
+						<div className="blockons-divider"></div>
 						{transition !== "fade" && (
-							<RangeControl
-								label={__("Slides Per View", "blockons")}
-								value={perView}
-								onChange={(newValue) =>
-									setAttributes({
-										perView: newValue === undefined ? 1 : parseInt(newValue),
-									})
-								}
-								min={1}
-								max={sliderSlides.length < 4 ? sliderSlides.length : 4}
-							/>
+							<>
+								<RangeControl
+									label={__("Slides Per View", "blockons")}
+									value={perView}
+									onChange={(newValue) =>
+										setAttributes({
+											perView: newValue === undefined ? 1 : parseInt(newValue),
+										})
+									}
+									min={1}
+									max={sliderSlides.length < 4 ? sliderSlides.length : 4}
+								/>
+								<div className="blockons-divider"></div>
+							</>
 						)}
-
 						<SelectControl
 							label="Slider Mode"
 							value={mode}
@@ -449,6 +454,7 @@ const Edit = (props) => {
 								setAttributes({ mode: newValue });
 							}}
 						/>
+						<div className="blockons-divider"></div>
 						<RangeControl
 							label={__("Space Between Slides", "blockons")}
 							value={spaceBetween}
@@ -461,8 +467,6 @@ const Edit = (props) => {
 							max={200}
 							step={10}
 						/>
-
-						<div className="blockons-divider"></div>
 					</PanelBody>
 					<PanelBody
 						title={__("Testimonials Design", "blockons")}
@@ -477,7 +481,6 @@ const Edit = (props) => {
 							]}
 							onChange={(newValue) => setAttributes({ testStyle: newValue })}
 						/>
-
 						<SelectControl
 							label="Layout"
 							value={testLayout}
@@ -488,6 +491,7 @@ const Edit = (props) => {
 							]}
 							onChange={(newValue) => setAttributes({ testLayout: newValue })}
 						/>
+						<div className="blockons-divider"></div>
 
 						<ToggleControl
 							label={__("Show Star Rating", "blockons")}
@@ -498,7 +502,6 @@ const Edit = (props) => {
 								"blockons"
 							)}
 						/>
-
 						<ToggleControl
 							label={__("Show Author Position", "blockons")}
 							checked={showPosition}
@@ -514,6 +517,7 @@ const Edit = (props) => {
 							checked={showQuotes}
 							onChange={(newValue) => setAttributes({ showQuotes: newValue })}
 						/>
+
 						{showQuotes && (
 							<>
 								<RangeControl
@@ -551,20 +555,25 @@ const Edit = (props) => {
 									max={1}
 									step={0.1}
 								/>
+								<div className="blockons-divider"></div>
 							</>
 						)}
 
 						{testStyle === "two" && (
-							<BlockonsColorpicker
-								label={__("Background Color", "blockons")}
-								value={bgColor}
-								onChange={(colorValue) => {
-									setAttributes({
-										bgColor: colorValue === undefined ? "#f9f9f9" : colorValue,
-									});
-								}}
-								paletteColors={colorPickerPalette}
-							/>
+							<>
+								<BlockonsColorpicker
+									label={__("Background Color", "blockons")}
+									value={bgColor}
+									onChange={(colorValue) => {
+										setAttributes({
+											bgColor:
+												colorValue === undefined ? "#f0f0f0" : colorValue,
+										});
+									}}
+									paletteColors={colorPickerPalette}
+								/>
+								<div className="blockons-divider"></div>
+							</>
 						)}
 
 						<BlockonsColorpicker
@@ -577,6 +586,7 @@ const Edit = (props) => {
 							}}
 							paletteColors={colorPickerPalette}
 						/>
+						<div className="blockons-divider"></div>
 
 						<BlockonsColorpicker
 							label={__("Author Name Color", "blockons")}
@@ -588,7 +598,6 @@ const Edit = (props) => {
 							}}
 							paletteColors={colorPickerPalette}
 						/>
-
 						{showPosition && (
 							<BlockonsColorpicker
 								label={__("Author Position Color", "blockons")}

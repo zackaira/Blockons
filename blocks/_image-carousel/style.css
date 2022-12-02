@@ -1,0 +1,296 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+/* ---- Slider ---- */
+.wp-block-blockons-image-carousel {
+	display: flex;
+	align-items: flex-start;
+}
+.wp-block-blockons-image-carousel .blockons-image-carousel-slider {
+	width: 100%;
+	max-width: 100%;
+}
+.wp-block-blockons-image-carousel .blockons-image-carousel-slider img {
+	display: block;
+	margin: 0 !important;
+}
+.blockons-imgcarousel-wrap {
+	position: relative;
+}
+.blockons-imgcarousel-wrap .splide__track {
+	transition: height 0.2s ease-in-out 0s;
+}
+.blockons-imgcarousel-wrap .splide__list {
+	align-items: flex-start;
+}
+
+/* -- Alignment -- */
+.wp-block-blockons-image-carousel.left-align {
+	justify-content: flex-start;
+}
+.wp-block-blockons-image-carousel.center-align {
+	justify-content: center;
+}
+.wp-block-blockons-image-carousel.right-align {
+	justify-content: flex-end;
+}
+
+/* -- Slides -- */
+.blockons-imgcarousel-wrap .splide__slide .blockons-imgcarousel-inner {
+	display: flex;
+	justify-content: center;
+}
+
+/* ---- Slider Arrows ---- */
+.blockons-imgcarousel-wrap .splide__arrow {
+	background-color: #fff;
+	border-radius: 3px;
+	cursor: pointer;
+	display: flex;
+	color: #222;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+	position: absolute;
+	top: 50%;
+	z-index: 11;
+	font-size: 20px;
+	margin-top: -20px;
+	overflow: hidden;
+	opacity: 0.8;
+	transition: opacity 0.2s ease-in-out 0s;
+}
+.blockons-imgcarousel-wrap .splide__arrow svg {
+	display: none !important;
+}
+.blockons-imgcarousel-wrap .splide__arrow--prev {
+	left: 10px;
+}
+.blockons-imgcarousel-wrap .splide__arrow--next {
+	right: 10px;
+}
+.blockons-imgcarousel-wrap .splide__arrow:disabled {
+	opacity: 0 !important;
+	pointer-events: none;
+}
+.blockons-imgcarousel-wrap .splide__arrow:hover,
+.blockons-imgcarousel-wrap .splide__arrow:focus {
+	background-color: #fff;
+	color: #222;
+	opacity: 1;
+}
+.blockons-imgcarousel-wrap.arrow-style-two .splide__arrow {
+	border-radius: 50%;
+}
+.blockons-imgcarousel-wrap.arrow-style-three .splide__arrow {
+	background-color: transparent !important;
+	box-shadow: none !important;
+}
+/* - Font Awesome Overrides - */
+.wp-block-blockons-image-carousel.arrows-arrow-right
+	.splide__arrow--prev::before {
+	content: "\f060";
+}
+.wp-block-blockons-image-carousel.arrows-arrow-right
+	.splide__arrow--next::before {
+	content: "\f061";
+}
+.wp-block-blockons-image-carousel.arrows-arrow-right-long
+	.splide__arrow--prev::before {
+	content: "\f177";
+}
+.wp-block-blockons-image-carousel.arrows-arrow-right-long
+	.splide__arrow--next::before {
+	content: "\f178";
+}
+.wp-block-blockons-image-carousel.arrows-angle-right
+	.splide__arrow--prev::before {
+	content: "\f104";
+}
+.wp-block-blockons-image-carousel.arrows-angle-right
+	.splide__arrow--next::before {
+	content: "\f105";
+}
+.wp-block-blockons-image-carousel.arrows-caret-right
+	.splide__arrow--prev::before {
+	content: "\f0d9";
+}
+.wp-block-blockons-image-carousel.arrows-caret-right
+	.splide__arrow--next::before {
+	content: "\f0da";
+}
+.wp-block-blockons-image-carousel.arrows-angles-right
+	.splide__arrow--prev::before {
+	content: "\f100";
+}
+.wp-block-blockons-image-carousel.arrows-angles-right
+	.splide__arrow--next::before {
+	content: "\f101";
+}
+/* ---- Slider Pagination ---- */
+.blockons-imgcarousel-wrap .splide__pagination {
+	bottom: -25px;
+}
+.blockons-imgcarousel-wrap.pagination-dots
+	.splide__pagination
+	button.splide__pagination__page {
+	width: 10px;
+	height: 10px;
+	border: 0;
+	box-shadow: inset 0 0 0 1px #000;
+	border-radius: 10px;
+	background-color: #fff;
+	margin: 0 3px;
+	cursor: pointer;
+}
+.blockons-imgcarousel-wrap.pagination-dots
+	.splide__pagination
+	button.splide__pagination__page.is-active {
+	background-color: #000;
+	color: #fff;
+}
+.blockons-imgcarousel-wrap
+	.splide__pagination
+	button.splide__pagination__page.is-active {
+	box-shadow: 0 1px 5px rgb(0 0 0 / 12%);
+	transform: scale(1.1);
+}
+
+.blockons-imgcarousel-wrap.on-hover .splide__arrow--prev,
+.blockons-imgcarousel-wrap.on-hover .splide__arrow--next,
+.blockons-imgcarousel-wrap.on-hover .splide__pagination {
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out 0s;
+}
+.blockons-imgcarousel-wrap.on-hover:hover .splide__arrow--prev,
+.blockons-imgcarousel-wrap.on-hover:hover .splide__arrow--next,
+.blockons-imgcarousel-wrap.on-hover:hover .splide__pagination {
+	opacity: 1;
+}
+
+.blockons-imgcarousel-wrap.pagination-numbers .splide__pagination {
+	counter-reset: pagination-num;
+}
+.blockons-imgcarousel-wrap.pagination-numbers .splide__pagination__page {
+	width: 18px;
+	height: 18px;
+	font-size: 11px;
+	font-weight: 600;
+}
+.blockons-imgcarousel-wrap.pagination-numbers .splide__pagination__page:before {
+	counter-increment: pagination-num;
+	content: counter(pagination-num);
+}
+
+/* -- Image Proportion -- */
+.blockons-imgcarousel-inner.imgbg img {
+	width: 100%;
+	height: auto;
+}
+
+/* -- Alignment -- */
+.wp-block-blockons-image-carousel.align-left .blockons-imgcaption-inner {
+	text-align: left;
+}
+.wp-block-blockons-image-carousel.align-center .blockons-imgcaption-inner {
+	text-align: center;
+}
+.wp-block-blockons-image-carousel.align-right .blockons-imgcaption-inner {
+	text-align: right;
+}
+
+/* -- Roundness -- */
+.wp-block-blockons-image-carousel.brad-two .splide__track,
+.wp-block-blockons-image-carousel.brad-two .splide__slide {
+	border-radius: 8px;
+}
+.wp-block-blockons-image-carousel.brad-three .splide__track,
+.wp-block-blockons-image-carousel.brad-three .splide__slide {
+	border-radius: 55px;
+}
+.wp-block-blockons-image-carousel.brad-four .splide__track,
+.wp-block-blockons-image-carousel.brad-four .splide__slide {
+	border-radius: 110px;
+}
+.wp-block-blockons-image-carousel.brad-two .splide__slide,
+.wp-block-blockons-image-carousel.brad-three .splide__slide,
+.wp-block-blockons-image-carousel.brad-four .splide__slide {
+	overflow: hidden;
+}
+
+/* -- Caption Positions -- */
+.blockons-imgcaption-inner {
+	color: #fff;
+	font-size: 11px;
+	letter-spacing: 0.4px;
+	position: relative;
+	z-index: 9;
+}
+.blockons-imgcaption-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;
+	background-color: rgb(0 0 0 / 85%);
+	z-index: 7;
+}
+/* - Two - */
+.blockons-imgcarousel-wrap.caption-two .blockons-imgcaption {
+	position: absolute;
+	bottom: 12px;
+	box-shadow: 0 1px 5px rgb(0 0 0 / 12%);
+	width: calc(100% - 20px);
+	margin: 0 10px;
+	text-align: center;
+	padding: 5px 10px;
+}
+.blockons-imgcarousel-wrap.caption-two.cap-hover .blockons-imgcaption {
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out 0s;
+}
+.blockons-imgcarousel-wrap.caption-two.cap-hover
+	.splide__slide:hover
+	.blockons-imgcaption {
+	opacity: 1;
+}
+/* - Three - */
+.blockons-imgcarousel-wrap.caption-three .blockons-imgcaption {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.blockons-imgcarousel-wrap.caption-three .blockons-imgcaption-inner {
+	overflow-y: scroll;
+	max-width: 280px;
+	padding: 20px 25px;
+	border-radius: 3px;
+}
+.blockons-imgcarousel-wrap.caption-three.cap-hover .blockons-imgcaption {
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out 0s;
+}
+.blockons-imgcarousel-wrap.caption-three.cap-hover
+	.splide__slide:hover
+	.blockons-imgcaption {
+	opacity: 1;
+}
+/* - Four - */
+.blockons-imgcarousel-wrap.caption-four .blockons-imgcaption-bg {
+	display: none !important;
+}
+.blockons-imgcarousel-wrap.caption-four .blockons-imgcaption {
+	padding: 10px;
+}

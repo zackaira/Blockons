@@ -8,7 +8,7 @@
  *
  * @package blockons
  */
-$custom_classes = 'align-' . $attributes['alignment'];
+$custom_classes = 'align-' . $attributes['alignment'] . ' layout-' . $attributes['testLayout'] . ' style-' . $attributes['testStyle'];
 
 $sliderOptions = array(
 	"autoHeight" => true,
@@ -36,8 +36,61 @@ $sliderOptions = array(
 			<div class="swiper-wrapper">
 				<?php foreach ($attributes['sliderSlides'] as $i => $slide) { ?>
 					<div class="swiper-slide">
-						<div className="swiper-slide-inner">
-							<h4><?php echo esc_html($slide['title']); ?></h4>
+						<div class="swiper-slide-inner">
+
+							<div class="blockons-slide-text" style="<?php echo isset($attributes['fontColor']) ? "color: " . esc_attr($attributes['fontColor']) . ";" : ""; ?> <?php echo isset($attributes['testStyle']) && $attributes['testStyle'] == "two" ? 'background-color: ' . esc_url($attributes['bgColor']) . ';' : ''; ?>">
+								<?php if (isset($attributes['showStars']) && $attributes['showStars'] == true) : ?>
+									<div class="blockons-star-ratings">
+										<span class="fa-solid fa-star blockons-star <?php echo ($slide['rating'] && $slide['rating'] >= 1) ? sanitize_html_class("checked") : ""; ?>"></span>
+										<span class="fa-solid fa-star blockons-star <?php echo ($slide['rating'] && $slide['rating'] >= 2) ? sanitize_html_class("checked") : ""; ?>"></span>
+										<span class="fa-solid fa-star blockons-star <?php echo ($slide['rating'] && $slide['rating'] >= 3) ? sanitize_html_class("checked") : ""; ?>"></span>
+										<span class="fa-solid fa-star blockons-star <?php echo ($slide['rating'] && $slide['rating'] >= 4) ? sanitize_html_class("checked") : ""; ?>"></span>
+										<span class="fa-solid fa-star blockons-star <?php echo ($slide['rating'] && $slide['rating'] >= 5) ? sanitize_html_class("checked") : ""; ?>"></span>
+									</div>
+								<?php endif; ?>
+
+								<?php if (isset($attributes['testStyle']) && $attributes['testStyle'] == "two") : ?>
+									<span class="corner" style="<?php echo isset($attributes['bgColor']) ? "borderColor: " . esc_attr($attributes['bgColor']) . ";" : ""; ?>"></span>
+								<?php endif; ?>
+
+								<?php if (isset($attributes['showQuotes']) && $attributes['showQuotes'] == true) : ?>
+									<span class="blockons-fontawesome fa-solid fa-quote-left" style="<?php echo isset($attributes['quoteSize']) ? "font-size: " . esc_attr($attributes['quoteSize']) . "px;" : ""; ?> <?php echo isset($attributes['quotesColor']) ? "color: " . esc_attr($attributes['quotesColor']) . ";" : ""; ?> <?php echo isset($attributes['quotesOpacity']) ? "opacity: " . esc_attr($attributes['quotesOpacity']) . ";" : ""; ?>"></span>
+								<?php endif; ?>
+
+								<div class="blockons-slide-text-txt">
+									<?php echo esc_html($slide['title']); ?>
+								</div>
+
+								<?php if (isset($attributes['showQuotes']) && $attributes['showQuotes'] == true) : ?>
+									<span class="blockons-fontawesome fa-solid fa-quote-right" style="<?php echo isset($attributes['quoteSize']) ? "font-size: " . esc_attr($attributes['quoteSize']) . "px;" : "jj"; ?> <?php echo isset($attributes['quotesColor']) ? "color: " . esc_attr($attributes['quotesColor']) . ";" : ""; ?> <?php echo isset($attributes['quotesOpacity']) ? "opacity: " . esc_attr($attributes['quotesOpacity']) . ";" : ""; ?>"></span>
+								<?php endif; ?>
+							</div>
+
+							<div class="blockons-slide-author">
+
+								<?php if (isset($attributes['showIcon']) && $attributes['showIcon'] == true) : ?>
+									<div class="blockons-slide-author-img <?php echo isset($slide['authorImg']) && isset($slide['authorImg']['url']) ? "hasimg" : "noimg"; ?>" <?php echo isset($slide['authorImg']) && isset($slide['authorImg']['url']) ? 'style="background-image: url(' . esc_url($slide['authorImg']['url']) . ');"' : ''; ?>>
+										<?php if (isset($slide['authorImg']) && isset($slide['authorImg']['url'])) : ?>
+											<!-- Image -->
+										<?php else : ?>
+											<span class="blockons-fontawesome fa-solid fa-user"></span>
+										<?php endif; ?>
+									</div>
+								<?php endif; ?>
+
+								<div class="blockons-slide-author-txt">
+									<div class="blockons-slide-author-txt-auth" style="<?php echo isset($attributes['nameColor']) ? "color: " . esc_attr($attributes['nameColor']) . ";" : ""; ?>">
+										<?php echo esc_html($slide['author']); ?>
+									</div>
+									
+									<?php if (isset($attributes['showPosition']) && $attributes['showPosition'] == true) : ?>
+										<div class="blockons-slide-author-txt-pos" style="<?php echo isset($attributes['posColor']) ? "color: " . esc_attr($attributes['posColor']) . ";" : ""; ?>">
+											<?php echo esc_html($slide['authorPos']); ?>
+										</div>
+									<?php endif; ?>
+								</div>
+							</div>
+
 						</div>
 					</div>
 				<?php } ?>

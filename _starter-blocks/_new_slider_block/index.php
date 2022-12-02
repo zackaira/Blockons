@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Slider Block
+ * Plugin Name: Image Carousel Block
  * Plugin URI: https://github.com/WordPress/blockons
- * Description: A Slider Block.
+ * Description: An Image Carousel Block.
  * Version: 1.1.0
  * Author: Kaira
  *
@@ -14,10 +14,10 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Load all translations for our plugin from the MO file.
  */
-function blockons_slider_load_textdomain() {
+function blockons_image_carousel_load_textdomain() {
 	load_plugin_textdomain( 'blockons', false, basename( __DIR__ ) . '/languages' );
 }
-add_action( 'init', 'blockons_slider_load_textdomain' );
+add_action( 'init', 'blockons_image_carousel_load_textdomain' );
 
 /**
  * Registers all block assets so that they can be enqueued through Gutenberg in
@@ -25,22 +25,22 @@ add_action( 'init', 'blockons_slider_load_textdomain' );
  *
  * Passes translations to JavaScript.
  */
-function blockons_slider_newblock_register_block() {
+function blockons_image_carousel_register_block() {
 
 	// Register the block by passing the location of block.json.
 	register_block_type(
 		__DIR__,
 		array(
-			'render_callback' => 'blockons_slider_newblock_render_callback',
+			'render_callback' => 'blockons_image_carousel_render_callback',
 		)
 	);
 
 	if ( function_exists( 'wp_set_script_translations' ) ) {
-		wp_set_script_translations( 'blockons-slider', 'blockons' );
+		wp_set_script_translations( 'blockons-image-carousel-editor-script', 'blockons', BLOCKONS_PLUGIN_DIR . 'lang' );
 	}
 
 }
-add_action( 'init', 'blockons_slider_newblock_register_block' );
+add_action( 'init', 'blockons_image_carousel_register_block' );
 
 /**
  * This function is called when the block is being rendered on the front end of the site
@@ -49,7 +49,7 @@ add_action( 'init', 'blockons_slider_newblock_register_block' );
  * @param string   $content        Rendered block output. ie. <InnerBlocks.Content />.
  * @param WP_Block $block_instance The instance of the WP_Block class that represents the block being rendered.
  */
-function blockons_slider_newblock_render_callback( $attributes, $content, $block_instance ) {
+function blockons_image_carousel_render_callback( $attributes, $content, $block_instance ) {
 	ob_start();
 	/**
 	 * All of passed parameters are still accessible in the file.

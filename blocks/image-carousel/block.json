@@ -4,125 +4,108 @@
 	"name": "blockons/image-carousel",
 	"title": "Image Carousel",
 	"textdomain": "blockons",
-	"icon": "format-image",
+	"icon": "heart",
 	"category": "blockons-category",
 	"keywords": ["image", "carousel", "gallery", "picture", "slider"],
 	"attributes": {
 		"uniqueId": {
-			"type": "string",
-			"default": ""
+			"type": "string"
 		},
 		"alignment": {
 			"type": "string",
 			"default": "center"
 		},
-		"slideAlign": {
-			"type": "string",
-			"default": "left"
-		},
-		"sliderWidth": {
-			"type": "string",
-			"default": "100%"
-		},
-		"slides": {
+		"sliderSlides": {
 			"type": "array",
 			"default": []
-		},
-		"carouselType": {
-			"type": "string",
-			"default": "slide"
-		},
-		"carouselNumber": {
-			"type": "number",
-			"default": 1
-		},
-		"carouselRewind": {
-			"type": "boolean",
-			"default": false
-		},
-		"carouselAuto": {
-			"type": "boolean",
-			"default": false
-		},
-		"carouselGap": {
-			"type": "number",
-			"default": 15
-		},
-		"captionPosition": {
-			"type": "string",
-			"default": "one"
-		},
-		"captionOnHover": {
-			"type": "boolean",
-			"default": false
-		},
-		"carouselStyle": {
-			"type": "string",
-			"default": "one"
-		},
-		"carouselLayout": {
-			"type": "string",
-			"default": "vertical"
-		},
-		"controlsOnHover": {
-			"type": "boolean",
-			"default": false
-		},
-		"carouselArrows": {
-			"type": "boolean",
-			"default": true
-		},
-		"arrowStyle": {
-			"type": "string",
-			"default": "one"
-		},
-		"carouselArrowIcon": {
-			"type": "string",
-			"default": "arrow-right"
-		},
-		"carouselPagination": {
-			"type": "boolean",
-			"default": true
-		},
-		"carouselPagDesign": {
-			"type": "string",
-			"default": "dots"
 		},
 		"imageProportion": {
 			"type": "string",
 			"default": "actual"
 		},
-		"carouselBRadius": {
-			"type": "string",
-			"default": "one"
+		"forceFullWidth": {
+			"type": "boolean",
+			"default": false
 		},
-		"carouselSidePadding": {
-			"type": "number",
-			"default": 0
+		"imageRoundness": {
+			"type": "string",
+			"default": "square"
+		},
+		"captionPosition": {
+			"type": "string",
+			"default": ""
+		},
+		"captionOnHover": {
+			"type": "boolean",
+			"default": false
 		},
 		"captionBgColor": {
 			"type": "string",
-			"default": "#000"
+			"default": "#FFF"
 		},
 		"captionBgOpacity": {
 			"type": "number",
-			"default": 0.65
-		},
-		"captionFontColor": {
-			"type": "string",
-			"default": "#FFF"
+			"default": 0.5
 		},
 		"captionFontSize": {
 			"type": "number",
-			"default": 11
+			"default": 14
+		},
+		"captionFontColor": {
+			"type": "string",
+			"default": "#171515"
+		},
+		"transition": {
+			"type": "string",
+			"default": "slide"
+		},
+		"perView": {
+			"type": "number",
+			"default": 1
+		},
+		"mode": {
+			"type": "string",
+			"default": "default"
+		},
+		"spaceBetween": {
+			"type": "number",
+			"default": 0
+		},
+		"navigation": {
+			"type": "boolean",
+			"default": true
+		},
+		"navigationStyle": {
+			"type": "string",
+			"default": "default"
+		},
+		"navigationColor": {
+			"type": "string",
+			"default": "dark"
+		},
+		"navigationArrow": {
+			"type": "string",
+			"default": "ban"
+		},
+		"pagination": {
+			"type": "boolean",
+			"default": true
+		},
+		"paginationStyle": {
+			"type": "string",
+			"default": "bullets"
+		},
+		"paginationColor": {
+			"type": "string",
+			"default": "dark"
+		},
+		"showOnHover": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"viewScript": "file:./splide.js",
-	"style": [
-		"file:./style-index.css",
-		"blockons-fontawesome",
-		"blockons-splidecss"
-	]
+	"viewScript": "blockons-slider",
+	"style": ["file:./style-index.css", "blockons-fontawesome", "blockons-slider"]
 }

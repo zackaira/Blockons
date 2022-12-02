@@ -2,8 +2,9 @@
  * Note that these styles are loaded *after* common styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.blockons-image-carousel-slider:hover .blockons-imgcarousel-wrap {
-	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
+.wp-block-blockons-image-carousel {
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 20%);
+	position: relative;
 }
 .blockons-imgcarousel-empty {
 	background-color: #f0f0f0;
@@ -16,106 +17,52 @@
 	max-width: 320px;
 	padding: 30px;
 }
-/* -- Remove Button -- */
-.blockons-image-carousel-slider .blockons-item-btns {
-	display: flex;
-	align-items: stretch;
+/* -- Slide Settings -- */
+.blockons-slider-btns {
 	position: absolute;
-	top: -4px;
-	right: 0;
-	z-index: 8;
-	opacity: 0;
-	transition: opacity 0.3s ease-in-out 0s;
+	top: 5px;
+	right: 5px;
+	z-index: 20;
 }
-.blockons-image-carousel-slider .splide__slide:hover .blockons-item-btns {
-	opacity: 1;
+.blockons-slider.bradius-rounder .blockons-slider-btns {
+	right: 35px;
 }
-/* -- Disabled - Needs to be reloaded -- */
-.blockons-reload {
+.blockons-slider.bradius-round .blockons-slider-btns {
+	right: 85px;
+}
+/* -- Settings Popup -- */
+.blockons-icon-select {
+	display: flex;
+	align-items: center;
+}
+.blockons-icon-select p {
+	margin: 0 0 0 10px;
+}
+.blockons-editor-popup.icon-selector .components-popover__content {
+	display: flex;
+	flex-wrap: wrap;
+	width: 145px;
+}
+/* -- Settings Need Reload -- */
+.blockons-slider-reload {
+	background-color: #f0f0f0;
 	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 15;
-	background-color: rgb(255 255 255 / 35%);
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	z-index: 45;
 }
-.blockons-reload .blockons-reload-block {
+.blockons-slider-reload-inner {
 	background-color: #fff;
+	box-shadow: 0 1px 5px rgb(0 0 0 / 14%);
 	border-radius: 4px;
-	box-shadow: 0 1px 5px rgb(0 0 0 / 30%);
-	padding: 15px;
-	font-size: 14px;
-	max-width: 310px;
+	padding: 12px 15px;
+	font-size: 13px;
+	color: #000;
 	text-align: center;
-}
-.blockons-imgcarousel-wrap.reload-fix > .splide {
-	height: 400px !important;
-	background-color: #f0f0f0;
-}
-.blockons-imgcarousel-wrap.reload-fix .splide__track {
-	visibility: hidden;
-}
-/* -- Image Button -- */
-.blockons-upload-remove {
-	background-color: #fff;
-	position: absolute;
-	border-radius: 20px;
-	top: -22px;
-	right: -10px;
-	box-shadow: 0 0 0 1px #000;
-	font-size: 12px !important;
-	padding: 0 !important;
-	width: 18px;
-	height: 18px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	opacity: 0;
-	transition: opacity 0.3s ease-in-out 0.2s;
-}
-.blockons-imgcarousel-wrap:hover
-	.blockons-slide-author
-	span.blockons-fontawesome.fa-user::before {
-	content: "\f093";
-}
-
-/* -- Item level controls popup box -- */
-.blockons-editor-popup .components-popover__content {
-	width: 274px;
-}
-.blockons-editor-popup.arrow-selector .components-popover__content {
-	width: 185px;
-}
-.blockons-editor-popup .components-popover__content > div {
-	display: flex;
-	flex-wrap: wrap;
-}
-.blockons-editor-popup .components-popover__content .blockons-fontawesome {
-	width: 32px;
-	height: 32px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.blockons-editor-popup
-	.components-popover__content
-	.blockons-fontawesome:hover {
-	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
-}
-
-/* -- Roundness -- */
-.wp-block-blockons-image-carousel.brad-two .blockons-item-btns {
-	right: 10px;
-}
-.wp-block-blockons-image-carousel.brad-three .blockons-item-btns {
-	right: 50px;
-}
-.wp-block-blockons-image-carousel.brad-four .blockons-item-btns {
-	right: 105px;
+	max-width: 300px;
 }

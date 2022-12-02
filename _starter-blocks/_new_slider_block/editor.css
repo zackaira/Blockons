@@ -2,7 +2,7 @@
  * Note that these styles are loaded *after* common styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.wp-block-blockons-slider-newblock {
+.wp-block-blockons-image-carousel {
 	box-shadow: 0 0 0 1px rgb(0 0 0 / 20%);
 	position: relative;
 }

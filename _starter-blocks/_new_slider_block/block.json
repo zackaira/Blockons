@@ -1,12 +1,12 @@
 {
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
-	"name": "blockons/slider-newblock",
-	"title": "Slider Block",
+	"name": "blockons/image-carousel",
+	"title": "Image Carousel",
 	"textdomain": "blockons",
 	"icon": "heart",
 	"category": "blockons-category",
-	"keywords": ["test", "slider", "carousel"],
+	"keywords": ["image", "carousel", "gallery", "picture", "slider"],
 	"attributes": {
 		"uniqueId": {
 			"type": "string"
