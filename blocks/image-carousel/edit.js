@@ -77,7 +77,7 @@ const Edit = (props) => {
 		modules: [Navigation, Pagination, EffectFade, EffectCoverflow],
 		autoHeight: true,
 		effect: transition,
-		slidesPerView: transition === "slide" ? perView : 1,
+		slidesPerView: transition !== "fade" ? perView : 1,
 		spaceBetween: perView > 1 ? spaceBetween : 0,
 		loop: mode === "loop" ? true : false,
 		rewind: mode === "rewind" ? true : false,
@@ -213,7 +213,7 @@ const Edit = (props) => {
 										<Button className="blockons-upload-button" onClick={open}>
 											{sliderSlides.length
 												? __("Add / Edit Images")
-												: __("Create Image Slider")}
+												: __("Create Image Slider / Carousel")}
 										</Button>
 									</>
 								);
@@ -600,7 +600,7 @@ const Edit = (props) => {
 								return (
 									<>
 										<Button className="blockons-upload-button" onClick={open}>
-											{__("Create Image Slider")}
+											{__("Create Image Slider / Carousel")}
 										</Button>
 									</>
 								);

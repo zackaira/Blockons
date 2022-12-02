@@ -4,41 +4,39 @@
 	"name": "blockons/video-slider",
 	"title": "Video Slider",
 	"textdomain": "blockons",
-	"icon": "format-video",
+	"icon": "heart",
 	"category": "blockons-category",
-	"keywords": ["video", "slider", "play", "gallery"],
+	"keywords": ["image", "carousel", "gallery", "picture", "slider"],
 	"attributes": {
 		"uniqueId": {
-			"type": "string",
-			"default": ""
+			"type": "string"
 		},
-		"sliderWidth": {
-			"type": "string",
-			"default": "100%"
-		},
-		"sliderRewind": {
-			"type": "boolean",
-			"default": false
-		},
-		"sliderAlign": {
+		"alignment": {
 			"type": "string",
 			"default": "left"
 		},
-		"slides": {
+		"sliderSlides": {
 			"type": "array",
 			"default": [
 				{
-					"itemId": 0,
-					"itemType": "youtube",
-					"itemUrl": "",
-					"itemImage": {},
+					"id": "video-one",
+					"videoType": "youtube",
+					"videoId": "",
+					"coverImage": {},
 					"customVideo": {}
 				},
 				{
-					"itemId": 1,
-					"itemType": "youtube",
-					"itemUrl": "",
-					"itemImage": {},
+					"id": "video-two",
+					"videoType": "youtube",
+					"videoId": "",
+					"coverImage": {},
+					"customVideo": {}
+				},
+				{
+					"id": "video-three",
+					"videoType": "youtube",
+					"videoId": "",
+					"coverImage": {},
 					"customVideo": {}
 				}
 			]
@@ -47,7 +45,7 @@
 			"type": "string",
 			"default": "one"
 		},
-		"sliderRoundNess": {
+		"sliderRoundness": {
 			"type": "string",
 			"default": "square"
 		},
@@ -63,29 +61,49 @@
 			"type": "string",
 			"default": "#000"
 		},
-		"sliderArrowIcon": {
+		"transition": {
 			"type": "string",
-			"default": "arrow-right"
+			"default": "slide"
 		},
-		"controlsOnHover": {
-			"type": "boolean",
-			"default": false
+		"mode": {
+			"type": "string",
+			"default": "default"
 		},
-		"sliderPagination": {
+		"navigation": {
 			"type": "boolean",
 			"default": true
 		},
-		"sliderPagDesign": {
+		"navigationStyle": {
 			"type": "string",
-			"default": "dots"
+			"default": "default"
+		},
+		"navigationColor": {
+			"type": "string",
+			"default": "dark"
+		},
+		"navigationArrow": {
+			"type": "string",
+			"default": "ban"
+		},
+		"pagination": {
+			"type": "boolean",
+			"default": true
+		},
+		"paginationStyle": {
+			"type": "string",
+			"default": "bullets"
+		},
+		"paginationColor": {
+			"type": "string",
+			"default": "dark"
+		},
+		"showOnHover": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"viewScript": "file:./splide.js",
-	"style": [
-		"file:./style-index.css",
-		"blockons-fontawesome",
-		"blockons-splidecss"
-	]
+	"viewScript": "blockons-slider",
+	"style": ["file:./style-index.css", "blockons-fontawesome", "blockons-slider"]
 }

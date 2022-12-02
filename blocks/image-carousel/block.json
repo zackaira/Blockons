@@ -4,7 +4,7 @@
 	"name": "blockons/image-carousel",
 	"title": "Image Carousel",
 	"textdomain": "blockons",
-	"icon": "heart",
+	"icon": "format-image",
 	"category": "blockons-category",
 	"keywords": ["image", "carousel", "gallery", "picture", "slider"],
 	"attributes": {

@@ -1,10 +1,11 @@
 /**
  * WordPress dependencies
  */
-import { useEffect } from "@wordpress/element";
+import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
-	BlockAlignmentToolbar,
+	RichText,
+	AlignmentToolbar,
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
@@ -15,62 +16,50 @@ import {
 	Dropdown,
 	ToggleControl,
 	SelectControl,
-	RangeControl,
 	TextControl,
+	RangeControl,
 	Button,
-	__experimentalUnitControl as UnitControl,
 } from "@wordpress/components";
 import { v4 as uuidv4 } from "uuid";
-import { Splide } from "@splidejs/react-splide";
-import { Video } from "@splidejs/splide-extension-video";
-import "@splidejs/react-splide/css";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
-import { sliderArrowIcons } from "../block-global";
+import { slugify, sliderArrowIcons } from "../block-global";
 import { colorPickerPalette } from "../block-global";
+import { Navigation, Pagination, EffectFade, EffectCoverflow } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const Edit = (props) => {
 	const {
 		isSelected,
 		attributes: {
 			uniqueId,
-			sliderWidth,
-			sliderRewind,
-			sliderAlign,
-			slides,
+			alignment,
+			sliderSlides,
 			sliderStyle,
 			sliderRoundNess,
 			sliderBorderWidth,
 			sliderOuterRound,
 			sliderBorderColor,
-			sliderArrowIcon,
-			controlsOnHover,
-			sliderPagination,
-			sliderPagDesign,
+			transition,
+			mode,
+			navigation,
+			navigationStyle,
+			navigationColor,
+			navigationArrow,
+			pagination,
+			paginationStyle,
+			paginationColor,
+			showOnHover,
 		},
 		setAttributes,
 	} = props;
 
 	const blockProps = useBlockProps({
-		className: `${sliderAlign}-align playbtn-one style-${sliderStyle} arrows-${sliderArrowIcon} rn-${sliderRoundNess}`,
+		className: `align-${alignment} style-${sliderStyle} rn-${sliderRoundNess}`,
+		// className: `${sliderAlign}-align playbtn-one style-${sliderStyle} arrows-${sliderArrowIcon} rn-${sliderRoundNess}`,
 	});
-
-	// Slider Settings
-	const sliderOptions = {
-		heightRatio: 0.5625,
-		cover: true,
-		rewind: sliderRewind,
-		speed: 1000,
-		video: {
-			loop: true,
-			// mute: true,
-		},
-		arrows: true,
-		pagination: sliderPagination,
-		classes: {
-			arrow: "splide__arrow fa-solid",
-		},
-	};
+	const [needsReload, setNeedsReload] = useState(false);
+	const [reloads, setReloads] = useState({ transition, mode });
 
 	useEffect(() => {
 		if (!uniqueId) {
@@ -80,37 +69,90 @@ const Edit = (props) => {
 		}
 	}, []);
 
-	// Item Controls Functions
-	const handleItemVideoType = (itemType, itemId) => {
-		const newSlides = [...slides];
-		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.itemId === itemId)
-				return {
-					...obj,
-					itemType: itemType,
-				};
-			return obj;
-		});
-		setAttributes({ slides: editedSlideItems });
+	const sliderOptions = {
+		modules: [Navigation, Pagination, EffectFade, EffectCoverflow],
+		autoHeight: true,
+		effect: transition,
+		slidesPerView: 1,
+		spaceBetween: 0,
+		loop: mode === "loop" ? true : false,
+		rewind: mode === "rewind" ? true : false,
+		simulateTouch: false,
+		navigation: navigation,
+		pagination: pagination
+			? {
+					type: paginationStyle === "fraction" ? "fraction" : "bullets",
+					dynamicBullets: paginationStyle === "dynamicBullets" ? true : false,
+					clickable: true,
+			  }
+			: false,
 	};
-	const handleItemVideoUrl = (itemUrl, itemId) => {
-		const newSlides = [...slides];
+
+	const onChangeAlignment = (newAlignment) => {
+		setAttributes({
+			alignment: newAlignment === undefined ? "left" : newAlignment,
+		});
+	};
+
+	const handleAddItem = () => {
+		const newSlides = [...sliderSlides];
+		newSlides.push({
+			id: newSlides.length + 1,
+			videoType: "youtube",
+			videoId: "",
+			coverImage: {},
+			customVideo: {},
+		});
+		setAttributes({ sliderSlides: newSlides });
+	};
+	const handleDuplicateItem = (index, slideItem) => {
+		const newSlides = [...sliderSlides];
+		newSlides.splice(index + 1, 0, {
+			id: Math.floor(Math.random() * 700) + 1,
+			videoType: slideItem.videoType,
+			videoId: slideItem.videoId,
+			coverImage: slideItem.coverImage,
+			customVideo: slideItem.customVideo,
+		});
+		setAttributes({ sliderSlides: newSlides });
+	};
+	const handleDeleteItem = (index) => {
+		const newSlides = [...sliderSlides];
+		newSlides.splice(index, 1);
+		setAttributes({ sliderSlides: newSlides });
+	};
+
+	// Item Controls Functions
+	const handleItemVideoType = (videoType, id) => {
+		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.itemId === itemId)
+			if (obj.id === id)
 				return {
 					...obj,
-					itemUrl: itemUrl,
+					videoType: videoType,
 				};
 			return obj;
 		});
-		setAttributes({ slides: editedSlideItems });
+		setAttributes({ sliderSlides: editedSlideItems });
+	};
+	const handleItemVideoUrl = (videoId, id) => {
+		const newSlides = [...sliderSlides];
+		const editedSlideItems = newSlides.map((obj) => {
+			if (obj.id === id)
+				return {
+					...obj,
+					videoId: videoId,
+				};
+			return obj;
+		});
+		setAttributes({ sliderSlides: editedSlideItems });
 	};
 	// Custom Video
-	const handleCustomVideoSelect = (media, itemId) => {
+	const handleCustomVideoSelect = (media, id) => {
 		console.log(media);
-		const newSlides = [...slides];
+		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.itemId === itemId)
+			if (obj.id === id)
 				return {
 					...obj,
 					customVideo: {
@@ -120,25 +162,25 @@ const Edit = (props) => {
 				};
 			return obj;
 		});
-		setAttributes({ slides: editedSlideItems });
+		setAttributes({ sliderSlides: editedSlideItems });
 	};
-	const handleCustomVideoRemove = (itemId) => {
-		const newSlides = [...slides];
+	const handleCustomVideoRemove = (id) => {
+		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.itemId === itemId)
+			if (obj.id === id)
 				return {
 					...obj,
 					customVideo: {},
 				};
 			return obj;
 		});
-		setAttributes({ slides: editedSlideItems });
+		setAttributes({ sliderSlides: editedSlideItems });
 	};
 	// Cover Image
-	const handleCoverImageSelect = (media, itemId) => {
-		const newSlides = [...slides];
+	const handleCoverImageSelect = (media, id) => {
+		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.itemId === itemId)
+			if (obj.id === id)
 				return {
 					...obj,
 					itemImage: {
@@ -149,320 +191,291 @@ const Edit = (props) => {
 				};
 			return obj;
 		});
-		setAttributes({ slides: editedSlideItems });
+		setAttributes({ sliderSlides: editedSlideItems });
 	};
-	const handleCoverImageRemove = (itemId) => {
-		const newSlides = [...slides];
+	const handleCoverImageRemove = (id) => {
+		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.itemId === itemId)
+			if (obj.id === id)
 				return {
 					...obj,
 					itemImage: {},
 				};
 			return obj;
 		});
-		setAttributes({ slides: editedSlideItems });
+		setAttributes({ sliderSlides: editedSlideItems });
 	};
 
-	// Add Slide
-	const handleAddItem = () => {
-		const newSlides = [...slides];
-		newSlides.push({
-			itemId: newSlides.length + 1,
-			itemType: "youtube",
-			itemUrl: "",
-			itemImage: {},
-			customVideo: {},
-		});
-		setAttributes({ slides: newSlides });
-	};
+	const slides = sliderSlides.map((slideItem, index) => (
+		<div className="swiper-slide-inner">
+			<div className="swiper-slide-video">
+				{slideItem.videoType === "youtube" && slideItem.videoId && (
+					<iframe
+						width="560"
+						height="315"
+						src={`https://www.youtube.com/embed/${slideItem.videoId}?enablejsapi=1&rel=0`}
+						title="YouTube video player"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+					></iframe>
+				)}
+			</div>
 
-	const handleRemoveItem = (index) => {
-		const newSlides = [...slides];
-		newSlides.splice(index, 1);
-		setAttributes({ slides: newSlides });
-	};
+			<div
+				className="swiper-slide-img"
+				// style={{
+				// 	...(slideItem.coverImage && slideItem.coverImage.url
+				// 		? { backgroundImage: `url(${slideItem.coverImage.url})` }
+				// 		: {
+				// 				backgroundImage: `url(${blockonsObj.pluginUrl}assets/images/videoslider-placeholder.jpg)`,
+				// 		  }),
+				// }}
+			>
+				<div
+					className="play-button"
+					title={__("The video only plays on the frontend", "blockons")}
+				></div>
+			</div>
 
-	const handleDuplicateItem = (index, type, url, image, cVideo) => {
-		const newSlides = [...slides];
-		newSlides.splice(index + 1, 0, {
-			itemId: Math.floor(Math.random() * 700) + 1,
-			itemType: type,
-			itemUrl: url,
-			itemImage: image,
-			customVideo: cVideo,
-		});
-		setAttributes({ slides: newSlides });
-	};
-
-	// Video Slider Items
-	let sliderSlideItems;
-
-	if (slides.length) {
-		sliderSlideItems = slides.map((slideItem, index) => {
-			return (
-				<li className="splide__slide">
-					<div
-						className="splide-custom-slide"
-						style={{
-							...(slideItem.itemImage && slideItem.itemImage.url
-								? {
-										background: `url("${slideItem.itemImage.url}") center center / cover no-repeat`,
-								  }
-								: ""),
-						}}
-					>
-						<div
-							className="play-button"
-							title={__("The video only plays on the frontend", "blockons")}
-						></div>
-					</div>
-
-					<img
-						src={`${blockonsObj.pluginUrl}assets/images/videoslider-placeholder.jpg`}
-					/>
-
-					{isSelected && (
-						<div className="blockons-item-btns">
-							<Dropdown
-								className="blockons-vslider-media-settings"
-								contentClassName="blockons-editor-popup"
-								position="bottom left"
-								renderToggle={({ isOpen, onToggle }) => (
-									<Button
-										icon="format-video"
-										label={__("Upload Image and Video", "blockons")}
-										onClick={onToggle}
-									/>
-								)}
-								renderContent={() => (
-									<>
-										<SelectControl
-											label="Video Type"
-											value={slideItem.itemType}
-											options={[
-												{ label: "YouTube", value: "youtube" },
-												{ label: "Vimeo", value: "vimeo" },
-												{ label: "Upload Video", value: "custom" },
-											]}
-											onChange={(newType) =>
-												handleItemVideoType(newType, slideItem.itemId)
-											}
-										/>
-										{(slideItem.itemType === "youtube" ||
-											slideItem.itemType === "vimeo") && (
-											<>
-												{slideItem.itemType === "youtube" && (
-													<p className="blockons-hint">
-														{__("Please enter ONLY the video ID", "blockons")}
-														<br />
-														Eg: youtube.com/watch?v=
-														<b>
-															<big>Byr4Lr6qUaY</big>
-														</b>
-													</p>
-												)}
-
-												{slideItem.itemType === "vimeo" && (
-													<p className="blockons-hint">
-														{__("Please enter ONLY the video ID", "blockons")}
-														<br />
-														Eg: vimeo.com/
-														<b>
-															<big>230574607</big>
-														</b>
-													</p>
-												)}
-												<TextControl
-													label="Video ID"
-													value={slideItem.itemUrl}
-													onChange={(newUrl) =>
-														handleItemVideoUrl(newUrl, slideItem.itemId)
-													}
-												/>
-											</>
-										)}
-										{slideItem.itemType === "custom" && (
-											<>
-												<p className="blockons-hint">
-													{__("Please ONLY upload mp4 Video", "blockons")}
-													<br />
-													Eg: VideoName
-													<b>
-														<big>.mp4</big>
-													</b>
-												</p>
-												<MediaUpload
-													className="components-icon-button components-toolbar__control"
-													allowedTypes={["video"]}
-													value={slideItem.customVideo}
-													onSelect={(media) =>
-														handleCustomVideoSelect(media, slideItem.itemId)
-													}
-													render={({ open }) => {
-														return (
-															<>
-																{slideItem.customVideo &&
-																	slideItem.customVideo.url && (
-																		<Button
-																			className="blockons-upload-button remove"
-																			onClick={() =>
-																				handleCustomVideoRemove(
-																					slideItem.itemId
-																				)
-																			}
-																		>
-																			{__("Remove Video", "blockons")}
-																		</Button>
-																	)}
-																{slideItem.customVideo &&
-																	!slideItem.customVideo.url && (
-																		<Button
-																			className="blockons-upload-button"
-																			onClick={open}
-																		>
-																			{__("Upload a Custom Video", "blockons")}
-																		</Button>
-																	)}
-															</>
-														);
-													}}
-												/>
-											</>
-										)}
-
-										{/* TRY REMOVING HTTPS BELOW: HERE and see if it fixes the YouTube error */}
-
-										<div className="blockons-videos-prev">
-											{slideItem.itemType === "youtube" && slideItem.itemUrl && (
-												<a
-													href={`https://www.youtube.com/watch?v=${slideItem.itemUrl}`}
-													target="_blank"
-													className="blockons-confirm-button"
-												>
-													{__("Check video link", "blockons")}
-												</a>
-											)}
-											{slideItem.itemType === "vimeo" && slideItem.itemUrl && (
-												<a
-													href={`https://vimeo.com/${slideItem.itemUrl}`}
-													target="_blank"
-													className="blockons-confirm-button"
-												>
-													{__("Check video link", "blockons")}
-												</a>
-											)}
-											{slideItem.itemType === "custom" &&
-												slideItem.customVideo &&
-												slideItem.customVideo.url && (
-													<video controls width="250">
-														<source
-															src={slideItem.customVideo.url}
-															type="video/mp4"
-														/>
-													</video>
-												)}
-										</div>
-
-										{/* TRY REMOVING HTTPS ABOVE: HERE and see if it fixes the YouTube error */}
-
-										<p>{__("Slide Cover Image", "blockons")}</p>
-										<MediaUpload
-											className="components-icon-button components-toolbar__control"
-											allowedTypes={["image"]}
-											value={slideItem.itemImage}
-											onSelect={(media) =>
-												handleCoverImageSelect(media, slideItem.itemId)
-											}
-											render={({ open }) => {
-												return (
-													<>
-														{slideItem.itemImage && slideItem.itemImage.url && (
-															<div className="blockons-upload-imgpreview">
-																<div className="blockons-upload-imgpreview-img">
-																	<img src={slideItem.itemImage.url} />
-																</div>
-																<Button
-																	className="blockons-upload-button remove"
-																	onClick={() =>
-																		handleCoverImageRemove(slideItem.itemId)
-																	}
-																>
-																	{__("Remove Cover Image", "blockons")}
-																</Button>
-															</div>
-														)}
-														{slideItem.itemImage && !slideItem.itemImage.url && (
-															<Button
-																className="blockons-upload-button"
-																onClick={open}
-															>
-																{__("Upload a Cover Image", "blockons")}
-															</Button>
-														)}
-													</>
-												);
-											}}
-										/>
-									</>
-								)}
-							/>
-							<Button
-								className="blockons-duplicate-item"
-								icon="admin-page"
-								label="Duplicate Item"
-								onClick={() =>
-									handleDuplicateItem(
-										index,
-										slideItem.itemType,
-										slideItem.itemUrl,
-										slideItem.itemImage,
-										slideItem.customVideo
-									)
+			<div className="blockons-slider-btns">
+				<Dropdown
+					className="blockons-vslider-media-settings"
+					contentClassName="blockons-editor-popup"
+					position="bottom left"
+					renderToggle={({ isOpen, onToggle }) => (
+						<Button
+							icon="format-video"
+							label={__("Upload Image and Video", "blockons")}
+							onClick={onToggle}
+						/>
+					)}
+					renderContent={() => (
+						<>
+							<SelectControl
+								label="Video Type"
+								value={slideItem.videoType}
+								options={[
+									{ label: "YouTube", value: "youtube" },
+									{ label: "Vimeo", value: "vimeo" },
+									{ label: "Upload Video", value: "custom" },
+								]}
+								onChange={(newType) =>
+									handleItemVideoType(newType, slideItem.id)
 								}
 							/>
-							<Button
-								className="blockons-remove-item"
-								icon="no-alt"
-								label="Delete Item"
-								onClick={() => handleRemoveItem(index)}
+							{(slideItem.videoType === "youtube" ||
+								slideItem.videoType === "vimeo") && (
+								<>
+									{slideItem.videoType === "youtube" && (
+										<p className="blockons-hint">
+											{__("Please enter ONLY the video ID", "blockons")}
+											<br />
+											Eg: youtube.com/watch?v=
+											<b>
+												<big>Byr4Lr6qUaY</big>
+											</b>
+										</p>
+									)}
+
+									{slideItem.videoType === "vimeo" && (
+										<p className="blockons-hint">
+											{__("Please enter ONLY the video ID", "blockons")}
+											<br />
+											Eg: vimeo.com/
+											<b>
+												<big>230574607</big>
+											</b>
+										</p>
+									)}
+									<TextControl
+										label="Video ID"
+										value={slideItem.videoId}
+										onChange={(newId) =>
+											handleItemVideoUrl(newId, slideItem.id)
+										}
+									/>
+								</>
+							)}
+							{slideItem.videoType === "custom" && (
+								<>
+									<p className="blockons-hint">
+										{__("Please ONLY upload mp4 Video", "blockons")}
+										<br />
+										Eg: VideoName
+										<b>
+											<big>.mp4</big>
+										</b>
+									</p>
+									<MediaUpload
+										className="components-icon-button components-toolbar__control"
+										allowedTypes={["video"]}
+										value={slideItem.customVideo}
+										onSelect={(media) =>
+											handleCustomVideoSelect(media, slideItem.id)
+										}
+										render={({ open }) => {
+											return (
+												<>
+													{slideItem.customVideo && slideItem.customVideo.url && (
+														<Button
+															className="blockons-upload-button remove"
+															onClick={() =>
+																handleCustomVideoRemove(slideItem.id)
+															}
+														>
+															{__("Remove Video", "blockons")}
+														</Button>
+													)}
+													{slideItem.customVideo && !slideItem.customVideo.url && (
+														<Button
+															className="blockons-upload-button"
+															onClick={open}
+														>
+															{__("Upload a Custom Video", "blockons")}
+														</Button>
+													)}
+												</>
+											);
+										}}
+									/>
+								</>
+							)}
+
+							<div className="blockons-videos-prev">
+								{slideItem.videoType === "youtube" && slideItem.videoId && (
+									<a
+										href={`https://www.youtube.com/watch?v=${slideItem.videoId}`}
+										target="_blank"
+										className="blockons-confirm-button"
+									>
+										{__("Check video link", "blockons")}
+									</a>
+								)}
+								{slideItem.videoType === "vimeo" && slideItem.videoId && (
+									<a
+										href={`https://vimeo.com/${slideItem.videoId}`}
+										target="_blank"
+										className="blockons-confirm-button"
+									>
+										{__("Check video link", "blockons")}
+									</a>
+								)}
+								{slideItem.videoType === "custom" &&
+									slideItem.customVideo &&
+									slideItem.customVideo.url && (
+										<video controls width="250">
+											<source
+												src={slideItem.customVideo.url}
+												type="video/mp4"
+											/>
+										</video>
+									)}
+							</div>
+
+							<p>{__("Slide Cover Image", "blockons")}</p>
+							<MediaUpload
+								className="components-icon-button components-toolbar__control"
+								allowedTypes={["image"]}
+								value={slideItem.coverImage}
+								onSelect={(media) =>
+									handleCoverImageSelect(media, slideItem.id)
+								}
+								render={({ open }) => {
+									return (
+										<>
+											{slideItem.coverImage && slideItem.coverImage.url && (
+												<div className="blockons-upload-imgpreview">
+													<div className="blockons-upload-imgpreview-img">
+														<img src={slideItem.coverImage.url} />
+													</div>
+													<Button
+														className="blockons-upload-button remove"
+														onClick={() => handleCoverImageRemove(slideItem.id)}
+													>
+														{__("Remove Cover Image", "blockons")}
+													</Button>
+												</div>
+											)}
+											{slideItem.coverImage && !slideItem.coverImage.url && (
+												<Button
+													className="blockons-upload-button"
+													onClick={open}
+												>
+													{__("Upload a Cover Image", "blockons")}
+												</Button>
+											)}
+										</>
+									);
+								}}
 							/>
-						</div>
+						</>
 					)}
-				</li>
-			);
-		});
-	}
+				/>
+				<Button
+					className="blockons-slide-add"
+					icon="plus-alt"
+					label="Add New Slide"
+					onClick={() => handleAddItem(index)}
+				/>
+				<Button
+					className="blockons-slide-duplicate"
+					icon="admin-page"
+					label="Duplicate Slide"
+					onClick={() => handleDuplicateItem(index, slideItem)}
+				/>
+				<Button
+					className="blockons-slide-delete"
+					icon="no-alt"
+					label="Delete Slide"
+					onClick={() => handleDeleteItem(index)}
+				/>
+			</div>
+		</div>
+	));
 
 	return (
 		<div {...blockProps}>
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody
-						title={__("Video Slider Settings", "blockons")}
+						title={__("Slider Settings", "blockons")}
 						initialOpen={true}
 					>
-						<UnitControl
-							label={__("Slider Width", "blockons")}
-							value={sliderWidth}
-							onChange={(value) =>
-								setAttributes({
-									sliderWidth: value,
-								})
-							}
-							units={[
-								{ value: "%", label: "%", default: 100 },
-								{ value: "px", label: "px", default: 800 },
+						<SelectControl
+							label="Transition Type"
+							value={transition}
+							options={[
+								{ label: "Slide", value: "slide" },
+								{ label: "Fade", value: "fade" },
 							]}
-							isResetValueOnUnitChange
+							onChange={(newValue) => {
+								newValue === reloads.transition
+									? setNeedsReload(false)
+									: setNeedsReload(true);
+
+								setAttributes({ transition: newValue });
+							}}
 						/>
 
-						<ToggleControl
-							label={__("Rewind Slider", "blockons")}
-							checked={sliderRewind}
-							onChange={(newValue) => setAttributes({ sliderRewind: newValue })}
-						/>
+						<SelectControl
+							label="Slider Mode"
+							value={mode}
+							options={[
+								{ label: "Default", value: "default" },
+								{ label: "Rewind", value: "rewind" },
+								{ label: "Infinite Loop", value: "loop" },
+							]}
+							onChange={(newValue) => {
+								newValue === reloads.mode
+									? setNeedsReload(false)
+									: setNeedsReload(true);
 
+								setAttributes({ mode: newValue });
+							}}
+						/>
+					</PanelBody>
+					<PanelBody title={__("Video Design", "blockons")} initialOpen={false}>
 						<SelectControl
 							label="Style"
 							value={sliderStyle}
@@ -473,11 +486,8 @@ const Edit = (props) => {
 							]}
 							onChange={(newValue) => setAttributes({ sliderStyle: newValue })}
 						/>
-					</PanelBody>
-					<PanelBody
-						title={__("Video Slider Design", "blockons")}
-						initialOpen={false}
-					>
+						<div className="blockons-divider"></div>
+
 						<SelectControl
 							label="Slider Roundness"
 							value={sliderRoundNess}
@@ -532,132 +542,154 @@ const Edit = (props) => {
 						)}
 					</PanelBody>
 					<PanelBody
-						title={__("Video Slider Controls", "blockons")}
+						title={__("Slider Controls", "blockons")}
 						initialOpen={false}
 					>
-						<div className="blockons-icon-text-select">
-							<Dropdown
-								className="blockons-icon-selecter"
-								contentClassName="blockons-editor-popup arrow-selector"
-								position="bottom left"
-								renderToggle={({ isOpen, onToggle }) => (
-									<FontAwesomeIcon
-										icon={sliderArrowIcon}
-										iconSize={24}
-										onClick={onToggle}
+						<ToggleControl
+							label={__("Show Navigation", "blockons")}
+							checked={navigation}
+							onChange={(newValue) => setAttributes({ navigation: newValue })}
+						/>
+
+						{navigation && (
+							<>
+								<SelectControl
+									label="Style"
+									value={navigationStyle}
+									options={[
+										{ label: "Default", value: "default" },
+										{ label: "Round", value: "round" },
+										{ label: "Rounded", value: "rounded" },
+										{ label: "Square", value: "square" },
+									]}
+									onChange={(newValue) =>
+										setAttributes({ navigationStyle: newValue })
+									}
+								/>
+								<SelectControl
+									label="Color"
+									value={navigationColor}
+									options={[
+										{ label: "Dark", value: "dark" },
+										{ label: "Light", value: "light" },
+									]}
+									onChange={(newValue) =>
+										setAttributes({ navigationColor: newValue })
+									}
+								/>
+
+								<div className="blockons-icon-select">
+									<Dropdown
+										className="blockons-icon-selector"
+										contentClassName="blockons-editor-popup icon-selector"
+										position="bottom right"
+										renderToggle={({ isOpen, onToggle }) => (
+											<FontAwesomeIcon
+												icon={navigationArrow}
+												iconSize={24}
+												onClick={onToggle}
+											/>
+										)}
+										renderContent={() =>
+											Object.keys(sliderArrowIcons).map((icon) => (
+												<FontAwesomeIcon
+													icon={icon}
+													iconSize={20}
+													onClick={() =>
+														setAttributes({ navigationArrow: icon })
+													}
+												/>
+											))
+										}
 									/>
-								)}
-								renderContent={() =>
-									Object.keys(sliderArrowIcons).map((icon) => (
-										<FontAwesomeIcon
-											icon={icon}
-											iconSize={20}
-											onClick={() => setAttributes({ sliderArrowIcon: icon })}
-										/>
-									))
-								}
-							/>
-							<p>{__("Select Slider Arrow Icons", "blockons")}</p>
-						</div>
+									<p>{__("Select Slider Arrow Icons", "blockons")}</p>
+								</div>
+							</>
+						)}
+
+						<div className="blockons-divider"></div>
 
 						<ToggleControl
 							label={__("Show Pagination", "blockons")}
-							checked={sliderPagination}
-							onChange={(newValue) =>
-								setAttributes({ sliderPagination: newValue })
-							}
+							checked={pagination}
+							onChange={(newValue) => setAttributes({ pagination: newValue })}
 						/>
-						{sliderPagination && (
+						{pagination && (
 							<>
 								<SelectControl
-									label="Testimonials Layout"
-									value={sliderPagDesign}
+									label={__("Pagination Type", "blockons")}
+									value={paginationStyle}
 									options={[
-										{ label: "Dots", value: "dots" },
+										{ label: "Bullets", value: "bullets" },
+										{ label: "Dynamic Bullets", value: "dynamicBullets" },
 										{ label: "Numbers", value: "numbers" },
+										{ label: "Fraction", value: "fraction" },
 									]}
 									onChange={(newValue) =>
 										setAttributes({
-											sliderPagDesign:
-												newValue === undefined ? "dots" : newValue,
+											paginationStyle:
+												newValue === undefined ? "bullets" : newValue,
 										})
+									}
+									help={__(
+										"Turn the Pagination off and on again to see this change",
+										"blockons"
+									)}
+								/>
+								<SelectControl
+									label="Color"
+									value={paginationColor}
+									options={[
+										{ label: "Dark", value: "dark" },
+										{ label: "Light", value: "light" },
+									]}
+									onChange={(newValue) =>
+										setAttributes({ paginationColor: newValue })
 									}
 								/>
 							</>
 						)}
 
-						<ToggleControl
-							label={__("Show Controls only on Hover", "blockons")}
-							checked={controlsOnHover}
-							onChange={(newValue) =>
-								setAttributes({ controlsOnHover: newValue })
-							}
-						/>
+						{(navigation || pagination) && (
+							<>
+								<div className="blockons-divider"></div>
+								<ToggleControl
+									label={__("Show Controls on Hover", "blockons")}
+									checked={showOnHover}
+									onChange={(newValue) =>
+										setAttributes({ showOnHover: newValue })
+									}
+								/>
+							</>
+						)}
 					</PanelBody>
 				</InspectorControls>
 			)}
 			{
 				<BlockControls>
-					<BlockAlignmentToolbar
-						value={sliderAlign}
-						controls={["left", "center", "right"]}
-						onChange={(newValue) => {
-							setAttributes({
-								sliderAlign: newValue === undefined ? "left" : newValue,
-							});
-						}}
-					/>
+					<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
 				</BlockControls>
 			}
 			<div
-				className={`blockons-video-slider`}
+				className={`blockons-slider ${
+					showOnHover ? "controlsOnHover" : ""
+				} navigation-${navigationStyle} navigation-${navigationColor} pagination-${paginationStyle} pagination-${paginationColor} ${
+					navigationArrow === "ban" ? "default-icon" : "custom-icon"
+				} arrows-${navigationArrow}`}
 				id={uniqueId}
-				data-settings={JSON.stringify(sliderOptions)}
-				style={{
-					maxWidth: sliderWidth,
-				}}
 			>
-				{sliderSlideItems ? (
-					<>
-						<div
-							className={`blockons-video-slider-wrap ${
-								controlsOnHover ? "on-hover" : ""
-							} pagination-${sliderPagDesign}`}
-							style={{
-								...(sliderStyle === "three"
-									? {
-											padding: sliderBorderWidth,
-											borderRadius: sliderOuterRound,
-											backgroundColor: sliderBorderColor,
-									  }
-									: ""),
-							}}
-						>
-							<Splide options={sliderOptions} extensions={{ Video }}>
-								{sliderSlideItems}
-							</Splide>
-						</div>
-						{isSelected && (
-							<div
-								className={`blockons-add-new ${
-									sliderSlideItems === undefined ? "no-slides" : "has-slides"
-								}`}
-							>
-								<Button variant="secondary" onClick={handleAddItem}>
-									{__("Add Another Slide", "blockons")}
-								</Button>
-							</div>
-						)}
-					</>
-				) : (
-					<div className="blockons-noslides">
-						<div className="blockons-add-new">
-							<Button variant="secondary" onClick={handleAddItem}>
-								{__("Add your first slide", "blockons")}
-							</Button>
+				{needsReload && (
+					<div className="blockons-slider-reload">
+						<div className="blockons-slider-reload-inner">
+							{__("Please Save or Update and reload the page", "blockons")}
 						</div>
 					</div>
 				)}
+				<Swiper {...sliderOptions}>
+					{slides.map((slideContent, index) => (
+						<SwiperSlide>{slideContent}</SwiperSlide>
+					))}
+				</Swiper>
 			</div>
 		</div>
 	);

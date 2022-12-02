@@ -13,7 +13,7 @@ $custom_classes = 'align-' . $attributes['alignment'];
 $sliderOptions = array(
 	"autoHeight" => true,
 	"effect" => $attributes['transition'],
-	"slidesPerView" => $attributes['transition'] === "slide" ? $attributes['perView'] : 1,
+	"slidesPerView" => $attributes['transition'] != "fade" ? $attributes['perView'] : 1,
 	"spaceBetween" => $attributes['perView'] > 1 ? $attributes['spaceBetween'] : 0,
 	"loop" => $attributes['mode'] === "loop" ? true : false,
 	"rewind" => $attributes['mode'] === "rewind" ? true : false,
@@ -36,7 +36,7 @@ $sliderOptions = array(
 				<?php foreach ($attributes['sliderSlides'] as $i => $slide) { ?>
 					<div class="swiper-slide">
 						<div class="swiper-slide-inner">
-							<div class="blockons-slider-img <?php echo ((isset($attributes['forceFullWidth']) && $attributes['forceFullWidth'] == true) && (isset($attributes['imageProportion']) && $attributes['imageProportion'] == "actual")) ? sanitize_html_class("imgfull") : ""; ?>" <?php echo isset($attributes['imageProportion']) && $attributes['imageProportion'] != "actual" ? 'style="background-image: url(' . $slide['imageUrl'] . ');"' : ''; ?>>
+							<div class="blockons-slider-img <?php echo ((isset($attributes['forceFullWidth']) || $attributes['forceFullWidth'] == true) && (isset($attributes['imageProportion']) && $attributes['imageProportion'] != "actual")) ? sanitize_html_class("imgfull") : ""; ?>" <?php echo isset($attributes['imageProportion']) && $attributes['imageProportion'] != "actual" ? 'style="background-image: url(' . $slide['imageUrl'] . ');"' : ''; ?>>
 								<?php if ((isset($attributes['imageProportion']) && $attributes['imageProportion'] == "actual") && $slide['imageUrl']) : ?>
 									<img src="<?php echo esc_url($slide['imageUrl']); ?>" alt="<?php echo esc_attr($slide['imageAlt']); ?>" />
 								<?php else : ?>
@@ -44,7 +44,7 @@ $sliderOptions = array(
 								<?php endif; ?>
 							</div>
 
-							<?php if ((isset($attributes['captionPosition']) && $attributes['captionPosition'] != "") && isset($slide['imageCaption'])) : ?>
+							<?php if ((isset($attributes['captionPosition']) && $attributes['captionPosition'] != "") && (isset($slide['imageCaption']) && $slide['imageCaption'] != "")) : ?>
 								<div class="blockons-caption" <?php echo isset($attributes['captionPosition']) && $attributes['captionPosition'] == "below" && isset($attributes['captionBgColor']) ? 'style="background-color: ' . esc_attr($attributes['captionBgColor']) . ';"' : ''; ?>>
 									
 									<?php if (isset($attributes['captionPosition']) && $attributes['captionPosition'] == "over") : ?>

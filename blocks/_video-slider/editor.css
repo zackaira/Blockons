@@ -1,0 +1,170 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.components-popover.components-dropdown__content.blockons-editor-popup {
+	z-index: 99;
+}
+.blockons-video-slider:hover .blockons-video-slider-wrap {
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
+}
+
+/* -- Editor Overrides -- */
+.blockons-video-slider-wrap .splide-custom-slide {
+	background: url("../../assets/images/videoslider-placeholder.jpg") center
+		center / cover no-repeat;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.blockons-video-slider-wrap .splide-custom-slide .play-button {
+	background-color: rgb(255 255 255 / 85%);
+	border-radius: 80px;
+	width: 80px;
+	height: 80px;
+	margin: -40px 0 0;
+	font-family: "Font Awesome 6 Free";
+	font-weight: 900;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0.7;
+	transition: opacity 0.2s ease-in-out 0s;
+	cursor: pointer;
+}
+.blockons-video-slider-wrap .splide-custom-slide .play-button::after {
+	content: "\f04b";
+	border: 0 !important;
+	font-size: 38px;
+	margin-left: 5px;
+	color: #222;
+}
+.blockons-video-slider-wrap .splide-custom-slide:hover .play-button {
+	opacity: 0.9;
+}
+
+/* -- Item Level Controls -- */
+.wp-block-blockons-video-slider .blockons-item-btns {
+	display: flex;
+	align-items: stretch;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background-color: #fff;
+	z-index: 21;
+	opacity: 1 !important;
+}
+
+/* -- Item level controls popup box -- */
+.blockons-editor-popup .components-popover__content {
+	width: 274px;
+}
+.blockons-editor-popup.arrow-selector .components-popover__content {
+	width: 185px;
+}
+.blockons-editor-popup .components-popover__content > div {
+	display: flex;
+	flex-wrap: wrap;
+}
+.blockons-editor-popup .components-popover__content .blockons-fontawesome {
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.blockons-editor-popup
+	.components-popover__content
+	.blockons-fontawesome:hover {
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
+}
+/* -- Make editor controls span full with of popup box -- */
+.blockons-editor-popup .components-popover__content > div > div {
+	width: 100%;
+}
+.blockons-add-new {
+	margin: 15px 0 0;
+}
+
+/* -- Previews -- */
+.blockons-upload-imgpreview {
+	display: flex;
+	align-items: center;
+}
+.blockons-upload-imgpreview-img {
+	display: flex;
+	width: 100px;
+	margin: 0 8px 0 0;
+	align-items: center;
+	justify-content: center;
+	pointer-events: none;
+}
+.blockons-upload-imgpreview-img img {
+	max-width: 100%;
+	height: auto;
+	margin: 0;
+	max-height: 42px;
+}
+.blockons-upload-button {
+	box-shadow: 0 0 0 1px #e0e0e0;
+	width: 100%;
+	justify-content: center;
+	padding: 20px 10px;
+}
+.blockons-upload-remove {
+	background-color: #fff;
+	position: absolute;
+	border-radius: 20px;
+	top: -22px;
+	right: -10px;
+	box-shadow: 0 0 0 1px #000;
+	font-size: 12px !important;
+	padding: 0 !important;
+	width: 18px;
+	height: 18px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out 0.2s;
+}
+.blockons-confirm-button {
+	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 20%);
+	background-color: #e9e9e9;
+	display: inline-block;
+	justify-content: center;
+	padding: 10px 18px;
+	margin: 0px 0;
+	border-radius: 3px;
+	font-size: 12px;
+	text-decoration: none;
+	color: #787878;
+}
+/* -- Image Preview -- */
+.blockons-videos-prev {
+	margin: 10px 0 0;
+}
+.blockons-hint {
+	font-size: 11px;
+	letter-spacing: 0.2px;
+	margin: 0 0 10px;
+}
+
+/* ---- No Slides ---- */
+.blockons-noslides {
+	background-color: #f2f2f2;
+	box-shadow: inset 0 0 0 1px #dbdbdb;
+	border-radius: 3px;
+	padding: 28px;
+	text-align: center;
+}
+.blockons-noslides .blockons-add-new {
+	margin: 0;
+}

@@ -2,97 +2,59 @@
  * Note that these styles are loaded *after* common styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.components-popover.components-dropdown__content.blockons-editor-popup {
-	z-index: 99;
+.wp-block-blockons-video-slider {
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 20%);
+	position: relative;
 }
-.blockons-video-slider:hover .blockons-video-slider-wrap {
-	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
-}
-
-/* -- Editor Overrides -- */
-.blockons-video-slider-wrap .splide-custom-slide {
-	background: url("../../assets/images/videoslider-placeholder.jpg") center
-		center / cover no-repeat;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.blockons-video-slider-wrap .splide-custom-slide .play-button {
-	background-color: rgb(255 255 255 / 85%);
-	border-radius: 80px;
-	width: 80px;
-	height: 80px;
-	margin: -40px 0 0;
-	font-family: "Font Awesome 6 Free";
-	font-weight: 900;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	opacity: 0.7;
-	transition: opacity 0.2s ease-in-out 0s;
-	cursor: pointer;
-}
-.blockons-video-slider-wrap .splide-custom-slide .play-button::after {
-	content: "\f04b";
-	border: 0 !important;
-	font-size: 38px;
-	margin-left: 5px;
-	color: #222;
-}
-.blockons-video-slider-wrap .splide-custom-slide:hover .play-button {
-	opacity: 0.9;
-}
-
-/* -- Item Level Controls -- */
-.wp-block-blockons-video-slider .blockons-item-btns {
-	display: flex;
-	align-items: stretch;
+/* -- Slide Settings -- */
+.blockons-slider-btns {
+	background-color: #fff;
 	position: absolute;
 	top: 5px;
 	right: 5px;
-	background-color: #fff;
-	z-index: 21;
-	opacity: 1 !important;
+	z-index: 20;
+	padding: 8px;
 }
-
-/* -- Item level controls popup box -- */
-.blockons-editor-popup .components-popover__content {
-	width: 274px;
+/* -- Settings Popup -- */
+.blockons-icon-select {
+	display: flex;
+	align-items: center;
 }
-.blockons-editor-popup.arrow-selector .components-popover__content {
-	width: 185px;
+.blockons-icon-select p {
+	margin: 0 0 0 10px;
 }
-.blockons-editor-popup .components-popover__content > div {
+.blockons-editor-popup.icon-selector .components-popover__content {
 	display: flex;
 	flex-wrap: wrap;
+	width: 145px;
 }
-.blockons-editor-popup .components-popover__content .blockons-fontawesome {
-	width: 32px;
-	height: 32px;
+.components-popover.blockons-editor-popup {
+	z-index: 21;
+}
+/* -- Settings Need Reload -- */
+.blockons-slider-reload {
+	background-color: #f0f0f0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	z-index: 45;
 }
-.blockons-editor-popup
-	.components-popover__content
-	.blockons-fontawesome:hover {
-	box-shadow: 0 0 0 1px rgb(0 0 0 / 16%);
+.blockons-slider-reload-inner {
+	background-color: #fff;
+	box-shadow: 0 1px 5px rgb(0 0 0 / 14%);
+	border-radius: 4px;
+	padding: 12px 15px;
+	font-size: 13px;
+	color: #000;
+	text-align: center;
+	max-width: 300px;
 }
-/* -- Make editor controls span full with of popup box -- */
-.blockons-editor-popup .components-popover__content > div > div {
-	width: 100%;
-}
-.blockons-add-new {
-	margin: 15px 0 0;
-}
-
+/* -- Slider Options -- */
 /* -- Previews -- */
 .blockons-upload-imgpreview {
 	display: flex;
@@ -112,6 +74,7 @@
 	margin: 0;
 	max-height: 42px;
 }
+/* - Buttons - */
 .blockons-upload-button {
 	box-shadow: 0 0 0 1px #e0e0e0;
 	width: 100%;
@@ -155,16 +118,4 @@
 	font-size: 11px;
 	letter-spacing: 0.2px;
 	margin: 0 0 10px;
-}
-
-/* ---- No Slides ---- */
-.blockons-noslides {
-	background-color: #f2f2f2;
-	box-shadow: inset 0 0 0 1px #dbdbdb;
-	border-radius: 3px;
-	padding: 28px;
-	text-align: center;
-}
-.blockons-noslides .blockons-add-new {
-	margin: 0;
 }

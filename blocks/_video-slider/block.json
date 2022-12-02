@@ -1,0 +1,91 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/video-slider",
+	"title": "Video Slider",
+	"textdomain": "blockons",
+	"icon": "format-video",
+	"category": "blockons-category",
+	"keywords": ["video", "slider", "play", "gallery"],
+	"attributes": {
+		"uniqueId": {
+			"type": "string",
+			"default": ""
+		},
+		"sliderWidth": {
+			"type": "string",
+			"default": "100%"
+		},
+		"sliderRewind": {
+			"type": "boolean",
+			"default": false
+		},
+		"sliderAlign": {
+			"type": "string",
+			"default": "left"
+		},
+		"slides": {
+			"type": "array",
+			"default": [
+				{
+					"itemId": 0,
+					"itemType": "youtube",
+					"itemUrl": "",
+					"itemImage": {},
+					"customVideo": {}
+				},
+				{
+					"itemId": 1,
+					"itemType": "youtube",
+					"itemUrl": "",
+					"itemImage": {},
+					"customVideo": {}
+				}
+			]
+		},
+		"sliderStyle": {
+			"type": "string",
+			"default": "one"
+		},
+		"sliderRoundNess": {
+			"type": "string",
+			"default": "square"
+		},
+		"sliderBorderWidth": {
+			"type": "number",
+			"default": 10
+		},
+		"sliderOuterRound": {
+			"type": "number",
+			"default": 4
+		},
+		"sliderBorderColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"sliderArrowIcon": {
+			"type": "string",
+			"default": "arrow-right"
+		},
+		"controlsOnHover": {
+			"type": "boolean",
+			"default": false
+		},
+		"sliderPagination": {
+			"type": "boolean",
+			"default": true
+		},
+		"sliderPagDesign": {
+			"type": "string",
+			"default": "dots"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"viewScript": "file:./splide.js",
+	"style": [
+		"file:./style-index.css",
+		"blockons-fontawesome",
+		"blockons-splidecss"
+	]
+}
