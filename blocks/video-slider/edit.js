@@ -183,7 +183,7 @@ const Edit = (props) => {
 			if (obj.id === id)
 				return {
 					...obj,
-					itemImage: {
+					coverImage: {
 						id: media.id,
 						url: media.url,
 						alt: media.alt,
@@ -199,7 +199,7 @@ const Edit = (props) => {
 			if (obj.id === id)
 				return {
 					...obj,
-					itemImage: {},
+					coverImage: {},
 				};
 			return obj;
 		});
@@ -220,17 +220,29 @@ const Edit = (props) => {
 						allowfullscreen
 					></iframe>
 				)}
+
+				{slideItem.videoType === "vimeo" && slideItem.videoId && (
+					<>
+						<iframe
+							src={`https://player.vimeo.com/video/${slideItem.videoId}?h=55b3242b2e&title=0&byline=0&portrait=0`}
+							frameborder="0"
+							allow="autoplay; fullscreen; picture-in-picture"
+							allowfullscreen
+						></iframe>
+						<script src="https://player.vimeo.com/api/player.js"></script>
+					</>
+				)}
 			</div>
 
 			<div
 				className="swiper-slide-img"
-				// style={{
-				// 	...(slideItem.coverImage && slideItem.coverImage.url
-				// 		? { backgroundImage: `url(${slideItem.coverImage.url})` }
-				// 		: {
-				// 				backgroundImage: `url(${blockonsObj.pluginUrl}assets/images/videoslider-placeholder.jpg)`,
-				// 		  }),
-				// }}
+				style={{
+					...(slideItem.coverImage && slideItem.coverImage.url
+						? { backgroundImage: `url(${slideItem.coverImage.url})` }
+						: {
+								backgroundImage: `url(${blockonsObj.pluginUrl}assets/images/videoslider-placeholder.jpg)`,
+						  }),
+				}}
 			>
 				<div
 					className="play-button"
@@ -685,7 +697,41 @@ const Edit = (props) => {
 						</div>
 					</div>
 				)}
-				<Swiper {...sliderOptions}>
+				<Swiper
+					{...sliderOptions}
+					onSwiper={(swiper) => {
+						const currentSlide = swiper.slides[swiper.realIndex];
+						const playBtn = currentSlide.querySelector(".play-button");
+
+						if (playBtn) {
+							playBtn.addEventListener("click", () => {
+								if (currentSlide.classList.contains("swiper-slide-active")) {
+									currentSlide.classList.add("blockons-play");
+								}
+							});
+						}
+
+						console.log("Current Slide: ", currentSlide);
+					}}
+					onSlideChangeTransitionStart={() =>
+						console.log("Slide Change STARTED !")
+					}
+					onSlideChange={(swiper) => {
+						const currentSlide = swiper.slides[swiper.realIndex];
+						const playBtn = currentSlide.querySelector(".play-button");
+
+						if (playBtn) {
+							playBtn.addEventListener("click", () => {
+								if (currentSlide.classList.contains("swiper-slide-active")) {
+									currentSlide.classList.add("blockons-play");
+								}
+							});
+						}
+
+						console.log("Current Slide: ", currentSlide);
+					}}
+					onSlideChangeTransitionEnd={() => console.log("Slide Change ENDED !")}
+				>
 					{slides.map((slideContent, index) => (
 						<SwiperSlide>{slideContent}</SwiperSlide>
 					))}
