@@ -1,3 +1,5 @@
+import { blockonsSlideVideoAction } from "../../blocks/video-slider/video-actions";
+
 document.addEventListener("DOMContentLoaded", () => {
 	const blockonSliders = document.querySelectorAll(".blockons-slider");
 
@@ -8,6 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			if (sliderElement) {
 				const blockonSwiper = new Swiper(`.${sliderElement}`, sliderSettings);
+
+				blockonSwiper.on("click", () => blockonsSlideVideoAction());
+				blockonSwiper.on("slideChange", () => blockonsSlideVideoAction());
 			}
 		});
 	}

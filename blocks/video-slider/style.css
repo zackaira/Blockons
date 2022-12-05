@@ -24,29 +24,16 @@
 .wp-block-blockons-video-slider.style-three .blockons-slider {
 	background-color: #000;
 	padding: 10px;
-	border-radius: 4px;
 }
 /* -- Player Roundness -- */
-.wp-block-blockons-video-slider.rn-rounded .blockons-slider,
 .wp-block-blockons-video-slider.rn-rounded .blockons-slider .swiper {
 	border-radius: 12px;
 }
-.wp-block-blockons-video-slider.rn-rounded .blockons-slider-btns {
-	right: 12px;
-}
-.wp-block-blockons-video-slider.rn-rounder .blockons-slider,
-.wp-block-blockons-video-slider.rn-rounded .blockons-slider .swiper {
+.wp-block-blockons-video-slider.rn-rounder .blockons-slider .swiper {
 	border-radius: 45px;
 }
-.wp-block-blockons-video-slider.rn-rounder .blockons-slider-btns {
-	right: 45px;
-}
-.wp-block-blockons-video-slider.rn-round .blockons-slider,
-.wp-block-blockons-video-slider.rn-rounded .blockons-slider .swiper {
+.wp-block-blockons-video-slider.rn-round .blockons-slider .swiper {
 	border-radius: 100px;
-}
-.wp-block-blockons-video-slider.rn-round .blockons-slider-btns {
-	right: 95px;
 }
 /* - Video Responsive - */
 .wp-block-blockons-video-slider .swiper-slide-video {
@@ -295,11 +282,6 @@
 	content: "\f101";
 }
 /* -- Pagination -- */
-.wp-block-blockons-video-slider .blockons-slider .swiper-pagination {
-	position: relative;
-	bottom: auto;
-	padding: 2px 0;
-}
 .wp-block-blockons-video-slider
 	.blockons-slider.pagination-dark
 	.swiper-pagination

@@ -23,10 +23,11 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
-import { slugify, sliderArrowIcons } from "../block-global";
+import { sliderArrowIcons } from "../block-global";
 import { colorPickerPalette } from "../block-global";
 import { Navigation, Pagination, EffectFade, EffectCoverflow } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { blockonsSlideVideoAction } from "./video-actions";
 
 const Edit = (props) => {
 	const {
@@ -56,7 +57,6 @@ const Edit = (props) => {
 
 	const blockProps = useBlockProps({
 		className: `align-${alignment} style-${sliderStyle} rn-${sliderRoundNess}`,
-		// className: `${sliderAlign}-align playbtn-one style-${sliderStyle} arrows-${sliderArrowIcon} rn-${sliderRoundNess}`,
 	});
 	const [needsReload, setNeedsReload] = useState(false);
 	const [reloads, setReloads] = useState({ transition, mode });
@@ -83,7 +83,7 @@ const Edit = (props) => {
 			? {
 					type: paginationStyle === "fraction" ? "fraction" : "bullets",
 					dynamicBullets: paginationStyle === "dynamicBullets" ? true : false,
-					clickable: true,
+					clickable: false,
 			  }
 			: false,
 	};
@@ -207,13 +207,14 @@ const Edit = (props) => {
 	};
 
 	const slides = sliderSlides.map((slideItem, index) => (
-		<div className="swiper-slide-inner">
+		<div className="swiper-slide-inner blockons-videos">
 			<div className="swiper-slide-video">
 				{slideItem.videoType === "youtube" && slideItem.videoId && (
 					<iframe
+						className="blockons-video youtube"
 						width="560"
 						height="315"
-						src={`https://www.youtube.com/embed/${slideItem.videoId}?enablejsapi=1&rel=0`}
+						src={`https://www.youtube.com/embed/${slideItem.videoId}?enablejsapi=1`}
 						title="YouTube video player"
 						frameborder="0"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -224,12 +225,11 @@ const Edit = (props) => {
 				{slideItem.videoType === "vimeo" && slideItem.videoId && (
 					<>
 						<iframe
+							className="blockons-video vimeo"
 							src={`https://player.vimeo.com/video/${slideItem.videoId}?h=55b3242b2e&title=0&byline=0&portrait=0`}
 							frameborder="0"
 							allow="autoplay; fullscreen; picture-in-picture"
-							allowfullscreen
 						></iframe>
-						<script src="https://player.vimeo.com/api/player.js"></script>
 					</>
 				)}
 			</div>
@@ -244,10 +244,12 @@ const Edit = (props) => {
 						  }),
 				}}
 			>
-				<div
-					className="play-button"
-					title={__("The video only plays on the frontend", "blockons")}
-				></div>
+				{slideItem.videoId && (
+					<div
+						className={`play-button`}
+						title={__("The video only plays on the frontend", "blockons")}
+					></div>
+				)}
 			</div>
 
 			<div className="blockons-slider-btns">
@@ -510,7 +512,9 @@ const Edit = (props) => {
 								{ label: "Very Round", value: "round" },
 							]}
 							onChange={(newValue) =>
-								setAttributes({ sliderRoundNess: newValue })
+								setAttributes({
+									sliderRoundNess: newValue === undefined ? "square" : newValue,
+								})
 							}
 						/>
 						{sliderStyle === "three" && (
@@ -683,12 +687,21 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 			<div
-				className={`blockons-slider ${
+				className={`blockons-slider video-slider ${
 					showOnHover ? "controlsOnHover" : ""
 				} navigation-${navigationStyle} navigation-${navigationColor} pagination-${paginationStyle} pagination-${paginationColor} ${
 					navigationArrow === "ban" ? "default-icon" : "custom-icon"
 				} arrows-${navigationArrow}`}
 				id={uniqueId}
+				style={{
+					...(sliderStyle === "three"
+						? {
+								padding: sliderBorderWidth,
+								borderRadius: sliderOuterRound,
+								backgroundColor: sliderBorderColor,
+						  }
+						: ""),
+				}}
 			>
 				{needsReload && (
 					<div className="blockons-slider-reload">
@@ -699,40 +712,10 @@ const Edit = (props) => {
 				)}
 				<Swiper
 					{...sliderOptions}
-					onSwiper={(swiper) => {
-						const currentSlide = swiper.slides[swiper.realIndex];
-						const playBtn = currentSlide.querySelector(".play-button");
-
-						if (playBtn) {
-							playBtn.addEventListener("click", () => {
-								if (currentSlide.classList.contains("swiper-slide-active")) {
-									currentSlide.classList.add("blockons-play");
-								}
-							});
-						}
-
-						console.log("Current Slide: ", currentSlide);
-					}}
-					onSlideChangeTransitionStart={() =>
-						console.log("Slide Change STARTED !")
-					}
-					onSlideChange={(swiper) => {
-						const currentSlide = swiper.slides[swiper.realIndex];
-						const playBtn = currentSlide.querySelector(".play-button");
-
-						if (playBtn) {
-							playBtn.addEventListener("click", () => {
-								if (currentSlide.classList.contains("swiper-slide-active")) {
-									currentSlide.classList.add("blockons-play");
-								}
-							});
-						}
-
-						console.log("Current Slide: ", currentSlide);
-					}}
-					onSlideChangeTransitionEnd={() => console.log("Slide Change ENDED !")}
+					onSwiper={() => blockonsSlideVideoAction()}
+					onSlideChange={() => blockonsSlideVideoAction()}
 				>
-					{slides.map((slideContent, index) => (
+					{slides.map((slideContent) => (
 						<SwiperSlide>{slideContent}</SwiperSlide>
 					))}
 				</Swiper>

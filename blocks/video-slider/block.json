@@ -45,7 +45,7 @@
 			"type": "string",
 			"default": "one"
 		},
-		"sliderRoundness": {
+		"sliderRoundNess": {
 			"type": "string",
 			"default": "square"
 		},
@@ -104,6 +104,6 @@
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"viewScript": "blockons-slider",
+	"viewScript": "blockons-slider-video",
 	"style": ["file:./style-index.css", "blockons-fontawesome", "blockons-slider"]
 }

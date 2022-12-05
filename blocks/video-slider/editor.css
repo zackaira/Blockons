@@ -15,6 +15,15 @@
 	z-index: 20;
 	padding: 8px;
 }
+.wp-block-blockons-video-slider.rn-rounded .blockons-slider-btns {
+	right: 12px;
+}
+.wp-block-blockons-video-slider.rn-rounder .blockons-slider-btns {
+	right: 45px;
+}
+.wp-block-blockons-video-slider.rn-round .blockons-slider-btns {
+	right: 95px;
+}
 /* -- Settings Popup -- */
 .blockons-icon-select {
 	display: flex;
@@ -56,13 +65,14 @@
 }
 /* -- Slider Options -- */
 /* -- Previews -- */
-.blockons-upload-imgpreview {
+.blockons-editor-popup .blockons-upload-imgpreview {
 	display: flex;
 	align-items: center;
+	flex-wrap: initial !important;
 }
-.blockons-upload-imgpreview-img {
+.blockons-editor-popup .blockons-upload-imgpreview-img {
 	display: flex;
-	width: 100px;
+	width: 100px !important;
 	margin: 0 8px 0 0;
 	align-items: center;
 	justify-content: center;

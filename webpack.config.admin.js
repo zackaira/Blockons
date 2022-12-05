@@ -15,6 +15,7 @@ const config = {
 		"editor.min": "./src/backend/editor/editor.js",
 		frontend: "./src/frontend/frontend.js",
 		"frontend.min": "./src/frontend/frontend.js",
+		"swiper-video.min": "./assets/slider/swiper-video.js",
 		// Premium Files
 		"cart-pro.min": "./assets/blocks/wc-mini-cart/pro/cart.js",
 		"search-pro.min": "./assets/blocks/search/pro/search.js",
