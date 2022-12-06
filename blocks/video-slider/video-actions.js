@@ -20,18 +20,20 @@ export function blockonsSlideVideoAction() {
 
 				switch (videoType) {
 					case "youtube":
-						const player = YouTubePlayer(video);
-
-						player.on("ready", (event) => {
-							if (playBtn) {
-								playBtn.addEventListener("click", () => {
-									if (slideParent.classList.contains("swiper-slide-active")) {
-										slideParent.classList.add("blockons-play");
-									}
-									player.playVideo();
-								});
-							}
+						const videoId = video.id.slice(4);
+						const player = YouTubePlayer(video.id, {
+							videoId: videoId,
 						});
+
+						if (playBtn) {
+							playBtn.addEventListener("click", () => {
+								if (slideParent.classList.contains("swiper-slide-active")) {
+									slideParent.classList.add("blockons-play");
+								}
+								player.playVideo();
+							});
+						}
+
 						if (nextPrev) {
 							nextPrev.forEach((el) => {
 								el.addEventListener("click", () => player.pauseVideo());
@@ -48,7 +50,11 @@ export function blockonsSlideVideoAction() {
 								if (slideParent.classList.contains("swiper-slide-active")) {
 									slideParent.classList.add("blockons-play");
 								}
-								vimeo.play();
+
+								vimeo
+									.ready()
+									.then(() => vimeo.play())
+									.catch((err) => console.log(err));
 							});
 						}
 						if (nextPrev) {

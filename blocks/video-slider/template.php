@@ -41,6 +41,7 @@ $sliderOptions = array(
 								<?php if ((isset($slide['videoType']) && $slide['videoType'] == "youtube") && (isset($slide['videoId']) && $slide['videoId'] != "")) : ?>
 									<iframe
 										class="blockons-video youtube"
+										id="vid-<?php echo esc_attr($slide['videoId']); ?>"
 										width="560"
 										height="315"
 										src="https://www.youtube.com/embed/<?php echo esc_attr($slide['videoId']); ?>?enablejsapi=1"
@@ -54,6 +55,7 @@ $sliderOptions = array(
 								<?php if ((isset($slide['videoType']) && $slide['videoType'] == "vimeo") && (isset($slide['videoId']) && $slide['videoId'] != "")) : ?>
 									<iframe
 										class="blockons-video vimeo"
+										id="vid-<?php echo esc_attr($slide['videoId']); ?>"
 										src="https://player.vimeo.com/video/<?php echo esc_attr($slide['videoId']); ?>?h=55b3242b2e&title=0&byline=0&portrait=0"
 										frameborder="0"
 										allow="autoplay; fullscreen; picture-in-picture"
@@ -62,11 +64,13 @@ $sliderOptions = array(
 
 								<?php if ((isset($slide['videoType']) && $slide['videoType'] == "custom") && (isset($slide['customVideo']) && isset($slide['customVideo']['url']) && $slide['customVideo']['url'] != "")) : ?>
 									<video class="blockons-video custom" controls>
-										<source src="<?php echo esc_url($slide['customVideo']['url']); ?>" type="video/mp4"></source>
-										<!-- <source src="movie.ogg" type="video/ogg"></source> -->
+										<source src="<?php echo esc_url($slide['customVideo']['url']); ?>" type="video/mp4">
+										<!-- <source src="movie.ogg" type="video/ogg"> -->
 										<?php esc_html_e("Your browser does not support the video tag.", "blockons"); ?>
 									</video>
 								<?php endif; ?>
+
+								<img src="<?php echo esc_url(BLOCKONS_PLUGIN_URL . 'assets/images/169panoramic.png'); ?>" alt="no image" />
 							</div>
 
 							<div class="swiper-slide-img" style="<?php echo (isset($slide['coverImage']) && (isset($slide['coverImage']['url']) && $slide['coverImage']['url'] != "")) ? "background-image: url(" . esc_url($slide['coverImage']['url']) . ");" : "background-image: url(" . esc_url(BLOCKONS_PLUGIN_URL . 'assets/images/videoslider-placeholder.jpg') . ");"; ?>">

@@ -1,3 +1,4 @@
+import "../../blocks/video-slider/video-actions";
 import { blockonsSlideVideoAction } from "../../blocks/video-slider/video-actions";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -8,11 +9,18 @@ document.addEventListener("DOMContentLoaded", () => {
 			const sliderSettings = JSON.parse(slider.getAttribute("data-settings"));
 			const sliderElement = slider.firstElementChild.className;
 
-			if (sliderElement) {
-				const blockonSwiper = new Swiper(`.${sliderElement}`, sliderSettings);
+			const sliderOn = {
+				on: {
+					init: () => blockonsSlideVideoAction(),
+					slideChange: () => blockonsSlideVideoAction(),
+				},
+			};
 
-				blockonSwiper.on("click", () => blockonsSlideVideoAction());
-				blockonSwiper.on("slideChange", () => blockonsSlideVideoAction());
+			if (sliderElement) {
+				const blockonSwiper = new Swiper(`.${sliderElement}`, {
+					...sliderSettings,
+					...sliderOn,
+				});
 			}
 		});
 	}

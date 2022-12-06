@@ -41,11 +41,13 @@
 /* - Video Responsive - */
 .wp-block-blockons-video-slider .swiper-slide-video {
 	position: relative;
-	padding-bottom: 53.55%;
-	padding-top: 30px;
-	height: 0;
 	overflow: hidden;
 	z-index: 10;
+}
+.wp-block-blockons-video-slider .swiper-slide-video img {
+	display: block;
+	width: 100%;
+	height: auto;
 }
 .wp-block-blockons-video-slider .swiper-slide-video iframe,
 .wp-block-blockons-video-slider .swiper-slide-video object,

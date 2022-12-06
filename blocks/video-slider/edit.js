@@ -211,6 +211,7 @@ const Edit = (props) => {
 				{slideItem.videoType === "youtube" && slideItem.videoId && (
 					<iframe
 						className="blockons-video youtube"
+						id={`vid-${slideItem.videoId}`}
 						width="560"
 						height="315"
 						src={`https://www.youtube.com/embed/${slideItem.videoId}?enablejsapi=1`}
@@ -224,6 +225,7 @@ const Edit = (props) => {
 				{slideItem.videoType === "vimeo" && slideItem.videoId && (
 					<iframe
 						className="blockons-video vimeo"
+						id={`vid-${slideItem.videoId}`}
 						src={`https://player.vimeo.com/video/${slideItem.videoId}?h=55b3242b2e&title=0&byline=0&portrait=0`}
 						frameborder="0"
 						allow="autoplay; fullscreen; picture-in-picture"
@@ -237,6 +239,8 @@ const Edit = (props) => {
 						{__("Your browser does not support the video tag.", "blockons")}
 					</video>
 				)}
+
+				<img src={`${blockonsObj.pluginUrl}assets/images/169panoramic.png`} />
 			</div>
 
 			<div
@@ -253,10 +257,7 @@ const Edit = (props) => {
 					slideItem.videoType === "vimeo") &&
 					slideItem.videoId) ||
 					(slideItem.videoType === "custom" && slideItem.customVideo?.url)) && (
-					<div
-						className={`play-button`}
-						title={__("The video only plays on the frontend", "blockons")}
-					></div>
+					<div className={`play-button`}></div>
 				)}
 			</div>
 

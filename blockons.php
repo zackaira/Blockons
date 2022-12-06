@@ -13,7 +13,7 @@
  * Text Domain: blockons
  * Domain Path: /lang/
  * 
- * @fs_premium_only /dist/pro/, /assets/blocks/search/pro/, /assets/blocks/wc-mini-cart/pro/, /assets/aos/
+ * @fs_premium_only /dist/pro/, /assets/blocks/search/pro/, /assets/blocks/wc-mini-cart/pro/, /assets/aos/, /assets/slider/swiper-video.js
  *
  * @package blockons
  */
