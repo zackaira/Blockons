@@ -60,8 +60,6 @@ export function blockonsSlideVideoAction() {
 
 						break;
 					default:
-						// const customVideo = video;
-
 						if (playBtn) {
 							playBtn.addEventListener("click", () => {
 								if (slideParent.classList.contains("swiper-slide-active")) {
@@ -82,19 +80,4 @@ export function blockonsSlideVideoAction() {
 			}
 		});
 	}
-
-	// console.log(nodelist);
-
-	// for (i = 0; i < nodelist; i++) {
-	// 	el = video_frame[i];
-	// 	let player = new Vimeo.Player(x[i]);
-
-	// 	play_btn[i].addEventListener("click", function () {
-	// 		player.play();
-	// 	});
-
-	// 	player.on("play", function () {
-	// 		console.log("played the video!");
-	// 	});
-	// }
 }
