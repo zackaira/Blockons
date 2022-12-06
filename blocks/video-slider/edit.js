@@ -223,14 +223,20 @@ const Edit = (props) => {
 				)}
 
 				{slideItem.videoType === "vimeo" && slideItem.videoId && (
-					<>
-						<iframe
-							className="blockons-video vimeo"
-							src={`https://player.vimeo.com/video/${slideItem.videoId}?h=55b3242b2e&title=0&byline=0&portrait=0`}
-							frameborder="0"
-							allow="autoplay; fullscreen; picture-in-picture"
-						></iframe>
-					</>
+					<iframe
+						className="blockons-video vimeo"
+						src={`https://player.vimeo.com/video/${slideItem.videoId}?h=55b3242b2e&title=0&byline=0&portrait=0`}
+						frameborder="0"
+						allow="autoplay; fullscreen; picture-in-picture"
+					></iframe>
+				)}
+
+				{slideItem.videoType === "custom" && slideItem.customVideo?.url && (
+					<video className="blockons-video custom" controls>
+						<source src={slideItem.customVideo.url} type="video/mp4"></source>
+						{/* <source src="movie.ogg" type="video/ogg"></source> */}
+						{__("Your browser does not support the video tag.", "blockons")}
+					</video>
 				)}
 			</div>
 
@@ -244,7 +250,10 @@ const Edit = (props) => {
 						  }),
 				}}
 			>
-				{slideItem.videoId && (
+				{(((slideItem.videoType === "youtube" ||
+					slideItem.videoType === "vimeo") &&
+					slideItem.videoId) ||
+					(slideItem.videoType === "custom" && slideItem.customVideo?.url)) && (
 					<div
 						className={`play-button`}
 						title={__("The video only plays on the frontend", "blockons")}
@@ -376,8 +385,7 @@ const Edit = (props) => {
 									</a>
 								)}
 								{slideItem.videoType === "custom" &&
-									slideItem.customVideo &&
-									slideItem.customVideo.url && (
+									slideItem.customVideo?.url && (
 										<video controls width="250">
 											<source
 												src={slideItem.customVideo.url}
@@ -495,7 +503,7 @@ const Edit = (props) => {
 							value={sliderStyle}
 							options={[
 								{ label: "Plain", value: "one" },
-								{ label: "Drop Shadows", value: "two" },
+								{ label: "Drop Shadow", value: "two" },
 								{ label: "Bordered", value: "three" },
 							]}
 							onChange={(newValue) => setAttributes({ sliderStyle: newValue })}

@@ -120,11 +120,8 @@ class Blockons {
 		wp_register_script('blockons-waypoint', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/waypoints.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 		wp_register_script('blockons-waypoint-inview', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/inview.min.js'), array('blockons-waypoint'), BLOCKONS_PLUGIN_VERSION, true);
 		wp_register_script('blockons-progress-bars', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/progress-bars.js'), array('blockons-waypoint', 'blockons-waypoint-inview' ), BLOCKONS_PLUGIN_VERSION, true);
-		// Testimonials
-		wp_register_style('blockons-splidecss', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/splide.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
-		wp_register_script('blockons-splidejs', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/splide.min.js'), array(), BLOCKONS_PLUGIN_VERSION);
 
-		// SLIDERS
+		// Sliders
 		wp_register_style('blockons-slider', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
 		wp_register_script('blockons-swiper', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 		wp_register_script('blockons-slider', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.js'), array('blockons-swiper'), BLOCKONS_PLUGIN_VERSION, true);

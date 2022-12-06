@@ -17,8 +17,8 @@
 }
 /* -- Player Styles -- */
 /* -- Two -- */
-.wp-block-blockons-video-slider.style-two .blockons-slider {
-	box-shadow: 0 1px 6px rgb(0 0 0 / 45%);
+.wp-block-blockons-video-slider.style-two .blockons-slider .swiper {
+	box-shadow: 0 1px 6px rgb(0 0 0 / 65%);
 }
 /* -- Three -- */
 .wp-block-blockons-video-slider.style-three .blockons-slider {
@@ -26,19 +26,22 @@
 	padding: 10px;
 }
 /* -- Player Roundness -- */
+.wp-block-blockons-video-slider.style-two.rn-rounded .blockons-slider,
 .wp-block-blockons-video-slider.rn-rounded .blockons-slider .swiper {
 	border-radius: 12px;
 }
+.wp-block-blockons-video-slider.style-two.rn-rounded .blockons-slider,
 .wp-block-blockons-video-slider.rn-rounder .blockons-slider .swiper {
 	border-radius: 45px;
 }
+.wp-block-blockons-video-slider.style-two.rn-rounded .blockons-slider,
 .wp-block-blockons-video-slider.rn-round .blockons-slider .swiper {
 	border-radius: 100px;
 }
 /* - Video Responsive - */
 .wp-block-blockons-video-slider .swiper-slide-video {
 	position: relative;
-	padding-bottom: 53%;
+	padding-bottom: 53.55%;
 	padding-top: 30px;
 	height: 0;
 	overflow: hidden;
@@ -46,7 +49,8 @@
 }
 .wp-block-blockons-video-slider .swiper-slide-video iframe,
 .wp-block-blockons-video-slider .swiper-slide-video object,
-.wp-block-blockons-video-slider .swiper-slide-video embed {
+.wp-block-blockons-video-slider .swiper-slide-video embed,
+.wp-block-blockons-video-slider .swiper-slide-video video {
 	position: absolute;
 	top: 0;
 	left: 0;

@@ -17,6 +17,7 @@ $sliderOptions = array(
 	"spaceBetween" => 0,
 	"loop" => $attributes['mode'] === "loop" ? true : false,
 	"rewind" => $attributes['mode'] === "rewind" ? true : false,
+	"simulateTouch" => false,
 	"navigation" => isset($attributes['navigation']) && $attributes['navigation'] == true ? array(
 		"prevEl" => ".swiper-button-prev",
 		"nextEl" => ".swiper-button-next",
@@ -49,6 +50,7 @@ $sliderOptions = array(
 										allowfullscreen
 									></iframe>
 								<?php endif; ?>
+
 								<?php if ((isset($slide['videoType']) && $slide['videoType'] == "vimeo") && (isset($slide['videoId']) && $slide['videoId'] != "")) : ?>
 									<iframe
 										class="blockons-video vimeo"
@@ -57,10 +59,18 @@ $sliderOptions = array(
 										allow="autoplay; fullscreen; picture-in-picture"
 									></iframe>
 								<?php endif; ?>
+
+								<?php if ((isset($slide['videoType']) && $slide['videoType'] == "custom") && (isset($slide['customVideo']) && isset($slide['customVideo']['url']) && $slide['customVideo']['url'] != "")) : ?>
+									<video class="blockons-video custom" controls>
+										<source src="<?php echo esc_url($slide['customVideo']['url']); ?>" type="video/mp4"></source>
+										<!-- <source src="movie.ogg" type="video/ogg"></source> -->
+										<?php esc_html_e("Your browser does not support the video tag.", "blockons"); ?>
+									</video>
+								<?php endif; ?>
 							</div>
 
 							<div class="swiper-slide-img" style="<?php echo (isset($slide['coverImage']) && (isset($slide['coverImage']['url']) && $slide['coverImage']['url'] != "")) ? "background-image: url(" . esc_url($slide['coverImage']['url']) . ");" : "background-image: url(" . esc_url(BLOCKONS_PLUGIN_URL . 'assets/images/videoslider-placeholder.jpg') . ");"; ?>">
-								<?php if (isset($slide['videoId']) && $slide['videoId'] != "") : ?>
+								<?php if (((isset($slide['videoType']) && $slide['videoType'] == "youtube" || $slide['videoType'] == "vimeo") && (isset($slide['videoId']) && $slide['videoId'] != "")) || (isset($slide['videoType']) && $slide['videoType'] == "custom") && isset($slide['customVideo']['url']) && $slide['customVideo']['url'] != "") : ?>
 									<div class="play-button" title="<?php esc_html_e("The video only plays on the frontend", "blockons"); ?>"></div>
 								<?php endif; ?>
 							</div>

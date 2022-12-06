@@ -9,7 +9,7 @@ export function blockonsSlideVideoAction() {
 	if (video_slides) {
 		video_slides.forEach((slide, i) => {
 			const slideParent = slide.parentElement;
-			const video = slide.querySelector("iframe");
+			const video = slide.querySelector(".blockons-video");
 			const nextPrev = document.querySelectorAll(
 				".swiper-button-prev, .swiper-button-next"
 			);
@@ -60,7 +60,23 @@ export function blockonsSlideVideoAction() {
 
 						break;
 					default:
-						// console.log("play an uploaded video", videoType);
+						// const customVideo = video;
+
+						if (playBtn) {
+							playBtn.addEventListener("click", () => {
+								if (slideParent.classList.contains("swiper-slide-active")) {
+									slideParent.classList.add("blockons-play");
+								}
+								video.play();
+							});
+						}
+						if (nextPrev) {
+							nextPrev.forEach((el) => {
+								el.addEventListener("click", () => video.pause());
+								slideParent.classList.remove("blockons-play");
+							});
+						}
+
 						break;
 				}
 			}
