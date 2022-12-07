@@ -32,7 +32,7 @@ $sliderOptions = array(
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes(['class' => $custom_classes]) ); ?>>
 	<div class="blockons-slider video-slider <?php echo isset($attributes['showOnHover']) && $attributes['showOnHover'] == true ? sanitize_html_class("controlsOnHover") : ""; ?> navigation-<?php echo sanitize_html_class($attributes['navigationStyle']); ?> navigation-<?php echo sanitize_html_class($attributes['navigationColor']); ?> pagination-<?php echo sanitize_html_class($attributes['paginationStyle']); ?> pagination-<?php echo sanitize_html_class($attributes['paginationColor']); ?> <?php echo isset($attributes['navigationArrow']) && $attributes['navigationArrow'] == "ban" ? sanitize_html_class("default-icon") : sanitize_html_class("custom-icon"); ?> arrows-<?php echo sanitize_html_class($attributes['navigationArrow']); ?>" id="<?php echo esc_attr($attributes['uniqueId']); ?>" data-settings="<?php echo esc_attr(json_encode((object)$sliderOptions)); ?>" style="<?php echo isset($attributes['sliderStyle']) && $attributes['sliderStyle'] == "three" ? "padding: " . $attributes['sliderBorderWidth'] . "px; border-radius: " . $attributes['sliderOuterRound'] . "px; background-color: " . $attributes['sliderBorderColor'] . ";" : ""; ?>">
-		<div class="swiper">
+		<div class="video-swiper-<?php echo esc_attr($attributes['uniqueId']); ?> swiper">
 			<div class="swiper-wrapper">
 				<?php foreach ($attributes['sliderSlides'] as $i => $slide) { ?>
 					<div class="swiper-slide">

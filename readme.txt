@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: blocks, editor blocks, block, gutenberg blocks, woocommerce blocks
 Requires at least: 5.0
 Tested up to: 6.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,6 +167,13 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 
 == Changelog ==
+
+= 1.0.3 =
+* Styling tweaks/fixes
+* 
+* Updated the language .pot file
+* Rebuilt all Slider Blocks to use Swiper JS
+NOTE: Please check all sliders are working if previously used - Testimonials, Video Slider & Image Carousel
 
 = 1.0.2 =
 * Styling tweaks/fixes

@@ -31,12 +31,12 @@ $sliderOptions = array(
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes(['class' => $custom_classes]) ); ?>>
 	<div class="blockons-slider <?php echo isset($attributes['showOnHover']) && $attributes['showOnHover'] == true ? sanitize_html_class("controlsOnHover") : ""; ?> navigation-<?php echo sanitize_html_class($attributes['navigationStyle']); ?> navigation-<?php echo sanitize_html_class($attributes['navigationColor']); ?> pagination-<?php echo sanitize_html_class($attributes['paginationStyle']); ?> pagination-<?php echo sanitize_html_class($attributes['paginationColor']); ?> <?php echo isset($attributes['navigationArrow']) && $attributes['navigationArrow'] == "ban" ? sanitize_html_class("default-icon") : sanitize_html_class("custom-icon"); ?> arrows-<?php echo sanitize_html_class($attributes['navigationArrow']); ?> <?php echo isset($attributes['captionPosition']) && $attributes['captionPosition'] != "" ? sanitize_html_class("caption-" . $attributes['captionPosition']) : sanitize_html_class("nocaption"); ?> <?php echo ((isset($attributes['captionPosition']) && $attributes['captionPosition'] == "over") && (isset($attributes['captionOnHover']) && $attributes['captionOnHover'] == true)) ? sanitize_html_class("caption-hover") : ""; ?> <?php echo isset($attributes['imageRoundness']) ? sanitize_html_class("bradius-" . $attributes['imageRoundness']) : ""; ?>" id="<?php echo esc_attr($attributes['uniqueId']); ?>" data-settings="<?php echo esc_attr(json_encode((object)$sliderOptions)); ?>">
-		<div class="swiper">
+		<div class="ic-swiper-<?php echo esc_attr($attributes['uniqueId']); ?> swiper">
 			<div class="swiper-wrapper">
-				<?php foreach ($attributes['sliderSlides'] as $i => $slide) { ?>
+				<?php foreach ($attributes['slides'] as $i => $slide) { ?>
 					<div class="swiper-slide">
 						<div class="swiper-slide-inner">
-							<div class="blockons-slider-img <?php echo ((isset($attributes['forceFullWidth']) || $attributes['forceFullWidth'] == true) && (isset($attributes['imageProportion']) && $attributes['imageProportion'] != "actual")) ? sanitize_html_class("imgfull") : ""; ?>" <?php echo isset($attributes['imageProportion']) && $attributes['imageProportion'] != "actual" ? 'style="background-image: url(' . $slide['imageUrl'] . ');"' : ''; ?>>
+							<div class="blockons-slider-img <?php echo ((isset($attributes['forceFullWidth']) || $attributes['forceFullWidth'] == true) || (isset($attributes['imageProportion']) && $attributes['imageProportion'] != "actual")) ? sanitize_html_class("imgfull") : ""; ?>" <?php echo isset($attributes['imageProportion']) && $attributes['imageProportion'] != "actual" ? 'style="background-image: url(' . $slide['imageUrl'] . ');"' : ''; ?>>
 								<?php if ((isset($attributes['imageProportion']) && $attributes['imageProportion'] == "actual") && $slide['imageUrl']) : ?>
 									<img src="<?php echo esc_url($slide['imageUrl']); ?>" alt="<?php echo esc_attr($slide['imageAlt']); ?>" />
 								<?php else : ?>
@@ -44,7 +44,7 @@ $sliderOptions = array(
 								<?php endif; ?>
 							</div>
 
-							<?php if ((isset($attributes['captionPosition']) && $attributes['captionPosition'] != "") && (isset($slide['imageCaption']) && $slide['imageCaption'] != "")) : ?>
+							<?php if ((isset($attributes['captionPosition']) && $attributes['captionPosition'] != "none") && (isset($slide['imageCaption']) && $slide['imageCaption'] != "")) : ?>
 								<div class="blockons-caption" <?php echo isset($attributes['captionPosition']) && $attributes['captionPosition'] == "below" && isset($attributes['captionBgColor']) ? 'style="background-color: ' . esc_attr($attributes['captionBgColor']) . ';"' : ''; ?>>
 									
 									<?php if (isset($attributes['captionPosition']) && $attributes['captionPosition'] == "over") : ?>

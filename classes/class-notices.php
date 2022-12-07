@@ -13,9 +13,12 @@ class Blockons_Notices {
 	 */
 	public function __construct() {
 		add_action( 'admin_init', array($this, 'blockons_dismiss_notice' ), 0);
-		add_action( 'admin_notices', array( $this, 'blockons_add_update_notice' ) );
+		add_action( 'admin_notices', array($this, 'blockons_add_update_notice' ));
 	} // End __construct ()
 
+	/**
+	 * Add notices
+	 */
 	public function blockons_add_update_notice() {
 		global $pagenow;
 		global $current_user;
@@ -23,6 +26,10 @@ class Blockons_Notices {
 		$blockons_page = isset( $_GET['page'] ) ? $pagenow . '?page=' . sanitize_text_field($_GET['page']) . '&' : sanitize_text_field($pagenow) . '?';
 
 		$notices = $this->blockons_notices();
+
+		$allowed_html = array(
+			'b' => array('style' => array()),
+		);
 
 		if ( $pagenow == 'plugins.php' || $pagenow == 'options-general.php' ) :
 
@@ -36,11 +43,11 @@ class Blockons_Notices {
 
 							<div class="blockons-notice <?php echo isset($notice['inline']) ? esc_attr( 'inline' ) : ''; ?>">
 								<?php if (isset($notice['title'])) : ?>
-									<h4 class="blockons-notice-title"><?php esc_html_e($notice['title']); ?></h4>
+									<h4 class="blockons-notice-title"><?php echo wp_kses($notice['title'] ,$allowed_html); ?></h4>
 								<?php endif; ?>
 
 								<?php if (isset($notice['text'])) : ?>
-									<p class="blockons-notice-text"><?php esc_html_e($notice['text']); ?></p>
+									<p class="blockons-notice-text"><?php echo wp_kses($notice['text'] ,$allowed_html); ?></p>
 								<?php endif; ?>
 
 								<?php if (isset($notice['link']) && isset($notice['link_text'])) : ?>
@@ -86,6 +93,16 @@ class Blockons_Notices {
 		// 	'link_text' => __( 'Go to the Blockons settings', 'blockons' ),
 		// 	'inline' => true, // To display the link & text inline
 		// );
+
+		$settings['slider_blocks_rebuilt'] = array(
+			'id'    => 'sliders_rebuilt',
+			'type'  => 'error',
+			'title' => __( '<b>Blockons Plugin:</b> We\'ve rebuilt the Slider blocks to be much better!', 'blockons' ),
+			'text'  => __( '<b style="color: #000;">Please Note:</b> If you\'ve used the <b>Video Slider</b> block, <b>Image Carousel</b> block or the <b>Testimonials</b> block, then please check that they are still working after this latest update, or you might need to re-create those blocks again! Apologies for the inconvenience.', 'blockons' ),
+			// 'link'  => admin_url( 'options-general.php?page=blockons-settings' ),
+			// 'link_text' => __( 'Go to Settings', 'blockons' ),
+			// 'inline' => true,
+		);
 
 		// $settings['new_settings'] = array(
 		// 	'id'    => '01',

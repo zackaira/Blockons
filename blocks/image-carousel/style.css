@@ -9,6 +9,7 @@
 .wp-block-blockons-image-carousel .swiper-slide {
 	text-align: center;
 	position: relative;
+	box-sizing: border-box;
 }
 .wp-block-blockons-image-carousel .blockons-slider-img {
 	display: flex;
@@ -103,6 +104,10 @@
 	padding: 8px 60px;
 }
 /* -- Navigation -- */
+.wp-block-blockons-image-carousel .swiper-button-prev,
+.wp-block-blockons-image-carousel .swiper-button-next {
+	background-image: none;
+}
 .wp-block-blockons-image-carousel
 	.blockons-slider.navigation-round
 	.swiper-button-prev,

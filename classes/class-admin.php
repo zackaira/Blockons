@@ -62,7 +62,6 @@ class Blockons_Admin {
 		 
 		return $plugin_meta;
 	}
-	
 
 	/**
 	 * Create the Page Template html for React

@@ -4,7 +4,7 @@
 	"name": "blockons/video-slider",
 	"title": "Video Slider",
 	"textdomain": "blockons",
-	"icon": "heart",
+	"icon": "format-video",
 	"category": "blockons-category",
 	"keywords": ["image", "carousel", "gallery", "picture", "slider"],
 	"attributes": {

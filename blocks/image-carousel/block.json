@@ -33,7 +33,7 @@
 		},
 		"captionPosition": {
 			"type": "string",
-			"default": ""
+			"default": "none"
 		},
 		"captionOnHover": {
 			"type": "boolean",

@@ -30,6 +30,9 @@ body.wp-admin.blockons-free.plugins-php
 	font-weight: 500;
 	color: #222;
 }
+.blockons-admin-notice .blockons-notice-title b {
+	color: #9807aa;
+}
 .blockons-admin-notice p.blockons-notice-text {
 	margin: 5px 0 0;
 	padding: 0;
@@ -40,73 +43,3 @@ body.wp-admin.blockons-free.plugins-php
 	vertical-align: baseline;
 	margin-right: 5px;
 }
-
-/* .blockons-updatenotice {
-	display: flex;
-	align-items: center;
-}
-.blockons-updatenotice-btn {
-	padding: 8px 12px;
-	display: flex;
-	justify-content: center;
-}
-.blockons-updatenotice-btn a {
-	display: inline-block;
-	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 50%);
-	border-radius: 3px;
-	margin: 0;
-	padding: 6px 25px;
-	font-size: 12px;
-	letter-spacing: 0.3px;
-	cursor: pointer;
-	background-color: #c1219f;
-	color: #fff;
-	transition: all 0.2s ease-in-out 0s;
-}
-.blockons-updatenotice-btn a:hover {
-	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 50%), 0 0 6px rgb(0 0 0 / 18%);
-	background-color: #d811ae;
-} */
-
-/* -- Loader -- */
-/* .blockons-loader {
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 25px;
-	height: 25px;
-	z-index: 2;
-}
-.blockons-loader * {
-	box-sizing: border-box;
-}
-.blockons-loader-sector {
-	border-radius: 50%;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	border: 2px solid #b1b5d52b;
-	mix-blend-mode: overlay;
-}
-
-.blockons-loader-sector-pink {
-	animation: rotate 2s ease-out infinite;
-	border-top: 2px solid #f0219c;
-}
-.blockons-loader-sector-blue {
-	animation: rotate 2.5s ease-in infinite;
-	border-top: 2px solid #6823a1;
-}
-.blockons-loader-sector-purple {
-	animation: rotate 1.5s ease-in-out infinite;
-	border-top: 2px solid #c1219f;
-}
-@keyframes rotate {
-	from {
-		transform: rotate(0);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-} */

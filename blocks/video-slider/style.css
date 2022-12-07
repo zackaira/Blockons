@@ -10,6 +10,7 @@
 	background-color: #fafafa;
 	text-align: center;
 	position: relative;
+	box-sizing: border-box;
 }
 .wp-block-blockons-video-slider .swiper-slide img {
 	display: block;
@@ -107,6 +108,10 @@
 }
 
 /* -- Navigation -- */
+.wp-block-blockons-video-slider .swiper-button-prev,
+.wp-block-blockons-video-slider .swiper-button-next {
+	background-image: none;
+}
 .wp-block-blockons-video-slider
 	.blockons-slider.navigation-round
 	.swiper-button-prev,

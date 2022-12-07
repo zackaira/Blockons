@@ -148,7 +148,7 @@ const Edit = (props) => {
 				)}
 			</div>
 
-			{captionPosition && slideItem.imageCaption && (
+			{captionPosition !== "none" && slideItem.imageCaption && (
 				<div
 					className="blockons-caption"
 					style={
@@ -358,13 +358,14 @@ const Edit = (props) => {
 									label={__("Caption Position", "blockons")}
 									value={captionPosition}
 									options={[
-										{ label: __("None", "blockons"), value: "" },
+										{ label: __("None", "blockons"), value: "none" },
 										{ label: __("Below Image", "blockons"), value: "below" },
 										{ label: __("Over Image", "blockons"), value: "over" },
 									]}
 									onChange={(newValue) => {
 										setAttributes({
-											captionPosition: newValue === undefined ? "" : newValue,
+											captionPosition:
+												newValue === undefined ? "none" : newValue,
 										});
 									}}
 								/>
@@ -565,7 +566,9 @@ const Edit = (props) => {
 				} navigation-${navigationStyle} navigation-${navigationColor} pagination-${paginationStyle} pagination-${paginationColor} ${
 					navigationArrow === "ban" ? "default-icon" : "custom-icon"
 				} arrows-${navigationArrow} ${
-					captionPosition ? "caption-" + captionPosition : "nocaption"
+					captionPosition !== "none"
+						? "caption-" + captionPosition
+						: "nocaption"
 				} ${
 					captionPosition === "over" && captionOnHover ? "caption-hover" : ""
 				} bradius-${imageRoundness}`}

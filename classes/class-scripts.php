@@ -291,7 +291,6 @@ class Blockons {
 	public static function blockonsDefaults() {
 		$initialSettings = array(
 			"blocks" => array( // For adding a new block, update this AND class-notices.php newblocks number
-				"slider" => true, // TESTING NEW SLIDER
 				"accordions" => true, // 12
 				"icon_list" => true, // 11
 				"image_carousel" => true, // 10

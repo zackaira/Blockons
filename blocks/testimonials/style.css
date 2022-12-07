@@ -17,11 +17,16 @@
 	justify-content: center;
 	align-items: center;
 	align-self: stretch;
+	box-sizing: border-box;
 }
 .wp-block-blockons-testimonials .swiper-slide h4 {
 	margin: 80px 0;
 }
 /* -- Navigation -- */
+.wp-block-blockons-testimonials .swiper-button-prev,
+.wp-block-blockons-testimonials .swiper-button-next {
+	background-image: none;
+}
 .wp-block-blockons-testimonials
 	.blockons-slider.navigation-round
 	.swiper-button-prev,
@@ -263,10 +268,12 @@
 	opacity: 1;
 }
 /* -- Testimonials Design -- */
-.blockons-slide-text {
+.wp-block-blockons-testimonials .blockons-slide-text {
 	position: relative;
 }
-.blockons-slide-text .blockons-fontawesome.fa-quote-left {
+.wp-block-blockons-testimonials
+	.blockons-slide-text
+	.blockons-fontawesome.fa-quote-left {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -275,12 +282,16 @@
 	width: 5px;
 	height: 5px;
 }
-.blockons-slide-text .blockons-fontawesome.fa-quote-left::before {
+.wp-block-blockons-testimonials
+	.blockons-slide-text
+	.blockons-fontawesome.fa-quote-left::before {
 	position: absolute;
 	top: -20px;
 	right: 15px;
 }
-.blockons-slide-text .blockons-fontawesome.fa-quote-right {
+.wp-block-blockons-testimonials
+	.blockons-slide-text
+	.blockons-fontawesome.fa-quote-right {
 	position: absolute;
 	bottom: -15px;
 	right: 0;
@@ -289,26 +300,28 @@
 	width: 5px;
 	height: 5px;
 }
-.blockons-slide-text .blockons-fontawesome.fa-quote-right::before {
+.wp-block-blockons-testimonials
+	.blockons-slide-text
+	.blockons-fontawesome.fa-quote-right::before {
 	position: absolute;
 	bottom: -10px;
 	right: -5px;
 }
-.blockons-slide-text-txt {
+.wp-block-blockons-testimonials .blockons-slide-text-txt {
 	position: relative;
 	z-index: 4;
 }
-.blockons-slide-author {
+.wp-block-blockons-testimonials .blockons-slide-author {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 	margin: 42px 0 0;
 }
-.blockons-slide-author-img img {
+.wp-block-blockons-testimonials .blockons-slide-author-img img {
 	width: 100%;
 	height: auto;
 }
-.blockons-slide-author-img {
+.wp-block-blockons-testimonials .blockons-slide-author-img {
 	width: 45px;
 	height: 45px;
 	display: flex;
@@ -320,16 +333,16 @@
 	margin-right: 12px;
 	position: relative;
 }
-.blockons-slide-author-img.hasimg {
+.wp-block-blockons-testimonials .blockons-slide-author-img.hasimg {
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
 }
-.blockons-slide-author-txt-auth {
+.wp-block-blockons-testimonials .blockons-slide-author-txt-auth {
 	font-size: 0.85em;
 	font-weight: bold;
 }
-.blockons-slide-author-txt-pos {
+.wp-block-blockons-testimonials .blockons-slide-author-txt-pos {
 	font-size: 0.75em;
 	letter-spacing: 0.2px;
 	margin-top: 3px;
@@ -345,17 +358,17 @@
 	text-align: right;
 }
 /* ---- Star Ratings ---- */
-.blockons-star-ratings {
+.wp-block-blockons-testimonials .blockons-star-ratings {
 	margin: 0 0 20px;
 	text-align: center;
 }
-.blockons-star {
+.wp-block-blockons-testimonials .blockons-star {
 	font-size: 16px;
 	margin: 0 1px;
 	color: #999;
 	width: 16px;
 }
-.blockons-star.checked {
+.wp-block-blockons-testimonials .blockons-star.checked {
 	color: #fdc704;
 }
 /* -- Layout One -- */
