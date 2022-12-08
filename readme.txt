@@ -1,7 +1,7 @@
 === Blockons - WordPress editor blocks plugin ===
 Contributors: Kaira
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PFZGBM92T8XSE&source=url
-Tags: blocks, editor blocks, block, gutenberg blocks, woocommerce blocks
+Tags: blocks, block, gutenberg blocks, woocommerce blocks, editor blocks
 Requires at least: 5.0
 Tested up to: 6.1
 Stable tag: 1.0.3
@@ -170,6 +170,7 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.0.3 =
 * Styling tweaks/fixes
+* Improved compatibility with other plugins
 * Updated the language .pot file
 * Rebuilt all Slider Blocks to use Swiper JS
 NOTE: Please check all sliders are working if previously used - Testimonials, Video Slider & Image Carousel

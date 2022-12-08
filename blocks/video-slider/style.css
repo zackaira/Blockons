@@ -12,10 +12,6 @@
 	position: relative;
 	box-sizing: border-box;
 }
-.wp-block-blockons-video-slider .swiper-slide img {
-	display: block;
-	margin: 0;
-}
 /* -- Player Styles -- */
 /* -- Two -- */
 .wp-block-blockons-video-slider.style-two .blockons-slider .swiper {
@@ -49,6 +45,7 @@
 	display: block;
 	width: 100%;
 	height: auto;
+	margin: 0 !important;
 }
 .wp-block-blockons-video-slider .swiper-slide-video iframe,
 .wp-block-blockons-video-slider .swiper-slide-video object,

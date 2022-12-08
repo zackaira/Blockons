@@ -295,7 +295,13 @@
 .wp-block-blockons-image-carousel .blockons-slider .swiper-pagination {
 	position: relative;
 	bottom: auto;
-	padding: 5px 0;
+	padding: 0;
+	line-height: 1.2;
+}
+.wp-block-blockons-image-carousel
+	.blockons-slider
+	.swiper-pagination.swiper-pagination-bullets-dynamic {
+	padding: 8px 0 0;
 }
 .wp-block-blockons-image-carousel
 	.blockons-slider.pagination-dark
