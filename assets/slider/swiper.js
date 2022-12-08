@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-	const blockonSliders = document.querySelectorAll(".blockons-slider");
+	const blockonSliders = document.querySelectorAll(".blockons-slider.slider");
 
 	if (blockonSliders) {
 		blockonSliders.forEach((slider) => {

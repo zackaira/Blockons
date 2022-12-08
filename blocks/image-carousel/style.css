@@ -80,12 +80,14 @@
 }
 /* -- Roundness -- */
 .blockons-slider.nocaption.bradius-rounded .swiper-slide,
+.blockons-slider.caption-none.bradius-rounded .swiper-slide,
 .blockons-slider.caption-below.bradius-rounded .blockons-slider-img,
 .blockons-slider.caption-over.bradius-rounded .swiper-slide {
 	border-radius: 12px;
 	overflow: hidden;
 }
 .blockons-slider.nocaption.bradius-rounder .swiper-slide,
+.blockons-slider.caption-none.bradius-rounder .swiper-slide,
 .blockons-slider.caption-below.bradius-rounder .blockons-slider-img,
 .blockons-slider.caption-over.bradius-rounder .swiper-slide {
 	border-radius: 60px;
@@ -95,6 +97,7 @@
 	padding: 8px 25px;
 }
 .blockons-slider.nocaption.bradius-round .swiper-slide,
+.blockons-slider.caption-none.bradius-round .swiper-slide,
 .blockons-slider.caption-below.bradius-round .blockons-slider-img,
 .blockons-slider.caption-over.bradius-round .swiper-slide {
 	border-radius: 120px;

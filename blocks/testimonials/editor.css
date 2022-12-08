@@ -46,7 +46,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 45;
+	z-index: 30;
 }
 .blockons-slider-reload-inner {
 	background-color: #fff;

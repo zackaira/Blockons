@@ -170,7 +170,6 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.0.3 =
 * Styling tweaks/fixes
-* 
 * Updated the language .pot file
 * Rebuilt all Slider Blocks to use Swiper JS
 NOTE: Please check all sliders are working if previously used - Testimonials, Video Slider & Image Carousel

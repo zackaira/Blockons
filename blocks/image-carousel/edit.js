@@ -561,7 +561,7 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 			<div
-				className={`blockons-slider ${
+				className={`blockons-slider slider ${
 					showOnHover ? "controlsOnHover" : ""
 				} navigation-${navigationStyle} navigation-${navigationColor} pagination-${paginationStyle} pagination-${paginationColor} ${
 					navigationArrow === "ban" ? "default-icon" : "custom-icon"
