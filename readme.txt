@@ -168,6 +168,11 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 == Changelog ==
 
+= 1.0.4 =
+* Styling tweaks/fixes
+* 
+* 
+
 = 1.0.3 =
 * Styling tweaks/fixes
 * Improved compatibility with other plugins

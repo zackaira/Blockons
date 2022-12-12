@@ -1,0 +1,43 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/image-gallery",
+	"title": "Image Gallery",
+	"textdomain": "blockons",
+	"icon": "heart",
+	"category": "blockons-category",
+	"keywords": ["image", "gallery", "picture"],
+	"attributes": {
+		"uniqueId": {
+			"type": "string"
+		},
+		"alignment": {
+			"type": "string",
+			"default": "center"
+		},
+		"galleryImages": {
+			"type": "array",
+			"default": []
+		},
+		"columns": {
+			"type": "number",
+			"default": 4
+		},
+		"gridGap": {
+			"type": "number",
+			"default": 10
+		},
+		"layout": {
+			"type": "string",
+			"default": "grid"
+		},
+		"imageProportion": {
+			"type": "string",
+			"default": "actual"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"viewScript": "file:./masonry.js",
+	"style": ["file:./style-index.css", "blockons-fontawesome"]
+}

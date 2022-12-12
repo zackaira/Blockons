@@ -94,16 +94,6 @@ class Blockons_Notices {
 		// 	'inline' => true, // To display the link & text inline
 		// );
 
-		$settings['slider_blocks_rebuilt'] = array(
-			'id'    => 'sliders_rebuilt',
-			'type'  => 'error',
-			'title' => __( '<b>Blockons Plugin:</b> We\'ve rebuilt the Slider blocks to be much better!', 'blockons' ),
-			'text'  => __( '<b style="color: #000;">Please Note:</b> If you\'ve used the <b>Video Slider</b> block, <b>Image Carousel</b> block or the <b>Testimonials</b> block to build your pages, then please check that they are still working after this latest update, or you might need to re-create those blocks again! Apologies for the inconvenience.', 'blockons' ),
-			// 'link'  => admin_url( 'options-general.php?page=blockons-settings' ),
-			// 'link_text' => __( 'Go to Settings', 'blockons' ),
-			// 'inline' => true,
-		);
-
 		// $settings['new_settings'] = array(
 		// 	'id'    => '01',
 		// 	'type'  => 'info',

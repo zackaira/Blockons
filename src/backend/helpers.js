@@ -27,6 +27,11 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: false,
 	},
+	image_gallery: {
+		desc: __("Display multiple images in a more advanced gallery", "blockons"),
+		pluginSpecific: false,
+		isNew: __("NEW", ""),
+	},
 	image_carousel: {
 		desc: __("Display multiple images in a neat carousel", "blockons"),
 		pluginSpecific: false,

@@ -1,0 +1,40 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.wp-block-blockons-image-gallery {
+}
+.blockons-gallery-image {
+	position: relative;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.layout-grid
+	.blockons-gallery-image.grid,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.layout-featured
+	.blockons-gallery-image.featured {
+	position: relative !important;
+	top: auto !important;
+	left: auto !important;
+}
+/* -- No Images / Upload Images -- */
+.blockons-gallery-select {
+	background-color: #f0f0f0;
+	padding: 40px;
+	display: flex;
+	justify-content: center;
+}
+.blockons-gallery-select .blockons-upload-button {
+	background-color: #fff;
+	max-width: 320px;
+	padding: 30px;
+}
+/* -- Image Settings -- */
+.blockons-gallery-btns {
+	background-color: #fff;
+	box-shadow: 0 1px 4px rgb(0 0 0 / 22%);
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	z-index: 20;
+}
