@@ -37,6 +37,10 @@ const Edit = (props) => {
 			gridGap,
 			layout,
 			imageProportion,
+			imageHover,
+			imageCaption,
+			captionOnHover,
+			captionAnimation,
 		},
 		setAttributes,
 	} = props;
@@ -60,8 +64,8 @@ const Edit = (props) => {
 			if (msnryEle) {
 				const msnry = new Masonry(msnryEle, {
 					// options
-					itemSelector: ".blockons-gallery-image.masonry",
-					columnWidth: ".blockons-gallery-image.masonry",
+					itemSelector: ".blockons-gallery-item.masonry",
+					columnWidth: ".blockons-gallery-item.masonry",
 					percentPosition: true,
 				});
 				setMasonry(msnry);
@@ -77,7 +81,7 @@ const Edit = (props) => {
 		setTimeout(() => {
 			if (masonry) masonry.layout();
 		}, 200);
-	}, [columns, gridGap]);
+	}, [columns, gridGap, imageCaption]);
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
@@ -109,45 +113,79 @@ const Edit = (props) => {
 		}
 	};
 
-	const images = galleryImages.map((imageItem, index) => (
-		<div
-			className={`blockons-gallery-image ${layout}`}
-			style={
-				layout === "masonry"
-					? {
-							width: `calc((100% / ${columns}) - (${gridGap}px * 2))`,
-							margin: `0 ${gridGap}px ${gridGap * 2}px`,
-					  }
-					: {
-							"--n": `0`,
-					  }
-			}
-		>
-			{imageProportion === "actual" ? (
-				imageItem.imageUrl && (
-					<img src={imageItem.imageUrl} alt={imageItem.alt} />
-				)
-			) : (
-				<img
-					src={`${blockonsObj.pluginUrl}assets/images/${imageProportion}.png`}
-					alt={imageItem.alt}
-				/>
-			)}
+	let nValue = 0;
+	const images = galleryImages.map((imageItem, index) => {
+		const imageCount = index;
+		if (imageCount % 11 === 0) nValue++;
 
-			{imageItem.imageCaption && (
-				<div className="blockons-gallery-caption"></div>
-			)}
+		return (
+			<div
+				className={`blockons-gallery-item ${layout}`}
+				style={{
+					...(layout === "masonry"
+						? {
+								width: `calc((100% / ${columns}) - (${Math.floor(
+									gridGap / 2
+								)}px * 2))`,
+								margin: `0 ${Math.floor(gridGap / 2)}px ${gridGap}px`,
+						  }
+						: {}),
+					...(layout === "featured"
+						? {
+								// backgroundImage: `url(${imageItem.imageUrl})`,
+								"--n": nValue - 1,
+						  }
+						: {}),
+				}}
+			>
+				{layout === "featured" && imageItem.imageUrl && (
+					<div className="blockons-gallery-img">
+						<img src={imageItem.imageUrl} alt={imageItem.alt} />
+					</div>
+				)}
+				{(layout === "grid" || layout === "masonry") && (
+					<div
+						className="blockons-gallery-img"
+						style={{
+							...(imageProportion !== "actual"
+								? {
+										backgroundImage: `url(${imageItem.imageUrl})`,
+								  }
+								: {}),
+						}}
+					>
+						{imageProportion === "actual" ? (
+							imageItem.imageUrl && (
+								<img src={imageItem.imageUrl} alt={imageItem.alt} />
+							)
+						) : (
+							<img
+								src={`${blockonsObj.pluginUrl}assets/images/${imageProportion}.png`}
+								alt={imageItem.alt}
+							/>
+						)}
+					</div>
+				)}
 
-			<div className="blockons-gallery-btns">
-				<Button
-					className="blockons-image-delete"
-					icon="no-alt"
-					label="Delete Image"
-					onClick={() => handleDeleteItem(index)}
-				/>
+				{imageCaption !== "none" && imageItem.imageCaption && (
+					<div className="blockons-gallery-caption">
+						<div className="blockons-gallery-caption-inner">
+							{imageItem.imageCaption}
+						</div>
+					</div>
+				)}
+
+				<div className="blockons-gallery-btns">
+					<Button
+						className="blockons-image-delete"
+						icon="no-alt"
+						label="Delete Image"
+						onClick={() => handleDeleteItem(index)}
+					/>
+				</div>
 			</div>
-		</div>
-	));
+		);
+	});
 
 	return (
 		<div {...blockProps}>
@@ -181,37 +219,17 @@ const Edit = (props) => {
 							<>
 								<br />
 								<div className="blockons-divider"></div>
-								<RangeControl
-									label={__("Columns", "blockons")}
-									value={columns}
-									onChange={(newValue) =>
-										setAttributes({ columns: parseInt(newValue) })
-									}
-									min={2}
-									max={10}
-								/>
-								<RangeControl
-									label={__("Grid Spacing", "blockons")}
-									value={gridGap}
-									onChange={(newValue) =>
-										setAttributes({ gridGap: parseInt(newValue) })
-									}
-									min={0}
-									max={200}
-								/>
-								<div className="blockons-divider"></div>
-
 								<SelectControl
 									label={__("Gallery Layout", "blockons")}
 									value={layout}
 									options={[
-										{ label: __("Default Grid", "blockons"), value: "grid" },
+										{ label: __("Grid Layout", "blockons"), value: "grid" },
 										{
 											label: __("Masonry Layout", "blockons"),
 											value: "masonry",
 										},
 										{
-											label: __("Featured Grid", "blockons"),
+											label: __("Featured Grid Layout", "blockons"),
 											value: "featured",
 										},
 									]}
@@ -221,6 +239,29 @@ const Edit = (props) => {
 										});
 									}}
 								/>
+
+								<div className="blockons-divider"></div>
+
+								{(layout === "grid" || layout === "masonry") && (
+									<RangeControl
+										label={__("Columns", "blockons")}
+										value={columns}
+										onChange={(newValue) =>
+											setAttributes({ columns: parseInt(newValue) })
+										}
+										min={2}
+										max={10}
+									/>
+								)}
+								<RangeControl
+									label={__("Grid Spacing", "blockons")}
+									value={gridGap}
+									onChange={(newValue) =>
+										setAttributes({ gridGap: parseInt(newValue) })
+									}
+									min={0}
+									max={60}
+								/>
 							</>
 						)}
 					</PanelBody>
@@ -228,31 +269,116 @@ const Edit = (props) => {
 						title={__("Image Settings", "blockons")}
 						initialOpen={false}
 					>
+						{layout !== "featured" && (
+							<SelectControl
+								label={__("Image Proportions", "blockons")}
+								value={imageProportion}
+								options={[
+									{
+										label: __("Actual Image", "blockons"),
+										value: "actual",
+									},
+									{ label: __("Square", "blockons"), value: "square" },
+									{
+										label: __("3:2 Rectangle", "blockons"),
+										value: "32rectangle",
+									},
+									{
+										label: __("4:3 Rectangle", "blockons"),
+										value: "43rectangle",
+									},
+									{
+										label: __("16:9 Panoramic", "blockons"),
+										value: "169panoramic",
+									},
+								]}
+								onChange={(newValue) =>
+									setAttributes({
+										imageProportion:
+											newValue === undefined ? "actual" : newValue,
+									})
+								}
+							/>
+						)}
+
 						<SelectControl
-							label={__("Image Proportions", "blockons")}
-							value={imageProportion}
+							label={__("Image Hover Effect", "blockons")}
+							value={imageHover}
 							options={[
-								{ label: __("Actual Image", "blockons"), value: "actual" },
-								{ label: __("Square", "blockons"), value: "square" },
+								{ label: __("None", "blockons"), value: "none" },
 								{
-									label: __("3:2 Rectangle", "blockons"),
-									value: "32rectangle",
+									label: __("Color to Greyscale", "blockons"),
+									value: "togreyscale",
 								},
 								{
-									label: __("4:3 Rectangle", "blockons"),
-									value: "43rectangle",
+									label: __("Greyscale to Color", "blockons"),
+									value: "tocolor",
 								},
+								{ label: __("Grow", "blockons"), value: "grow" },
+								{ label: __("Shrink", "blockons"), value: "shrink" },
+								{ label: __("Normal to Blurry", "blockons"), value: "toblur" },
 								{
-									label: __("16:9 Panoramic", "blockons"),
-									value: "169panoramic",
+									label: __("Blurry to Normal", "blockons"),
+									value: "tonormal",
 								},
+								{ label: __("Zoom", "blockons"), value: "zoom" },
 							]}
 							onChange={(newValue) =>
 								setAttributes({
-									imageProportion: newValue === undefined ? "actual" : newValue,
+									imageHover: newValue === undefined ? "none" : newValue,
 								})
 							}
 						/>
+						<div className="blockons-divider"></div>
+
+						<SelectControl
+							label={__("Image Caption", "blockons")}
+							value={imageCaption}
+							options={[
+								{ label: __("None", "blockons"), value: "none" },
+								{
+									label: __("Over Image Plain Text", "blockons"),
+									value: "plain",
+								},
+								{
+									label: __("Over Image Bottom", "blockons"),
+									value: "bottom",
+								},
+								{
+									label: __("Over Image Centered", "blockons"),
+									value: "over",
+								},
+								{ label: __("Below Image", "blockons"), value: "below" },
+							]}
+							onChange={(newValue) =>
+								setAttributes({
+									imageCaption: newValue === undefined ? "none" : newValue,
+								})
+							}
+						/>
+						<ToggleControl
+							label={__("Show Caption on Hover", "blockons")}
+							checked={captionOnHover}
+							onChange={(newValue) =>
+								setAttributes({ captionOnHover: newValue })
+							}
+						/>
+						{captionOnHover && (
+							<SelectControl
+								label={__("Caption Animation", "blockons")}
+								value={captionAnimation}
+								options={[
+									{ label: __("Fade In", "blockons"), value: "fade" },
+									{ label: __("Zoom In", "blockons"), value: "zoom" },
+								]}
+								onChange={(newValue) =>
+									setAttributes({
+										captionAnimation:
+											newValue === undefined ? "fade" : newValue,
+									})
+								}
+							/>
+						)}
 					</PanelBody>
 				</InspectorControls>
 			)}
@@ -264,12 +390,19 @@ const Edit = (props) => {
 
 			{images.length > 0 ? (
 				<div
-					className={`blockons-gallery ${layout} cols-${columns}`}
+					className={`blockons-gallery ${layout} cols-${columns} ${
+						imageProportion !== "actual" ? "imgfull" : ""
+					} caption-${imageCaption} effect-${imageHover} ${
+						(imageCaption !== "none" || imageCaption !== "below") &&
+						captionOnHover
+							? "caption-hover"
+							: ""
+					} ${captionOnHover ? "caption-" + captionAnimation : ""}`}
 					id={uniqueId}
 					style={
 						layout === "masonry"
 							? {
-									margin: `0 -${gridGap}px`,
+									margin: `0 -${Math.floor(gridGap / 2)}px`,
 							  }
 							: {
 									"grid-gap": gridGap,

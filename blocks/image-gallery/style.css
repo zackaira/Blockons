@@ -5,13 +5,33 @@
 .wp-block-blockons-image-gallery {
 	position: relative;
 }
-/* -- Layouts -- */
-.wp-block-blockons-image-gallery .blockons-gallery.grid,
-.wp-block-blockons-image-gallery .blockons-gallery.featured {
+/* ---- Gallery Layouts ---- */
+.wp-block-blockons-image-gallery .blockons-gallery .blockons-gallery-item,
+.wp-block-blockons-image-gallery .blockons-gallery .blockons-gallery-img {
+	background-color: #f0f0f0;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow: hidden;
+}
+.wp-block-blockons-image-gallery .blockons-gallery .blockons-gallery-item img {
+	display: block;
+	margin: 0;
+}
+/* -- Grid Layout -- */
+.wp-block-blockons-image-gallery .blockons-gallery.grid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-gap: 10px;
 }
+.wp-block-blockons-image-gallery
+	.blockons-gallery.grid.imgfull
+	.blockons-gallery-item
+	img {
+	width: 100%;
+	height: auto;
+}
+/* -- Masonry -- */
 .wp-block-blockons-image-gallery .blockons-gallery.masonry {
 	display: flex;
 	flex-direction: row;
@@ -20,55 +40,26 @@
 }
 .wp-block-blockons-image-gallery
 	.blockons-gallery.masonry
-	.blockons-gallery-image.masonry {
+	.blockons-gallery-item.masonry {
 	flex-direction: column;
 	width: calc(25% - 20px);
 	margin: 0 10px 20px;
 	box-sizing: border-box;
 }
-.wp-block-blockons-image-gallery .blockons-gallery .blockons-gallery-image img {
-	display: block;
-	margin: 0;
+.wp-block-blockons-image-gallery
+	.blockons-gallery.masonry.imgfull
+	.blockons-gallery-item
+	img {
+	width: 100%;
+	height: auto;
 }
-/* -- Gallery Columns -- */
-.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-2,
-.wp-block-blockons-image-gallery .blockons-gallery.featured.cols-2 {
-	grid-template-columns: repeat(2, 1fr);
-}
-.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-3,
-.wp-block-blockons-image-gallery .blockons-gallery.featured.cols-3 {
-	grid-template-columns: repeat(3, 1fr);
-}
-.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-4,
-.wp-block-blockons-image-gallery .blockons-gallery.featured.cols-4 {
-	grid-template-columns: repeat(4, 1fr);
-}
-.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-5,
-.wp-block-blockons-image-gallery .blockons-gallery.featured.cols-5 {
-	grid-template-columns: repeat(5, 1fr);
-}
-.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-6,
-.wp-block-blockons-image-gallery .blockons-gallery.featured.cols-6 {
-	grid-template-columns: repeat(6, 1fr);
-}
-.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-7,
-.wp-block-blockons-image-gallery .blockons-gallery.featured.cols-7 {
-	grid-template-columns: repeat(7, 1fr);
-}
-.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-8,
-.wp-block-blockons-image-gallery .blockons-gallery.featured.cols-8 {
-	grid-template-columns: repeat(8, 1fr);
-}
-.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-9,
-.wp-block-blockons-image-gallery .blockons-gallery.featured.cols-9 {
-	grid-template-columns: repeat(9, 1fr);
-}
-.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-10,
-.wp-block-blockons-image-gallery .blockons-gallery.featured.cols-10 {
-	grid-template-columns: repeat(10, 1fr);
-}
-
 /* -- Featured Layout -- */
+.wp-block-blockons-image-gallery .blockons-gallery.featured {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 10px;
+}
+/* -- Mobile -- */
 .wp-block-blockons-image-gallery .blockons-gallery.featured {
 	display: grid;
 	grid-gap: 8px;
@@ -76,29 +67,24 @@
 	grid-auto-rows: 30vw;
 	list-style: none;
 }
-
 .wp-block-blockons-image-gallery
 	.blockons-gallery.featured
-	.blockons-gallery-image.featured:nth-child(11n + 9) {
+	.blockons-gallery-item.featured:nth-child(11n + 9) {
 	grid-column: 1 / -1;
 	grid-row: span 2;
 }
-
 .wp-block-blockons-image-gallery
 	.blockons-gallery.featured
-	.blockons-gallery-image.featured
+	.blockons-gallery-item.featured
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.featured
+	.blockons-gallery-item.featured
 	img {
 	width: 100%;
 	height: 100%;
-}
-
-.wp-block-blockons-image-gallery
-	.blockons-gallery.featured
-	.blockons-gallery-image.featured
-	img {
 	object-fit: cover;
 }
-
 @media (min-width: 850px) {
 	.wp-block-blockons-image-gallery .blockons-gallery.featured {
 		grid-gap: 24px;
@@ -108,84 +94,437 @@
 
 	.wp-block-blockons-image-gallery
 		.blockons-gallery.featured
-		.blockons-gallery-image.featured {
+		.blockons-gallery-item.featured {
 		--row-step: calc(4 * var(--n));
 	}
 
 	.wp-block-blockons-image-gallery
 		.blockons-gallery.featured
-		.blockons-gallery-image.featured:nth-child(11n + 1) {
+		.blockons-gallery-item.featured:nth-child(11n + 1) {
 		grid-column: 1;
 		grid-row: calc(1 + var(--row-step)) / span 2;
 	}
 
 	.wp-block-blockons-image-gallery
 		.blockons-gallery.featured
-		.blockons-gallery-image.featured:nth-child(11n + 2) {
+		.blockons-gallery-item.featured:nth-child(11n + 2) {
 		grid-column: 2 / span 2;
 		grid-row: calc(1 + var(--row-step)) / span 2;
 	}
 
 	.wp-block-blockons-image-gallery
 		.blockons-gallery.featured
-		.blockons-gallery-image.featured:nth-child(11n + 3) {
+		.blockons-gallery-item.featured:nth-child(11n + 3) {
 		grid-column: 4;
 		grid-row: calc(1 + var(--row-step));
 	}
 
 	.wp-block-blockons-image-gallery
 		.blockons-gallery.featured
-		.blockons-gallery-image.featured:nth-child(11n + 4) {
+		.blockons-gallery-item.featured:nth-child(11n + 4) {
 		grid-column: 5;
 		grid-row: calc(1 + var(--row-step));
 	}
 
 	.wp-block-blockons-image-gallery
 		.blockons-gallery.featured
-		.blockons-gallery-image.featured:nth-child(11n + 5) {
+		.blockons-gallery-item.featured:nth-child(11n + 5) {
 		grid-column: 4;
 		grid-row: calc(2 + var(--row-step));
 	}
 
 	.wp-block-blockons-image-gallery
 		.blockons-gallery.featured
-		.blockons-gallery-image.featured:nth-child(11n + 6) {
+		.blockons-gallery-item.featured:nth-child(11n + 6) {
 		grid-column: 5;
 		grid-row: calc(2 + var(--row-step)) / span 2;
 	}
 
 	.wp-block-blockons-image-gallery
 		.blockons-gallery.featured
-		.blockons-gallery-image.featured:nth-child(11n + 7) {
+		.blockons-gallery-item.featured:nth-child(11n + 7) {
 		grid-column: 2;
 		grid-row: calc(3 + var(--row-step));
 	}
 
 	.wp-block-blockons-image-gallery
 		.blockons-gallery.featured
-		.blockons-gallery-image.featured:nth-child(11n + 8) {
+		.blockons-gallery-item.featured:nth-child(11n + 8) {
 		grid-column: 1;
 		grid-row: calc(3 + var(--row-step));
 	}
 
 	.wp-block-blockons-image-gallery
 		.blockons-gallery.featured
-		.blockons-gallery-image.featured:nth-child(11n + 9) {
+		.blockons-gallery-item.featured:nth-child(11n + 9) {
 		grid-column: 3 / span 2;
 		grid-row: calc(3 + var(--row-step)) / span 2;
 	}
 
 	.wp-block-blockons-image-gallery
 		.blockons-gallery.featured
-		.blockons-gallery-image.featured:nth-child(11n + 10) {
+		.blockons-gallery-item.featured:nth-child(11n + 10) {
 		grid-column: 1 / span 2;
 		grid-row: calc(4 + var(--row-step));
 	}
 
 	.wp-block-blockons-image-gallery
 		.blockons-gallery.featured
-		.blockons-gallery-image.featured:nth-child(11n + 11) {
+		.blockons-gallery-item.featured:nth-child(11n + 11) {
 		grid-column: 5;
 		grid-row: calc(4 + var(--row-step));
 	}
+}
+/* -- Gallery Columns -- */
+.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-2 {
+	grid-template-columns: repeat(2, 1fr);
+}
+.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-4 {
+	grid-template-columns: repeat(4, 1fr);
+}
+.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-5 {
+	grid-template-columns: repeat(5, 1fr);
+}
+.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-6 {
+	grid-template-columns: repeat(6, 1fr);
+}
+.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-7 {
+	grid-template-columns: repeat(7, 1fr);
+}
+.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-8 {
+	grid-template-columns: repeat(8, 1fr);
+}
+.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-9 {
+	grid-template-columns: repeat(9, 1fr);
+}
+.wp-block-blockons-image-gallery .blockons-gallery.grid.cols-10 {
+	grid-template-columns: repeat(10, 1fr);
+}
+/* ---- Caption Layouts ---- */
+/* -- Bottom -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.caption-bottom
+	.blockons-gallery-caption {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.caption-bottom
+	.blockons-gallery-caption-inner {
+	background-color: rgb(0 0 0 / 72%);
+	padding: 5px 12px 6px;
+	color: #fff;
+	font-size: 13px;
+	text-align: center;
+}
+/* -- Over -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.caption-over
+	.blockons-gallery-caption {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.caption-over
+	.blockons-gallery-caption-inner {
+	background-color: rgb(0 0 0 / 90%);
+	border-radius: 4px;
+	box-shadow: 0 1px 5px rgb(0 0 0 / 24%);
+	padding: 10px;
+	color: #fff;
+	font-size: 13px;
+	margin: 10px;
+}
+/* -- Plain -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.caption-plain
+	.blockons-gallery-caption {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.caption-plain
+	.blockons-gallery-caption-inner {
+	text-shadow: 0 1px 5px rgb(0 0 0 / 55%);
+	padding: 10px;
+	color: #fff;
+	font-size: 14px;
+}
+/* -- Below -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.caption-below
+	.blockons-gallery-caption-inner {
+	padding: 6px 8px;
+	font-size: 14px;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.featured.caption-below
+	.blockons-gallery-item.featured
+	.blockons-gallery-caption {
+	background-color: inherit;
+	box-shadow: 0 1px 4px rgb(0 0 0 / 18%);
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 100%;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out 0.05s;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.featured.caption-below
+	.blockons-gallery-item.featured:hover {
+	overflow: visible;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.featured.caption-below
+	.blockons-gallery-item.featured:hover
+	.blockons-gallery-caption {
+	opacity: 1;
+	visibility: visible;
+}
+
+/* -- Caption Animations -- */
+/* -- Fade -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.caption-hover.caption-fade
+	.blockons-gallery-item
+	.blockons-gallery-caption {
+	opacity: 0;
+	transition: all 0.3s ease-in-out 0s;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.caption-hover.caption-fade
+	.blockons-gallery-item:hover
+	.blockons-gallery-caption {
+	opacity: 1;
+}
+/* -- Zoom In -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.caption-hover.caption-zoom
+	.blockons-gallery-item
+	.blockons-gallery-caption {
+	opacity: 0;
+	scale: (0.9);
+	transition: all 0.3s ease-in-out 0s;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.caption-hover.caption-zoom
+	.blockons-gallery-item:hover
+	.blockons-gallery-caption {
+	opacity: 1;
+	scale: (1);
+}
+/* -- Zoom Out -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.caption-hover.caption-zoom
+	.blockons-gallery-item
+	.blockons-gallery-caption {
+	opacity: 0;
+	scale: (1.1);
+	transition: all 0.3s ease-in-out 0s;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.caption-hover.caption-zoom
+	.blockons-gallery-item:hover
+	.blockons-gallery-caption {
+	opacity: 1;
+	scale: (1);
+}
+
+/* ---- Image Hover Effects ---- */
+/* -- To Greyscale -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-togreyscale.grid
+	.blockons-gallery-item
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-togreyscale.masonry
+	.blockons-gallery-item
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-togreyscale
+	.blockons-gallery-item
+	img {
+	filter: grayscale(0%) brightness(100%);
+	-webkit-filter: grayscale(0%) brightness(100%);
+	transition: all 0.3s ease-in-out 0s;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-togreyscale.grid
+	.blockons-gallery-item:hover
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-togreyscale.masonry
+	.blockons-gallery-item:hover
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-togreyscale
+	.blockons-gallery-item:hover
+	img {
+	-webkit-filter: grayscale(100%) brightness(100%); /* Chrome, Safari, Opera */
+	filter: grayscale(100%) brightness(100%);
+}
+/* -- To Color -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-tocolor.grid
+	.blockons-gallery-item
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-tocolor.masonry
+	.blockons-gallery-item
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-tocolor
+	.blockons-gallery-item
+	img {
+	filter: grayscale(100%) brightness(108%);
+	-webkit-filter: grayscale(100%) brightness(108%);
+	transition: all 0.3s ease-in-out 0s;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-tocolor.grid
+	.blockons-gallery-item:hover
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-tocolor.masonry
+	.blockons-gallery-item:hover
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-tocolor
+	.blockons-gallery-item:hover
+	img {
+	-webkit-filter: grayscale(0%) brightness(100%); /* Chrome, Safari, Opera */
+	filter: grayscale(0%) brightness(100%);
+}
+/* -- Grow -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-grow
+	.blockons-gallery-item {
+	transition: all 0.3s ease-in-out 0s;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-grow
+	.blockons-gallery-item:hover {
+	-webkit-transform: scale(1.04);
+	-ms-transform: scale(1.04);
+	transform: scale(1.04);
+}
+/* -- Shrink -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-shrink
+	.blockons-gallery-item {
+	transition: all 0.3s ease-in-out 0s;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-shrink
+	.blockons-gallery-item:hover {
+	-webkit-transform: scale(0.92);
+	-ms-transform: scale(0.92);
+	transform: scale(0.92);
+}
+/* -- Blurry to Normal -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-tonormal.grid
+	.blockons-gallery-item
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-tonormal.masonry
+	.blockons-gallery-item
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-tonormal.featured
+	.blockons-gallery-item
+	img {
+	-webkit-filter: blur(2px); /* Chrome, Safari, Opera */
+	filter: blur(2px);
+	transition: all 0.3s ease-in-out 0s;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-tonormal.grid
+	.blockons-gallery-item:hover
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-tonormal.masonry
+	.blockons-gallery-item:hover
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-tonormal.featured
+	.blockons-gallery-item:hover
+	img {
+	-webkit-filter: blur(0); /* Chrome, Safari, Opera */
+	filter: blur(0);
+}
+/* -- Normal to Blurry -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-toblur.grid
+	.blockons-gallery-item
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-toblur.masonry
+	.blockons-gallery-item
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-toblur.featured
+	.blockons-gallery-item
+	img {
+	transition: all 0.3s ease-in-out 0s;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-toblur.grid
+	.blockons-gallery-item:hover
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-toblur.masonry
+	.blockons-gallery-item:hover
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-toblur.featured
+	.blockons-gallery-item:hover
+	img {
+	-webkit-filter: blur(2px); /* Chrome, Safari, Opera */
+	filter: blur(2px);
+}
+/* -- Zoom -- */
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-toblur.grid
+	.blockons-gallery-item
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-toblur.masonry
+	.blockons-gallery-item
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-toblur.featured
+	.blockons-gallery-item
+	img {
+	transition: all 0.3s ease-in-out 0s;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-toblur.grid
+	.blockons-gallery-item:hover
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-toblur.masonry
+	.blockons-gallery-item:hover
+	.blockons-gallery-img,
+.wp-block-blockons-image-gallery
+	.blockons-gallery.effect-toblur.featured
+	.blockons-gallery-item:hover
+	img {
+	-webkit-filter: blur(2px); /* Chrome, Safari, Opera */
+	filter: blur(2px);
 }

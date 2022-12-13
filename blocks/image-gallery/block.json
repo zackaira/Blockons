@@ -34,6 +34,22 @@
 		"imageProportion": {
 			"type": "string",
 			"default": "actual"
+		},
+		"imageHover": {
+			"type": "string",
+			"default": "none"
+		},
+		"imageCaption": {
+			"type": "string",
+			"default": "none"
+		},
+		"captionOnHover": {
+			"type": "boolean",
+			"default": false
+		},
+		"captionAnimation": {
+			"type": "string",
+			"default": "zoom"
 		}
 	},
 	"editorScript": "file:./index.js",
