@@ -4,7 +4,6 @@
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
-	RichText,
 	AlignmentToolbar,
 	BlockControls,
 	InspectorControls,
@@ -21,10 +20,9 @@ import {
 } from "@wordpress/components";
 import { v4 as uuidv4 } from "uuid";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
-import FontAwesomeIcon from "../_components/FontAwesomeIcon";
-import { slugify, sliderArrowIcons } from "../block-global";
 import { colorPickerPalette } from "../block-global";
 const Masonry = require("masonry-layout");
+var imagesLoaded = require("imagesloaded");
 
 const Edit = (props) => {
 	const {
@@ -68,18 +66,19 @@ const Edit = (props) => {
 					columnWidth: ".blockons-gallery-item.masonry",
 					percentPosition: true,
 				});
+
+				imagesLoaded(msnryEle, () => msnry.layout());
 				setMasonry(msnry);
 			}
-
-			if (masonry) masonry.layout();
 		} else {
 			if (masonry) masonry.destroy();
 		}
 	}, [layout]);
 
 	useEffect(() => {
+		const msnryEle = document.querySelector(".blockons-gallery.masonry");
 		setTimeout(() => {
-			if (masonry) masonry.layout();
+			if (masonry) imagesLoaded(msnryEle, () => masonry.layout());
 		}, 200);
 	}, [columns, gridGap, imageProportion, imageCaption]);
 
@@ -98,7 +97,6 @@ const Edit = (props) => {
 	// Item Settings
 	const handleMediaUpload = (media) => {
 		const mediaItems = [...media];
-		console.log(mediaItems);
 
 		if (mediaItems.length) {
 			const newSlides = mediaItems.map((image) => {
