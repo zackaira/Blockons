@@ -459,6 +459,8 @@ const Edit = (props) => {
 								},
 								{ label: __("Zoom", "blockons"), value: "zoom" },
 								{ label: __("Zoom Long", "blockons"), value: "zoomlong" },
+								{ label: __("Light Border", "blockons"), value: "border" },
+								{ label: __("Slightly Raized", "blockons"), value: "raised" },
 							]}
 							onChange={(newValue) =>
 								setAttributes({
