@@ -2,21 +2,22 @@
  * Note that these styles are loaded *after* common styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.wp-block-blockons-image-gallery {
+.wp-block-blockons-image-gallery .blockons-gallery.grid,
+.wp-block-blockons-image-gallery .blockons-gallery.featured {
+	height: auto !important;
 }
 .blockons-gallery-item {
 	position: relative;
 }
 .blockons-gallery-item:hover {
-	box-shadow: 0 0 0 1px #5d5d5d;
 	position: relative;
 	z-index: 9;
 }
 .wp-block-blockons-image-gallery
-	.blockons-gallery.layout-grid
+	.blockons-gallery.grid
 	.blockons-gallery-item.grid,
 .wp-block-blockons-image-gallery
-	.blockons-gallery.layout-featured
+	.blockons-gallery.featured
 	.blockons-gallery-item.featured {
 	position: relative !important;
 	top: auto !important;

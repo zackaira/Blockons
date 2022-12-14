@@ -49,7 +49,7 @@
 		},
 		"captionAnimation": {
 			"type": "string",
-			"default": "zoom"
+			"default": "fade"
 		}
 	},
 	"editorScript": "file:./index.js",
