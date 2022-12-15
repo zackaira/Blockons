@@ -6,13 +6,6 @@
 .wp-block-blockons-image-gallery .blockons-gallery.featured {
 	height: auto !important;
 }
-.blockons-gallery-item {
-	position: relative;
-}
-.blockons-gallery-item:hover {
-	position: relative;
-	z-index: 9;
-}
 .wp-block-blockons-image-gallery
 	.blockons-gallery.grid
 	.blockons-gallery-item.grid,

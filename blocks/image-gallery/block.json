@@ -4,16 +4,12 @@
 	"name": "blockons/image-gallery",
 	"title": "Image Gallery",
 	"textdomain": "blockons",
-	"icon": "heart",
+	"icon": "format-gallery",
 	"category": "blockons-category",
-	"keywords": ["image", "gallery", "picture"],
+	"keywords": ["image", "gallery", "picture", "img", "advanced"],
 	"attributes": {
 		"uniqueId": {
 			"type": "string"
-		},
-		"alignment": {
-			"type": "string",
-			"default": "center"
 		},
 		"galleryImages": {
 			"type": "array",

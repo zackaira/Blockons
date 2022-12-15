@@ -12,14 +12,6 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Load all translations for our plugin from the MO file.
- */
-function blockons_marketing_button_load_textdomain() {
-	load_plugin_textdomain( 'blockons', false, basename( __DIR__ ) . '/languages' );
-}
-add_action( 'init', 'blockons_marketing_button_load_textdomain' );
-
-/**
  * Registers all block assets so that they can be enqueued through Gutenberg in
  * the corresponding context.
  *

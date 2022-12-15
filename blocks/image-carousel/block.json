@@ -6,7 +6,7 @@
 	"textdomain": "blockons",
 	"icon": "format-image",
 	"category": "blockons-category",
-	"keywords": ["image", "carousel", "gallery", "picture", "slider"],
+	"keywords": ["image", "carousel", "gallery", "picture", "slider", "img"],
 	"attributes": {
 		"uniqueId": {
 			"type": "string"

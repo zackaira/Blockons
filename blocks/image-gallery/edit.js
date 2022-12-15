@@ -28,7 +28,6 @@ const Edit = (props) => {
 		isSelected,
 		attributes: {
 			uniqueId,
-			alignment,
 			galleryImages,
 			columns,
 			gridGap,
@@ -48,7 +47,7 @@ const Edit = (props) => {
 	} = props;
 
 	const blockProps = useBlockProps({
-		className: `align-${alignment}`,
+		className: ``,
 	});
 	const [masonry, setMasonry] = useState();
 
@@ -80,17 +79,15 @@ const Edit = (props) => {
 	}, [layout]);
 
 	useEffect(() => {
-		const msnryEle = document.querySelector(".blockons-gallery.masonry");
-		setTimeout(() => {
-			if (masonry) imagesLoaded(msnryEle, () => masonry.layout());
-		}, 200);
-	}, [columns, gridGap, imageProportion, imageCaption]);
+		if (masonry) {
+			const msnryEle = document.querySelector(".blockons-gallery.masonry");
+			masonry.reloadItems();
 
-	const onChangeAlignment = (newAlignment) => {
-		setAttributes({
-			alignment: newAlignment === undefined ? "center" : newAlignment,
-		});
-	};
+			setTimeout(() => {
+				imagesLoaded(msnryEle, () => masonry.layout());
+			}, 200);
+		}
+	}, [galleryImages, columns, gridGap, imageProportion, imageCaption]);
 
 	const handleDeleteItem = (index) => {
 		const newSlides = [...galleryImages];
@@ -419,6 +416,20 @@ const Edit = (props) => {
 									: ""
 							}
 						/>
+						<div className="helplink fixmargin">
+							<p>
+								{__(
+									"Add the image caption when uploading or editing images",
+									"blockons"
+								)}
+							</p>
+							<a
+								href="https://blockons.com/documentation/adding-a-custom-font-awesome-icon-to-the-block/"
+								target="_blank"
+							>
+								{__("Read More")}
+							</a>
+						</div>
 
 						{(imageCaption === "plain" ||
 							imageCaption === "bottom" ||
@@ -574,11 +585,6 @@ const Edit = (props) => {
 					</PanelBody>
 				</InspectorControls>
 			)}
-			{
-				<BlockControls>
-					<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
-				</BlockControls>
-			}
 
 			{images.length > 0 ? (
 				<div

@@ -170,6 +170,7 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.0.4 =
 * Styling tweaks/fixes
+* Updated block(s) keywords
 * 
 * 
 

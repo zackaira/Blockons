@@ -2,8 +2,14 @@
  * Note that these styles are loaded *before* editor styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.wp-block-blockons-image-gallery {
+.wp-block-blockons-image-gallery,
+.wp-block-blockons-image-gallery .blockons-gallery .blockons-gallery-item {
 	position: relative;
+}
+.wp-block-blockons-image-gallery
+	.blockons-gallery
+	.blockons-gallery-item:hover {
+	z-index: 11;
 }
 /* ---- Gallery Layouts ---- */
 .wp-block-blockons-image-gallery .blockons-gallery .blockons-gallery-item,
@@ -59,7 +65,7 @@
 	grid-template-columns: repeat(4, 1fr);
 	grid-gap: 10px;
 }
-/* -- Mobile -- */
+/* -- Featured Grid Mobile -- */
 .wp-block-blockons-image-gallery .blockons-gallery.featured {
 	display: grid;
 	grid-gap: 8px;
@@ -69,7 +75,7 @@
 }
 .wp-block-blockons-image-gallery
 	.blockons-gallery.featured
-	.blockons-gallery-item.featured:nth-child(11n + 9) {
+	.blockons-gallery-item.featured:nth-child(5n + 5) {
 	grid-column: 1 / -1;
 	grid-row: span 2;
 }
@@ -88,7 +94,7 @@
 	height: 100%;
 	object-fit: cover;
 }
-@media (min-width: 850px) {
+@media (min-width: 680px) {
 	.wp-block-blockons-image-gallery .blockons-gallery.featured {
 		grid-gap: 24px;
 		grid-template-columns: repeat(5, 1fr);
@@ -276,7 +282,7 @@
 	border-radius: 4px;
 	box-shadow: 0 1px 5px rgb(0 0 0 / 24%);
 	padding: 10px;
-	margin: 10px;
+	margin: 25px;
 }
 /* -- Plain -- */
 .wp-block-blockons-image-gallery
@@ -826,4 +832,35 @@
 	box-shadow: 0 0 8px rgb(0 0 0 / 50%);
 	top: -3px;
 	left: -3px;
+}
+
+/* ---- Responsive Tablet ---- */
+@media only screen and (max-width: 920px) {
+	/* -- Grid -- */
+	.wp-block-blockons-image-gallery .blockons-gallery.grid {
+		grid-template-columns: repeat(3, 1fr) !important;
+	}
+	/* -- Masonry -- */
+	.wp-block-blockons-image-gallery
+		.blockons-gallery.masonry
+		.blockons-gallery-item.masonry {
+		width: calc(33.3333% - 10px) !important;
+		margin: 0 5px 10px !important;
+	}
+	/* -- Featured Grid done further up -- */
+}
+/* ---- Responsive Mobile ---- */
+@media only screen and (max-width: 680px) {
+	/* -- Grid -- */
+	.wp-block-blockons-image-gallery .blockons-gallery.grid {
+		grid-template-columns: repeat(2, 1fr) !important;
+	}
+	/* -- Masonry -- */
+	.wp-block-blockons-image-gallery
+		.blockons-gallery.masonry
+		.blockons-gallery-item.masonry {
+		width: calc(50% - 10px) !important;
+		margin: 0 5px 10px !important;
+	}
+	/* -- Featured Grid done further up -- */
 }

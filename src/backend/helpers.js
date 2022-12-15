@@ -28,7 +28,10 @@ export const blockListSettings = {
 		isNew: false,
 	},
 	image_gallery: {
-		desc: __("Display multiple images in a more advanced gallery", "blockons"),
+		desc: __(
+			"A more advanced image gallery with 3 beautiful layouts",
+			"blockons"
+		),
 		pluginSpecific: false,
 		isNew: __("NEW", ""),
 	},
