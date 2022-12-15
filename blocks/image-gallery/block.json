@@ -50,6 +50,26 @@
 		"captionAnimation": {
 			"type": "string",
 			"default": "fade"
+		},
+		"imageBgColor": {
+			"type": "string",
+			"default": "#f0f0f0"
+		},
+		"captionBgColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"captionOpacity": {
+			"type": "number",
+			"default": 0.75
+		},
+		"captionFontColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"captionFontSize": {
+			"type": "number",
+			"default": 13
 		}
 	},
 	"editorScript": "file:./index.js",

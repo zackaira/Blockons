@@ -12,7 +12,6 @@ import {
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
-	Dropdown,
 	ToggleControl,
 	SelectControl,
 	RangeControl,
@@ -39,6 +38,11 @@ const Edit = (props) => {
 			imageCaption,
 			captionOnHover,
 			captionAnimation,
+			imageBgColor,
+			captionBgColor,
+			captionOpacity,
+			captionFontColor,
+			captionFontSize,
 		},
 		setAttributes,
 	} = props;
@@ -141,6 +145,11 @@ const Edit = (props) => {
 								"--n": nValue - 1,
 						  }
 						: {}),
+					...(imageBgColor !== "#f0f0f0"
+						? {
+								backgroundColor: imageBgColor,
+						  }
+						: {}),
 				}}
 			>
 				<div className="blockons-gallery-item-inner">
@@ -174,9 +183,42 @@ const Edit = (props) => {
 					)}
 
 					{imageCaption !== "none" && imageItem.imageCaption && (
-						<div className="blockons-gallery-caption">
-							<div className="blockons-gallery-caption-inner">
-								{imageItem.imageCaption}
+						<div
+							className="blockons-gallery-caption"
+							style={{
+								...(imageCaption === "flipup" ||
+								imageCaption === "flipside" ||
+								imageCaption === "below"
+									? {
+											backgroundColor: captionBgColor,
+											opacity: captionOpacity,
+									  }
+									: {}),
+							}}
+						>
+							<div
+								className="blockons-gallery-caption-inner"
+								style={{
+									color: captionFontColor,
+									fontSize: captionFontSize,
+								}}
+							>
+								{(imageCaption === "bottom" ||
+									imageCaption === "over" ||
+									imageCaption === "below") && (
+									<div
+										className="caption-bg"
+										style={{
+											...(imageCaption === "bottom" || imageCaption === "over"
+												? {
+														backgroundColor: captionBgColor,
+														opacity: captionOpacity,
+												  }
+												: {}),
+										}}
+									></div>
+								)}
+								<span>{imageItem.imageCaption}</span>
 							</div>
 						</div>
 					)}
@@ -253,6 +295,41 @@ const Edit = (props) => {
 									}}
 								/>
 
+								{layout !== "featured" && (
+									<>
+										<div className="blockons-divider"></div>
+										<SelectControl
+											label={__("Image Proportions", "blockons")}
+											value={imageProportion}
+											options={[
+												{
+													label: __("Actual Image", "blockons"),
+													value: "actual",
+												},
+												{ label: __("Square", "blockons"), value: "square" },
+												{
+													label: __("3:2 Rectangle", "blockons"),
+													value: "32rectangle",
+												},
+												{
+													label: __("4:3 Rectangle", "blockons"),
+													value: "43rectangle",
+												},
+												{
+													label: __("16:9 Panoramic", "blockons"),
+													value: "169panoramic",
+												},
+											]}
+											onChange={(newValue) =>
+												setAttributes({
+													imageProportion:
+														newValue === undefined ? "actual" : newValue,
+												})
+											}
+										/>
+									</>
+								)}
+
 								<div className="blockons-divider"></div>
 
 								{(layout === "grid" || layout === "masonry") && (
@@ -282,41 +359,6 @@ const Edit = (props) => {
 						title={__("Image Settings", "blockons")}
 						initialOpen={false}
 					>
-						{layout !== "featured" && (
-							<>
-								<SelectControl
-									label={__("Image Proportions", "blockons")}
-									value={imageProportion}
-									options={[
-										{
-											label: __("Actual Image", "blockons"),
-											value: "actual",
-										},
-										{ label: __("Square", "blockons"), value: "square" },
-										{
-											label: __("3:2 Rectangle", "blockons"),
-											value: "32rectangle",
-										},
-										{
-											label: __("4:3 Rectangle", "blockons"),
-											value: "43rectangle",
-										},
-										{
-											label: __("16:9 Panoramic", "blockons"),
-											value: "169panoramic",
-										},
-									]}
-									onChange={(newValue) =>
-										setAttributes({
-											imageProportion:
-												newValue === undefined ? "actual" : newValue,
-										})
-									}
-								/>
-								<div className="blockons-divider"></div>
-							</>
-						)}
-
 						<SelectControl
 							label={__("Image Caption", "blockons")}
 							value={imageCaption}
@@ -468,6 +510,67 @@ const Edit = (props) => {
 								})
 							}
 						/>
+						<div className="blockons-divider"></div>
+
+						<BlockonsColorpicker
+							label={__("Image Background Color", "blockons")}
+							value={imageBgColor}
+							onChange={(newColor) => setAttributes({ imageBgColor: newColor })}
+							paletteColors={colorPickerPalette}
+						/>
+
+						{imageCaption !== "none" && (
+							<>
+								<div className="blockons-divider"></div>
+
+								{(imageCaption === "bottom" ||
+									imageCaption === "over" ||
+									imageCaption === "below" ||
+									imageCaption === "flipup" ||
+									imageCaption === "flipside") && (
+									<>
+										<BlockonsColorpicker
+											label={__("Caption Background Color", "blockons")}
+											value={captionBgColor}
+											onChange={(newColor) =>
+												setAttributes({ captionBgColor: newColor })
+											}
+											paletteColors={colorPickerPalette}
+										/>
+										<RangeControl
+											label={__("Opacity", "blockons")}
+											value={captionOpacity}
+											onChange={(newValue) =>
+												setAttributes({ captionOpacity: newValue })
+											}
+											min={0}
+											max={1}
+											step={0.01}
+										/>
+										<div className="blockons-divider"></div>
+									</>
+								)}
+
+								<BlockonsColorpicker
+									label={__("Caption Font Color", "blockons")}
+									value={captionFontColor}
+									onChange={(newColor) =>
+										setAttributes({ captionFontColor: newColor })
+									}
+									paletteColors={colorPickerPalette}
+								/>
+								<RangeControl
+									label={__("Font Size", "blockons")}
+									value={captionFontSize}
+									onChange={(newValue) =>
+										setAttributes({ captionFontSize: parseInt(newValue) })
+									}
+									min={10}
+									max={24}
+									step={1}
+								/>
+							</>
+						)}
 					</PanelBody>
 				</InspectorControls>
 			)}
