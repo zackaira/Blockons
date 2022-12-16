@@ -7,6 +7,7 @@ const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
 		className: ``,
 	});
+	const isPro = Boolean(blockonsDetails.isPremium);
 
 	let nValue = 0;
 	const images = attributes.galleryImages.map((imageItem, index) => {
@@ -47,6 +48,13 @@ const Save = ({ attributes }) => {
 						: {}),
 				}}
 			>
+				<div
+					className={`blockons-venobox-item fa-solid fa-magnifying-glass`}
+					data-title={imageItem.imageCaption ? imageItem.imageCaption : ""}
+					data-href={imageItem.imageUrl}
+					data-gall={`gal${attributes.uniqueId}`}
+				></div>
+
 				<div className="blockons-gallery-item-inner">
 					{attributes.layout === "featured" && imageItem.imageUrl && (
 						<div className="blockons-gallery-img">

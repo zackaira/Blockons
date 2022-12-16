@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	if (typeof blockonsPageLoader !== undefined && blockonsPageLoader !== null) {
 		ReactDOM.render(
 			<PageLoader
-				pageLoaderOptions={blockonsObj.blockonsOptions?.pageloader}
-				isPro={blockonsObj.isPremium}
+				pageLoaderOptions={blockObj.blockonsOptions?.pageloader}
+				isPro={blockObj.isPremium}
 			/>,
 			document.getElementById("blockons-pageloader")
 		);
@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	if (typeof blockonsBttb !== undefined && blockonsBttb !== null) {
 		ReactDOM.render(
 			<BackToTop
-				bttOptions={blockonsObj.blockonsOptions?.bttb}
-				isPro={blockonsObj.isPremium}
+				bttOptions={blockObj.blockonsOptions?.bttb}
+				isPro={blockObj.isPremium}
 			/>,
 			document.getElementById("blockons-bttb")
 		);
@@ -45,8 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	if (typeof blockonsScrollInd !== undefined && blockonsScrollInd !== null) {
 		ReactDOM.render(
 			<ScrollIndicator
-				scrollInOptions={blockonsObj.blockonsOptions?.scrollindicator}
-				isPro={blockonsObj.isPremium}
+				scrollInOptions={blockObj.blockonsOptions?.scrollindicator}
+				isPro={blockObj.isPremium}
 			/>,
 			document.getElementById("blockons-scroll-indicator")
 		);

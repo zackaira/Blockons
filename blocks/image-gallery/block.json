@@ -66,10 +66,19 @@
 		"captionFontSize": {
 			"type": "number",
 			"default": 13
+		},
+		"popupEnable": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"viewScript": "file:./masonry.js",
-	"style": ["file:./style-index.css", "blockons-fontawesome"]
+	"script": "blockons-js",
+	"viewScript": "blockons-image-gallery",
+	"style": [
+		"file:./style-index.css",
+		"blockons-fontawesome",
+		"blockons-venobox-style"
+	]
 }

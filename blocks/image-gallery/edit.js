@@ -42,6 +42,7 @@ const Edit = (props) => {
 			captionOpacity,
 			captionFontColor,
 			captionFontSize,
+			popupEnable,
 		},
 		setAttributes,
 	} = props;
@@ -49,12 +50,28 @@ const Edit = (props) => {
 	const blockProps = useBlockProps({
 		className: ``,
 	});
+	const isPro = Boolean(blockonsDetails.isPremium);
 	const [masonry, setMasonry] = useState();
 
 	useEffect(() => {
+		setAttributes({ isPremium: isPro }); // SETS PREMIUM
+
 		if (!uniqueId) {
 			setAttributes({
 				uniqueId: uuidv4(),
+			});
+		}
+
+		console.log(isPro);
+
+		const venoboxItems = document.querySelectorAll(".blockons-venobox-item");
+		if (venoboxItems) {
+			venoboxItems.forEach((venobox, i) => {
+				if (isPro) {
+					venobox.classList.add("blockons-venobox");
+				} else {
+					venobox.classList.add("hide");
+				}
 			});
 		}
 	}, []);
@@ -149,6 +166,13 @@ const Edit = (props) => {
 						: {}),
 				}}
 			>
+				<div
+					className={`blockons-venobox-item fa-solid fa-magnifying-glass`}
+					data-title={imageItem.imageCaption ? imageItem.imageCaption : ""}
+					data-href={imageItem.imageUrl}
+					data-gall={`gal${uniqueId}`}
+				></div>
+
 				<div className="blockons-gallery-item-inner">
 					{layout === "featured" && imageItem.imageUrl && (
 						<div className="blockons-gallery-img">
@@ -352,237 +376,276 @@ const Edit = (props) => {
 							</>
 						)}
 					</PanelBody>
-					<PanelBody
-						title={__("Image Settings", "blockons")}
-						initialOpen={false}
-					>
-						<SelectControl
-							label={__("Image Caption", "blockons")}
-							value={imageCaption}
-							options={
-								layout === "masonry"
-									? [
-											{ label: __("None", "blockons"), value: "none" },
-											{
-												label: __("Over Image Plain Text", "blockons"),
-												value: "plain",
-											},
-											{
-												label: __("Over Image Bottom", "blockons"),
-												value: "bottom",
-											},
-											{
-												label: __("Over Image Centered", "blockons"),
-												value: "over",
-											},
-											{ label: __("Below Image", "blockons"), value: "below" },
-									  ]
-									: [
-											{ label: __("None", "blockons"), value: "none" },
-											{
-												label: __("Plain text on Image", "blockons"),
-												value: "plain",
-											},
-											{
-												label: __("Bottom Banner", "blockons"),
-												value: "bottom",
-											},
-											{
-												label: __("Centered Banner", "blockons"),
-												value: "over",
-											},
-											{ label: __("Below Image", "blockons"), value: "below" },
-											{
-												label: __("Flip Card (Up)", "blockons"),
-												value: "flipup",
-											},
-											{
-												label: __("Flip Card (Side)", "blockons"),
-												value: "flipside",
-											},
-									  ]
-							}
-							onChange={(newValue) =>
-								setAttributes({
-									imageCaption: newValue === undefined ? "none" : newValue,
-								})
-							}
-							help={
-								imageCaption === "flipup" || imageCaption === "flipside"
-									? __(
-											"Cards will only 'flip' if the image has a caption",
-											"blockons"
-									  )
-									: ""
-							}
-						/>
-						<div className="helplink fixmargin">
-							<p>
-								{__(
-									"Add the image caption when uploading or editing images",
-									"blockons"
-								)}
-							</p>
-							<a
-								href="https://blockons.com/documentation/adding-a-custom-font-awesome-icon-to-the-block/"
-								target="_blank"
-							>
-								{__("Read More")}
-							</a>
-						</div>
 
-						{(imageCaption === "plain" ||
-							imageCaption === "bottom" ||
-							imageCaption === "over") && (
-							<>
-								<ToggleControl
-									label={__("Show Caption on Hover", "blockons")}
-									checked={captionOnHover}
+					{galleryImages.length > 1 && (
+						<>
+							<PanelBody
+								title={__("Image Settings", "blockons")}
+								initialOpen={false}
+							>
+								<SelectControl
+									label={__("Image Caption", "blockons")}
+									value={imageCaption}
+									options={
+										layout === "masonry"
+											? [
+													{ label: __("None", "blockons"), value: "none" },
+													{
+														label: __("Over Image Plain Text", "blockons"),
+														value: "plain",
+													},
+													{
+														label: __("Over Image Bottom", "blockons"),
+														value: "bottom",
+													},
+													{
+														label: __("Over Image Centered", "blockons"),
+														value: "over",
+													},
+													{
+														label: __("Below Image", "blockons"),
+														value: "below",
+													},
+											  ]
+											: [
+													{ label: __("None", "blockons"), value: "none" },
+													{
+														label: __("Plain text on Image", "blockons"),
+														value: "plain",
+													},
+													{
+														label: __("Bottom Banner", "blockons"),
+														value: "bottom",
+													},
+													{
+														label: __("Centered Banner", "blockons"),
+														value: "over",
+													},
+													{
+														label: __("Below Image", "blockons"),
+														value: "below",
+													},
+													{
+														label: __("Flip Card (Up)", "blockons"),
+														value: "flipup",
+													},
+													{
+														label: __("Flip Card (Side)", "blockons"),
+														value: "flipside",
+													},
+											  ]
+									}
 									onChange={(newValue) =>
-										setAttributes({ captionOnHover: newValue })
+										setAttributes({
+											imageCaption: newValue === undefined ? "none" : newValue,
+										})
+									}
+									help={
+										imageCaption === "flipup" || imageCaption === "flipside"
+											? __(
+													"Cards will only 'flip' if the image has a caption",
+													"blockons"
+											  )
+											: ""
 									}
 								/>
-								{captionOnHover && (
-									<SelectControl
-										label={__("Caption Animation", "blockons")}
-										value={captionAnimation}
-										options={
-											imageCaption === "bottom"
-												? [
-														{ label: __("Fade In", "blockons"), value: "fade" },
-														{
-															label: __("Zoom In", "blockons"),
-															value: "zoomin",
-														},
-														{
-															label: __("Zoom Out", "blockons"),
-															value: "zoomout",
-														},
-														{
-															label: __("Slide In", "blockons"),
-															value: "slide",
-														},
-												  ]
-												: [
-														{ label: __("Fade In", "blockons"), value: "fade" },
-														{
-															label: __("Zoom In", "blockons"),
-															value: "zoomin",
-														},
-														{
-															label: __("Zoom Out", "blockons"),
-															value: "zoomout",
-														},
-												  ]
-										}
-										onChange={(newValue) =>
-											setAttributes({
-												captionAnimation:
-													newValue === undefined ? "fade" : newValue,
-											})
-										}
-									/>
+								<div className="helplink fixmargin">
+									<p>
+										{__(
+											"Add the image caption when uploading or editing images",
+											"blockons"
+										)}
+									</p>
+									<a
+										href="https://blockons.com/documentation/adding-a-custom-font-awesome-icon-to-the-block/"
+										target="_blank"
+									>
+										{__("Read More")}
+									</a>
+								</div>
+
+								{(imageCaption === "plain" ||
+									imageCaption === "bottom" ||
+									imageCaption === "over") && (
+									<>
+										<ToggleControl
+											label={__("Show Caption on Hover", "blockons")}
+											checked={captionOnHover}
+											onChange={(newValue) =>
+												setAttributes({ captionOnHover: newValue })
+											}
+										/>
+										{captionOnHover && (
+											<SelectControl
+												label={__("Caption Animation", "blockons")}
+												value={captionAnimation}
+												options={
+													imageCaption === "bottom"
+														? [
+																{
+																	label: __("Fade In", "blockons"),
+																	value: "fade",
+																},
+																{
+																	label: __("Zoom In", "blockons"),
+																	value: "zoomin",
+																},
+																{
+																	label: __("Zoom Out", "blockons"),
+																	value: "zoomout",
+																},
+																{
+																	label: __("Slide In", "blockons"),
+																	value: "slide",
+																},
+														  ]
+														: [
+																{
+																	label: __("Fade In", "blockons"),
+																	value: "fade",
+																},
+																{
+																	label: __("Zoom In", "blockons"),
+																	value: "zoomin",
+																},
+																{
+																	label: __("Zoom Out", "blockons"),
+																	value: "zoomout",
+																},
+														  ]
+												}
+												onChange={(newValue) =>
+													setAttributes({
+														captionAnimation:
+															newValue === undefined ? "fade" : newValue,
+													})
+												}
+											/>
+										)}
+									</>
 								)}
-							</>
-						)}
-						<div className="blockons-divider"></div>
-
-						<SelectControl
-							label={__("Image Hover Effect", "blockons")}
-							value={imageHover}
-							options={[
-								{ label: __("None", "blockons"), value: "none" },
-								{
-									label: __("Color to Greyscale", "blockons"),
-									value: "togreyscale",
-								},
-								{
-									label: __("Greyscale to Color", "blockons"),
-									value: "tocolor",
-								},
-								{ label: __("Grow", "blockons"), value: "grow" },
-								{ label: __("Shrink", "blockons"), value: "shrink" },
-								{
-									label: __("Normal to Blurry", "blockons"),
-									value: "toblur",
-								},
-								{
-									label: __("Blurry to Normal", "blockons"),
-									value: "tonormal",
-								},
-								{ label: __("Zoom", "blockons"), value: "zoom" },
-								{ label: __("Zoom Long", "blockons"), value: "zoomlong" },
-								{ label: __("Light Border", "blockons"), value: "border" },
-								{ label: __("Slightly Raized", "blockons"), value: "raised" },
-							]}
-							onChange={(newValue) =>
-								setAttributes({
-									imageHover: newValue === undefined ? "none" : newValue,
-								})
-							}
-						/>
-						<div className="blockons-divider"></div>
-
-						<BlockonsColorpicker
-							label={__("Image Background Color", "blockons")}
-							value={imageBgColor}
-							onChange={(newColor) => setAttributes({ imageBgColor: newColor })}
-							paletteColors={colorPickerPalette}
-						/>
-
-						{imageCaption !== "none" && (
-							<>
 								<div className="blockons-divider"></div>
 
-								{(imageCaption === "bottom" ||
-									imageCaption === "over" ||
-									imageCaption === "below" ||
-									imageCaption === "flipup" ||
-									imageCaption === "flipside") && (
+								<SelectControl
+									label={__("Image Hover Effect", "blockons")}
+									value={imageHover}
+									options={[
+										{ label: __("None", "blockons"), value: "none" },
+										{
+											label: __("Color to Greyscale", "blockons"),
+											value: "togreyscale",
+										},
+										{
+											label: __("Greyscale to Color", "blockons"),
+											value: "tocolor",
+										},
+										{ label: __("Grow", "blockons"), value: "grow" },
+										{ label: __("Shrink", "blockons"), value: "shrink" },
+										{
+											label: __("Normal to Blurry", "blockons"),
+											value: "toblur",
+										},
+										{
+											label: __("Blurry to Normal", "blockons"),
+											value: "tonormal",
+										},
+										{ label: __("Zoom", "blockons"), value: "zoom" },
+										{ label: __("Zoom Long", "blockons"), value: "zoomlong" },
+										{ label: __("Light Border", "blockons"), value: "border" },
+										{
+											label: __("Slightly Raized", "blockons"),
+											value: "raised",
+										},
+									]}
+									onChange={(newValue) =>
+										setAttributes({
+											imageHover: newValue === undefined ? "none" : newValue,
+										})
+									}
+								/>
+								<div className="blockons-divider"></div>
+
+								<BlockonsColorpicker
+									label={__("Image Background Color", "blockons")}
+									value={imageBgColor}
+									onChange={(newColor) =>
+										setAttributes({ imageBgColor: newColor })
+									}
+									paletteColors={colorPickerPalette}
+								/>
+
+								{imageCaption !== "none" && (
 									<>
+										<div className="blockons-divider"></div>
+
+										{(imageCaption === "bottom" ||
+											imageCaption === "over" ||
+											imageCaption === "below" ||
+											imageCaption === "flipup" ||
+											imageCaption === "flipside") && (
+											<>
+												<BlockonsColorpicker
+													label={__("Caption Background Color", "blockons")}
+													value={captionBgColor}
+													onChange={(newColor) =>
+														setAttributes({ captionBgColor: newColor })
+													}
+													paletteColors={colorPickerPalette}
+												/>
+												<RangeControl
+													label={__("Opacity", "blockons")}
+													value={captionOpacity}
+													onChange={(newValue) =>
+														setAttributes({ captionOpacity: newValue })
+													}
+													min={0}
+													max={1}
+													step={0.01}
+												/>
+												<div className="blockons-divider"></div>
+											</>
+										)}
+
 										<BlockonsColorpicker
-											label={__("Caption Background Color", "blockons")}
-											value={captionBgColor}
+											label={__("Caption Font Color", "blockons")}
+											value={captionFontColor}
 											onChange={(newColor) =>
-												setAttributes({ captionBgColor: newColor })
+												setAttributes({ captionFontColor: newColor })
 											}
 											paletteColors={colorPickerPalette}
 										/>
 										<RangeControl
-											label={__("Opacity", "blockons")}
-											value={captionOpacity}
+											label={__("Font Size", "blockons")}
+											value={captionFontSize}
 											onChange={(newValue) =>
-												setAttributes({ captionOpacity: newValue })
+												setAttributes({ captionFontSize: parseInt(newValue) })
 											}
-											min={0}
-											max={1}
-											step={0.01}
+											min={10}
+											max={24}
+											step={1}
 										/>
-										<div className="blockons-divider"></div>
 									</>
 								)}
+							</PanelBody>
 
-								<BlockonsColorpicker
-									label={__("Caption Font Color", "blockons")}
-									value={captionFontColor}
-									onChange={(newColor) =>
-										setAttributes({ captionFontColor: newColor })
-									}
-									paletteColors={colorPickerPalette}
-								/>
-								<RangeControl
-									label={__("Font Size", "blockons")}
-									value={captionFontSize}
-									onChange={(newValue) =>
-										setAttributes({ captionFontSize: parseInt(newValue) })
-									}
-									min={10}
-									max={24}
-									step={1}
-								/>
-							</>
-						)}
-					</PanelBody>
+							{isPro && (
+								<PanelBody
+									title={__("Gallery Lightbox Settings", "blockons")}
+									initialOpen={false}
+								>
+									<ToggleControl
+										label={__("Enable Lightbox", "blockons")}
+										checked={popupEnable}
+										onChange={(newValue) =>
+											setAttributes({ popupEnable: newValue })
+										}
+										help={__("Add a popup to view larger images", "blockons")}
+									/>
+									{popupEnable && <>more settings</>}
+								</PanelBody>
+							)}
+						</>
+					)}
 				</InspectorControls>
 			)}
 
