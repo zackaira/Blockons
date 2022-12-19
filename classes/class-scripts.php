@@ -128,7 +128,7 @@ class Blockons {
 		wp_register_script('blockons-slider', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.js'), array('blockons-swiper-js'), BLOCKONS_PLUGIN_VERSION, true);
 		wp_register_script('blockons-slider-video', esc_url(BLOCKONS_PLUGIN_URL . 'dist/swiper-video.min.js'), array('blockons-swiper-js'), BLOCKONS_PLUGIN_VERSION, true);
 
-		// AOS Animations
+		// AOS Animations & Venobox Popup
 		if (blockons_fs()->can_use_premium_code__premium_only()) {
 			wp_register_style('blockons-aos-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/aos/aos.css'), array(), BLOCKONS_PLUGIN_VERSION);
 			wp_register_script('blockons-aos-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/aos/aos.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
@@ -140,7 +140,7 @@ class Blockons {
 		if (blockons_fs()->can_use_premium_code__premium_only()) {
 			wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/imagegallery-pro.min.js'), array('blockons-venobox-script', 'blockons-js'), BLOCKONS_PLUGIN_VERSION, true);
 		} else {
-			wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-js'), BLOCKONS_PLUGIN_VERSION);
+			wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-js'), BLOCKONS_PLUGIN_VERSION, true);
 		}
 
 		// Settings JS

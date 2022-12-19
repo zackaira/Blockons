@@ -43,6 +43,11 @@ const Edit = (props) => {
 			captionFontColor,
 			captionFontSize,
 			popupEnable,
+			popupClick,
+			popupIcon,
+			popupCaption,
+			popupIconOnHover,
+			popupInfiniteGal,
 		},
 		setAttributes,
 	} = props;
@@ -54,24 +59,9 @@ const Edit = (props) => {
 	const [masonry, setMasonry] = useState();
 
 	useEffect(() => {
-		setAttributes({ isPremium: isPro }); // SETS PREMIUM
-
 		if (!uniqueId) {
 			setAttributes({
 				uniqueId: uuidv4(),
-			});
-		}
-
-		console.log(isPro);
-
-		const venoboxItems = document.querySelectorAll(".blockons-venobox-item");
-		if (venoboxItems) {
-			venoboxItems.forEach((venobox, i) => {
-				if (isPro) {
-					venobox.classList.add("blockons-venobox");
-				} else {
-					venobox.classList.add("hide");
-				}
 			});
 		}
 	}, []);
@@ -143,7 +133,9 @@ const Edit = (props) => {
 
 		return (
 			<div
-				className={`blockons-gallery-item ${layout} ${canFlip}`}
+				className={`blockons-gallery-item ${
+					popupEnable && popupClick === "image" ? "blockons-venobox" : ""
+				} ${layout} ${canFlip}`}
 				style={{
 					...(layout === "masonry"
 						? {
@@ -165,12 +157,29 @@ const Edit = (props) => {
 						  }
 						: {}),
 				}}
+				{...(popupClick === "image"
+					? {
+							"data-title": imageItem.imageCaption
+								? imageItem.imageCaption
+								: "",
+							"data-href": imageItem.imageUrl,
+							"data-gall": `gal${uniqueId}`,
+					  }
+					: {})}
 			>
 				<div
-					className={`blockons-venobox-item fa-solid fa-magnifying-glass`}
-					data-title={imageItem.imageCaption ? imageItem.imageCaption : ""}
-					data-href={imageItem.imageUrl}
-					data-gall={`gal${uniqueId}`}
+					className={`${
+						popupEnable && popupClick === "icon" ? "blockons-venobox" : ""
+					} venobox-icon fa-solid fa-${popupIcon}`}
+					{...(popupClick === "icon"
+						? {
+								"data-title": imageItem.imageCaption
+									? imageItem.imageCaption
+									: "",
+								"data-href": imageItem.imageUrl,
+								"data-gall": `gal${uniqueId}`,
+						  }
+						: {})}
 				></div>
 
 				<div className="blockons-gallery-item-inner">
@@ -224,18 +233,12 @@ const Edit = (props) => {
 									fontSize: captionFontSize,
 								}}
 							>
-								{(imageCaption === "bottom" ||
-									imageCaption === "over" ||
-									imageCaption === "below") && (
+								{(imageCaption === "bottom" || imageCaption === "over") && (
 									<div
 										className="caption-bg"
 										style={{
-											...(imageCaption === "bottom" || imageCaption === "over"
-												? {
-														backgroundColor: captionBgColor,
-														opacity: captionOpacity,
-												  }
-												: {}),
+											backgroundColor: captionBgColor,
+											opacity: captionOpacity,
 										}}
 									></div>
 								)}
@@ -639,9 +642,102 @@ const Edit = (props) => {
 										onChange={(newValue) =>
 											setAttributes({ popupEnable: newValue })
 										}
-										help={__("Add a popup to view larger images", "blockons")}
+										help={__(
+											"Please check the website frontend to view the image popup",
+											"blockons"
+										)}
 									/>
-									{popupEnable && <>more settings</>}
+									{popupEnable && (
+										<>
+											<SelectControl
+												label={__("Click to Open", "blockons")}
+												value={popupClick}
+												options={[
+													{
+														label: __("Popup Icon", "blockons"),
+														value: "icon",
+													},
+													{
+														label: __("Click Full Image", "blockons"),
+														value: "image",
+													},
+												]}
+												onChange={(newValue) =>
+													setAttributes({
+														popupClick:
+															newValue === undefined ? "icon" : newValue,
+													})
+												}
+											/>
+											{popupClick === "icon" && (
+												<>
+													<ToggleControl
+														label={__("Show on Hover", "blockons")}
+														checked={popupIconOnHover}
+														onChange={(newValue) =>
+															setAttributes({ popupIconOnHover: newValue })
+														}
+													/>
+													<SelectControl
+														label={__("Select Icon", "blockons")}
+														value={popupIcon}
+														options={[
+															{
+																label: __("Magnifying Glass", "blockons"),
+																value: "magnifying-glass",
+															},
+															{
+																label: __("Expand", "blockons"),
+																value: "expand",
+															},
+															{
+																label: __("Maximize", "blockons"),
+																value: "maximize",
+															},
+															{
+																label: __("Plus", "blockons"),
+																value: "plus",
+															},
+														]}
+														onChange={(newValue) =>
+															setAttributes({
+																popupIcon:
+																	newValue === undefined
+																		? "magnifying-glass"
+																		: newValue,
+															})
+														}
+													/>
+												</>
+											)}
+											<div className="blockons-divider"></div>
+
+											<SelectControl
+												label={__("Image Caption", "blockons")}
+												value={popupCaption}
+												options={[
+													{ label: __("Top", "blockons"), value: "top" },
+													{ label: __("Bottom", "blockons"), value: "bottom" },
+													{ label: __("None", "blockons"), value: "none" },
+												]}
+												onChange={(newValue) =>
+													setAttributes({
+														popupCaption:
+															newValue === undefined ? "top" : newValue,
+													})
+												}
+											/>
+											<div className="blockons-divider"></div>
+
+											<ToggleControl
+												label={__("Infinite Gallery", "blockons")}
+												checked={popupInfiniteGal}
+												onChange={(newValue) =>
+													setAttributes({ popupInfiniteGal: newValue })
+												}
+											/>
+										</>
+									)}
 								</PanelBody>
 							)}
 						</>
@@ -660,7 +756,7 @@ const Edit = (props) => {
 						captionOnHover
 							? `caption-hover caption-${captionAnimation}`
 							: ""
-					}`}
+					} ${popupIconOnHover ? "icon-hover" : ""}`}
 					id={uniqueId}
 					style={
 						layout === "masonry"
@@ -671,6 +767,14 @@ const Edit = (props) => {
 									"grid-gap": gridGap,
 							  }
 					}
+					{...(popupEnable
+						? {
+								"data-popup": JSON.stringify({
+									caption: popupCaption,
+									infinite: popupInfiniteGal,
+								}),
+						  }
+						: {})}
 				>
 					{images.map((image, index) => image)}
 				</div>

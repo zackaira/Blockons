@@ -70,6 +70,26 @@
 		"popupEnable": {
 			"type": "boolean",
 			"default": false
+		},
+		"popupClick": {
+			"type": "string",
+			"default": "icon"
+		},
+		"popupIconOnHover": {
+			"type": "boolean",
+			"default": false
+		},
+		"popupIcon": {
+			"type": "string",
+			"default": "magnifying-glass"
+		},
+		"popupCaption": {
+			"type": "string",
+			"default": "top"
+		},
+		"popupInfiniteGal": {
+			"type": "boolean",
+			"default": true
 		}
 	},
 	"editorScript": "file:./index.js",

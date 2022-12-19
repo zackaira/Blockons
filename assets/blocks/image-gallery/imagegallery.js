@@ -2,7 +2,7 @@ const Masonry = require("masonry-layout");
 var imagesLoaded = require("imagesloaded");
 
 document.addEventListener("DOMContentLoaded", () => {
-	const isPro = blockonsDetails.isPremium;
+	const isPro = Boolean(blockonsDetails.isPremium);
 
 	const msnryEle = document.querySelector(".blockons-gallery.masonry");
 	if (msnryEle) {
@@ -15,15 +15,24 @@ document.addEventListener("DOMContentLoaded", () => {
 		imagesLoaded(msnryEle, () => msnry.layout());
 	}
 
-	const venoboxItems = document.querySelectorAll(".blockons-venobox-item");
+	// Add Venobox if isPro, else hide elements
+	// const blockonsGals = document.querySelectorAll(".blockons-gallery");
+	// if (isPro && blockonsGals) {
+	// 	console.log(blockonsGals);
 
-	if (venoboxItems) {
-		venoboxItems.forEach((venobox, i) => {
-			if (isPro) {
-				venobox.classList.add("blockons-venobox");
-			} else {
-				venobox.classList.add("hide");
-			}
-		});
-	}
+	// 	blockonsGals.forEach((gallery) => {
+	// 		const popupSettings = JSON.parse(gallery.getAttribute("data-popup"));
+	// 		// console.log("Popup Settings: ", popupSettings);
+
+	// 		if (popupSettings) {
+	// 			const venoboxItems = document.querySelectorAll(".blockons-venobox-item");
+
+	// 			if (venoboxItems) {
+	// 				venoboxItems.forEach((item, i) => {
+	// 					item.classList.add("blockons-venobox");
+	// 				});
+	// 			}
+	// 		}
+	// 	});
+	// }
 });

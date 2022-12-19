@@ -7,7 +7,6 @@ const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
 		className: ``,
 	});
-	const isPro = Boolean(blockonsDetails.isPremium);
 
 	let nValue = 0;
 	const images = attributes.galleryImages.map((imageItem, index) => {
@@ -23,7 +22,11 @@ const Save = ({ attributes }) => {
 
 		return (
 			<div
-				className={`blockons-gallery-item ${attributes.layout} ${canFlip}`}
+				className={`blockons-gallery-item ${
+					attributes.popupEnable && attributes.popupClick === "image"
+						? "blockons-venobox"
+						: ""
+				} ${attributes.layout} ${canFlip}`}
 				style={{
 					...(attributes.layout === "masonry"
 						? {
@@ -47,12 +50,31 @@ const Save = ({ attributes }) => {
 						  }
 						: {}),
 				}}
+				{...(attributes.popupClick === "image"
+					? {
+							"data-title": imageItem.imageCaption
+								? imageItem.imageCaption
+								: "",
+							"data-href": imageItem.imageUrl,
+							"data-gall": `gal${attributes.uniqueId}`,
+					  }
+					: {})}
 			>
 				<div
-					className={`blockons-venobox-item fa-solid fa-magnifying-glass`}
-					data-title={imageItem.imageCaption ? imageItem.imageCaption : ""}
-					data-href={imageItem.imageUrl}
-					data-gall={`gal${attributes.uniqueId}`}
+					className={`${
+						attributes.popupEnable && attributes.popupClick === "icon"
+							? "blockons-venobox"
+							: ""
+					} venobox-icon fa-solid fa-${attributes.popupIcon}`}
+					{...(attributes.popupClick === "icon"
+						? {
+								"data-title": imageItem.imageCaption
+									? imageItem.imageCaption
+									: "",
+								"data-href": imageItem.imageUrl,
+								"data-gall": `gal${attributes.uniqueId}`,
+						  }
+						: {})}
 				></div>
 
 				<div className="blockons-gallery-item-inner">
@@ -113,13 +135,8 @@ const Save = ({ attributes }) => {
 									<div
 										className="caption-bg"
 										style={{
-											...(attributes.imageCaption === "bottom" ||
-											attributes.imageCaption === "over"
-												? {
-														backgroundColor: attributes.captionBgColor,
-														opacity: attributes.captionOpacity,
-												  }
-												: {}),
+											backgroundColor: attributes.captionBgColor,
+											opacity: attributes.captionOpacity,
 										}}
 									></div>
 								)}
@@ -146,7 +163,7 @@ const Save = ({ attributes }) => {
 					attributes.captionOnHover
 						? `caption-hover caption-${attributes.captionAnimation}`
 						: ""
-				}`}
+				} ${attributes.popupIconOnHover ? "icon-hover" : ""}`}
 				id={attributes.uniqueId}
 				style={
 					attributes.layout === "masonry"
@@ -157,6 +174,14 @@ const Save = ({ attributes }) => {
 								"grid-gap": attributes.gridGap,
 						  }
 				}
+				{...(attributes.popupEnable
+					? {
+							"data-popup": JSON.stringify({
+								caption: attributes.popupCaption,
+								infinite: attributes.popupInfiniteGal,
+							}),
+					  }
+					: {})}
 			>
 				{images.map((image, index) => image)}
 			</div>
