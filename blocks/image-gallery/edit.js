@@ -133,9 +133,7 @@ const Edit = (props) => {
 
 		return (
 			<div
-				className={`blockons-gallery-item ${
-					popupEnable && popupClick === "image" ? "blockons-venobox" : ""
-				} ${layout} ${canFlip}`}
+				className={`blockons-gallery-item ${layout} ${canFlip}`}
 				style={{
 					...(layout === "masonry"
 						? {
@@ -157,15 +155,6 @@ const Edit = (props) => {
 						  }
 						: {}),
 				}}
-				{...(popupClick === "image"
-					? {
-							"data-title": imageItem.imageCaption
-								? imageItem.imageCaption
-								: "",
-							"data-href": imageItem.imageUrl,
-							"data-gall": `gal${uniqueId}`,
-					  }
-					: {})}
 			>
 				<div
 					className={`${
@@ -184,13 +173,28 @@ const Edit = (props) => {
 
 				<div className="blockons-gallery-item-inner">
 					{layout === "featured" && imageItem.imageUrl && (
-						<div className="blockons-gallery-img">
+						<div
+							className={`blockons-gallery-img ${
+								popupEnable && popupClick === "image" ? "blockons-venobox" : ""
+							}`}
+							{...(popupClick === "image"
+								? {
+										"data-title": imageItem.imageCaption
+											? imageItem.imageCaption
+											: "",
+										"data-href": imageItem.imageUrl,
+										"data-gall": `gal${uniqueId}`,
+								  }
+								: {})}
+						>
 							<img src={imageItem.imageUrl} alt={imageItem.alt} />
 						</div>
 					)}
 					{(layout === "grid" || layout === "masonry") && (
 						<div
-							className="blockons-gallery-img"
+							className={`blockons-gallery-img ${
+								popupEnable && popupClick === "image" ? "blockons-venobox" : ""
+							}`}
 							style={{
 								...(imageProportion !== "actual"
 									? {
@@ -198,6 +202,15 @@ const Edit = (props) => {
 									  }
 									: {}),
 							}}
+							{...(popupClick === "image"
+								? {
+										"data-title": imageItem.imageCaption
+											? imageItem.imageCaption
+											: "",
+										"data-href": imageItem.imageUrl,
+										"data-gall": `gal${uniqueId}`,
+								  }
+								: {})}
 						>
 							{imageProportion === "actual" ? (
 								imageItem.imageUrl && (

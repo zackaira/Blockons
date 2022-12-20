@@ -22,11 +22,7 @@ const Save = ({ attributes }) => {
 
 		return (
 			<div
-				className={`blockons-gallery-item ${
-					attributes.popupEnable && attributes.popupClick === "image"
-						? "blockons-venobox"
-						: ""
-				} ${attributes.layout} ${canFlip}`}
+				className={`blockons-gallery-item ${attributes.layout} ${canFlip}`}
 				style={{
 					...(attributes.layout === "masonry"
 						? {
@@ -50,15 +46,6 @@ const Save = ({ attributes }) => {
 						  }
 						: {}),
 				}}
-				{...(attributes.popupClick === "image"
-					? {
-							"data-title": imageItem.imageCaption
-								? imageItem.imageCaption
-								: "",
-							"data-href": imageItem.imageUrl,
-							"data-gall": `gal${attributes.uniqueId}`,
-					  }
-					: {})}
 			>
 				<div
 					className={`${
@@ -79,14 +66,33 @@ const Save = ({ attributes }) => {
 
 				<div className="blockons-gallery-item-inner">
 					{attributes.layout === "featured" && imageItem.imageUrl && (
-						<div className="blockons-gallery-img">
+						<div
+							className={`blockons-gallery-img ${
+								attributes.popupEnable && attributes.popupClick === "image"
+									? "blockons-venobox"
+									: ""
+							}`}
+							{...(attributes.popupClick === "image"
+								? {
+										"data-title": imageItem.imageCaption
+											? imageItem.imageCaption
+											: "",
+										"data-href": imageItem.imageUrl,
+										"data-gall": `gal${attributes.uniqueId}`,
+								  }
+								: {})}
+						>
 							<img src={imageItem.imageUrl} alt={imageItem.alt} />
 						</div>
 					)}
 					{(attributes.layout === "grid" ||
 						attributes.layout === "masonry") && (
 						<div
-							className="blockons-gallery-img"
+							className={`blockons-gallery-img ${
+								attributes.popupEnable && attributes.popupClick === "image"
+									? "blockons-venobox"
+									: ""
+							}`}
 							style={{
 								...(attributes.imageProportion !== "actual"
 									? {
@@ -94,6 +100,15 @@ const Save = ({ attributes }) => {
 									  }
 									: {}),
 							}}
+							{...(attributes.popupClick === "image"
+								? {
+										"data-title": imageItem.imageCaption
+											? imageItem.imageCaption
+											: "",
+										"data-href": imageItem.imageUrl,
+										"data-gall": `gal${attributes.uniqueId}`,
+								  }
+								: {})}
 						>
 							{attributes.imageProportion === "actual" ? (
 								imageItem.imageUrl && (
