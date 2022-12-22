@@ -13,7 +13,7 @@
 .wp-block-blockons-image-comparison.align-right {
 	justify-content: flex-end;
 }
-
+/* -- Slider -- */
 .wp-block-blockons-image-comparison img-comparison-slider {
 	visibility: hidden;
 }
@@ -36,30 +36,42 @@
 	[slot="second"] {
 	display: block;
 }
+.wp-block-blockons-image-comparison img-comparison-slider .handle-container {
+	cursor: col-resize;
+}
 /* -- Handle -- */
 .handle-bar {
 	position: absolute;
 	border-radius: 3px;
 	width: 8px;
 	height: 48px;
-	background-color: #fff;
-	left: -4px;
+	background-color: #000;
+	left: -5px;
 	margin: -24px 0 0;
+	border-color: #000;
+	cursor: col-resize;
 }
 .handle-bar::before,
 .handle-bar::after {
 	content: "";
 	position: absolute;
 	border: 6px solid transparent;
-	border-left: 7px solid #fff;
+	border-left: 7px solid #000;
+	border-left-color: inherit;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
 	top: calc(50% - 6px);
 	left: 11px;
 	pointer-events: none;
 	transition: all 0.2s ease-in-out 0s;
 }
 .handle-bar::after {
+	border-right: 7px solid #000;
+	border-right-color: inherit;
+	border-top-color: transparent;
 	border-left-color: transparent;
-	border-right: 7px solid #fff;
+	border-bottom-color: transparent;
 	left: auto;
 	right: 11px;
 }
@@ -69,13 +81,20 @@
 .blockons-image-comparison-wrap:hover .handle-bar::after {
 	right: 13px;
 }
+/* - Handle Three - */
+.large-arrow-handle {
+	transition: transform 0.2s;
+}
+.blockons-image-comparison-wrap.handle-three:hover .large-arrow-handle {
+	transform: scale(1.2);
+}
 /* -- Image Captions -- */
 .wp-block-blockons-image-comparison .blockons-ic-title {
 	position: absolute;
 	bottom: 12px;
 	font-size: 15px;
-	color: #fff;
-	text-shadow: 0 1px 3px rgb(0 0 0 / 22%);
+	color: #000;
+	text-shadow: 0 1px 3px rgb(0 0 0 / 16%);
 }
 .wp-block-blockons-image-comparison .blockons-ic-title.before {
 	left: 12px;

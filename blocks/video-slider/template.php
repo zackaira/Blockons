@@ -73,7 +73,7 @@ $sliderOptions = array(
 								<img src="<?php echo esc_url(BLOCKONS_PLUGIN_URL . 'assets/images/169panoramic.png'); ?>" alt="no image" />
 							</div>
 
-							<div class="swiper-slide-img" style="<?php echo (isset($slide['coverImage']) && (isset($slide['coverImage']['url']) && $slide['coverImage']['url'] != "")) ? "background-image: url(" . esc_url($slide['coverImage']['url']) . ");" : "background-image: url(" . esc_url(BLOCKONS_PLUGIN_URL . 'assets/images/videoslider-placeholder.jpg') . ");"; ?>">
+							<div class="swiper-slide-img" style="<?php echo (isset($slide['coverImage']) && (isset($slide['coverImage']['url']) && $slide['coverImage']['url'] != "")) ? "background-image: url(" . esc_url($slide['coverImage']['url']) . ");" : "background-image: url(" . esc_url(BLOCKONS_PLUGIN_URL . 'assets/images/placeholder.png') . ");"; ?>">
 								<?php if (((isset($slide['videoType']) && $slide['videoType'] == "youtube" || $slide['videoType'] == "vimeo") && (isset($slide['videoId']) && $slide['videoId'] != "")) || (isset($slide['videoType']) && $slide['videoType'] == "custom") && isset($slide['customVideo']['url']) && $slide['customVideo']['url'] != "") : ?>
 									<div class="play-button" title="<?php esc_html_e("The video only plays on the frontend", "blockons"); ?>"></div>
 								<?php endif; ?>

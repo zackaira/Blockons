@@ -20,8 +20,10 @@ import {
 	RangeControl,
 	ColorPalette,
 	Button,
+	__experimentalUnitControl as UnitControl,
 } from "@wordpress/components";
 import { v4 as uuidv4 } from "uuid";
+import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import { colorPickerPalette } from "../block-global";
 
 const Edit = (props) => {
@@ -30,13 +32,17 @@ const Edit = (props) => {
 		attributes: {
 			uniqueId,
 			alignment,
+			maxWidth,
 			slideDirection,
 			before,
 			after,
+			labelColor,
 			imageLabels,
 			imageBefore,
 			imageAfter,
 			automatic,
+			handle,
+			handleColor,
 		},
 		setAttributes,
 	} = props;
@@ -59,7 +65,6 @@ const Edit = (props) => {
 		});
 	};
 
-	// Cover Image
 	const handleImageUpload = (media, image) => {
 		const addedImage = {
 			id: media.id,
@@ -83,6 +88,18 @@ const Edit = (props) => {
 						title={__("Image Comparison Settings", "blockons")}
 						initialOpen={true}
 					>
+						<UnitControl
+							label={__("Slider Width", "blockons")}
+							value={maxWidth}
+							onChange={(value) => setAttributes({ maxWidth: value })}
+							units={[
+								{ value: "%", label: "%", default: 100 },
+								{ value: "px", label: "px", default: 600 },
+							]}
+							isResetValueOnUnitChange
+						/>
+						<div className="blockons-divider"></div>
+
 						<SelectControl
 							label={__("Image Display", "blockons")}
 							value={slideDirection}
@@ -123,8 +140,40 @@ const Edit = (props) => {
 									value={after}
 									onChange={(newValue) => setAttributes({ after: newValue })}
 								/>
+								<div className="blockons-divider"></div>
+								<BlockonsColorpicker
+									label={__("Label Color", "blockons")}
+									value={labelColor}
+									onChange={(newColor) =>
+										setAttributes({ labelColor: newColor })
+									}
+									paletteColors={colorPickerPalette}
+								/>
+								<div className="blockons-divider"></div>
 							</>
 						)}
+
+						<SelectControl
+							label={__("Handle Design", "blockons")}
+							value={handle}
+							options={[
+								{ label: __("Handle with Arrows", "blockons"), value: "one" },
+								{ label: __("Plain Side Arrows", "blockons"), value: "two" },
+								{ label: __("Large Side Arrows", "blockons"), value: "three" },
+								{ label: __("Simple Line", "blockons"), value: "four" },
+							]}
+							onChange={(newValue) =>
+								setAttributes({
+									handle: newValue === undefined ? "one" : newValue,
+								})
+							}
+						/>
+						<BlockonsColorpicker
+							label={__("Handle Color", "blockons")}
+							value={handleColor}
+							onChange={(newColor) => setAttributes({ handleColor: newColor })}
+							paletteColors={colorPickerPalette}
+						/>
 					</PanelBody>
 				</InspectorControls>
 			)}
@@ -133,7 +182,12 @@ const Edit = (props) => {
 					<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
 				</BlockControls>
 			}
-			<div className="blockons-image-comparison-wrap">
+			<div
+				className={`blockons-image-comparison-wrap handle-${handle}`}
+				style={{
+					width: maxWidth,
+				}}
+			>
 				<MediaUpload
 					className="components-icon-button components-toolbar__control"
 					allowedTypes={["image"]}
@@ -186,6 +240,16 @@ const Edit = (props) => {
 					className="rendered"
 					{...(automatic ? { hover: "hover" } : { hover: false })}
 					direction={slideDirection}
+					style={{
+						"--divider-color": handleColor,
+						"--default-handle-color": handleColor,
+						...(handle === "four"
+							? {
+									"--divider-width": 4,
+									"--default-handle-opacity": 0,
+							  }
+							: {}),
+					}}
 				>
 					<div slot="first" className="before">
 						<img
@@ -193,7 +257,7 @@ const Edit = (props) => {
 							src={
 								imageBefore?.url
 									? imageBefore.url
-									: "https://img-comparison-slider.sneas.io/demo/images/before.webp"
+									: `${blockonsObj.pluginUrl}assets/images/placeholder.png`
 							}
 						/>
 						{imageLabels && (
@@ -204,6 +268,9 @@ const Edit = (props) => {
 								value={before}
 								className="blockons-ic-title before"
 								onChange={(value) => setAttributes({ before: value })}
+								style={{
+									color: labelColor,
+								}}
 							/>
 						)}
 					</div>
@@ -213,7 +280,7 @@ const Edit = (props) => {
 							src={
 								imageAfter?.url
 									? imageAfter.url
-									: "https://img-comparison-slider.sneas.io/demo/images/after.webp"
+									: `${blockonsObj.pluginUrl}assets/images/placeholder2.png`
 							}
 						/>
 						{imageLabels && (
@@ -224,11 +291,37 @@ const Edit = (props) => {
 								value={after}
 								className="blockons-ic-title after"
 								onChange={(value) => setAttributes({ after: value })}
+								style={{
+									color: labelColor,
+								}}
 							/>
 						)}
 					</div>
 
-					<div className="handle-bar" slot="handle"></div>
+					{handle === "one" && (
+						<div
+							className="handle-bar"
+							slot="handle"
+							style={{ backgroundColor: handleColor, borderColor: handleColor }}
+						></div>
+					)}
+					{handle === "three" && (
+						<svg
+							slot="handle"
+							class="large-arrow-handle"
+							xmlns="http://www.w3.org/2000/svg"
+							width="100"
+							viewBox="-8 -3 16 6"
+						>
+							<path
+								stroke={handleColor}
+								d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2"
+								stroke-width="1"
+								fill={handleColor}
+								vector-effect="non-scaling-stroke"
+							></path>
+						</svg>
+					)}
 				</img-comparison-slider>
 			</div>
 		</div>

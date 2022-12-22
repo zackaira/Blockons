@@ -249,7 +249,7 @@ const Edit = (props) => {
 					...(slideItem.coverImage && slideItem.coverImage.url
 						? { backgroundImage: `url(${slideItem.coverImage.url})` }
 						: {
-								backgroundImage: `url(${blockonsObj.pluginUrl}assets/images/videoslider-placeholder.jpg)`,
+								backgroundImage: `url(${blockonsObj.pluginUrl}assets/images/placeholder.png)`,
 						  }),
 				}}
 			>
