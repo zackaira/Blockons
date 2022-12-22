@@ -4,7 +4,7 @@
 	"name": "blockons/image-comparison",
 	"title": "Image Comparison",
 	"textdomain": "blockons",
-	"icon": "heart",
+	"icon": "format-gallery",
 	"category": "blockons-category",
 	"keywords": ["image", "compare", "comparison", "slider", "blockons"],
 	"attributes": {
