@@ -1,0 +1,58 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/image-comparison",
+	"title": "Image Comparison",
+	"textdomain": "blockons",
+	"icon": "heart",
+	"category": "blockons-category",
+	"keywords": ["image", "compare", "comparison", "slider", "blockons"],
+	"attributes": {
+		"uniqueId": {
+			"type": "string"
+		},
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"slideDirection": {
+			"type": "string",
+			"default": "horizontal"
+		},
+		"before": {
+			"type": "string",
+			"default": "Before"
+		},
+		"after": {
+			"type": "string",
+			"default": "After"
+		},
+		"imageLabels": {
+			"type": "boolean",
+			"default": false
+		},
+		"imageBefore": {
+			"type": "object",
+			"default": {}
+		},
+		"imageAfter": {
+			"type": "object",
+			"default": {}
+		},
+		"automatic": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"example": {
+		"attributes": {
+			"alignment": "left",
+			"title": "GRAB this offer now!",
+			"subText": "Valid only until July 28th"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"script": "blockons-img-comparison",
+	"style": ["file:./style-index.css", "blockons-fontawesome"]
+}

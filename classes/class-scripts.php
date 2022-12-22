@@ -128,6 +128,8 @@ class Blockons {
 		wp_register_script('blockons-slider', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.js'), array('blockons-swiper-js'), BLOCKONS_PLUGIN_VERSION, true);
 		wp_register_script('blockons-slider-video', esc_url(BLOCKONS_PLUGIN_URL . 'dist/swiper-video.min.js'), array('blockons-swiper-js'), BLOCKONS_PLUGIN_VERSION, true);
 
+		wp_register_script('blockons-img-comparison', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/image-comparison.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
+
 		// AOS Animations & Venobox Popup
 		if (blockons_fs()->can_use_premium_code__premium_only()) {
 			wp_register_style('blockons-aos-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/aos/aos.css'), array(), BLOCKONS_PLUGIN_VERSION);
@@ -301,6 +303,7 @@ class Blockons {
 	public static function blockonsDefaults() {
 		$initialSettings = array(
 			"blocks" => array( // For adding a new block, update this AND class-notices.php newblocks number
+				"image_comparison" => true, // 14 BUSY BUILDING
 				"image_gallery" => true, // 13 BUSY BUILDING
 				"accordions" => true, // 12
 				"icon_list" => true, // 11

@@ -27,6 +27,11 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: false,
 	},
+	image_comparison: {
+		desc: __("Use a neat action slider to compare 2 images", "blockons"),
+		pluginSpecific: false,
+		isNew: __("NEW", ""),
+	},
 	image_gallery: {
 		desc: __("A more advanced gallery with 3 beautiful layouts", "blockons"),
 		pluginSpecific: false,

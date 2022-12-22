@@ -4,8 +4,6 @@
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
-	AlignmentToolbar,
-	BlockControls,
 	InspectorControls,
 	useBlockProps,
 	MediaUpload,
@@ -465,7 +463,7 @@ const Edit = (props) => {
 											: ""
 									}
 								/>
-								<div className="helplink fixmargin">
+								{/* <div className="helplink fixmargin">
 									<p>
 										{__(
 											"Add the image caption when uploading or editing images",
@@ -478,7 +476,7 @@ const Edit = (props) => {
 									>
 										{__("Read More")}
 									</a>
-								</div>
+								</div> */}
 
 								{(imageCaption === "plain" ||
 									imageCaption === "bottom" ||

@@ -1,0 +1,86 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.wp-block-blockons-image-comparison {
+	display: flex;
+	justify-content: flex-start;
+}
+/* -- Alignment -- */
+.wp-block-blockons-image-comparison.align-center {
+	justify-content: center;
+}
+.wp-block-blockons-image-comparison.align-right {
+	justify-content: flex-end;
+}
+
+.wp-block-blockons-image-comparison img-comparison-slider {
+	visibility: hidden;
+}
+.wp-block-blockons-image-comparison img-comparison-slider img {
+	display: block;
+	margin: 0;
+	object-fit: cover;
+}
+.wp-block-blockons-image-comparison img-comparison-slider [slot="first"] {
+	height: 100%;
+}
+.wp-block-blockons-image-comparison img-comparison-slider [slot="second"] {
+	display: none;
+}
+.wp-block-blockons-image-comparison img-comparison-slider.rendered {
+	visibility: inherit;
+}
+.wp-block-blockons-image-comparison
+	img-comparison-slider.rendered
+	[slot="second"] {
+	display: block;
+}
+/* -- Handle -- */
+.handle-bar {
+	position: absolute;
+	border-radius: 3px;
+	width: 8px;
+	height: 48px;
+	background-color: #fff;
+	left: -4px;
+	margin: -24px 0 0;
+}
+.handle-bar::before,
+.handle-bar::after {
+	content: "";
+	position: absolute;
+	border: 6px solid transparent;
+	border-left: 7px solid #fff;
+	top: calc(50% - 6px);
+	left: 11px;
+	pointer-events: none;
+	transition: all 0.2s ease-in-out 0s;
+}
+.handle-bar::after {
+	border-left-color: transparent;
+	border-right: 7px solid #fff;
+	left: auto;
+	right: 11px;
+}
+.blockons-image-comparison-wrap:hover .handle-bar::before {
+	left: 13px;
+}
+.blockons-image-comparison-wrap:hover .handle-bar::after {
+	right: 13px;
+}
+/* -- Image Captions -- */
+.wp-block-blockons-image-comparison .blockons-ic-title {
+	position: absolute;
+	bottom: 12px;
+	font-size: 15px;
+	color: #fff;
+	text-shadow: 0 1px 3px rgb(0 0 0 / 22%);
+}
+.wp-block-blockons-image-comparison .blockons-ic-title.before {
+	left: 12px;
+}
+.wp-block-blockons-image-comparison .blockons-ic-title.after {
+	right: 12px;
+	bottom: 22px;
+}

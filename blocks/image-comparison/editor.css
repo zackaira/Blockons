@@ -1,0 +1,19 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.wp-block-blockons-image-comparison .blockons-ic-button {
+	background-color: #fff;
+	box-shadow: 0 1px 5px rgb(0 0 0 / 18%);
+	border-radius: 3px;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 99;
+	font-family: "Font Awesome 6 Free";
+	font-weight: 900;
+}
+.wp-block-blockons-image-comparison .blockons-ic-button.after {
+	left: auto;
+	right: 10px;
+}
