@@ -6,7 +6,7 @@
 	"textdomain": "blockons",
 	"icon": "heading",
 	"category": "blockons-category",
-	"keywords": ["line", "heading", "title"],
+	"keywords": ["line", "heading", "title", "blockons"],
 	"attributes": {
 		"alignment": {
 			"type": "string",

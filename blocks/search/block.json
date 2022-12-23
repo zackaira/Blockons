@@ -6,7 +6,7 @@
 	"textdomain": "blockons",
 	"icon": "search",
 	"category": "blockons-category",
-	"keywords": ["search", "searchbar", "icon", "woocommerce", "header", "site"],
+	"keywords": ["search", "bar", "blockons"],
 	"attributes": {
 		"alignment": {
 			"type": "string",

@@ -6,7 +6,7 @@
 	"textdomain": "blockons",
 	"icon": "star-empty",
 	"category": "blockons-category",
-	"keywords": ["featured", "product", "woocommerce"],
+	"keywords": ["featured", "product", "woocommerce", "wc", "blockons"],
 	"attributes": {
 		"alignment": {
 			"type": "string",

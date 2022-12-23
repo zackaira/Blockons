@@ -3,8 +3,9 @@ Contributors: Kaira
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PFZGBM92T8XSE&source=url
 Tags: blocks, block, gutenberg blocks, woocommerce blocks, editor blocks
 Requires at least: 5.0
+Requires PHP: 5.6
 Tested up to: 6.1
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,11 +14,11 @@ WordPress editor blocks for you to build your website.
 
 == Description ==
 
-[Blockons](https://blockons.com/go/website/)! Editor Blocks & Site Addons... It's free, it's customizable, and it's built for you!
+[Blockons](https://blockons.com/go/website/)!!  WordPress Editor Blocks & Site Addons... It's free, it's customizable, and it's built for you!
 
 Add powerful and advanced blocks to your website to enhance the WordPress editor (previously known as the Gutenberg editor), so you can easily create engaging and visually attractive website pages.
 
-We have 12 editor blocks available at the moment (includes 3 WooCommerce blocks), but we're working on more... And we want to build gutenberg blocks that you need... We want to offer a complete blocks solution to building your website.
+We currently have 14 editor blocks available at the moment (includes 3 WooCommerce blocks), but we're working on more... And we want to build gutenberg blocks that you need... We want to offer a complete blocks solution to building your website.
 
 
 ## Blockons Offers the following blocks
@@ -35,6 +36,15 @@ Use better icon list items to display on your website, a fully customizable list
 
 &#9989; **Accordion(s)** block
 Display content in a (click to) show or hide accordion style block... This is good for displaying lots of content in an expandable section or content such as Frequently Asked Questions (FAQ's) where your users can select and click for the content they want to see.
+
+&#9989; **Advanced Image Gallery** block
+Select from 3 beautiful layouts, to display your galleries, as well as image hover animations & caption display options:
+Default Grid layout - Use the normal, neat grid type layout with lots of customization options for your image gallery.
+Masonry Gallery Layout - Display your images in a neat masonry type layout which is sort of like a mason fitting stones in a wall, or like the Pinterest blocks layout
+Featured Grid Layout - The Featured grid offers small and large images all neatly tiled together to create a beautiful gallery.
+
+&#9989; **Image Comparison** block
+The Image Comparison block allows you to display and compare the differences between two images side by side (or above and below each other), and view them by using an action slider to compare the images.
 
 &#9989; **Marketing Button** block
 Basically an advanced button block. The marketing button lets you add a stand out CTA (call-to-action) button with an icon, heading and text to attract your users to click through.
@@ -171,8 +181,9 @@ This could be from the theme you're using, or another plugin. Again, please [con
 = 1.0.4 =
 * Styling tweaks/fixes
 * Updated block(s) keywords
-* 
-* 
+* Added minimum required PHP version
+* NEW: Added new Advanced Image Gallery Block
+* NEW: Added new Image Comparison block
 
 = 1.0.3 =
 * Styling tweaks/fixes

@@ -6,7 +6,7 @@
 	"textdomain": "blockons",
 	"icon": "admin-users",
 	"category": "blockons-category",
-	"keywords": ["account", "icon", "profile", "woocommerce", "header"],
+	"keywords": ["account", "icon", "profile", "woocommerce", "wc", "blockons"],
 	"attributes": {
 		"alignment": {
 			"type": "string",

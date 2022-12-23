@@ -6,7 +6,7 @@
 	"textdomain": "blockons",
 	"icon": "format-video",
 	"category": "blockons-category",
-	"keywords": ["video", "image", "slider", "youtube", "vimeo"],
+	"keywords": ["video", "slider", "youtube", "vimeo", "blockons"],
 	"attributes": {
 		"uniqueId": {
 			"type": "string"

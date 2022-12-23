@@ -6,7 +6,7 @@
 	"textdomain": "blockons",
 	"icon": "button",
 	"category": "blockons-category",
-	"keywords": ["marketing", "button", "cta", "banner"],
+	"keywords": ["marketing", "button", "cta", "banner", "blockons"],
 	"attributes": {
 		"alignment": {
 			"type": "string",

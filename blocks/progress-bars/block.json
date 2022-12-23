@@ -6,7 +6,7 @@
 	"textdomain": "blockons",
 	"icon": "editor-alignleft",
 	"category": "blockons-category",
-	"keywords": ["progress", "bars", "items"],
+	"keywords": ["progress", "bars", "items", "blockons"],
 	"attributes": {
 		"alignment": {
 			"type": "string",

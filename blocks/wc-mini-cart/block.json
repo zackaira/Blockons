@@ -6,7 +6,7 @@
 	"textdomain": "blockons",
 	"icon": "cart",
 	"category": "blockons-category",
-	"keywords": ["cart", "icon", "mini cart", "woocommerce", "header"],
+	"keywords": ["cart", "mini cart", "woocommerce", "wc", "blockons"],
 	"attributes": {
 		"cartLink": {
 			"type": "string",
