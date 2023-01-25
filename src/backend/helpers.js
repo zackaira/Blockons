@@ -30,12 +30,12 @@ export const blockListSettings = {
 	image_comparison: {
 		desc: __("Use a neat action slider to compare 2 images", "blockons"),
 		pluginSpecific: false,
-		isNew: __("NEW", ""),
+		isNew: false,
 	},
 	image_gallery: {
 		desc: __("A more advanced gallery with 3 beautiful layouts", "blockons"),
 		pluginSpecific: false,
-		isNew: __("NEW", ""),
+		isNew: false,
 	},
 	image_carousel: {
 		desc: __("Display multiple images in a neat carousel", "blockons"),
@@ -59,6 +59,14 @@ export const blockListSettings = {
 		desc: __("Show progress with beautiful, animated bars", "blockons"),
 		pluginSpecific: false,
 		isNew: false,
+	},
+	slider: {
+		desc: __(
+			"A slider to display custom content or posts/products",
+			"blockons"
+		),
+		pluginSpecific: false,
+		isNew: __("NEW", "blockons"),
 	},
 	search: {
 		desc: __("A search bar/icon with drop down or popup search", "blockons"),
@@ -89,11 +97,6 @@ export const blockListSettings = {
 	wc_mini_cart: {
 		desc: __("A simple WC cart icon with a full cart drop down", "blockons"),
 		pluginSpecific: "WooCommerce",
-		isNew: false,
-	},
-	layout_container: {
-		desc: __("A more advaced layout block for your pages", "blockons"),
-		pluginSpecific: false,
 		isNew: false,
 	},
 };

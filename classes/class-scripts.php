@@ -302,9 +302,10 @@ class Blockons {
 
 	public static function blockonsDefaults() {
 		$initialSettings = array(
-			"blocks" => array( // For adding a new block, update this AND class-notices.php newblocks number
-				"image_comparison" => true, // 14 BUSY BUILDING
-				"image_gallery" => true, // 13 BUSY BUILDING
+			"blocks" => array( // For adding a new block, update this AND ../src/backend/helpers.js AND class-notices.php newblocks number
+				"slider" => true, // 15 Busy Building
+				"image_comparison" => true, // 14
+				"image_gallery" => true, // 13
 				"accordions" => true, // 12
 				"icon_list" => true, // 11
 				"image_carousel" => true, // 10

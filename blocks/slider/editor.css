@@ -1,0 +1,56 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.wp-block-blockons-slider {
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 20%);
+	position: relative;
+}
+/* -- Slide Settings -- */
+.blockons-slider-btns {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	z-index: 20;
+}
+.wp-block-blockons-slider .blockons-slider-btns .blockons-sliderimg-button {
+	position: absolute;
+	right: 100%;
+	margin-right: 8px;
+}
+/* -- Settings Popup -- */
+.blockons-icon-select {
+	display: flex;
+	align-items: center;
+}
+.blockons-icon-select p {
+	margin: 0 0 0 10px;
+}
+.blockons-editor-popup.icon-selector .components-popover__content {
+	display: flex;
+	flex-wrap: wrap;
+	width: 145px;
+}
+/* -- Settings Need Reload -- */
+.blockons-slider-reload {
+	background-color: #f0f0f0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 45;
+}
+.blockons-slider-reload-inner {
+	background-color: #fff;
+	box-shadow: 0 1px 5px rgb(0 0 0 / 14%);
+	border-radius: 4px;
+	padding: 12px 15px;
+	font-size: 13px;
+	color: #000;
+	text-align: center;
+	max-width: 300px;
+}

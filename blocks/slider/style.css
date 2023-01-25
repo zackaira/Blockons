@@ -1,0 +1,274 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.wp-block-blockons-slider {
+	position: relative;
+}
+/* ---- Slider ---- */
+.wp-block-blockons-slider .swiper-slide {
+	background-color: #fafafa;
+	text-align: center;
+	position: relative;
+}
+.wp-block-blockons-slider .swiper-slide-inner {
+	display: block;
+}
+.wp-block-blockons-slider .blockons-slider-image {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
+.wp-block-blockons-slider .blockons-slider-inner {
+	position: relative;
+	z-index: 4;
+}
+.wp-block-blockons-slider .blockons-slider-inner .blockons-slider-content-bg {
+	background-color: rgba(0, 0, 0, 0.35);
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 4;
+}
+.wp-block-blockons-slider .blockons-slider-inner .blockons-slider-content {
+	position: relative;
+	z-index: 6;
+}
+.wp-block-blockons-slider .swiper-slide h4.slider-title {
+}
+.wp-block-blockons-slider .swiper-slide p.slider-desc {
+}
+.wp-block-blockons-slider .swiper-slide a.slider-button {
+}
+
+/* -- Navigation -- */
+.wp-block-blockons-slider .blockons-slider.navigation-round .swiper-button-prev,
+.wp-block-blockons-slider .blockons-slider.navigation-round .swiper-button-next,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-rounded
+	.swiper-button-prev,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-rounded
+	.swiper-button-next,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-square
+	.swiper-button-prev,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-square
+	.swiper-button-next {
+	box-shadow: 0 1px 4px rgb(0 0 0 / 14%), inset 0 0 0 1px rgb(0 0 0 / 18%);
+	width: 46px;
+	height: 46px;
+	margin-top: -23px;
+}
+.wp-block-blockons-slider .blockons-slider.navigation-round .swiper-button-prev,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-round
+	.swiper-button-next {
+	border-radius: 50px;
+}
+.wp-block-blockons-slider
+	.blockons-slider.navigation-rounded
+	.swiper-button-prev,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-rounded
+	.swiper-button-next {
+	border-radius: 8px;
+}
+
+.wp-block-blockons-slider .blockons-slider.navigation-dark .swiper-button-prev,
+.wp-block-blockons-slider .blockons-slider.navigation-dark .swiper-button-next {
+	color: #222;
+}
+.wp-block-blockons-slider .blockons-slider.navigation-light .swiper-button-prev,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-light
+	.swiper-button-next {
+	color: #fff;
+}
+.wp-block-blockons-slider
+	.blockons-slider.navigation-dark.navigation-round
+	.swiper-button-prev,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-dark.navigation-round
+	.swiper-button-next,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-dark.navigation-rounded
+	.swiper-button-prev,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-dark.navigation-rounded
+	.swiper-button-next,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-dark.navigation-square
+	.swiper-button-prev,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-dark.navigation-square
+	.swiper-button-next {
+	background-color: #222;
+	color: #fff;
+}
+.wp-block-blockons-slider
+	.blockons-slider.navigation-light.navigation-round
+	.swiper-button-prev,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-light.navigation-round
+	.swiper-button-next,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-light.navigation-rounded
+	.swiper-button-prev,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-light.navigation-rounded
+	.swiper-button-next,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-light.navigation-square
+	.swiper-button-prev,
+.wp-block-blockons-slider
+	.blockons-slider.navigation-light.navigation-square
+	.swiper-button-next {
+	background-color: #fff;
+	color: #222;
+}
+.wp-block-blockons-slider
+	.blockons-slider.default-icon.navigation-round
+	.swiper-button-prev::after,
+.wp-block-blockons-slider
+	.blockons-slider.default-icon.navigation-round
+	.swiper-button-next::after,
+.wp-block-blockons-slider
+	.blockons-slider.default-icon.navigation-rounded
+	.swiper-button-prev::after,
+.wp-block-blockons-slider
+	.blockons-slider.default-icon.navigation-rounded
+	.swiper-button-next::after,
+.wp-block-blockons-slider
+	.blockons-slider.default-icon.navigation-square
+	.swiper-button-prev::after,
+.wp-block-blockons-slider
+	.blockons-slider.default-icon.navigation-square
+	.swiper-button-next::after {
+	font-size: 30px;
+}
+/* - Arrows - */
+.wp-block-blockons-slider
+	.blockons-slider.custom-icon
+	.swiper-button-prev::after,
+.wp-block-blockons-slider
+	.blockons-slider.custom-icon
+	.swiper-button-next::after {
+	font-family: "Font Awesome 6 Free";
+	font-weight: 900;
+	font-size: 32px;
+}
+/* - Font Awesome Overrides - */
+.wp-block-blockons-slider
+	.blockons-slider.custom-icon.arrows-arrow-right
+	.swiper-button-prev::after {
+	content: "\f060";
+}
+.wp-block-blockons-slider
+	.blockons-slider.custom-icon.arrows-arrow-right
+	.swiper-button-next::after {
+	content: "\f061";
+}
+.wp-block-blockons-slider
+	.blockons-slider.custom-icon.arrows-arrow-right-long
+	.swiper-button-prev::after {
+	content: "\f177";
+}
+.wp-block-blockons-slider
+	.blockons-slider.custom-icon.arrows-arrow-right-long
+	.swiper-button-next::after {
+	content: "\f178";
+}
+.wp-block-blockons-slider
+	.blockons-slider.custom-icon.arrows-angle-right
+	.swiper-button-prev::after {
+	content: "\f104";
+}
+.wp-block-blockons-slider
+	.blockons-slider.custom-icon.arrows-angle-right
+	.swiper-button-next::after {
+	content: "\f105";
+}
+.wp-block-blockons-slider
+	.blockons-slider.custom-icon.arrows-caret-right
+	.swiper-button-prev::after {
+	content: "\f0d9";
+}
+.wp-block-blockons-slider
+	.blockons-slider.custom-icon.arrows-caret-right
+	.swiper-button-next::after {
+	content: "\f0da";
+}
+.wp-block-blockons-slider
+	.blockons-slider.custom-icon.arrows-angles-right
+	.swiper-button-prev::after {
+	content: "\f100";
+}
+.wp-block-blockons-slider
+	.blockons-slider.custom-icon.arrows-angles-right
+	.swiper-button-next::after {
+	content: "\f101";
+}
+/* -- Pagination -- */
+.wp-block-blockons-slider
+	.blockons-slider.pagination-dark
+	.swiper-pagination
+	.swiper-pagination-bullet.swiper-pagination-bullet-active {
+	background-color: #222;
+}
+.wp-block-blockons-slider
+	.blockons-slider.pagination-light
+	.swiper-pagination
+	.swiper-pagination-bullet.swiper-pagination-bullet-active {
+	background-color: #fff;
+	box-shadow: 0 0 0 1px #c6c6c6;
+	color: #111;
+}
+.wp-block-blockons-slider .blockons-slider.pagination-numbers {
+	counter-reset: blockons-slider-counter;
+}
+.wp-block-blockons-slider
+	.blockons-slider.pagination-numbers
+	.swiper-pagination-bullet {
+	color: #fff;
+	font-size: 11px;
+	font-weight: bold;
+	width: 16px;
+	height: 16px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+.wp-block-blockons-slider
+	.blockons-slider.pagination-numbers
+	.swiper-pagination-bullet::before {
+	counter-increment: blockons-slider-counter;
+	content: counter(blockons-slider-counter);
+}
+
+.wp-block-blockons-slider .blockons-slider.controlsOnHover .swiper-button-prev,
+.wp-block-blockons-slider .blockons-slider.controlsOnHover .swiper-button-next,
+.wp-block-blockons-slider .blockons-slider.controlsOnHover .swiper-pagination {
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out 0s;
+}
+.wp-block-blockons-slider
+	.blockons-slider.controlsOnHover:hover
+	.swiper-button-prev,
+.wp-block-blockons-slider
+	.blockons-slider.controlsOnHover:hover
+	.swiper-button-next,
+.wp-block-blockons-slider
+	.blockons-slider.controlsOnHover:hover
+	.swiper-pagination {
+	opacity: 1;
+}

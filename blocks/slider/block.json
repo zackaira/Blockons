@@ -1,0 +1,112 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/slider",
+	"title": "Blockons Slider",
+	"textdomain": "blockons",
+	"icon": "heart",
+	"category": "blockons-category",
+	"keywords": ["woocommerce", "product", "slider", "custom", "blockons"],
+	"attributes": {
+		"uniqueId": {
+			"type": "string"
+		},
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"sliderSlides": {
+			"type": "array",
+			"default": [
+				{
+					"id": "slide-one",
+					"title": "Lorem ipsum",
+					"subtitle": "Cras sollicitudin cursus faucibus. Integer mauris lorem, placerat quis aliquam a, ultrices eu velit. Integer nulla nisi, semper id ornare sit amet, mattis id tortor",
+					"link": {
+						"type": "button",
+						"url": "",
+						"target": false
+					},
+					"button": {
+						"text": "View Post",
+						"color": "#000",
+						"fcolor": "#FFF"
+					},
+					"image": {}
+				},
+				{
+					"id": "slide-two",
+					"title": "Lorem ipsum",
+					"subtitle": "Cras sollicitudin cursus faucibus. Integer mauris lorem, placerat quis aliquam a, ultrices eu velit. Integer nulla nisi, semper id ornare sit amet, mattis id tortor",
+					"link": {
+						"type": "button",
+						"url": "",
+						"target": false
+					},
+					"button": {
+						"text": "View Post",
+						"color": "#000",
+						"fcolor": "#FFF"
+					},
+					"image": {}
+				}
+			]
+		},
+		"sliderLinks": {
+			"type": "string",
+			"default": "button"
+		},
+		"transition": {
+			"type": "string",
+			"default": "slide"
+		},
+		"perView": {
+			"type": "number",
+			"default": 1
+		},
+		"mode": {
+			"type": "string",
+			"default": "default"
+		},
+		"spaceBetween": {
+			"type": "number",
+			"default": 0
+		},
+		"navigation": {
+			"type": "boolean",
+			"default": true
+		},
+		"navigationStyle": {
+			"type": "string",
+			"default": "default"
+		},
+		"navigationColor": {
+			"type": "string",
+			"default": "dark"
+		},
+		"navigationArrow": {
+			"type": "string",
+			"default": "ban"
+		},
+		"pagination": {
+			"type": "boolean",
+			"default": true
+		},
+		"paginationStyle": {
+			"type": "string",
+			"default": "bullets"
+		},
+		"paginationColor": {
+			"type": "string",
+			"default": "dark"
+		},
+		"showOnHover": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"viewScript": "blockons-slider",
+	"style": ["file:./style-index.css", "blockons-fontawesome", "blockons-slider"]
+}

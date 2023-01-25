@@ -39,9 +39,10 @@ Display content in a (click to) show or hide accordion style block... This is go
 
 &#9989; **Advanced Image Gallery** block
 Select from 3 beautiful layouts, to display your galleries, as well as image hover animations & caption display options:
-Default Grid layout - Use the normal, neat grid type layout with lots of customization options for your image gallery.
-Masonry Gallery Layout - Display your images in a neat masonry type layout which is sort of like a mason fitting stones in a wall, or like the Pinterest blocks layout
-Featured Grid Layout - The Featured grid offers small and large images all neatly tiled together to create a beautiful gallery.
+
+**Default Grid layout** - Use the normal, neat grid type layout with lots of customization options for your image gallery.
+**Masonry Gallery Layout** - Display your images in a neat masonry type layout which is sort of like a mason fitting stones in a wall, or like the Pinterest blocks layout
+**Featured Grid Layout** - The Featured grid offers small and large images all neatly tiled together to create a beautiful gallery.
 
 &#9989; **Image Comparison** block
 The Image Comparison block allows you to display and compare the differences between two images side by side (or above and below each other), and view them by using an action slider to compare the images.
@@ -177,6 +178,12 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 
 == Changelog ==
+
+= 1.0.5 =
+* Styling tweaks/fixes
+* 
+* 
+* Updated the language .pot file
 
 = 1.0.4 =
 * Styling tweaks/fixes
