@@ -13,7 +13,7 @@
 		},
 		"alignment": {
 			"type": "string",
-			"default": "left"
+			"default": "center"
 		},
 		"sliderSlides": {
 			"type": "array",
@@ -28,9 +28,9 @@
 						"target": false
 					},
 					"button": {
-						"text": "View Post",
-						"color": "#000",
-						"fcolor": "#FFF"
+						"text": "",
+						"color": "",
+						"fcolor": ""
 					},
 					"image": {}
 				},
@@ -44,17 +44,89 @@
 						"target": false
 					},
 					"button": {
-						"text": "View Post",
-						"color": "#000",
-						"fcolor": "#FFF"
+						"text": "",
+						"color": "",
+						"fcolor": ""
 					},
 					"image": {}
 				}
 			]
 		},
+		"sliderStyle": {
+			"type": "string",
+			"default": "one"
+		},
 		"sliderLinks": {
 			"type": "string",
-			"default": "button"
+			"default": "none"
+		},
+		"showTitle": {
+			"type": "boolean",
+			"default": true
+		},
+		"defaultTitleSize": {
+			"type": "number",
+			"default": 26
+		},
+		"defaultTitleColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"showDesc": {
+			"type": "boolean",
+			"default": true
+		},
+		"defaultDescSize": {
+			"type": "number",
+			"default": 15
+		},
+		"defaultDescColor": {
+			"type": "string",
+			"default": "#e5e5e5"
+		},
+		"defaultBtnText": {
+			"type": "string",
+			"default": "View Post"
+		},
+		"defaultBtnColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"defaultBtnfColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"imageProportion": {
+			"type": "string",
+			"default": "actual"
+		},
+		"forceFullWidth": {
+			"type": "boolean",
+			"default": false
+		},
+		"infoBg": {
+			"type": "boolean",
+			"default": true
+		},
+		"infoBgColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"infoBgOpacity": {
+			"type": "number",
+			"default": 0.62
+		},
+		"imageOverlay": {
+			"type": "boolean",
+			"default": false
+		},
+		"imageOverlayColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"imageOverlayOpacity": {
+			"type": "number",
+			"default": 0.62
 		},
 		"transition": {
 			"type": "string",

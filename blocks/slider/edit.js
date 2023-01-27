@@ -38,7 +38,25 @@ const Edit = (props) => {
 			uniqueId,
 			alignment,
 			sliderSlides,
+			sliderStyle,
 			sliderLinks,
+			showTitle,
+			defaultTitleSize,
+			defaultTitleColor,
+			showDesc,
+			defaultDescSize,
+			defaultDescColor,
+			defaultBtnText,
+			defaultBtnColor,
+			defaultBtnfColor,
+			imageProportion,
+			forceFullWidth,
+			infoBg,
+			infoBgColor,
+			infoBgOpacity,
+			imageOverlay,
+			imageOverlayColor,
+			imageOverlayOpacity,
 			transition,
 			perView,
 			mode,
@@ -57,7 +75,7 @@ const Edit = (props) => {
 	const wcActive = blockonsObj.wcActive;
 
 	const blockProps = useBlockProps({
-		className: `align-${alignment}`,
+		className: ``,
 	});
 	const [needsReload, setNeedsReload] = useState(false);
 	const [reloads, setReloads] = useState({ transition, mode });
@@ -93,7 +111,7 @@ const Edit = (props) => {
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
-			alignment: newAlignment === undefined ? "left" : newAlignment,
+			alignment: newAlignment === undefined ? "center" : newAlignment,
 		});
 	};
 	// Slider Settings
@@ -113,6 +131,18 @@ const Edit = (props) => {
 		});
 		setAttributes({ sliderSlides: editedSlideItems });
 	};
+	const handleSliderImageRemove = (id) => {
+		const newSlides = [...sliderSlides];
+		const editedSlideItems = newSlides.map((obj) => {
+			if (obj.id === id)
+				return {
+					...obj,
+					image: {},
+				};
+			return obj;
+		});
+		setAttributes({ sliderSlides: editedSlideItems });
+	};
 	const handleUpdateSlideLink = (value, id, attr) => {
 		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
@@ -123,6 +153,30 @@ const Edit = (props) => {
 						...obj.link,
 						[attr]: value,
 					},
+				};
+			return obj;
+		});
+		setAttributes({ sliderSlides: editedSlideItems });
+	};
+	const handleUpdateSlideTitle = (value, id) => {
+		const newSlides = [...sliderSlides];
+		const editedSlideItems = newSlides.map((obj) => {
+			if (obj.id === id)
+				return {
+					...obj,
+					title: value,
+				};
+			return obj;
+		});
+		setAttributes({ sliderSlides: editedSlideItems });
+	};
+	const handleUpdateSlideText = (value, id) => {
+		const newSlides = [...sliderSlides];
+		const editedSlideItems = newSlides.map((obj) => {
+			if (obj.id === id)
+				return {
+					...obj,
+					subtitle: value,
 				};
 			return obj;
 		});
@@ -148,7 +202,8 @@ const Edit = (props) => {
 		const newSlides = [...sliderSlides];
 		newSlides.push({
 			id: newSlides.length + 1,
-			title: "New Title",
+			title: "Lorem ipsum",
+			subtitle: "Cras sollicitudin cursus faucibus. Integer mauris lorem",
 		});
 		setAttributes({ sliderSlides: newSlides });
 	};
@@ -167,7 +222,11 @@ const Edit = (props) => {
 	};
 
 	const slides = sliderSlides.map((slideItem, index) => (
-		<div className="swiper-slide-inner">
+		<div
+			className={`swiper-slide-inner ${
+				forceFullWidth || imageProportion !== "actual" ? "imgfull" : ""
+			}`}
+		>
 			<div
 				className="blockons-slider-image"
 				{...(slideItem.image?.url
@@ -176,35 +235,114 @@ const Edit = (props) => {
 								backgroundImage: `url(${slideItem.image.url})`,
 							},
 					  }
-					: {})}
-			></div>
+					: {
+							style: {
+								backgroundImage: `url(${blockonsObj.pluginUrl}assets/images/placeholder.png)`,
+							},
+					  })}
+			>
+				{imageOverlay && (
+					<div
+						className="blockons-slider-imgoverlay"
+						style={{
+							backgroundColor: imageOverlayColor,
+							opacity: imageOverlayOpacity,
+						}}
+					></div>
+				)}
 
-			<div className="blockons-slider-inner">
-				<div className="blockons-slider-content-bg">BG</div>
+				{imageProportion === "actual" ? (
+					slideItem.image?.url ? (
+						<img src={slideItem.image.url} alt={slideItem.image.alt} />
+					) : (
+						<img
+							src={`${blockonsObj.pluginUrl}assets/images/placeholder.png`}
+						/>
+					)
+				) : (
+					<img
+						src={`${blockonsObj.pluginUrl}assets/images/${imageProportion}.png`}
+					/>
+				)}
+			</div>
 
-				<div className="blockons-slider-content">
-					<h4 className="slider-title">{`${slideItem.title} (${slideItem.id})`}</h4>
+			<div className={`blockons-slider-inner align-${alignment}`}>
+				<div className="blockons-slider-inner-slide">
+					{infoBg && (
+						<div
+							className="blockons-slider-content-bg"
+							style={{
+								backgroundColor: infoBgColor,
+								opacity: infoBgOpacity,
+							}}
+						></div>
+					)}
 
-					<p className="slider-desc">{`${slideItem.subtitle}`}</p>
+					{(showTitle || showDesc || sliderLinks === "button") && (
+						<div className="blockons-slider-content">
+							{showTitle && (
+								<RichText
+									tagName="h4"
+									value={slideItem.title}
+									className="slider-title"
+									onChange={(newValue) =>
+										handleUpdateSlideTitle(newValue, slideItem.id)
+									}
+									allowedFormats={["core/bold", "core/italic"]}
+									placeholder="Lorem ipsum"
+									disableLineBreaks
+									style={{
+										fontSize: defaultTitleSize,
+										color: defaultTitleColor,
+									}}
+								/>
+							)}
 
-					{sliderLinks === "button" ||
-						(slideItem.link.type === "button" && slideItem.button?.text && (
-							<RichText
-								tagName="div"
-								value={slideItem.button?.text}
-								className="slider-button"
-								onChange={(newValue) =>
-									handleUpdateSlideButton(newValue, slideItem.id, "text")
-								}
-								allowedFormats={["core/bold", "core/italic"]}
-								placeholder={__("Slide Link", "blockons")}
-								disableLineBreaks
-								style={{
-									backgroundColor: slideItem.button?.color,
-									color: slideItem.button?.fcolor,
-								}}
-							/>
-						))}
+							{showDesc && (
+								<RichText
+									tagName="p"
+									value={slideItem.subtitle}
+									className="slider-desc"
+									onChange={(newValue) =>
+										handleUpdateSlideText(newValue, slideItem.id)
+									}
+									allowedFormats={["core/bold", "core/italic"]}
+									placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+									disableLineBreaks
+									style={{
+										fontSize: defaultDescSize,
+										color: defaultDescColor,
+									}}
+								/>
+							)}
+
+							{sliderLinks === "button" && (
+								<RichText
+									tagName="div"
+									value={
+										slideItem.button?.text
+											? slideItem.button.text
+											: defaultBtnText
+									}
+									className="slider-button"
+									onChange={(newValue) =>
+										handleUpdateSlideButton(newValue, slideItem.id, "text")
+									}
+									allowedFormats={["core/bold", "core/italic"]}
+									placeholder={__("Slide Link", "blockons")}
+									disableLineBreaks
+									style={{
+										backgroundColor: slideItem.button?.color
+											? slideItem.button.color
+											: defaultBtnColor,
+										color: slideItem.button?.fcolor
+											? slideItem.button.fcolor
+											: defaultBtnfColor,
+									}}
+								/>
+							)}
+						</div>
+					)}
 				</div>
 			</div>
 
@@ -215,7 +353,14 @@ const Edit = (props) => {
 					value={slideItem.image}
 					onSelect={(media) => handleSliderImageSelect(media, slideItem.id)}
 					render={({ open }) => {
-						return (
+						return slideItem.image?.url ? (
+							<Button
+								className="blockons-sliderimg-button"
+								icon="no-alt"
+								label="Remove Slide Image"
+								onClick={() => handleSliderImageRemove(slideItem.id)}
+							/>
+						) : (
 							<Button
 								className="blockons-sliderimg-button"
 								icon="format-image"
@@ -277,7 +422,11 @@ const Edit = (props) => {
 									<p>{__("Button", "blockons")}</p>
 									<BlockonsColorpicker
 										label={__("Color", "blockons")}
-										value={slideItem.button.color}
+										value={
+											slideItem.button.color
+												? slideItem.button.color
+												: defaultBtnColor
+										}
 										onChange={(colorValue) =>
 											handleUpdateSlideButton(colorValue, slideItem.id, "color")
 										}
@@ -285,7 +434,11 @@ const Edit = (props) => {
 									/>
 									<BlockonsColorpicker
 										label={__("Font Color", "blockons")}
-										value={slideItem.button.fcolor}
+										value={
+											slideItem.button.fcolor
+												? slideItem.button.fcolor
+												: defaultBtnfColor
+										}
 										onChange={(colorValue) =>
 											handleUpdateSlideButton(
 												colorValue,
@@ -326,9 +479,252 @@ const Edit = (props) => {
 		<div {...blockProps}>
 			{isSelected && (
 				<InspectorControls>
+					<PanelBody title={__("Slider Posts", "blockons")} initialOpen={true}>
+						<SelectControl
+							label="Slider Style"
+							value={sliderStyle}
+							options={[
+								{ label: "Default Style", value: "one" },
+								{ label: "Another Style", value: "two" },
+								{ label: "And Another Style", value: "three" },
+							]}
+							onChange={(newValue) =>
+								setAttributes({
+									sliderStyle: newValue === undefined ? "one" : newValue,
+								})
+							}
+						/>
+						<div className="blockons-divider"></div>
+
+						<SelectControl
+							label={__("Image Proportions", "blockons")}
+							value={imageProportion}
+							options={[
+								{ label: __("Actual Image", "blockons"), value: "actual" },
+								{ label: __("Square", "blockons"), value: "square" },
+								{
+									label: __("3:2 Rectangle", "blockons"),
+									value: "32rectangle",
+								},
+								{
+									label: __("4:3 Rectangle", "blockons"),
+									value: "43rectangle",
+								},
+								{
+									label: __("16:9 Panoramic", "blockons"),
+									value: "169panoramic",
+								},
+							]}
+							onChange={(newValue) =>
+								setAttributes({
+									imageProportion: newValue === undefined ? "actual" : newValue,
+								})
+							}
+						/>
+						{imageProportion === "actual" && (
+							<ToggleControl
+								label={__("Force Images Full Width", "blockons")}
+								checked={forceFullWidth}
+								onChange={(newValue) =>
+									setAttributes({ forceFullWidth: newValue })
+								}
+							/>
+						)}
+						<div className="blockons-divider"></div>
+
+						<ToggleControl
+							label={__("Add Background Image Overlay", "blockons")}
+							checked={imageOverlay}
+							onChange={(newValue) => setAttributes({ imageOverlay: newValue })}
+						/>
+						{imageOverlay && (
+							<>
+								<BlockonsColorpicker
+									label={__("Overlay Color", "blockons")}
+									value={imageOverlayColor}
+									onChange={(colorValue) => {
+										setAttributes({
+											imageOverlayColor:
+												colorValue === undefined ? "#000" : colorValue,
+										});
+									}}
+									paletteColors={colorPickerPalette}
+								/>
+								<RangeControl
+									label={__("Opacity", "blockons")}
+									value={imageOverlayOpacity}
+									onChange={(newValue) =>
+										setAttributes({
+											imageOverlayOpacity:
+												newValue === undefined ? 0.62 : newValue,
+										})
+									}
+									min={0}
+									max={1}
+									step={0.01}
+								/>
+							</>
+						)}
+
+						<div className="blockons-divider"></div>
+
+						<SelectControl
+							label="Slide Links"
+							value={sliderLinks}
+							options={[
+								{ label: "None", value: "none" },
+								{ label: "Button Link", value: "button" },
+								{ label: "Link Full Slide", value: "full" },
+							]}
+							onChange={(newValue) =>
+								setAttributes({
+									sliderLinks: newValue === undefined ? "button" : newValue,
+								})
+							}
+						/>
+						{sliderLinks === "button" && (
+							<>
+								<p>{__("Button", "blockons")}</p>
+								<TextControl
+									label="Button Text"
+									value={defaultBtnText}
+									onChange={(newValue) =>
+										setAttributes({ defaultBtnText: newValue })
+									}
+								/>
+								<BlockonsColorpicker
+									label={__("Color", "blockons")}
+									value={defaultBtnColor}
+									onChange={(colorValue) =>
+										setAttributes({
+											defaultBtnColor:
+												colorValue === undefined ? "#000" : colorValue,
+										})
+									}
+									paletteColors={colorPickerPalette}
+								/>
+								<BlockonsColorpicker
+									label={__("Font Color", "blockons")}
+									value={defaultBtnfColor}
+									onChange={(colorValue) =>
+										setAttributes({
+											defaultBtnfColor:
+												colorValue === undefined ? "#FFF" : colorValue,
+										})
+									}
+									paletteColors={colorPickerPalette}
+								/>
+							</>
+						)}
+
+						<div className="blockons-divider"></div>
+
+						<ToggleControl
+							label={__("Add Text Background", "blockons")}
+							checked={infoBg}
+							onChange={(newValue) => setAttributes({ infoBg: newValue })}
+						/>
+						{infoBg && (
+							<>
+								<BlockonsColorpicker
+									label={__("Overlay Color", "blockons")}
+									value={infoBgColor}
+									onChange={(colorValue) => {
+										setAttributes({
+											infoBgColor:
+												colorValue === undefined ? "#000" : colorValue,
+										});
+									}}
+									paletteColors={colorPickerPalette}
+								/>
+								<RangeControl
+									label={__("Opacity", "blockons")}
+									value={infoBgOpacity}
+									onChange={(newValue) =>
+										setAttributes({
+											infoBgOpacity: newValue === undefined ? 0.62 : newValue,
+										})
+									}
+									min={0}
+									max={1}
+									step={0.01}
+								/>
+							</>
+						)}
+
+						<div className="blockons-divider"></div>
+
+						<ToggleControl
+							label={__("Show Title", "blockons")}
+							checked={showTitle}
+							onChange={(newValue) => setAttributes({ showTitle: newValue })}
+						/>
+						{showTitle && (
+							<>
+								<RangeControl
+									label={__("Title Size", "blockons")}
+									value={defaultTitleSize}
+									onChange={(newValue) =>
+										setAttributes({
+											defaultTitleSize:
+												newValue === undefined ? 1 : parseInt(newValue),
+										})
+									}
+									min={10}
+									max={48}
+								/>
+								<BlockonsColorpicker
+									label={__("Color", "blockons")}
+									value={defaultTitleColor}
+									onChange={(colorValue) =>
+										setAttributes({
+											defaultTitleColor:
+												colorValue === undefined ? "#FFF" : colorValue,
+										})
+									}
+									paletteColors={colorPickerPalette}
+								/>
+							</>
+						)}
+
+						<div className="blockons-divider"></div>
+
+						<ToggleControl
+							label={__("Show Description", "blockons")}
+							checked={showDesc}
+							onChange={(newValue) => setAttributes({ showDesc: newValue })}
+						/>
+						{showDesc && (
+							<>
+								<RangeControl
+									label={__("Description Size", "blockons")}
+									value={defaultDescSize}
+									onChange={(newValue) =>
+										setAttributes({
+											defaultDescSize:
+												newValue === undefined ? 1 : parseInt(newValue),
+										})
+									}
+									min={10}
+									max={48}
+								/>
+								<BlockonsColorpicker
+									label={__("Color", "blockons")}
+									value={defaultDescColor}
+									onChange={(colorValue) =>
+										setAttributes({
+											defaultDescColor:
+												colorValue === undefined ? "#e5e5e5" : colorValue,
+										})
+									}
+									paletteColors={colorPickerPalette}
+								/>
+							</>
+						)}
+					</PanelBody>
 					<PanelBody
 						title={__("Slider Settings", "blockons")}
-						initialOpen={true}
+						initialOpen={false}
 					>
 						<SelectControl
 							label="Transition Type"
@@ -387,22 +783,6 @@ const Edit = (props) => {
 							min={0}
 							max={200}
 							step={10}
-						/>
-					</PanelBody>
-					<PanelBody title={__("Slider Posts", "blockons")} initialOpen={false}>
-						<SelectControl
-							label="Slide Links"
-							value={sliderLinks}
-							options={[
-								{ label: "Button Link", value: "button" },
-								{ label: "Link Full Slide", value: "full" },
-								{ label: "None", value: "none" },
-							]}
-							onChange={(newValue) =>
-								setAttributes({
-									sliderLinks: newValue === undefined ? "button" : newValue,
-								})
-							}
 						/>
 					</PanelBody>
 					<PanelBody
@@ -535,7 +915,7 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 			<div
-				className={`blockons-slider ${
+				className={`blockons-adv-slider style-${sliderStyle} ${
 					showOnHover ? "controlsOnHover" : ""
 				} navigation-${navigationStyle} navigation-${navigationColor} pagination-${paginationStyle} pagination-${paginationColor} ${
 					navigationArrow === "ban" ? "default-icon" : "custom-icon"
