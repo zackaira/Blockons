@@ -210,8 +210,8 @@ const Edit = (props) => {
 	const handleDuplicateItem = (index, slideItem) => {
 		const newSlides = [...sliderSlides];
 		newSlides.splice(index + 1, 0, {
+			...slideItem,
 			id: Math.floor(Math.random() * 700) + 1,
-			title: slideItem.title,
 		});
 		setAttributes({ sliderSlides: newSlides });
 	};
