@@ -23,7 +23,7 @@
 					"title": "Lorem ipsum",
 					"subtitle": "Cras sollicitudin cursus faucibus. Integer mauris lorem, placerat quis aliquam a, ultrices eu velit. Integer nulla nisi, semper id ornare sit amet, mattis id tortor",
 					"link": {
-						"type": "button",
+						"type": "",
 						"url": "",
 						"target": false
 					},
@@ -32,14 +32,15 @@
 						"color": "",
 						"fcolor": ""
 					},
-					"image": {}
+					"image": {},
+					"style": ""
 				},
 				{
 					"id": "slide-two",
 					"title": "Lorem ipsum",
 					"subtitle": "Cras sollicitudin cursus faucibus. Integer mauris lorem, placerat quis aliquam a, ultrices eu velit. Integer nulla nisi, semper id ornare sit amet, mattis id tortor",
 					"link": {
-						"type": "button",
+						"type": "",
 						"url": "",
 						"target": false
 					},
@@ -48,7 +49,8 @@
 						"color": "",
 						"fcolor": ""
 					},
-					"image": {}
+					"image": {},
+					"style": ""
 				}
 			]
 		},
@@ -83,18 +85,6 @@
 		"defaultDescColor": {
 			"type": "string",
 			"default": "#e5e5e5"
-		},
-		"defaultBtnText": {
-			"type": "string",
-			"default": "View Post"
-		},
-		"defaultBtnColor": {
-			"type": "string",
-			"default": "#000"
-		},
-		"defaultBtnfColor": {
-			"type": "string",
-			"default": "#FFF"
 		},
 		"imageProportion": {
 			"type": "string",

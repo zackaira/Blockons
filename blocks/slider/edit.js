@@ -39,16 +39,12 @@ const Edit = (props) => {
 			alignment,
 			sliderSlides,
 			sliderStyle,
-			sliderLinks,
 			showTitle,
 			defaultTitleSize,
 			defaultTitleColor,
 			showDesc,
 			defaultDescSize,
 			defaultDescColor,
-			defaultBtnText,
-			defaultBtnColor,
-			defaultBtnfColor,
 			imageProportion,
 			forceFullWidth,
 			infoBg,
@@ -223,9 +219,9 @@ const Edit = (props) => {
 
 	const slides = sliderSlides.map((slideItem, index) => (
 		<div
-			className={`swiper-slide-inner ${
-				forceFullWidth || imageProportion !== "actual" ? "imgfull" : ""
-			}`}
+			className={`swiper-slide-inner style-${
+				slideItem.style ? slideItem.style : sliderStyle
+			} ${forceFullWidth || imageProportion !== "actual" ? "imgfull" : ""}`}
 		>
 			<div
 				className="blockons-slider-image"
@@ -278,7 +274,7 @@ const Edit = (props) => {
 						></div>
 					)}
 
-					{(showTitle || showDesc || sliderLinks === "button") && (
+					{(showTitle || showDesc) && (
 						<div className="blockons-slider-content">
 							{showTitle && (
 								<RichText
@@ -316,7 +312,7 @@ const Edit = (props) => {
 								/>
 							)}
 
-							{sliderLinks === "button" && (
+							{slideItem.button?.type === "button" && (
 								<RichText
 									tagName="div"
 									value={
@@ -376,30 +372,31 @@ const Edit = (props) => {
 					position="bottom left"
 					renderToggle={({ isOpen, onToggle }) => (
 						<Button
-							icon="admin-settings"
-							label={__("Slide Settings", "blockons")}
+							icon="admin-links"
+							label={__("Slide Link", "blockons")}
 							onClick={onToggle}
 						/>
 					)}
 					renderContent={() => (
 						<>
 							<SelectControl
-								label="Slide Link"
+								label={__("Link Type", "blockons")}
 								value={slideItem.link.type}
 								options={[
-									{ label: "Button Link", value: "button" },
-									{ label: "Link Full Slide", value: "full" },
-									{ label: "None", value: "none" },
+									{ label: __("None", "blockons"), value: "none" },
+									{ label: __("Button Link", "blockons"), value: "button" },
+									{ label: __("Full Slide Link", "blockons"), value: "full" },
 								]}
 								onChange={(newValue) =>
 									handleUpdateSlideLink(newValue, slideItem.id, "type")
 								}
 							/>
 
-							{slideItem.link.type !== "none" && (
+							{(slideItem.link?.type === "button" ||
+								slideItem.link?.type === "full") && (
 								<>
 									<TextControl
-										label="Slide Link URL"
+										label={__("Link URL", "blockons")}
 										value={slideItem.link.url}
 										onChange={(newValue) =>
 											handleUpdateSlideLink(newValue, slideItem.id, "url")
@@ -415,18 +412,14 @@ const Edit = (props) => {
 								</>
 							)}
 
-							{slideItem.link.type === "button" && (
+							{slideItem.link?.type === "button" && (
 								<>
 									<div className="blockons-divider"></div>
 
 									<p>{__("Button", "blockons")}</p>
 									<BlockonsColorpicker
 										label={__("Color", "blockons")}
-										value={
-											slideItem.button.color
-												? slideItem.button.color
-												: defaultBtnColor
-										}
+										value={slideItem.button.color}
 										onChange={(colorValue) =>
 											handleUpdateSlideButton(colorValue, slideItem.id, "color")
 										}
@@ -434,11 +427,7 @@ const Edit = (props) => {
 									/>
 									<BlockonsColorpicker
 										label={__("Font Color", "blockons")}
-										value={
-											slideItem.button.fcolor
-												? slideItem.button.fcolor
-												: defaultBtnfColor
-										}
+										value={slideItem.button.fcolor}
 										onChange={(colorValue) =>
 											handleUpdateSlideButton(
 												colorValue,
@@ -450,6 +439,36 @@ const Edit = (props) => {
 									/>
 								</>
 							)}
+						</>
+					)}
+				/>
+				<Dropdown
+					className="blockons-slide-settings"
+					contentClassName="blockons-editor-popup"
+					position="bottom left"
+					renderToggle={({ isOpen, onToggle }) => (
+						<Button
+							icon="admin-settings"
+							label={__("Slide Settings", "blockons")}
+							onClick={onToggle}
+						/>
+					)}
+					renderContent={() => (
+						<>
+							<SelectControl
+								label="Slide Style"
+								value={sliderStyle}
+								options={[
+									{ label: "Default Style", value: "one" },
+									{ label: "Another Style", value: "two" },
+									{ label: "And Another Style", value: "three" },
+								]}
+								onChange={(newValue) =>
+									setAttributes({
+										sliderStyle: newValue === undefined ? "one" : newValue,
+									})
+								}
+							/>
 						</>
 					)}
 				/>
@@ -568,57 +587,6 @@ const Edit = (props) => {
 
 						<div className="blockons-divider"></div>
 
-						<SelectControl
-							label="Slide Links"
-							value={sliderLinks}
-							options={[
-								{ label: "None", value: "none" },
-								{ label: "Button Link", value: "button" },
-								{ label: "Link Full Slide", value: "full" },
-							]}
-							onChange={(newValue) =>
-								setAttributes({
-									sliderLinks: newValue === undefined ? "button" : newValue,
-								})
-							}
-						/>
-						{sliderLinks === "button" && (
-							<>
-								<p>{__("Button", "blockons")}</p>
-								<TextControl
-									label="Button Text"
-									value={defaultBtnText}
-									onChange={(newValue) =>
-										setAttributes({ defaultBtnText: newValue })
-									}
-								/>
-								<BlockonsColorpicker
-									label={__("Color", "blockons")}
-									value={defaultBtnColor}
-									onChange={(colorValue) =>
-										setAttributes({
-											defaultBtnColor:
-												colorValue === undefined ? "#000" : colorValue,
-										})
-									}
-									paletteColors={colorPickerPalette}
-								/>
-								<BlockonsColorpicker
-									label={__("Font Color", "blockons")}
-									value={defaultBtnfColor}
-									onChange={(colorValue) =>
-										setAttributes({
-											defaultBtnfColor:
-												colorValue === undefined ? "#FFF" : colorValue,
-										})
-									}
-									paletteColors={colorPickerPalette}
-								/>
-							</>
-						)}
-
-						<div className="blockons-divider"></div>
-
 						<ToggleControl
 							label={__("Add Text Background", "blockons")}
 							checked={infoBg}
@@ -671,7 +639,7 @@ const Edit = (props) => {
 										})
 									}
 									min={10}
-									max={48}
+									max={72}
 								/>
 								<BlockonsColorpicker
 									label={__("Color", "blockons")}
@@ -706,7 +674,7 @@ const Edit = (props) => {
 										})
 									}
 									min={10}
-									max={48}
+									max={32}
 								/>
 								<BlockonsColorpicker
 									label={__("Color", "blockons")}
@@ -915,7 +883,7 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 			<div
-				className={`blockons-adv-slider style-${sliderStyle} ${
+				className={`blockons-adv-slider ${
 					showOnHover ? "controlsOnHover" : ""
 				} navigation-${navigationStyle} navigation-${navigationColor} pagination-${paginationStyle} pagination-${paginationColor} ${
 					navigationArrow === "ban" ? "default-icon" : "custom-icon"

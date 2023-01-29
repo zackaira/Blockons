@@ -106,7 +106,11 @@
 }
 
 /* -- Slider Styles -- */
-.wp-block-blockons-slider .blockons-adv-slider.style-one {
+/* - One - */
+.wp-block-blockons-slider .swiper-slide-inner.style-one {
+}
+/* - Two - */
+.wp-block-blockons-slider .swiper-slide-inner.style-two {
 }
 
 /* -- Navigation -- */
