@@ -11,40 +11,24 @@ import {
 	useBlockProps,
 	MediaUpload,
 	InnerBlocks,
+	__experimentalLinkControl as LinkControl,
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
 	Dropdown,
 	ToggleControl,
-	TextControl,
 	SelectControl,
 	RangeControl,
 	Button,
 } from "@wordpress/components";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
-import GetPostsSelect from "../_components/GetPostsSelect";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
-import { slugify, sliderArrowIcons } from "../block-global";
-import { colorPickerPalette } from "../block-global";
+import { sliderArrowIcons, colorPickerPalette } from "../block-global";
 import { Navigation, Pagination, EffectFade, EffectCoverflow } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const ALLOWED_BLOCKS = ["core/button"];
-const TEMPLATE = [
-	[
-		"core/button",
-		{ placeholder: "Button Text", supports: { padding: 10 } },
-	],
-	[
-		"core/button",
-		{ placeholder: "Button Text", supports: { padding: 10 } },
-	],
-];
-
 const Edit = (props) => {
-	const site_url = blockonsObj.apiUrl;
 	const {
 		isSelected,
 		attributes: {
@@ -81,7 +65,8 @@ const Edit = (props) => {
 		},
 		setAttributes,
 	} = props;
-	const wcActive = blockonsObj.wcActive;
+	// const site_url = blockonsObj.apiUrl;
+	// const wcActive = blockonsObj.wcActive;
 
 	const blockProps = useBlockProps({
 		className: ``,
@@ -152,7 +137,22 @@ const Edit = (props) => {
 		});
 		setAttributes({ sliderSlides: editedSlideItems });
 	};
-	const handleUpdateSlideLink = (value, id, attr) => {
+	const handleUpdateSlideLinkType = (value, id) => {
+		const newSlides = [...sliderSlides];
+		const editedSlideItems = newSlides.map((obj) => {
+			if (obj.id === id)
+				return {
+					...obj,
+					link: {
+						type: value,
+						value: [],
+					},
+				};
+			return obj;
+		});
+		setAttributes({ sliderSlides: editedSlideItems });
+	};
+	const handleUpdateSlideLinkValue = (value, id) => {
 		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
 			if (obj.id === id)
@@ -160,7 +160,7 @@ const Edit = (props) => {
 					...obj,
 					link: {
 						...obj.link,
-						[attr]: value,
+						value: value,
 					},
 				};
 			return obj;
@@ -186,21 +186,6 @@ const Edit = (props) => {
 				return {
 					...obj,
 					subtitle: value,
-				};
-			return obj;
-		});
-		setAttributes({ sliderSlides: editedSlideItems });
-	};
-	const handleUpdateSlideButton = (value, id, attr) => {
-		const newSlides = [...sliderSlides];
-		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.id === id)
-				return {
-					...obj,
-					button: {
-						...obj.button,
-						[attr]: value,
-					},
 				};
 			return obj;
 		});
@@ -328,27 +313,12 @@ const Edit = (props) => {
 							{slideItem.link?.type === "button" && (
 								<div className="slider-btns">
 									<InnerBlocks
-										allowedBlocks={ALLOWED_BLOCKS}
-										template={TEMPLATE}
+										allowedBlocks={["core/button"]}
+										template={[["core/button", { placeholder: "Button Text" }]]}
 										renderAppender={InnerBlocks.ButtonBlockAppender}
 										orientation="horizontal"
 									/>
 								</div>
-								// <RichText
-								// 	tagName="div"
-								// 	value={slideItem.button.text}
-								// 	className="slider-button"
-								// 	onChange={(newValue) =>
-								// 		handleUpdateSlideButton(newValue, slideItem.id, "text")
-								// 	}
-								// 	allowedFormats={["core/bold", "core/italic"]}
-								// 	placeholder={__("Slide Link", "blockons")}
-								// 	disableLineBreaks
-								// 	style={{
-								// 		backgroundColor: slideItem.button?.color,
-								// 		color: slideItem.button?.fcolor,
-								// 	}}
-								// />
 							)}
 						</div>
 					)}
@@ -381,7 +351,7 @@ const Edit = (props) => {
 				/>
 				<Dropdown
 					className="blockons-slide-settings"
-					contentClassName="blockons-editor-popup"
+					contentClassName="blockons-editor-popup blockons-link-component"
 					position="bottom left"
 					renderToggle={({ isOpen, onToggle }) => (
 						<Button
@@ -401,56 +371,25 @@ const Edit = (props) => {
 									{ label: __("Full Slide Link", "blockons"), value: "full" },
 								]}
 								onChange={(newValue) =>
-									handleUpdateSlideLink(newValue, slideItem.id, "type")
+									handleUpdateSlideLinkType(newValue, slideItem.id)
 								}
 							/>
 
-							{(slideItem.link?.type === "button" ||
-								slideItem.link?.type === "full") && (
-								<>
-									<TextControl
-										label={__("Link URL", "blockons")}
-										value={slideItem.link.url}
-										onChange={(newValue) =>
-											handleUpdateSlideLink(newValue, slideItem.id, "url")
-										}
-									/>
-									<ToggleControl
-										label={__("Open in new window", "blockons")}
-										checked={slideItem.link.target}
-										onChange={(newValue) =>
-											handleUpdateSlideLink(newValue, slideItem.id, "target")
-										}
-									/>
-								</>
-							)}
-
-							{slideItem.link?.type === "button" && (
-								<>
-									<div className="blockons-divider"></div>
-
-									<p>{__("Button", "blockons")}</p>
-									<BlockonsColorpicker
-										label={__("Color", "blockons")}
-										value={slideItem.button.color}
-										onChange={(colorValue) =>
-											handleUpdateSlideButton(colorValue, slideItem.id, "color")
-										}
-										paletteColors={colorPickerPalette}
-									/>
-									<BlockonsColorpicker
-										label={__("Font Color", "blockons")}
-										value={slideItem.button.fcolor}
-										onChange={(colorValue) =>
-											handleUpdateSlideButton(
-												colorValue,
-												slideItem.id,
-												"fcolor"
-											)
-										}
-										paletteColors={colorPickerPalette}
-									/>
-								</>
+							{slideItem.link?.type === "full" && (
+								<LinkControl
+									searchInputPlaceholder={__("Search", "blockons")}
+									value={slideItem.link.value}
+									settings={[
+										{
+											id: "opensInNewTab",
+											title: __("Open in new window", "blockons"),
+										},
+									]}
+									onChange={(newValue) => {
+										handleUpdateSlideLinkValue(newValue, slideItem.id);
+									}}
+									withCreateSuggestion={false}
+								/>
 							)}
 						</>
 					)}
@@ -608,7 +547,7 @@ const Edit = (props) => {
 						{infoBg && (
 							<>
 								<BlockonsColorpicker
-									label={__("Overlay Color", "blockons")}
+									label={__("Background Color", "blockons")}
 									value={infoBgColor}
 									onChange={(colorValue) => {
 										setAttributes({

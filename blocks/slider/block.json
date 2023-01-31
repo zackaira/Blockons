@@ -23,14 +23,8 @@
 					"title": "Lorem ipsum",
 					"subtitle": "Cras sollicitudin cursus faucibus. Integer mauris lorem, placerat quis aliquam a, ultrices eu velit. Integer nulla nisi, semper id ornare sit amet, mattis id tortor",
 					"link": {
-						"type": "",
-						"url": "",
-						"target": false
-					},
-					"button": {
-						"text": "",
-						"color": "",
-						"fcolor": ""
+						"type": "none",
+						"value": []
 					},
 					"image": {},
 					"style": ""
@@ -40,14 +34,8 @@
 					"title": "Lorem ipsum",
 					"subtitle": "Cras sollicitudin cursus faucibus. Integer mauris lorem, placerat quis aliquam a, ultrices eu velit. Integer nulla nisi, semper id ornare sit amet, mattis id tortor",
 					"link": {
-						"type": "",
-						"url": "",
-						"target": false
-					},
-					"button": {
-						"text": "",
-						"color": "",
-						"fcolor": ""
+						"type": "none",
+						"value": []
 					},
 					"image": {},
 					"style": ""

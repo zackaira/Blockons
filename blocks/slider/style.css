@@ -85,20 +85,23 @@
 	color: #e5e5e5;
 }
 .wp-block-blockons-slider .blockons-slider-inner .slider-btns {
+	margin: 12px 0 10px;
 }
 .wp-block-blockons-slider
 	.blockons-slider-inner
 	.slider-btns
-	.wp-block.wp-block-button {
-}
-.wp-block-blockons-slider .blockons-slider-inner .slider-button {
-	display: inline-block;
-	padding: 7px 14px;
-	border-radius: 3px;
-	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 32%),
-		inset 0 2px 0 rgb(255 255 255 / 12%);
-	margin: 12px 0 10px;
+	.wp-element-button {
+	padding: 10px 15px;
+	margin: 0 8px 8px;
 	font-size: 15px;
+	background-color: #af2dbf;
+	color: #fff;
+}
+.wp-block-blockons-slider
+	.blockons-slider-inner
+	.slider-btns
+	.wp-element-button:hover {
+	opacity: 0.85;
 }
 
 /* -- Alignment -- */
