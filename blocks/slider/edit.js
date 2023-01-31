@@ -10,6 +10,7 @@ import {
 	InspectorControls,
 	useBlockProps,
 	MediaUpload,
+	InnerBlocks,
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
@@ -29,6 +30,18 @@ import { slugify, sliderArrowIcons } from "../block-global";
 import { colorPickerPalette } from "../block-global";
 import { Navigation, Pagination, EffectFade, EffectCoverflow } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+const ALLOWED_BLOCKS = ["core/button"];
+const TEMPLATE = [
+	[
+		"core/button",
+		{ placeholder: "Button Text", supports: { padding: 10 } },
+	],
+	[
+		"core/button",
+		{ placeholder: "Button Text", supports: { padding: 10 } },
+	],
+];
 
 const Edit = (props) => {
 	const site_url = blockonsObj.apiUrl;
@@ -312,30 +325,30 @@ const Edit = (props) => {
 								/>
 							)}
 
-							{slideItem.button?.type === "button" && (
-								<RichText
-									tagName="div"
-									value={
-										slideItem.button?.text
-											? slideItem.button.text
-											: defaultBtnText
-									}
-									className="slider-button"
-									onChange={(newValue) =>
-										handleUpdateSlideButton(newValue, slideItem.id, "text")
-									}
-									allowedFormats={["core/bold", "core/italic"]}
-									placeholder={__("Slide Link", "blockons")}
-									disableLineBreaks
-									style={{
-										backgroundColor: slideItem.button?.color
-											? slideItem.button.color
-											: defaultBtnColor,
-										color: slideItem.button?.fcolor
-											? slideItem.button.fcolor
-											: defaultBtnfColor,
-									}}
-								/>
+							{slideItem.link?.type === "button" && (
+								<div className="slider-btns">
+									<InnerBlocks
+										allowedBlocks={ALLOWED_BLOCKS}
+										template={TEMPLATE}
+										renderAppender={InnerBlocks.ButtonBlockAppender}
+										orientation="horizontal"
+									/>
+								</div>
+								// <RichText
+								// 	tagName="div"
+								// 	value={slideItem.button.text}
+								// 	className="slider-button"
+								// 	onChange={(newValue) =>
+								// 		handleUpdateSlideButton(newValue, slideItem.id, "text")
+								// 	}
+								// 	allowedFormats={["core/bold", "core/italic"]}
+								// 	placeholder={__("Slide Link", "blockons")}
+								// 	disableLineBreaks
+								// 	style={{
+								// 		backgroundColor: slideItem.button?.color,
+								// 		color: slideItem.button?.fcolor,
+								// 	}}
+								// />
 							)}
 						</div>
 					)}

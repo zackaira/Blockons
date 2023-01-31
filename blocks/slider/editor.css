@@ -18,6 +18,15 @@
 	right: 100%;
 	margin-right: 8px;
 }
+.wp-block-blockons-slider
+	.blockons-slider-inner
+	.slider-btns
+	.block-editor-inner-blocks
+	.block-editor-block-list__layout {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 /* -- Settings Popup -- */
 .blockons-icon-select {
 	display: flex;
