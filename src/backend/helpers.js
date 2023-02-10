@@ -60,14 +60,14 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: false,
 	},
-	slider: {
-		desc: __(
-			"A slider to display custom content or posts/products",
-			"blockons"
-		),
-		pluginSpecific: false,
-		isNew: __("NEW", "blockons"),
-	},
+	// slider: {
+	// 	desc: __(
+	// 		"A slider to display custom content or posts/products",
+	// 		"blockons"
+	// 	),
+	// 	pluginSpecific: false,
+	// 	isNew: __("NEW", "blockons"),
+	// },
 	search: {
 		desc: __("A search bar/icon with drop down or popup search", "blockons"),
 		pluginSpecific: false,

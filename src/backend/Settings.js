@@ -427,7 +427,10 @@ const Settings = () => {
 																		title={__("Text")}
 																		slug="pageloader_text"
 																		value={blockonsOptions.pageloader?.text}
-																		placeholder="Loading Website..."
+																		placeholder={__(
+																			"Loading Website...",
+																			"blockons"
+																		)}
 																		inputType="text"
 																		onChange={handleChange}
 																	/>
@@ -439,10 +442,10 @@ const Settings = () => {
 																		}
 																		inputType="select"
 																		options={{
-																			one: "Top Center",
-																			two: "Bottom Center",
-																			three: "Above Loader",
-																			four: "Below Loader",
+																			one: __("Top Center", "blockons"),
+																			two: __("Bottom Center", "blockons"),
+																			three: __("Above Loader", "blockons"),
+																			four: __("Below Loader", "blockons"),
 																		}}
 																		onChange={handleChange}
 																	/>
@@ -512,8 +515,8 @@ const Settings = () => {
 															value={blockonsOptions.scrollindicator?.position}
 															inputType="select"
 															options={{
-																top: "Top of Website",
-																bottom: "Bottom of Website",
+																top: __("Top of Website", "blockons"),
+																bottom: __("Bottom of Website", "blockons"),
 															}}
 															onChange={handleChange}
 														/>
@@ -596,8 +599,8 @@ const Settings = () => {
 															value={blockonsOptions.bttb?.type}
 															inputType="select"
 															options={{
-																plain: "Simple Button",
-																// scroll: "Scroll Progress",
+																plain: __("Simple Button", "blockons"),
+																// scroll: __("Scroll Progress", "blockons"),
 															}}
 															onChange={handleChange}
 															note={__("More Coming Soon", "blockons")}
@@ -621,8 +624,8 @@ const Settings = () => {
 															value={blockonsOptions.bttb?.position}
 															inputType="select"
 															options={{
-																right: "Right",
-																left: "Left",
+																right: __("Right", "blockons"),
+																left: __("Left", "blockons"),
 															}}
 															onChange={handleChange}
 														/>
@@ -806,8 +809,8 @@ const Settings = () => {
 																	value={blockonsOptions.sidecart?.position}
 																	inputType="select"
 																	options={{
-																		right: "Right",
-																		left: "Left",
+																		right: __("Right", "blockons"),
+																		left: __("Left", "blockons"),
 																	}}
 																	onChange={handleChange}
 																/>
@@ -831,11 +834,11 @@ const Settings = () => {
 																				value={blockonsOptions.sidecart?.icon}
 																				inputType="select"
 																				options={{
-																					"cart-shopping": "Shopping Cart",
-																					"cart-arrow-down": "Cart Arrow Down",
-																					"basket-shopping": "Shopping Basket",
-																					suitcase: "Shopping Suitcase",
-																					bucket: "Bucket",
+																					"cart-shopping": __("Shopping Cart", "blockons"),
+																					"cart-arrow-down": __("Cart Arrow Down", "blockons"),
+																					"basket-shopping": __("Shopping Basket", "blockons"),
+																					suitcase: __("Shopping Suitcase", "blockons"),
+																					bucket: __("Bucket", "blockons"),
 																				}}
 																				onChange={handleChange}
 																			/>
