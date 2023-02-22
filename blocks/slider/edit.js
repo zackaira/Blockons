@@ -152,6 +152,58 @@ const Edit = (props) => {
 		});
 		setAttributes({ sliderSlides: editedSlideItems });
 	};
+	const handleUpdateSlideButtons = (value, id) => {
+		const newSlides = [...sliderSlides];
+
+		let theButtons = Array(value)
+			.fill()
+			.map((b, i) => ({
+				id: i + 1,
+				link: {},
+				target: false,
+				color: "#af2dbf",
+				fcolor: "#fff",
+				text: "Button Text",
+			}));
+
+		const editedSlideItems = newSlides.map((obj) => {
+			if (obj.id === id)
+				return {
+					...obj,
+					buttons: {
+						number: value,
+						buttons: theButtons,
+					},
+				};
+			return obj;
+		});
+		setAttributes({ sliderSlides: editedSlideItems });
+	};
+	const handleUpdateBtnValues = (value, slideId, btn, property) => {
+		const newSlides = [...sliderSlides];
+
+		const editedSlideItems = newSlides.map((obj) => {
+			if (obj.id === slideId) {
+				const updatedButtons = [...obj.buttons.buttons];
+				updatedButtons[btn] = {
+					...updatedButtons[btn],
+					[property]: value,
+				};
+
+				return {
+					...obj,
+					buttons: {
+						number: obj.buttons.number,
+						buttons: updatedButtons,
+					},
+				};
+			}
+
+			return obj;
+		});
+
+		setAttributes({ sliderSlides: editedSlideItems });
+	};
 	const handleUpdateSlideLinkValue = (value, id) => {
 		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
@@ -312,12 +364,30 @@ const Edit = (props) => {
 
 							{slideItem.link?.type === "button" && (
 								<div className="slider-btns">
-									<InnerBlocks
-										allowedBlocks={["core/button"]}
-										template={[["core/button", { placeholder: "Button Text" }]]}
-										renderAppender={InnerBlocks.ButtonBlockAppender}
-										orientation="horizontal"
-									/>
+									{slideItem.buttons?.buttons?.map((button, index) => {
+										return (
+											<RichText
+												tagName="div"
+												value={button.text}
+												className="slider-btn"
+												onChange={(newValue) =>
+													handleUpdateBtnValues(
+														newValue,
+														slideItem.id,
+														index,
+														"text"
+													)
+												}
+												allowedFormats={["core/bold", "core/italic"]}
+												placeholder="Lorem ipsum"
+												disableLineBreaks
+												style={{
+													fontSize: button.color,
+													color: button.fcolor,
+												}}
+											/>
+										);
+									})}
 								</div>
 							)}
 						</div>
@@ -367,13 +437,84 @@ const Edit = (props) => {
 								value={slideItem.link.type}
 								options={[
 									{ label: __("None", "blockons"), value: "none" },
-									{ label: __("Button Link", "blockons"), value: "button" },
+									{ label: __("Button Links", "blockons"), value: "button" },
 									{ label: __("Full Slide Link", "blockons"), value: "full" },
 								]}
 								onChange={(newValue) =>
 									handleUpdateSlideLinkType(newValue, slideItem.id)
 								}
 							/>
+
+							{slideItem.link?.type === "button" && (
+								<>
+									<RangeControl
+										label={__("Number of Buttons", "blockons")}
+										value={slideItem.buttons?.number}
+										onChange={(newValue) =>
+											handleUpdateSlideButtons(newValue, slideItem.id)
+										}
+										min={0}
+										max={4}
+									/>
+
+									{slideItem.buttons?.number > 0 &&
+										slideItem.buttons?.buttons?.map((button, i) => {
+											return (
+												<>
+													<p>{__("Button " + (i + 1), "blockons")}</p>
+													<LinkControl
+														searchInputPlaceholder={__("Search", "blockons")}
+														value={button.link}
+														settings={[
+															{
+																id: "opensInNewTab",
+																title: __("Open in new window", "blockons"),
+															},
+														]}
+														onChange={(newValue) => {
+															handleUpdateBtnValues(
+																newValue,
+																slideItem.id,
+																i,
+																"link"
+															);
+														}}
+														withCreateSuggestion={false}
+													/>
+													<BlockonsColorpicker
+														label={__("Color", "blockons")}
+														value={button.color}
+														onChange={(newValue) => {
+															handleUpdateBtnValues(
+																newValue,
+																slideItem.id,
+																i,
+																"color"
+															);
+														}}
+														paletteColors={colorPickerPalette}
+													/>
+													<BlockonsColorpicker
+														label={__("Font Color", "blockons")}
+														value={button.fcolor}
+														onChange={(newValue) => {
+															handleUpdateBtnValues(
+																newValue,
+																slideItem.id,
+																i,
+																"fcolor"
+															);
+														}}
+														paletteColors={colorPickerPalette}
+													/>
+													{i !== slideItem.buttons?.number && (
+														<div className="blockons-divider"></div>
+													)}
+												</>
+											);
+										})}
+								</>
+							)}
 
 							{slideItem.link?.type === "full" && (
 								<LinkControl
@@ -835,7 +976,7 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 			<div
-				className={`blockons-adv-slider ${
+				className={`blockons-slider slider adv-slider ${
 					showOnHover ? "controlsOnHover" : ""
 				} navigation-${navigationStyle} navigation-${navigationColor} pagination-${paginationStyle} pagination-${paginationColor} ${
 					navigationArrow === "ban" ? "default-icon" : "custom-icon"

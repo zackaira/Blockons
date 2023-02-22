@@ -22,6 +22,10 @@
 					"id": "slide-one",
 					"title": "Lorem ipsum",
 					"subtitle": "Cras sollicitudin cursus faucibus. Integer mauris lorem, placerat quis aliquam a, ultrices eu velit. Integer nulla nisi, semper id ornare sit amet, mattis id tortor",
+					"buttons": {
+						"number": 0,
+						"buttons": []
+					},
 					"link": {
 						"type": "none",
 						"value": []
@@ -33,6 +37,10 @@
 					"id": "slide-two",
 					"title": "Lorem ipsum",
 					"subtitle": "Cras sollicitudin cursus faucibus. Integer mauris lorem, placerat quis aliquam a, ultrices eu velit. Integer nulla nisi, semper id ornare sit amet, mattis id tortor",
+					"buttons": {
+						"number": 0,
+						"buttons": []
+					},
 					"link": {
 						"type": "none",
 						"value": []
@@ -158,5 +166,9 @@
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"viewScript": "blockons-slider",
-	"style": ["file:./style-index.css", "blockons-fontawesome", "blockons-slider"]
+	"style": [
+		"file:./style-index.css",
+		"blockons-fontawesome",
+		"blockons-swiper-css"
+	]
 }
