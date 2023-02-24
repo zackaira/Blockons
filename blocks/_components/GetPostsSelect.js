@@ -34,7 +34,7 @@ const GetPostsSelect = (props) => {
 				placeholder={
 					loadingProducts
 						? __("Loading...", "blockons")
-						: __("Select...", "blockons")
+						: __("Select Product...", "blockons")
 				}
 				noOptionsMessage={() => __("No Products", "blockons")}
 			/>

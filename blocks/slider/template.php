@@ -82,12 +82,14 @@ $sliderOptions = array(
 												<div class="slider-btns">
 													
 													<?php
-													if (isset($slide['buttons']) && isset($slide['buttons']) && isset($slide['buttons']['buttons'])) :
+													if (isset($slide['buttons']) && isset($slide['buttons']['buttons'])) :
 														foreach ($slide['buttons']['buttons'] as $button) : ?>
 															
-															<button class="slider-btn">
-																<?php esc_html_e($button['text']); ?>
-															</button>
+															<?php if (isset($button['link']) && isset($button['link']['url'])) : ?>
+																<a href="<?php esc_url($button['link']['url']); ?>" class="slider-btn" <?php echo isset($button['link']) && isset($button['link']['opensInNewTab']) && $button['link']['opensInNewTab'] == true ? esc_attr('target="_blank"') : ''; ?>>
+																	<?php esc_html_e($button['text']); ?>
+																</a>
+															<?php endif; ?>
 
 														<?php
 														endforeach;

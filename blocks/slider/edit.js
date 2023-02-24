@@ -22,11 +22,14 @@ import {
 	Button,
 } from "@wordpress/components";
 import { v4 as uuidv4 } from "uuid";
+import GetPostsSelect from "../_components/GetPostsSelect";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
+import BlockonsLoader from "../_components/BlockonsLoader";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
 import { sliderArrowIcons, colorPickerPalette } from "../block-global";
 import { Navigation, Pagination, EffectFade, EffectCoverflow } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import axios from "axios";
 
 const Edit = (props) => {
 	const {
@@ -35,7 +38,7 @@ const Edit = (props) => {
 			uniqueId,
 			alignment,
 			sliderSlides,
-			sliderStyle,
+			position,
 			showTitle,
 			defaultTitleSize,
 			defaultTitleColor,
@@ -65,8 +68,8 @@ const Edit = (props) => {
 		},
 		setAttributes,
 	} = props;
-	// const site_url = blockonsObj.apiUrl;
-	// const wcActive = blockonsObj.wcActive;
+	const site_url = blockonsObj.apiUrl;
+	const wcActive = blockonsObj.wcActive;
 
 	const blockProps = useBlockProps({
 		className: ``,
@@ -102,6 +105,7 @@ const Edit = (props) => {
 			  }
 			: false,
 	};
+	const [swiper, setSwiper] = useState(null);
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
@@ -152,22 +156,33 @@ const Edit = (props) => {
 		});
 		setAttributes({ sliderSlides: editedSlideItems });
 	};
-	const handleUpdateSlideButtons = (value, id) => {
+	const handleUpdateSlideButtons = (value, slideId) => {
 		const newSlides = [...sliderSlides];
 
-		let theButtons = Array(value)
-			.fill()
-			.map((b, i) => ({
-				id: i + 1,
-				link: {},
-				target: false,
-				color: "#af2dbf",
-				fcolor: "#fff",
-				text: "Button Text",
-			}));
-
 		const editedSlideItems = newSlides.map((obj) => {
-			if (obj.id === id)
+			if (obj.id === slideId) {
+				let slide = newSlides.find((obj) => obj.id === slideId);
+
+				let theButtons = slide.buttons?.buttons;
+				let numItemsToAddOrRemove = value - slide.buttons?.buttons.length;
+
+				if (numItemsToAddOrRemove > 0) {
+					for (let i = 1; i <= numItemsToAddOrRemove; i++) {
+						theButtons.push({
+							id: i + 1,
+							link: {},
+							color: "#af2dbf",
+							fcolor: "#fff",
+							text: "Button Text",
+						});
+					}
+				} else if (numItemsToAddOrRemove < 0) {
+					theButtons.splice(
+						theButtons.length + numItemsToAddOrRemove,
+						-numItemsToAddOrRemove
+					);
+				}
+
 				return {
 					...obj,
 					buttons: {
@@ -175,6 +190,7 @@ const Edit = (props) => {
 						buttons: theButtons,
 					},
 				};
+			}
 			return obj;
 		});
 		setAttributes({ sliderSlides: editedSlideItems });
@@ -219,6 +235,23 @@ const Edit = (props) => {
 		});
 		setAttributes({ sliderSlides: editedSlideItems });
 	};
+	const handleUpdateSlideStyle = (value, id, property) => {
+		console.log(value);
+
+		const newSlides = [...sliderSlides];
+		const editedSlideItems = newSlides.map((obj) => {
+			if (obj.id === id)
+				return {
+					...obj,
+					style: {
+						...obj.style,
+						[property]: value,
+					},
+				};
+			return obj;
+		});
+		setAttributes({ sliderSlides: editedSlideItems });
+	};
 	const handleUpdateSlideTitle = (value, id) => {
 		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
@@ -244,13 +277,56 @@ const Edit = (props) => {
 		setAttributes({ sliderSlides: editedSlideItems });
 	};
 
-	const handleAddItem = () => {
+	const handleAddItem = (index, position) => {
 		const newSlides = [...sliderSlides];
-		newSlides.push({
-			id: newSlides.length + 1,
+
+		const blankItem = {
+			id: "slide-two",
 			title: "Lorem ipsum",
-			subtitle: "Cras sollicitudin cursus faucibus. Integer mauris lorem",
-		});
+			subtitle:
+				"Cras sollicitudin cursus faucibus. Integer mauris lorem, placerat quis aliquam a, ultrices eu velit.",
+			buttons: {
+				number: 0,
+				buttons: [],
+			},
+			link: {
+				type: "none",
+				value: [],
+			},
+			image: {},
+			productSlide: {},
+			style: {
+				position: "",
+				imgFull: "",
+				bgOverlayColor: "",
+				bgOverlayOpacity: "",
+				txtBgColor: "",
+				txtBgOpacity: "",
+				titleSize: "",
+				titleColor: "",
+				descSize: "",
+				descColor: "",
+			},
+		};
+
+		if (position === "next") {
+			newSlides.splice(index + 1, 0, {
+				...blankItem,
+				id: newSlides.length + 1,
+			});
+			setTimeout(() => {
+				swiper.slideTo(index + 1);
+			}, 250);
+		} else {
+			newSlides.push({
+				...blankItem,
+				id: newSlides.length + 1,
+			});
+			setTimeout(() => {
+				swiper.slideTo(newSlides.length + 1);
+			}, 250);
+		}
+
 		setAttributes({ sliderSlides: newSlides });
 	};
 	const handleDuplicateItem = (index, slideItem) => {
@@ -267,10 +343,66 @@ const Edit = (props) => {
 		setAttributes({ sliderSlides: newSlides });
 	};
 
+	const [loadingProductDetails, setLoadingProductDetails] = useState(false);
+
+	const handleInsertProduct = (selectedProduct, index) => {
+		const newSlides = [...sliderSlides];
+
+		const id = selectedProduct ? selectedProduct.value : "";
+		if (!id) return;
+
+		setLoadingProductDetails(true);
+
+		async function getProductDetails() {
+			return await axios
+				.get(site_url + "blcns/v1/product/" + id)
+				.then((res) => {
+					newSlides.splice(index + 1, 0, {
+						id: "product-" + id,
+						link: {
+							type: "button",
+							value: [],
+						},
+						buttons: {
+							number: 1,
+							buttons: [
+								{
+									color: "#af2dbf",
+									fcolor: "#fff",
+									id: 1,
+									link: {
+										url: res.data.permalink,
+										title: "",
+									},
+									text: "View Product",
+								},
+							],
+						},
+						image: {
+							alt: res.data.title,
+							id: "",
+							url: res.data.featured_media,
+						},
+						productSlide: selectedProduct,
+						title: res.data.title,
+						subtitle: res.data.short_desc,
+					});
+					setAttributes({ sliderSlides: newSlides });
+
+					setLoadingProductDetails(false);
+
+					setTimeout(() => {
+						swiper.slideTo(index + 1);
+					}, 250);
+				});
+		}
+		getProductDetails();
+	};
+
 	const slides = sliderSlides.map((slideItem, index) => (
 		<div
-			className={`swiper-slide-inner style-${
-				slideItem.style ? slideItem.style : sliderStyle
+			className={`swiper-slide-inner ${
+				slideItem.style?.position ? slideItem.style.position : position
 			} ${forceFullWidth || imageProportion !== "actual" ? "imgfull" : ""}`}
 		>
 			<div
@@ -291,8 +423,14 @@ const Edit = (props) => {
 					<div
 						className="blockons-slider-imgoverlay"
 						style={{
-							backgroundColor: imageOverlayColor,
-							opacity: imageOverlayOpacity,
+							backgroundColor: slideItem.style?.bgOverlayColor
+								? slideItem.style.bgOverlayColor
+								: imageOverlayColor,
+							opacity:
+								slideItem.style?.bgOverlayOpacity ||
+								slideItem.style.bgOverlayOpacity === 0
+									? slideItem.style.bgOverlayOpacity
+									: imageOverlayOpacity,
 						}}
 					></div>
 				)}
@@ -318,8 +456,14 @@ const Edit = (props) => {
 						<div
 							className="blockons-slider-content-bg"
 							style={{
-								backgroundColor: infoBgColor,
-								opacity: infoBgOpacity,
+								backgroundColor: slideItem.style?.txtBgColor
+									? slideItem.style.txtBgColor
+									: infoBgColor,
+								opacity:
+									slideItem.style?.txtBgOpacity ||
+									slideItem.style.txtBgOpacity === 0
+										? slideItem.style.txtBgOpacity
+										: infoBgOpacity,
 							}}
 						></div>
 					)}
@@ -338,8 +482,12 @@ const Edit = (props) => {
 									placeholder="Lorem ipsum"
 									disableLineBreaks
 									style={{
-										fontSize: defaultTitleSize,
-										color: defaultTitleColor,
+										fontSize: slideItem.style?.titleSize
+											? slideItem.style.titleSize
+											: defaultTitleSize,
+										color: slideItem.style?.titleColor
+											? slideItem.style.titleColor
+											: defaultTitleColor,
 									}}
 								/>
 							)}
@@ -356,40 +504,45 @@ const Edit = (props) => {
 									placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 									disableLineBreaks
 									style={{
-										fontSize: defaultDescSize,
-										color: defaultDescColor,
+										fontSize: slideItem.style?.descSize
+											? slideItem.style.descSize
+											: defaultDescSize,
+										color: slideItem.style?.descColor
+											? slideItem.style.descColor
+											: defaultDescColor,
 									}}
 								/>
 							)}
 
-							{slideItem.link?.type === "button" && (
-								<div className="slider-btns">
-									{slideItem.buttons?.buttons?.map((button, index) => {
-										return (
-											<RichText
-												tagName="div"
-												value={button.text}
-												className="slider-btn"
-												onChange={(newValue) =>
-													handleUpdateBtnValues(
-														newValue,
-														slideItem.id,
-														index,
-														"text"
-													)
-												}
-												allowedFormats={["core/bold", "core/italic"]}
-												placeholder="Lorem ipsum"
-												disableLineBreaks
-												style={{
-													fontSize: button.color,
-													color: button.fcolor,
-												}}
-											/>
-										);
-									})}
-								</div>
-							)}
+							{slideItem.link?.type === "button" &&
+								slideItem.buttons?.buttons?.length > 0 && (
+									<div className="slider-btns">
+										{slideItem.buttons?.buttons?.map((button, index) => {
+											return (
+												<RichText
+													tagName="div"
+													value={button.text}
+													className="slider-btn"
+													onChange={(newValue) =>
+														handleUpdateBtnValues(
+															newValue,
+															slideItem.id,
+															index,
+															"text"
+														)
+													}
+													allowedFormats={["core/bold", "core/italic"]}
+													placeholder="Lorem ipsum"
+													disableLineBreaks
+													style={{
+														backgroundColor: button.color,
+														color: button.fcolor,
+													}}
+												/>
+											);
+										})}
+									</div>
+								)}
 						</div>
 					)}
 				</div>
@@ -549,27 +702,250 @@ const Edit = (props) => {
 					renderContent={() => (
 						<>
 							<SelectControl
-								label="Slide Style"
-								value={sliderStyle}
+								label="Position"
+								value={
+									slideItem.style?.position
+										? slideItem.style.position
+										: position
+								}
 								options={[
-									{ label: "Default Style", value: "one" },
-									{ label: "Another Style", value: "two" },
-									{ label: "And Another Style", value: "three" },
+									{ label: "Top Left", value: "topleft" },
+									{ label: "Top Center", value: "topcenter" },
+									{ label: "Top Right", value: "topright" },
+									{ label: "Center Left", value: "centerleft" },
+									{ label: "Center Center", value: "centercenter" },
+									{ label: "Center Right", value: "centerright" },
+									{ label: "Bottom Left", value: "bottomleft" },
+									{ label: "Bottom Center", value: "bottomcenter" },
+									{ label: "Bottom Right", value: "bottomright" },
 								]}
 								onChange={(newValue) =>
-									setAttributes({
-										sliderStyle: newValue === undefined ? "one" : newValue,
-									})
+									handleUpdateSlideStyle(newValue, slideItem.id, "position")
 								}
 							/>
+
+							{imageOverlay && (
+								<>
+									<div className="blockons-divider"></div>
+									<p className="blockons-section-title">
+										{__("Background Image Overlay", "blockons")}
+									</p>
+									<RangeControl
+										label={__("Opacity", "blockons")}
+										value={
+											slideItem.style?.bgOverlayOpacity ||
+											slideItem.style.bgOverlayOpacity === 0
+												? slideItem.style.bgOverlayOpacity
+												: imageOverlayOpacity
+										}
+										onChange={(newValue) =>
+											handleUpdateSlideStyle(
+												newValue,
+												slideItem.id,
+												"bgOverlayOpacity"
+											)
+										}
+										min={0}
+										max={1}
+										step={0.01}
+									/>
+									<BlockonsColorpicker
+										label={__("Overlay Color", "blockons")}
+										value={
+											slideItem.style?.bgOverlayColor
+												? slideItem.style.bgOverlayColor
+												: imageOverlayColor
+										}
+										onChange={(newValue) =>
+											handleUpdateSlideStyle(
+												newValue,
+												slideItem.id,
+												"bgOverlayColor"
+											)
+										}
+										paletteColors={colorPickerPalette}
+									/>
+								</>
+							)}
+
+							{infoBg && (
+								<>
+									<div className="blockons-divider"></div>
+									<p className="blockons-section-title">
+										{__("Text Background", "blockons")}
+									</p>
+									<RangeControl
+										label={__("Opacity", "blockons")}
+										value={
+											slideItem.style?.txtBgOpacity ||
+											slideItem.style.txtBgOpacity === 0
+												? slideItem.style.txtBgOpacity
+												: infoBgOpacity
+										}
+										onChange={(newValue) =>
+											handleUpdateSlideStyle(
+												newValue,
+												slideItem.id,
+												"txtBgOpacity"
+											)
+										}
+										min={0}
+										max={1}
+										step={0.01}
+									/>
+									<BlockonsColorpicker
+										label={__("Overlay Color", "blockons")}
+										value={
+											slideItem.style?.txtBgColor
+												? slideItem.style.txtBgColor
+												: infoBgColor
+										}
+										onChange={(newValue) =>
+											handleUpdateSlideStyle(
+												newValue,
+												slideItem.id,
+												"txtBgColor"
+											)
+										}
+										paletteColors={colorPickerPalette}
+									/>
+								</>
+							)}
+
+							{showTitle && (
+								<>
+									<div className="blockons-divider"></div>
+									<p className="blockons-section-title">
+										{__("Title", "blockons")}
+									</p>
+									<RangeControl
+										label={__("Size", "blockons")}
+										value={
+											slideItem.style?.titleSize ||
+											slideItem.style.titleSize === 0
+												? slideItem.style.titleSize
+												: defaultTitleSize
+										}
+										onChange={(newValue) =>
+											handleUpdateSlideStyle(
+												newValue,
+												slideItem.id,
+												"titleSize"
+											)
+										}
+										min={10}
+										max={72}
+									/>
+									<BlockonsColorpicker
+										label={__("Color", "blockons")}
+										value={
+											slideItem.style?.titleColor
+												? slideItem.style.titleColor
+												: defaultTitleColor
+										}
+										onChange={(newValue) =>
+											handleUpdateSlideStyle(
+												newValue,
+												slideItem.id,
+												"titleColor"
+											)
+										}
+										paletteColors={colorPickerPalette}
+									/>
+								</>
+							)}
+
+							{showDesc && (
+								<>
+									<div className="blockons-divider"></div>
+									<p className="blockons-section-title">
+										{__("Description", "blockons")}
+									</p>
+									<RangeControl
+										label={__("Size", "blockons")}
+										value={
+											slideItem.style?.descSize ||
+											slideItem.style.descSize === 0
+												? slideItem.style.descSize
+												: defaultDescSize
+										}
+										onChange={(newValue) =>
+											handleUpdateSlideStyle(newValue, slideItem.id, "descSize")
+										}
+										min={10}
+										max={72}
+									/>
+									<BlockonsColorpicker
+										label={__("Color", "blockons")}
+										value={
+											slideItem.style?.descColor
+												? slideItem.style.descColor
+												: defaultDescColor
+										}
+										onChange={(newValue) =>
+											handleUpdateSlideStyle(
+												newValue,
+												slideItem.id,
+												"descColor"
+											)
+										}
+										paletteColors={colorPickerPalette}
+									/>
+								</>
+							)}
 						</>
 					)}
 				/>
-				<Button
+
+				<Dropdown
 					className="blockons-slide-add"
-					icon="plus-alt"
-					label="Add New Slide"
-					onClick={() => handleAddItem(index)}
+					contentClassName="blockons-editor-popup blockons-new-slide"
+					position="bottom left"
+					renderToggle={({ isOpen, onToggle }) => (
+						<Button
+							icon="plus-alt"
+							label={__("Add New", "blockons")}
+							onClick={onToggle}
+						/>
+					)}
+					renderContent={() => (
+						<>
+							{loadingProductDetails ? (
+								<div className="loading-product-slide">
+									<BlockonsLoader />
+									<p>{__("Loading Product Details", "blockons")}</p>
+								</div>
+							) : (
+								<>
+									<Button
+										className="blockons-slide-add"
+										icon="plus-alt"
+										onClick={() => handleAddItem(index, "next")}
+										variant="secondary"
+									>
+										{__("Add New Slide - Next Position", "blockons")}
+									</Button>
+									<Button
+										className="blockons-slide-add"
+										icon="plus-alt"
+										onClick={() => handleAddItem(index, "end")}
+										variant="secondary"
+									>
+										{__("Add New Slide - End of Slider", "blockons")}
+									</Button>
+
+									<GetPostsSelect
+										label={__("Create a new Product Slide", "blockons")}
+										value={slideItem.productSlide}
+										onChange={(newValue) => {
+											handleInsertProduct(newValue, index);
+										}}
+										siteurl={site_url}
+									/>
+								</>
+							)}
+						</>
+					)}
 				/>
 				<Button
 					className="blockons-slide-duplicate"
@@ -591,18 +967,24 @@ const Edit = (props) => {
 		<div {...blockProps}>
 			{isSelected && (
 				<InspectorControls>
-					<PanelBody title={__("Slider Posts", "blockons")} initialOpen={true}>
+					<PanelBody title={__("Slider Design", "blockons")} initialOpen={true}>
 						<SelectControl
 							label="Slider Style"
-							value={sliderStyle}
+							value={position}
 							options={[
-								{ label: "Default Style", value: "one" },
-								{ label: "Another Style", value: "two" },
-								{ label: "And Another Style", value: "three" },
+								{ label: "Top Left", value: "topleft" },
+								{ label: "Top Center", value: "topcenter" },
+								{ label: "Top Right", value: "topright" },
+								{ label: "Center Left", value: "centerleft" },
+								{ label: "Center Center", value: "centercenter" },
+								{ label: "Center Right", value: "centerright" },
+								{ label: "Bottom Left", value: "bottomleft" },
+								{ label: "Bottom Center", value: "bottomcenter" },
+								{ label: "Bottom Right", value: "bottomright" },
 							]}
 							onChange={(newValue) =>
 								setAttributes({
-									sliderStyle: newValue === undefined ? "one" : newValue,
+									position: newValue === undefined ? "centercenter" : newValue,
 								})
 							}
 						/>
@@ -990,7 +1372,7 @@ const Edit = (props) => {
 						</div>
 					</div>
 				)}
-				<Swiper {...sliderOptions}>
+				<Swiper {...sliderOptions} onSwiper={setSwiper}>
 					{slides.map((slideContent, index) => (
 						<SwiperSlide>{slideContent}</SwiperSlide>
 					))}

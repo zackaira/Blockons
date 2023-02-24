@@ -2,11 +2,11 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "blockons/slider",
-	"title": "Blockons Slider",
+	"title": "Advanced Slider",
 	"textdomain": "blockons",
-	"icon": "heart",
+	"icon": "slides",
 	"category": "blockons-category",
-	"keywords": ["woocommerce", "product", "slider", "custom", "blockons"],
+	"keywords": ["woocommerce", "product", "slider", "advanced", "blockons"],
 	"attributes": {
 		"uniqueId": {
 			"type": "string"
@@ -21,7 +21,7 @@
 				{
 					"id": "slide-one",
 					"title": "Lorem ipsum",
-					"subtitle": "Cras sollicitudin cursus faucibus. Integer mauris lorem, placerat quis aliquam a, ultrices eu velit. Integer nulla nisi, semper id ornare sit amet, mattis id tortor",
+					"subtitle": "Cras sollicitudin cursus faucibus. Integer mauris lorem, placerat quis aliquam a, ultrices eu velit.",
 					"buttons": {
 						"number": 0,
 						"buttons": []
@@ -31,12 +31,24 @@
 						"value": []
 					},
 					"image": {},
-					"style": ""
+					"productSlide": {},
+					"style": {
+						"position": "",
+						"imgFull": "",
+						"bgOverlayColor": "",
+						"bgOverlayOpacity": "",
+						"txtBgColor": "",
+						"txtBgOpacity": "",
+						"titleSize": "",
+						"titleColor": "",
+						"descSize": "",
+						"descColor": ""
+					}
 				},
 				{
 					"id": "slide-two",
 					"title": "Lorem ipsum",
-					"subtitle": "Cras sollicitudin cursus faucibus. Integer mauris lorem, placerat quis aliquam a, ultrices eu velit. Integer nulla nisi, semper id ornare sit amet, mattis id tortor",
+					"subtitle": "Cras sollicitudin cursus faucibus. Integer mauris lorem, placerat quis aliquam a, ultrices eu velit.",
 					"buttons": {
 						"number": 0,
 						"buttons": []
@@ -46,13 +58,25 @@
 						"value": []
 					},
 					"image": {},
-					"style": ""
+					"productSlide": {},
+					"style": {
+						"position": "",
+						"imgFull": "",
+						"bgOverlayColor": "",
+						"bgOverlayOpacity": "",
+						"txtBgColor": "",
+						"txtBgOpacity": "",
+						"titleSize": "",
+						"titleColor": "",
+						"descSize": "",
+						"descColor": ""
+					}
 				}
 			]
 		},
-		"sliderStyle": {
+		"position": {
 			"type": "string",
-			"default": "one"
+			"default": "centercenter"
 		},
 		"sliderLinks": {
 			"type": "string",

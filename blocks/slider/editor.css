@@ -6,6 +6,12 @@
 	box-shadow: 0 0 0 1px rgb(0 0 0 / 20%);
 	position: relative;
 }
+.blockons-section-title {
+	font-size: 14px;
+	font-weight: 600;
+	color: #555;
+	margin: 0 0 10px;
+}
 .blockons-link-component .block-editor-link-control__field {
 	margin: 16px 0;
 }
@@ -22,6 +28,40 @@
 	.block-editor-link-control
 	.block-editor-link-control__search-actions {
 	right: 3px;
+}
+.blockons-editor-popup.blockons-new-slide .components-popover__content {
+	overflow: visible !important;
+}
+.blockons-editor-popup.blockons-new-slide
+	.components-popover__content
+	.blockons-postselect__control {
+	margin: 0;
+}
+.blockons-editor-popup.blockons-new-slide .components-button {
+	width: 100%;
+	border-radius: 4px;
+	margin: 10px 0 0;
+	padding: 12px;
+	box-shadow: inset 0 0 0 1px #ccc;
+	height: auto;
+	color: #222;
+}
+.loading-product-slide {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100px;
+}
+.loading-product-slide p {
+	font-size: 11px;
+	text-align: center;
+	margin-top: 2px;
+}
+.loading-product-slide .blockons-loader {
+	width: 40px !important;
+	height: 40px;
 }
 /* -- Slide Settings -- */
 .blockons-slider-btns {
