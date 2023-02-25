@@ -78,10 +78,6 @@
 			"type": "string",
 			"default": "centercenter"
 		},
-		"sliderLinks": {
-			"type": "string",
-			"default": "none"
-		},
 		"showTitle": {
 			"type": "boolean",
 			"default": true

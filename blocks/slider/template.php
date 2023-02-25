@@ -36,10 +36,10 @@ $sliderOptions = array(
 				<?php foreach ($attributes['sliderSlides'] as $i => $slide) { ?>
 					<div class="swiper-slide">
 
-						<div class="swiper-slide-inner <?php echo isset($slide['style']['position']) ? sanitize_html_class($slide['style']['position']) : sanitize_html_class($attributes['position']); ?> <?php echo (isset($attributes['forceFullWidth']) && $attributes['forceFullWidth'] == true) || (isset($attributes['imageProportion']) && $attributes['imageProportion'] != 'actual') ? 'imgfull' : ''; ?>">
+						<div class="swiper-slide-inner <?php echo isset($slide['style']['position']) && $slide['style']['position'] != "" ? sanitize_html_class($slide['style']['position']) : sanitize_html_class($attributes['position']); ?> <?php echo (isset($attributes['forceFullWidth']) && $attributes['forceFullWidth'] == true) || (isset($attributes['imageProportion']) && $attributes['imageProportion'] != 'actual') ? 'imgfull' : ''; ?>">
 							<div class="blockons-slider-image" style="background-image: url(<?php echo (isset($slide['image']) && isset($slide['image']['url']) && $slide['image']['url'] != "") ? esc_url($slide['image']['url']) : esc_url(BLOCKONS_PLUGIN_URL . 'assets/images/placeholder.png'); ?>);">
 								<?php if (isset($attributes['imageOverlay']) && $attributes['imageOverlay'] == true) : ?>
-									<div class="blockons-slider-imgoverlay" style="<?php echo isset($slide['style']['bgOverlayColor']) ? 'background-color:' . esc_attr($slide['style']['bgOverlayColor']) . '; ' : 'background-color:' . esc_attr($attributes['imageOverlayColor']) . '; '; ?> <?php echo isset($slide['style']['bgOverlayOpacity']) ? 'opacity:' . esc_attr($slide['style']['bgOverlayOpacity']) . '; ' : 'opacity:' . esc_attr($attributes['imageOverlayOpacity']) . '; '; ?>"></div>
+									<div class="blockons-slider-imgoverlay" style="<?php echo isset($slide['style']['bgOverlayColor']) && $slide['style']['bgOverlayColor'] != "" ? 'background-color:' . esc_attr($slide['style']['bgOverlayColor']) . '; ' : 'background-color:' . esc_attr($attributes['imageOverlayColor']) . '; '; ?> <?php echo isset($slide['style']['bgOverlayOpacity']) && $slide['style']['bgOverlayOpacity'] != "" ? 'opacity:' . esc_attr($slide['style']['bgOverlayOpacity']) . '; ' : 'opacity:' . esc_attr($attributes['imageOverlayOpacity']) . '; '; ?>"></div>
 								<?php endif; ?>
 								
 								<?php if (isset($attributes['imageProportion']) && $attributes['imageProportion'] == "actual") : ?>
@@ -60,20 +60,20 @@ $sliderOptions = array(
 							<div class="blockons-slider-inner align-<?php echo isset($attributes['alignment']) ? sanitize_html_class($attributes['alignment']) : ''; ?>">
 								<div class="blockons-slider-inner-slide">
 									<?php if (isset($attributes['infoBg']) && $attributes['infoBg'] == true) : ?>
-										<div class="blockons-slider-content-bg" style="<?php echo isset($slide['style']['txtBgColor']) ? 'background-color:' . esc_attr($slide['style']['txtBgColor']) . '; ' : 'background-color:' . esc_attr($attributes['infoBgColor']) . '; '; ?> <?php echo isset($slide['style']['txtBgOpacity']) ? 'opacity:' . esc_attr($slide['style']['txtBgOpacity']) . '; ' : 'opacity:' . esc_attr($attributes['infoBgOpacity']) . '; '; ?>"></div>
+										<div class="blockons-slider-content-bg" style="<?php echo isset($slide['style']['txtBgColor']) && $slide['style']['txtBgColor'] != "" ? 'background-color:' . esc_attr($slide['style']['txtBgColor']) . '; ' : 'background-color:' . esc_attr($attributes['infoBgColor']) . '; '; ?> <?php echo isset($slide['style']['txtBgOpacity']) && $slide['style']['txtBgOpacity'] != "" ? 'opacity:' . esc_attr($slide['style']['txtBgOpacity']) . '; ' : 'opacity:' . esc_attr($attributes['infoBgOpacity']) . '; '; ?>"></div>
 									<?php endif; ?>
 									
 									<?php if ((isset($attributes['showTitle']) && $attributes['showTitle'] == true) || (isset($attributes['showDesc']) && $attributes['showDesc'] == true)) : ?>
 										<div class="blockons-slider-content">
 											
 											<?php if (isset($attributes['showTitle']) && $attributes['showTitle'] == true) : ?>
-												<h4 class="slider-title" style="<?php echo isset($slide['style']['titleSize']) ? 'font-size:' . esc_attr($slide['style']['titleSize']) . 'px; ' : 'font-size:' . esc_attr($attributes['defaultTitleSize']) . 'px; '; ?> <?php echo isset($slide['style']['titleColor']) ? 'color:' . esc_attr($slide['style']['titleColor']) . '; ' : 'color:' . esc_attr($attributes['defaultTitleColor']) . '; '; ?>">
+												<h4 class="slider-title" style="<?php echo isset($slide['style']['titleSize']) && $slide['style']['titleSize'] != "" ? 'font-size:' . esc_attr($slide['style']['titleSize']) . 'px; ' : 'font-size:' . esc_attr($attributes['defaultTitleSize']) . 'px; '; ?> <?php echo isset($slide['style']['titleColor']) && $slide['style']['titleColor'] != "" ? 'color:' . esc_attr($slide['style']['titleColor']) . '; ' : 'color:' . esc_attr($attributes['defaultTitleColor']) . '; '; ?>">
 													<?php esc_html_e($slide['title']); ?>
 												</h4>
 											<?php endif; ?>
 											
 											<?php if (isset($attributes['showDesc']) && $attributes['showDesc'] == true) : ?>
-												<p class="slider-desc" style="<?php echo isset($slide['style']['descSize']) ? 'font-size:' . esc_attr($slide['style']['descSize']) . 'px; ' : 'font-size:' . esc_attr($attributes['defaultDescSize']) . 'px; '; ?> <?php echo isset($slide['style']['descColor']) ? 'color:' . esc_attr($slide['style']['descColor']) . '; ' : 'color:' . esc_attr($attributes['defaultDescColor']) . '; '; ?>">
+												<p class="slider-desc" style="<?php echo isset($slide['style']['descSize']) && $slide['style']['descSize'] != "" ? 'font-size:' . esc_attr($slide['style']['descSize']) . 'px; ' : 'font-size:' . esc_attr($attributes['defaultDescSize']) . 'px; '; ?> <?php echo isset($slide['style']['descColor']) && $slide['style']['descColor'] != "" ? 'color:' . esc_attr($slide['style']['descColor']) . '; ' : 'color:' . esc_attr($attributes['defaultDescColor']) . '; '; ?>">
 													<?php esc_html_e($slide['subtitle']); ?>
 												</p>
 											<?php endif; ?>
