@@ -472,7 +472,7 @@ const Edit = (props) => {
 			>
 				<div
 					className={`blockons-slider-inner-slide ${
-						slideItem.style?.textBoxFull ? 'textboxfull' : ''
+						slideItem.style?.textBoxFull ? "textboxfull" : ""
 					}`}
 				>
 					{infoBg && (
@@ -1021,14 +1021,16 @@ const Edit = (props) => {
 										{__("Add New Slide - End of Slider", "blockons")}
 									</Button>
 
-									<GetPostsSelect
-										label={__("Create a new Product Slide", "blockons")}
-										value={slideItem.productSlide}
-										onChange={(newValue) => {
-											handleInsertProduct(newValue, index);
-										}}
-										siteurl={site_url}
-									/>
+									{wcActive && (
+										<GetPostsSelect
+											label={__("Create new slide from Product", "blockons")}
+											value={slideItem.productSlide}
+											onChange={(newValue) => {
+												handleInsertProduct(newValue, index);
+											}}
+											siteurl={site_url}
+										/>
+									)}
 								</>
 							)}
 						</>
