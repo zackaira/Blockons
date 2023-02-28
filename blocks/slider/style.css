@@ -7,8 +7,8 @@
 }
 /* ---- Slider ---- */
 .wp-block-blockons-slider .swiper-slide {
+	display: block;
 	background-color: #fafafa;
-	text-align: center;
 	position: relative;
 }
 .wp-block-blockons-slider .swiper-slide-inner {
@@ -54,6 +54,10 @@
 .wp-block-blockons-slider .blockons-slider-inner .blockons-slider-inner-slide {
 	position: relative;
 	max-width: 75%;
+}
+.wp-block-blockons-slider .blockons-slider-inner .blockons-slider-inner-slide.textboxfull {
+	max-width: 100%;
+	width: 100%;
 }
 .wp-block-blockons-slider .blockons-slider-inner .blockons-slider-content-bg {
 	background-color: rgba(0, 0, 0, 0.62);

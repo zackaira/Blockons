@@ -15,7 +15,10 @@
 .blockons-link-component .block-editor-link-control__field {
 	margin: 16px 0;
 }
-.blockons-link-component .block-editor-link-control__tools {
+.blockons-link-component .block-editor-link-control__tools,
+.blockons-link-component
+	.components-popover__content
+	.block-editor-link-control__search-item {
 	padding: 16px 0;
 }
 .blockons-link-component

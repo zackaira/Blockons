@@ -4,18 +4,15 @@ import {
 	useBlockProps,
 	InspectorControls,
 } from "@wordpress/block-editor";
-import { useState } from "@wordpress/element";
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 import {
 	Dropdown,
-	TextControl,
 	ToggleControl,
 	PanelBody,
 	SelectControl,
 	RangeControl,
 } from "@wordpress/components";
-import { subscribe } from "@wordpress/data";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import {

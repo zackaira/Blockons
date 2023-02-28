@@ -5,12 +5,9 @@ import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	RichText,
-	AlignmentToolbar,
-	BlockControls,
 	InspectorControls,
 	useBlockProps,
 	MediaUpload,
-	InnerBlocks,
 	__experimentalLinkControl as LinkControl,
 } from "@wordpress/block-editor";
 import {
@@ -28,7 +25,7 @@ import BlockonsLoader from "../_components/BlockonsLoader";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
 import { sliderArrowIcons, colorPickerPalette } from "../block-global";
 import { Navigation, Pagination, EffectFade, EffectCoverflow } from "swiper";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
 
 const Edit = (props) => {
@@ -39,6 +36,8 @@ const Edit = (props) => {
 			alignment,
 			sliderSlides,
 			position,
+			outerPadding,
+			innerPadding,
 			showTitle,
 			defaultTitleSize,
 			defaultTitleColor,
@@ -71,9 +70,8 @@ const Edit = (props) => {
 	const site_url = blockonsObj.apiUrl;
 	const wcActive = blockonsObj.wcActive;
 
-	const blockProps = useBlockProps({
-		className: ``,
-	});
+	const blockProps = useBlockProps();
+
 	const [needsReload, setNeedsReload] = useState(false);
 	const [reloads, setReloads] = useState({ transition, mode });
 
@@ -107,11 +105,6 @@ const Edit = (props) => {
 	};
 	const [swiper, setSwiper] = useState(null);
 
-	const onChangeAlignment = (newAlignment) => {
-		setAttributes({
-			alignment: newAlignment === undefined ? "center" : newAlignment,
-		});
-	};
 	// Slider Settings
 	const handleSliderImageSelect = (media, id) => {
 		const newSlides = [...sliderSlides];
@@ -236,8 +229,6 @@ const Edit = (props) => {
 		setAttributes({ sliderSlides: editedSlideItems });
 	};
 	const handleUpdateSlideStyle = (value, id, property) => {
-		console.log(value);
-
 		const newSlides = [...sliderSlides];
 		const editedSlideItems = newSlides.map((obj) => {
 			if (obj.id === id)
@@ -297,7 +288,9 @@ const Edit = (props) => {
 			productSlide: {},
 			style: {
 				position: "",
-				imgFull: "",
+				alignment: "",
+				outerPadding: "",
+				innerPadding: "",
 				bgOverlayColor: "",
 				bgOverlayOpacity: "",
 				txtBgColor: "",
@@ -306,6 +299,7 @@ const Edit = (props) => {
 				titleColor: "",
 				descSize: "",
 				descColor: "",
+				textBoxFull: false,
 			},
 		};
 
@@ -359,10 +353,8 @@ const Edit = (props) => {
 				.then((res) => {
 					newSlides.splice(index + 1, 0, {
 						id: "product-" + id,
-						link: {
-							type: "button",
-							value: [],
-						},
+						title: res.data.title,
+						subtitle: res.data.short_desc,
 						buttons: {
 							number: 1,
 							buttons: [
@@ -378,14 +370,31 @@ const Edit = (props) => {
 								},
 							],
 						},
+						link: {
+							type: "button",
+							value: [],
+						},
 						image: {
 							alt: res.data.title,
 							id: "",
 							url: res.data.featured_media,
 						},
 						productSlide: selectedProduct,
-						title: res.data.title,
-						subtitle: res.data.short_desc,
+						style: {
+							position: "",
+							alignment: "",
+							outerPadding: "",
+							innerPadding: "",
+							bgOverlayColor: "",
+							bgOverlayOpacity: "",
+							txtBgColor: "",
+							txtBgOpacity: "",
+							titleSize: "",
+							titleColor: "",
+							descSize: "",
+							descColor: "",
+							textBoxFull: false,
+						},
 					});
 					setAttributes({ sliderSlides: newSlides });
 
@@ -450,8 +459,22 @@ const Edit = (props) => {
 				)}
 			</div>
 
-			<div className={`blockons-slider-inner align-${alignment}`}>
-				<div className="blockons-slider-inner-slide">
+			<div // Turn to a link on full slide selection
+				className={`blockons-slider-inner align-${
+					slideItem.style?.alignment ? slideItem.style.alignment : alignment
+				}`}
+				style={{
+					padding:
+						slideItem.style?.outerPadding || slideItem.style.outerPadding === 0
+							? slideItem.style.outerPadding
+							: outerPadding,
+				}}
+			>
+				<div
+					className={`blockons-slider-inner-slide ${
+						slideItem.style?.textBoxFull ? 'textboxfull' : ''
+					}`}
+				>
 					{infoBg && (
 						<div
 							className="blockons-slider-content-bg"
@@ -469,7 +492,16 @@ const Edit = (props) => {
 					)}
 
 					{(showTitle || showDesc) && (
-						<div className="blockons-slider-content">
+						<div
+							className="blockons-slider-content"
+							style={{
+								padding:
+									slideItem.style?.innerPadding ||
+									slideItem.style.innerPadding === 0
+										? slideItem.style.innerPadding
+										: innerPadding,
+							}}
+						>
 							{showTitle && (
 								<RichText
 									tagName="h4"
@@ -702,7 +734,7 @@ const Edit = (props) => {
 					renderContent={() => (
 						<>
 							<SelectControl
-								label="Position"
+								label="Textbox Position"
 								value={
 									slideItem.style?.position
 										? slideItem.style.position
@@ -722,6 +754,61 @@ const Edit = (props) => {
 								onChange={(newValue) =>
 									handleUpdateSlideStyle(newValue, slideItem.id, "position")
 								}
+							/>
+							<div className="blockons-divider"></div>
+							<SelectControl
+								label={__("Text Alignment", "blockons")}
+								value={
+									slideItem.style?.alignment
+										? slideItem.style.alignment
+										: alignment
+								}
+								options={[
+									{ label: __("Left", "blockons"), value: "left" },
+									{ label: __("Center", "blockons"), value: "center" },
+									{ label: __("Right", "blockons"), value: "right" },
+								]}
+								onChange={(newValue) =>
+									handleUpdateSlideStyle(newValue, slideItem.id, "alignment")
+								}
+							/>
+							<div className="blockons-divider"></div>
+							<ToggleControl
+								label={__("Textbox Full Width", "blockons")}
+								checked={slideItem.style.textBoxFull}
+								onChange={(newValue) =>
+									handleUpdateSlideStyle(newValue, slideItem.id, "textBoxFull")
+								}
+							/>
+							<div className="blockons-divider"></div>
+							<RangeControl
+								label={__("Slider Outer Padding", "blockons")}
+								value={
+									slideItem.style?.outerPadding ||
+									slideItem.style.outerPadding === 0
+										? slideItem.style.outerPadding
+										: outerPadding
+								}
+								onChange={(newValue) =>
+									handleUpdateSlideStyle(newValue, slideItem.id, "outerPadding")
+								}
+								min={0}
+								max={200}
+							/>
+							<div className="blockons-divider"></div>
+							<RangeControl
+								label={__("Textbox Padding", "blockons")}
+								value={
+									slideItem.style?.innerPadding ||
+									slideItem.style.innerPadding === 0
+										? slideItem.style.innerPadding
+										: innerPadding
+								}
+								onChange={(newValue) =>
+									handleUpdateSlideStyle(newValue, slideItem.id, "innerPadding")
+								}
+								min={0}
+								max={150}
 							/>
 
 							{imageOverlay && (
@@ -772,7 +859,7 @@ const Edit = (props) => {
 								<>
 									<div className="blockons-divider"></div>
 									<p className="blockons-section-title">
-										{__("Text Background", "blockons")}
+										{__("Textbox Background", "blockons")}
 									</p>
 									<RangeControl
 										label={__("Opacity", "blockons")}
@@ -969,7 +1056,7 @@ const Edit = (props) => {
 				<InspectorControls>
 					<PanelBody title={__("Slider Design", "blockons")} initialOpen={true}>
 						<SelectControl
-							label="Slider Style"
+							label="Textbox Position"
 							value={position}
 							options={[
 								{ label: "Top Left", value: "topleft" },
@@ -987,6 +1074,44 @@ const Edit = (props) => {
 									position: newValue === undefined ? "centercenter" : newValue,
 								})
 							}
+						/>
+						<SelectControl
+							label="Text Alignment"
+							value={alignment}
+							options={[
+								{ label: "Left", value: "left" },
+								{ label: "Center", value: "center" },
+								{ label: "Right", value: "right" },
+							]}
+							onChange={(newValue) =>
+								setAttributes({
+									alignment: newValue === undefined ? "center" : newValue,
+								})
+							}
+						/>
+						<div className="blockons-divider"></div>
+						<RangeControl
+							label={__("Slider Outer Padding", "blockons")}
+							value={outerPadding}
+							onChange={(newValue) =>
+								setAttributes({
+									outerPadding: newValue === undefined ? 50 : newValue,
+								})
+							}
+							min={0}
+							max={200}
+						/>
+						<div className="blockons-divider"></div>
+						<RangeControl
+							label={__("Textbox Padding", "blockons")}
+							value={innerPadding}
+							onChange={(newValue) =>
+								setAttributes({
+									innerPadding: newValue === undefined ? 15 : newValue,
+								})
+							}
+							min={0}
+							max={150}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -1063,7 +1188,7 @@ const Edit = (props) => {
 						<div className="blockons-divider"></div>
 
 						<ToggleControl
-							label={__("Add Text Background", "blockons")}
+							label={__("Add Textbox Background", "blockons")}
 							checked={infoBg}
 							onChange={(newValue) => setAttributes({ infoBg: newValue })}
 						/>
@@ -1215,18 +1340,21 @@ const Edit = (props) => {
 								setAttributes({ mode: newValue });
 							}}
 						/>
-						<RangeControl
-							label={__("Space Between Slides", "blockons")}
-							value={spaceBetween}
-							onChange={(newValue) =>
-								setAttributes({
-									spaceBetween: newValue === undefined ? 0 : parseInt(newValue),
-								})
-							}
-							min={0}
-							max={200}
-							step={10}
-						/>
+						{perView > 1 && (
+							<RangeControl
+								label={__("Space Between Slides", "blockons")}
+								value={spaceBetween}
+								onChange={(newValue) =>
+									setAttributes({
+										spaceBetween:
+											newValue === undefined ? 0 : parseInt(newValue),
+									})
+								}
+								min={0}
+								max={200}
+								step={10}
+							/>
+						)}
 					</PanelBody>
 					<PanelBody
 						title={__("Slider Controls", "blockons")}
@@ -1352,11 +1480,6 @@ const Edit = (props) => {
 					</PanelBody>
 				</InspectorControls>
 			)}
-			{
-				<BlockControls>
-					<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
-				</BlockControls>
-			}
 			<div
 				className={`blockons-slider slider adv-slider ${
 					showOnHover ? "controlsOnHover" : ""

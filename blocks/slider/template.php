@@ -8,8 +8,6 @@
  *
  * @package blockons
  */
-$custom_classes = '';
-
 $sliderOptions = array(
 	"autoHeight" => true,
 	"effect" => $attributes['transition'],
@@ -29,7 +27,7 @@ $sliderOptions = array(
 	) : false,
 );
 ?>
-<div <?php echo wp_kses_data( get_block_wrapper_attributes(['class' => $custom_classes]) ); ?>>
+<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
 	<div class="blockons-slider slider adv-slider <?php echo isset($attributes['showOnHover']) && $attributes['showOnHover'] == true ? sanitize_html_class("controlsOnHover") : ""; ?> navigation-<?php echo sanitize_html_class($attributes['navigationStyle']); ?> navigation-<?php echo sanitize_html_class($attributes['navigationColor']); ?> pagination-<?php echo sanitize_html_class($attributes['paginationStyle']); ?> pagination-<?php echo sanitize_html_class($attributes['paginationColor']); ?> <?php echo isset($attributes['navigationArrow']) && $attributes['navigationArrow'] == "ban" ? sanitize_html_class("default-icon") : sanitize_html_class("custom-icon"); ?> arrows-<?php echo sanitize_html_class($attributes['navigationArrow']); ?>" id="<?php echo esc_attr($attributes['uniqueId']); ?>" data-settings="<?php echo esc_attr(json_encode((object)$sliderOptions)); ?>">
 		<div class="swiper">
 			<div class="swiper-wrapper">
@@ -56,15 +54,20 @@ $sliderOptions = array(
 
 								<?php endif; ?>
 							</div><!-- .blockons-slider-image -->
-
-							<div class="blockons-slider-inner align-<?php echo isset($attributes['alignment']) ? sanitize_html_class($attributes['alignment']) : ''; ?>">
-								<div class="blockons-slider-inner-slide">
+							
+							<?php if (isset($slide['link']) && isset($slide['link']['type']) && $slide['link']['type'] == "full") : ?>
+								<a <?php echo isset($slide['link']['value']) && isset($slide['link']['value']['url']) && $slide['link']['value']['url'] != "" ? 'href="' . esc_url($slide['link']['value']['url']) . '"' : ''; ?> <?php echo isset($slide['link']['value']) && isset($slide['link']['value']['opensInNewTab']) && $slide['link']['value']['opensInNewTab'] == true ? 'target="_blank"' : ''; ?> class="blockons-slider-inner align-<?php echo isset($slide['style']['alignment']) && $slide['style']['alignment'] != "" ? sanitize_html_class($slide['style']['alignment']) : sanitize_html_class($attributes['alignment']); ?>" <?php echo isset($slide['style']['outerPadding']) && $slide['style']['outerPadding'] != "" ? 'style="padding: ' . esc_attr($slide['style']['outerPadding']) . 'px;"' : 'style="padding: ' . esc_attr($attributes['outerPadding']) . 'px;"'; ?>>
+							<?php else : ?>
+								<div class="blockons-slider-inner align-<?php echo isset($slide['style']['alignment']) && $slide['style']['alignment'] != "" ? sanitize_html_class($slide['style']['alignment']) : sanitize_html_class($attributes['alignment']); ?>" <?php echo isset($slide['style']['outerPadding']) && $slide['style']['outerPadding'] != "" ? 'style="padding: ' . esc_attr($slide['style']['outerPadding']) . 'px;"' : 'style="padding: ' . esc_attr($attributes['outerPadding']) . 'px;"'; ?>>
+							<?php endif; ?>
+								
+								<div class="blockons-slider-inner-slide <?php echo isset($slide['style']['textBoxFull']) && $slide['style']['textBoxFull'] == true ? 'textboxfull' : ''; ?>">
 									<?php if (isset($attributes['infoBg']) && $attributes['infoBg'] == true) : ?>
 										<div class="blockons-slider-content-bg" style="<?php echo isset($slide['style']['txtBgColor']) && $slide['style']['txtBgColor'] != "" ? 'background-color:' . esc_attr($slide['style']['txtBgColor']) . '; ' : 'background-color:' . esc_attr($attributes['infoBgColor']) . '; '; ?> <?php echo isset($slide['style']['txtBgOpacity']) && $slide['style']['txtBgOpacity'] != "" ? 'opacity:' . esc_attr($slide['style']['txtBgOpacity']) . '; ' : 'opacity:' . esc_attr($attributes['infoBgOpacity']) . '; '; ?>"></div>
 									<?php endif; ?>
 									
 									<?php if ((isset($attributes['showTitle']) && $attributes['showTitle'] == true) || (isset($attributes['showDesc']) && $attributes['showDesc'] == true)) : ?>
-										<div class="blockons-slider-content">
+										<div class="blockons-slider-content" <?php echo isset($slide['style']['innerPadding']) && $slide['style']['innerPadding'] != "" ? 'style="padding: ' . esc_attr($slide['style']['innerPadding']) . 'px;"' : 'style="padding: ' . esc_attr($attributes['innerPadding']) . 'px;"'; ?>>
 											
 											<?php if (isset($attributes['showTitle']) && $attributes['showTitle'] == true) : ?>
 												<h4 class="slider-title" style="<?php echo isset($slide['style']['titleSize']) && $slide['style']['titleSize'] != "" ? 'font-size:' . esc_attr($slide['style']['titleSize']) . 'px; ' : 'font-size:' . esc_attr($attributes['defaultTitleSize']) . 'px; '; ?> <?php echo isset($slide['style']['titleColor']) && $slide['style']['titleColor'] != "" ? 'color:' . esc_attr($slide['style']['titleColor']) . '; ' : 'color:' . esc_attr($attributes['defaultTitleColor']) . '; '; ?>">
@@ -85,8 +88,8 @@ $sliderOptions = array(
 													if (isset($slide['buttons']) && isset($slide['buttons']['buttons'])) :
 														foreach ($slide['buttons']['buttons'] as $button) : ?>
 															
-															<?php if (isset($button['link']) && isset($button['link']['url'])) : ?>
-																<a href="<?php esc_url($button['link']['url']); ?>" class="slider-btn" <?php echo isset($button['link']) && isset($button['link']['opensInNewTab']) && $button['link']['opensInNewTab'] == true ? esc_attr('target="_blank"') : ''; ?>>
+															<?php if (isset($button['link']) && isset($button['link']['url']) && $button['link']['url'] != "") : ?>
+																<a href="<?php echo esc_url($button['link']['url']); ?>" class="slider-btn" <?php echo isset($button['link']) && isset($button['link']['opensInNewTab']) && $button['link']['opensInNewTab'] == true ? esc_attr('target="_blank"') : ''; ?> style="<?php echo isset($button['color']) ? 'background-color: ' . esc_attr($button['color']) . '; ' : ''; ?> <?php echo isset($button['fcolor']) ? 'color: ' . esc_attr($button['fcolor']) . '; ' : ''; ?>">
 																	<?php esc_html_e($button['text']); ?>
 																</a>
 															<?php endif; ?>
@@ -100,7 +103,13 @@ $sliderOptions = array(
 										</div>
 									<?php endif; ?>
 								</div><!-- .blockons-slider-inner-slide -->
-							</div><!-- .blockons-slider-inner -->
+							
+							<?php if (isset($slide['link']) && isset($slide['link']['type']) && $slide['link']['type'] == "full") : ?>
+								</a><!-- .blockons-slider-inner -->
+							<?php else : ?>
+								</div><!-- .blockons-slider-inner -->
+							<?php endif; ?>
+
 						</div><!-- .swiper-slide-inner -->
 
 					</div>

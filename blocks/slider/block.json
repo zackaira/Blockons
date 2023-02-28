@@ -34,7 +34,9 @@
 					"productSlide": {},
 					"style": {
 						"position": "",
-						"imgFull": "",
+						"alignment": "",
+						"outerPadding": "",
+						"innerPadding": "",
 						"bgOverlayColor": "",
 						"bgOverlayOpacity": "",
 						"txtBgColor": "",
@@ -42,7 +44,8 @@
 						"titleSize": "",
 						"titleColor": "",
 						"descSize": "",
-						"descColor": ""
+						"descColor": "",
+						"textBoxFull": false
 					}
 				},
 				{
@@ -61,7 +64,9 @@
 					"productSlide": {},
 					"style": {
 						"position": "",
-						"imgFull": "",
+						"alignment": "",
+						"outerPadding": "",
+						"innerPadding": "",
 						"bgOverlayColor": "",
 						"bgOverlayOpacity": "",
 						"txtBgColor": "",
@@ -69,7 +74,8 @@
 						"titleSize": "",
 						"titleColor": "",
 						"descSize": "",
-						"descColor": ""
+						"descColor": "",
+						"textBoxFull": false
 					}
 				}
 			]
@@ -77,6 +83,14 @@
 		"position": {
 			"type": "string",
 			"default": "centercenter"
+		},
+		"outerPadding": {
+			"type": "number",
+			"default": 50
+		},
+		"innerPadding": {
+			"type": "number",
+			"default": 15
 		},
 		"showTitle": {
 			"type": "boolean",
