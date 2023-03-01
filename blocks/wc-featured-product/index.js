@@ -12,11 +12,13 @@ import Edit from "./edit";
 import "./style.css";
 
 const { name } = json;
+import { wcFeaturedProductIcon as svg } from "../svgIcons";
 
 /**
  * Every block starts by registering a new block type definition.
  */
 registerBlockType(name, {
+	icon: svg,
 	/**
 	 * @see ./edit.js
 	 */

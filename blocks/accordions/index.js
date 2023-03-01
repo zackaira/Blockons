@@ -15,11 +15,13 @@ import "./style.css";
 import "./single-accordion.js";
 
 const { name } = json;
+import { accordionIcon as svg } from "../svgIcons";
 
 /**
  * Register the Block
  */
 registerBlockType(name, {
+	icon: svg,
 	edit: Edit,
 	save,
 });

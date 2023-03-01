@@ -14,11 +14,13 @@ import "./editor.css";
 import "./style.css";
 
 const { name } = json;
+import { searchIcon as svg } from "../svgIcons";
 
 /**
  * Register the Block
  */
 registerBlockType(name, {
+	icon: svg,
 	edit: Edit,
 	save,
 });

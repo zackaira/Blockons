@@ -13,11 +13,13 @@ import "./editor.css";
 import "./style.css";
 
 const { name } = json;
+import { sliderIcon as svg } from "../svgIcons";
 
 /**
  * Register the Block
  */
 registerBlockType(name, {
+	icon: svg,
 	edit: Edit,
 	/**
 	 * No save: defaults to: save: () => null

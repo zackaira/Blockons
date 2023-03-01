@@ -179,6 +179,14 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 == Changelog ==
 
+= 1.0.6 =
+* Styling tweaks/fixes
+* 
+* 
+* Updated blocks icons to custom icons
+* Updated the language .pot file
+* NEW: Added new Advanced Slider Block
+
 = 1.0.5 =
 * Styling tweaks/fixes
 * Added missing translations to settings
