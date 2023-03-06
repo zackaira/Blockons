@@ -15,6 +15,10 @@
 .wp-block-blockons-accordions .accordion-label .blockons-fontawesome:hover {
 	box-shadow: 0 0 0 1px #297cba;
 }
+.wp-block-blockons-accordions.has-child-selected
+	.block-editor-block-list__block.is-selected {
+	margin: 0;
+}
 .wp-block-blockons-accordions .accordion-label .accordion-label-title {
 	margin: 0;
 	padding: 0;

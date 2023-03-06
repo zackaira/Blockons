@@ -4,7 +4,6 @@
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
-	RichText,
 	AlignmentToolbar,
 	BlockControls,
 	InspectorControls,
@@ -22,7 +21,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
-import { slugify, sliderArrowIcons } from "../block-global";
+import { sliderArrowIcons } from "../block-global";
 import { colorPickerPalette } from "../block-global";
 import { Navigation, Pagination, EffectFade, EffectCoverflow } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -286,7 +285,7 @@ const Edit = (props) => {
 										}
 										min={0}
 										max={200}
-										step={10}
+										step={1}
 									/>
 								)}
 							</>

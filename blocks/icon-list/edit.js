@@ -46,9 +46,6 @@ const Edit = (props) => {
 			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
 		});
 	};
-	const onChangeCustomIcon = (value) => {
-		setAttributes({ customIcon: value });
-	};
 
 	// Item Control Functions
 	const handleItemIconChange = (itemIcon, itemId) => {
@@ -125,7 +122,6 @@ const Edit = (props) => {
 	};
 	const handleItemTextChange = (itemText, itemId) => {
 		const newListItems = [...listItems];
-		// Edit the item text and ID (this prevent the edit from editing all instances if the block is duplicated)
 		const editedListItems = newListItems.map((obj) => {
 			if (obj.itemId === itemId)
 				return {
@@ -215,8 +211,7 @@ const Edit = (props) => {
 						}}
 					>
 						<Dropdown
-							className="blockons-icon-selecter"
-							contentClassName="blockons-editor-popup"
+							contentClassName="blockons-editor-popup blockons-icon-selecter"
 							position="bottom right"
 							renderToggle={({ isOpen, onToggle }) => (
 								<FontAwesomeIcon

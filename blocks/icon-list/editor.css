@@ -49,14 +49,14 @@
 
 /* -- Controls -- */
 /* -- Item level controls popup box -- */
-.blockons-editor-popup .components-popover__content {
+.blockons-editor-popup.blockons-icon-selecter .components-popover__content {
 	width: 274px;
-}
-.blockons-editor-popup .components-popover__content > div {
 	display: flex;
 	flex-wrap: wrap;
 }
-.blockons-editor-popup .components-popover__content .blockons-fontawesome {
+.blockons-editor-popup.blockons-icon-selecter
+	.components-popover__content
+	.blockons-fontawesome {
 	width: 32px;
 	height: 32px;
 	display: flex;
