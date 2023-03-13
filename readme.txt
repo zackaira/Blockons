@@ -182,7 +182,7 @@ This could be from the theme you're using, or another plugin. Again, please [con
 = 1.0.6 =
 * Styling tweaks/fixes
 * 
-* 
+* Fixed layout bug when duplicating slider blocks
 * Updated blocks icons to custom icons
 * Updated the language .pot file
 * NEW: Added new Advanced Slider Block

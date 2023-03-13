@@ -57,11 +57,9 @@ const Edit = (props) => {
 	const [masonry, setMasonry] = useState();
 
 	useEffect(() => {
-		if (!uniqueId) {
-			setAttributes({
-				uniqueId: uuidv4(),
-			});
-		}
+		setAttributes({
+			uniqueId: uuidv4(),
+		});
 	}, []);
 
 	useEffect(() => {

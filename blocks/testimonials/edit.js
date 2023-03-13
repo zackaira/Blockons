@@ -70,11 +70,9 @@ const Edit = (props) => {
 	const [reloads, setReloads] = useState({ transition, mode });
 
 	useEffect(() => {
-		if (!uniqueId) {
-			setAttributes({
-				uniqueId: uuidv4(),
-			});
-		}
+		setAttributes({
+			uniqueId: uuidv4(),
+		});
 	}, []);
 
 	const sliderOptions = {

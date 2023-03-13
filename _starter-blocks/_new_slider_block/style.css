@@ -219,7 +219,7 @@
 	.swiper-pagination-bullet {
 	color: #fff;
 	font-size: 11px;
-	font-weight: bold;
+	font-weight: 600;
 	width: 16px;
 	height: 16px;
 	display: inline-flex;

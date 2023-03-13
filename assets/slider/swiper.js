@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		blockonSliders.forEach((slider) => {
 			const sliderSettings = JSON.parse(slider.getAttribute("data-settings"));
 			const sliderElement = slider.firstElementChild.classList[0];
-			console.log(sliderElement, sliderSettings);
+			// console.log(sliderElement, sliderSettings);
 
 			if (sliderElement) {
 				// const blockonSwiper = new Swiper(`.${sliderElement}`, sliderSettings);
