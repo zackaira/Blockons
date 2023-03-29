@@ -6,6 +6,7 @@ import SettingRow from "./components/SettingRow";
 import SettingGroup from "./components/SettingGroup";
 import SettingBlock from "./components/SettingBlock";
 import SettingHeader from "./components/SettingHeader";
+import GiveFeedback from "./components/GiveFeedback";
 import InfoTab from "./InfoTab";
 import Loader from "./Loader";
 import { blockonsGroupSettings, blockListSettings } from "./helpers";
@@ -147,8 +148,6 @@ const Settings = () => {
 			});
 	}, []);
 
-	console.log(blockonsObject, isPremium, wcActive);
-
 	return (
 		<React.Fragment>
 			<div className="blockons-settings">
@@ -168,6 +167,15 @@ const Settings = () => {
 						></a>
 					</div>
 				</div>
+
+				{Object.keys(blockonsOptions).length > 0 &&
+					!blockonsOptions.disablerating && (
+						<GiveFeedback
+							blockonsOptions={blockonsOptions}
+							clickClose={handleChange}
+						/>
+					)}
+
 				<div className="blockons-settings-content">
 					<form id="blockons-settings-form" onSubmit={(e) => handleSubmit(e)}>
 						<div className="blockons-tabs">
@@ -834,10 +842,22 @@ const Settings = () => {
 																				value={blockonsOptions.sidecart?.icon}
 																				inputType="select"
 																				options={{
-																					"cart-shopping": __("Shopping Cart", "blockons"),
-																					"cart-arrow-down": __("Cart Arrow Down", "blockons"),
-																					"basket-shopping": __("Shopping Basket", "blockons"),
-																					suitcase: __("Shopping Suitcase", "blockons"),
+																					"cart-shopping": __(
+																						"Shopping Cart",
+																						"blockons"
+																					),
+																					"cart-arrow-down": __(
+																						"Cart Arrow Down",
+																						"blockons"
+																					),
+																					"basket-shopping": __(
+																						"Shopping Basket",
+																						"blockons"
+																					),
+																					suitcase: __(
+																						"Shopping Suitcase",
+																						"blockons"
+																					),
 																					bucket: __("Bucket", "blockons"),
 																				}}
 																				onChange={handleChange}

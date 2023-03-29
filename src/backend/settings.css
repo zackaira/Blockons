@@ -581,6 +581,87 @@ a.blockons-docs::before {
 .center {
 	text-align: center;
 }
+/* ---- Give Feedback ---- */
+.blockons-feedback {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 10px 0 30px 7px;
+}
+.blockons-feedback a {
+	display: inline-block;
+	background-color: #f4f7fb;
+	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 25%);
+	border-radius: 4px;
+	color: #616161;
+	margin: 0 0 -4px 10px;
+	padding: 5px 12px;
+	min-width: 20px;
+	text-align: center;
+	font-size: 12px;
+	line-height: 1;
+	text-decoration: none;
+	letter-spacing: 0.2px;
+	cursor: pointer;
+	transition: all 0.25s ease-in-out 0s;
+}
+.blockons-feedback a:hover {
+	background-color: #ffffff;
+}
+.ask-feedback,
+.blockons-reply {
+	display: none;
+}
+.blockons-reply img.emoji {
+	width: 18px !important;
+	height: 18px !important;
+	margin: 0 6px !important;
+}
+.ask-feedback b {
+	font-size: 14px;
+	color: #c1219f;
+	margin: 0 5px 0 0;
+}
+.ask-feedback.show,
+.blockons-reply.show {
+	display: flex;
+}
+.blockons-feedback .blockons-feedback-dismiss {
+	display: inline-block;
+	margin: 0 0 -4px 18px;
+}
+.blockons-feedback .blockons-feedback-dismiss label {
+	width: 20px;
+	height: 20px;
+	position: relative;
+	font-size: 12px;
+	color: #828587;
+}
+.blockons-feedback .blockons-feedback-dismiss label:hover {
+	color: red;
+}
+.blockons-feedback .blockons-feedback-dismiss label::before {
+	display: block;
+	font-family: "Font Awesome 6 Free";
+	font-weight: 900;
+	content: "\f00d";
+	position: absolute;
+	top: 2px;
+	left: 6px;
+}
+.blockons-feedback .blockons-feedback-dismiss input.toggle-switch-checkbox {
+	opacity: 1;
+	width: 20px;
+	height: 20px;
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+	margin: 0;
+}
+.blockons-feedback input.toggle-switch-checkbox::before,
+.blockons-feedback .blockons-feedback-dismiss .toggle-switch-slider {
+	display: none !important;
+}
 /* ---- Info Tab ---- */
 .blockons-settings a.blockons-button {
 	display: inline-block;
@@ -588,7 +669,7 @@ a.blockons-docs::before {
 	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 25%);
 	border-radius: 4px;
 	color: #616161;
-	margin: 0 10px;
+	margin: 0 10px 12px;
 	padding: 12px 20px;
 	font-size: 14px;
 	line-height: 1;
@@ -926,3 +1007,19 @@ a.blockons-docs::before {
 	border-color: #878787;
 	color: #303030;
 } */
+
+@media only screen and (max-width: 980px) {
+	.blockons-block {
+		width: 33.3333%;
+	}
+}
+@media only screen and (max-width: 680px) {
+	.blockons-block {
+		width: 50%;
+	}
+}
+@media only screen and (max-width: 500px) {
+	.blockons-block {
+		width: 100%;
+	}
+}

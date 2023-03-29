@@ -114,11 +114,6 @@ body.blockons-page-loading.blockons-page-loaded {
 body.admin-bar .blockons-page-loader {
 	top: 32px;
 }
-@media only screen and (max-width: 782px) {
-	body.admin-bar .blockons-page-loader {
-		top: 46px;
-	}
-}
 
 /**
  * Back To Top Button
@@ -255,7 +250,7 @@ body.admin-bar .blockons-scroll-indicator.top {
 }
 @media only screen and (max-width: 782px) {
 	body.admin-bar .blockons-scroll-indicator.top {
-		top: 46px;
+		top: 0;
 	}
 }
 /* -- Settings Overrides -- */

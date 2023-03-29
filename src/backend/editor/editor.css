@@ -43,14 +43,18 @@
 	color: rgb(117, 117, 117);
 	margin: 20px 0 0;
 }
-
 /**
  * UnitControl Spacing
  */
 .components-unit-control-wrapper {
 	margin-bottom: 25px;
 }
-
+/**
+ * Settings Popups
+ */
+.components-popover.blockons-editor-popup .components-popover__content {
+	min-width: 280px;
+}
 /**
  * Blockons Color Picker Component
  */
@@ -71,7 +75,6 @@
 .components-button.blockons-colorpicker-btn:hover {
 	box-shadow: 0 0 0 1px #b9b9b9;
 }
-
 /**
  * SelectControl Multiple
  */
@@ -85,7 +88,6 @@
 	option {
 	padding: 5px 6px;
 }
-
 /**
  * Visibility Settings added to all blocks
  */

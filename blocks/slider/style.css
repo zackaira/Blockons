@@ -27,6 +27,7 @@
 	position: relative;
 	z-index: 2;
 	visibility: hidden;
+	margin: 0 !important;
 }
 .wp-block-blockons-slider .swiper-slide-inner.imgfull,
 .wp-block-blockons-slider .swiper-slide-inner.imgfull img {
@@ -103,6 +104,18 @@
 	background-color: #af2dbf;
 	color: #fff;
 	min-width: 110px !important;
+}
+.wp-block-blockons-slider
+	.blockons-slider-inner
+	.slider-btns
+	.slider-btn:first-child {
+	margin-left: 0;
+}
+.wp-block-blockons-slider
+	.blockons-slider-inner
+	.slider-btns
+	.slider-btn:last-child {
+	margin-right: 0;
 }
 .wp-block-blockons-slider
 	.blockons-slider-inner

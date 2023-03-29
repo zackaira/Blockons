@@ -81,7 +81,7 @@ const Edit = (props) => {
 		});
 	}, []);
 
-	console.log(sliderSlides);
+	// console.log(sliderSlides);
 
 	const sliderOptions = {
 		modules: [Navigation, Pagination, EffectFade, EffectCoverflow],

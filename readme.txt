@@ -1,15 +1,15 @@
-=== Blockons - WordPress editor blocks plugin ===
+=== Blockons - Gutenberg blocks for WordPress and WooCommerce websites ===
 Contributors: Kaira
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PFZGBM92T8XSE&source=url
 Tags: blocks, block, gutenberg blocks, woocommerce blocks, editor blocks
 Requires at least: 5.0
 Requires PHP: 5.6
-Tested up to: 6.1
+Tested up to: 6.2
 Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WordPress editor blocks for you to build your website.
+WordPress & WooCommerce editor blocks for you to use when building your website.
 
 
 == Description ==
@@ -181,9 +181,11 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.0.6 =
 * Styling tweaks/fixes
-* 
+* Version compatibility for WC 7.5 & WP 6.2
+* Fixed website loader & page scroll indicator issues
 * Fixed layout bug when duplicating slider blocks
 * Updated blocks icons to custom icons
+* Improved settings page responsiveness
 * Updated the language .pot file
 * NEW: Added new Advanced Slider Block
 

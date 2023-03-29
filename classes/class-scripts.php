@@ -153,7 +153,7 @@ class Blockons {
 			'nonce' => wp_create_nonce('wp_rest'),
 			'blockonsDefaults' => json_decode($blockonsDefaults),
 			'accountUrl' => esc_url($blockons_fs->get_account_url()),
-			'wcActive' => defined('WC_VERSION') ? true : false,
+			'wcActive' => Blockons_Admin::blockons_is_plugin_active('woocommerce.php'),
 			'isPremium' => $isPro,
 			// 'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
 		));
@@ -220,6 +220,7 @@ class Blockons {
 			'apiUrl' => esc_url( get_rest_url() ),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 			'nonce' => wp_create_nonce('wp_rest'),
+			'wcActive' => Blockons_Admin::blockons_is_plugin_active('woocommerce.php'),
 		));
 		wp_enqueue_script('blockons-admin-script');
 

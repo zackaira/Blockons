@@ -1,6 +1,5 @@
 import React from "react";
 import { __ } from "@wordpress/i18n";
-import parse from "html-react-parser";
 
 const InfoTab = (props) => {
 	// const wcActive = Boolean(blockonsObj.wcActive);

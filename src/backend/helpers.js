@@ -61,7 +61,7 @@ export const blockListSettings = {
 		isNew: false,
 	},
 	slider: {
-		desc: __("A slider to display custom content or products", "blockons"),
+		desc: __("A slider to display custom content or WC products", "blockons"),
 		pluginSpecific: false,
 		isNew: __("NEW", "blockons"),
 	},

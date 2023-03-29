@@ -22,7 +22,7 @@
 }
 .wp-block-blockons-image-gallery .blockons-gallery .blockons-gallery-item img {
 	display: block;
-	margin: 0;
+	margin: 0 !important;
 }
 /* -- Grid Layout -- */
 .wp-block-blockons-image-gallery .blockons-gallery.grid {
