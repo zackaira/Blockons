@@ -63,11 +63,11 @@ $sliderOptions = array(
 								
 								<div class="blockons-slider-inner-slide <?php echo isset($slide['style']['textBoxFull']) && $slide['style']['textBoxFull'] == true ? 'textboxfull' : ''; ?>">
 									<?php if (isset($attributes['infoBg']) && $attributes['infoBg'] == true) : ?>
-										<div class="blockons-slider-content-bg" style="<?php echo isset($slide['style']['txtBgColor']) && $slide['style']['txtBgColor'] != "" ? 'background-color:' . esc_attr($slide['style']['txtBgColor']) . '; ' : 'background-color:' . esc_attr($attributes['infoBgColor']) . '; '; ?> <?php echo isset($slide['style']['txtBgOpacity']) && $slide['style']['txtBgOpacity'] != "" ? 'opacity:' . esc_attr($slide['style']['txtBgOpacity']) . '; ' : 'opacity:' . esc_attr($attributes['infoBgOpacity']) . '; '; ?>"></div>
+										<div class="blockons-slider-content-bg" style="<?php echo isset($slide['style']['txtBgColor']) && $slide['style']['txtBgColor'] != "" ? 'background-color:' . esc_attr($slide['style']['txtBgColor']) . '; ' : 'background-color:' . esc_attr($attributes['infoBgColor']) . '; '; ?> <?php echo isset($slide['style']['txtBgOpacity']) && $slide['style']['txtBgOpacity'] !== "" ? 'opacity:' . esc_attr($slide['style']['txtBgOpacity']) . '; ' : 'opacity:' . esc_attr($attributes['infoBgOpacity']) . '; '; ?>"></div>
 									<?php endif; ?>
 									
 									<?php if ((isset($attributes['showTitle']) && $attributes['showTitle'] == true) || (isset($attributes['showDesc']) && $attributes['showDesc'] == true)) : ?>
-										<div class="blockons-slider-content" <?php echo isset($slide['style']['innerPadding']) && $slide['style']['innerPadding'] != "" ? 'style="padding: ' . esc_attr($slide['style']['innerPadding']) . 'px;"' : 'style="padding: ' . esc_attr($attributes['innerPadding']) . 'px;"'; ?>>
+										<div class="blockons-slider-content" <?php echo isset($slide['style']['innerPadding']) && $slide['style']['innerPadding'] !== "" ? 'style="padding: ' . esc_attr($slide['style']['innerPadding']) . 'px;"' : 'style="padding: ' . esc_attr($attributes['innerPadding']) . 'px;"'; ?>>
 											
 											<?php if (isset($attributes['showTitle']) && $attributes['showTitle'] == true) : ?>
 												<h4 class="slider-title" style="<?php echo isset($slide['style']['titleSize']) && $slide['style']['titleSize'] != "" ? 'font-size:' . esc_attr($slide['style']['titleSize']) . 'px; ' : 'font-size:' . esc_attr($attributes['defaultTitleSize']) . 'px; '; ?> <?php echo isset($slide['style']['titleColor']) && $slide['style']['titleColor'] != "" ? 'color:' . esc_attr($slide['style']['titleColor']) . '; ' : 'color:' . esc_attr($attributes['defaultTitleColor']) . '; '; ?>">
@@ -88,7 +88,7 @@ $sliderOptions = array(
 													if (isset($slide['buttons']) && isset($slide['buttons']['buttons'])) :
 														foreach ($slide['buttons']['buttons'] as $button) : ?>
 															
-															<?php if (isset($button['link']) && isset($button['link']['url']) && $button['link']['url'] != "") : ?>
+															<?php if (isset($button['link']) && isset($button['link']['url']) && $button['link']['url'] !== "") : ?>
 																<a href="<?php echo esc_url($button['link']['url']); ?>" class="slider-btn" <?php echo isset($button['link']) && isset($button['link']['opensInNewTab']) && $button['link']['opensInNewTab'] == true ? esc_attr('target="_blank"') : ''; ?> style="<?php echo isset($button['color']) ? 'background-color: ' . esc_attr($button['color']) . '; ' : ''; ?> <?php echo isset($button['fcolor']) ? 'color: ' . esc_attr($button['fcolor']) . '; ' : ''; ?>">
 																	<?php esc_html_e($button['text']); ?>
 																</a>

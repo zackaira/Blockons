@@ -82,6 +82,7 @@
 	margin: 0;
 	padding: 0;
 	font-weight: 500;
+	line-height: 1.2;
 	color: #fff;
 }
 .wp-block-blockons-slider .blockons-slider-inner p.slider-desc {
@@ -104,6 +105,7 @@
 	background-color: #af2dbf;
 	color: #fff;
 	min-width: 110px !important;
+	text-align: center;
 }
 .wp-block-blockons-slider
 	.blockons-slider-inner
@@ -186,6 +188,10 @@
 }
 
 /* -- Navigation -- */
+.wp-block-blockons-slider .swiper-button-prev,
+.wp-block-blockons-slider .swiper-button-next {
+	background-image: none;
+}
 .wp-block-blockons-slider
 	.blockons-slider.adv-slider.navigation-round
 	.swiper-button-prev,
