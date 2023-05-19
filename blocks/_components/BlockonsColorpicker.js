@@ -12,7 +12,7 @@ const BlockonsColorpicker = (props) => {
 		<Dropdown
 			className="blockons-colorpicker"
 			contentClassName="blockons-editor-popup blockons-colorpicker-popup"
-			position="bottom left"
+			popoverProps={{ placement: "bottom-start" }}
 			renderToggle={({ isOpen, onToggle }) => (
 				<Button
 					variant="link"

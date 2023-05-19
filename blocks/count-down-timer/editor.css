@@ -1,0 +1,35 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.wp-block-blockons-count-down-timer
+	.blockons-count-timer-block.blockons-countdown-hide {
+	position: relative;
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 28%);
+}
+.wp-block-blockons-count-down-timer
+	.blockons-count-timer-block.blockons-countdown-hide::before {
+	display: block;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #fff;
+	opacity: 0.9;
+	z-index: 2;
+}
+.wp-block-blockons-count-down-timer
+	.blockons-count-timer-block.blockons-countdown-hide::after {
+	display: flex;
+	content: "Element is hidden";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 4;
+	align-items: center;
+	justify-content: center;
+}

@@ -10,6 +10,24 @@ export const slugify = (str) =>
 		.replace(/^-+|-+$/g, "");
 
 /*
+ * Format DatePicker Date
+ */
+export function formatDateTime(date) {
+	const timestamp = date;
+	const theDate = new Date(timestamp);
+	const formattedDate = theDate.toLocaleString("en-US", {
+		month: "2-digit",
+		day: "2-digit",
+		year: "numeric",
+		hour: "2-digit",
+		minute: "2-digit",
+		hour12: true,
+	});
+
+	return formattedDate;
+}
+
+/*
  * Default Colors for Color Palette
  */
 export const colorPickerPalette = [

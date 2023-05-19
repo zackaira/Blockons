@@ -22,6 +22,14 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: false,
 	},
+	count_down_timer: {
+		desc: __(
+			"Add a count down block for specials, sales, events, etc",
+			"blockons"
+		),
+		pluginSpecific: false,
+		isNew: __("NEW", "blockons"),
+	},
 	icon_list: {
 		desc: __("Visually, more attractive list items with icons", "blockons"),
 		pluginSpecific: false,

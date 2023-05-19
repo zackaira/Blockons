@@ -605,7 +605,7 @@ const Edit = (props) => {
 				<Dropdown
 					className="blockons-slide-settings"
 					contentClassName="blockons-editor-popup blockons-link-component"
-					position="bottom left"
+					popoverProps={{ placement: "bottom-start" }}
 					renderToggle={({ isOpen, onToggle }) => (
 						<Button
 							icon="admin-links"
@@ -721,7 +721,7 @@ const Edit = (props) => {
 				<Dropdown
 					className="blockons-slide-settings"
 					contentClassName="blockons-editor-popup"
-					position="bottom left"
+					popoverProps={{ placement: "bottom-start" }}
 					renderToggle={({ isOpen, onToggle }) => (
 						<Button
 							icon="admin-settings"
@@ -985,7 +985,7 @@ const Edit = (props) => {
 				<Dropdown
 					className="blockons-slide-add"
 					contentClassName="blockons-editor-popup blockons-new-slide"
-					position="bottom left"
+					popoverProps={{ placement: "bottom-start" }}
 					renderToggle={({ isOpen, onToggle }) => (
 						<Button
 							icon="plus-alt"
@@ -1397,7 +1397,7 @@ const Edit = (props) => {
 									<Dropdown
 										className="blockons-icon-selector"
 										contentClassName="blockons-editor-popup icon-selector"
-										position="bottom right"
+										popoverProps={{ placement: "bottom-end" }}
 										renderToggle={({ isOpen, onToggle }) => (
 											<FontAwesomeIcon
 												icon={navigationArrow}

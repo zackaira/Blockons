@@ -90,7 +90,7 @@ const Edit = (props) => {
 				<Dropdown
 					className="blockons-icon-selecter"
 					contentClassName="blockons-editor-popup"
-					position="bottom right"
+					popoverProps={{ placement: "bottom-end" }}
 					renderToggle={({ isOpen, onToggle }) => (
 						<FontAwesomeIcon
 							icon={customIcon && customIconName ? customIconName : theIcon}

@@ -1,7 +1,7 @@
 === Blockons - Gutenberg blocks for WordPress and WooCommerce websites ===
 Contributors: Kaira
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PFZGBM92T8XSE&source=url
-Tags: blocks, block, gutenberg blocks, woocommerce blocks, editor blocks
+Tags: gutenberg blocks, woocommerce blocks, editor blocks, slider blocks, page builder
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.2
@@ -178,6 +178,14 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 
 == Changelog ==
+
+= 1.0.7 =
+* Styling tweaks/fixes
+* 
+* Version compatibility for WC 7.7
+* Fixed Dropdown setting 'position deprecated' warning
+* Fix Video Slider block JS bug
+* Updated the language .pot file
 
 = 1.0.6 =
 * Styling tweaks/fixes

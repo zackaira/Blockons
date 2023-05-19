@@ -1,0 +1,93 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.wp-block-blockons-count-down-timer {
+	display: flex;
+	justify-content: flex-start;
+}
+.wp-block-blockons-count-down-timer.align-right {
+	justify-content: flex-end;
+}
+.wp-block-blockons-count-down-timer.align-center {
+	justify-content: center;
+}
+.blockons-count-timer-block {
+	display: flex;
+	align-items: baseline;
+}
+.wp-block-blockons-count-down-timer .blockons-button {
+	display: inline-block;
+	font-size: 0.9em;
+	background-color: #000;
+	color: #fff;
+	border-radius: 4px;
+	margin: 0 0 0 8px;
+	padding: 5px 12px 6px;
+	line-height: 1.2;
+}
+/* -- Countdown Expired -- */
+.blockons-count-timer-block.blockons-expired-hide .countdown,
+.blockons-count-timer-block.blockons-expired-hide .blockons-countdown-before,
+.blockons-count-timer-block.blockons-expired-hide .blockons-countdown-after,
+.blockons-count-timer-block.blockons-expired-hide .blockons-button {
+	display: none !important;
+}
+.blockons-count-timer-block.blockons-expired-hide .blockons-timer-expired {
+	display: block;
+}
+
+/* -- Alignment -- */
+.wp-block-blockons-count-down-timer.blockons-count-timer-block.blockons-expired-hide
+	.blockons-count-timer-block {
+	align-items: flex-start;
+}
+.wp-block-blockons-count-down-timer.alignment-center
+	.blockons-count-timer-block {
+	align-items: center;
+}
+.wp-block-blockons-count-down-timer.alignment-right
+	.blockons-count-timer-block {
+	align-items: flex-end;
+}
+.wp-block-blockons-count-down-timer .blockons-button {
+	margin: 10px 0 0;
+}
+
+/* -- Designs -- */
+/* - One - Plain Text - */
+.wp-block-blockons-count-down-timer.design-one .blockons-count-timer-block {
+	align-items: baseline;
+}
+.wp-block-blockons-count-down-timer.design-one .countdown {
+	display: flex;
+	align-items: baseline;
+	margin: 0 3px;
+}
+.wp-block-blockons-count-down-timer.design-one .countdown .count-block {
+	display: flex;
+	align-items: baseline;
+	padding: 0 2px 0 3px;
+}
+.wp-block-blockons-count-down-timer.design-one .count-block:first-child,
+.wp-block-blockons-count-down-timer.design-one .count-block:last-child {
+	padding: 0;
+}
+.wp-block-blockons-count-down-timer.design-one .countdown .count-block .txt {
+	margin-left: 3px;
+}
+/* - Two - Grid Layout - */
+.wp-block-blockons-count-down-timer.design-two .blockons-count-timer-block {
+	flex-direction: column;
+}
+.wp-block-blockons-count-down-timer.design-two .countdown {
+	display: flex;
+	align-items: center;
+	margin: 10px 0;
+}
+.wp-block-blockons-count-down-timer.design-two .count-block {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0 8px;
+}

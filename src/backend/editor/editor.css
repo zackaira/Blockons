@@ -8,6 +8,9 @@
 	width: 100%;
 	margin: 10px 0 30px;
 }
+.blockons-hide {
+	display: none !important;
+}
 /**
  * Help / Read More Link
  */
@@ -55,6 +58,13 @@
 .components-popover.blockons-editor-popup .components-popover__content {
 	min-width: 280px;
 }
+.blockons-datetime-selecter {
+	width: 100%;
+}
+.blockons-datetime-selecter input.components-text-control__input {
+	padding: 10px;
+	font-size: 14px;
+}
 /**
  * Blockons Color Picker Component
  */
@@ -89,7 +99,7 @@
 	padding: 5px 6px;
 }
 /**
- * Visibility Settings added to all blocks
+ * Visibility Settings added to all blocks - Blockons PRO
  */
 @media only screen and (min-width: 1100px) {
 	body.blockons-pro .hide-on-desktop {
