@@ -62,6 +62,7 @@ const Edit = (props) => {
 			numberColor,
 			numberTextSize,
 			numberTextColor,
+			timerSpacing,
 		},
 		setAttributes,
 	} = props;
@@ -79,11 +80,27 @@ const Edit = (props) => {
 		});
 	};
 
+	console.log("EDIT - selectedDateTime", selectedDateTime);
+
 	useEffect(() => {
-		if (currentInterval) clearInterval(currentInterval);
-		const currentTimer = runCountDownTimer(dateTime, dateTime, design);
-		setCurrentInterval(currentTimer);
+		setAttributes({
+			selectedDateTime: dateTime,
+		});
+	}, []);
+
+	useEffect(() => {
+		if (selectedDateTime) {
+			if (currentInterval) clearInterval(currentInterval);
+			const currentTimer = runCountDownTimer(
+				selectedDateTime,
+				dateTime,
+				design
+			);
+			setCurrentInterval(currentTimer);
+		}
 	}, [selectedDateTime]);
+
+	console.log("EDIT - selectedDateTime2", selectedDateTime);
 
 	return (
 		<div {...blockProps}>
@@ -93,39 +110,39 @@ const Edit = (props) => {
 						title={__("Timer Settings", "blockons")}
 						initialOpen={true}
 					>
-						<Dropdown
-							className="blockons-datetime-selecter"
-							contentClassName="blockons-editor-popup"
-							popoverProps={{ placement: "bottom-end" }}
-							renderToggle={({ isOpen, onToggle }) => (
-								<TextControl
-									hideLabelFromVision={true}
-									value={
-										selectedDateTime
-											? formatDateTime(selectedDateTime)
-											: formatDateTime(todayPlusOneDay)
-									}
-									readOnly={true}
-									onClick={onToggle}
-								/>
-							)}
-							renderContent={() => (
-								<DateTimePicker
-									currentDate={selectedDateTime}
-									onChange={(newDate) =>
-										setAttributes({
-											selectedDateTime:
-												newDate === undefined
-													? formatDateTime(todayPlusOneDay).toString()
-													: newDate.toString(),
-										})
-									}
-									is12Hour={true}
-									__nextRemoveHelpButton
-									__nextRemoveResetButton
-								/>
-							)}
-						/>
+						{selectedDateTime ? (
+							<Dropdown
+								className="blockons-datetime-selecter"
+								contentClassName="blockons-editor-popup"
+								popoverProps={{ placement: "bottom-end" }}
+								renderToggle={({ isOpen, onToggle }) => (
+									<TextControl
+										hideLabelFromVision={true}
+										value={formatDateTime(selectedDateTime)}
+										readOnly={true}
+										onClick={onToggle}
+									/>
+								)}
+								renderContent={() => (
+									<DateTimePicker
+										currentDate={selectedDateTime}
+										onChange={(newDate) =>
+											setAttributes({
+												selectedDateTime:
+													newDate === undefined
+														? formatDateTime(todayPlusOneDay).toString()
+														: newDate.toString(),
+											})
+										}
+										is12Hour={true}
+										__nextRemoveHelpButton
+										__nextRemoveResetButton
+									/>
+								)}
+							/>
+						) : (
+							<div>Loading...</div>
+						)}
 						<div className="blockons-divider"></div>
 
 						<SelectControl
@@ -408,7 +425,7 @@ const Edit = (props) => {
 							paletteColors={colorPickerPalette}
 						/>
 						<RangeControl
-							label={__("Tmier Digits Size", "blockons")}
+							label={__("Timer Digits Size", "blockons")}
 							value={numberSize}
 							onChange={(newValue) =>
 								setAttributes({
@@ -419,7 +436,7 @@ const Edit = (props) => {
 							max={82}
 						/>
 						<BlockonsColorpicker
-							label={__("Tmier Digits Color", "blockons")}
+							label={__("Timer Digits Color", "blockons")}
 							value={numberColor}
 							onChange={(colorValue) => {
 								setAttributes({
@@ -428,6 +445,18 @@ const Edit = (props) => {
 								});
 							}}
 							paletteColors={colorPickerPalette}
+						/>
+						<div className="blockons-divider"></div>
+						<RangeControl
+							label={__("Spacing", "blockons")}
+							value={timerSpacing}
+							onChange={(newValue) =>
+								setAttributes({
+									timerSpacing: newValue === undefined ? 0 : parseInt(newValue),
+								})
+							}
+							min={0}
+							max={120}
 						/>
 					</PanelBody>
 				</InspectorControls>
@@ -449,12 +478,20 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 			<div
-				className={`blockons-count-timer-block`}
+				className="blockons-count-timer-block"
 				style={{
 					...(bgColor ? { backgroundColor: bgColor } : {}),
 					...(counterPadding ? { padding: counterPadding } : {}),
 				}}
 			>
+				{linkType === "full" && (
+					<a
+						href={linkTo}
+						className="blockons-timer-link"
+						{...(linkTarget ? { target: "_blank" } : {})}
+					></a>
+				)}
+
 				{hasBeforeText && (
 					<RichText
 						tagName={"span"}
@@ -487,7 +524,14 @@ const Edit = (props) => {
 						? { "data-completeHide": onCompleteHide }
 						: {})}
 				>
-					<div className="count-block days">
+					<div
+						className="count-block days"
+						style={{
+							...(design === "two"
+								? { margin: `${timerSpacing}px 0` }
+								: { margin: `0 ${timerSpacing}px` }),
+						}}
+					>
 						<div
 							className="amnt days"
 							style={{
@@ -512,7 +556,14 @@ const Edit = (props) => {
 							}}
 						/>
 					</div>
-					<div className="count-block hours">
+					<div
+						className="count-block hours"
+						style={{
+							...(design === "two"
+								? { margin: `${timerSpacing}px 0` }
+								: { margin: `0 ${timerSpacing}px` }),
+						}}
+					>
 						<div
 							className="amnt hours"
 							style={{
@@ -537,7 +588,14 @@ const Edit = (props) => {
 							}}
 						/>
 					</div>
-					<div className="count-block minutes">
+					<div
+						className="count-block minutes"
+						style={{
+							...(design === "two"
+								? { margin: `${timerSpacing}px 0` }
+								: { margin: `0 ${timerSpacing}px` }),
+						}}
+					>
 						<div
 							className="amnt minutes"
 							style={{
@@ -562,7 +620,14 @@ const Edit = (props) => {
 							}}
 						/>
 					</div>
-					<div className="count-block seconds">
+					<div
+						className="count-block seconds"
+						style={{
+							...(design === "two"
+								? { margin: `${timerSpacing}px 0` }
+								: { margin: `0 ${timerSpacing}px` }),
+						}}
+					>
 						<div
 							className="amnt seconds"
 							style={{
@@ -606,26 +671,31 @@ const Edit = (props) => {
 						}}
 					/>
 				)}
-				{linkType === "button" && (
-					<RichText
-						tagName={"span"}
-						placeholder={linkButtonText}
-						keepPlaceholderOnFocus
-						value={linkButtonText}
+				{/* {linkType === "button" && (
+					<a
+						href={linkTo}
+						{...(linkTarget ? { target: "_blank" } : {})}
 						className="blockons-button"
-						onChange={(value) => setAttributes({ linkButtonText: value })}
-						allowedFormats={minimalRichText}
-						disableLineBreaks={true}
-						style={{
-							...(linkButtonBgColor !== "#000"
-								? { backgroundColor: linkButtonBgColor }
-								: {}),
-							...(linkButtonFontColor !== "#FFF"
-								? { color: linkButtonFontColor }
-								: {}),
-						}}
-					/>
-				)}
+					>
+						<RichText
+							tagName={"span"}
+							placeholder={linkButtonText}
+							keepPlaceholderOnFocus
+							value={linkButtonText}
+							onChange={(value) => setAttributes({ linkButtonText: value })}
+							allowedFormats={minimalRichText}
+							disableLineBreaks={true}
+							style={{
+								...(linkButtonBgColor !== "#000"
+									? { backgroundColor: linkButtonBgColor }
+									: {}),
+								...(linkButtonFontColor !== "#FFF"
+									? { color: linkButtonFontColor }
+									: {}),
+							}}
+						/>
+					</a>
+				)} */}
 
 				{onComplete === "one" && (
 					<RichText
@@ -643,7 +713,7 @@ const Edit = (props) => {
 	);
 };
 
-function runCountDownTimer(elementId, dateTime, design) {
+function runCountDownTimer(elementId, dateTime) {
 	const counterElement = document.getElementById(elementId);
 	const counterElementParent = counterElement.parentElement;
 	const countDownDate = new Date(dateTime).getTime();

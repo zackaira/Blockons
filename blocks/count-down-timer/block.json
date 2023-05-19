@@ -130,6 +130,10 @@
 		"numberTextColor": {
 			"type": "string",
 			"default": "#101015"
+		},
+		"timerSpacing": {
+			"type": "number",
+			"default": 0
 		}
 	},
 	"example": {

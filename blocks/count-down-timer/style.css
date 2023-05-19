@@ -15,6 +15,7 @@
 .blockons-count-timer-block {
 	display: flex;
 	align-items: baseline;
+	position: relative;
 }
 .wp-block-blockons-count-down-timer .blockons-button {
 	display: inline-block;
@@ -26,7 +27,18 @@
 	padding: 5px 12px 6px;
 	line-height: 1.2;
 }
+.blockons-timer-link {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 8;
+	background-color: rgb(255 0 0 /20%)
+}
 /* -- Countdown Expired -- */
+.blockons-timer-expired,
 .blockons-count-timer-block.blockons-expired-hide .countdown,
 .blockons-count-timer-block.blockons-expired-hide .blockons-countdown-before,
 .blockons-count-timer-block.blockons-expired-hide .blockons-countdown-after,
@@ -34,7 +46,7 @@
 	display: none !important;
 }
 .blockons-count-timer-block.blockons-expired-hide .blockons-timer-expired {
-	display: block;
+	display: block !important;
 }
 
 /* -- Alignment -- */
@@ -84,10 +96,15 @@
 	display: flex;
 	align-items: center;
 	margin: 10px 0;
+	line-height: 1.2;
 }
 .wp-block-blockons-count-down-timer.design-two .count-block {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 0 8px;
+}
+.wp-block-blockons-count-down-timer.design-two .count-block .amnt {
+}
+.wp-block-blockons-count-down-timer.design-two .count-block .txt {
 }
