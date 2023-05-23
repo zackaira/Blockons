@@ -5,10 +5,14 @@ import { RichText, useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
-		className: `align-${attributes.align} alignment-${attributes.alignment} design-${attributes.design}`,
+		className: `align-${attributes.align} alignment-${
+			attributes.alignment
+		} design-${attributes.design} ${
+			attributes.design === "two" && attributes.timerStyle !== "one"
+				? "style-" + attributes.timerStyle
+				: ""
+		}`,
 	});
-
-	console.log("SAVE - selectedDateTime", attributes.selectedDateTime);
 
 	return (
 		<div {...blockProps}>
@@ -61,9 +65,14 @@ const Save = ({ attributes }) => {
 					<div
 						className="count-block days"
 						style={{
-							...(attributes.design === "two"
-								? { margin: `${attributes.timerSpacing}px 0` }
-								: { margin: `0 ${attributes.timerSpacing}px` }),
+							...(attributes.design === "two" &&
+							attributes.timerVertSpacing !== 0
+								? { margin: `${attributes.timerVertSpacing}px 0` }
+								: { margin: `0 ${attributes.timerVertSpacing}px` }),
+							...(attributes.design === "two" &&
+							attributes.timerHoriSpacing !== 12
+								? { padding: `0 ${attributes.timerHoriSpacing}px` }
+								: {}),
 						}}
 					>
 						<div
@@ -94,9 +103,14 @@ const Save = ({ attributes }) => {
 					<div
 						className="count-block hours"
 						style={{
-							...(attributes.design === "two"
-								? { margin: `${attributes.timerSpacing}px 0` }
-								: { margin: `0 ${attributes.timerSpacing}px` }),
+							...(attributes.design === "two" &&
+							attributes.timerVertSpacing !== 0
+								? { margin: `${attributes.timerVertSpacing}px 0` }
+								: { margin: `0 ${attributes.timerVertSpacing}px` }),
+							...(attributes.design === "two" &&
+							attributes.timerHoriSpacing !== 12
+								? { padding: `0 ${attributes.timerHoriSpacing}px` }
+								: {}),
 						}}
 					>
 						<div
@@ -127,9 +141,14 @@ const Save = ({ attributes }) => {
 					<div
 						className="count-block minutes"
 						style={{
-							...(attributes.design === "two"
-								? { margin: `${attributes.timerSpacing}px 0` }
-								: { margin: `0 ${attributes.timerSpacing}px` }),
+							...(attributes.design === "two" &&
+							attributes.timerVertSpacing !== 0
+								? { margin: `${attributes.timerVertSpacing}px 0` }
+								: { margin: `0 ${attributes.timerVertSpacing}px` }),
+							...(attributes.design === "two" &&
+							attributes.timerHoriSpacing !== 12
+								? { padding: `0 ${attributes.timerHoriSpacing}px` }
+								: {}),
 						}}
 					>
 						<div
@@ -160,9 +179,14 @@ const Save = ({ attributes }) => {
 					<div
 						className="count-block seconds"
 						style={{
-							...(attributes.design === "two"
-								? { margin: `${attributes.timerSpacing}px 0` }
-								: { margin: `0 ${attributes.timerSpacing}px` }),
+							...(attributes.design === "two" &&
+							attributes.timerVertSpacing !== 0
+								? { margin: `${attributes.timerVertSpacing}px 0` }
+								: { margin: `0 ${attributes.timerVertSpacing}px` }),
+							...(attributes.design === "two" &&
+							attributes.timerHoriSpacing !== 12
+								? { padding: `0 ${attributes.timerHoriSpacing}px` }
+								: {}),
 						}}
 					>
 						<div
@@ -204,26 +228,32 @@ const Save = ({ attributes }) => {
 						}}
 					/>
 				)}
-				{/* {attributes.linkType === "button" && (
-					<a
-						href={attributes.linkTo}
-						{...(attributes.linkTarget ? { target: "_blank" } : {})}
-						className="blockons-button"
+				{attributes.linkType === "button" && (
+					<div
+						className="blockons-timer-button"
+						style={{
+							...(attributes.linkButtonBgColor !== "#000"
+								? { backgroundColor: attributes.linkButtonBgColor }
+								: {}),
+							...(attributes.linkButtonFontColor !== "#FFF"
+								? { color: attributes.linkButtonFontColor }
+								: {}),
+							...(attributes.design === "two"
+								? { marginTop: attributes.linkButtonSpace }
+								: { marginLeft: attributes.linkButtonSpace }),
+						}}
 					>
+						<a
+							href={attributes.linkTo}
+							{...(attributes.linkTarget ? { target: "_blank" } : {})}
+							className="blockons-timer-button-link"
+						></a>
 						<RichText.Content
 							tagName="span"
 							value={attributes.linkButtonText}
-							style={{
-								...(attributes.linkButtonBgColor !== "#000"
-									? { backgroundColor: attributes.linkButtonBgColor }
-									: {}),
-								...(attributes.linkButtonFontColor !== "#FFF"
-									? { color: attributes.linkButtonFontColor }
-									: {}),
-							}}
 						/>
-					</a>
-				)} */}
+					</div>
+				)}
 
 				{attributes.onComplete === "one" && (
 					<RichText.Content
@@ -231,11 +261,9 @@ const Save = ({ attributes }) => {
 						value={attributes.onCompleteText}
 						className="blockons-timer-expired"
 						style={{
-							...(attributes.linkButtonBgColor !== "#000"
-								? { backgroundColor: attributes.linkButtonBgColor }
-								: {}),
-							...(attributes.linkButtonFontColor !== "#FFF"
-								? { color: attributes.linkButtonFontColor }
+							fontSize: attributes.afterFontSize,
+							...(attributes.afterTextColor !== "#101015"
+								? { color: attributes.afterTextColor }
 								: {}),
 						}}
 					/>

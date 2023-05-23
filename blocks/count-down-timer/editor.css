@@ -23,7 +23,7 @@
 .wp-block-blockons-count-down-timer
 	.blockons-count-timer-block.blockons-countdown-hide::after {
 	display: flex;
-	content: "Element is hidden";
+	content: "Hidden";
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -32,4 +32,10 @@
 	z-index: 4;
 	align-items: center;
 	justify-content: center;
+	text-align: center;
+}
+/* - Hide links in editor only - */
+.wp-block-blockons-count-down-timer .blockons-timer-link,
+.wp-block-blockons-count-down-timer .blockons-timer-button-link {
+	display: none !important;
 }

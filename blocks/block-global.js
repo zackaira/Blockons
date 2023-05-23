@@ -12,12 +12,12 @@ export const slugify = (str) =>
 /*
  * Format DatePicker Date
  */
+
 export function formatDateTime(date) {
-	const timestamp = date;
-	const theDate = new Date(timestamp);
+	const theDate = new Date(date);
 	const formattedDate = theDate.toLocaleString("en-US", {
-		month: "2-digit",
-		day: "2-digit",
+		day: "numeric",
+		month: "long",
 		year: "numeric",
 		hour: "2-digit",
 		minute: "2-digit",

@@ -13,10 +13,10 @@
 		},
 		"alignment": {
 			"type": "string",
-			"default": "left"
+			"default": "center"
 		},
 		"selectedDateTime": {
-			"type": "string",
+			"type": "number",
 			"default": ""
 		},
 		"linkType": {
@@ -42,6 +42,10 @@
 		"linkButtonFontColor": {
 			"type": "string",
 			"default": "#FFF"
+		},
+		"linkButtonSpace": {
+			"type": "number",
+			"default": 8
 		},
 		"hasBeforeText": {
 			"type": "boolean",
@@ -131,9 +135,17 @@
 			"type": "string",
 			"default": "#101015"
 		},
-		"timerSpacing": {
+		"timerVertSpacing": {
 			"type": "number",
 			"default": 0
+		},
+		"timerHoriSpacing": {
+			"type": "number",
+			"default": 12
+		},
+		"timerStyle": {
+			"type": "string",
+			"default": "one"
 		}
 	},
 	"example": {
