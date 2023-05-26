@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			if (accPanels) {
 				accPanels.forEach((accPanel, i) => {
+					const panelTitle = accPanel.querySelector(".accordion-label");
 					const panelHeight =
 						accPanel.querySelector(".accordion-content").scrollHeight;
 
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 							panelHeight + "px";
 					}
 
-					accPanel.addEventListener("click", () => {
+					panelTitle.addEventListener("click", () => {
 						if (closeAll) {
 							accPanels.forEach((acc, i) => {
 								acc.classList.remove("active");

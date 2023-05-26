@@ -1,0 +1,87 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.blockons-content-toggle-container {
+	position: relative;
+}
+.blockons-content-toggle-block {
+	display: grid;
+	grid-template-rows: 0fr;
+	overflow: hidden;
+	opacity: 1;
+	transition: grid-template-rows 0.4s ease-in-out;
+}
+.blockons-content-toggle-block .blockons-content-toggle-grad {
+	opacity: 1;
+	pointer-events: none;
+	transition: opacity 0.3s ease-in-out 0.1s;
+}
+.blockons-content-toggle-inner {
+	min-height: 80px;
+}
+.blockons-content-toggle-container.isopen .blockons-content-toggle-block {
+	grid-template-rows: 1fr;
+}
+.blockons-content-toggle-container.isopen .blockons-content-toggle-grad {
+	opacity: 0;
+}
+
+.blockons-content-toggle {
+	position: relative;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.blockons-content-toggle-grad {
+	background-image: linear-gradient(
+		to bottom,
+		rgb(255 255 255 / 0%) 8%,
+		#ffffff 92%
+	);
+	height: 60px;
+	position: absolute;
+	bottom: 100%;
+	left: 0;
+	right: 0;
+}
+.blockons-content-toggle .blockons-toggle-button {
+	display: inline-block;
+	cursor: pointer;
+}
+.blockons-content-toggle p.blockons-toggle-btn {
+	margin: 0;
+	padding: 0;
+}
+.blockons-content-toggle-container.btn-inside
+	.blockons-content-toggle
+	.blockons-toggle-button {
+	position: absolute;
+	bottom: 100%;
+	margin-bottom: 12px;
+}
+
+.blockons-content-toggle-container.isopen .blockons-toggle-btn.closed,
+.blockons-content-toggle-container.isclosed .blockons-toggle-btn.open {
+	display: none !important;
+}
+
+/* -- Button Styles -- */
+/* - Two - */
+.wp-block-blockons-content-toggler.style-two
+	.blockons-content-toggle
+	p.blockons-toggle-btn {
+	display: inline-block;
+	border-radius: 6px;
+	background-color: #8b8b8b;
+	color: #fff;
+	padding: 5px 10px;
+	min-width: 160px !important;
+	text-align: center;
+}
+/* - Three - */
+.wp-block-blockons-content-toggler.style-three .blockons-content-toggle {
+	background-color: #8b8b8b;
+	color: #fff;
+}

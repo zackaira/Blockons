@@ -1,0 +1,49 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+/* -- Open IF Child Block Selected -- */
+.wp-block-blockons-content-toggler.has-child-selected
+	.blockons-content-toggle-block {
+	grid-template-rows: 1fr;
+}
+.wp-block-blockons-content-toggler.has-child-selected
+	.blockons-content-toggle-container.isclosed
+	.blockons-toggle-btn.closed {
+	display: none !important;
+}
+.wp-block-blockons-content-toggler.has-child-selected
+	.blockons-content-toggle-container.isclosed
+	.blockons-toggle-btn.open {
+	display: inline-block !important;
+	}
+/* -- Child Block Selected Styling -- */
+.block-editor-block-list__block.wp-block.wp-block-blockons-content-toggler.has-child-selected {
+	border: 2px solid #f5c48c;
+	border-radius: 3px;
+}
+.block-editor-block-list__block.wp-block.wp-block-blockons-content-toggler.has-child-selected::before {
+	display: block;
+	border-radius: 3px 3px 0 0;
+	content: "Child Selected";
+	position: absolute;
+	top: -19px;
+	right: 48px;
+	background-color: #f5c48c;
+	font-size: 11px;
+	padding: 1px 5px;
+	color: #fff;
+	letter-spacing: 0.5px;
+}
+/* -- Block Appender Styling -- */
+.wp-block-blockons-content-toggler
+	.block-editor-block-list__layout
+	.block-list-appender {
+	position: relative;
+}
+.wp-block-blockons-content-toggler
+	.block-editor-block-list__layout
+	.block-list-appender
+	.block-editor-button-block-appender.components-button {
+	padding: 4px 12px;
+}

@@ -30,6 +30,14 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: __("NEW", "blockons"),
 	},
+	content_toggler: {
+		desc: __(
+			"Show / Hide sections of long content with a toggle button",
+			"blockons"
+		),
+		pluginSpecific: false,
+		isNew: __("NEW", "blockons"),
+	},
 	icon_list: {
 		desc: __("Visually, more attractive list items with icons", "blockons"),
 		pluginSpecific: false,
