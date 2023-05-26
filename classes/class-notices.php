@@ -85,10 +85,10 @@ class Blockons_Notices {
 		$settings = array();
 		
 		$settings['new_blocks_added'] = array(
-			'id'    => 'newblocks_002', // Increment this when adding new blocks
+			'id'    => 'newblocks_003', // Increment this when adding new blocks
 			'type'  => 'info', // info | error | warning | success
-			'title' => __( 'A new Advanced Slider block has been added to the Blockons plugin', 'blockons' ),
-			'text'  => __( 'To enable the new block and start using it in the WordPress editor:', 'blockons' ),
+			'title' => __( 'New Advanced Slider & Content Toggler blocks have been added to the Blockons plugin', 'blockons' ),
+			'text'  => __( 'To enable the new blocks and start using them in the WordPress editor:', 'blockons' ),
 			'link'  => admin_url( 'options-general.php?page=blockons-settings' ),
 			'link_text' => __( 'Go to the Blockons settings', 'blockons' ),
 			'inline' => true, // To display the link & text inline

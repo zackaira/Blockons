@@ -5,7 +5,7 @@ Tags: gutenberg blocks, woocommerce blocks, editor blocks, slider blocks, page b
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.2
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,9 @@ Our Line heading block is similar to the original heading block, but if offers a
 
 &#9989; **Icon List** block
 Use better icon list items to display on your website, a fully customizable list with your own icons simply makes your lists better to look at and is sure to be more attractive to the viewers eye.
+
+&#9989; **Content Toggler** block
+Show & Hide longer sections of content by using the content toggler block. Users can click to show and re-hide the content (Inner blocks) that have been added within the toggle block.
 
 &#9989; **Accordion(s)** block
 Display content in a (click to) show or hide accordion style block... This is good for displaying lots of content in an expandable section or content such as Frequently Asked Questions (FAQ's) where your users can select and click for the content they want to see.
@@ -181,10 +184,12 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.0.7 =
 * Styling tweaks/fixes
-* 
+* Fixed Accordions to toggle only on title click
 * Version compatibility for WC 7.7
-* Fixed Dropdown setting 'position deprecated' warning
+* Fixed Dropdown component 'position deprecated' warning
 * Fix Video Slider block JS bug
+* NEW: Added a new Content Toggler block
+* Updated Freemius SDK
 * Updated the language .pot file
 
 = 1.0.6 =

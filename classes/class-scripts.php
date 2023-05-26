@@ -304,8 +304,8 @@ class Blockons {
 	public static function blockonsDefaults() {
 		$initialSettings = array(
 			"blocks" => array( // For adding a new block, update this AND ../src/backend/helpers.js AND class-notices.php newblocks number
-				"content_toggler" => true, // 17 // In Development
-				"count_down_timer" => true, // 16
+				// "count_down_timer" => true, // 17
+				"content_toggler" => true, // 16
 				"slider" => true, // 15
 				"image_comparison" => true, // 14
 				"image_gallery" => true, // 13

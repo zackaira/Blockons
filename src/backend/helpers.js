@@ -22,14 +22,14 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: false,
 	},
-	count_down_timer: {
-		desc: __(
-			"Add a count down block for specials, sales, events, etc",
-			"blockons"
-		),
-		pluginSpecific: false,
-		isNew: __("NEW", "blockons"),
-	},
+	// count_down_timer: {
+	// 	desc: __(
+	// 		"Add a count down block for specials, sales, events, etc",
+	// 		"blockons"
+	// 	),
+	// 	pluginSpecific: false,
+	// 	isNew: __("NEW", "blockons"),
+	// },
 	content_toggler: {
 		desc: __(
 			"Show / Hide sections of long content with a toggle button",
