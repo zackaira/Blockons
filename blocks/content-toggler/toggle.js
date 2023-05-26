@@ -1,5 +1,5 @@
 /**
- * Functionality for the Count Down Timer block
+ * Functionality for the Content Toggler block
  */
 document.addEventListener("DOMContentLoaded", () => {
 	const toggleContents = document.querySelectorAll(
