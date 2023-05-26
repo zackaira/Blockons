@@ -18,7 +18,7 @@ function blockons_count_down_timer_register_block() {
 	register_block_type( __DIR__ );
 
 	if ( function_exists( 'wp_set_script_translations' ) ) {
-		wp_set_script_translations( 'blockons-marketing-button-editor-script', 'blockons', BLOCKONS_PLUGIN_DIR . 'lang' );
+		wp_set_script_translations( 'blockons-count-down-timer-editor-script', 'blockons', BLOCKONS_PLUGIN_DIR . 'lang' );
 	}
 
 }
