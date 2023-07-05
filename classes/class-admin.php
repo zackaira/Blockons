@@ -126,9 +126,9 @@ class Blockons_Admin {
 	 */
 	public function blockons_admin_body_classes($admin_classes) {
 		if ( blockons_fs()->can_use_premium_code__premium_only() ) {
-			$admin_classes .= sanitize_html_class('blockons-pro');
+			$admin_classes .= ' ' . sanitize_html_class('blockons-pro');
 		} else {
-			$admin_classes .= sanitize_html_class('blockons-free');
+			$admin_classes .= ' ' . sanitize_html_class('blockons-free');
 		}
 		return $admin_classes;
 	}

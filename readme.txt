@@ -1,11 +1,11 @@
 === Blockons - Gutenberg blocks for WordPress and WooCommerce websites ===
 Contributors: Kaira
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PFZGBM92T8XSE&source=url
-Tags: gutenberg blocks, woocommerce blocks, editor blocks, slider blocks, page builder
+Tags: gutenberg, editor blocks, page builder, slider, woocommerce
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.2
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ WordPress & WooCommerce editor blocks for you to use when building your website.
 
 Add powerful and advanced blocks to your website to enhance the WordPress editor (previously known as the Gutenberg editor), so you can easily create engaging and visually attractive website pages.
 
-We currently have 14 editor blocks available at the moment (includes 3 WooCommerce blocks), but we're working on more... And we want to build gutenberg blocks that you need... We want to offer a complete blocks solution to building your website.
+We currently offer 17 editor blocks available at the moment (includes 3 WooCommerce blocks), but we're working on more... And we want to build gutenberg blocks that you need... We want to offer a complete blocks solution to building your website.
 
 
 ## Blockons Offers the following blocks
@@ -181,6 +181,12 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 
 == Changelog ==
+
+= 1.0.8 =
+* Styling tweaks/fixes
+* Updated plugin tags
+* Update Freemius SDK 2.5.10
+* Updated the language .pot file
 
 = 1.0.7 =
 * Styling tweaks/fixes
