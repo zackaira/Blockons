@@ -17,7 +17,7 @@ const Save = ({ attributes }) => {
 	return (
 		<div {...blockProps}>
 			<div
-				className="blockons-count-timer-block"
+				className="blockons-count-timer-block hide-timer"
 				style={{
 					...(attributes.bgColor
 						? { backgroundColor: attributes.bgColor }

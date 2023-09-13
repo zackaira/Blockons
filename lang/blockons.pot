@@ -2,16 +2,16 @@
 # This file is distributed under the same license as the Blockons plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Blockons 1.0.8\n"
+"Project-Id-Version: Blockons 1.0.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/blockons\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-07-05T07:29:17+00:00\n"
+"POT-Creation-Date: 2023-09-13T09:39:59+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.1\n"
+"X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: blockons\n"
 
 #. Plugin Name of the plugin
@@ -84,7 +84,7 @@ msgid "Blockons Blocks"
 msgstr ""
 
 #: classes/class-notices.php:90
-msgid "New Advanced Slider & Content Toggler blocks have been added to the Blockons plugin"
+msgid "A New Count Down Timer block has been added to the Blockons plugin"
 msgstr ""
 
 #: classes/class-notices.php:91
@@ -118,7 +118,7 @@ msgid "Accordion Design"
 msgstr ""
 
 #: blocks/accordions/edit.js:40
-#: blocks/count-down-timer/edit.js:473
+#: blocks/count-down-timer/edit.js:476
 #: blocks/marketing-button/edit.js:148
 msgid "Plain"
 msgstr ""
@@ -184,7 +184,7 @@ msgstr ""
 #: blocks/accordions/single-accordion.js:170
 #: blocks/accordions/single-accordion.js:229
 #: blocks/content-toggler/edit.js:147
-#: blocks/count-down-timer/edit.js:335
+#: blocks/count-down-timer/edit.js:338
 #: blocks/image-carousel/edit.js:384
 #: blocks/marketing-button/edit.js:313
 #: blocks/progress-bars/edit.js:230
@@ -202,8 +202,8 @@ msgstr ""
 
 #: blocks/accordions/single-accordion.js:177
 #: blocks/content-toggler/edit.js:161
-#: blocks/count-down-timer/edit.js:362
-#: blocks/count-down-timer/edit.js:392
+#: blocks/count-down-timer/edit.js:365
+#: blocks/count-down-timer/edit.js:395
 #: blocks/icon-list/edit.js:408
 #: blocks/image-carousel/edit.js:414
 #: blocks/image-gallery/edit.js:630
@@ -289,7 +289,7 @@ msgid "Toggle Open Text"
 msgstr ""
 
 #: blocks/content-toggler/edit.js:125
-#: blocks/count-down-timer/edit.js:331
+#: blocks/count-down-timer/edit.js:334
 msgid "Design Settings"
 msgstr ""
 
@@ -298,7 +298,7 @@ msgid "Toggle Text Style"
 msgstr ""
 
 #: blocks/content-toggler/edit.js:132
-#: blocks/count-down-timer/edit.js:153
+#: blocks/count-down-timer/edit.js:156
 msgid "Plain Text"
 msgstr ""
 
@@ -311,9 +311,9 @@ msgid "Banner"
 msgstr ""
 
 #: blocks/content-toggler/edit.js:172
-#: blocks/count-down-timer/edit.js:374
-#: blocks/count-down-timer/edit.js:404
-#: blocks/count-down-timer/edit.js:433
+#: blocks/count-down-timer/edit.js:377
+#: blocks/count-down-timer/edit.js:407
+#: blocks/count-down-timer/edit.js:436
 #: blocks/icon-list/edit.js:277
 #: blocks/marketing-button/edit.js:357
 #: blocks/progress-bars/edit.js:367
@@ -333,28 +333,28 @@ msgstr ""
 msgid "Show more +"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:111
+#: blocks/count-down-timer/edit.js:114
 msgid "Timer Settings"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:150
-#: blocks/count-down-timer/edit.js:419
+#: blocks/count-down-timer/edit.js:153
+#: blocks/count-down-timer/edit.js:422
 msgid "Timer Design"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:154
+#: blocks/count-down-timer/edit.js:157
 msgid "Block Design"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:162
+#: blocks/count-down-timer/edit.js:165
 msgid "Adjust all colors, sizing and spacing in the 'Design Settings' panel further down."
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:170
+#: blocks/count-down-timer/edit.js:173
 msgid "Link To URL"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:173
+#: blocks/count-down-timer/edit.js:176
 #: blocks/image-carousel/edit.js:358
 #: blocks/image-gallery/edit.js:404
 #: blocks/image-gallery/edit.js:423
@@ -365,120 +365,120 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:174
+#: blocks/count-down-timer/edit.js:177
 msgid "Button link"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:175
+#: blocks/count-down-timer/edit.js:178
 msgid "Link whole block"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:201
+#: blocks/count-down-timer/edit.js:204
 #: blocks/marketing-button/edit.js:133
 #: blocks/slider/edit.js:654
 #: blocks/slider/edit.js:709
 msgid "Open in new window"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:212
+#: blocks/count-down-timer/edit.js:215
 #: blocks/search/edit.js:370
 msgid "Button Background Color"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:223
+#: blocks/count-down-timer/edit.js:226
 msgid "Button Text Color"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:234
-#: blocks/count-down-timer/edit.js:507
+#: blocks/count-down-timer/edit.js:237
+#: blocks/count-down-timer/edit.js:510
 msgid "Spacing"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:252
+#: blocks/count-down-timer/edit.js:255
 msgid "Add Text Before"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:272
+#: blocks/count-down-timer/edit.js:275
 msgid "Add Text After"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:293
+#: blocks/count-down-timer/edit.js:296
 msgid "On timer Complete"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:296
+#: blocks/count-down-timer/edit.js:299
 msgid "Show Text"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:297
+#: blocks/count-down-timer/edit.js:300
 msgid "Hide Element"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:345
+#: blocks/count-down-timer/edit.js:348
 msgid "Padding"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:360
+#: blocks/count-down-timer/edit.js:363
 msgid "Before Text"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:390
+#: blocks/count-down-timer/edit.js:393
 msgid "After Text"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:421
+#: blocks/count-down-timer/edit.js:424
 msgid "Text Size"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:444
+#: blocks/count-down-timer/edit.js:447
 msgid "Timer Digits Size"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:455
+#: blocks/count-down-timer/edit.js:458
 msgid "Timer Digits Color"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:470
+#: blocks/count-down-timer/edit.js:473
 msgid "Style"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:474
+#: blocks/count-down-timer/edit.js:477
 msgid "Clock"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:475
+#: blocks/count-down-timer/edit.js:478
 msgid "Line Divider"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:490
+#: blocks/count-down-timer/edit.js:493
 msgid "Horizontal Spacing"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:506
+#: blocks/count-down-timer/edit.js:509
 msgid "Vertical Spacing"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:556
+#: blocks/count-down-timer/edit.js:559
 msgid "Special:"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:605
+#: blocks/count-down-timer/edit.js:608
 msgid "days"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:640
+#: blocks/count-down-timer/edit.js:643
 msgid "hours"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:675
+#: blocks/count-down-timer/edit.js:678
 msgid "minutes"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:710
+#: blocks/count-down-timer/edit.js:713
 msgid "seconds"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:729
+#: blocks/count-down-timer/edit.js:732
 msgid "until the discount ends."
 msgstr ""
 
@@ -2075,13 +2075,17 @@ msgstr ""
 msgid "Display content in smaller areas with collapsible lists"
 msgstr ""
 
-#: src/backend/helpers.js:34
-msgid "Show / Hide sections of long content with a toggle button"
+#: src/backend/helpers.js:26
+msgid "Add a count down block for specials, sales, events, etc"
 msgstr ""
 
+#: src/backend/helpers.js:31
 #: src/backend/helpers.js:39
-#: src/backend/helpers.js:82
 msgid "NEW"
+msgstr ""
+
+#: src/backend/helpers.js:34
+msgid "Show / Hide sections of long content with a toggle button"
 msgstr ""
 
 #: src/backend/helpers.js:42
@@ -2128,15 +2132,15 @@ msgstr ""
 msgid "Display multiple videos in a neat video slider"
 msgstr ""
 
-#: src/backend/helpers.js:101
+#: src/backend/helpers.js:100
 msgid "A simple icon linking to a users WC Account"
 msgstr ""
 
-#: src/backend/helpers.js:106
+#: src/backend/helpers.js:105
 msgid "Display a WC featured product with multple layouts"
 msgstr ""
 
-#: src/backend/helpers.js:111
+#: src/backend/helpers.js:110
 msgid "A simple WC cart icon with a full cart drop down"
 msgstr ""
 

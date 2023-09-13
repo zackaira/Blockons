@@ -22,14 +22,14 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: false,
 	},
-	// count_down_timer: {
-	// 	desc: __(
-	// 		"Add a count down block for specials, sales, events, etc",
-	// 		"blockons"
-	// 	),
-	// 	pluginSpecific: false,
-	// 	isNew: __("NEW", "blockons"),
-	// },
+	count_down_timer: {
+		desc: __(
+			"Add a count down block for specials, sales, events, etc",
+			"blockons"
+		),
+		pluginSpecific: false,
+		isNew: __("NEW", "blockons"),
+	},
 	content_toggler: {
 		desc: __(
 			"Show / Hide sections of long content with a toggle button",
@@ -79,7 +79,7 @@ export const blockListSettings = {
 	slider: {
 		desc: __("A slider to display custom content or WC products", "blockons"),
 		pluginSpecific: false,
-		isNew: __("NEW", "blockons"),
+		isNew: false,
 	},
 	search: {
 		desc: __("A search bar/icon with drop down or popup search", "blockons"),
@@ -95,7 +95,6 @@ export const blockListSettings = {
 		desc: __("Display multiple videos in a neat video slider", "blockons"),
 		pluginSpecific: false,
 		isNew: false,
-		// isNew: __("New", "blockons"),
 	},
 	wc_account_icon: {
 		desc: __("A simple icon linking to a users WC Account", "blockons"),

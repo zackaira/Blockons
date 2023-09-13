@@ -68,6 +68,9 @@
 .wp-block-blockons-count-down-timer .blockons-button {
 	margin: 10px 0 0;
 }
+.hide-timer {
+	visibility: hidden;
+}
 
 /* -- Designs -- */
 /* - One - Plain Text - */

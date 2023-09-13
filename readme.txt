@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: gutenberg, editor blocks, page builder, slider, woocommerce
 Requires at least: 5.0
 Requires PHP: 5.6
-Tested up to: 6.2
-Stable tag: 1.0.8
+Tested up to: 6.3
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -181,6 +181,14 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 
 == Changelog ==
+
+= 1.0.9 =
+* Styling tweaks/fixes
+* Added compatibility & declaration for WC HPOS feature
+* Version compatibility for WP 6.3 & WC 8.0
+* Update Freemius SDK 2.5.12
+* Updated the language .pot file
+* NEW: Added a new Count Down Timer block
 
 = 1.0.8 =
 * Styling tweaks/fixes

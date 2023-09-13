@@ -67,6 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
 						counterElementParent.classList.remove("blockons-countdown-hide");
 					}
 				}
+
+				if (counterElementParent.classList.contains("hide-timer"))
+					counterElementParent.classList.remove("hide-timer");
 			};
 
 			const x = setInterval(updateCountdown, 1000);

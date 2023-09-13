@@ -34,6 +34,9 @@
 	justify-content: center;
 	text-align: center;
 }
+.hide-timer {
+	visibility: visible !important;
+}
 /* - Hide links in editor only - */
 .wp-block-blockons-count-down-timer .blockons-timer-link,
 .wp-block-blockons-count-down-timer .blockons-timer-button-link {

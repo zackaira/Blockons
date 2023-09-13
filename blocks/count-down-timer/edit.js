@@ -94,12 +94,15 @@ const Edit = (props) => {
 	useEffect(() => {
 		if (selectedDateTime) {
 			if (currentInterval) clearInterval(currentInterval);
-			const currentTimer = runCountDownTimer(
-				selectedDateTime,
-				dateTime,
-				design
-			);
+			const currentTimer = runCountDownTimer(selectedDateTime, dateTime);
 			setCurrentInterval(currentTimer);
+			const counterElementParent =
+				document.getElementById(selectedDateTime).parentElement;
+			if (counterElementParent.classList.contains("hide-timer")) {
+				setTimeout(() => {
+					counterElementParent.classList.remove("hide-timer");
+				}, 400);
+			}
 		}
 	}, [selectedDateTime]);
 
@@ -536,7 +539,7 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 			<div
-				className="blockons-count-timer-block"
+				className="blockons-count-timer-block hide-timer"
 				style={{
 					...(bgColor ? { backgroundColor: bgColor } : {}),
 					...(counterPadding ? { padding: counterPadding } : {}),
