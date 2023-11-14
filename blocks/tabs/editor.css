@@ -1,0 +1,36 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.blockons-inner-tab-label {
+	display: none !important;
+}
+.blockons-tab div {
+	margin: 0;
+}
+.blockons-tab-controls {
+	position: absolute;
+	bottom: 100%;
+	right: 0;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
+}
+.blockons-tab .blockons-tab-controls {
+	opacity: 1;
+}
+.blockons-tab-controls button.components-button {
+	padding: 6px;
+	font-weight: 700;
+	color: #494949;
+}
+.blockons-tab-controls button.components-button:not(:disabled):hover {
+	color: #b951c8;
+}
+.blockons-tab-label input.components-text-control__input {
+	background: none;
+	border: 0;
+	min-height: auto;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+}

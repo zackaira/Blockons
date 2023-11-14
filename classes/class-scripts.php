@@ -63,7 +63,7 @@ class Blockons {
 		$blockonsDefaults = get_option('blockons_default_options');
 
 		// Font Awesome Free
-		wp_register_style('blockons-fontawesome', esc_url(BLOCKONS_PLUGIN_URL . 'assets/font-awesome/css/all.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
+		wp_register_style('blockons-fontawesome', esc_url(BLOCKONS_PLUGIN_URL . 'assets/font-awesome/css/all.min.css'), array('dashicons'), BLOCKONS_PLUGIN_VERSION);
 
 		// Frontend
 		wp_register_style('blockons-frontend-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
@@ -304,6 +304,7 @@ class Blockons {
 	public static function blockonsDefaults() {
 		$initialSettings = array(
 			"blocks" => array( // For adding a new block, update this AND ../src/backend/helpers.js AND class-notices.php newblocks number
+				"tabs" => true, // 18
 				"count_down_timer" => true, // 17
 				"content_toggler" => true, // 16
 				"slider" => true, // 15

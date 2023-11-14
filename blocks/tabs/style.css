@@ -1,0 +1,28 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.blockons-tabs {
+	display: flex;
+	align-items: flex-end;
+}
+.blockons-tab {
+	border-radius: 4px 4px 0 0;
+	position: relative;
+	border: 1px solid rgb(0 0 0 /20%);
+	border-bottom: 0;
+	margin: 0 -1px 0 0;
+	padding: 8px 10px;
+	text-align: center;
+}
+.blockons-tab-label {
+}
+
+.blockons-tabs-innerblocks {
+	border: 1px solid rgb(0 0 0 / 20%);
+	padding: 1px 20px;
+	margin: 0 -1px 0 0;
+}
+
+@media only screen and (min-width: 768px) {
+}

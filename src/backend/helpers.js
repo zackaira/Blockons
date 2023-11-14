@@ -86,6 +86,11 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: false,
 	},
+	tabs: {
+		desc: __("Display your site information in tabbed content", "blockons"),
+		pluginSpecific: false,
+		isNew: __("NEW", "blockons"),
+	},
 	testimonials: {
 		desc: __("Display client testimonials in a slider or carousel", "blockons"),
 		pluginSpecific: false,

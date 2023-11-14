@@ -182,6 +182,12 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 == Changelog ==
 
+= 1.1.01 =
+* Styling tweaks/fixes
+* Fixed Dashicons not loading in Site Editor
+* 
+* 
+
 = 1.0.9 =
 * Styling tweaks/fixes
 * Added compatibility & declaration for WC HPOS feature
