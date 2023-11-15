@@ -22,7 +22,9 @@ registerBlockType("blockons/tab", {
 		});
 
 		// Default template for InnerBlocks
-		const TEMPLATE = [["core/paragraph", { content: "Tab Content" }]];
+		const TEMPLATE = [
+			["core/paragraph", { content: "Tab Content - " + clientId }],
+		];
 
 		return (
 			<div {...blockProps}>
