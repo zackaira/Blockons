@@ -11,17 +11,69 @@
 		"html": false
 	},
 	"attributes": {
-		"tabLabelsArray": {
-			"type": "array",
-			"default": []
-		},
-		"updateChild": {
+		"tabsSideLayout": {
 			"type": "boolean",
 			"default": false
 		},
-		"sideTabLayout": {
+		"tabsJustified": {
 			"type": "boolean",
 			"default": false
+		},
+		"contentMinHeight": {
+			"type": "number",
+			"default": 100
+		},
+		"tabWidth": {
+			"type": "number",
+			"default": 200
+		},
+		"tabMinWidth": {
+			"type": "number",
+			"default": 120
+		},
+		"tabBorderRadius": {
+			"type": "number",
+			"default": 4
+		},
+		"tabVertPadding": {
+			"type": "number",
+			"default": 8
+		},
+		"tabHorizPadding": {
+			"type": "number",
+			"default": 16
+		},
+		"contentVertPadding": {
+			"type": "number",
+			"default": 1
+		},
+		"contentHorizPadding": {
+			"type": "number",
+			"default": 20
+		},
+		"tabHasBg": {
+			"type": "boolean",
+			"default": true
+		},
+		"tabColor": {
+			"type": "string",
+			"default": "#ececec"
+		},
+		"bgTabColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"tabFontColor": {
+			"type": "string",
+			"default": "#4f4f4f"
+		},
+		"activeTabFontColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"bgFontColor": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"editorScript": "file:./index.js",

@@ -2,32 +2,59 @@
  * Note that these styles are loaded *before* editor styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.blockons-tabs {
+.wp-block-blockons-tabs.top-layout .blockons-tabs {
 	display: flex;
 	align-items: flex-end;
 }
-.blockons-tab {
+.wp-block-blockons-tabs.top-layout .blockons-tab {
 	background-color: #ececec;
 	border-radius: 4px 4px 0 0;
 	position: relative;
 	border: 1px solid rgb(0 0 0 /20%);
 	border-bottom: 0;
 	margin: 0 -1px 0 0;
-	padding: 8px 10px;
+	padding: 8px 16px;
 	text-align: center;
 }
-.blockons-tab.active {
+.blockons-tabs.full .blockons-tab {
+	flex: 1;
+}
+.wp-block-blockons-tabs .blockons-tab.active {
 	background-color: #fff;
 	border-bottom: 1px solid #fff;
 	margin: 0 -1px -1px 0;
 }
 .blockons-tab-label {
+	color: inherit;
 }
 
 .blockons-tabs-innerblocks {
 	border: 1px solid rgb(0 0 0 / 20%);
 	padding: 1px 20px;
 	margin: 0 -1px 0 0;
+}
+
+.blockons-tabs.nobg .na {
+	border: 0 !important;
+	background: none !important;
+}
+
+/* -- Tabs Side Layout -- */
+.wp-block-blockons-tabs.side-layout {
+	display: flex;
+	align-items: flex-start;
+}
+.wp-block-blockons-tabs.side-layout .blockons-tabs {
+	flex-direction: column;
+	width: 250px;
+}
+.wp-block-blockons-tabs.side-layout .blockons-tab {
+	margin: 0 -1px -1px 0;
+	border-radius: 0 !important;
+	border: 1px solid rgb(0 0 0 /20%);
+}
+.wp-block-blockons-tabs.side-layout .blockons-tabs-innerblocks {
+	flex: 1;
 }
 
 @media only screen and (min-width: 768px) {

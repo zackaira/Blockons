@@ -43,9 +43,11 @@
 .block-list-appender button.blockons-new-button {
 	box-shadow: 0 0 0 1px rgb(0 0 0 / 20%);
 	margin: 6px;
+	padding: 32px;
 	width: 100%;
 	justify-content: center;
 	background-color: #f1f1f1;
+	font-size: 15px;
 }
 .block-list-appender button.blockons-new-button:hover {
 	box-shadow: 0 0 0 1px #2a7ebb;
