@@ -9,20 +9,33 @@
 .wp-block-blockons-tabs.top-layout .blockons-tab {
 	background-color: #ececec;
 	border-radius: 4px 4px 0 0;
-	position: relative;
-	border: 1px solid rgb(0 0 0 /20%);
 	border-bottom: 0;
 	margin: 0 -1px 0 0;
 	padding: 8px 16px;
+}
+.wp-block-blockons-tabs .blockons-tab.align-center {
 	text-align: center;
+}
+.wp-block-blockons-tabs .blockons-tab.align-left {
+	text-align: left;
+}
+.wp-block-blockons-tabs .blockons-tab.align-right {
+	text-align: right;
+}
+.blockons-tabs .blockons-tab {
+	border: 1px solid rgb(0 0 0 /20%);
+	position: relative;
+	z-index: 4;
 }
 .blockons-tabs.full .blockons-tab {
 	flex: 1;
 }
 .wp-block-blockons-tabs .blockons-tab.active {
 	background-color: #fff;
-	border-bottom: 1px solid #fff;
 	margin: 0 -1px -1px 0;
+}
+.wp-block-blockons-tabs.top-layout .blockons-tab.active {
+	border-bottom: 1px solid #fff;
 }
 .blockons-tab-label {
 	color: inherit;
@@ -34,7 +47,7 @@
 	margin: 0 -1px 0 0;
 }
 
-.blockons-tabs.nobg .na {
+.blockons-tabs.nobg .blockons-tab.na {
 	border: 0 !important;
 	background: none !important;
 }
@@ -51,7 +64,6 @@
 .wp-block-blockons-tabs.side-layout .blockons-tab {
 	margin: 0 -1px -1px 0;
 	border-radius: 0 !important;
-	border: 1px solid rgb(0 0 0 /20%);
 }
 .wp-block-blockons-tabs.side-layout .blockons-tabs-innerblocks {
 	flex: 1;

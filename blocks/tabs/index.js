@@ -21,5 +21,5 @@ const { name } = json;
  */
 registerBlockType(name, {
 	edit: Edit,
-	// save,
+	save,
 });

@@ -18,10 +18,22 @@
 .blockons-tab:hover .blockons-tab-controls {
 	opacity: 1;
 }
+.wp-block-blockons-tabs.side-layout .blockons-tab-controls {
+	bottom: -8px;
+	display: flex;
+	flex-direction: column;
+	right: -24px;
+}
+
 .blockons-tab-controls button.components-button {
 	padding: 6px;
 	font-weight: 700;
 	color: #494949;
+}
+.wp-block-blockons-tabs.side-layout
+	.blockons-tab-controls
+	button.components-button {
+	height: 20px;
 }
 .blockons-tab-controls button.components-button:not(:disabled):hover {
 	color: #b951c8;
@@ -54,12 +66,22 @@
 }
 .blockons-tabs .components-button.blockons-new-button {
 	background-color: #1e1e1e;
-	padding: 10px;
-	height: 32px;
+	padding: 8px;
+	height: 28px;
 	border-top: 1px solid #c2c2c2;
 	border-right: 1px solid #c2c2c2;
 	border-radius: 0 4px 0 0;
 	color: #fff;
 	font-size: 20px;
 	font-weight: 500;
+	line-height: 0;
+}
+.blockons-tabs.full .components-button.blockons-new-button {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	z-index: 4;
+	border-radius: 4px 0 0 0;
+	border-left: 1px solid #c2c2c2;
+	border-right: 0;
 }
