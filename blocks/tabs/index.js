@@ -15,11 +15,13 @@ import "./style.css";
 import "./tab.js";
 
 const { name } = json;
+import { tabsIcon as svg } from "../svgIcons";
 
 /**
  * Register the Block
  */
 registerBlockType(name, {
+	icon: svg,
 	edit: Edit,
 	save,
 });

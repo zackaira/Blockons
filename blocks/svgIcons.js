@@ -61,6 +61,34 @@ export const countDownTimerIcon = {
 	),
 };
 
+export const tabsIcon = {
+	src: (
+		<svg
+			width="100px"
+			height="100px"
+			viewBox="0 0 16 16"
+			version="1.1"
+			xmlns="http://www.w3.org/2000/svg"
+			fill="#af2dbf"
+			stroke="#af2dbf"
+			stroke-width="0.00016"
+		>
+			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g
+				id="SVGRepo_tracerCarrier"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			></g>
+			<g id="SVGRepo_iconCarrier">
+				<path
+					fill="#af2dbf"
+					d="M14 4v-2h-14v12h16v-10h-2zM10 3h3v1h-3v-1zM6 3h3v1h-3v-1zM15 13h-14v-10h4v2h10v8z"
+				></path>
+			</g>
+		</svg>
+	),
+};
+
 export const contentTogglerIcon = {
 	src: (
 		<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

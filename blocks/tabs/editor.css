@@ -81,7 +81,13 @@
 	bottom: 0;
 	right: 0;
 	z-index: 4;
-	border-radius: 4px 0 0 0;
-	border-left: 1px solid #c2c2c2;
-	border-right: 0;
+	border-radius: 4px;
+}
+.wp-block-blockons-tabs.side-layout
+	.blockons-tabs
+	.components-button.blockons-new-button {
+	position: absolute;
+	right: 0;
+	top: 100%;
+	border-radius: 4px;
 }

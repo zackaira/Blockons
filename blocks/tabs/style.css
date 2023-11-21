@@ -5,6 +5,8 @@
 .wp-block-blockons-tabs.top-layout .blockons-tabs {
 	display: flex;
 	align-items: flex-end;
+	position: relative;
+	z-index: 4;
 }
 .wp-block-blockons-tabs.top-layout .blockons-tab {
 	padding: 8px 16px;
@@ -56,9 +58,8 @@
 }
 
 /* -- Tab Design One -*/
-.wp-block-blockons-tabs.design-one .blockons-tabs {
-	position: relative;
-	z-index: 4;
+.wp-block-blockons-tabs.design-one .blockons-tabs.full {
+	padding: 0 1px 0 0;
 }
 .wp-block-blockons-tabs.design-one .blockons-tabs .blockons-tab {
 	box-shadow: 0 1px rgb(0 0 0 / 20%) inset, 0 -1px rgb(0 0 0 / 20%) inset,
@@ -75,8 +76,8 @@
 .wp-block-blockons-tabs.top-layout.design-one
 	.blockons-tabs
 	.blockons-tab.active {
-	box-shadow: 0 1px rgb(0 0 0 / 20%) inset, 0 0px #fff inset,
-		-1px 0 rgb(0 0 0 / 20%) inset, 1px 0 rgb(0 0 0 / 20%) inset;
+	box-shadow: 0 1px rgb(0 0 0 / 20%) inset, 0px -1px rgb(0 0 0 / 20%) inset,
+		-1px 0 #fff inset, 1px 0 rgb(0 0 0 / 20%) inset;
 }
 .wp-block-blockons-tabs.side-layout.design-one
 	.blockons-tabs
@@ -92,19 +93,11 @@
 .wp-block-blockons-tabs.design-two .blockons-tabs {
 	box-shadow: 0 0 #000, 0 3px #000, 0 0 #000, 0 0 #000;
 }
-.wp-block-blockons-tabs.design-two .blockons-tabs .blockons-tab {
-}
 .wp-block-blockons-tabs.design-two .blockons-tabs .blockons-tab.active {
 	background-color: #000;
 	color: #fff;
 }
-.wp-block-blockons-tabs.design-two .blockons-tabs-innerblocks {
-}
 /* -- Tab Design Three -*/
-.wp-block-blockons-tabs.design-three .blockons-tabs {
-}
-.wp-block-blockons-tabs.design-three .blockons-tabs .blockons-tab {
-}
 .wp-block-blockons-tabs.design-three .blockons-tabs .blockons-tab.active {
 	box-shadow: 0 0 #000, 0 -3px #000, 0 0 #000, 0 0 #000;
 	background-color: #f7f7f7;
