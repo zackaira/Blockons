@@ -13,7 +13,7 @@ const Save = ({ attributes }) => {
 			<div
 				className={`blockons-tabs ${
 					!attributes.tabsSideLayout && attributes.tabsJustified ? "full" : ""
-				} ${!attributes.tabHasBg ? "nobg" : ""}`}
+				}`}
 				{...(attributes.tabsSideLayout
 					? {
 							style: {

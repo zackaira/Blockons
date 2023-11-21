@@ -15,6 +15,10 @@
 			"type": "array",
 			"default": []
 		},
+		"tabDesign": {
+			"type": "string",
+			"default": "one"
+		},
 		"alignment": {
 			"type": "string",
 			"default": "center"
@@ -59,29 +63,41 @@
 			"type": "number",
 			"default": 20
 		},
-		"tabHasBg": {
-			"type": "boolean",
-			"default": true
-		},
-		"tabColor": {
+		"activeColor": {
 			"type": "string",
-			"default": "#ececec"
+			"default": "#FFF"
 		},
-		"bgTabColor": {
-			"type": "string",
-			"default": "#fff"
-		},
-		"tabFontColor": {
-			"type": "string",
-			"default": "#4f4f4f"
-		},
-		"activeTabFontColor": {
+		"activeFontColor": {
 			"type": "string",
 			"default": "#000"
 		},
-		"bgFontColor": {
+		"selectedColor": {
 			"type": "string",
-			"default": ""
+			"default": "#000"
+		},
+		"selectedFontColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"nonActiveColor": {
+			"type": "string",
+			"default": "#ececec"
+		},
+		"nonActiveFontColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"contentColor": {
+			"type": "string",
+			"default": "inherit"
+		},
+		"otherContentColor": {
+			"type": "string",
+			"default": "#f7f7f7"
+		},
+		"contentFontColor": {
+			"type": "string",
+			"default": "inherit"
 		}
 	},
 	"editorScript": "file:./index.js",

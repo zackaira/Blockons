@@ -13,6 +13,7 @@ import {
 import {
 	PanelBody,
 	ToggleControl,
+	SelectControl,
 	RangeControl,
 	Button,
 } from "@wordpress/components";
@@ -26,23 +27,27 @@ const Edit = (props) => {
 		isSelected,
 		attributes: {
 			tabs,
+			tabDesign,
 			alignment,
 			tabsSideLayout,
 			contentMinHeight,
 			tabWidth,
 			tabMinWidth,
 			tabsJustified,
-			tabHasBg,
-			tabColor,
-			bgTabColor,
 			tabVertPadding,
 			tabHorizPadding,
 			tabBorderRadius,
-			tabFontColor,
-			activeTabFontColor,
-			bgFontColor,
 			contentVertPadding,
 			contentHorizPadding,
+			activeColor,
+			activeFontColor,
+			selectedColor,
+			selectedFontColor,
+			nonActiveColor,
+			nonActiveFontColor,
+			contentColor,
+			otherContentColor,
+			contentFontColor,
 		},
 		setAttributes,
 		clientId,
@@ -57,7 +62,9 @@ const Edit = (props) => {
 	} = useDispatch(blockEditorStore);
 
 	const blockProps = useBlockProps({
-		className: `${tabsSideLayout ? "side-layout" : "top-layout"}`,
+		className: `${
+			tabsSideLayout ? "side-layout" : "top-layout"
+		} design-${tabDesign}`,
 	});
 
 	const innerBlocks = useSelect(
@@ -88,7 +95,9 @@ const Edit = (props) => {
 			selectBlock(innerBlocks[currentIndex].clientId);
 			setAttributes({ tabs: innerBlocks });
 		}
-		// tabChange();
+		setTimeout(() => {
+			tabChange();
+		}, 300); // Temp Fix
 	};
 
 	const selectTab = (index) => {
@@ -127,8 +136,6 @@ const Edit = (props) => {
 		if (selectedTab) {
 			const selectedClass = "content-" + selectedTab.id.slice(4);
 
-			console.log("tab changed", selectedClass);
-
 			if (innerBlocks.length > 1) {
 				const allContent = document.querySelectorAll(".blockons-content");
 				if (allContent) {
@@ -161,6 +168,28 @@ const Edit = (props) => {
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody title={__("Tabs Settings", "blockons")} initialOpen={true}>
+						<SelectControl
+							label={__("Tab Design", "blockons")}
+							value={tabDesign}
+							options={[
+								{ label: __("Normal Tab Design", "blockons"), value: "one" },
+								{
+									label: __("Underlined & Selected", "blockons"),
+									value: "two",
+								},
+								{
+									label: __("Top Line & Subtle Background", "blockons"),
+									value: "three",
+								},
+							]}
+							onChange={(newValue) =>
+								setAttributes({
+									tabDesign: newValue === undefined ? "one" : newValue,
+								})
+							}
+						/>
+						<div className="blockons-divider"></div>
+
 						<ToggleControl
 							label={__("Switch to side tab layout", "blockons")}
 							checked={tabsSideLayout}
@@ -261,7 +290,7 @@ const Edit = (props) => {
 							</>
 						)}
 
-						{!tabsSideLayout && (
+						{!tabsSideLayout && (tabDesign === "one" || tabDesign === "two") && (
 							<>
 								<RangeControl
 									label={__("Tab Border Radius", "blockons")}
@@ -305,78 +334,122 @@ const Edit = (props) => {
 						/>
 						<div className="blockons-divider"></div>
 
-						{innerBlocks.length > 1 && (
+						{tabDesign === "one" && (
+							<BlockonsColorpicker
+								label={__("Tab Active Color", "blockons")}
+								value={activeColor}
+								onChange={(colorValue) =>
+									setAttributes({
+										activeColor: colorValue,
+									})
+								}
+								paletteColors={colorPickerPalette}
+							/>
+						)}
+
+						{(tabDesign === "two" || tabDesign === "three") && (
+							<BlockonsColorpicker
+								label={__("Tab Active Color", "blockons")}
+								value={selectedColor}
+								onChange={(colorValue) =>
+									setAttributes({
+										selectedColor: colorValue,
+									})
+								}
+								paletteColors={colorPickerPalette}
+							/>
+						)}
+
+						{(tabDesign === "one" || tabDesign === "three") && (
+							<BlockonsColorpicker
+								label={__("Active Font Color", "blockons")}
+								value={activeFontColor}
+								onChange={(colorValue) =>
+									setAttributes({
+										activeFontColor: colorValue,
+									})
+								}
+								paletteColors={colorPickerPalette}
+							/>
+						)}
+
+						{tabDesign === "two" && (
+							<BlockonsColorpicker
+								label={__("Active Font Color", "blockons")}
+								value={selectedFontColor}
+								onChange={(colorValue) =>
+									setAttributes({
+										selectedFontColor: colorValue,
+									})
+								}
+								paletteColors={colorPickerPalette}
+							/>
+						)}
+						<div className="blockons-divider"></div>
+
+						{tabDesign === "one" && (
 							<>
-								<ToggleControl
-									label={__("Tab Has Background Color", "blockons")}
-									checked={tabHasBg}
-									onChange={(newValue) => {
-										setAttributes({ tabHasBg: newValue });
-									}}
-								/>
-								{tabHasBg && (
-									<BlockonsColorpicker
-										label={__("Tab Color", "blockons")}
-										value={tabColor}
-										onChange={(colorValue) => {
-											setAttributes({
-												tabColor:
-													colorValue === undefined ? "#ececec" : colorValue,
-											});
-										}}
-										paletteColors={colorPickerPalette}
-									/>
-								)}
 								<BlockonsColorpicker
-									label={__("Tab Font Color", "blockons")}
-									value={tabFontColor}
-									onChange={(colorValue) => {
+									label={__("Tab Non-Active Color", "blockons")}
+									value={nonActiveColor}
+									onChange={(colorValue) =>
 										setAttributes({
-											tabFontColor:
-												colorValue === undefined ? "#4f4f4f" : colorValue,
-										});
-									}}
+											nonActiveColor: colorValue,
+										})
+									}
+									paletteColors={colorPickerPalette}
+								/>
+								<BlockonsColorpicker
+									label={__("Non-Active Font Color", "blockons")}
+									value={nonActiveFontColor}
+									onChange={(colorValue) =>
+										setAttributes({
+											nonActiveFontColor: colorValue,
+										})
+									}
 									paletteColors={colorPickerPalette}
 								/>
 								<div className="blockons-divider"></div>
 							</>
 						)}
-						<BlockonsColorpicker
-							label={__("Active Tab & Content Background Color", "blockons")}
-							value={bgTabColor}
-							onChange={(colorValue) => {
-								setAttributes({
-									bgTabColor: colorValue === undefined ? "#FFF" : colorValue,
-								});
-							}}
-							paletteColors={colorPickerPalette}
-						/>
-						<BlockonsColorpicker
-							label={__("Active Tab Font Color", "blockons")}
-							value={activeTabFontColor}
-							onChange={(colorValue) => {
-								setAttributes({
-									activeTabFontColor:
-										colorValue === undefined ? "#000" : colorValue,
-								});
-							}}
-							paletteColors={colorPickerPalette}
-						/>
-						<div className="blockons-divider"></div>
+
+						{(tabDesign === "one" || tabDesign === "two") && (
+							<BlockonsColorpicker
+								label={__("Content Background Color", "blockons")}
+								value={contentColor}
+								onChange={(colorValue) =>
+									setAttributes({
+										contentColor:
+											colorValue === undefined ? "inherit" : colorValue,
+									})
+								}
+								paletteColors={colorPickerPalette}
+							/>
+						)}
+						{tabDesign === "three" && (
+							<BlockonsColorpicker
+								label={__("Content Background Color", "blockons")}
+								value={otherContentColor}
+								onChange={(colorValue) =>
+									setAttributes({
+										otherContentColor:
+											colorValue === undefined ? "#f7f7f7" : colorValue,
+									})
+								}
+								paletteColors={colorPickerPalette}
+							/>
+						)}
 
 						<BlockonsColorpicker
 							label={__("Content Font Color", "blockons")}
-							value={bgFontColor}
-							onChange={(colorValue) => {
+							value={contentFontColor}
+							onChange={(colorValue) =>
 								setAttributes({
-									bgFontColor: colorValue === undefined ? "" : colorValue,
-								});
-							}}
+									contentFontColor:
+										colorValue === undefined ? "inherit" : colorValue,
+								})
+							}
 							paletteColors={colorPickerPalette}
-							help={__(
-								"This will add a font color for all content, but depending on the inner blocks, you might need to adjust the font colors within the blocks added.",
-								"blockons"
-							)}
 						/>
 					</PanelBody>
 				</InspectorControls>
@@ -397,14 +470,25 @@ const Edit = (props) => {
 			<div
 				className={`blockons-tabs ${
 					!tabsSideLayout && tabsJustified ? "full" : ""
-				} ${!tabHasBg ? "nobg" : ""}`}
-				{...(tabsSideLayout
-					? {
-							style: {
+				}`}
+				style={{
+					...(tabsSideLayout
+						? {
 								width: tabWidth,
-							},
-					  }
-					: {})}
+						  }
+						: {}),
+					...(tabDesign === "two"
+						? {
+								...(tabsSideLayout
+									? {
+											boxShadow: `0 0 #000, 0 0 #000, 0 0 #000, ${selectedColor} 4px 0`,
+									  }
+									: {
+											boxShadow: `0 0 #000, 0 3px ${selectedColor}, 0 0 #000, 0 0 #000`,
+									  }),
+						  }
+						: {}),
+				}}
 			>
 				{tabs.map((block, index) => (
 					<div
@@ -415,33 +499,69 @@ const Edit = (props) => {
 						id={`tab-${block.clientId}`}
 						onClick={() => selectTab(index)}
 						style={{
-							backgroundColor: index === activeTab ? bgTabColor : tabColor,
-							color: index === activeTab ? activeTabFontColor : tabFontColor,
 							padding: `${tabVertPadding}px ${tabHorizPadding}px`,
-							...(tabsSideLayout
+							...(!tabsSideLayout
 								? {
-										...(index === activeTab
-											? { borderRightColor: bgTabColor }
-											: {}),
-										...(index === activeTab ? { marginRight: "-1px" } : {}),
-								  }
-								: {
-										borderBottomColor:
-											index === activeTab ? bgTabColor : tabColor,
-										borderRadius: `${tabBorderRadius}px ${tabBorderRadius}px 0 0`,
 										minWidth: tabMinWidth,
-								  }),
+								  }
+								: {}),
+							...(tabDesign === "one"
+								? {
+										backgroundColor:
+											index === activeTab ? activeColor : nonActiveColor,
+										color:
+											index === activeTab
+												? activeFontColor
+												: nonActiveFontColor,
+										...(!tabsSideLayout
+											? {
+													borderRadius: `${tabBorderRadius}px ${tabBorderRadius}px 0 0`,
+											  }
+											: {}),
+								  }
+								: {}),
+							...(tabDesign === "two"
+								? {
+										backgroundColor:
+											index === activeTab ? selectedColor : "transparent",
+										color: index === activeTab ? selectedFontColor : "inherit",
+										...(!tabsSideLayout
+											? {
+													borderRadius: `${tabBorderRadius}px ${tabBorderRadius}px 0 0`,
+											  }
+											: {}),
+								  }
+								: {}),
+							...(tabDesign === "three"
+								? {
+										backgroundColor:
+											index === activeTab ? otherContentColor : "transparent",
+										color: index === activeTab ? activeFontColor : "inherit",
+										...(tabsSideLayout
+											? {
+													boxShadow:
+														index === activeTab
+															? `#000 0 0, #000 0 0, #000 0 0, ${selectedColor} 3px 0 inset`
+															: "none",
+											  }
+											: {
+													boxShadow:
+														index === activeTab
+															? `0 0 #000, 0 -3px ${selectedColor}, 0 0 #000, 0 0 #000`
+															: "none",
+											  }),
+								  }
+								: {}),
 						}}
 					>
 						<RichText
 							tagName="div"
-							// value={block.attributes.tabLabel}
-							value={block.clientId}
+							value={block.attributes.tabLabel}
 							className="blockons-tab-label"
 							onChange={(newTitle) =>
 								updateBlockAttributes(block.clientId, { tabLabel: newTitle })
 							}
-							// allowedFormats={["core/bold", "core/italic"]}
+							allowedFormats={["core/bold", "core/italic"]}
 							placeholder={__("Tab Title", "blockons")}
 							disableLineBreaks
 						/>
@@ -477,10 +597,20 @@ const Edit = (props) => {
 					tabs.length > 0 ? "blockons-nbb" : ""
 				}`}
 				style={{
-					backgroundColor: bgTabColor,
-					color: bgFontColor,
 					padding: `${contentVertPadding}px ${contentHorizPadding}px`,
 					...(tabs.length > 0 ? { minHeight: contentMinHeight } : {}),
+					...(tabDesign === "three"
+						? {
+								backgroundColor: otherContentColor,
+						  }
+						: {
+								backgroundColor: contentColor,
+						  }),
+					...(contentFontColor
+						? {
+								color: contentFontColor,
+						  }
+						: {}),
 				}}
 			>
 				<InnerBlocks
