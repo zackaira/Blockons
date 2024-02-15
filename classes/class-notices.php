@@ -85,9 +85,9 @@ class Blockons_Notices {
 		$settings = array();
 		
 		$settings['new_blocks_added'] = array(
-			'id'    => 'newblocks_004', // Increment this when adding new blocks
+			'id'    => 'newblocks_005', // Increment this when adding new blocks
 			'type'  => 'info', // info | error | warning | success
-			'title' => __( 'A New Count Down Timer block has been added to the Blockons plugin', 'blockons' ),
+			'title' => __( 'A New Tabs block has been added to the Blockons plugin', 'blockons' ),
 			'text'  => __( 'To enable the new blocks and start using them in the WordPress editor:', 'blockons' ),
 			'link'  => admin_url( 'options-general.php?page=blockons-settings' ),
 			'link_text' => __( 'Go to the Blockons settings', 'blockons' ),

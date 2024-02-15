@@ -36,7 +36,7 @@ export const blockListSettings = {
 			"blockons"
 		),
 		pluginSpecific: false,
-		isNew: __("NEW", "blockons"),
+		isNew: false,
 	},
 	icon_list: {
 		desc: __("Visually, more attractive list items with icons", "blockons"),
@@ -91,6 +91,11 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: __("NEW", "blockons"),
 	},
+	// table_of_contents: {
+	// 	desc: __("Display a neat table of contents", "blockons"),
+	// 	pluginSpecific: false,
+	// 	isNew: __("NEW", "blockons"),
+	// },
 	testimonials: {
 		desc: __("Display client testimonials in a slider or carousel", "blockons"),
 		pluginSpecific: false,

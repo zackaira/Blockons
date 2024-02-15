@@ -1,4 +1,5 @@
 import React from "react";
+import { __ } from "@wordpress/i18n";
 import InputToggleSwitch from "./inputs/InputToggleSwitch";
 import InputSelect from "./inputs/InputSelect";
 import InputText from "./inputs/InputText";

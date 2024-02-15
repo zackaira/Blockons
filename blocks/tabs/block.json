@@ -11,6 +11,9 @@
 		"html": false
 	},
 	"attributes": {
+		"uniqueId": {
+			"type": "string"
+		},
 		"tabs": {
 			"type": "array",
 			"default": []
@@ -57,33 +60,33 @@
 		},
 		"contentVertPadding": {
 			"type": "number",
-			"default": 1
+			"default": 20
 		},
 		"contentHorizPadding": {
 			"type": "number",
 			"default": 20
 		},
-		"activeColor": {
-			"type": "string",
-			"default": "#FFF"
-		},
-		"activeFontColor": {
-			"type": "string",
-			"default": "#000"
-		},
-		"selectedColor": {
-			"type": "string",
-			"default": "#000"
-		},
-		"selectedFontColor": {
-			"type": "string",
-			"default": "#FFF"
-		},
-		"nonActiveColor": {
+		"tabColor": {
 			"type": "string",
 			"default": "#ececec"
 		},
-		"nonActiveFontColor": {
+		"tabFontColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"tabActiveColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"tabSelectedColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"tabSelectedFontColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"tabActiveFontColor": {
 			"type": "string",
 			"default": "#000"
 		},
@@ -91,7 +94,7 @@
 			"type": "string",
 			"default": "inherit"
 		},
-		"otherContentColor": {
+		"contentOtherColor": {
 			"type": "string",
 			"default": "#f7f7f7"
 		},
@@ -102,6 +105,6 @@
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"script": "file:./js-tabs.js",
+	"viewScript": "file:./js-tabs.js",
 	"style": ["file:./style-index.css", "blockons-fontawesome"]
 }

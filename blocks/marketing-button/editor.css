@@ -27,3 +27,10 @@
 	display: flex;
 	align-items: center;
 }
+.blockons-editor-popup.marketing-button span.blockons-fontawesome {
+	margin: 5px;
+	display: inline-block;
+	width: 27px;
+	height: 20px;
+	text-align: center;
+}

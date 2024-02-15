@@ -76,17 +76,19 @@ const Save = ({ attributes }) => {
 								<MarketingButtonIcon />
 							)}
 						</div>
-						<div className="blockons-marketing-button-text-wrap">
-							<RichText.Content
-								tagName="p"
-								value={attributes.subText}
-								className="blockons-marketing-button-text"
-								style={{
-									color: attributes.textColor,
-									fontSize: attributes.textSize,
-								}}
-							/>
-						</div>
+						{attributes.showSubText && (
+							<div className="blockons-marketing-button-text-wrap">
+								<RichText.Content
+									tagName="p"
+									value={attributes.subText}
+									className="blockons-marketing-button-text"
+									style={{
+										color: attributes.textColor,
+										fontSize: attributes.textSize,
+									}}
+								/>
+							</div>
+						)}
 					</div>
 					{attributes.hasIcon && attributes.iconPosition === "four" && (
 						<MarketingButtonIcon />

@@ -2,6 +2,11 @@
  * Note that these styles are loaded *before* editor styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
+.wp-block-blockons-tabs.load-content
+	.blockons-tabs-innerblocks
+	.wp-block-blockons-tab {
+	display: none;
+}
 .wp-block-blockons-tabs.top-layout .blockons-tabs {
 	display: flex;
 	align-items: flex-end;
@@ -23,6 +28,7 @@
 .blockons-tabs .blockons-tab {
 	position: relative;
 	z-index: 4;
+	cursor: pointer;
 }
 .blockons-tabs.full .blockons-tab {
 	flex: 1;
@@ -33,8 +39,11 @@
 
 .blockons-tabs-innerblocks {
 	padding: 1px 20px;
+	min-height: 100px;
 }
-
+.content-hide {
+	display: none;
+}
 .blockons-tabs.nobg .blockons-tab.na {
 	border: 0 !important;
 	background: none !important;
@@ -57,6 +66,16 @@
 	flex: 1;
 }
 
+:root {
+	--tab-color: #ececec;
+	--tab-font-color: "inherit";
+	--tab-active-color: #fff;
+	--tab-active-font-color: "inherit";
+	--tab-selected-color: #000;
+	--tab-selected-font-color: #fff;
+	--content-other-color: #f7f7f7;
+}
+
 /* -- Tab Design One -*/
 .wp-block-blockons-tabs.design-one .blockons-tabs.full {
 	padding: 0 1px 0 0;
@@ -64,25 +83,27 @@
 .wp-block-blockons-tabs.design-one .blockons-tabs .blockons-tab {
 	box-shadow: 0 1px rgb(0 0 0 / 20%) inset, 0 -1px rgb(0 0 0 / 20%) inset,
 		-1px 0 rgb(0 0 0 / 20%) inset, 1px 0 rgb(0 0 0 / 20%) inset;
-	background-color: #ececec;
+	background-color: var(--tab-color);
+	color: var(--tab-font-color);
 }
 .wp-block-blockons-tabs.top-layout.design-one .blockons-tabs .blockons-tab {
 	border-radius: 6px 6px 0 0;
 	margin: 0 -1px -1px 0px;
 }
 .wp-block-blockons-tabs.design-one .blockons-tabs .blockons-tab.active {
-	background-color: #fff;
+	background-color: var(--tab-active-color);
+	color: var(--tab-active-font-color);
 }
 .wp-block-blockons-tabs.top-layout.design-one
 	.blockons-tabs
 	.blockons-tab.active {
-	box-shadow: 0 1px rgb(0 0 0 / 20%) inset, 0px -1px rgb(0 0 0 / 20%) inset,
-		-1px 0 #fff inset, 1px 0 rgb(0 0 0 / 20%) inset;
+	box-shadow: -1px 1px rgb(0 0 0 / 20%) inset, 0 0 rgb(0 0 0 / 20%) inset,
+		0 0 #fff inset, 1px 0 rgb(0 0 0 / 20%) inset;
 }
 .wp-block-blockons-tabs.side-layout.design-one
 	.blockons-tabs
 	.blockons-tab.active {
-	box-shadow: 0 1px rgb(0 0 0 / 20%) inset, 0 0px rgb(0 0 0 / 20%) inset,
+	box-shadow: 0 1px rgb(0 0 0 / 20%) inset, 0 -1px rgb(0 0 0 / 20%) inset,
 		-1px 0 #fff inset, 1px 0 rgb(0 0 0 / 20%) inset;
 }
 .wp-block-blockons-tabs.design-one .blockons-tabs-innerblocks {
@@ -90,22 +111,44 @@
 		-1px 0 rgb(0 0 0 / 20%) inset, 1px 0 rgb(0 0 0 / 20%) inset;
 }
 /* -- Tab Design Two -*/
+.wp-block-blockons-tabs.design-two .blockons-tabs .blockons-tab {
+	color: var(--tab-font-color);
+}
 .wp-block-blockons-tabs.design-two .blockons-tabs {
-	box-shadow: 0 0 #000, 0 3px #000, 0 0 #000, 0 0 #000;
+	box-shadow: 0 0 #000, 0 3px var(--tab-selected-color), 0 0 #000, 0 0 #000;
 }
 .wp-block-blockons-tabs.design-two .blockons-tabs .blockons-tab.active {
-	background-color: #000;
-	color: #fff;
+	background-color: var(--tab-selected-color);
+	color: var(--tab-selected-font-color);
+	margin: 0 0 -1px 0;
 }
 /* -- Tab Design Three -*/
+.wp-block-blockons-tabs.design-three .blockons-tabs .blockons-tab {
+	color: var(--tab-font-color);
+}
 .wp-block-blockons-tabs.design-three .blockons-tabs .blockons-tab.active {
-	box-shadow: 0 0 #000, 0 -3px #000, 0 0 #000, 0 0 #000;
-	background-color: #f7f7f7;
-	color: #000;
+	box-shadow: 0 0 #000, 0 -3px var(--tab-selected-color), 0 0 #000, 0 0 #000;
+	background-color: var(--content-other-color);
+	color: var(--tab-active-font-color);
+}
+.wp-block-blockons-tabs.design-three.side-layout
+	.blockons-tabs
+	.blockons-tab.active {
+	box-shadow: #000 0 0, #000 0 0, #000 0 0,
+		var(--tab-selected-color) 3px 0 inset;
 }
 .wp-block-blockons-tabs.design-three .blockons-tabs-innerblocks {
-	background-color: #f7f7f7;
+	background-color: var(--content-other-color);
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
+	.wp-block.wp-block-blockons-tabs .blockons-tabs {
+		flex-direction: column;
+	}
+	.wp-block.wp-block-blockons-tabs .blockons-tabs .blockons-tab {
+		width: 100%;
+		margin: 0 0 -1px 0;
+	}
+	.wp-block.wp-block-blockons-tabs .blockons-tabs-innerblocks {
+	}
 }

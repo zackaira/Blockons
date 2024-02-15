@@ -17,6 +17,7 @@ import {
 	RangeControl,
 	Button,
 } from "@wordpress/components";
+import { v4 as uuidv4 } from "uuid";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import { colorPickerPalette } from "../block-global";
 
@@ -26,6 +27,7 @@ const Edit = (props) => {
 	const {
 		isSelected,
 		attributes: {
+			uniqueId,
 			tabs,
 			tabDesign,
 			alignment,
@@ -39,14 +41,14 @@ const Edit = (props) => {
 			tabBorderRadius,
 			contentVertPadding,
 			contentHorizPadding,
-			activeColor,
-			activeFontColor,
-			selectedColor,
-			selectedFontColor,
-			nonActiveColor,
-			nonActiveFontColor,
+			tabColor,
+			tabFontColor,
+			tabActiveColor,
+			tabSelectedColor,
+			tabSelectedFontColor,
+			tabActiveFontColor,
 			contentColor,
-			otherContentColor,
+			contentOtherColor,
 			contentFontColor,
 		},
 		setAttributes,
@@ -64,13 +66,19 @@ const Edit = (props) => {
 	const blockProps = useBlockProps({
 		className: `${
 			tabsSideLayout ? "side-layout" : "top-layout"
-		} design-${tabDesign}`,
+		} design-${tabDesign} load-content`,
 	});
 
 	const innerBlocks = useSelect(
 		(select) => select(blockEditorStore).getBlock(clientId).innerBlocks,
 		[clientId]
 	);
+
+	useEffect(() => {
+		setAttributes({
+			uniqueId: uuidv4(),
+		});
+	}, []);
 
 	useEffect(() => {
 		if (innerBlocks.length && activeTab >= innerBlocks.length) {
@@ -131,40 +139,48 @@ const Edit = (props) => {
 	};
 
 	function tabChange() {
-		const selectedTab = document.querySelector(".blockons-tab.active");
+		const tabBlocks = document.querySelectorAll(".wp-block-blockons-tabs");
 
-		if (selectedTab) {
-			const selectedClass = "content-" + selectedTab.id.slice(4);
+		if (tabBlocks) {
+			tabBlocks.forEach((block) => {
+				const selectedTab = block.querySelector(".blockons-tab.active");
 
-			if (innerBlocks.length > 1) {
-				const allContent = document.querySelectorAll(".blockons-content");
-				if (allContent) {
-					allContent.forEach((content) => {
-						content.style.display = "none";
-					});
-				}
-				const selectedContent = document.querySelector(`.${selectedClass}`);
-				if (selectedContent) {
-					selectedContent.style.display = "block";
-				} else {
-					const firstContent = document.querySelector(".blockons-content");
-					if (firstContent) {
-						firstContent.style.display = "block";
+				if (selectedTab) {
+					const selectedClass = "content-" + selectedTab.id.slice(4);
+
+					if (innerBlocks.length > 1) {
+						const allContent = block.querySelectorAll(".blockons-content");
+						if (allContent) {
+							allContent.forEach((content) => {
+								content.style.display = "none";
+							});
+						}
+						const selectedContent = block.querySelector(`.${selectedClass}`);
+						if (selectedContent) {
+							selectedContent.style.display = "block";
+						} else {
+							const firstContent = block.querySelector(".blockons-content");
+							if (firstContent) {
+								firstContent.style.display = "block";
+							}
+						}
+					} else {
+						const allContent =
+							block.getElementsByClassName(".blockons-content");
+
+						if (allContent) {
+							for (const content of allContent) {
+								content.style.display = "block";
+							}
+						}
 					}
 				}
-			} else {
-				const allContent = document.querySelectorAll(".blockons-content");
-				if (allContent) {
-					allContent.forEach((content) => {
-						content.style.display = "block";
-					});
-				}
-			}
+			});
 		}
 	}
 
 	return (
-		<div {...blockProps}>
+		<div {...blockProps} id={uniqueId}>
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody title={__("Tabs Settings", "blockons")} initialOpen={true}>
@@ -314,7 +330,7 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({
 									contentVertPadding:
-										newValue === undefined ? 8 : parseInt(newValue),
+										newValue === undefined ? 20 : parseInt(newValue),
 								})
 							}
 							min={1}
@@ -326,94 +342,94 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({
 									contentHorizPadding:
-										newValue === undefined ? 8 : parseInt(newValue),
+										newValue === undefined ? 20 : parseInt(newValue),
 								})
 							}
-							min={2}
+							min={1}
 							max={300}
 						/>
 						<div className="blockons-divider"></div>
 
 						{tabDesign === "one" && (
 							<BlockonsColorpicker
-								label={__("Tab Active Color", "blockons")}
-								value={activeColor}
+								label={__("Tab Color", "blockons")}
+								value={tabColor}
 								onChange={(colorValue) =>
 									setAttributes({
-										activeColor: colorValue,
+										tabColor: colorValue === undefined ? "#ececec" : colorValue,
 									})
 								}
 								paletteColors={colorPickerPalette}
 							/>
 						)}
 
-						{(tabDesign === "two" || tabDesign === "three") && (
-							<BlockonsColorpicker
-								label={__("Tab Active Color", "blockons")}
-								value={selectedColor}
-								onChange={(colorValue) =>
-									setAttributes({
-										selectedColor: colorValue,
-									})
-								}
-								paletteColors={colorPickerPalette}
-							/>
-						)}
-
-						{(tabDesign === "one" || tabDesign === "three") && (
-							<BlockonsColorpicker
-								label={__("Active Font Color", "blockons")}
-								value={activeFontColor}
-								onChange={(colorValue) =>
-									setAttributes({
-										activeFontColor: colorValue,
-									})
-								}
-								paletteColors={colorPickerPalette}
-							/>
-						)}
-
-						{tabDesign === "two" && (
-							<BlockonsColorpicker
-								label={__("Active Font Color", "blockons")}
-								value={selectedFontColor}
-								onChange={(colorValue) =>
-									setAttributes({
-										selectedFontColor: colorValue,
-									})
-								}
-								paletteColors={colorPickerPalette}
-							/>
-						)}
+						<BlockonsColorpicker
+							label={__("Tab Font Color", "blockons")}
+							value={tabFontColor}
+							onChange={(colorValue) =>
+								setAttributes({
+									tabFontColor: colorValue,
+								})
+							}
+							paletteColors={colorPickerPalette}
+						/>
 						<div className="blockons-divider"></div>
 
 						{tabDesign === "one" && (
-							<>
-								<BlockonsColorpicker
-									label={__("Tab Non-Active Color", "blockons")}
-									value={nonActiveColor}
-									onChange={(colorValue) =>
-										setAttributes({
-											nonActiveColor: colorValue,
-										})
-									}
-									paletteColors={colorPickerPalette}
-								/>
-								<BlockonsColorpicker
-									label={__("Non-Active Font Color", "blockons")}
-									value={nonActiveFontColor}
-									onChange={(colorValue) =>
-										setAttributes({
-											nonActiveFontColor: colorValue,
-										})
-									}
-									paletteColors={colorPickerPalette}
-								/>
-								<div className="blockons-divider"></div>
-							</>
+							<BlockonsColorpicker
+								label={__("Tab Active Color", "blockons")}
+								value={tabActiveColor}
+								onChange={(colorValue) =>
+									setAttributes({
+										tabActiveColor:
+											colorValue === undefined ? "#FFF" : colorValue,
+									})
+								}
+								paletteColors={colorPickerPalette}
+							/>
+						)}
+						{tabDesign !== "one" && (
+							<BlockonsColorpicker
+								label={__("Tab Active Color", "blockons")}
+								value={tabSelectedColor}
+								onChange={(colorValue) =>
+									setAttributes({
+										tabSelectedColor:
+											colorValue === undefined ? "#000" : colorValue,
+									})
+								}
+								paletteColors={colorPickerPalette}
+							/>
 						)}
 
-						{(tabDesign === "one" || tabDesign === "two") && (
+						{tabDesign !== "two" && (
+							<BlockonsColorpicker
+								label={__("Tab Active Font Color", "blockons")}
+								value={tabActiveFontColor}
+								onChange={(colorValue) =>
+									setAttributes({
+										tabActiveFontColor: colorValue,
+									})
+								}
+								paletteColors={colorPickerPalette}
+							/>
+						)}
+						{tabDesign === "two" && (
+							<BlockonsColorpicker
+								label={__("Tab Active Font Color", "blockons")}
+								value={tabSelectedFontColor}
+								onChange={(colorValue) =>
+									setAttributes({
+										tabSelectedFontColor: colorValue,
+									})
+								}
+								paletteColors={colorPickerPalette}
+							/>
+						)}
+
+						<div className="blockons-divider"></div>
+
+						{tabDesign !== "three" && (
 							<BlockonsColorpicker
 								label={__("Content Background Color", "blockons")}
 								value={contentColor}
@@ -429,10 +445,10 @@ const Edit = (props) => {
 						{tabDesign === "three" && (
 							<BlockonsColorpicker
 								label={__("Content Background Color", "blockons")}
-								value={otherContentColor}
+								value={contentOtherColor}
 								onChange={(colorValue) =>
 									setAttributes({
-										otherContentColor:
+										contentOtherColor:
 											colorValue === undefined ? "#f7f7f7" : colorValue,
 									})
 								}
@@ -481,10 +497,10 @@ const Edit = (props) => {
 						? {
 								...(tabsSideLayout
 									? {
-											boxShadow: `0 0 #000, 0 0 #000, 0 0 #000, ${selectedColor} 4px 0`,
+											boxShadow: `#000 0px 0px, #000 0px 0px, #000 0px 0px, ${tabSelectedColor} -4px 0px inset`,
 									  }
 									: {
-											boxShadow: `0 0 #000, 0 3px ${selectedColor}, 0 0 #000, 0 0 #000`,
+											boxShadow: `0 0 #000, 0 3px ${tabSelectedColor}, 0 0 #000, 0 0 #000`,
 									  }),
 						  }
 						: {}),
@@ -507,12 +523,10 @@ const Edit = (props) => {
 								: {}),
 							...(tabDesign === "one"
 								? {
-										backgroundColor:
-											index === activeTab ? activeColor : nonActiveColor,
-										color:
-											index === activeTab
-												? activeFontColor
-												: nonActiveFontColor,
+										"--tab-color": tabColor,
+										"--tab-font-color": tabFontColor,
+										"--tab-active-color": tabActiveColor,
+										"--tab-active-font-color": tabActiveFontColor,
 										...(!tabsSideLayout
 											? {
 													borderRadius: `${tabBorderRadius}px ${tabBorderRadius}px 0 0`,
@@ -522,9 +536,10 @@ const Edit = (props) => {
 								: {}),
 							...(tabDesign === "two"
 								? {
-										backgroundColor:
-											index === activeTab ? selectedColor : "transparent",
-										color: index === activeTab ? selectedFontColor : "inherit",
+										"--tab-color": "transparent",
+										"--tab-font-color": tabFontColor,
+										"--tab-selected-color": tabSelectedColor,
+										"--tab-selected-font-color": tabSelectedFontColor,
 										...(!tabsSideLayout
 											? {
 													borderRadius: `${tabBorderRadius}px ${tabBorderRadius}px 0 0`,
@@ -534,22 +549,11 @@ const Edit = (props) => {
 								: {}),
 							...(tabDesign === "three"
 								? {
-										backgroundColor:
-											index === activeTab ? otherContentColor : "transparent",
-										color: index === activeTab ? activeFontColor : "inherit",
-										...(tabsSideLayout
-											? {
-													boxShadow:
-														index === activeTab
-															? `#000 0 0, #000 0 0, #000 0 0, ${selectedColor} 3px 0 inset`
-															: "none",
-											  }
-											: {
-													boxShadow:
-														index === activeTab
-															? `0 0 #000, 0 -3px ${selectedColor}, 0 0 #000, 0 0 #000`
-															: "none",
-											  }),
+										"--tab-color": "transparent",
+										"--tab-font-color": tabFontColor,
+										"--content-other-color": contentOtherColor,
+										"--tab-active-font-color": tabActiveFontColor,
+										"--tab-selected-color": tabSelectedColor,
 								  }
 								: {}),
 						}}
@@ -601,7 +605,7 @@ const Edit = (props) => {
 					...(tabs.length > 0 ? { minHeight: contentMinHeight } : {}),
 					...(tabDesign === "three"
 						? {
-								backgroundColor: otherContentColor,
+								backgroundColor: contentOtherColor,
 						  }
 						: {
 								backgroundColor: contentColor,

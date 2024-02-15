@@ -4,17 +4,42 @@
 document.addEventListener("DOMContentLoaded", () => {
 	const tabBlocks = document.querySelectorAll(".wp-block-blockons-tabs");
 
-	console.log(tabBlocks);
+	if (tabBlocks) {
+		tabBlocks.forEach((block) => {
+			block.classList.remove("load-content"); // Loading class
+			const tabs = block.querySelectorAll(".blockons-tab");
+			const contents = block.querySelectorAll(".blockons-content");
 
-	tabBlocks.forEach((tabBlock, i) => {
-		const activeTabId = tabBlock.querySelectorAll(".blockons-tab.active").id;
+			// Hide all content blocks
+			contents.forEach((content) => {
+				content.style.display = "none";
+			});
 
-		console.log(activeTabId);
+			// Show the content of the first tab by default
+			if (contents.length > 0) {
+				contents[0].style.display = "block";
+				tabs[0].classList.add("active");
+			}
 
-		// tabLabels.forEach((tab, i) => {
-		// 	const selectedTab = tab.querySelector(".blockons-tab.active").id;
+			for (let i = 0; i < tabs.length; i++) {
+				tabs[i].addEventListener("click", () => {
+					const contentClass = tabs[i].id.replace("tab-", "content-");
 
-		// 	console.log(selectedTab);
-		// }); // tabLabels forEach
-	}); // tabBlocks forEach
+					for (let d = 0; d < contents.length; d++) {
+						contents[d].style.display = "none";
+					}
+
+					for (let j = 0; j < tabs.length; j++) {
+						tabs[j].classList.remove("active");
+
+						if (contents[j].classList.contains(contentClass)) {
+							contents[j].style.display = "block";
+						}
+					}
+
+					tabs[i].classList.add("active");
+				});
+			}
+		});
+	}
 }); // DOMContentLoaded

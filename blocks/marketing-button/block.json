@@ -68,6 +68,10 @@
 			"type": "string",
 			"default": "GRAB this offer now!"
 		},
+		"showSubText": {
+			"type": "boolean",
+			"default": true
+		},
 		"subText": {
 			"type": "string",
 			"default": "Valid only until July 28th"

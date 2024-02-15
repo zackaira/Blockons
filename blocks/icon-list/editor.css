@@ -54,10 +54,10 @@
 	display: flex;
 	flex-wrap: wrap;
 }
-.blockons-editor-popup.blockons-icon-selecter
+.blockons-editor-popup.icon-list
 	.components-popover__content
-	.blockons-fontawesome {
-	width: 32px;
+	span.blockons-fontawesome {
+	width: 29px;
 	height: 32px;
 	display: flex;
 	align-items: center;

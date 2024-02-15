@@ -69,6 +69,8 @@ const Edit = (props) => {
 	const isPro = Boolean(searchObj.isPremium);
 	const wcActive = Boolean(searchObj.wcActive);
 
+	// console.log("TextInput: ", textInput);
+
 	const blockProps = useBlockProps({
 		className: `align-${alignment} ${
 			isSelected && showSearch ? "blockons-show" : ""
@@ -122,6 +124,7 @@ const Edit = (props) => {
 		});
 	};
 	const onChangeInputText = (newValue) => {
+		// console.log("New Value", newValue);
 		setAttributes({ textInput: newValue });
 	};
 	const onChangeButtonText = (newValue) => {
@@ -692,6 +695,7 @@ const Edit = (props) => {
 									allowedFormats={["core/bold", "core/italic"]}
 									placeholder={__("Add Placeholder...", "blockons")}
 									disableLineBreaks
+									keepPlaceholderOnFocus
 									style={{
 										backgroundColor: searchInputBgColor,
 										borderColor: searchInputBorderColor,

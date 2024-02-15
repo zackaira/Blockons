@@ -45,6 +45,7 @@ const Edit = (props) => {
 			linkTo,
 			linkTarget,
 			title,
+			showSubText,
 			subText,
 			bRadius,
 			vertPad,
@@ -89,7 +90,7 @@ const Edit = (props) => {
 			>
 				<Dropdown
 					className="blockons-icon-selecter"
-					contentClassName="blockons-editor-popup"
+					contentClassName="blockons-editor-popup marketing-button"
 					popoverProps={{ placement: "bottom-end" }}
 					renderToggle={({ isOpen, onToggle }) => (
 						<FontAwesomeIcon
@@ -176,6 +177,16 @@ const Edit = (props) => {
 							}
 							min={50}
 							max={500}
+						/>
+
+						<ToggleControl
+							label={__("Show Sub Text", "blockons")}
+							checked={showSubText}
+							onChange={(newValue) => {
+								setAttributes({
+									showSubText: newValue,
+								});
+							}}
 						/>
 
 						<ToggleControl
@@ -415,18 +426,20 @@ const Edit = (props) => {
 							/>
 							{hasIcon && iconPosition === "two" && <MarketingButtonIcon />}
 						</div>
-						<div className="blockons-marketing-button-text-wrap">
-							<RichText
-								tagName={"p"}
-								placeholder={__("Some extra text", "blockons")}
-								keepPlaceholderOnFocus
-								value={subText}
-								className="blockons-marketing-button-text"
-								onChange={(value) => setAttributes({ subText: value })}
-								allowedFormats={minimalRichText}
-								style={{ color: textColor, fontSize: textSize }}
-							/>
-						</div>
+						{showSubText && (
+							<div className="blockons-marketing-button-text-wrap">
+								<RichText
+									tagName={"p"}
+									placeholder={__("Some extra text", "blockons")}
+									keepPlaceholderOnFocus
+									value={subText}
+									className="blockons-marketing-button-text"
+									onChange={(value) => setAttributes({ subText: value })}
+									allowedFormats={minimalRichText}
+									style={{ color: textColor, fontSize: textSize }}
+								/>
+							</div>
+						)}
 					</div>
 					{hasIcon && iconPosition === "four" && <MarketingButtonIcon />}
 				</a>
