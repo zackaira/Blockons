@@ -207,6 +207,12 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 == Changelog ==
 
+= 1.1.01 =
+* Styling tweaks/fixes
+* Fixed minor Search block bug
+* 
+* 
+
 = 1.1.00 =
 * Styling tweaks/fixes
 * Fixed Dashicons not loading in Site Editor

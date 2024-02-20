@@ -36,7 +36,7 @@
 			"type": "string",
 			"default": "default"
 		},
-		"textInput": {
+		"searchValue": {
 			"type": "string",
 			"default": ""
 		},
@@ -80,6 +80,10 @@
 			"type": "string",
 			"default": "#000"
 		},
+		"hasPlaceholder": {
+			"type": "boolean",
+			"default": true
+		},
 		"hasBtn": {
 			"type": "boolean",
 			"default": true
@@ -106,7 +110,7 @@
 		},
 		"searchProTypes": {
 			"type": "string",
-			"default": "post"
+			"default": ""
 		},
 		"searchProAmnt": {
 			"type": "number",
@@ -147,6 +151,10 @@
 		"searchProPrice": {
 			"type": "boolean",
 			"default": true
+		},
+		"searchProHasPreview": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"editorScript": "file:./index.js",

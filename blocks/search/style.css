@@ -62,8 +62,9 @@
 	min-width: 200px;
 	position: relative;
 }
-.blockons-search-block .blockons-search-default:hover,
-.blockons-search-block.search-on .blockons-search-default {
+/* .blockons-search-block .blockons-search-default:hover,
+.blockons-search-block.search-on .blockons-search-default, */
+.blockons-search-block .blockons-search-default.searchon {
 	overflow: visible;
 }
 .blockons-search-default .blockons-search-inner {
@@ -72,6 +73,49 @@
 	align-items: stretch;
 	min-height: 40px;
 	color: inherit;
+}
+.blockons-search-items.loading {
+	min-height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+/* -- Pagination -- */
+.blockons-results-pagination,
+.blockons-results-pagination .pag-item.pages {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+}
+.blockons-results-pagination {
+	box-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+	margin: 6px 0 0;
+	padding: 4px 0;
+}
+.blockons-results-pagination .pag-item {
+	flex: 1;
+	margin: 0 2px;
+	display: flex;
+	justify-content: center;
+}
+.blockons-results-pagination .pag-item.pages {
+	justify-content: center;
+}
+.blockons-results-pagination button.pag-link {
+	background: none;
+	border: 0;
+	font-size: 12px;
+	color: #2f2f2f;
+	opacity: 0.82;
+	cursor: pointer;
+}
+.blockons-results-pagination button.pag-link.active {
+	color: #000;
+	font-weight: 600;
+	opacity: 1;
+}
+.blockons-results-pagination button.pag-link:disabled {
+	opacity: 0.5;
 }
 /* -- Drop Down Style -- */
 .blockons-search-block.dropdown {
@@ -267,17 +311,14 @@
 	align-items: center;
 	text-decoration: none;
 	padding: 5px 8px;
-	transition: background-color 0.2s ease-in-out 0s;
+	cursor: pointer;
+	transition: background-color 0.25s ease-in-out 0s;
 }
 .blockons-sresult:hover {
 	background-color: #f0f0f0;
 }
-.blockons-search-results {
-	max-height: 290px;
-	overflow-y: scroll;
-}
 .blockons-sresult-catags {
-	padding: 5px 0 10px;
+	padding: 5px 0 0;
 	font-size: 13px;
 }
 .blockons-search-results-block .blockons-sresult-head {
@@ -354,4 +395,88 @@
 	font-weight: 500;
 	padding: 5px 2px 6px;
 	line-height: 1;
+}
+/* -- Preview -- */
+.blockons-search-preview.loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.blockons-search-results.has-preview {
+	display: flex;
+	align-items: stretch;
+}
+.blockons-results {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	overflow: hidden;
+}
+.blockons-search-items {
+	max-height: 260px;
+	overflow: hidden;
+	overflow-y: scroll;
+	flex: 1;
+}
+.blockons-search-preview {
+	box-shadow: -1px 0 0 rgb(0 0 0 / 12%);
+	width: 35%;
+	padding: 10px;
+	font-size: 13px;
+	position: relative;
+}
+.blockons-search-preview-inner {
+	overflow-y: scroll;
+	position: absolute;
+	width: calc(100% - 20px);
+	height: calc(100% - 20px);
+}
+.blockons-spreview-close {
+	position: absolute;
+	background-color: #efefef;
+	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 12%);
+	border: 0;
+	width: 19px;
+	height: 19px;
+	border-radius: 20px;
+	top: 2px;
+	right: 2px;
+	padding: 4px 5px;
+	font-size: 12px;
+	color: #707070;
+	cursor: pointer;
+	z-index: 6;
+}
+.blockons-spreview-close:hover {
+	color: #222;
+	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 20%);
+}
+/* -- Post -- */
+
+/* -- Product -- */
+.blockons-search-preview img {
+	width: 100%;
+}
+.blockons-search-preview .blockons-spreview-title {
+	font-size: 17px;
+	margin: 0;
+	padding: 0;
+}
+.blockons-search-preview .blockons-spreview-price {
+	font-weight: bold;
+}
+.blockons-search-preview .blockons-spreview-btns {
+	margin: 20px 0 5px;
+}
+.blockons-search-preview .blockons-spreview-btns a {
+	display: inline-block;
+	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 25%);
+	border-radius: 4px;
+	background-color: #222;
+	color: #fff;
+	padding: 5px 10px;
+}
+.blockons-search-preview .blockons-spreview-btns a:hover {
+	background-color: #000;
 }

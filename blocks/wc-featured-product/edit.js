@@ -1,6 +1,3 @@
-/**
- * WordPress dependencies
- */
 import { useState, useEffect } from "@wordpress/element";
 import axios from "axios";
 import { __ } from "@wordpress/i18n";

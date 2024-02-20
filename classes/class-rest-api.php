@@ -40,6 +40,12 @@ class Blockons_WC_Rest_Routes {
 			]);
 		}
 
+		register_rest_route('blcns/v1', '/post-types', array(
+			'methods' => 'GET',
+			'callback' => [$this, 'blockons_get_all_post_types'],
+			'permission_callback' => [$this, 'blockons_get_settings_permission'],
+		));
+
 		// Add Excerpt to Search Results
 		register_rest_field( 'search-result', 'extras', array(
 			'get_callback' => function ( $post_arr ) {
@@ -150,12 +156,32 @@ class Blockons_WC_Rest_Routes {
 			'title' => $product->get_name(),
 			'featured_media' => $product_image,
 			'short_desc' => $product->get_short_description(),
+			'content' => $product->get_description(),
 			'price' => $product->get_price_html(),
 			'permalink' => get_permalink( $product->get_id() ),
 			'date_created' => $product->get_date_created(),
 		);
 
 		return $product_data;
+	}
+
+	/*
+	 * Get All Post Types
+	 */
+	function blockons_get_all_post_types() {
+		$post_types = get_post_types(['show_in_rest' => true], 'objects'); // Fetch post types exposed in REST
+		$post_types_data = [];
+	
+		foreach ($post_types as $post_type) {
+			if (!in_array($post_type->name, ['attachment', 'wp_template', 'wp_template_part', 'nav_menu_item', 'wp_block', 'wp_navigation'])) {
+				$post_types_data[] = [
+					'slug' => $post_type->name,
+					'name' => $post_type->labels->singular_name
+				];
+			}
+		}
+	
+		return $post_types_data;
 	}
 }
 new Blockons_WC_Rest_Routes();

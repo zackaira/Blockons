@@ -68,11 +68,6 @@ class Blockons {
 		// Frontend
 		wp_register_style('blockons-frontend-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
 		wp_register_script('blockons-frontend-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.js'), array('wp-i18n'), BLOCKONS_PLUGIN_VERSION, true);
-		wp_localize_script('blockons-frontend-script', 'blockObj', array(
-			'siteUrl' => esc_url(get_home_url('/')),
-			'blockonsOptions' => $blockonsOptions,
-			'isPremium' => $isPro,
-		));
 
 		// JS URLs file/object for featured product, video slider, image carousel
 		wp_register_script('blockons-js', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/blockons.js'), array(), BLOCKONS_PLUGIN_VERSION);
@@ -166,12 +161,18 @@ class Blockons {
 		$suffix = (defined('WP_DEBUG') && true === WP_DEBUG) ? '' : '.min';
 		$blockonsSavedOptions = get_option('blockons_options');
 		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
+		$isPro = (boolean)blockons_fs()->can_use_premium_code__premium_only();
 
 		// Frontend CSS
 		wp_enqueue_style('blockons-frontend-style');
 		
 		// Frontend JS
 		wp_enqueue_script('blockons-frontend-script');
+		wp_localize_script('blockons-frontend-script', 'blockObj', array(
+			'siteUrl' => esc_url(get_home_url('/')),
+			'blockonsOptions' => $blockonsOptions,
+			'isPremium' => $isPro,
+		));
 
 		if (blockons_fs()->can_use_premium_code__premium_only()) {
 			if ( Blockons_Admin::blockons_is_plugin_active('woocommerce.php') ) {

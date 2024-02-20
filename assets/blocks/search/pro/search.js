@@ -5,7 +5,7 @@
  */
 import React from "react";
 import ReactDOM from "react-dom";
-import SearchResults from "./components/SearchResults";
+import SearchWrap from "./components/SearchWrap";
 import "../search";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			if (typeof searchElements !== undefined && searchElements !== null) {
 				ReactDOM.render(
-					<SearchResults searchId={searchId} searchSettings={searchSettings} />,
+					<SearchWrap searchId={searchId} searchSettings={searchSettings} />,
 					searchBlock
 				);
 			}

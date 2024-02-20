@@ -20,6 +20,7 @@ import {
 } from "@wordpress/components";
 import { v4 as uuidv4 } from "uuid";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
+import BlockonsPostTypeSelect from "../_components/BlockonsPostTypeSelect";
 import { colorPickerPalette } from "../block-global";
 
 const Edit = (props) => {
@@ -33,7 +34,7 @@ const Edit = (props) => {
 			searchWidthDropdown,
 			searchWidthPopup,
 			searchDisplay,
-			textInput,
+			searchValue,
 			textButton,
 			iconSize,
 			iconPadding,
@@ -44,6 +45,7 @@ const Edit = (props) => {
 			searchInputBgColor,
 			searchInputBorderColor,
 			searchInputColor,
+			hasPlaceholder,
 			hasBtn,
 			searchBtnBgColor,
 			searchBtnColor,
@@ -61,15 +63,14 @@ const Edit = (props) => {
 			searchProImage,
 			searchProDesc,
 			searchProPrice,
+			searchProHasPreview,
 		},
 		setAttributes,
 	} = props;
-
+	const site_url = blockonsObj.apiUrl;
 	const [showSearch, setShowSearch] = useState(false);
 	const isPro = Boolean(searchObj.isPremium);
 	const wcActive = Boolean(searchObj.wcActive);
-
-	// console.log("TextInput: ", textInput);
 
 	const blockProps = useBlockProps({
 		className: `align-${alignment} ${
@@ -95,6 +96,7 @@ const Edit = (props) => {
 				searchProImage,
 				searchProDesc,
 				searchProPrice,
+				searchProHasPreview,
 		  }
 		: { searchPro };
 
@@ -124,11 +126,12 @@ const Edit = (props) => {
 		});
 	};
 	const onChangeInputText = (newValue) => {
-		// console.log("New Value", newValue);
-		setAttributes({ textInput: newValue });
+		setAttributes({
+			searchValue: newValue === undefined ? "" : newValue,
+		});
 	};
 	const onChangeButtonText = (newValue) => {
-		setAttributes({ textButton: newValue });
+		setAttributes({ textButton: newValue === undefined ? "" : newValue });
 	};
 
 	const closePopup = () => {
@@ -357,6 +360,15 @@ const Edit = (props) => {
 							}}
 							paletteColors={colorPickerPalette}
 						/>
+						<div className="blockons-divider"></div>
+
+						<ToggleControl
+							label={__("Has Placeholder Text", "blockons")}
+							checked={hasPlaceholder}
+							onChange={(newValue) => {
+								setAttributes({ hasPlaceholder: newValue });
+							}}
+						/>
 
 						<div className="blockons-divider"></div>
 						<ToggleControl
@@ -411,127 +423,136 @@ const Edit = (props) => {
 
 							{searchPro && (
 								<>
-									<SelectControl
-										label={__("Search For:", "blockons")}
+									<BlockonsPostTypeSelect
+										label={__("Search In:", "blockons")}
 										value={searchProTypes}
-										options={[
-											{ label: __("Posts", "blockons"), value: "post" },
-											{ label: __("Pages", "blockons"), value: "page" },
-											{
-												label: __("Products", "blockons"),
-												value: "product",
-												disabled: wcActive ? false : true,
-											},
-										]}
+										exclude={["linkt"]}
 										onChange={(newValue) =>
 											setAttributes({
-												searchProTypes:
-													newValue === undefined ? "post" : newValue,
+												searchProTypes: newValue === undefined ? "" : newValue,
 											})
 										}
-										// multiple={true}
-										// className="blockons-multiselect"
+										siteurl={site_url}
 									/>
-									<TextControl
-										label={__("Results Amount to Display", "blockons")}
-										value={searchProAmnt}
-										onChange={(newValue) =>
-											setAttributes({ searchProAmnt: parseInt(newValue) })
-										}
-										type="number"
-									/>
-
-									<div className="blockons-divider"></div>
-									<ToggleControl
-										label={__("Show Categories in Search", "blockons")}
-										checked={searchProCats}
-										onChange={(newValue) => {
-											setAttributes({ searchProCats: newValue });
-										}}
-									/>
-									{searchProCats && (
-										<>
-											<TextControl
-												label={__("Results Title", "blockons")}
-												value={searchProCatsTitle}
-												onChange={(newValue) =>
-													setAttributes({ searchProCatsTitle: newValue })
-												}
-											/>
-											<TextControl
-												label={__("Amount to Display", "blockons")}
-												value={searchProCatsAmnt}
-												onChange={(newValue) =>
-													setAttributes({
-														searchProCatsAmnt: parseInt(newValue),
-													})
-												}
-												type="number"
-											/>
-											<div className="blockons-divider"></div>
-										</>
-									)}
-
-									<ToggleControl
-										label={__("Show Tags in Search", "blockons")}
-										checked={searchProTags}
-										onChange={(newValue) => {
-											setAttributes({ searchProTags: newValue });
-										}}
-									/>
-									{searchProTags && (
-										<>
-											<TextControl
-												label={__("Results Title", "blockons")}
-												value={searchProTagsTitle}
-												onChange={(newValue) =>
-													setAttributes({ searchProTagsTitle: newValue })
-												}
-											/>
-											<TextControl
-												label={__("Amount to Display", "blockons")}
-												value={searchProTagsAmnt}
-												onChange={(newValue) =>
-													setAttributes({
-														searchProTagsAmnt: parseInt(newValue),
-													})
-												}
-												type="number"
-											/>
-										</>
-									)}
-
-									<div className="blockons-divider"></div>
-									<ToggleControl
-										label={__("Show Image", "blockons")}
-										checked={searchProImage}
-										onChange={(newValue) => {
-											setAttributes({ searchProImage: newValue });
-										}}
-									/>
-									<ToggleControl
-										label={
-											searchProTypes === "product"
-												? __("Show Product Short Description", "blockons")
-												: __("Show Post Excerpt", "blockons")
-										}
-										checked={searchProDesc}
-										onChange={(newValue) => {
-											setAttributes({
-												searchProDesc: newValue,
-											});
-										}}
-									/>
-									{searchProTypes === "product" && (
-										<ToggleControl
-											label={__("Show Product Price", "blockons")}
-											checked={searchProPrice}
-											onChange={(newValue) => {
-												setAttributes({
-													searchProPrice: newValue,
-												});
-											}}
+									{searchProTypes && (
+										<TextControl
+											label={__("Results Amount to Display", "blockons")}
+											value={searchProAmnt}
+											onChange={(newValue) =>
+												setAttributes({ searchProAmnt: parseInt(newValue) })
+											}
+											type="number"
 										/>
+									)}
+									{searchProTypes && searchProTypes !== "page" && (
+										<>
+											<div className="blockons-divider"></div>
+											<ToggleControl
+												label={__("Show Categories in Search", "blockons")}
+												checked={searchProCats}
+												onChange={(newValue) => {
+													setAttributes({ searchProCats: newValue });
+												}}
+											/>
+											{searchProCats && (
+												<>
+													<TextControl
+														label={__("Results Title", "blockons")}
+														value={searchProCatsTitle}
+														onChange={(newValue) =>
+															setAttributes({
+																searchProCatsTitle: newValue,
+															})
+														}
+													/>
+													<TextControl
+														label={__("Amount to Display", "blockons")}
+														value={searchProCatsAmnt}
+														onChange={(newValue) =>
+															setAttributes({
+																searchProCatsAmnt: parseInt(newValue),
+															})
+														}
+														type="number"
+													/>
+													<div className="blockons-divider"></div>
+												</>
+											)}
+
+											<ToggleControl
+												label={__("Show Tags in Search", "blockons")}
+												checked={searchProTags}
+												onChange={(newValue) => {
+													setAttributes({ searchProTags: newValue });
+												}}
+											/>
+											{searchProTags && (
+												<>
+													<TextControl
+														label={__("Results Title", "blockons")}
+														value={searchProTagsTitle}
+														onChange={(newValue) =>
+															setAttributes({
+																searchProTagsTitle: newValue,
+															})
+														}
+													/>
+													<TextControl
+														label={__("Amount to Display", "blockons")}
+														value={searchProTagsAmnt}
+														onChange={(newValue) =>
+															setAttributes({
+																searchProTagsAmnt: parseInt(newValue),
+															})
+														}
+														type="number"
+													/>
+												</>
+											)}
+
+											<div className="blockons-divider"></div>
+											<ToggleControl
+												label={__("Show Image", "blockons")}
+												checked={searchProImage}
+												onChange={(newValue) => {
+													setAttributes({ searchProImage: newValue });
+												}}
+											/>
+											<ToggleControl
+												label={
+													searchProTypes === "product"
+														? __("Show Product Short Description", "blockons")
+														: __("Show Excerpt", "blockons")
+												}
+												checked={searchProDesc}
+												onChange={(newValue) => {
+													setAttributes({
+														searchProDesc: newValue,
+													});
+												}}
+											/>
+											{searchProTypes === "product" && (
+												<>
+													<ToggleControl
+														label={__("Show Product Price", "blockons")}
+														checked={searchProPrice}
+														onChange={(newValue) => {
+															setAttributes({
+																searchProPrice: newValue,
+															});
+														}}
+													/>
+													<div className="blockons-divider"></div>
+													<ToggleControl
+														label={__("Enable Search Previews", "blockons")}
+														checked={searchProHasPreview}
+														onChange={(newValue) => {
+															setAttributes({ searchProHasPreview: newValue });
+														}}
+													/>
+												</>
+											)}
+										</>
 									)}
 								</>
 							)}
@@ -567,14 +588,21 @@ const Edit = (props) => {
 							width: searchWidthDefault,
 						}}
 					>
-						<div className="blockons-search-inner">
+						<div
+							className={`blockons-search-inner ${
+								hasPlaceholder ? "hasph" : "noph"
+							}`}
+						>
 							<RichText
 								tagName="div"
-								value={textInput}
+								value={
+									searchValue
+										? searchValue
+										: __("Add Placeholder...", "blockons")
+								}
 								className="blockons-search-input"
 								onChange={onChangeInputText}
 								allowedFormats={["core/bold", "core/italic"]}
-								placeholder={__("Add Placeholder...", "blockons")}
 								disableLineBreaks
 								style={{
 									backgroundColor: searchInputBgColor,
@@ -627,14 +655,21 @@ const Edit = (props) => {
 								: ""),
 						}}
 					>
-						<div className="blockons-search-inner">
+						<div
+							className={`blockons-search-inner ${
+								hasPlaceholder ? "hasph" : "noph"
+							}`}
+						>
 							<RichText
 								tagName="div"
-								value={textInput}
+								value={
+									searchValue
+										? searchValue
+										: __("Add Placeholder...", "blockons")
+								}
 								className="blockons-search-input"
 								onChange={onChangeInputText}
 								allowedFormats={["core/bold", "core/italic"]}
-								placeholder={__("Add Placeholder...", "blockons")}
 								disableLineBreaks
 								style={{
 									backgroundColor: searchInputBgColor,
@@ -686,16 +721,22 @@ const Edit = (props) => {
 								className="blockons-close fas fa-x"
 								onClick={closePopup}
 							></div>
-							<div className="blockons-search-inner">
+							<div
+								className={`blockons-search-inner ${
+									hasPlaceholder ? "hasph" : "noph"
+								}`}
+							>
 								<RichText
 									tagName="div"
-									value={textInput}
+									value={
+										searchValue
+											? searchValue
+											: __("Add Placeholder...", "blockons")
+									}
 									className="blockons-search-input"
 									onChange={onChangeInputText}
 									allowedFormats={["core/bold", "core/italic"]}
-									placeholder={__("Add Placeholder...", "blockons")}
 									disableLineBreaks
-									keepPlaceholderOnFocus
 									style={{
 										backgroundColor: searchInputBgColor,
 										borderColor: searchInputBorderColor,

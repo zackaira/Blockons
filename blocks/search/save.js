@@ -26,6 +26,7 @@ const Save = ({ attributes }) => {
 				searchProImage: attributes.searchProImage,
 				searchProDesc: attributes.searchProDesc,
 				searchProPrice: attributes.searchProPrice,
+				searchProHasPreview: attributes.searchProHasPreview,
 		  }
 		: { searchPro: attributes.searchPro };
 
@@ -60,14 +61,18 @@ const Save = ({ attributes }) => {
 						<form
 							role="search"
 							method="get"
-							className="blockons-search-inner"
+							className={`blockons-search-inner ${
+								attributes.hasPlaceholder ? "hasph" : "noph"
+							}`}
 							{...(attributes.baseUrl ? { action: attributes.baseUrl } : {})}
 						>
 							<input
 								type="text"
 								name="s"
 								className="blockons-search-input"
-								placeholder={attributes.textInput}
+								{...(attributes.hasPlaceholder
+									? { placeholder: attributes.searchValue }
+									: {})}
 								required
 								autoComplete="off"
 								style={{
@@ -125,14 +130,18 @@ const Save = ({ attributes }) => {
 						<form
 							role="search"
 							method="get"
-							className="blockons-search-inner"
+							className={`blockons-search-inner ${
+								attributes.hasPlaceholder ? "hasph" : "noph"
+							}`}
 							{...(attributes.baseUrl ? { action: attributes.baseUrl } : {})}
 						>
 							<input
 								type="text"
 								name="s"
 								className="blockons-search-input"
-								placeholder={attributes.textInput}
+								{...(attributes.hasPlaceholder
+									? { placeholder: attributes.searchValue }
+									: {})}
 								required
 								autoComplete="off"
 								style={{
@@ -180,14 +189,18 @@ const Save = ({ attributes }) => {
 							<form
 								role="search"
 								method="get"
-								className="blockons-search-inner"
+								className={`blockons-search-inner ${
+									attributes.hasPlaceholder ? "hasph" : "noph"
+								}`}
 								{...(attributes.baseUrl ? { action: attributes.baseUrl } : {})}
 							>
 								<input
 									type="text"
 									name="s"
 									className="blockons-search-input"
-									placeholder={attributes.textInput}
+									{...(attributes.hasPlaceholder
+										? { placeholder: attributes.searchValue }
+										: {})}
 									required
 									autoComplete="off"
 									style={{

@@ -11,16 +11,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	if (!blockDefaultFocus) return;
 
-	blockDefaultFocus.forEach((item) => {
-		item.addEventListener("focus", () => {
-			const searchBlockParent = item.closest(".blockons-search-block");
-			searchBlockParent.classList.add("search-on");
-		});
-		item.addEventListener("blur", () => {
-			const searchBlockParent = item.closest(".blockons-search-block");
-			searchBlockParent.classList.remove("search-on");
-		});
-	});
+	// blockDefaultFocus.forEach((item) => {
+	// 	item.addEventListener("focus", () => {
+	// 		const searchBlockParent = item.closest(".blockons-search-block");
+	// 		searchBlockParent.classList.add("search-on");
+	// 	});
+	// 	item.addEventListener("blur", () => {
+	// 		const searchBlockParent = item.closest(".blockons-search-block");
+	// 		searchBlockParent.classList.remove("search-on");
+	// 	});
+	// });
 
 	// Drop Down Search
 	const blockDropdownFocus = document.querySelectorAll(

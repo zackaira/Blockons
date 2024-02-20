@@ -14,7 +14,11 @@
 	opacity: 1;
 }
 .blockons-search-input {
-	color: #939393;
+	color: #939393 !important;
+}
+.blockons-search-inner.noph .blockons-search-input.rich-text {
+	color: transparent !important;
+	font-size: 0 !important;
 }
 
 /* -- Premium Block -- */
