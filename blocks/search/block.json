@@ -146,7 +146,7 @@
 		},
 		"searchProDesc": {
 			"type": "boolean",
-			"default": false
+			"default": true
 		},
 		"searchProPrice": {
 			"type": "boolean",

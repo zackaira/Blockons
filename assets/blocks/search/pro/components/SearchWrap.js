@@ -17,17 +17,26 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 	const [searchTags, setSearchTags] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [postTypeTaxonomies, setPostTypeTaxonomies] = useState([]);
-	const [currentQuery, setcurrentQuery] = useState("");
+	const [currentQuery, setCurrentQuery] = useState("");
+	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(0);
 	let timeout = false;
 
-	// Search Input Event Listener
-	searchInput.addEventListener("keyup", () => {
-		setSearchQuery(searchInput.value);
-	});
+	useEffect(() => {
+		if (!searchInput) return;
+
+		const handleKeyUp = () => {
+			setSearchQuery(searchInput.value);
+		};
+
+		searchInput.addEventListener("keyup", handleKeyUp);
+		return () => {
+			searchInput.removeEventListener("keyup", handleKeyUp);
+		};
+	}, [searchInput]);
 
 	useEffect(() => {
-		const searchParent = searchInput.closest(".blockons-search-default");
+		const searchParent = searchInput?.closest(".blockons-search-default");
 
 		if (!searchParent) return;
 
@@ -40,7 +49,6 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 		}
 
 		document.addEventListener("click", handleClick);
-
 		return () => {
 			document.removeEventListener("click", handleClick);
 		};
@@ -79,7 +87,7 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 			setIsLoading(true);
 			if (timeout) clearTimeout(timeout);
 
-			if (searchQuery != currentQuery) {
+			if (searchQuery !== currentQuery) {
 				timeout = setTimeout(() => {
 					clearSearchResults();
 
@@ -103,26 +111,37 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 					axios
 						.all(endpoints.map((endpoint) => axios.get(endpoint)))
 						.then(
-							axios.spread((mainResponse, { data: cats }, { data: tags }) => {
-								setcurrentQuery(searchQuery);
+							axios.spread((mainResponse, catsResponse, tagsResponse) => {
+								setCurrentQuery(searchQuery);
 
 								if (mainResponse) {
 									setSearchResults(mainResponse.data);
 									setTotalPages(mainResponse.headers["x-wp-totalpages"]);
 								}
-								if (set.searchProCats && cats && cats.length > 0) {
-									setSearchCats(cats);
+								if (
+									set.searchProCats &&
+									catsResponse?.data &&
+									catsResponse?.data.length > 0
+								) {
+									setSearchCats(catsResponse.data);
 								}
-								if (set.searchProTags && tags && tags.length > 0) {
-									setSearchTags(tags);
+								if (
+									set.searchProTags &&
+									tagsResponse?.data &&
+									tagsResponse?.data.length > 0
+								) {
+									setSearchTags(tagsResponse.data);
 								}
 							})
 						)
-						.then(() => setIsLoading(false))
 						.catch((err) => {
 							clearSearchResults();
-							setIsLoading(false);
 							console.log("There was a problem or request was cancelled.", err);
+						})
+						.finally(() => {
+							setIsLoading(false);
+							clearTimeout(timeout);
+							timeout = false;
 						});
 				}, 800);
 			}
@@ -134,10 +153,16 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 		}
 	}
 
+	function handlePaginationPageChange(newPage) {
+		setCurrentPage(newPage);
+	}
+
 	function clearSearchResults() {
 		setSearchResults([]);
 		setSearchCats([]);
 		setSearchTags([]);
+		setCurrentPage(1);
+		setTotalPages(0);
 	}
 
 	if (isLoading)
@@ -147,11 +172,13 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 			</div>
 		);
 
+	console.log("Results: ", searchResults);
+
 	return (
 		<React.Fragment>
-			{searchQuery.length >= 3 && searchResults && (
+			{searchQuery?.length >= 3 && searchResults && (
 				<div className="blockons-search-results-block">
-					{searchResults.length > 0 && (
+					{searchResults?.length > 0 && (
 						<ResultsBlock
 							searchCats={searchCats}
 							searchTags={searchTags}
@@ -159,13 +186,15 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 							set={set}
 							restUrl={restUrl}
 							searchQuery={searchQuery}
+							currentPage={currentPage}
 							totalPages={totalPages}
+							onPaginationPageChange={handlePaginationPageChange}
 						/>
 					)}
 
-					{searchResults.length === 0 &&
-						searchCats.length === 0 &&
-						searchTags.length === 0 && (
+					{searchResults?.length === 0 &&
+						searchCats?.length === 0 &&
+						searchTags?.length === 0 && (
 							<div className="blockons-search-results-block no-results">
 								{__("No Results", "blockons")}
 							</div>

@@ -40,6 +40,11 @@ class Blockons_WC_Rest_Routes {
 			]);
 		}
 
+		register_rest_route( 'blcns/v1', '/post/(?P<id>\d+)', [
+			'methods' => 'GET',
+			'callback' => [$this, 'blockons_get_post_by_id'],
+			'permission_callback' => [$this, 'blockons_get_settings_permission'],
+		]);
 		register_rest_route('blcns/v1', '/post-types', array(
 			'methods' => 'GET',
 			'callback' => [$this, 'blockons_get_all_post_types'],
@@ -142,7 +147,7 @@ class Blockons_WC_Rest_Routes {
 	}
 
 	/*
-	 * Get Image by ID for InputMediaUpload Component
+	 * Get WC Product by ID
 	 */
 	function blockons_get_wc_product_by_id($request) {
 		$product_id = esc_attr($request->get_param( 'id' ));
@@ -163,6 +168,33 @@ class Blockons_WC_Rest_Routes {
 		);
 
 		return $product_data;
+	}
+
+	/*
+	 * Get Post by ID
+	 */
+	function blockons_get_post_by_id($request) {
+		$post_id = esc_attr($request->get_param('id'));
+		$post = get_post($post_id);
+	
+		if (!$post) {
+			return new WP_Error('invalid_post_id', __('Invalid post ID.', 'text-domain'), array('status' => 404));
+		}
+	
+		$post_thumbnail_id = get_post_thumbnail_id($post_id);
+		$post_image = wp_get_attachment_url($post_thumbnail_id);
+	
+		$post_data = array(
+			'id' => $post->ID,
+			'title' => $post->post_title,
+			'content' => $post->post_content,
+			'excerpt' => $post->post_excerpt,
+			'featured_media' => $post_image,
+			'permalink' => get_permalink($post->ID),
+			'date_created' => $post->post_date,
+		);
+	
+		return $post_data;
 	}
 
 	/*

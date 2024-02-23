@@ -1,32 +1,34 @@
 import React from "react";
 import parse from "html-react-parser";
 
-const ResultsItem = ({ resultItem, set, previewChange }) => {
+const ResultsItem = ({ searchItem, set, previewChange }) => {
+	if (!searchItem) return;
+
 	return (
 		<a
-			{...(!set.searchProHasPreview ? { ref: resultItem.url } : {})}
-			id={`${resultItem.subtype}-${resultItem.id}`}
-			className={`blockons-sresult ${resultItem.subtype}`}
+			{...(!set.searchProHasPreview ? { href: searchItem.url } : {})}
+			id={`${searchItem.subtype}-${searchItem.id}`}
+			className={`blockons-sresult ${searchItem.subtype}`}
 			{...(set.searchProHasPreview
-				? { onClick: () => previewChange(resultItem.id) }
+				? { onClick: () => previewChange(searchItem.id) }
 				: {})}
 		>
-			{resultItem.extras.image && set.searchProImage && (
+			{set.searchProImage && searchItem.extras.image && (
 				<div className="blockons-sresult-left">
-					<img src={resultItem.extras.image} />
+					<img src={searchItem.extras.image} />
 				</div>
 			)}
 			<div className="blockons-sresult-center">
-				{resultItem.title && (
-					<h4 className="blockons-sresult-title">{resultItem.title}</h4>
+				{searchItem.title && (
+					<h4 className="blockons-sresult-title">{searchItem.title}</h4>
 				)}
-				{resultItem.extras.excerpt && set.searchProDesc && (
-					<p className="blockons-sresult-desc">{resultItem.extras.excerpt}</p>
+				{set.searchProDesc && searchItem.extras.excerpt && (
+					<p className="blockons-sresult-desc">{searchItem.extras.excerpt}</p>
 				)}
 			</div>
-			{resultItem.subtype === "product" && set.searchProPrice && (
+			{searchItem.subtype === "product" && set.searchProPrice && (
 				<div className="blockons-sresult-right">
-					{parse(resultItem.extras.price)}
+					{parse(searchItem.extras.price)}
 				</div>
 			)}
 		</a>

@@ -444,6 +444,7 @@ const Edit = (props) => {
 											type="number"
 										/>
 									)}
+
 									{searchProTypes && searchProTypes !== "page" && (
 										<>
 											<div className="blockons-divider"></div>
@@ -522,7 +523,7 @@ const Edit = (props) => {
 												label={
 													searchProTypes === "product"
 														? __("Show Product Short Description", "blockons")
-														: __("Show Excerpt", "blockons")
+														: __("Show Post Excerpt", "blockons")
 												}
 												checked={searchProDesc}
 												onChange={(newValue) => {
@@ -532,26 +533,25 @@ const Edit = (props) => {
 												}}
 											/>
 											{searchProTypes === "product" && (
-												<>
-													<ToggleControl
-														label={__("Show Product Price", "blockons")}
-														checked={searchProPrice}
-														onChange={(newValue) => {
-															setAttributes({
-																searchProPrice: newValue,
-															});
-														}}
-													/>
-													<div className="blockons-divider"></div>
-													<ToggleControl
-														label={__("Enable Search Previews", "blockons")}
-														checked={searchProHasPreview}
-														onChange={(newValue) => {
-															setAttributes({ searchProHasPreview: newValue });
-														}}
-													/>
-												</>
+												<ToggleControl
+													label={__("Show Product Price", "blockons")}
+													checked={searchProPrice}
+													onChange={(newValue) => {
+														setAttributes({
+															searchProPrice: newValue,
+														});
+													}}
+												/>
 											)}
+
+											<div className="blockons-divider"></div>
+											<ToggleControl
+												label={__("Enable Search Previews", "blockons")}
+												checked={searchProHasPreview}
+												onChange={(newValue) => {
+													setAttributes({ searchProHasPreview: newValue });
+												}}
+											/>
 										</>
 									)}
 								</>

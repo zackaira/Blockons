@@ -425,6 +425,7 @@
 	padding: 10px;
 	font-size: 13px;
 	position: relative;
+	min-height: 210px;
 }
 .blockons-search-preview-inner {
 	overflow-y: scroll;

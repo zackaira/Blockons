@@ -1,6 +1,8 @@
 import React from "react";
 
 const TaxResults = ({ taxItems, title }) => {
+	if (!taxItems || taxItems.length === 0) return;
+
 	return (
 		<div className="blockons-sresult-catags">
 			<h6 className="blockons-sresult-head">{title}</h6>

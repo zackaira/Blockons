@@ -9,12 +9,14 @@ const Preview = ({ restUrl, cpt, postId, set }) => {
 	const [postData, setPostData] = useState({});
 	const [previewIsLoading, setPreviewIsLoading] = useState(false);
 
+	if (!cpt || !postId) {
+		return <div>{__("No post found", "blockons")}</div>;
+	}
+
 	useEffect(() => {
 		setPreviewIsLoading(true);
 
-		let requestUrl = `${restUrl}wp/v2/${
-			cpt === "post" ? "posts" : cpt
-		}/${postId}`;
+		let requestUrl = `${restUrl}blcns/v1/post/${postId}`;
 		if (cpt === "product") {
 			requestUrl = `${restUrl}blcns/v1/product/${postId}`;
 		}
@@ -22,13 +24,12 @@ const Preview = ({ restUrl, cpt, postId, set }) => {
 		axios
 			.get(requestUrl)
 			.then((response) => {
-				// console.log("response.data", response.data);
-
-				setPostData(response.data);
+				if (response?.data) setPostData(response.data);
 				setPreviewIsLoading(false);
 			})
 			.catch((error) => {
 				console.error(error);
+				setPreviewIsLoading(false);
 			});
 	}, [postId]);
 
@@ -41,9 +42,9 @@ const Preview = ({ restUrl, cpt, postId, set }) => {
 	}
 
 	return cpt === "product" ? (
-		<PreviewProduct set={set} postData={postData} />
+		<PreviewProduct postData={postData} />
 	) : (
-		<PreviewPost set={set} postData={postData} />
+		<PreviewPost postData={postData} />
 	);
 };
 

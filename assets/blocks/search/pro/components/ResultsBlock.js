@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { __ } from "@wordpress/i18n";
 import ResultsItem from "./ResultsItem";
 import Loader from "../../../../../src/backend/Loader";
 import TaxResults from "./TaxResults";
@@ -13,11 +14,13 @@ const ResultsBlock = ({
 	set,
 	restUrl,
 	searchQuery,
+	currentPage,
 	totalPages,
+	onPaginationPageChange,
 }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchResults, setSearchResults] = useState(results);
-	const [currentPage, setCurrentPage] = useState(1);
+	// const [currentPage, setCurrentPage] = useState(1);
 	const [previewId, setPreviewId] = useState(null);
 
 	function handlePostPageChange(newPage) {
@@ -27,12 +30,17 @@ const ResultsBlock = ({
 				`${restUrl}wp/v2/search?search=${searchQuery}&subtype=${set.searchProTypes}&per_page=${set.searchProAmnt}&page=${newPage}`
 			)
 			.then((response) => {
-				setCurrentPage(newPage);
-				setSearchResults(response.data);
-				setIsLoading(false);
+				if (response && response.data && Array.isArray(response.data)) {
+					onPaginationPageChange(newPage);
+					setSearchResults(response.data);
+				} else {
+					throw new Error("Invalid response data format");
+				}
 			})
 			.catch((error) => {
 				console.error(error);
+			})
+			.finally(() => {
 				setIsLoading(false);
 			});
 	}
@@ -41,27 +49,25 @@ const ResultsBlock = ({
 		setPreviewId(id);
 	};
 
-	console.log(searchCats, searchTags);
-
 	return (
 		<div
 			className={`blockons-search-results ${
 				set.searchProHasPreview ? "has-preview" : ""
 			}`}
 		>
-			{set.searchProHasPreview && previewId && (
+			{/* {set.searchProHasPreview && previewId && (
 				<div
 					className="blockons-spreview-close fa-solid fa-xmark"
 					onClick={() => setPreviewId(null)}
 				></div>
-			)}
+			)} */}
 
 			<div className="blockons-results">
-				{set.searchProCats && searchCats.length > 0 && (
+				{set.searchProCats && searchCats?.length > 0 && (
 					<TaxResults taxItems={searchCats} title={set.searchProCatsTitle} />
 				)}
 
-				{set.searchProTags && searchTags.length > 0 && (
+				{set.searchProTags && searchTags?.length > 0 && (
 					<TaxResults taxItems={searchTags} title={set.searchProTagsTitle} />
 				)}
 
@@ -72,15 +78,17 @@ const ResultsBlock = ({
 				<div className={`blockons-search-items ${isLoading ? "loading" : ""}`}>
 					{isLoading ? (
 						<Loader />
-					) : (
+					) : searchResults && Array.isArray(searchResults) ? (
 						searchResults.map((item) => (
 							<ResultsItem
 								key={item.id}
-								resultItem={item}
+								searchItem={item}
 								set={set}
 								previewChange={handlePreviewChange}
 							/>
 						))
+					) : (
+						<p>{__("No Results", "blockons")}</p>
 					)}
 				</div>
 

@@ -2,29 +2,24 @@ import React from "react";
 import { __ } from "@wordpress/i18n";
 import parse from "html-react-parser";
 
-const PreviewProduct = ({ set, postData }) => {
-	// console.log(set);
+const PreviewProduct = ({ postData }) => {
+	if (!postData) return <div>{__("No post found", "blockons")}</div>;
 
 	return (
 		<div className="blockons-search-preview">
 			<div className="blockons-search-preview-inner">
-				{postData.featured_media && set.searchProImage && (
+				{postData.featured_media && (
 					<img src={postData.featured_media} alt={postData.title} />
 				)}
 				{postData.title && (
 					<h4 className="blockons-spreview-title">{postData.title}</h4>
 				)}
-				{postData.price && set.searchProPrice && (
+				{postData.price && (
 					<div className="blockons-spreview-price">{parse(postData.price)}</div>
 				)}
 
-				{postData.short_desc && set.searchProDesc && (
+				{postData.short_desc && (
 					<p className="blockons-spreview-desc">{parse(postData.short_desc)}</p>
-				)}
-				{postData.content && (
-					<div className="blockons-spreview-content">
-						{parse(postData.content)}
-					</div>
 				)}
 				{postData.permalink && (
 					<div className="blockons-spreview-btns">
