@@ -332,6 +332,13 @@ class Blockons {
 			),
 			"blockanimation" => array(
 				"enabled" => false,
+				"default_style" => "fade",
+				"default_direction" => "-up",
+				"default_duration" => "850",
+				"default_delay" => "50",
+				"default_offset" => "80",
+				"default_animate_once" => false,
+				"default_mirror" => false,
 			),
 			"pageloader" => array(
 				"enabled" => false,

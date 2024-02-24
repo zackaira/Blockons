@@ -3,14 +3,14 @@
  */
 import React from "react";
 import ReactDOM from "react-dom";
-import Settings from "./backend/Settings";
+import SettingsPage from "./backend/settings/SettingsPage";
 import "./backend/settings.css";
 
 document.addEventListener("DOMContentLoaded", function () {
 	const element = document.getElementById("blockons-root");
 
 	if (typeof element !== undefined && element !== null) {
-		ReactDOM.render(<Settings />, document.getElementById("blockons-root"));
+		ReactDOM.render(<SettingsPage />, document.getElementById("blockons-root"));
 	}
 
 	/*

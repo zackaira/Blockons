@@ -210,6 +210,7 @@ This could be from the theme you're using, or another plugin. Again, please [con
 = 1.1.01 =
 * Styling tweaks/fixes
 * Fixed minor Search block bug
+* Version compatibility for WC 8.6
 * 
 * 
 

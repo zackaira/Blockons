@@ -2,19 +2,19 @@
 import React, { useState, useEffect } from "react";
 import { __ } from "@wordpress/i18n";
 import axios from "axios";
-import SettingRow from "./components/SettingRow";
-import SettingGroup from "./components/SettingGroup";
-import SettingBlock from "./components/SettingBlock";
-import SettingHeader from "./components/SettingHeader";
-import GiveFeedback from "./components/GiveFeedback";
-import InfoTab from "./InfoTab";
-import Loader from "./Loader";
-import { blockonsGroupSettings, blockListSettings } from "./helpers";
-import PageLoader from "../frontend/site-addons/pageloader/PageLoader";
-import BackToTop from "../frontend/site-addons/backtotop/BackToTop";
-import ScrollIndicator from "../frontend/site-addons/scrollindicator/ScrollIndicator";
+import SettingRow from "../components/SettingRow";
+import SettingGroup from "../components/SettingGroup";
+import SettingBlock from "../components/SettingBlock";
+import SettingHeader from "../components/SettingHeader";
+import GiveFeedback from "../components/GiveFeedback";
+import InfoTab from "../InfoTab";
+import Loader from "../Loader";
+import { blockonsGroupSettings, blockListSettings } from "../helpers";
+import PageLoader from "../../frontend/site-addons/pageloader/PageLoader";
+import BackToTop from "../../frontend/site-addons/backtotop/BackToTop";
+import ScrollIndicator from "../../frontend/site-addons/scrollindicator/ScrollIndicator";
 
-const Settings = () => {
+const SettingsPage = () => {
 	const blockonsObject = blockonsObj;
 	const url = `${blockonsObject.apiUrl}blcns/v1`;
 	const [loader, setLoader] = useState(false);
@@ -58,7 +58,7 @@ const Settings = () => {
 		});
 	};
 
-	// console.log(blockonsOptions);
+	console.log(blockonsOptions);
 
 	useEffect(() => {
 		blockonsGroupSettings();
@@ -197,6 +197,14 @@ const Settings = () => {
 										{__("Site Addons", "blockons")}
 									</a>
 								</li>
+
+								{isPremium && wcActive && (
+									<li>
+										<a id="blockonstab-4" className="blockons-tab">
+											{__("WooCommerce Addons", "blockons")}
+										</a>
+									</li>
+								)}
 
 								<li className="help">
 									<a id="blockonstab-help" className="blockons-tab">
@@ -339,11 +347,94 @@ const Settings = () => {
 													{blockonsOptions.blockanimation?.enabled && (
 														<>
 															<SettingRow
-																title={__("Wahoo yeah!")}
-																slug="blockanimation_blahblah"
-																value={blockonsOptions.blockanimation?.blahblah}
-																placeholder="1100"
-																inputType="number"
+																title={__("Style", "blockons")}
+																slug="blockanimation_default_style"
+																value={
+																	blockonsOptions.blockanimation?.default_style
+																}
+																inputType="select"
+																options={{
+																	fade: "Fade",
+																	slide: "Slide",
+																	flip: "Flip",
+																	"zoom-in": "Zoom In",
+																	"zoom-out": "Zoom Out",
+																}}
+																onChange={handleChange}
+															/>
+															<SettingRow
+																title={__("Direction", "blockons")}
+																slug="blockanimation_default_direction"
+																value={
+																	blockonsOptions.blockanimation
+																		?.default_direction
+																}
+																inputType="select"
+																options={{
+																	"-up": "Up",
+																	"-down": "Down",
+																	"-left": "Left",
+																	"-right": "Right",
+																}}
+																onChange={handleChange}
+															/>
+															<SettingRow
+																title={__("Duration", "blockons")}
+																slug="blockanimation_default_duration"
+																value={
+																	blockonsOptions.blockanimation
+																		?.default_duration
+																}
+																inputType="range"
+																defaultValue={850}
+																min={50}
+																max={4000}
+																suffix="px"
+																onChange={handleChange}
+															/>
+															<SettingRow
+																title={__("Delay", "blockons")}
+																slug="blockanimation_default_delay"
+																value={
+																	blockonsOptions.blockanimation?.default_delay
+																}
+																inputType="range"
+																defaultValue={50}
+																min={50}
+																max={4000}
+																suffix="px"
+																onChange={handleChange}
+															/>
+															<SettingRow
+																title={__("Offset", "blockons")}
+																slug="blockanimation_default_offset"
+																value={
+																	blockonsOptions.blockanimation?.default_offset
+																}
+																inputType="range"
+																defaultValue={80}
+																min={50}
+																max={1000}
+																suffix="px"
+																onChange={handleChange}
+															/>
+															<SettingRow
+																title={__("Animate Once", "blockons")}
+																slug="blockanimation_default_animate_once"
+																value={
+																	blockonsOptions.blockanimation
+																		?.default_animate_once
+																}
+																inputType="toggle"
+																onChange={handleChange}
+															/>
+															<SettingRow
+																title={__("Mirror Animations", "blockons")}
+																slug="blockanimation_default_mirror"
+																value={
+																	blockonsOptions.blockanimation?.default_mirror
+																}
+																inputType="toggle"
 																onChange={handleChange}
 															/>
 														</>
@@ -781,8 +872,32 @@ const Settings = () => {
 														</SettingGroup>
 													</>
 												)}
+											</tbody>
+										</table>
 
-												{isPremium && wcActive && (
+										<div className="blockons-more">
+											{__("More Add-Ons Coming Soon...", "blockons")}
+										</div>
+										<p className="center">
+											{__(
+												"Get in touch and let us know which add-ons you need for your site.",
+												"blockons"
+											)}
+										</p>
+									</div>
+
+									{isPremium && wcActive && (
+										<div id="blockons-content-4" className="blockons-content">
+											<SettingHeader
+												title={__("WooCommerce Addons", "blockons")}
+												description={__(
+													"Add extra, useful features to your WooCommerce online store",
+													"blockons"
+												)}
+											/>
+
+											<table className="form-table" role="presentation">
+												<tbody>
 													<>
 														<SettingRow
 															title={__("WooCommerce Side Cart", "blockons")}
@@ -1029,20 +1144,20 @@ const Settings = () => {
 															</>
 														)}
 													</>
-												)}
-											</tbody>
-										</table>
+												</tbody>
+											</table>
 
-										<div className="blockons-more">
-											{__("More Add-Ons Coming Soon...", "blockons")}
+											<div className="blockons-more">
+												{__("More Add-Ons Coming Soon...", "blockons")}
+											</div>
+											<p className="center">
+												{__(
+													"Get in touch and let us know which add-ons you need for your site.",
+													"blockons"
+												)}
+											</p>
 										</div>
-										<p className="center">
-											{__(
-												"Get in touch and let us know which add-ons you need for your site.",
-												"blockons"
-											)}
-										</p>
-									</div>
+									)}
 
 									<div id="blockons-content-help" className="blockons-content">
 										<InfoTab
@@ -1101,4 +1216,4 @@ const Settings = () => {
 	);
 };
 
-export default Settings;
+export default SettingsPage;

@@ -99,6 +99,34 @@
 	padding: 5px 6px;
 }
 /**
+ * Editor Note component
+ */
+.blockons-editor-note {
+	box-shadow: 0 1px 0 0 #e0e0e0;
+	margin: 0 0 20px;
+	padding: 0 0 15px;
+}
+.blockons-editor-note .bl-note-title {
+	font-size: 13px;
+	margin: 0 0 5px;
+	padding: 0;
+}
+.blockons-editor-note .bl-note-txt {
+	color: #757575;
+}
+.blockons-editor-note .bl-note-link {
+	display: inline-block;
+	background-color: #cae4f1;
+	color: #297cba;
+	padding: 3px 7px 4px;
+	border-radius: 3px;
+	box-shadow: 0 1px 5px rgb(0 0 0 / 15%);
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	font-size: 12px;
+	text-decoration: none;
+	margin-top: 15px;
+}
+/**
  * Visibility Settings added to all blocks - Blockons PRO
  */
 @media only screen and (min-width: 1100px) {

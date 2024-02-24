@@ -1,11 +1,19 @@
+import BlockonsNote from "../../../assets/blocks/notes/BlockonsNote";
 import "./editor.css";
 const { __ } = wp.i18n;
 const { addFilter } = wp.hooks;
 const { assign, merge } = lodash;
 import classnames from "classnames";
 const { createHigherOrderComponent } = wp.compose;
+
 const isPremium = Boolean(blockonsEditorObj.isPremium);
-const blockOptions = blockonsEditorObj.blockonsOptions;
+const addVisibility =
+	blockonsEditorObj.blockonsOptions?.blockvisibility?.enabled || false;
+const addAnimations =
+	blockonsEditorObj.blockonsOptions?.blockanimation?.enabled || false;
+const animationsSettings = blockonsEditorObj.blockonsOptions?.blockanimation;
+
+console.log("addAnimations", animationsSettings);
 
 /**
  * Add New Attributes to all blocks
@@ -14,7 +22,7 @@ function blockonsAddCustomAttributes(settings, name) {
 	// console.log({ settings, name });
 
 	const blockVisibilityAtts =
-		blockOptions.blockvisibility?.enabled === true
+		addVisibility === true
 			? {
 					blockonsHideOnDesktop: {
 						type: "boolean",
@@ -32,7 +40,7 @@ function blockonsAddCustomAttributes(settings, name) {
 			: {};
 
 	const blockAnimationAtts =
-		blockOptions.blockanimation?.enabled === true
+		addAnimations === true
 			? {
 					blockonsEnableAnimation: {
 						type: "boolean",
@@ -40,31 +48,31 @@ function blockonsAddCustomAttributes(settings, name) {
 					},
 					blockonsAnimation: {
 						type: "string",
-						default: "fade",
+						default: animationsSettings?.default_style || "fade",
 					},
 					blockonsAnimationDirection: {
 						type: "string",
-						default: "-up",
+						default: animationsSettings?.default_direction || "-up",
 					},
 					blockonsAnimationDuration: {
 						type: "number",
-						default: 400,
+						default: animationsSettings?.default_duration || 850,
 					},
 					blockonsAnimationDelay: {
 						type: "number",
-						default: 50,
+						default: animationsSettings?.default_delay || 50,
 					},
 					blockonsAnimationOffset: {
 						type: "number",
-						default: 120,
+						default: animationsSettings?.default_offset || 80,
 					},
 					blockonsAnimationOnce: {
 						type: "boolean",
-						default: false,
+						default: animationsSettings?.default_animate_once || false,
 					},
 					blockonsAnimationMirror: {
 						type: "boolean",
-						default: false,
+						default: animationsSettings?.default_mirror || false,
 					},
 			  }
 			: {};
@@ -77,8 +85,6 @@ function blockonsAddCustomAttributes(settings, name) {
 	return assign({}, settings, {
 		attributes: merge(settings.attributes, newAttributes),
 	});
-
-	// return settings;
 }
 /**
  * Add New Controls to all blocks
@@ -107,16 +113,33 @@ const blockonsAddInspectorControls = createHigherOrderComponent((BlockEdit) => {
 			name,
 		} = props;
 
+		const allowedBlockTypes = ["core/group", "core/columns", "core/column"];
+		const allowedVisibilityBlockTypes = [...allowedBlockTypes, "core/cover"];
+		const allowedAnimationBlockTypes = [...allowedBlockTypes, "core/heading"];
+
+		const showVisibilitySettings = allowedVisibilityBlockTypes.includes(name);
+		const showAnimationSettings = allowedAnimationBlockTypes.includes(name);
+
 		return (
 			<Fragment>
 				<BlockEdit {...props} />
 
-				{blockOptions.blockvisibility?.enabled === true && (
+				{addVisibility === true && showVisibilitySettings && (
 					<InspectorControls>
 						<PanelBody
 							title={__("Block Visibility", "blockons")}
 							initialOpen={false}
 						>
+							<BlockonsNote
+								imageUrl=""
+								title={__("Using Block Visibility", "blockons")}
+								text={__(
+									"Hide certain blocks by device screen size. For more information, click the link below.",
+									"blockons"
+								)}
+								link="https://blockons.com/documentation/block-visibility"
+							/>
+
 							<ToggleControl
 								checked={blockonsHideOnDesktop}
 								label={__("Hide on desktop", "blockons")}
@@ -142,12 +165,22 @@ const blockonsAddInspectorControls = createHigherOrderComponent((BlockEdit) => {
 					</InspectorControls>
 				)}
 
-				{blockOptions.blockanimation?.enabled === true && (
+				{addAnimations === true && showAnimationSettings && (
 					<InspectorControls>
 						<PanelBody
 							title={__("Block Animations", "blockons")}
 							initialOpen={false}
 						>
+							<BlockonsNote
+								imageUrl=""
+								title={__("Using Block Animations", "blockons")}
+								text={__(
+									"Add scroll animations for layout blocks in your WordPress editor. For more information, click the link below.",
+									"blockons"
+								)}
+								link="https://blockons.com/documentation/block-scroll-animations"
+							/>
+
 							<ToggleControl
 								checked={blockonsEnableAnimation}
 								label={__("Enable Block Animations", "blockons")}
@@ -309,7 +342,7 @@ const blockonsAddEditorNewAttributes = createHigherOrderComponent(
 			} = props;
 
 			const newClassnames =
-				isPremium && blockOptions.blockvisibility?.enabled === true
+				isPremium && addVisibility === true
 					? classnames(
 							className,
 							`${blockonsHideOnDesktop ? "hide-on-desktop" : ""} ${
@@ -364,7 +397,7 @@ const blockonsAddFrontendNewAttributes = (
 		blockonsAnimationMirror,
 	} = attributes;
 
-	if (blockOptions.blockvisibility?.enabled === true) {
+	if (addVisibility === true) {
 		extraProps.className = classnames(extraProps.className, {
 			"hide-on-desktop": blockonsHideOnDesktop,
 			"hide-on-tablet": blockonsHideOnTablet,
@@ -372,10 +405,7 @@ const blockonsAddFrontendNewAttributes = (
 		});
 	}
 
-	if (
-		blockOptions.blockanimation?.enabled === true &&
-		blockonsEnableAnimation
-	) {
+	if (addAnimations === true && blockonsEnableAnimation) {
 		extraProps[
 			"data-aos"
 		] = `${blockonsAnimation}${blockonsAnimationDirection}`;
