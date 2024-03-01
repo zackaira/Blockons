@@ -280,3 +280,65 @@ body.wp-admin.admin-bar .blockons-settings .blockons-page-loader {
 		top: 46px;
 	}
 }
+
+/**
+ * Blockons Inline Tooltip Settings
+ */
+body.blockons-tooltips .blockons-inline-tooltip {
+	display: inline-block;
+	vertical-align: middle;
+	border-bottom: 2px dashed #1433e0;
+	position: relative;
+	overflow: hidden;
+}
+body.blockons-tooltips .blockons-tooltip {
+	background-color: #424242;
+	border-radius: 4px;
+	position: absolute;
+	bottom: calc(100% + 5px);
+	left: 50%;
+	width: 180px;
+	margin-left: -90px;
+	padding: 6px 10px 8px;
+	text-align: left;
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out 0.15s, bottom 0.2s ease-in-out 0.15s;
+}
+body.blockons-tooltips .blockons-tooltip::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin: 0 0 0 -3px;
+	border-width: 6px;
+	border-style: solid;
+	border-color: #424242 transparent transparent transparent;
+}
+body.blockons-tooltips .blockons-tooltip-title {
+	margin: 0 0 3px;
+	padding: 0;
+	font-size: 14px;
+	color: #fff;
+}
+body.blockons-tooltips .blockons-tooltip-text {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	line-height: 1.52;
+	color: #cdcdcd;
+}
+body.blockons-tooltips .blockons-tooltip .blockons-tooltip-text a {
+	color: #fff !important;
+	font-weight: bold;
+	border: 0 !important;
+}
+body.blockons-tooltips .blockons-tooltip .blockons-tooltip-text a:hover {
+	text-decoration: underline;
+}
+body.blockons-tooltips .blockons-inline-tooltip.active {
+	overflow: visible;
+}
+body.blockons-tooltips .blockons-inline-tooltip.active .blockons-tooltip {
+	opacity: 1;
+	bottom: calc(100% + 8px);
+}

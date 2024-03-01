@@ -10,6 +10,20 @@ export const blockonsConvertToSlug = (text) => {
 		.replace(/ +/g, "_");
 };
 
+export function blockonsStringReplaceForLink(inputString) {
+	return inputString.replace(
+		/\((.*?) \[\*?(https?:\/\/[^\]]+)\]\)/g,
+		(match, linkText, url) => {
+			// Check if the original text contains the star indicating a new tab target
+			const hasStar = match.includes("[*");
+			// Construct the anchor tag with or without the target="_blank" attribute
+			return `<a href="${url}"${
+				hasStar ? ' target="_blank"' : ""
+			}>${linkText}</a>`;
+		}
+	);
+}
+
 /*
  * Setting for the Blocks settings displayed in the admin dashboard
  */

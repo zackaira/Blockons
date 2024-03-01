@@ -125,8 +125,15 @@ class Blockons_Admin {
 	 * Function to check for active plugins
 	 */
 	public function blockons_admin_body_classes($admin_classes) {
+		$blockonsSavedOptions = get_option('blockons_options');
+		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
+		
 		if ( blockons_fs()->can_use_premium_code__premium_only() ) {
 			$admin_classes .= ' ' . sanitize_html_class('blockons-pro');
+
+			if (isset($blockonsOptions->tooltips->enabled) && $blockonsOptions->tooltips->enabled == true) {
+				$admin_classes .= ' ' . sanitize_html_class('blockons-tooltips');
+			}
 		} else {
 			$admin_classes .= ' ' . sanitize_html_class('blockons-free');
 		}

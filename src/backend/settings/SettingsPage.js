@@ -292,9 +292,40 @@ const SettingsPage = () => {
 											<table className="form-table" role="presentation">
 												<tbody>
 													<SettingRow
+														title={__("Tooltips", "blockons")}
+														description={__(
+															"Add a tooltip to core paragraph and heading blocks anywhere within in the editor.",
+															"blockons"
+														)}
+														inputType="heading"
+													/>
+													<SettingRow
+														title={__("Enable Tooltips", "blockons")}
+														slug="tooltips_enabled"
+														value={blockonsOptions.tooltips?.enabled}
+														inputType="toggle"
+														onChange={handleChange}
+													/>
+													{blockonsOptions.tooltips?.enabled && (
+														<>
+															<SettingRow
+																title={__("Tooltip Theme", "blockons")}
+																slug="tooltips_theme"
+																value={blockonsOptions.tooltips?.theme}
+																inputType="select"
+																options={{
+																	one: "Dark",
+																	two: "Light",
+																}}
+																onChange={handleChange}
+															/>
+														</>
+													)}
+
+													<SettingRow
 														title={__("Block Visibility", "blockons")}
 														description={__(
-															"Add a Blockons Visibility settings panel to each block and select to show or hide any blocks per device - Desktop, Tablet & Mobile",
+															"Add Blockons Visibility settings to certain blocks and select to show or hide the editor blocks per device - Desktop, Tablet & Mobile. Blocks Visibility is available on layout blocks such as Group, Columns, and Cover blocks.",
 															"blockons"
 														)}
 														inputType="heading"
@@ -332,7 +363,7 @@ const SettingsPage = () => {
 													<SettingRow
 														title={__("Block Animations", "blockons")}
 														description={__(
-															"Animate your blocks as they appear on screen when scrolling down the page",
+															"Add Scroll Animations to certain blocks so they animate into screen when scrolling on the page. Block Animations are available on layout blocks and certain elements such as Group blocks, Columns, and Heading blocks.",
 															"blockons"
 														)}
 														inputType="heading"

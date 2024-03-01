@@ -99,6 +99,32 @@
 	padding: 5px 6px;
 }
 /**
+ * Blockons Inline Tooltip Settings
+ */
+.blockons-tooltip-settings {
+	min-width: 200px;
+}
+.blockons-tooltip-settings .blockons-tooltip-btns {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+.blockons-tooltip-settings .blockons-tooltip-btns.active {
+	justify-content: space-between;
+}
+.blockons-tooltip-settings .blockons-tooltip-button {
+	font-size: 12px;
+}
+.blockons-tooltip-settings .blockons-tooltip-button.remove {
+}
+/* -- Duplicate to frontend CSS -- */
+body.blockons-tooltips .blockons-inline-tooltip {
+	display: inline-block;
+	vertical-align: baseline;
+	border-bottom: 2px dashed #1433e0;
+	position: relative;
+}
+/**
  * Editor Note component
  */
 .blockons-editor-note {
@@ -144,10 +170,10 @@
 		z-index: 28;
 		background: repeating-linear-gradient(
 			-45deg,
-			#c2c2c2 0px,
-			#c2c2c2 10px,
-			#454545 10px,
-			#454545 15px
+			#e0e0e0 0px,
+			#e0e0e0 10px,
+			#b1b1b1 10px,
+			#b1b1b1 15px
 		);
 		opacity: 0.18;
 	}
@@ -185,10 +211,10 @@
 		z-index: 28;
 		background: repeating-linear-gradient(
 			-45deg,
-			#c2c2c2 0px,
-			#c2c2c2 10px,
-			#454545 10px,
-			#454545 15px
+			#e0e0e0 0px,
+			#e0e0e0 10px,
+			#b1b1b1 10px,
+			#b1b1b1 15px
 		);
 		opacity: 0.18;
 	}
@@ -226,10 +252,10 @@
 		z-index: 28;
 		background: repeating-linear-gradient(
 			-45deg,
-			#c2c2c2 0px,
-			#c2c2c2 10px,
-			#454545 10px,
-			#454545 15px
+			#e0e0e0 0px,
+			#e0e0e0 10px,
+			#b1b1b1 10px,
+			#b1b1b1 15px
 		);
 		opacity: 0.18;
 	}

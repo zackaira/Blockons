@@ -44,8 +44,15 @@ class Blockons_Frontend {
 	 * Function to check for active plugins
 	 */
 	public function blockons_frontend_body_classes($classes) {
+		$blockonsSavedOptions = get_option('blockons_options');
+		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
+
 		if ( blockons_fs()->can_use_premium_code__premium_only() ) {
 			$classes[] = sanitize_html_class('blockons-pro');
+
+			if (isset($blockonsOptions->tooltips->enabled) && $blockonsOptions->tooltips->enabled == true) {
+				$classes[] = sanitize_html_class('blockons-tooltips');
+			}
 		} else {
 			$classes[] = sanitize_html_class('blockons-free');
 		}
