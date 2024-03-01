@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import { ChromePicker } from "react-color";
-import { blockonsConvertToSlug } from "../../helpers";
+import { blockonsConvertToSlug } from "../../../helpers";
 import { __ } from "@wordpress/i18n";
 
 const ColorPicker = (props) => {

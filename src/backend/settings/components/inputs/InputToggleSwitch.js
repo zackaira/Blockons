@@ -1,5 +1,5 @@
 import React from "react";
-import { blockonsConvertToSlug } from "../../helpers";
+import { blockonsConvertToSlug } from "../../../helpers";
 
 const InputToggleSwitch = ({ slug, title, value, onChange }) => {
 	const inputTitleSlug = blockonsConvertToSlug(slug)

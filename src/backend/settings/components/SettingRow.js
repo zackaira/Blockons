@@ -6,7 +6,7 @@ import InputText from "./inputs/InputText";
 import InputRange from "./inputs/InputRange";
 import ColorPicker from "./inputs/ColorPicker";
 import SettingTooltip from "./UI/SettingTooltip";
-import { blockonsConvertToSlug } from "../helpers";
+import { blockonsConvertToSlug } from "../../helpers";
 
 import Heading from "./UI/Heading";
 

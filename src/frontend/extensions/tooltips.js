@@ -10,7 +10,7 @@ export function createTooltipComponent(title, text) {
 	return tooltipComponent;
 }
 
-export function initializeTooltips() {
+export function initializeTooltips(blockonsOptions = {}) {
 	const blockonsTooltips = document.querySelectorAll(
 		".blockons-inline-tooltip"
 	);
@@ -18,6 +18,8 @@ export function initializeTooltips() {
 		blockonsTooltips.forEach((tooltip) => {
 			const title = tooltip.getAttribute("data-title");
 			const text = tooltip.getAttribute("data-text");
+			console.log("blockonsOptions", blockonsOptions);
+			tooltip.classList.add(blockonsOptions?.theme || "one");
 
 			if (title || text) {
 				const tooltipComponent = createTooltipComponent(title, text);

@@ -7,8 +7,8 @@ const OptimizeCSSAssetsPlugin = require("css-minimizer-webpack-plugin");
 
 const config = {
 	entry: {
-		settings: "./src/settings.js",
-		"settings.min": "./src/settings.js",
+		settings: "./src/backend/settings/settings.js",
+		"settings.min": "./src/backend/settings/settings.js",
 		admin: "./src/backend/admin/admin.js",
 		"admin.min": "./src/backend/admin/admin.js",
 		editor: "./src/backend/editor/editor.js",

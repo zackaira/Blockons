@@ -1,5 +1,5 @@
 import React from "react";
-import { blockonsConvertToSlug } from "../../helpers";
+import { blockonsConvertToSlug } from "../../../helpers";
 
 const InputSelect = (props) => {
 	const selectTitleSlug = blockonsConvertToSlug(props.slug)

@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Blockons Tooltips
 	if (isPremium && blockonsOptions?.tooltips?.enabled) {
 		import("./extensions/tooltips.js").then((Tooltips) => {
-			Tooltips.initializeTooltips();
+			Tooltips.initializeTooltips(blockonsOptions?.tooltips);
 		});
 	}
 });

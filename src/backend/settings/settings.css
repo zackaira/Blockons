@@ -940,6 +940,13 @@ a.blockons-docs::before {
 	border: 1px solid #acacac;
 	color: #747474;
 }
+/* ---- Go Pro Upgrade ---- */
+.blockons-gopro {
+}
+.blockons-gopro-title {
+}
+.blockons-gopro-desc {
+}
 /* -- Multi Checkbox Inputs -- */
 /* .blockons-multioption {
 	display: inline-block;

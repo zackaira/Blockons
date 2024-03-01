@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { blockonsConvertToSlug } from "../../helpers";
+import { blockonsConvertToSlug } from "../../../helpers";
 
 const InputRange = (props) => {
 	const rangeTitleSlug = blockonsConvertToSlug(props.slug)
