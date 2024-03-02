@@ -18,7 +18,6 @@ export function initializeTooltips(blockonsOptions = {}) {
 		blockonsTooltips.forEach((tooltip) => {
 			const title = tooltip.getAttribute("data-title");
 			const text = tooltip.getAttribute("data-text");
-			console.log("blockonsOptions", blockonsOptions);
 			tooltip.classList.add(blockonsOptions?.theme || "one");
 
 			if (title || text) {

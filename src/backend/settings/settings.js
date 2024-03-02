@@ -1,5 +1,5 @@
 /*
- * Site Chat Admin / Settings Page JS
+ * Settings Page JS
  */
 import React from "react";
 import ReactDOM from "react-dom";
