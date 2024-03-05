@@ -11,8 +11,9 @@ export const blockonsConvertToSlug = (text) => {
 };
 
 export function blockonsStringReplaceForLink(inputString) {
+	console.log("Here is the inputString: ", inputString);
 	return inputString.replace(
-		/\((.*?) \[\*?(https?:\/\/[^\]]+)\]\)/g,
+		/\((.*?)\[\*?(https?:\/\/[^\]]+)\]\)/g,
 		(match, linkText, url) => {
 			// Check if the original text contains the star indicating a new tab target
 			const hasStar = match.includes("[*");

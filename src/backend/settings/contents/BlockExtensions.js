@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { __ } from "@wordpress/i18n";
 import SettingHeader from "../components/SettingHeader";
 import SettingRow from "../components/SettingRow";
+import SettingNote from "../components/UI/SettingNote";
 
-const BlockExtensions = ({ blockonsOptions, handleSettingChange }) => {
+const BlockExtensions = ({
+	blockonsOptions,
+	pluginUrl,
+	upgradeUrl,
+	isPremium,
+	handleSettingChange,
+}) => {
+	const [tooltipsPro, setTooltipsPro] = useState(false);
+	const [visibilityPro, setVisibilityPro] = useState(false);
+	const [animationsPro, setAnimationsPro] = useState(false);
+
 	const onSettingChange = (e) => {
 		handleSettingChange(e);
 	};
@@ -21,9 +32,9 @@ const BlockExtensions = ({ blockonsOptions, handleSettingChange }) => {
 			<table className="form-table" role="presentation">
 				<tbody>
 					<SettingRow
-						title={__("Tooltips", "blockons")}
+						title={__("Content Tooltips", "blockons")}
 						description={__(
-							"Add a tooltip to core paragraph and heading blocks anywhere within in the editor.",
+							"Add content tooltips to core paragraph and heading blocks anywhere within in the editor.",
 							"blockons"
 						)}
 						inputType="heading"
@@ -34,20 +45,107 @@ const BlockExtensions = ({ blockonsOptions, handleSettingChange }) => {
 						value={blockonsOptions.tooltips?.enabled}
 						inputType="toggle"
 						onChange={onSettingChange}
+						tooltip={__(
+							"Add basic content tooltips to your website.",
+							"blockons"
+						)}
+						documentation="https://blockons/documentation/tooltips"
 					/>
+
 					{blockonsOptions.tooltips?.enabled && (
 						<>
-							<SettingRow
-								title={__("Tooltip Theme", "blockons")}
-								slug="tooltips_theme"
-								value={blockonsOptions.tooltips?.theme}
-								inputType="select"
-								options={{
-									one: "Dark",
-									two: "Light",
-								}}
-								onChange={onSettingChange}
-							/>
+							{isPremium ? (
+								<>
+									<SettingRow
+										title={__("Tooltips Styles", "blockons")}
+										slug="tooltips_style"
+										value={blockonsOptions.tooltips?.style}
+										inputType="select"
+										options={{
+											underlined: "Underlined",
+											dashed: "Underline Dashed",
+											highlight: "Highlighted",
+											icon: "icon",
+										}}
+										onChange={onSettingChange}
+									/>
+									{blockonsOptions.tooltips?.style === "icon" && (
+										<SettingRow
+											title={__("Tooltips Icon", "blockons")}
+											slug="tooltips_default_icon"
+											value={blockonsOptions.tooltips?.default_icon}
+											inputType="select"
+											options={{
+												info: "Information",
+												question: "Question",
+												warning: "Warning",
+												alert: "Alert",
+											}}
+											onChange={onSettingChange}
+										/>
+									)}
+
+									<SettingRow
+										title={__("Tooltips Theme", "blockons")}
+										slug="tooltips_theme"
+										value={blockonsOptions.tooltips?.theme}
+										inputType="select"
+										options={{
+											one: "Dark",
+											two: "Light",
+										}}
+										onChange={onSettingChange}
+									/>
+									<SettingRow
+										title={__("Color", "blockons")}
+										slug="tooltips_color"
+										value={blockonsOptions.tooltips?.color}
+										inputType="colorpicker"
+										onChange={onSettingChange}
+										defaultValue="#000000"
+									/>
+								</>
+							) : (
+								<>
+									<SettingNote
+										note={__(
+											"Basic Tooltips are enabled. You can now create content tooltips within Heading and Paragraph blocks.",
+											"blockons"
+										)}
+									/>
+									<SettingRow
+										title={__("Premium Tooltips", "blockons")}
+										inputType="toggle"
+										slug="tooltips_pro"
+										value={tooltipsPro}
+										onChange={() => setTooltipsPro(!tooltipsPro)}
+										documentation="https://blockons/documentation/tooltips"
+									/>
+									{tooltipsPro && (
+										<SettingRow
+											inputType="upgrade"
+											title={__("Premium Tooltips", "blockons")}
+											description={__(
+												"Upgrade to Blockons Pro to add premium tooltips.",
+												"blockons"
+											)}
+											upgradeUrl={upgradeUrl}
+											proFeatures={[
+												__(
+													"Select between Light & Dark tooltip themes",
+													"blockons"
+												),
+												__(
+													"Add custom links into your Tooltip text",
+													"blockons"
+												),
+												__("Select from different tooltip styles", "blockons"),
+												__("More features coming soon", "blockons"),
+											]}
+										/>
+									)}
+								</>
+							)}
 						</>
 					)}
 
@@ -59,33 +157,65 @@ const BlockExtensions = ({ blockonsOptions, handleSettingChange }) => {
 						)}
 						inputType="heading"
 					/>
-					<SettingRow
-						title={__("Enable Block Visibility", "blockons")}
-						slug="blockvisibility_enabled"
-						value={blockonsOptions.blockvisibility?.enabled}
-						inputType="toggle"
-						onChange={onSettingChange}
-					/>
-					{blockonsOptions.blockvisibility?.enabled && (
+
+					{isPremium ? (
 						<>
 							<SettingRow
-								title={__("Tablet Breakpoint")}
-								slug="blockvisibility_tablet"
-								value={blockonsOptions.blockvisibility?.tablet}
-								placeholder="980"
-								inputType="number"
+								title={__("Enable Block Visibility", "blockons")}
+								slug="blockvisibility_enabled"
+								value={blockonsOptions.blockvisibility?.enabled}
+								inputType="toggle"
 								onChange={onSettingChange}
-								suffix="px"
 							/>
+							{blockonsOptions.blockvisibility?.enabled && (
+								<>
+									<SettingRow
+										title={__("Tablet Breakpoint")}
+										slug="blockvisibility_tablet"
+										value={blockonsOptions.blockvisibility?.tablet}
+										placeholder="980"
+										inputType="number"
+										onChange={onSettingChange}
+										suffix="px"
+									/>
+									<SettingRow
+										title={__("Mobile Breakpoint")}
+										slug="blockvisibility_mobile"
+										value={blockonsOptions.blockvisibility?.mobile}
+										placeholder="767"
+										inputType="number"
+										onChange={onSettingChange}
+										suffix="px"
+									/>
+								</>
+							)}
+						</>
+					) : (
+						<>
 							<SettingRow
-								title={__("Mobile Breakpoint")}
-								slug="blockvisibility_mobile"
-								value={blockonsOptions.blockvisibility?.mobile}
-								placeholder="767"
-								inputType="number"
-								onChange={onSettingChange}
-								suffix="px"
+								title={__("Add Visibility", "blockons")}
+								inputType="toggle"
+								slug="visibility_pro"
+								value={visibilityPro}
+								onChange={() => setVisibilityPro(!visibilityPro)}
+								documentation="https://blockons/documentation/block-visibility"
 							/>
+							{visibilityPro && (
+								<SettingRow
+									inputType="upgrade"
+									title={__("Add Block Visibility", "blockons")}
+									description={__(
+										"Upgrade to Blockons Pro to add premium block visibility to editor layout blocks.",
+										"blockons"
+									)}
+									upgradeUrl={upgradeUrl}
+									proFeatures={[
+										__("Show / Hide Blocks per screen size", "blockons"),
+										__("Set Tablet Breakpoint", "blockons"),
+										__("Set Mobile Breakpoint", "blockons"),
+									]}
+								/>
+							)}
 						</>
 					)}
 
@@ -97,89 +227,132 @@ const BlockExtensions = ({ blockonsOptions, handleSettingChange }) => {
 						)}
 						inputType="heading"
 					/>
-					<SettingRow
-						title={__("Enable Block Animations", "blockons")}
-						slug="blockanimation_enabled"
-						value={blockonsOptions.blockanimation?.enabled}
-						inputType="toggle"
-						onChange={onSettingChange}
-					/>
-					{blockonsOptions.blockanimation?.enabled && (
+
+					{isPremium ? (
 						<>
 							<SettingRow
-								title={__("Style", "blockons")}
-								slug="blockanimation_default_style"
-								value={blockonsOptions.blockanimation?.default_style}
-								inputType="select"
-								options={{
-									fade: "Fade",
-									slide: "Slide",
-									flip: "Flip",
-									"zoom-in": "Zoom In",
-									"zoom-out": "Zoom Out",
-								}}
-								onChange={onSettingChange}
-							/>
-							<SettingRow
-								title={__("Direction", "blockons")}
-								slug="blockanimation_default_direction"
-								value={blockonsOptions.blockanimation?.default_direction}
-								inputType="select"
-								options={{
-									"-up": "Up",
-									"-down": "Down",
-									"-left": "Left",
-									"-right": "Right",
-								}}
-								onChange={onSettingChange}
-							/>
-							<SettingRow
-								title={__("Duration", "blockons")}
-								slug="blockanimation_default_duration"
-								value={blockonsOptions.blockanimation?.default_duration}
-								inputType="range"
-								defaultValue={850}
-								min={50}
-								max={4000}
-								suffix="px"
-								onChange={onSettingChange}
-							/>
-							<SettingRow
-								title={__("Delay", "blockons")}
-								slug="blockanimation_default_delay"
-								value={blockonsOptions.blockanimation?.default_delay}
-								inputType="range"
-								defaultValue={50}
-								min={50}
-								max={4000}
-								suffix="px"
-								onChange={onSettingChange}
-							/>
-							<SettingRow
-								title={__("Offset", "blockons")}
-								slug="blockanimation_default_offset"
-								value={blockonsOptions.blockanimation?.default_offset}
-								inputType="range"
-								defaultValue={80}
-								min={50}
-								max={1000}
-								suffix="px"
-								onChange={onSettingChange}
-							/>
-							<SettingRow
-								title={__("Animate Once", "blockons")}
-								slug="blockanimation_default_animate_once"
-								value={blockonsOptions.blockanimation?.default_animate_once}
+								title={__("Enable Block Animations", "blockons")}
+								slug="blockanimation_enabled"
+								value={blockonsOptions.blockanimation?.enabled}
 								inputType="toggle"
 								onChange={onSettingChange}
 							/>
+							{blockonsOptions.blockanimation?.enabled && (
+								<>
+									<SettingRow
+										title={__("Style", "blockons")}
+										slug="blockanimation_default_style"
+										value={blockonsOptions.blockanimation?.default_style}
+										inputType="select"
+										options={{
+											fade: "Fade",
+											slide: "Slide",
+											flip: "Flip",
+											"zoom-in": "Zoom In",
+											"zoom-out": "Zoom Out",
+										}}
+										onChange={onSettingChange}
+									/>
+									<SettingRow
+										title={__("Direction", "blockons")}
+										slug="blockanimation_default_direction"
+										value={blockonsOptions.blockanimation?.default_direction}
+										inputType="select"
+										options={{
+											"-up": "Up",
+											"-down": "Down",
+											"-left": "Left",
+											"-right": "Right",
+										}}
+										onChange={onSettingChange}
+									/>
+									<SettingRow
+										title={__("Duration", "blockons")}
+										slug="blockanimation_default_duration"
+										value={blockonsOptions.blockanimation?.default_duration}
+										inputType="range"
+										defaultValue={850}
+										min={50}
+										max={4000}
+										suffix="px"
+										onChange={onSettingChange}
+									/>
+									<SettingRow
+										title={__("Delay", "blockons")}
+										slug="blockanimation_default_delay"
+										value={blockonsOptions.blockanimation?.default_delay}
+										inputType="range"
+										defaultValue={50}
+										min={50}
+										max={4000}
+										suffix="px"
+										onChange={onSettingChange}
+									/>
+									<SettingRow
+										title={__("Offset", "blockons")}
+										slug="blockanimation_default_offset"
+										value={blockonsOptions.blockanimation?.default_offset}
+										inputType="range"
+										defaultValue={80}
+										min={50}
+										max={1000}
+										suffix="px"
+										onChange={onSettingChange}
+									/>
+									<SettingRow
+										title={__("Animate Once", "blockons")}
+										slug="blockanimation_default_animate_once"
+										value={blockonsOptions.blockanimation?.default_animate_once}
+										inputType="toggle"
+										onChange={onSettingChange}
+									/>
+									<SettingRow
+										title={__("Mirror Animations", "blockons")}
+										slug="blockanimation_default_mirror"
+										value={blockonsOptions.blockanimation?.default_mirror}
+										inputType="toggle"
+										onChange={onSettingChange}
+									/>
+								</>
+							)}
+						</>
+					) : (
+						<>
 							<SettingRow
-								title={__("Mirror Animations", "blockons")}
-								slug="blockanimation_default_mirror"
-								value={blockonsOptions.blockanimation?.default_mirror}
+								title={__("Add Animations", "blockons")}
 								inputType="toggle"
-								onChange={onSettingChange}
+								slug="animations_pro"
+								value={animationsPro}
+								onChange={() => setAnimationsPro(!animationsPro)}
+								tooltip={__(
+									"Add block animations to layout block in the WordPress Editor.",
+									"blockons"
+								)}
+								documentation="https://blockons/documentation/block-animations"
 							/>
+							{animationsPro && (
+								<SettingRow
+									inputType="upgrade"
+									title={__("Add Block Animations", "blockons")}
+									description={__(
+										"Upgrade to Blockons Pro to add premium block animations to editor layout blocks.",
+										"blockons"
+									)}
+									upgradeUrl={upgradeUrl}
+									proFeatures={[
+										__("Add Scroll Animations to Layout Blocks", "blockons"),
+										__("Edit block animation style", "blockons"),
+										__(
+											"Set animation Direction, Duration & Delay & Offset",
+											"blockons"
+										),
+										__(
+											"Select if animations play once off or mirror animations in and out of screen",
+											"blockons"
+										),
+									]}
+								/>
+							)}
 						</>
 					)}
 				</tbody>

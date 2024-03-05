@@ -57,7 +57,7 @@ const Edit = (props) => {
 		},
 		setAttributes,
 	} = props;
-
+	const pluginUrl = blockonsEditorObj.pluginUrl || "";
 	const blockProps = useBlockProps({
 		className: `align-${alignment}`,
 	});
@@ -139,7 +139,7 @@ const Edit = (props) => {
 					)
 				) : (
 					<img
-						src={`${blockonsObj.pluginUrl}assets/images/${imageProportion}.png`}
+						src={`${pluginUrl}assets/images/${imageProportion}.png`}
 						alt={slideItem.alt}
 					/>
 				)}

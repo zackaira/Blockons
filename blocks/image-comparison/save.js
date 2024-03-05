@@ -4,6 +4,7 @@
 import { RichText, useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {
+	const pluginUrl = blockonsEditorObj.pluginUrl || "";
 	const blockProps = useBlockProps.save({
 		className: `align-${attributes.alignment}`,
 	});
@@ -38,7 +39,7 @@ const Save = ({ attributes }) => {
 							src={
 								attributes.imageBefore?.url
 									? attributes.imageBefore.url
-									: `${blockonsObj.pluginUrl}assets/images/placeholder.png`
+									: `${pluginUrl}assets/images/placeholder.png`
 							}
 						/>
 						{attributes.imageLabels && (
@@ -58,7 +59,7 @@ const Save = ({ attributes }) => {
 							src={
 								attributes.imageAfter?.url
 									? attributes.imageAfter.url
-									: `${blockonsObj.pluginUrl}assets/images/placeholder2.png`
+									: `${pluginUrl}assets/images/placeholder2.png`
 							}
 						/>
 						{attributes.imageLabels && (

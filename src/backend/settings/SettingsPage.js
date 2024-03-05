@@ -17,6 +17,7 @@ import ScrollIndicator from "../../frontend/site-addons/scrollindicator/ScrollIn
 const SettingsPage = () => {
 	const blockonsObject = blockonsObj;
 	const url = `${blockonsObject.apiUrl}blcns/v1`;
+	const pluginUrl = blockonsObject.pluginUrl;
 	const [loader, setLoader] = useState(false);
 	const [loadSetting, setLoadSetting] = useState(true);
 	const [activeTab, setActiveTab] = useState("1");
@@ -196,19 +197,17 @@ const SettingsPage = () => {
 										{__("Blocks", "blockons")}
 									</a>
 								</li>
-								{isPremium && (
-									<li>
-										<a
-											id="blockonstab-2"
-											className={`blockons-tab ${
-												activeTab === "2" ? "active" : ""
-											}`}
-											onClick={() => changeTab("2")}
-										>
-											{__("Block Extensions", "blockons")}
-										</a>
-									</li>
-								)}
+								<li>
+									<a
+										id="blockonstab-2"
+										className={`blockons-tab ${
+											activeTab === "2" ? "active" : ""
+										}`}
+										onClick={() => changeTab("2")}
+									>
+										{__("Block Extensions", "blockons")}
+									</a>
+								</li>
 								<li>
 									<a
 										id="blockonstab-3"
@@ -265,19 +264,20 @@ const SettingsPage = () => {
 										/>
 									</div>
 
-									{isPremium && (
-										<div
-											id="blockons-content-2"
-											className={`blockons-content ${
-												activeTab === "2" ? "active" : ""
-											}`}
-										>
-											<BlockExtensions
-												blockonsOptions={blockonsOptions}
-												handleSettingChange={handleChange}
-											/>
-										</div>
-									)}
+									<div
+										id="blockons-content-2"
+										className={`blockons-content ${
+											activeTab === "2" ? "active" : ""
+										}`}
+									>
+										<BlockExtensions
+											blockonsOptions={blockonsOptions}
+											pluginUrl={pluginUrl}
+											upgradeUrl={blockonsObject.upgradeUrl}
+											isPremium={isPremium}
+											handleSettingChange={handleChange}
+										/>
+									</div>
 
 									<div
 										id="blockons-content-3"

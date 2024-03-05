@@ -209,9 +209,9 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.1.01 =
 * Styling tweaks/fixes
-* Fixed minor Search block bug
+* Fixed minor Search block placeholder bug
 * Version compatibility for WC 8.6
-* 
+* Fixed Blocks Sidebar bug breaking the editor
 * 
 
 = 1.1.00 =

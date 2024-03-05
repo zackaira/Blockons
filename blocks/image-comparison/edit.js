@@ -46,7 +46,7 @@ const Edit = (props) => {
 		},
 		setAttributes,
 	} = props;
-
+	const pluginUrl = blockonsEditorObj.pluginUrl || "";
 	const blockProps = useBlockProps({
 		className: `align-${alignment}`,
 	});
@@ -255,7 +255,7 @@ const Edit = (props) => {
 							src={
 								imageBefore?.url
 									? imageBefore.url
-									: `${blockonsObj.pluginUrl}assets/images/placeholder.png`
+									: `${pluginUrl}assets/images/placeholder.png`
 							}
 						/>
 						{imageLabels && (
@@ -278,7 +278,7 @@ const Edit = (props) => {
 							src={
 								imageAfter?.url
 									? imageAfter.url
-									: `${blockonsObj.pluginUrl}assets/images/placeholder2.png`
+									: `${pluginUrl}assets/images/placeholder2.png`
 							}
 						/>
 						{imageLabels && (

@@ -49,11 +49,11 @@ const Edit = (props) => {
 		},
 		setAttributes,
 	} = props;
-
+	const pluginUrl = blockonsEditorObj.pluginUrl || "";
 	const blockProps = useBlockProps({
 		className: ``,
 	});
-	const isPro = Boolean(blockonsDetails.isPremium);
+	const isPro = Boolean(blockonsEditorObj.isPremium);
 	const [masonry, setMasonry] = useState();
 
 	useEffect(() => {
@@ -86,9 +86,11 @@ const Edit = (props) => {
 			const msnryEle = document.querySelector(".blockons-gallery.masonry");
 			masonry.reloadItems();
 
-			setTimeout(() => {
-				imagesLoaded(msnryEle, () => masonry.layout());
-			}, 200);
+			if (msnryEle) {
+				setTimeout(() => {
+					imagesLoaded(msnryEle, () => masonry.layout());
+				}, 200);
+			}
 		}
 	}, [galleryImages, columns, gridGap, imageProportion, imageCaption]);
 
@@ -214,7 +216,7 @@ const Edit = (props) => {
 								)
 							) : (
 								<img
-									src={`${blockonsObj.pluginUrl}assets/images/${imageProportion}.png`}
+									src={`${pluginUrl}assets/images/${imageProportion}.png`}
 									alt={imageItem.alt}
 								/>
 							)}

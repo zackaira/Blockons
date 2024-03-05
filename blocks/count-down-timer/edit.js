@@ -1,6 +1,3 @@
-/**
- * WordPress dependencies
- */
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
@@ -93,18 +90,25 @@ const Edit = (props) => {
 
 	useEffect(() => {
 		if (selectedDateTime) {
-			if (currentInterval) clearInterval(currentInterval);
+			console.log(selectedDateTime);
 			const currentTimer = runCountDownTimer(selectedDateTime, dateTime);
 			setCurrentInterval(currentTimer);
-			const counterElementParent =
-				document.getElementById(selectedDateTime).parentElement;
-			if (counterElementParent.classList.contains("hide-timer")) {
+
+			const counterParent =
+				document.getElementById(selectedDateTime)?.parentElement || "";
+			if (counterParent && counterParent.classList.contains("hide-timer")) {
 				setTimeout(() => {
-					counterElementParent.classList.remove("hide-timer");
+					counterParent.classList.remove("hide-timer");
 				}, 400);
 			}
 		}
 	}, [selectedDateTime]);
+
+	useEffect(() => {
+		return () => {
+			if (currentInterval) clearInterval(currentInterval);
+		};
+	}, [currentInterval]);
 
 	return (
 		<div {...blockProps}>
@@ -800,10 +804,10 @@ const Edit = (props) => {
 
 function runCountDownTimer(elementId, dateTime) {
 	const counterElement = document.getElementById(elementId);
-	const counterElementParent = counterElement.parentElement;
+	const counterElementParent = counterElement?.parentElement || "";
 	const countDownDate = new Date(dateTime).getTime();
-	const onCompleteText = counterElement.getAttribute("data-completeText");
-	const onCompleteHide = counterElement.getAttribute("data-completeHide");
+
+	if (!counterElement || !counterElementParent) return;
 
 	const updateCountdown = () => {
 		const now = new Date().getTime();
@@ -863,8 +867,8 @@ function runCountDownTimer(elementId, dateTime) {
 		}
 	};
 
-	const x = setInterval(updateCountdown, 1000);
-	return x;
+	const interval = setInterval(updateCountdown, 1000);
+	return interval;
 }
 
 export default Edit;

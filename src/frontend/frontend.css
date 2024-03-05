@@ -285,14 +285,11 @@ body.wp-admin.admin-bar .blockons-settings .blockons-page-loader {
  * Blockons Inline Tooltip Settings
  */
 body.blockons-tooltips .blockons-inline-tooltip {
-	display: inline-block;
-	vertical-align: middle;
 	border-bottom: 2px dashed #1433e0;
 	position: relative;
 	overflow: hidden;
 }
 body.blockons-tooltips .blockons-tooltip {
-	background-color: #424242;
 	border-radius: 4px;
 	position: absolute;
 	bottom: calc(100% + 5px);
@@ -318,17 +315,14 @@ body.blockons-tooltips .blockons-tooltip-title {
 	margin: 0 0 3px;
 	padding: 0;
 	font-size: 14px;
-	color: #fff;
 }
 body.blockons-tooltips .blockons-tooltip-text {
 	margin: 0;
 	padding: 0;
 	font-size: 12px;
 	line-height: 1.52;
-	color: #cdcdcd;
 }
 body.blockons-tooltips .blockons-tooltip .blockons-tooltip-text a {
-	color: #fff !important;
 	font-weight: bold;
 	border: 0 !important;
 }
@@ -341,4 +335,37 @@ body.blockons-tooltips .blockons-inline-tooltip.active {
 body.blockons-tooltips .blockons-inline-tooltip.active .blockons-tooltip {
 	opacity: 1;
 	bottom: calc(100% + 8px);
+}
+/* -- Theme One -- */
+body.blockons-tooltips .blockons-tooltip.one {
+	background-color: #424242;
+}
+body.blockons-tooltips .blockons-tooltip.one::after {
+	border-color: #424242 transparent transparent transparent;
+}
+body.blockons-tooltips .blockons-tooltip.one .blockons-tooltip-title {
+	color: #fff;
+}
+body.blockons-tooltips .blockons-tooltip.one .blockons-tooltip-text {
+	color: #cdcdcd;
+}
+body.blockons-tooltips .blockons-tooltip.one .blockons-tooltip-text a {
+	color: #fff !important;
+}
+/* -- Theme Two -- */
+body.blockons-tooltips .blockons-tooltip.two {
+	background-color: #fff;
+	box-shadow: 0 2px 12px rgb(0 0 0 / 20%);
+}
+body.blockons-tooltips .blockons-tooltip.two::after {
+	border-color: #fff transparent transparent transparent;
+}
+body.blockons-tooltips .blockons-tooltip.one .blockons-tooltip-title {
+	color: #333;
+}
+body.blockons-tooltips .blockons-tooltip.one .blockons-tooltip-text {
+	color: #222;
+}
+body.blockons-tooltips .blockons-tooltip.one .blockons-tooltip-text a {
+	color: #000 !important;
 }

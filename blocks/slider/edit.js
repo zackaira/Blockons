@@ -67,8 +67,9 @@ const Edit = (props) => {
 		},
 		setAttributes,
 	} = props;
-	const site_url = blockonsObj.apiUrl;
-	const wcActive = blockonsObj.wcActive;
+	const site_url = blockonsEditorObj.apiUrl;
+	const wcActive = blockonsEditorObj.wcActive;
+	const pluginUrl = blockonsEditorObj.pluginUrl || "";
 
 	const blockProps = useBlockProps();
 
@@ -422,7 +423,7 @@ const Edit = (props) => {
 					  }
 					: {
 							style: {
-								backgroundImage: `url(${blockonsObj.pluginUrl}assets/images/placeholder.png)`,
+								backgroundImage: `url(${pluginUrl}assets/images/placeholder.png)`,
 							},
 					  })}
 			>
@@ -446,14 +447,10 @@ const Edit = (props) => {
 					slideItem.image?.url ? (
 						<img src={slideItem.image.url} alt={slideItem.image.alt} />
 					) : (
-						<img
-							src={`${blockonsObj.pluginUrl}assets/images/placeholder.png`}
-						/>
+						<img src={`${pluginUrl}assets/images/placeholder.png`} />
 					)
 				) : (
-					<img
-						src={`${blockonsObj.pluginUrl}assets/images/${imageProportion}.png`}
-					/>
+					<img src={`${pluginUrl}assets/images/${imageProportion}.png`} />
 				)}
 			</div>
 

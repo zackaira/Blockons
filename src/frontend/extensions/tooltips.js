@@ -1,11 +1,14 @@
 import { blockonsStringReplaceForLink } from "../../backend/helpers";
+const isPremium = Boolean(blockonsFrontendObj.isPremium);
 
 export function createTooltipComponent(title, text) {
 	const tooltipComponent = document.createElement("div");
 	tooltipComponent.classList.add("blockons-tooltip");
 	tooltipComponent.innerHTML = `
 		<h6 class="blockons-tooltip-title">${title}</h6>
-		<p class="blockons-tooltip-text">${blockonsStringReplaceForLink(text)}</p>
+		<p class="blockons-tooltip-text">${
+			isPremium ? blockonsStringReplaceForLink(text) : text
+		}</p>
 	`;
 	return tooltipComponent;
 }
@@ -18,7 +21,15 @@ export function initializeTooltips(blockonsOptions = {}) {
 		blockonsTooltips.forEach((tooltip) => {
 			const title = tooltip.getAttribute("data-title");
 			const text = tooltip.getAttribute("data-text");
-			tooltip.classList.add(blockonsOptions?.theme || "one");
+			if (isPremium) {
+				tooltip.classList.add(
+					blockonsOptions?.theme,
+					blockonsOptions?.style,
+					blockonsOptions?.default_icon
+				);
+			} else {
+				tooltip.classList.add("one", "underlined", "info");
+			}
 
 			if (title || text) {
 				const tooltipComponent = createTooltipComponent(title, text);

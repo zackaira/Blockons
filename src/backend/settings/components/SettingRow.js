@@ -6,6 +6,7 @@ import InputText from "./inputs/InputText";
 import InputRange from "./inputs/InputRange";
 import ColorPicker from "./inputs/ColorPicker";
 import SettingTooltip from "./UI/SettingTooltip";
+import Upgrade from "./UI/Upgrade";
 import { blockonsConvertToSlug } from "../../helpers";
 
 import Heading from "./UI/Heading";
@@ -16,7 +17,15 @@ const SettingRow = (props) => {
 		: blockonsConvertToSlug(props.title);
 
 	let theInput;
-	if (props.inputType === "toggle") {
+	if (props.inputType === "upgrade") {
+		return (
+			<tr className="blockons-row upgrade">
+				<td colSpan={2}>
+					<Upgrade {...props} />
+				</td>
+			</tr>
+		);
+	} else if (props.inputType === "toggle") {
 		theInput = <InputToggleSwitch {...props} />;
 	} else if (props.inputType === "select") {
 		theInput = <InputSelect {...props} />;

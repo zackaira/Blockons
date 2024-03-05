@@ -6,8 +6,8 @@ import ScrollIndicator from "./site-addons/scrollindicator/ScrollIndicator";
 import "./frontend.css";
 
 document.addEventListener("DOMContentLoaded", () => {
-	const isPremium = Boolean(blockObj.isPremium);
-	const blockonsOptions = blockObj.blockonsOptions;
+	const isPremium = Boolean(blockonsFrontendObj.isPremium);
+	const blockonsOptions = blockonsFrontendObj.blockonsOptions;
 
 	/*
 	 * Site Addons
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	 * Block Entensions
 	 */
 	// Blockons Tooltips
-	if (isPremium && blockonsOptions?.tooltips?.enabled) {
+	if (blockonsOptions?.tooltips?.enabled) {
 		import("./extensions/tooltips.js").then((Tooltips) => {
 			Tooltips.initializeTooltips(blockonsOptions?.tooltips);
 		});

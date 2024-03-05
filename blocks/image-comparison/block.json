@@ -60,13 +60,6 @@
 			"default": "#000"
 		}
 	},
-	"example": {
-		"attributes": {
-			"alignment": "left",
-			"title": "GRAB this offer now!",
-			"subText": "Valid only until July 28th"
-		}
-	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"script": "blockons-img-comparison",

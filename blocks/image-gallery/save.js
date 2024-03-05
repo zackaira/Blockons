@@ -4,6 +4,7 @@
 import { useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {
+	const pluginUrl = blockonsEditorObj.pluginUrl || "";
 	const blockProps = useBlockProps.save({
 		className: ``,
 	});
@@ -116,7 +117,7 @@ const Save = ({ attributes }) => {
 								)
 							) : (
 								<img
-									src={`${blockonsObj.pluginUrl}assets/images/${attributes.imageProportion}.png`}
+									src={`${pluginUrl}assets/images/${attributes.imageProportion}.png`}
 									alt={imageItem.alt}
 								/>
 							)}

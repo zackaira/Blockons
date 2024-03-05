@@ -47,15 +47,18 @@ class Blockons_Frontend {
 		$blockonsSavedOptions = get_option('blockons_options');
 		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
 
+		// Pro / Free
 		if ( blockons_fs()->can_use_premium_code__premium_only() ) {
 			$classes[] = sanitize_html_class('blockons-pro');
-
-			if (isset($blockonsOptions->tooltips->enabled) && $blockonsOptions->tooltips->enabled == true) {
-				$classes[] = sanitize_html_class('blockons-tooltips');
-			}
 		} else {
 			$classes[] = sanitize_html_class('blockons-free');
 		}
+
+		// Tooltips
+		if (isset($blockonsOptions->tooltips->enabled) && $blockonsOptions->tooltips->enabled == true) {
+			$classes[] = sanitize_html_class('blockons-tooltips');
+		}
+
 		return $classes;
 	}
 

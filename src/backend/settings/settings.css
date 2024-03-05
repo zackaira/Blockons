@@ -563,7 +563,7 @@ a.blockons-docs::before {
 	font-size: 22px;
 	font-weight: 500;
 }
-.blockons-settings p {
+.blockons-header p {
 	margin: 0 auto 20px;
 	padding: 0;
 	font-size: 13px;
@@ -580,6 +580,14 @@ a.blockons-docs::before {
 .blockonsInfoTab .blockons-help,
 .center {
 	text-align: center;
+}
+.blockons-note-row th,
+.blockons-note-row td {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.blockons-note-row .blockons-note {
+	font-size: 13px;
 }
 /* ---- Give Feedback ---- */
 .blockons-feedback {
@@ -941,12 +949,63 @@ a.blockons-docs::before {
 	color: #747474;
 }
 /* ---- Go Pro Upgrade ---- */
-.blockons-gopro {
+.blockons-row.upgrade td {
+	padding: 15px 0;
 }
-.blockons-gopro-title {
+.blockons-gopro-head {
+	display: flex;
+	align-items: center;
 }
-.blockons-gopro-desc {
+.blockons-gopro-head-txt {
+	flex: 1;
+	padding-right: 30px;
 }
+.blockons-gopro-head-go {
+	width: 220px;
+	margin-top: 18px;
+}
+.blockons-gopro-head-go a {
+	display: inline-block;
+	background-color: #f45b08;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 0.4px;
+	padding: 8px 16px;
+	text-align: center;
+	text-decoration: none;
+	transition: all 0.3s;
+}
+.blockons-gopro-head-go a:hover {
+	background-color: #dd4f00;
+	box-shadow: 0 1px 10px rgb(0 0 0 / 25%);
+}
+.blockons-gopro .blockons-gopro-title {
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+}
+.blockons-gopro .blockons-gopro-desc {
+	margin: 4px 0 6px;
+	max-width: 800px;
+	font-size: 13px;
+}
+.blockons-gopro-features {
+	margin: 6px 0 0;
+}
+.blockons-gopro-features ul {
+	margin: 0;
+	padding: 0 0 0 20px;
+	display: flex;
+	flex-direction: column;
+}
+.blockons-gopro-features ul li {
+	list-style-type: disclosure-closed;
+	margin: 0 0 4px;
+	padding: 0;
+}
+
 /* -- Multi Checkbox Inputs -- */
 /* .blockons-multioption {
 	display: inline-block;

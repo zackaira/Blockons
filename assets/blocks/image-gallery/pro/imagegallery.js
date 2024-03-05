@@ -1,7 +1,7 @@
 import "../imagegallery";
 
 document.addEventListener("DOMContentLoaded", () => {
-	const isPro = Boolean(blockonsDetails.isPremium);
+	const isPro = Boolean(blockonsFrontendObj.isPremium);
 
 	// Add Venobox if isPro, else hide elements
 	const blockonsGals = document.querySelectorAll(".blockons-gallery");

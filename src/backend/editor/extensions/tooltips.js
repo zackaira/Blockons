@@ -150,7 +150,7 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 	);
 };
 
-if (isPremium && tooltipsEnabled) {
+if (tooltipsEnabled) {
 	registerFormatType("blockons/inline-tooltip", {
 		title: "Blockons Tooltip",
 		tagName: "span",

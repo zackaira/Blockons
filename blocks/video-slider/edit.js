@@ -53,7 +53,7 @@ const Edit = (props) => {
 		},
 		setAttributes,
 	} = props;
-
+	const pluginUrl = blockonsEditorObj.pluginUrl || "";
 	const blockProps = useBlockProps({
 		className: `align-${alignment} style-${sliderStyle} rn-${sliderRoundNess}`,
 	});
@@ -238,7 +238,7 @@ const Edit = (props) => {
 					</video>
 				)}
 
-				<img src={`${blockonsObj.pluginUrl}assets/images/169panoramic.png`} />
+				<img src={`${pluginUrl}assets/images/169panoramic.png`} />
 			</div>
 
 			<div
@@ -247,7 +247,7 @@ const Edit = (props) => {
 					...(slideItem.coverImage && slideItem.coverImage.url
 						? { backgroundImage: `url(${slideItem.coverImage.url})` }
 						: {
-								backgroundImage: `url(${blockonsObj.pluginUrl}assets/images/placeholder.png)`,
+								backgroundImage: `url(${pluginUrl}assets/images/placeholder.png)`,
 						  }),
 				}}
 			>

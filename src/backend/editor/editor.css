@@ -115,12 +115,8 @@
 .blockons-tooltip-settings .blockons-tooltip-button {
 	font-size: 12px;
 }
-.blockons-tooltip-settings .blockons-tooltip-button.remove {
-}
 /* -- Duplicate to frontend CSS -- */
 body.blockons-tooltips .blockons-inline-tooltip {
-	display: inline-block;
-	vertical-align: baseline;
 	border-bottom: 2px dashed #1433e0;
 	position: relative;
 }

@@ -67,7 +67,7 @@ const Edit = (props) => {
 		},
 		setAttributes,
 	} = props;
-	const site_url = blockonsObj.apiUrl;
+	const site_url = blockonsEditorObj.apiUrl;
 	const [showSearch, setShowSearch] = useState(false);
 	const isPro = Boolean(searchObj.isPremium);
 	const wcActive = Boolean(searchObj.wcActive);
