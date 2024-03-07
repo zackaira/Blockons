@@ -6,7 +6,6 @@ import SettingNote from "../components/UI/SettingNote";
 
 const BlockExtensions = ({
 	blockonsOptions,
-	pluginUrl,
 	upgradeUrl,
 	isPremium,
 	handleSettingChange,
@@ -57,7 +56,7 @@ const BlockExtensions = ({
 							{isPremium ? (
 								<>
 									<SettingRow
-										title={__("Tooltips Styles", "blockons")}
+										title={__("Tooltips Link Style", "blockons")}
 										slug="tooltips_style"
 										value={blockonsOptions.tooltips?.style}
 										inputType="select"
@@ -65,28 +64,12 @@ const BlockExtensions = ({
 											underlined: "Underlined",
 											dashed: "Underline Dashed",
 											highlight: "Highlighted",
-											icon: "icon",
 										}}
 										onChange={onSettingChange}
 									/>
-									{blockonsOptions.tooltips?.style === "icon" && (
-										<SettingRow
-											title={__("Tooltips Icon", "blockons")}
-											slug="tooltips_default_icon"
-											value={blockonsOptions.tooltips?.default_icon}
-											inputType="select"
-											options={{
-												info: "Information",
-												question: "Question",
-												warning: "Warning",
-												alert: "Alert",
-											}}
-											onChange={onSettingChange}
-										/>
-									)}
 
 									<SettingRow
-										title={__("Tooltips Theme", "blockons")}
+										title={__("Tooltips Popup Theme", "blockons")}
 										slug="tooltips_theme"
 										value={blockonsOptions.tooltips?.theme}
 										inputType="select"
@@ -96,13 +79,22 @@ const BlockExtensions = ({
 										}}
 										onChange={onSettingChange}
 									/>
+
 									<SettingRow
-										title={__("Color", "blockons")}
+										title={__("Tooltips Primary Color", "blockons")}
 										slug="tooltips_color"
 										value={blockonsOptions.tooltips?.color}
 										inputType="colorpicker"
+										defaultValue="#424242"
 										onChange={onSettingChange}
-										defaultValue="#000000"
+									/>
+									<SettingRow
+										title={__("Tooltips Font Color", "blockons")}
+										slug="tooltips_fcolor"
+										value={blockonsOptions.tooltips?.fcolor}
+										inputType="colorpicker"
+										defaultValue="#FFF"
+										onChange={onSettingChange}
 									/>
 								</>
 							) : (

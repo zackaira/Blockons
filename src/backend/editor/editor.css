@@ -115,10 +115,166 @@
 .blockons-tooltip-settings .blockons-tooltip-button {
 	font-size: 12px;
 }
-/* -- Duplicate to frontend CSS -- */
-body.blockons-tooltips .blockons-inline-tooltip {
-	border-bottom: 2px dashed #1433e0;
+.blockons-tooltip-extra {
+	margin: 0 0 8px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.blockons-tooltip-extra .blockons-tooltip-color-wrap {
+	min-height: 36px;
+	width: 50px;
+}
+.blockons-tooltip-extra .blockons-tooltip-color {
+	box-shadow: inset 0 0 0 1px #000;
+}
+.blockons-tooltip-preview {
+	min-height: 36px;
+	width: 122px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	border-radius: 3px;
 	position: relative;
+}
+.blockons-tooltip-preview span.blockons-icon {
+	margin: 0 0 0 5px;
+}
+.blockons-tooltip-preview-tooltip {
+	background-color: #424242;
+	border-radius: 4px;
+	position: absolute;
+	bottom: calc(100% + 5px);
+	left: -999999999999px;
+	width: 130px;
+	margin-left: -65px;
+	padding: 6px 10px 8px;
+	text-align: left;
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out 0.15s, bottom 0.2s ease-in-out 0.15s,
+		left 0.05s ease-in-out 0s;
+}
+.blockons-tooltip-preview-tooltip .blockons-tooltip-arrow {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin: 0 0 0 -3px;
+	border-width: 6px;
+	border-style: solid;
+	border-color: transparent;
+	border-top-color: #424242;
+}
+.blockons-tooltip-preview:hover .blockons-tooltip-preview-tooltip {
+	left: 50%;
+	opacity: 1;
+	bottom: calc(100% + 4px);
+}
+.blockons-tooltip-preview-tooltip .preview-title {
+	margin: 0 0 3px;
+	padding: 0;
+	font-size: 14px;
+}
+.blockons-tooltip-preview-tooltip .preview-text {
+	font-size: 12px;
+	line-height: 1.52;
+	margin: 0;
+	padding: 0;
+	white-space: normal;
+	font-weight: normal;
+}
+.components-dropdown__content.blockons-tooltip-color-picker
+	.components-popover__content {
+	width: 280px;
+}
+.components-dropdown__content.blockons-tooltip-settings-popover
+	.blockons-divider,
+.components-dropdown__content.blockons-tooltip-color-picker .blockons-divider {
+	box-shadow: 0 4px 0 #d6d6d6;
+	margin: 10px 0 14px;
+}
+.components-dropdown__content.blockons-tooltip-color-picker
+	.blockons-tooltip-clrs {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.components-dropdown__content.blockons-tooltip-color-picker
+	.blockons-tooltip-clrs
+	.components-button.blockons-colorpicker-btn {
+	font-size: 11px;
+	max-width: 135px;
+	min-width: 128px;
+}
+/* -- Styles -- */
+.blockons-tooltip-settings-popover .blockons-tooltip-style.underlined {
+	border-bottom: 1px solid #000;
+	position: relative;
+}
+.blockons-tooltip-settings-popover .blockons-tooltip-style.dashed {
+	border-bottom: 2px dashed #000;
+}
+.blockons-tooltip-settings-popover .blockons-tooltip-style.highlight {
+	border: 0;
+	position: relative;
+}
+.blockons-tooltip-settings-popover .blockons-tooltip-style.highlight > span {
+	display: block;
+	width: 100%;
+	height: 100%;
+	opacity: 0.15;
+}
+/* -- Themes -- */
+/* - One - */
+.blockons-tooltip-preview.one .blockons-tooltip-preview-tooltip {
+	background-color: #424242;
+}
+.blockons-tooltip-preview.one
+	.blockons-tooltip-preview-tooltip
+	.blockons-tooltip-arrow {
+	border-top-color: #424242;
+}
+.blockons-tooltip-preview.one .blockons-tooltip-preview-tooltip .preview-title {
+	color: #fff;
+}
+.blockons-tooltip-preview.one .blockons-tooltip-preview-tooltip .preview-text {
+	color: #cdcdcd;
+}
+/* - Two - */
+.blockons-tooltip-preview.two .blockons-tooltip-preview-tooltip {
+	background-color: #fff;
+	box-shadow: 0 2px 12px rgb(0 0 0 / 20%);
+	color: #222;
+}
+.blockons-tooltip-preview.two
+	.blockons-tooltip-preview-tooltip
+	.blockons-tooltip-arrow {
+	border-top-color: #fff;
+}
+.blockons-tooltip-preview.two .blockons-tooltip-preview-tooltip .preview-title {
+	color: #222;
+}
+.blockons-tooltip-preview.two .blockons-tooltip-preview-tooltip .preview-text {
+	color: #000;
+}
+
+body.blockons-tooltips .blockons-inline-tooltip {
+	border-bottom: 1px solid #000;
+	position: relative;
+}
+body.blockons-tooltips.blstyle-dashed .blockons-inline-tooltip {
+	border-bottom: 2px dashed #000;
+}
+body.blockons-tooltips.blstyle-highlight .blockons-inline-tooltip {
+	border: 0;
+	position: relative;
+}
+body.blockons-tooltips.blstyle-highlight .blockons-inline-tooltip::before {
+	display: inline-block;
+	content: "";
+	width: 100%;
+	height: 100%;
+	opacity: 0.15;
 }
 /**
  * Editor Note component

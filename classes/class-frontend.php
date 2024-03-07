@@ -57,6 +57,12 @@ class Blockons_Frontend {
 		// Tooltips
 		if (isset($blockonsOptions->tooltips->enabled) && $blockonsOptions->tooltips->enabled == true) {
 			$classes[] = sanitize_html_class('blockons-tooltips');
+
+			if ( blockons_fs()->can_use_premium_code__premium_only() ) {
+				if (isset($blockonsOptions->tooltips->style)) {
+					$classes[] = sanitize_html_class('blstyle-' . $blockonsOptions->tooltips->style);
+				}
+			}
 		}
 
 		return $classes;

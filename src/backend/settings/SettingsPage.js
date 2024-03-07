@@ -272,7 +272,6 @@ const SettingsPage = () => {
 									>
 										<BlockExtensions
 											blockonsOptions={blockonsOptions}
-											pluginUrl={pluginUrl}
 											upgradeUrl={blockonsObject.upgradeUrl}
 											isPremium={isPremium}
 											handleSettingChange={handleChange}

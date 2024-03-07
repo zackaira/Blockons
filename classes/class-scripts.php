@@ -346,7 +346,6 @@ class Blockons {
 				"enabled" => false,
 				"theme" => "one",
 				"style" => "underlined",
-				"default_icon" => "info"
 			),
 			"pageloader" => array(
 				"enabled" => false,

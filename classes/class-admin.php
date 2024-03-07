@@ -138,6 +138,12 @@ class Blockons_Admin {
 		// Tooltips
 		if (isset($blockonsOptions->tooltips->enabled) && $blockonsOptions->tooltips->enabled == true) {
 			$admin_classes .= ' ' . sanitize_html_class('blockons-tooltips');
+
+			if ( blockons_fs()->can_use_premium_code__premium_only() ) {
+				if (isset($blockonsOptions->tooltips->style)) {
+					$admin_classes .= ' ' . sanitize_html_class('blstyle-' . $blockonsOptions->tooltips->style);
+				}
+			}
 		}
 
 		return $admin_classes;

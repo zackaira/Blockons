@@ -285,7 +285,7 @@ body.wp-admin.admin-bar .blockons-settings .blockons-page-loader {
  * Blockons Inline Tooltip Settings
  */
 body.blockons-tooltips .blockons-inline-tooltip {
-	border-bottom: 2px dashed #1433e0;
+	border-bottom: 1px solid #000;
 	position: relative;
 	overflow: hidden;
 }
@@ -293,13 +293,14 @@ body.blockons-tooltips .blockons-tooltip {
 	border-radius: 4px;
 	position: absolute;
 	bottom: calc(100% + 5px);
-	left: 50%;
+	left: -999999999999px;
 	width: 180px;
 	margin-left: -90px;
 	padding: 6px 10px 8px;
 	text-align: left;
 	opacity: 0;
-	transition: opacity 0.2s ease-in-out 0.15s, bottom 0.2s ease-in-out 0.15s;
+	transition: opacity 0.2s ease-in-out 0.15s, bottom 0.2s ease-in-out 0.15s,
+		left 0.05s ease-in-out 0s;
 }
 body.blockons-tooltips .blockons-tooltip::after {
 	content: "";
@@ -317,10 +318,12 @@ body.blockons-tooltips .blockons-tooltip-title {
 	font-size: 14px;
 }
 body.blockons-tooltips .blockons-tooltip-text {
-	margin: 0;
-	padding: 0;
 	font-size: 12px;
 	line-height: 1.52;
+	margin: 0;
+	padding: 0;
+	white-space: normal;
+	font-weight: normal;
 }
 body.blockons-tooltips .blockons-tooltip .blockons-tooltip-text a {
 	font-weight: bold;
@@ -330,9 +333,9 @@ body.blockons-tooltips .blockons-tooltip .blockons-tooltip-text a:hover {
 	text-decoration: underline;
 }
 body.blockons-tooltips .blockons-inline-tooltip.active {
-	overflow: visible;
 }
 body.blockons-tooltips .blockons-inline-tooltip.active .blockons-tooltip {
+	left: 50%;
 	opacity: 1;
 	bottom: calc(100% + 8px);
 }
@@ -360,12 +363,27 @@ body.blockons-tooltips .blockons-tooltip.two {
 body.blockons-tooltips .blockons-tooltip.two::after {
 	border-color: #fff transparent transparent transparent;
 }
-body.blockons-tooltips .blockons-tooltip.one .blockons-tooltip-title {
+body.blockons-tooltips .blockons-tooltip.two .blockons-tooltip-title {
 	color: #333;
 }
-body.blockons-tooltips .blockons-tooltip.one .blockons-tooltip-text {
+body.blockons-tooltips .blockons-tooltip.two .blockons-tooltip-text {
 	color: #222;
 }
-body.blockons-tooltips .blockons-tooltip.one .blockons-tooltip-text a {
+body.blockons-tooltips .blockons-tooltip.two .blockons-tooltip-text a {
 	color: #000 !important;
+}
+/* -- Styles -- */
+body.blockons-tooltips.blstyle-dashed .blockons-inline-tooltip {
+	border-bottom: 2px dashed #000;
+}
+body.blockons-tooltips.blstyle-highlight .blockons-inline-tooltip {
+	border: 0;
+	position: relative;
+}
+body.blockons-tooltips.blstyle-highlight .blockons-inline-tooltip::before {
+	display: inline-block;
+	content: "";
+	width: 100%;
+	height: 100%;
+	opacity: 0.15;
 }
