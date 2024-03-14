@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { __ } from "@wordpress/i18n";
 
-const BackToTop = ({ bttOptions, isPro }) => {
+const BackToTop = ({ bttOptions, isPro, isAdmin }) => {
 	const bttb = bttOptions ? bttOptions : { enabled: false };
-	const isPremium = isPro ? isPro : false;
+	const isPremium = isPro ? Boolean(isPro) : false;
+	const inAdmin = isAdmin ? Boolean(isAdmin) : false;
 
 	if (!bttb.enabled) return null;
 
@@ -32,7 +33,7 @@ const BackToTop = ({ bttOptions, isPro }) => {
 	}
 	window.addEventListener("scroll", blockonsCheckPos);
 
-	window.addEventListener("load", () => {
+	useEffect(() => {
 		const container = document.querySelector(".blockons-bttbtn-progress");
 
 		if (!container) return;
@@ -50,7 +51,7 @@ const BackToTop = ({ bttOptions, isPro }) => {
 		window.addEventListener("scroll", () => {
 			blockonsSetProgress(container, progressBar, totalLength);
 		});
-	});
+	}, []);
 
 	function blockonsSetProgress(container, progressBar, totalLength) {
 		const clientHeight = document.documentElement.clientHeight;
@@ -69,7 +70,8 @@ const BackToTop = ({ bttOptions, isPro }) => {
 
 	return (
 		<React.Fragment>
-			{isPremium && bttb.type === "scroll" ? (
+			{(isPremium && bttb.type === "scroll") ||
+			(!isPremium && inAdmin && bttb.type === "scroll") ? (
 				<div
 					className={`blockons-bttbtn-progress ${
 						bttb.position ? bttb.position : "right"

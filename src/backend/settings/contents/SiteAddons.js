@@ -71,15 +71,14 @@ const SiteAddons = ({
 								value={blockonsOptions.pageloader?.style}
 								inputType="select"
 								options={{
-									one: "Dual Ring Spinner",
-									// two: "Loading Bars",
-									// three: "Circular Ripple",
-									// four: "Loading Ring Spinner",
-									// five: "Clock Spinner",
-									// six: "Circle Roller",
+									one: __("Dual Ring Spinner", "blockons"),
+									two: __("Loading Bars", "blockons"),
+									three: __("Circular Ripple", "blockons"),
+									four: __("Loading Ring Spinner", "blockons"),
+									five: __("Clock Spinner", "blockons"),
+									six: __("Circle Roller", "blockons"),
 								}}
 								onChange={onSettingChange}
-								note={__("More Coming Soon", "blockons")}
 							/>
 							{!isPremium && blockonsOptions.pageloader?.style !== "one" && (
 								<SettingRow
@@ -266,10 +265,9 @@ const SiteAddons = ({
 								inputType="select"
 								options={{
 									plain: __("Simple Button", "blockons"),
-									// scroll: __("Scroll Progress", "blockons"),
+									scroll: __("Scroll Progress", "blockons"),
 								}}
 								onChange={onSettingChange}
-								note={__("More Coming Soon", "blockons")}
 							/>
 
 							{!isPremium && blockonsOptions.bttb?.type === "scroll" && (

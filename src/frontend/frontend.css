@@ -75,6 +75,9 @@ body.blockons-page-loading::before {
 	opacity: 0;
 	transition: opacity 0.4s ease-in-out 0s;
 }
+body.blockons-free .blockons-pageloader-one .bpl {
+	background: none !important;
+}
 body.blockons-page-loading .blockons-page-loader {
 	opacity: 1;
 }
@@ -156,6 +159,9 @@ body.admin-bar .blockons-page-loader {
 	opacity: 1;
 	pointer-events: initial;
 }
+.blockons-settings .blockons-bttbtn {
+	z-index: 99991;
+}
 
 /* -- Progress Button -- */
 .blockons-bttbtn-progress {
@@ -213,7 +219,7 @@ body.admin-bar .blockons-page-loader {
 
 /* -- Settings Overrides -- */
 .blockons-settings .blockons-bttbtn.left,
-.blockons-settings .blockons-bttbtn-progress.left {
+.blockons-settings .blockons-bttbtn-progress {
 	z-index: 9999;
 }
 

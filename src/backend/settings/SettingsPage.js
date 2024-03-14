@@ -22,6 +22,7 @@ const SettingsPage = () => {
 	const [loadSetting, setLoadSetting] = useState(true);
 	const [activeTab, setActiveTab] = useState("1");
 	const isPremium = Boolean(blockonsObject.isPremium);
+	const isAdmin = Boolean(blockonsObject.isAdmin);
 	const wcActive = Boolean(blockonsObject.wcActive);
 	const defaults = blockonsObject.blockonsDefaults;
 
@@ -359,11 +360,15 @@ const SettingsPage = () => {
 					<PageLoader
 						pageLoaderOptions={blockonsOptions.pageloader}
 						isPro={isPremium}
-						isAdmin={true}
+						isAdmin={isAdmin}
 					/>
 				)}
 				{showBttbPreview && (
-					<BackToTop bttOptions={blockonsOptions.bttb} isPro={isPremium} />
+					<BackToTop
+						bttOptions={blockonsOptions.bttb}
+						isPro={isPremium}
+						isAdmin={isAdmin}
+					/>
 				)}
 				{showScrollIndPreview && (
 					<ScrollIndicator scrollInOptions={blockonsOptions.scrollindicator} />

@@ -150,6 +150,7 @@ class Blockons {
 			'accountUrl' => esc_url($blockons_fs->get_account_url()),
 			'wcActive' => Blockons_Admin::blockons_is_plugin_active('woocommerce.php'),
 			'isPremium' => $isPro,
+			'isAdmin' => (boolean)is_admin(),
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
 		));
 	} // End blockons_register_scripts ()

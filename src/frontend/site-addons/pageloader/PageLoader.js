@@ -4,8 +4,8 @@ import "./pageloader.css";
 
 const PageLoader = ({ pageLoaderOptions, isPro, isAdmin }) => {
 	const pageLoader = pageLoaderOptions ? pageLoaderOptions : { enabled: false };
-	const isPremium = isPro ? isPro : false;
-	const inAdmin = isAdmin ? isAdmin : false;
+	const isPremium = isPro ? Boolean(isPro) : false;
+	const inAdmin = isAdmin ? Boolean(isAdmin) : false;
 
 	if (!pageLoader.enabled) return null;
 
