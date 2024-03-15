@@ -289,6 +289,7 @@ const SettingsPage = () => {
 											blockonsOptions={blockonsOptions}
 											handleSettingChange={handleChange}
 											isPremium={isPremium}
+											upgradeUrl={blockonsObject.upgradeUrl}
 											showPageLoader={showPageLoaderPreview}
 											setShowPageLoader={setShowPageLoaderPreview}
 											showBttb={showBttbPreview}

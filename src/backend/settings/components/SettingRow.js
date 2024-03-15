@@ -41,16 +41,6 @@ const SettingRow = (props) => {
 				</td>
 			</tr>
 		);
-	} else if (props.inputType === "pronote") {
-		return (
-			<tr className="blockons-row pronote">
-				<th>&nbsp;</th>
-				<td>
-					{props.title && <h6>{props.title}:</h6>}
-					{props.desc && <p>{props.desc}</p>}
-				</td>
-			</tr>
-		);
 	} else {
 		theInput = <InputText {...props} />;
 	}

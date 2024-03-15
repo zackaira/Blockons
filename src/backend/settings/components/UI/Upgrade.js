@@ -20,15 +20,15 @@ const Upgrade = ({ title, description, upgradeUrl, proFeatures }) => {
 						</div>
 					)}
 				</div>
-				<div className="blockons-gopro-features">
-					{proFeatures && (
+				{proFeatures && (
+					<div className="blockons-gopro-features">
 						<ul className="blockons-gopro-features">
 							{proFeatures.map((feature, index) => (
 								<li key={index}>{feature}</li>
 							))}
 						</ul>
-					)}
-				</div>
+					</div>
+				)}
 			</div>
 		</React.Fragment>
 	);

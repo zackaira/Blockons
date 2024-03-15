@@ -146,6 +146,33 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 
 								<div className="blockons-tooltip-extra">
 									<div className="blockons-tooltip-color-wrap">
+										{!isPremium && (
+											<Dropdown
+												className="blockons-tooltip-color disabled"
+												contentClassName="blockons-tooltip-color-picker"
+												renderToggle={({ isOpen, onToggle }) => (
+													<ToolbarButton
+														icon={
+															<span className="dashicons dashicons-admin-appearance"></span>
+														}
+														title={__("Blockons Tooltip", "blockons")}
+														onClick={onToggle}
+														isActive={isOpen}
+														className="btn-disabled"
+													/>
+												)}
+												renderContent={() => (
+													<>
+														<p>
+															{__(
+																"Blockons Pro offers more advanced Tooltips with more customization options.",
+																"blockons"
+															)}
+														</p>
+													</>
+												)}
+											/>
+										)}
 										{isPremium && activeFormat && (
 											<Dropdown
 												className="blockons-tooltip-color"
@@ -155,7 +182,7 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 														icon={
 															<span className="dashicons dashicons-admin-appearance"></span>
 														}
-														title="Blockons Tooltip"
+														title={__("Blockons Tooltip", "blockons")}
 														onClick={onToggle}
 														isActive={isOpen}
 													/>

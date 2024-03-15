@@ -14,7 +14,7 @@ const InputSelect = (props) => {
 				name={selectTitleSlug}
 				onChange={props.onChange}
 				value={props.value || props.defaultValue}
-				className="snSelect"
+				className={`snSelect ${props.className || ""}`}
 			>
 				{Object.entries(selectOptions).map(([key, value]) => (
 					<option value={key} key={key}>

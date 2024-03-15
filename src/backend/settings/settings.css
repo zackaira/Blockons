@@ -460,23 +460,9 @@ a.blockons-docs::before {
 .blockons-row.heading td {
 	padding-bottom: 0;
 }
-.blockons-row.pronote th {
-	padding: 0 10px 0 0;
-}
-.blockons-row.pronote td {
-	padding: 0 15px;
-}
-.blockons-row.pronote h6 {
-	margin: 0;
-	padding: 0;
-	color: #af2dbf;
-	font-size: 16px;
-	font-weight: 500;
-}
-.blockons-row.pronote p {
-	margin: 2px 0 10px;
-	opacity: 0.6;
-	font-size: 12px;
+
+select.freedisabled option {
+	color: red;
 }
 
 /* -- Toggle Switch -- */

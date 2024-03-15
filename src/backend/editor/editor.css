@@ -128,6 +128,12 @@
 .blockons-tooltip-extra .blockons-tooltip-color {
 	box-shadow: inset 0 0 0 1px #000;
 }
+.blockons-tooltip-extra .blockons-tooltip-color.disabled {
+	box-shadow: inset 0 0 0 1px #c3c3c3;
+}
+.blockons-tooltip-extra .blockons-tooltip-color.disabled .btn-disabled {
+	color: #c3c3c3;
+}
 .blockons-tooltip-preview {
 	min-height: 36px;
 	width: 122px;

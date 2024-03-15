@@ -8,6 +8,7 @@ const SiteAddons = ({
 	blockonsOptions,
 	handleSettingChange,
 	isPremium,
+	upgradeUrl,
 	showPageLoader,
 	setShowPageLoader,
 	showBttb,
@@ -79,15 +80,19 @@ const SiteAddons = ({
 									six: __("Circle Roller", "blockons"),
 								}}
 								onChange={onSettingChange}
+								{...(!isPremium && blockonsOptions.pageloader?.style !== "one"
+									? { note: __("This is a Blockons Pro feature.", "blockons") }
+									: {})}
 							/>
 							{!isPremium && blockonsOptions.pageloader?.style !== "one" && (
 								<SettingRow
-									title={__("Premium Feature", "blockons")}
-									desc={__(
-										"Change the loader style. The Dual Ring Spinner is the default and the other spinners are only available in Blockons Pro.",
+									inputType="upgrade"
+									title={__("Premium Page Loaders", "blockons")}
+									description={__(
+										"Select from more Page Loaders in Blockons Pro. View the Pro loaders in the preview.",
 										"blockons"
 									)}
-									inputType="pronote"
+									upgradeUrl={upgradeUrl}
 								/>
 							)}
 
@@ -268,16 +273,25 @@ const SiteAddons = ({
 									scroll: __("Scroll Progress", "blockons"),
 								}}
 								onChange={onSettingChange}
+								{...(!isPremium && blockonsOptions.bttb?.type !== "plain"
+									? {
+											note: __(
+												"This is a Blockons Pro feature. Turn the Preview off/on to see this work.",
+												"blockons"
+											),
+									  }
+									: {})}
 							/>
 
 							{!isPremium && blockonsOptions.bttb?.type === "scroll" && (
 								<SettingRow
-									title={__("Premium Feature", "blockons")}
-									desc={__(
-										"This will add a Back To Top button with a Scroll Progress Indicator, visually showing the user how far they have scrolled on the page. This feature is only available in Blockons Pro.",
+									inputType="upgrade"
+									title={__("Premium 'Back to Top' button", "blockons")}
+									description={__(
+										"Add a 'Back to Top' button that shows the scroll progress as the users scroll down the page. View the Pro button in the preview.",
 										"blockons"
 									)}
-									inputType="pronote"
+									upgradeUrl={upgradeUrl}
 								/>
 							)}
 
