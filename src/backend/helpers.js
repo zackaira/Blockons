@@ -11,7 +11,6 @@ export const blockonsConvertToSlug = (text) => {
 };
 
 export function blockonsStringReplaceForLink(inputString) {
-	console.log("Here is the inputString: ", inputString);
 	return inputString.replace(
 		/\((.*?)\[\*?(https?:\/\/[^\]]+)\]\)/g,
 		(match, linkText, url) => {

@@ -90,7 +90,7 @@ const blockonsAddInspectorVisibilityControls = createHigherOrderComponent(
 										"Hide certain blocks by device screen size. For more information, click the link below.",
 										"blockons"
 									)}
-									link="https://blockons.com/documentation/block-visibility"
+									docLink="https://blockons.com/documentation/block-visibility"
 								/>
 
 								<ToggleControl

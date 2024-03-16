@@ -108,7 +108,7 @@ const blockonsAddAnimationInspectorControls = createHigherOrderComponent(
 										"Add scroll animations for layout blocks in your WordPress editor. For more information, click the link below.",
 										"blockons"
 									)}
-									link="https://blockons.com/documentation/block-scroll-animations"
+									docLink="https://blockons.com/documentation/block-scroll-animations"
 								/>
 
 								<ToggleControl

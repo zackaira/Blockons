@@ -20,8 +20,8 @@ export function createTooltipComponent(
 	}
 
 	tooltipComponent.innerHTML = `
-		<div class="blockons-tooltip-popup ${style ? style : tooltipSettings.style} ${
-		theme ? theme : tooltipSettings.theme
+		<div class="blockons-tooltip-popup ${style ? style : tooltipSettings?.style} ${
+		theme ? theme : tooltipSettings?.theme
 	}">
 			<h6 class="blockons-tooltip-title">${title}</h6>
 			<p class="blockons-tooltip-text">${

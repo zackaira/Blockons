@@ -18,6 +18,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import { colorPickerPalette } from "../block-global";
+import BlockonsNote from "../../assets/blocks/notes/BlockonsNote";
 const Masonry = require("masonry-layout");
 var imagesLoaded = require("imagesloaded");
 
@@ -642,115 +643,136 @@ const Edit = (props) => {
 								)}
 							</PanelBody>
 
-							{isPro && (
-								<PanelBody
-									title={__("Gallery Lightbox Settings", "blockons")}
-									initialOpen={false}
-								>
-									<ToggleControl
-										label={__("Enable Lightbox", "blockons")}
-										checked={popupEnable}
-										onChange={(newValue) =>
-											setAttributes({ popupEnable: newValue })
-										}
-										help={__(
-											"Please check the website frontend to view the image popup",
+							<PanelBody
+								title={__("Gallery Lightbox Settings", "blockons")}
+								initialOpen={false}
+							>
+								{isPro ? (
+									<>
+										<ToggleControl
+											label={__("Enable Lightbox", "blockons")}
+											checked={popupEnable}
+											onChange={(newValue) =>
+												setAttributes({ popupEnable: newValue })
+											}
+											help={__(
+												"Please check the website frontend to view the image popup",
+												"blockons"
+											)}
+										/>
+										{popupEnable && (
+											<>
+												<SelectControl
+													label={__("Click to Open", "blockons")}
+													value={popupClick}
+													options={[
+														{
+															label: __("Popup Icon", "blockons"),
+															value: "icon",
+														},
+														{
+															label: __("Click Full Image", "blockons"),
+															value: "image",
+														},
+													]}
+													onChange={(newValue) =>
+														setAttributes({
+															popupClick:
+																newValue === undefined ? "icon" : newValue,
+														})
+													}
+												/>
+												{popupClick === "icon" && (
+													<>
+														<ToggleControl
+															label={__("Show on Hover", "blockons")}
+															checked={popupIconOnHover}
+															onChange={(newValue) =>
+																setAttributes({ popupIconOnHover: newValue })
+															}
+														/>
+														<SelectControl
+															label={__("Select Icon", "blockons")}
+															value={popupIcon}
+															options={[
+																{
+																	label: __("Magnifying Glass", "blockons"),
+																	value: "magnifying-glass",
+																},
+																{
+																	label: __("Expand", "blockons"),
+																	value: "expand",
+																},
+																{
+																	label: __("Maximize", "blockons"),
+																	value: "maximize",
+																},
+																{
+																	label: __("Plus", "blockons"),
+																	value: "plus",
+																},
+															]}
+															onChange={(newValue) =>
+																setAttributes({
+																	popupIcon:
+																		newValue === undefined
+																			? "magnifying-glass"
+																			: newValue,
+																})
+															}
+														/>
+													</>
+												)}
+												<div className="blockons-divider"></div>
+
+												<SelectControl
+													label={__("Image Caption", "blockons")}
+													value={popupCaption}
+													options={[
+														{ label: __("Top", "blockons"), value: "top" },
+														{
+															label: __("Bottom", "blockons"),
+															value: "bottom",
+														},
+														{ label: __("None", "blockons"), value: "none" },
+													]}
+													onChange={(newValue) =>
+														setAttributes({
+															popupCaption:
+																newValue === undefined ? "top" : newValue,
+														})
+													}
+												/>
+												<div className="blockons-divider"></div>
+
+												<ToggleControl
+													label={__("Infinite Gallery", "blockons")}
+													checked={popupInfiniteGal}
+													onChange={(newValue) =>
+														setAttributes({ popupInfiniteGal: newValue })
+													}
+												/>
+											</>
+										)}
+									</>
+								) : (
+									<BlockonsNote
+										title={__("Get Blockons Gallery Lightbox", "blockons")}
+										text={__(
+											"Upgrade to Pro to enable the lightbox feature with customization options.",
 											"blockons"
 										)}
+										proFeatures={[
+											__("Click image or icon to open Lightbox", "blockons"),
+											__("Customize Lightbox popup icon", "blockons"),
+											__("Customize Lightbox caption position", "blockons"),
+											__("Infinite Gallery", "blockons"),
+										]}
+										docLink="https://blockons.com/documentation/block-scroll-animations"
+										upgradeLink="https://blockons.com/documentation/block-scroll-animations"
 									/>
-									{popupEnable && (
-										<>
-											<SelectControl
-												label={__("Click to Open", "blockons")}
-												value={popupClick}
-												options={[
-													{
-														label: __("Popup Icon", "blockons"),
-														value: "icon",
-													},
-													{
-														label: __("Click Full Image", "blockons"),
-														value: "image",
-													},
-												]}
-												onChange={(newValue) =>
-													setAttributes({
-														popupClick:
-															newValue === undefined ? "icon" : newValue,
-													})
-												}
-											/>
-											{popupClick === "icon" && (
-												<>
-													<ToggleControl
-														label={__("Show on Hover", "blockons")}
-														checked={popupIconOnHover}
-														onChange={(newValue) =>
-															setAttributes({ popupIconOnHover: newValue })
-														}
-													/>
-													<SelectControl
-														label={__("Select Icon", "blockons")}
-														value={popupIcon}
-														options={[
-															{
-																label: __("Magnifying Glass", "blockons"),
-																value: "magnifying-glass",
-															},
-															{
-																label: __("Expand", "blockons"),
-																value: "expand",
-															},
-															{
-																label: __("Maximize", "blockons"),
-																value: "maximize",
-															},
-															{
-																label: __("Plus", "blockons"),
-																value: "plus",
-															},
-														]}
-														onChange={(newValue) =>
-															setAttributes({
-																popupIcon:
-																	newValue === undefined
-																		? "magnifying-glass"
-																		: newValue,
-															})
-														}
-													/>
-												</>
-											)}
-											<div className="blockons-divider"></div>
-
-											<SelectControl
-												label={__("Image Caption", "blockons")}
-												value={popupCaption}
-												options={[
-													{ label: __("Top", "blockons"), value: "top" },
-													{ label: __("Bottom", "blockons"), value: "bottom" },
-													{ label: __("None", "blockons"), value: "none" },
-												]}
-												onChange={(newValue) =>
-													setAttributes({
-														popupCaption:
-															newValue === undefined ? "top" : newValue,
-													})
-												}
-											/>
-											<div className="blockons-divider"></div>
-
-											<ToggleControl
-												label={__("Infinite Gallery", "blockons")}
-												checked={popupInfiniteGal}
-												onChange={(newValue) =>
-													setAttributes({ popupInfiniteGal: newValue })
-												}
-											/>
-										</>
-									)}
-								</PanelBody>
-							)}
+								)}
+							</PanelBody>
 						</>
 					)}
 				</InspectorControls>

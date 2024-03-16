@@ -22,6 +22,7 @@ import { v4 as uuidv4 } from "uuid";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import BlockonsPostTypeSelect from "../_components/BlockonsPostTypeSelect";
 import { colorPickerPalette } from "../block-global";
+import BlockonsNote from "../../assets/blocks/notes/BlockonsNote";
 
 const Edit = (props) => {
 	const {
@@ -408,156 +409,177 @@ const Edit = (props) => {
 						)}
 					</PanelBody>
 
-					{isPremium && (
-						<PanelBody
-							title={__("Predictive Search", "blockons")}
-							initialOpen={false}
-						>
-							<ToggleControl
-								label={__("Enable Predictive Search", "blockons")}
-								checked={searchPro}
-								onChange={(newValue) => {
-									setAttributes({ searchPro: newValue });
-								}}
-							/>
+					<PanelBody
+						title={__("Instant Search", "blockons")}
+						initialOpen={false}
+					>
+						{isPremium ? (
+							<>
+								<ToggleControl
+									label={__("Enable Instant Search", "blockons")}
+									checked={searchPro}
+									onChange={(newValue) => {
+										setAttributes({ searchPro: newValue });
+									}}
+								/>
 
-							{searchPro && (
-								<>
-									<BlockonsPostTypeSelect
-										label={__("Search In:", "blockons")}
-										value={searchProTypes}
-										exclude={["linkt"]}
-										onChange={(newValue) =>
-											setAttributes({
-												searchProTypes: newValue === undefined ? "" : newValue,
-											})
-										}
-										siteurl={site_url}
-									/>
-									{searchProTypes && (
-										<TextControl
-											label={__("Results Amount to Display", "blockons")}
-											value={searchProAmnt}
+								{searchPro && (
+									<>
+										<BlockonsPostTypeSelect
+											label={__("Search In:", "blockons")}
+											value={searchProTypes}
+											exclude={["linkt"]}
 											onChange={(newValue) =>
-												setAttributes({ searchProAmnt: parseInt(newValue) })
+												setAttributes({
+													searchProTypes:
+														newValue === undefined ? "" : newValue,
+												})
 											}
-											type="number"
+											siteurl={site_url}
 										/>
-									)}
-
-									{searchProTypes && searchProTypes !== "page" && (
-										<>
-											<div className="blockons-divider"></div>
-											<ToggleControl
-												label={__("Show Categories in Search", "blockons")}
-												checked={searchProCats}
-												onChange={(newValue) => {
-													setAttributes({ searchProCats: newValue });
-												}}
-											/>
-											{searchProCats && (
-												<>
-													<TextControl
-														label={__("Results Title", "blockons")}
-														value={searchProCatsTitle}
-														onChange={(newValue) =>
-															setAttributes({
-																searchProCatsTitle: newValue,
-															})
-														}
-													/>
-													<TextControl
-														label={__("Amount to Display", "blockons")}
-														value={searchProCatsAmnt}
-														onChange={(newValue) =>
-															setAttributes({
-																searchProCatsAmnt: parseInt(newValue),
-															})
-														}
-														type="number"
-													/>
-													<div className="blockons-divider"></div>
-												</>
-											)}
-
-											<ToggleControl
-												label={__("Show Tags in Search", "blockons")}
-												checked={searchProTags}
-												onChange={(newValue) => {
-													setAttributes({ searchProTags: newValue });
-												}}
-											/>
-											{searchProTags && (
-												<>
-													<TextControl
-														label={__("Results Title", "blockons")}
-														value={searchProTagsTitle}
-														onChange={(newValue) =>
-															setAttributes({
-																searchProTagsTitle: newValue,
-															})
-														}
-													/>
-													<TextControl
-														label={__("Amount to Display", "blockons")}
-														value={searchProTagsAmnt}
-														onChange={(newValue) =>
-															setAttributes({
-																searchProTagsAmnt: parseInt(newValue),
-															})
-														}
-														type="number"
-													/>
-												</>
-											)}
-
-											<div className="blockons-divider"></div>
-											<ToggleControl
-												label={__("Show Image", "blockons")}
-												checked={searchProImage}
-												onChange={(newValue) => {
-													setAttributes({ searchProImage: newValue });
-												}}
-											/>
-											<ToggleControl
-												label={
-													searchProTypes === "product"
-														? __("Show Product Short Description", "blockons")
-														: __("Show Post Excerpt", "blockons")
+										{searchProTypes && (
+											<TextControl
+												label={__("Results Amount to Display", "blockons")}
+												value={searchProAmnt}
+												onChange={(newValue) =>
+													setAttributes({ searchProAmnt: parseInt(newValue) })
 												}
-												checked={searchProDesc}
-												onChange={(newValue) => {
-													setAttributes({
-														searchProDesc: newValue,
-													});
-												}}
+												type="number"
 											/>
-											{searchProTypes === "product" && (
+										)}
+
+										{searchProTypes && searchProTypes !== "page" && (
+											<>
+												<div className="blockons-divider"></div>
 												<ToggleControl
-													label={__("Show Product Price", "blockons")}
-													checked={searchProPrice}
+													label={__("Show Categories in Search", "blockons")}
+													checked={searchProCats}
+													onChange={(newValue) => {
+														setAttributes({ searchProCats: newValue });
+													}}
+												/>
+												{searchProCats && (
+													<>
+														<TextControl
+															label={__("Results Title", "blockons")}
+															value={searchProCatsTitle}
+															onChange={(newValue) =>
+																setAttributes({
+																	searchProCatsTitle: newValue,
+																})
+															}
+														/>
+														<TextControl
+															label={__("Amount to Display", "blockons")}
+															value={searchProCatsAmnt}
+															onChange={(newValue) =>
+																setAttributes({
+																	searchProCatsAmnt: parseInt(newValue),
+																})
+															}
+															type="number"
+														/>
+														<div className="blockons-divider"></div>
+													</>
+												)}
+
+												<ToggleControl
+													label={__("Show Tags in Search", "blockons")}
+													checked={searchProTags}
+													onChange={(newValue) => {
+														setAttributes({ searchProTags: newValue });
+													}}
+												/>
+												{searchProTags && (
+													<>
+														<TextControl
+															label={__("Results Title", "blockons")}
+															value={searchProTagsTitle}
+															onChange={(newValue) =>
+																setAttributes({
+																	searchProTagsTitle: newValue,
+																})
+															}
+														/>
+														<TextControl
+															label={__("Amount to Display", "blockons")}
+															value={searchProTagsAmnt}
+															onChange={(newValue) =>
+																setAttributes({
+																	searchProTagsAmnt: parseInt(newValue),
+																})
+															}
+															type="number"
+														/>
+													</>
+												)}
+
+												<div className="blockons-divider"></div>
+												<ToggleControl
+													label={__("Show Image", "blockons")}
+													checked={searchProImage}
+													onChange={(newValue) => {
+														setAttributes({ searchProImage: newValue });
+													}}
+												/>
+												<ToggleControl
+													label={
+														searchProTypes === "product"
+															? __("Show Product Short Description", "blockons")
+															: __("Show Post Excerpt", "blockons")
+													}
+													checked={searchProDesc}
 													onChange={(newValue) => {
 														setAttributes({
-															searchProPrice: newValue,
+															searchProDesc: newValue,
 														});
 													}}
 												/>
-											)}
+												{searchProTypes === "product" && (
+													<ToggleControl
+														label={__("Show Product Price", "blockons")}
+														checked={searchProPrice}
+														onChange={(newValue) => {
+															setAttributes({
+																searchProPrice: newValue,
+															});
+														}}
+													/>
+												)}
 
-											<div className="blockons-divider"></div>
-											<ToggleControl
-												label={__("Enable Search Previews", "blockons")}
-												checked={searchProHasPreview}
-												onChange={(newValue) => {
-													setAttributes({ searchProHasPreview: newValue });
-												}}
-											/>
-										</>
-									)}
-								</>
-							)}
-						</PanelBody>
-					)}
+												<div className="blockons-divider"></div>
+												<ToggleControl
+													label={__("Enable Search Previews", "blockons")}
+													checked={searchProHasPreview}
+													onChange={(newValue) => {
+														setAttributes({ searchProHasPreview: newValue });
+													}}
+												/>
+											</>
+										)}
+									</>
+								)}
+							</>
+						) : (
+							<BlockonsNote
+								title={__("Get Blockons Instant Search", "blockons")}
+								text={__(
+									"Upgrade to Blockons Pro to add on live search with quick results and image previews for posts and products.",
+									"blockons"
+								)}
+								proFeatures={[
+									__("Live quick search results", "blockons"),
+									__("Select post type to show in search", "blockons"),
+									__("Post / Product Previews in Results", "blockons"),
+									__("Display Category and Tag results", "blockons"),
+									__("Search results pagination", "blockons"),
+									__("Design & layout customization settings", "blockons"),
+								]}
+								docLink="https://blockons.com/documentation/block-scroll-animations"
+								upgradeLink="https://blockons.com/documentation/block-scroll-animations"
+							/>
+						)}
+					</PanelBody>
 				</InspectorControls>
 			)}
 			{

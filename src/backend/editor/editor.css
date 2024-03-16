@@ -298,6 +298,11 @@ body.blockons-tooltips.blstyle-highlight .blockons-inline-tooltip::before {
 .blockons-editor-note .bl-note-txt {
 	color: #757575;
 }
+.blockons-editor-note .bl-note-links {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
 .blockons-editor-note .bl-note-link {
 	display: inline-block;
 	background-color: #cae4f1;
@@ -309,6 +314,25 @@ body.blockons-tooltips.blstyle-highlight .blockons-inline-tooltip::before {
 	font-size: 12px;
 	text-decoration: none;
 	margin-top: 15px;
+}
+.blockons-editor-note .bl-note-link:hover {
+	background-color: #b7daeb;
+}
+.blockons-editor-note .bl-note-link.upgrade {
+	background-color: #f45b08;
+	color: #fff;
+}
+.blockons-editor-note .bl-note-link.upgrade:hover {
+	background-color: #da4e03;
+}
+.blockons-editor-note .bl-note-features {
+	margin: 10px 0 2px;
+}
+.blockons-editor-note .bl-note-features .bl-note-feature {
+	display: list-item;
+	list-style-type: disclosure-closed;
+	color: #5b5b5b;
+	margin: 0 0 0 13px;
 }
 /**
  * Visibility Settings added to all blocks - Blockons PRO

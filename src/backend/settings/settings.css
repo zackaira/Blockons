@@ -461,10 +461,6 @@ a.blockons-docs::before {
 	padding-bottom: 0;
 }
 
-select.freedisabled option {
-	color: red;
-}
-
 /* -- Toggle Switch -- */
 .toggle-switch {
 	position: relative;
