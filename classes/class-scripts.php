@@ -68,15 +68,6 @@ class Blockons {
 		// Frontend
 		wp_register_style('blockons-frontend-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
 		wp_register_script('blockons-frontend-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.js'), array('wp-i18n'), BLOCKONS_PLUGIN_VERSION, true);
-
-		// JS URLs file/object for featured product, video slider, image carousel
-		// wp_register_script('blockons-js', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/blockons.js'), array(), BLOCKONS_PLUGIN_VERSION);
-		// wp_localize_script('blockons-js', 'blockonsDetails', array(
-		// 	'apiUrl' => esc_url(get_rest_url()),
-		// 	'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
-		// 	'siteUrl' => esc_url(get_home_url('/')),
-		// 	'isPremium' => (boolean)$isPro,
-		// ));
 		
 		if ( Blockons_Admin::blockons_is_plugin_active('woocommerce.php') ) {
 			// WC Account Icon Block JS
@@ -125,19 +116,17 @@ class Blockons {
 
 		wp_register_script('blockons-img-comparison', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/image-comparison.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 
-		// AOS Animations & Venobox Popup
+		// Venobox Popup
+		wp_register_style('blockons-venobox-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/venobox/venobox.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
+		wp_register_script('blockons-venobox-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/venobox/venobox.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-venopopup', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.js'), array('blockons-venobox-script'), BLOCKONS_PLUGIN_VERSION, true);
+
+		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-frontend-script'), BLOCKONS_PLUGIN_VERSION, true);
+		
+		// AOS Animations
 		if (blockons_fs()->can_use_premium_code__premium_only()) {
 			wp_register_style('blockons-aos-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/aos/aos.css'), array(), BLOCKONS_PLUGIN_VERSION);
 			wp_register_script('blockons-aos-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/aos/aos.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
-
-			wp_register_style('blockons-venobox-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/venobox/venobox.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
-			wp_register_script('blockons-venobox-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/venobox/venobox.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
-		}
-		// Image Gallery - FREE & PREMIUM
-		if (blockons_fs()->can_use_premium_code__premium_only()) {
-			wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/imagegallery-pro.min.js'), array('blockons-venobox-script', 'blockons-js'), BLOCKONS_PLUGIN_VERSION, true);
-		} else {
-			wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-js'), BLOCKONS_PLUGIN_VERSION, true);
 		}
 
 		// Settings JS
@@ -175,7 +164,21 @@ class Blockons {
 			'isPremium' => $isPro,
 		));
 
-		if (blockons_fs()->can_use_premium_code__premium_only()) {
+		$allowed_block_names = array('core/image', 'core/gallery', 'blockons/image-gallery', 'blockons/image-carousel');
+		$has_block = false;
+		foreach ($allowed_block_names as $block_name) {
+			if (has_block($block_name)) {
+				$has_block = true;
+				break;
+			}
+		}
+		if ($has_block && isset($blockonsOptions->imagepopups->enabled) && $blockonsOptions->imagepopups->enabled == true) {
+			wp_enqueue_style('blockons-venobox-style');
+			wp_enqueue_script('blockons-venopopup');
+			var_dump('------------------------------------------------------ has block');
+		}
+
+		if (blockons_fs()->can_use_premium_code__premium_only()) {			
 			if ( Blockons_Admin::blockons_is_plugin_active('woocommerce.php') ) {
 				if (isset($blockonsOptions->sidecart->enabled) && $blockonsOptions->sidecart->enabled == true) {
 					wp_register_style('blockons-sidecart-pro', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/cart-pro.min.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
@@ -347,6 +350,10 @@ class Blockons {
 				"enabled" => false,
 				"theme" => "one",
 				"style" => "underlined",
+			),
+			"imagepopups" => array(
+				"enabled" => false,
+				"theme" => "one",
 			),
 			"pageloader" => array(
 				"enabled" => false,

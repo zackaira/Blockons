@@ -1,4 +1,4 @@
-import BlockonsNote from "../../../../assets/blocks/notes/BlockonsNote";
+import BlockonsNote from "../../settings/components/UI/BlockonsNote";
 const { __ } = wp.i18n;
 const { addFilter } = wp.hooks;
 const { assign, merge } = lodash;

@@ -22,7 +22,7 @@ import { v4 as uuidv4 } from "uuid";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import BlockonsPostTypeSelect from "../_components/BlockonsPostTypeSelect";
 import { colorPickerPalette } from "../block-global";
-import BlockonsNote from "../../assets/blocks/notes/BlockonsNote";
+import BlockonsNote from "../../src/backend/settings/components/UI/BlockonsNote";
 
 const Edit = (props) => {
 	const {

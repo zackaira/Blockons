@@ -17,17 +17,16 @@ const config = {
 		"frontend.min": "./src/frontend/frontend.js",
 		"swiper-video.min": "./assets/slider/swiper-video.js",
 		"imagegallery.min": "./assets/blocks/image-gallery/imagegallery.js",
+		"venopopup.min": "./assets/venobox/venopopup.js",
 		// Premium Files
 		"cart-pro.min": "./assets/blocks/wc-mini-cart/pro/cart.js",
 		"search-pro.min": "./assets/blocks/search/pro/search.js",
-		"imagegallery-pro.min": "./assets/blocks/image-gallery/pro/imagegallery.js",
 	},
 	output: {
 		// filename: "[name].js", // Uses the name of the file
 		filename: (pathData) => {
 			return pathData.chunk.name === "search-pro.min" ||
-				pathData.chunk.name === "cart-pro.min" ||
-				pathData.chunk.name === "imagegallery-pro.min"
+				pathData.chunk.name === "cart-pro.min"
 				? "pro/[name].js"
 				: "[name].js";
 		},

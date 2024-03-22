@@ -858,17 +858,17 @@
 .wp-block-blockons-image-gallery .venobox-icon.blockons-venobox {
 	display: flex;
 }
-.vbox-overlay.blockons-popup .vbox-content {
+.vbox-overlay.blockons-img-popup .vbox-content {
 	padding: 4% 8%;
 }
 .wp-block-blockons-image-gallery .venobox-icon.hide {
 	display: none !important;
 }
-.blockons-popup .vbox-title.vbox-bottom {
+.blockons-img-popup .vbox-title.vbox-bottom {
 	background-color: #000;
 	border-radius: 12px 12px 0 0;
 }
-.blockons-popup .vbox-title.vbox-top {
+.blockons-img-popup .vbox-title.vbox-top {
 	background-color: #000;
 	border-radius: 0 0 12px 12px;
 }
@@ -916,7 +916,7 @@
 	}
 	/* -- Featured Grid done further up -- */
 
-	.vbox-overlay.blockons-popup .vbox-content {
+	.vbox-overlay.blockons-img-popup .vbox-content {
 		padding: 20px 60px;
 	}
 }

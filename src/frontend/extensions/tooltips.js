@@ -2,14 +2,14 @@ import { blockonsStringReplaceForLink } from "../../backend/helpers";
 const isPremium = Boolean(blockonsFrontendObj.isPremium);
 
 export function createTooltipComponent(
-	style = "underlined",
-	theme = "one",
+	style,
+	theme,
 	title,
 	text,
 	icon,
-	tooltipSettings
+	tooltipDefaults
 ) {
-	console.log(style, theme, title, text, icon, tooltipSettings);
+	// console.log(style, theme, title, text, icon, tooltipDefaults);
 	const tooltipComponent = document.createElement("div");
 	tooltipComponent.classList.add("blockons-tooltip");
 
@@ -20,28 +20,26 @@ export function createTooltipComponent(
 	}
 
 	tooltipComponent.innerHTML = `
-		<div class="blockons-tooltip-popup ${style ? style : tooltipSettings?.style} ${
-		theme ? theme : tooltipSettings?.theme
-	}">
+		<div class="blockons-tooltip-popup">
 			<h6 class="blockons-tooltip-title">${title}</h6>
 			<p class="blockons-tooltip-text">${
 				isPremium ? blockonsStringReplaceForLink(text) : text
 			}</p>
 
-			${icon ? <div className={`tooltip-icon ${icon}`}></div> : ""}
-		</div>
-	`;
+			${icon ? `<div class="tooltip-icon ${icon}"></div>` : ""}
+		</div>`;
+
 	return tooltipComponent;
 }
 
-export function initializeTooltips(tooltipSettings = {}) {
+export function initializeTooltips(tooltipDefaults = {}) {
 	const blockonsTooltips = document.querySelectorAll(
 		".blockons-inline-tooltip"
 	);
 	if (blockonsTooltips.length > 0) {
 		blockonsTooltips.forEach((tooltip) => {
-			const style = tooltip.getAttribute("data-style");
-			const theme = tooltip.getAttribute("data-theme");
+			const style = tooltip.getAttribute("data-style") || "underlined";
+			const theme = tooltip.getAttribute("data-theme") || "one";
 			const title = tooltip.getAttribute("data-title");
 			const text = tooltip.getAttribute("data-text");
 			const icon = tooltip.getAttribute("data-icon");
@@ -54,7 +52,7 @@ export function initializeTooltips(tooltipSettings = {}) {
 					theme,
 					title,
 					text,
-					tooltipSettings
+					tooltipDefaults
 				);
 				tooltip.append(tooltipComponent);
 

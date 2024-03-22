@@ -11,6 +11,7 @@ const BlockExtensions = ({
 	handleSettingChange,
 }) => {
 	const [tooltipsPro, setTooltipsPro] = useState(false);
+	const [imgPopupsPro, setImgPopupsPro] = useState(false);
 	const [visibilityPro, setVisibilityPro] = useState(false);
 	const [animationsPro, setAnimationsPro] = useState(false);
 
@@ -132,6 +133,84 @@ const BlockExtensions = ({
 													"blockons"
 												),
 												__("Select from different tooltip styles", "blockons"),
+												__("More features coming soon", "blockons"),
+											]}
+										/>
+									)}
+								</>
+							)}
+						</>
+					)}
+
+					<SettingRow
+						title={__("Image Popups", "blockons")}
+						description={__(
+							"Add image popups to your website images and galleries.",
+							"blockons"
+						)}
+						inputType="heading"
+					/>
+					<SettingRow
+						title={__("Enable Image Lightbox", "blockons")}
+						slug="imagepopups_enabled"
+						value={blockonsOptions.imagepopups?.enabled}
+						inputType="toggle"
+						onChange={onSettingChange}
+						tooltip={__("Add image popups to your website.", "blockons")}
+						documentation="https://blockons/documentation/image-popups"
+					/>
+
+					{blockonsOptions.imagepopups?.enabled && (
+						<>
+							{isPremium ? (
+								<>
+									<SettingRow
+										title={__("Popup Theme", "blockons")}
+										slug="imagepopups_theme"
+										value={blockonsOptions.imagepopups?.theme}
+										inputType="select"
+										options={{
+											one: "Dark",
+											two: "Light",
+										}}
+										onChange={onSettingChange}
+									/>
+								</>
+							) : (
+								<>
+									<SettingNote
+										note={__(
+											"Basic Image Popups are enabled. You can now create image imagepopups within the Image and Gallery blocks.",
+											"blockons"
+										)}
+									/>
+									<SettingRow
+										title={__("Premium Image Popups", "blockons")}
+										inputType="toggle"
+										slug="imagepopups_pro"
+										value={imgPopupsPro}
+										onChange={() => setImgPopupsPro(!imgPopupsPro)}
+										documentation="https://blockons/documentation/image-popups"
+									/>
+									{imgPopupsPro && (
+										<SettingRow
+											inputType="upgrade"
+											title={__("Premium Image Popups", "blockons")}
+											description={__(
+												"Upgrade to Blockons Pro to add premium image imagepopups.",
+												"blockons"
+											)}
+											upgradeUrl={upgradeUrl}
+											proFeatures={[
+												__(
+													"Add image imagepopups to your website images and galleries.",
+													"blockons"
+												),
+												__(
+													"Select between Light & Dark popup themes",
+													"blockons"
+												),
+												__("Add custom links into your Popup text", "blockons"),
 												__("More features coming soon", "blockons"),
 											]}
 										/>

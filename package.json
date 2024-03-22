@@ -39,7 +39,7 @@
 		"react-waypoint": "^10.1.0",
 		"swiper": "^8.4.5",
 		"uuid": "^8.3.2",
-		"venobox": "^2.0.4",
+		"venobox": "^2.1.6",
 		"youtube-player": "^5.5.2"
 	}
 }

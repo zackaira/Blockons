@@ -31,7 +31,7 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 		return select("core/block-editor").getSelectedBlock();
 	}, []);
 
-	console.log("selectedBlock", selectedBlock);
+	// console.log("selectedBlock", selectedBlock);
 
 	const allowedBlocks = [
 		"core/paragraph",
