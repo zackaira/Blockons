@@ -24,7 +24,7 @@ function blockonsAddImgPopupAttributes(settings, name) {
 	const showImgPopupSettings = allowedImgPopupBlockTypes.includes(name);
 
 	const blockImgPopupAtts =
-		showImgPopupSettings && imgPopupEnabled === true
+		showImgPopupSettings && imgPopupEnabled
 			? {
 					blockonsPopupEnabled: {
 						type: "boolean",
@@ -68,16 +68,9 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 	(BlockEdit) => {
 		return (props) => {
 			const { Fragment } = wp.element;
-			const { InspectorControls, BlockControls } = wp.blockEditor;
-			const {
-				PanelBody,
-				ToggleControl,
-				RangeControl,
-				SelectControl,
-				TextControl,
-				ToolbarGroup,
-				DropdownMenu,
-			} = wp.components;
+			const { InspectorControls } = wp.blockEditor;
+			const { PanelBody, ToggleControl, SelectControl, TextControl } =
+				wp.components;
 			const {
 				attributes: {
 					blockonsPopupEnabled,
@@ -98,7 +91,7 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 				<Fragment>
 					<BlockEdit {...props} />
 
-					{imgPopupEnabled === true && showImgPopupSettings && (
+					{imgPopupEnabled && showImgPopupSettings && (
 						<InspectorControls>
 							<PanelBody
 								title={__("Image Lightbox Settings", "blockons")}
@@ -256,7 +249,6 @@ const blockonsAddEditorImgPopupAttributes = createHigherOrderComponent(
 				name,
 			} = props;
 			const showImgPopupSettings = allowedImgPopupBlockTypes.includes(name);
-			// console.log("attributes", showImgPopupSettings ? props : "");
 
 			const newWrapperProps =
 				imgPopupEnabled && showImgPopupSettings && blockonsPopupEnabled
@@ -273,7 +265,7 @@ const blockonsAddEditorImgPopupAttributes = createHigherOrderComponent(
 					: {};
 
 			const newClassnames =
-				showImgPopupSettings && imgPopupEnabled === true && blockonsPopupEnabled
+				showImgPopupSettings && imgPopupEnabled && blockonsPopupEnabled
 					? classnames(
 							className,
 							`blockons-venobox icon-${blockonsPopupIcon} ${blockonsPopupIconPos} ${blockonsPopupIconColor}`
@@ -313,8 +305,6 @@ const blockonsAddFrontendImgPopupAttributes = (
 	const { name } = blockType;
 	const showImgPopupSettings = allowedImgPopupBlockTypes.includes(name);
 
-	// console.log("frontend-attribs", extraProps, blockType, attributes);
-
 	if (imgPopupEnabled && showImgPopupSettings && blockonsPopupEnabled) {
 		const newClasses = `blockons-venobox icon-${blockonsPopupIcon} ${blockonsPopupIconPos} ${blockonsPopupIconColor}`;
 
@@ -339,7 +329,7 @@ const blockonsAddFrontendImgPopupAttributes = (
 /**
  * WP Editor Hooks
  */
-if (imgPopupEnabled === true) {
+if (imgPopupEnabled) {
 	addFilter(
 		"blocks.registerBlockType",
 		"blockons/block-imagepopups-attributes",

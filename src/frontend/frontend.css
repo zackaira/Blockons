@@ -397,6 +397,7 @@ body.blockons-tooltips.blstyle-highlight .blockons-inline-tooltip::before {
  */
 .blockons-venobox {
 	position: relative;
+	cursor: zoom-in;
 }
 .blockons-venobox::before {
 	display: flex;
@@ -423,7 +424,7 @@ body.blockons-tooltips.blstyle-highlight .blockons-inline-tooltip::before {
 .blockons-venobox.light::before {
 	background-color: rgb(255 255 255 / 45%);
 	box-shadow: 0 0 6px rgb(0 0 0 / 20%);
-	color: #000;
+	color: #555;
 }
 .blockons-venobox.topleft::before {
 	top: 0;

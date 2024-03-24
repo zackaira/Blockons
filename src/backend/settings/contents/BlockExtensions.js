@@ -165,13 +165,66 @@ const BlockExtensions = ({
 							{isPremium ? (
 								<>
 									<SettingRow
-										title={__("Popup Theme", "blockons")}
+										title={__("Icon", "blockons")}
+										slug="imagepopups_icon"
+										value={blockonsOptions.imagepopups?.icon}
+										inputType="select"
+										options={{
+											one: "Magnifying Glass",
+											two: "Expand",
+											one: "Diagonal Arrows",
+											two: "Maximize",
+											one: "Plus",
+											two: "Cross Arrows",
+										}}
+										onChange={onSettingChange}
+									/>
+									<SettingRow
+										title={__("Icon Position", "blockons")}
+										slug="imagepopups_iconpos"
+										value={blockonsOptions.imagepopups?.iconpos}
+										inputType="select"
+										options={{
+											topleft: "Top Left",
+											topright: "Top Right",
+											bottomleft: "Bottom Left",
+											bottomright: "Bottom Right",
+											center: "Center Center",
+										}}
+										onChange={onSettingChange}
+									/>
+									<SettingRow
+										title={__("Icon Theme", "blockons")}
 										slug="imagepopups_theme"
 										value={blockonsOptions.imagepopups?.theme}
 										inputType="select"
 										options={{
-											one: "Dark",
-											two: "Light",
+											dark: "Dark",
+											light: "Light",
+										}}
+										onChange={onSettingChange}
+									/>
+
+									<SettingRow
+										title={__("Popup Theme", "blockons")}
+										slug="imagepopups_popuptheme"
+										value={blockonsOptions.imagepopups?.popuptheme}
+										inputType="select"
+										options={{
+											dark: "Dark",
+											light: "Light",
+										}}
+										onChange={onSettingChange}
+									/>
+									<SettingRow
+										title={__("Caption Position", "blockons")}
+										slug="imagepopups_captionpos"
+										value={blockonsOptions.imagepopups?.captionpos}
+										inputType="select"
+										options={{
+											none: "No Caption",
+											top: "Top",
+											bottom: "Bottom",
 										}}
 										onChange={onSettingChange}
 									/>

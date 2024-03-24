@@ -1,16 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
 	const isPro = Boolean(blockonsFrontendObj.isPremium);
-	const defaultOptions = Boolean(
-		blockonsFrontendObj.blockonsOptions?.imagepopups
-	);
-
-	console.log("LOADERrrrrD !!!!");
-	console.log("defaultOptions: ", defaultOptions);
+	const defaultOptions = blockonsFrontendObj.blockonsOptions?.imagepopups;
 
 	const blockonsImages = document.querySelectorAll(".wp-block-image");
 	if (blockonsImages) {
 		blockonsImages.forEach((image) => {
 			const popupSettings = JSON.parse(image.getAttribute("data-popup"));
+			console.log("Default Options: ", defaultOptions);
 			console.log("Popup Settings: ", popupSettings);
 
 			if (popupSettings) {
@@ -27,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
 					titlePosition:
 						popupSettings.captionPosition !== "none"
 							? popupSettings.captionPosition
-							: "top", // bottom
-					titleStyle: "pill", // 'block' | 'pill' | 'transparent' | 'bar'
+							: "top",
+					titleStyle: "pill",
 					spinner: "flow",
 					maxWidth: "1200px",
 					toolsColor: "#FFF",
