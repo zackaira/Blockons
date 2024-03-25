@@ -256,9 +256,9 @@ const blockonsAddEditorImgPopupAttributes = createHigherOrderComponent(
 							"data-href": url,
 							"data-popup": JSON.stringify({
 								theme: `theme-${isPremium ? blockonsPopupTheme : "one"}`,
+								iconpos: blockonsPopupIconPos || "topleft",
 								caption: caption,
 								captionpos: isPremium ? blockonsCaptionPos : "none",
-								infinite: isPremium ? blockonsGalleryId : false,
 							}),
 							...(isPremium ? { "data-gall": blockonsGalleryId } : {}),
 					  }
@@ -314,9 +314,9 @@ const blockonsAddFrontendImgPopupAttributes = (
 		extraProps["data-href"] = url;
 		extraProps["data-popup"] = JSON.stringify({
 			theme: `theme-${isPremium ? blockonsPopupTheme : "one"}`,
+			iconpos: blockonsPopupIconPos || "topleft",
 			caption: caption,
 			captionpos: isPremium ? blockonsCaptionPos : "none",
-			infinite: isPremium ? blockonsGalleryId : false,
 		});
 		if (isPremium) {
 			extraProps["data-gall"] = blockonsGalleryId;

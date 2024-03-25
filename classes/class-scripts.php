@@ -353,7 +353,11 @@ class Blockons {
 			),
 			"imagepopups" => array(
 				"enabled" => false,
-				"theme" => "one",
+				"icon" => "one",
+				"iconpos" => "topleft",
+				"theme" => "dark",
+				"popuptheme" => "dark",
+				"captionpos" => "top",
 			),
 			"pageloader" => array(
 				"enabled" => false,
