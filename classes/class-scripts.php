@@ -175,7 +175,6 @@ class Blockons {
 		if ($has_block && isset($blockonsOptions->imagepopups->enabled) && $blockonsOptions->imagepopups->enabled == true) {
 			wp_enqueue_style('blockons-venobox-style');
 			wp_enqueue_script('blockons-venopopup');
-			var_dump('------------------------------------------------------ has block');
 		}
 
 		if (blockons_fs()->can_use_premium_code__premium_only()) {			

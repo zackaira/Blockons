@@ -6,15 +6,10 @@ import classnames from "classnames";
 const { createHigherOrderComponent } = wp.compose;
 
 const isPremium = Boolean(blockonsEditorObj.isPremium);
-const imgPopupEnabled =
-	Boolean(blockonsEditorObj.blockonsOptions?.imagepopups?.enabled) || false;
+const defaultOptions = blockonsEditorObj.blockonsOptions?.imagepopups;
+const imgPopupEnabled = Boolean(defaultOptions.enabled);
 
-const allowedImgPopupBlockTypes = [
-	"core/image",
-	// "core/gallery",
-	// "blockons/image-gallery",
-	// "blockons/image-carousel",
-];
+const allowedImgPopupBlockTypes = ["core/image"];
 
 /**
  * Add New Attributes to all blocks
@@ -32,23 +27,15 @@ function blockonsAddImgPopupAttributes(settings, name) {
 					},
 					blockonsPopupIcon: {
 						type: "string",
-						default: "one",
+						default: defaultOptions.icon || "one",
 					},
 					blockonsPopupIconPos: {
 						type: "string",
-						default: "topleft",
+						default: defaultOptions.iconpos || "topleft",
 					},
 					blockonsPopupIconColor: {
 						type: "string",
-						default: "dark",
-					},
-					blockonsPopupTheme: {
-						type: "string",
-						default: "one",
-					},
-					blockonsCaptionPos: {
-						type: "string",
-						default: "top",
+						default: defaultOptions.iconcolor || "dark",
 					},
 					blockonsGalleryId: {
 						type: "string",
@@ -77,8 +64,6 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 					blockonsPopupIcon,
 					blockonsPopupIconPos,
 					blockonsPopupIconColor,
-					blockonsPopupTheme,
-					blockonsCaptionPos,
 					blockonsGalleryId,
 				},
 				setAttributes,
@@ -97,16 +82,6 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 								title={__("Image Lightbox Settings", "blockons")}
 								initialOpen={false}
 							>
-								<BlockonsNote
-									imageUrl=""
-									title={__("Using Image Popups", "blockons")}
-									text={__(
-										"Enable this option to show the image in a popup when clicked.",
-										"blockons"
-									)}
-									docLink="https://blockons.com/documentation/block-visibility"
-								/>
-
 								<ToggleControl
 									checked={blockonsPopupEnabled}
 									label={__("Enable Image Popup", "blockons")}
@@ -154,7 +129,7 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 											__nextHasNoMarginBottom
 										/>
 										<SelectControl
-											label={__("Icon Theme", "blockons")}
+											label={__("Icon Color", "blockons")}
 											value={blockonsPopupIconColor}
 											options={[
 												{ label: "Dark", value: "dark" },
@@ -168,39 +143,9 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 											__nextHasNoMarginBottom
 										/>
 
-										<div className="blockons-divider"></div>
-										<SelectControl
-											label={__("Popup Theme", "blockons")}
-											value={blockonsPopupTheme}
-											options={[
-												{ label: "Dark", value: "one" },
-												{ label: "Light", value: "two" },
-											]}
-											onChange={(newValue) =>
-												setAttributes({
-													blockonsPopupTheme: newValue,
-												})
-											}
-											__nextHasNoMarginBottom
-										/>
-
 										{isPremium && (
 											<>
-												<SelectControl
-													label={__("Popup Caption Position", "blockons")}
-													value={blockonsCaptionPos}
-													options={[
-														{ label: "No Caption", value: "none" },
-														{ label: "Top", value: "top" },
-														{ label: "Bottom", value: "bottom" },
-													]}
-													onChange={(newValue) =>
-														setAttributes({
-															blockonsCaptionPos: newValue,
-														})
-													}
-													__nextHasNoMarginBottom
-												/>
+												<div className="blockons-divider"></div>
 												<TextControl
 													label={__("Gallery ID", "blockons")}
 													value={blockonsGalleryId}
@@ -216,6 +161,17 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 												/>
 											</>
 										)}
+
+										<div className="blockons-divider"></div>
+										<BlockonsNote
+											imageUrl=""
+											title={__("Using Image Popups", "blockons")}
+											text={__(
+												"Enable this option to show the image in a popup when clicked.",
+												"blockons"
+											)}
+											docLink="https://blockons.com/documentation/block-visibility"
+										/>
 									</>
 								)}
 							</PanelBody>
@@ -241,8 +197,6 @@ const blockonsAddEditorImgPopupAttributes = createHigherOrderComponent(
 					blockonsPopupIcon,
 					blockonsPopupIconPos,
 					blockonsPopupIconColor,
-					blockonsPopupTheme,
-					blockonsCaptionPos,
 					blockonsGalleryId,
 				},
 				className,
@@ -255,12 +209,12 @@ const blockonsAddEditorImgPopupAttributes = createHigherOrderComponent(
 					? {
 							"data-href": url,
 							"data-popup": JSON.stringify({
-								theme: `theme-${isPremium ? blockonsPopupTheme : "one"}`,
 								iconpos: blockonsPopupIconPos || "topleft",
-								caption: caption,
-								captionpos: isPremium ? blockonsCaptionPos : "none",
+								caption: caption || "",
 							}),
-							...(isPremium ? { "data-gall": blockonsGalleryId } : {}),
+							...(isPremium && blockonsGalleryId !== ""
+								? { "data-gall": blockonsGalleryId }
+								: {}),
 					  }
 					: {};
 
@@ -298,8 +252,6 @@ const blockonsAddFrontendImgPopupAttributes = (
 		blockonsPopupIcon,
 		blockonsPopupIconPos,
 		blockonsPopupIconColor,
-		blockonsPopupTheme,
-		blockonsCaptionPos,
 		blockonsGalleryId,
 	} = attributes;
 	const { name } = blockType;
@@ -313,12 +265,10 @@ const blockonsAddFrontendImgPopupAttributes = (
 		});
 		extraProps["data-href"] = url;
 		extraProps["data-popup"] = JSON.stringify({
-			theme: `theme-${isPremium ? blockonsPopupTheme : "one"}`,
 			iconpos: blockonsPopupIconPos || "topleft",
-			caption: caption,
-			captionpos: isPremium ? blockonsCaptionPos : "none",
+			caption: caption || "",
 		});
-		if (isPremium) {
+		if (isPremium && blockonsGalleryId !== "") {
 			extraProps["data-gall"] = blockonsGalleryId;
 		}
 	}

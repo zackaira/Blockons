@@ -683,76 +683,7 @@ const Edit = (props) => {
 														})
 													}
 												/>
-												{popupClick === "icon" && (
-													<>
-														<ToggleControl
-															label={__("Show on Hover", "blockons")}
-															checked={popupIconOnHover}
-															onChange={(newValue) =>
-																setAttributes({ popupIconOnHover: newValue })
-															}
-														/>
-														<SelectControl
-															label={__("Select Icon", "blockons")}
-															value={popupIcon}
-															options={[
-																{
-																	label: __("Magnifying Glass", "blockons"),
-																	value: "magnifying-glass",
-																},
-																{
-																	label: __("Expand", "blockons"),
-																	value: "expand",
-																},
-																{
-																	label: __("Maximize", "blockons"),
-																	value: "maximize",
-																},
-																{
-																	label: __("Plus", "blockons"),
-																	value: "plus",
-																},
-															]}
-															onChange={(newValue) =>
-																setAttributes({
-																	popupIcon:
-																		newValue === undefined
-																			? "magnifying-glass"
-																			: newValue,
-																})
-															}
-														/>
-													</>
-												)}
-												<div className="blockons-divider"></div>
-
-												<SelectControl
-													label={__("Image Caption", "blockons")}
-													value={popupCaption}
-													options={[
-														{ label: __("Top", "blockons"), value: "top" },
-														{
-															label: __("Bottom", "blockons"),
-															value: "bottom",
-														},
-														{ label: __("None", "blockons"), value: "none" },
-													]}
-													onChange={(newValue) =>
-														setAttributes({
-															popupCaption:
-																newValue === undefined ? "top" : newValue,
-														})
-													}
-												/>
-												<div className="blockons-divider"></div>
-
-												<ToggleControl
-													label={__("Infinite Gallery", "blockons")}
-													checked={popupInfiniteGal}
-													onChange={(newValue) =>
-														setAttributes({ popupInfiniteGal: newValue })
-													}
-												/>
+												
 											</>
 										)}
 									</>

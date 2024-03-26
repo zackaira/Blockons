@@ -473,3 +473,12 @@ body.blockons-tooltips.blstyle-highlight .blockons-inline-tooltip::before {
 .blockons-venobox.icon-six .blockons-venobox-trigger::before {
 	content: "\f047";
 }
+
+.vbox-overlay.light {
+	--vbox-tools-color: #000 !important;
+	--vbox-title-background: rgb(255 255 255 / 000) !important;
+	--vbox-share-background: rgb(255 255 255 / 75%) !important;
+}
+.vbox-overlay.light .vbox-backdrop {
+	background-color: rgb(255 255 255 / 75%) !important;
+}

@@ -8,7 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
 			const popupSettings = JSON.parse(image.getAttribute("data-popup"));
 			if (!popupSettings) return;
 
+			// console.log("PopupSetting: ", popupSettings);
+			// console.log("DefaultOptions: ", defaultOptions);
+
 			const img = image.querySelector("img");
+			if (!img) return;
+
 			const styles = calculatePosition(
 				img.width,
 				img.height,
@@ -16,30 +21,29 @@ document.addEventListener("DOMContentLoaded", () => {
 			);
 			const popupButton = document.createElement("div");
 			popupButton.classList.add("blockons-venobox-trigger");
-			console.log("styles", styles);
 			popupButton.style.left = styles.left + "px";
 			popupButton.style.top = styles.top + "px";
 			image.appendChild(popupButton);
 
-			// console.log("Default Options: ", defaultOptions);
-			console.log("Popup Settings: ", popupSettings);
-
 			new VenoBox({
 				selector: ".blockons-venobox",
-				customClass: "blockons-img-popup",
+				customClass: defaultOptions.popuptheme,
 				numeration: true,
-				infinigall: popupSettings.infinite,
+				infinigall: true,
 				share: false,
 				titleattr:
-					popupSettings.captionPosition !== "none" ? popupSettings.caption : "",
+					defaultOptions.captionpos !== "none" ? popupSettings.caption : "",
 				titlePosition:
-					popupSettings.captionPosition !== "none"
-						? popupSettings.captionPosition
+					defaultOptions.captionpos !== "none"
+						? defaultOptions.captionpos
 						: "top",
 				titleStyle: "pill",
 				spinner: "flow",
 				maxWidth: "1200px",
 				toolsColor: "#FFF",
+				...(defaultOptions.popuptheme === "light"
+					? { overlayColor: "rgb(255 255 255 / 75%)" }
+					: {}),
 			});
 		});
 	}

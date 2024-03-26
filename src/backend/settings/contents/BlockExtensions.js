@@ -172,10 +172,10 @@ const BlockExtensions = ({
 										options={{
 											one: "Magnifying Glass",
 											two: "Expand",
-											one: "Diagonal Arrows",
-											two: "Maximize",
-											one: "Plus",
-											two: "Cross Arrows",
+											three: "Diagonal Arrows",
+											four: "Maximize",
+											five: "Plus",
+											six: "Cross Arrows",
 										}}
 										onChange={onSettingChange}
 									/>
@@ -194,9 +194,9 @@ const BlockExtensions = ({
 										onChange={onSettingChange}
 									/>
 									<SettingRow
-										title={__("Icon Theme", "blockons")}
-										slug="imagepopups_theme"
-										value={blockonsOptions.imagepopups?.theme}
+										title={__("Icon Color", "blockons")}
+										slug="imagepopups_iconcolor"
+										value={blockonsOptions.imagepopups?.iconcolor}
 										inputType="select"
 										options={{
 											dark: "Dark",
@@ -206,7 +206,7 @@ const BlockExtensions = ({
 									/>
 
 									<SettingRow
-										title={__("Popup Theme", "blockons")}
+										title={__("Popup Color Theme", "blockons")}
 										slug="imagepopups_popuptheme"
 										value={blockonsOptions.imagepopups?.popuptheme}
 										inputType="select"
