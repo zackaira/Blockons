@@ -146,6 +146,11 @@ class Blockons_Admin {
 			}
 		}
 
+		// Image Lightbox
+		if (isset($blockonsOptions->imagepopups->enabled) && $blockonsOptions->imagepopups->enabled == true) {
+			$admin_classes .= ' ' . sanitize_html_class('blockons-imgpopup');
+		}
+
 		return $admin_classes;
 	}
 }

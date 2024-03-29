@@ -216,6 +216,7 @@
 .wp-block-blockons-image-gallery .blockons-gallery .blockons-gallery-caption {
 	max-height: 100%;
 	overflow-y: scroll;
+	pointer-events: none;
 }
 .wp-block-blockons-image-gallery
 	.blockons-gallery
@@ -833,57 +834,116 @@
 	top: -3px;
 	left: -3px;
 }
-
-/* -- Premium Features -- */
-.wp-block-blockons-image-gallery .blockons-venobox {
-	cursor: pointer;
+/**
+ * Lightbox Design
+ */
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox {
+	position: relative;
+	cursor: zoom-in;
 }
-.wp-block-blockons-image-gallery .venobox-icon {
-	position: absolute;
-	top: 5px;
-	left: 5px;
-	z-index: 99;
-	width: 35px;
-	height: 35px;
-	background-color: #5c5c5c;
-	box-shadow: 0 1px 4px rgb(0 0 0 / 22%);
-	border-radius: 35px;
-	font-size: 17px;
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox::before {
+	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: #fff !important;
-	cursor: pointer;
-	display: none;
-}
-.wp-block-blockons-image-gallery .venobox-icon.blockons-venobox {
-	display: flex;
-}
-.vbox-overlay.blockons-img-popup .vbox-content {
-	padding: 4% 8%;
-}
-.wp-block-blockons-image-gallery .venobox-icon.hide {
-	display: none !important;
-}
-.blockons-img-popup .vbox-title.vbox-bottom {
-	background-color: #000;
-	border-radius: 12px 12px 0 0;
-}
-.blockons-img-popup .vbox-title.vbox-top {
-	background-color: #000;
-	border-radius: 0 0 12px 12px;
-}
-.wp-block-blockons-image-gallery
-	.blockons-gallery.icon-hover
-	.blockons-gallery-item
-	.venobox-icon {
+	position: absolute;
+	z-index: 99;
+	border-radius: 4px;
+	width: 32px;
+	height: 32px;
+	font-size: 19px;
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
 	opacity: 0;
-	transition: opacity 0.3s ease-in-out 0s;
+	transition: opacity 0.3s ease-in-out;
 }
-.wp-block-blockons-image-gallery
-	.blockons-gallery.icon-hover
-	.blockons-gallery-item:hover
-	.venobox-icon {
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox:hover::before {
 	opacity: 1;
+}
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox.dark::before {
+	background-color: rgb(0 0 0 / 55%);
+	color: #fff;
+}
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox.light::before {
+	background-color: rgb(255 255 255 / 45%);
+	box-shadow: 0 0 6px rgb(0 0 0 / 20%);
+	color: #000;
+}
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox.topleft::before {
+	top: 15px;
+	left: 15px;
+}
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox.topright::before {
+	top: 15px;
+	right: 15px;
+}
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox.bottomleft::before {
+	bottom: 15px;
+	left: 15px;
+}
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox.bottomright::before {
+	bottom: 15px;
+	right: 15px;
+}
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox.center::before {
+	top: 50%;
+	left: 50%;
+	margin: -16px 0 0 -16px;
+}
+/* magnifying glass */
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox.icon-one::before {
+	content: "\f002";
+}
+/* expand */
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox.icon-two::before {
+	content: "\f065";
+}
+/* up right and down left arrow */
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox.icon-three::before {
+	content: "\f424";
+}
+/* maximize */
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox.icon-four::before {
+	content: "\f31e";
+}
+/* plus */
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox.icon-five::before {
+	content: "\2b";
+}
+/* arrows up down left right */
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox.icon-six::before {
+	content: "\f047";
 }
 
 /* ---- Responsive Tablet ---- */

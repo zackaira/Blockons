@@ -8,9 +8,10 @@ const BlockonsNote = ({
 	docLink,
 	upgradeLink,
 	proFeatures,
+	noline,
 }) => {
 	return (
-		<div className="blockons-editor-note">
+		<div className={`blockons-editor-note ${noline ? "noline" : ""}`}>
 			{imageUrl && (
 				<div className="bl-note-img">
 					<img src={imageUrl} alt={title} />

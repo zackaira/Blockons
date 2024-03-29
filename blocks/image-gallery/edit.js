@@ -1,6 +1,3 @@
-/**
- * WordPress dependencies
- */
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
@@ -42,11 +39,9 @@ const Edit = (props) => {
 			captionFontColor,
 			captionFontSize,
 			popupEnable,
-			popupClick,
 			popupIcon,
-			popupCaption,
-			popupIconOnHover,
-			popupInfiniteGal,
+			popupIconPos,
+			popupIconColor,
 		},
 		setAttributes,
 	} = props;
@@ -155,34 +150,22 @@ const Edit = (props) => {
 						: {}),
 				}}
 			>
-				<div
-					className={`${
-						popupEnable && popupClick === "icon" ? "blockons-venobox" : ""
-					} venobox-icon fa-solid fa-${popupIcon}`}
-					{...(popupClick === "icon"
-						? {
-								"data-title": imageItem.imageCaption
-									? imageItem.imageCaption
-									: "",
-								"data-href": imageItem.imageUrl,
-								"data-gall": `gal${uniqueId}`,
-						  }
-						: {})}
-				></div>
-
 				<div className="blockons-gallery-item-inner">
 					{layout === "featured" && imageItem.imageUrl && (
 						<div
 							className={`blockons-gallery-img ${
-								popupEnable && popupClick === "image" ? "blockons-venobox" : ""
+								isPro && popupEnable
+									? `blockons-galvenobox icon-${popupIcon} ${popupIconPos} ${popupIconColor}`
+									: ""
 							}`}
-							{...(popupClick === "image"
+							{...(isPro && popupEnable
 								? {
-										"data-title": imageItem.imageCaption
-											? imageItem.imageCaption
-											: "",
 										"data-href": imageItem.imageUrl,
-										"data-gall": `gal${uniqueId}`,
+										"data-title": imageItem.imageCaption || "",
+										"data-popup": JSON.stringify({
+											iconpos: popupIconPos || "topleft",
+										}),
+										"data-gall": uniqueId,
 								  }
 								: {})}
 						>
@@ -192,7 +175,9 @@ const Edit = (props) => {
 					{(layout === "grid" || layout === "masonry") && (
 						<div
 							className={`blockons-gallery-img ${
-								popupEnable && popupClick === "image" ? "blockons-venobox" : ""
+								isPro && popupEnable
+									? `blockons-galvenobox icon-${popupIcon} ${popupIconPos} ${popupIconColor}`
+									: ""
 							}`}
 							style={{
 								...(imageProportion !== "actual"
@@ -201,13 +186,14 @@ const Edit = (props) => {
 									  }
 									: {}),
 							}}
-							{...(popupClick === "image"
+							{...(isPro && popupEnable
 								? {
-										"data-title": imageItem.imageCaption
-											? imageItem.imageCaption
-											: "",
 										"data-href": imageItem.imageUrl,
-										"data-gall": `gal${uniqueId}`,
+										"data-title": imageItem.imageCaption || "",
+										"data-popup": JSON.stringify({
+											iconpos: popupIconPos || "topleft",
+										}),
+										"data-gall": uniqueId,
 								  }
 								: {})}
 						>
@@ -464,20 +450,6 @@ const Edit = (props) => {
 											: ""
 									}
 								/>
-								{/* <div className="helplink fixmargin">
-									<p>
-										{__(
-											"Add the image caption when uploading or editing images",
-											"blockons"
-										)}
-									</p>
-									<a
-										href="https://blockons.com/documentation/adding-a-custom-font-awesome-icon-to-the-block/"
-										target="_blank"
-									>
-										{__("Read More")}
-									</a>
-								</div> */}
 
 								{(imageCaption === "plain" ||
 									imageCaption === "bottom" ||
@@ -643,7 +615,6 @@ const Edit = (props) => {
 								)}
 							</PanelBody>
 
-							{/* 							
 							<PanelBody
 								title={__("Image Lightbox Settings", "blockons")}
 								initialOpen={false}
@@ -663,27 +634,56 @@ const Edit = (props) => {
 										/>
 										{popupEnable && (
 											<>
+												<div className="blockons-divider"></div>
 												<SelectControl
-													label={__("Click to Open", "blockons")}
-													value={popupClick}
+													label={__("Icon", "blockons")}
+													value={popupIcon}
 													options={[
-														{
-															label: __("Popup Icon", "blockons"),
-															value: "icon",
-														},
-														{
-															label: __("Click Full Image", "blockons"),
-															value: "image",
-														},
+														{ label: "Magnifying Glass", value: "one" },
+														{ label: "Expand", value: "two" },
+														{ label: "Diagonal Arrows", value: "three" },
+														{ label: "Maximize", value: "four" },
+														{ label: "Plus", value: "five" },
+														{ label: "Cross Arrows", value: "six" },
 													]}
 													onChange={(newValue) =>
 														setAttributes({
-															popupClick:
-																newValue === undefined ? "icon" : newValue,
+															popupIcon: newValue,
 														})
 													}
+													__nextHasNoMarginBottom
 												/>
-												
+												<SelectControl
+													label={__("Icon Position", "blockons")}
+													value={popupIconPos}
+													options={[
+														{ label: "Top Left", value: "topleft" },
+														{ label: "Top Right", value: "topright" },
+														{ label: "Bottom Left", value: "bottomleft" },
+														{ label: "Bottom Right", value: "bottomright" },
+														{ label: "Center Center", value: "center" },
+													]}
+													onChange={(newValue) =>
+														setAttributes({
+															popupIconPos: newValue,
+														})
+													}
+													__nextHasNoMarginBottom
+												/>
+												<SelectControl
+													label={__("Icon Color", "blockons")}
+													value={popupIconColor}
+													options={[
+														{ label: "Dark", value: "dark" },
+														{ label: "Light", value: "light" },
+													]}
+													onChange={(newValue) =>
+														setAttributes({
+															popupIconColor: newValue,
+														})
+													}
+													__nextHasNoMarginBottom
+												/>
 											</>
 										)}
 									</>
@@ -695,16 +695,22 @@ const Edit = (props) => {
 											"blockons"
 										)}
 										proFeatures={[
-											__("Click image or icon to open Lightbox", "blockons"),
-											__("Customize Lightbox popup icon", "blockons"),
-											__("Customize Lightbox caption position", "blockons"),
-											__("Infinite Gallery", "blockons"),
+											__("Click image to open a Lightbox", "blockons"),
+											__(
+												"Customize icon, and icon color and position",
+												"blockons"
+											),
+											__(
+												"Customize Lightbox color & other settings",
+												"blockons"
+											),
 										]}
 										docLink="https://blockons.com/documentation/block-scroll-animations"
 										upgradeLink="https://blockons.com/documentation/block-scroll-animations"
+										noline
 									/>
 								)}
-							</PanelBody> */}
+							</PanelBody>
 						</>
 					)}
 				</InspectorControls>
@@ -721,7 +727,7 @@ const Edit = (props) => {
 						captionOnHover
 							? `caption-hover caption-${captionAnimation}`
 							: ""
-					} ${popupIconOnHover ? "icon-hover" : ""}`}
+					}`}
 					id={uniqueId}
 					style={
 						layout === "masonry"
@@ -732,14 +738,6 @@ const Edit = (props) => {
 									"grid-gap": gridGap,
 							  }
 					}
-					{...(popupEnable
-						? {
-								"data-popup": JSON.stringify({
-									caption: popupCaption,
-									infinite: popupInfiniteGal,
-								}),
-						  }
-						: {})}
 				>
 					{images.map((image, index) => image)}
 				</div>

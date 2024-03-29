@@ -119,9 +119,10 @@ class Blockons {
 		// Venobox Popup
 		wp_register_style('blockons-venobox-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/venobox/venobox.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
 		wp_register_script('blockons-venobox-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/venobox/venobox.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_style('blockons-venopopup-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.css'), array('blockons-venobox-style', 'blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
 		wp_register_script('blockons-venopopup', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.js'), array('blockons-venobox-script'), BLOCKONS_PLUGIN_VERSION, true);
 
-		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-frontend-script'), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-frontend-script', 'blockons-venobox-script'), BLOCKONS_PLUGIN_VERSION, true);
 		
 		// AOS Animations
 		if (blockons_fs()->can_use_premium_code__premium_only()) {
@@ -164,16 +165,18 @@ class Blockons {
 			'isPremium' => $isPro,
 		));
 
-		$allowed_block_names = array('core/image', 'core/gallery', 'blockons/image-gallery', 'blockons/image-carousel');
-		$has_block = false;
-		foreach ($allowed_block_names as $block_name) {
-			if (has_block($block_name)) {
-				$has_block = true;
-				break;
-			}
-		}
-		if ($has_block && isset($blockonsOptions->imagepopups->enabled) && $blockonsOptions->imagepopups->enabled == true) {
+		// $allowed_block_names = array('core/image', 'core/gallery', 'blockons/image-gallery', 'blockons/image-carousel');
+		// $has_block = false;
+		// foreach ($allowed_block_names as $block_name) {
+		// 	if (has_block($block_name)) {
+		// 		$has_block = true;
+		// 		break;
+		// 	}
+		// }
+
+		if (isset($blockonsOptions->imagepopups->enabled) && $blockonsOptions->imagepopups->enabled == true) {
 			wp_enqueue_style('blockons-venobox-style');
+			wp_enqueue_style('blockons-venopopup-style');
 			wp_enqueue_script('blockons-venopopup');
 		}
 

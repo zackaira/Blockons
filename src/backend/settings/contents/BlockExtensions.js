@@ -206,7 +206,7 @@ const BlockExtensions = ({
 									/>
 
 									<SettingRow
-										title={__("Popup Color Theme", "blockons")}
+										title={__("Lightbox Color Theme", "blockons")}
 										slug="imagepopups_popuptheme"
 										value={blockonsOptions.imagepopups?.popuptheme}
 										inputType="select"
@@ -217,7 +217,7 @@ const BlockExtensions = ({
 										onChange={onSettingChange}
 									/>
 									<SettingRow
-										title={__("Caption Position", "blockons")}
+										title={__("Lightbox Caption Position", "blockons")}
 										slug="imagepopups_captionpos"
 										value={blockonsOptions.imagepopups?.captionpos}
 										inputType="select"
@@ -238,7 +238,7 @@ const BlockExtensions = ({
 										)}
 									/>
 									<SettingRow
-										title={__("Premium Image Popups", "blockons")}
+										title={__("Premium Image Lightbox", "blockons")}
 										inputType="toggle"
 										slug="imagepopups_pro"
 										value={imgPopupsPro}
@@ -248,7 +248,7 @@ const BlockExtensions = ({
 									{imgPopupsPro && (
 										<SettingRow
 											inputType="upgrade"
-											title={__("Premium Image Popups", "blockons")}
+											title={__("Premium Image Lightbox", "blockons")}
 											description={__(
 												"Upgrade to Blockons Pro to add premium image imagepopups.",
 												"blockons"
@@ -256,15 +256,18 @@ const BlockExtensions = ({
 											upgradeUrl={upgradeUrl}
 											proFeatures={[
 												__(
-													"Add image imagepopups to your website images and galleries.",
+													"Further customize lightboxes to suit your website.",
 													"blockons"
 												),
 												__(
-													"Select between Light & Dark popup themes",
+													"Select between Light & Dark lightbox themes.",
 													"blockons"
 												),
-												__("Add custom links into your Popup text", "blockons"),
-												__("More features coming soon", "blockons"),
+												__("Edit icons and Icon color & position", "blockons"),
+												__(
+													"Enable Lightboxes for Advanced Image Gallery block",
+													"blockons"
+												),
 											]}
 										/>
 									)}

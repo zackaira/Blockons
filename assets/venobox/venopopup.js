@@ -1,15 +1,17 @@
+/* Venobox Popup - Also in /assets/blocks/image-gallery/imagegallery.js */
+import "./venopopup.css";
+
 document.addEventListener("DOMContentLoaded", () => {
-	const isPro = Boolean(blockonsFrontendObj.isPremium);
 	const defaultOptions = blockonsFrontendObj.blockonsOptions?.imagepopups;
 
-	const blockonsImages = document.querySelectorAll(".wp-block-image");
+	const blockonsImages = document.querySelectorAll(
+		".wp-block-image, body.blockons-pro .blockons-gallery-img"
+	);
 	if (blockonsImages) {
 		blockonsImages.forEach((image) => {
 			const popupSettings = JSON.parse(image.getAttribute("data-popup"));
-			if (!popupSettings) return;
-
-			// console.log("PopupSetting: ", popupSettings);
-			// console.log("DefaultOptions: ", defaultOptions);
+			if (!popupSettings || !popupSettings?.enabled || !defaultOptions.enabled)
+				return;
 
 			const img = image.querySelector("img");
 			if (!img) return;
@@ -31,12 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
 				numeration: true,
 				infinigall: true,
 				share: false,
-				titleattr:
-					defaultOptions.captionpos !== "none" ? popupSettings.caption : "",
-				titlePosition:
-					defaultOptions.captionpos !== "none"
-						? defaultOptions.captionpos
-						: "top",
+				...(defaultOptions.captionpos !== "none"
+					? { titleattr: "data-title" }
+					: {}),
+				titlePosition: defaultOptions.captionpos,
 				titleStyle: "pill",
 				spinner: "flow",
 				maxWidth: "1200px",

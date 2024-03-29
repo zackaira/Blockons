@@ -71,31 +71,22 @@
 			"type": "boolean",
 			"default": false
 		},
-		"popupClick": {
-			"type": "string",
-			"default": "icon"
-		},
-		"popupIconOnHover": {
-			"type": "boolean",
-			"default": false
-		},
 		"popupIcon": {
 			"type": "string",
-			"default": "magnifying-glass"
+			"default": "one"
 		},
-		"popupCaption": {
+		"popupIconPos": {
 			"type": "string",
-			"default": "top"
+			"default": "topleft"
 		},
-		"popupInfiniteGal": {
-			"type": "boolean",
-			"default": true
+		"popupIconColor": {
+			"type": "string",
+			"default": "dark"
 		}
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"script": "blockons-js",
-	"viewScript": "blockons-image-gallery",
+	"viewScript": ["blockons-image-gallery"],
 	"style": [
 		"file:./style-index.css",
 		"blockons-fontawesome",

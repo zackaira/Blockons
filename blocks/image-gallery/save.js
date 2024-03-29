@@ -5,6 +5,7 @@ import { useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {
 	const pluginUrl = blockonsEditorObj.pluginUrl || "";
+	const isPro = Boolean(blockonsEditorObj.isPremium);
 	const blockProps = useBlockProps.save({
 		className: ``,
 	});
@@ -48,38 +49,23 @@ const Save = ({ attributes }) => {
 						: {}),
 				}}
 			>
-				<div
-					className={`${
-						attributes.popupEnable && attributes.popupClick === "icon"
-							? "blockons-venobox"
-							: ""
-					} venobox-icon fa-solid fa-${attributes.popupIcon}`}
-					{...(attributes.popupClick === "icon"
-						? {
-								"data-title": imageItem.imageCaption
-									? imageItem.imageCaption
-									: "",
-								"data-href": imageItem.imageUrl,
-								"data-gall": `gal${attributes.uniqueId}`,
-						  }
-						: {})}
-				></div>
-
 				<div className="blockons-gallery-item-inner">
 					{attributes.layout === "featured" && imageItem.imageUrl && (
 						<div
 							className={`blockons-gallery-img ${
-								attributes.popupEnable && attributes.popupClick === "image"
-									? "blockons-venobox"
+								attributes.popupEnable
+									? `blockons-galvenobox icon-${attributes.popupIcon} ${attributes.popupIconPos} ${attributes.popupIconColor}`
 									: ""
 							}`}
-							{...(attributes.popupClick === "image"
+							{...(attributes.popupEnable
 								? {
-										"data-title": imageItem.imageCaption
-											? imageItem.imageCaption
-											: "",
 										"data-href": imageItem.imageUrl,
-										"data-gall": `gal${attributes.uniqueId}`,
+										"data-title": imageItem.imageCaption || "",
+										"data-popup": JSON.stringify({
+											iconpos: attributes.popupIconPos || "topleft",
+											caption: imageItem.imageCaption || "",
+										}),
+										"data-gall": attributes.uniqueId,
 								  }
 								: {})}
 						>
@@ -90,8 +76,8 @@ const Save = ({ attributes }) => {
 						attributes.layout === "masonry") && (
 						<div
 							className={`blockons-gallery-img ${
-								attributes.popupEnable && attributes.popupClick === "image"
-									? "blockons-venobox"
+								attributes.popupEnable
+									? `blockons-galvenobox icon-${attributes.popupIcon} ${attributes.popupIconPos} ${attributes.popupIconColor}`
 									: ""
 							}`}
 							style={{
@@ -101,13 +87,15 @@ const Save = ({ attributes }) => {
 									  }
 									: {}),
 							}}
-							{...(attributes.popupClick === "image"
+							{...(attributes.popupEnable
 								? {
-										"data-title": imageItem.imageCaption
-											? imageItem.imageCaption
-											: "",
 										"data-href": imageItem.imageUrl,
-										"data-gall": `gal${attributes.uniqueId}`,
+										"data-title": imageItem.imageCaption || "",
+										"data-popup": JSON.stringify({
+											iconpos: attributes.popupIconPos || "topleft",
+											caption: imageItem.imageCaption || "",
+										}),
+										"data-gall": attributes.uniqueId,
 								  }
 								: {})}
 						>

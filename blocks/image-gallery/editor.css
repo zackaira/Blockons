@@ -37,3 +37,9 @@
 	right: 5px;
 	z-index: 20;
 }
+
+body.blockons-pro
+	.wp-block-blockons-image-gallery
+	.blockons-gallery-img.blockons-galvenobox {
+	cursor: initial;
+}

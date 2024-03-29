@@ -1,0 +1,91 @@
+/**
+ * Image Lightbox Popup
+ */
+.blockons-venobox {
+	position: relative;
+	cursor: zoom-in;
+}
+.blockons-venobox-trigger {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	z-index: 99;
+	border-radius: 4px;
+	width: 32px;
+	height: 32px;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
+}
+
+.blockons-venobox-trigger::before {
+	font-size: 19px;
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+}
+.blockons-venobox:hover .blockons-venobox-trigger {
+	opacity: 1;
+}
+.blockons-venobox.dark .blockons-venobox-trigger {
+	background-color: rgb(0 0 0 / 55%);
+	color: #fff;
+}
+.blockons-venobox.light .blockons-venobox-trigger {
+	background-color: rgb(255 255 255 / 45%);
+	box-shadow: 0 0 6px rgb(0 0 0 / 20%);
+	color: #555;
+}
+.blockons-venobox.topleft .blockons-venobox-trigger {
+	top: 0;
+	left: 0;
+}
+.blockons-venobox.topright .blockons-venobox-trigger {
+	top: 0;
+	right: 0;
+}
+.blockons-venobox.bottomleft .blockons-venobox-trigger {
+	bottom: 0;
+	left: 0;
+}
+.blockons-venobox.bottomright .blockons-venobox-trigger {
+	bottom: 0;
+	right: 0;
+}
+.blockons-venobox.center .blockons-venobox-trigger {
+	top: 50%;
+	left: 50%;
+	margin: -16px 0 0 -16px;
+}
+/* magnifying glass */
+.blockons-venobox.icon-one .blockons-venobox-trigger::before {
+	content: "\f002";
+}
+/* expand */
+.blockons-venobox.icon-two .blockons-venobox-trigger::before {
+	content: "\f065";
+}
+/* up right and down left arrow */
+.blockons-venobox.icon-three .blockons-venobox-trigger::before {
+	content: "\f424";
+}
+/* maximize */
+.blockons-venobox.icon-four .blockons-venobox-trigger::before {
+	content: "\f31e";
+}
+/* plus */
+.blockons-venobox.icon-five .blockons-venobox-trigger::before {
+	content: "\2b";
+}
+/* arrows up down left right */
+.blockons-venobox.icon-six .blockons-venobox-trigger::before {
+	content: "\f047";
+}
+
+.vbox-overlay.light {
+	--vbox-tools-color: #000 !important;
+	--vbox-title-background: rgb(255 255 255 / 000) !important;
+	--vbox-share-background: rgb(255 255 255 / 75%) !important;
+}
+.vbox-overlay.light .vbox-backdrop {
+	background-color: rgb(255 255 255 / 75%) !important;
+}
