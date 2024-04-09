@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Blockons
- * Version: 1.1.00001
+ * Version: 1.1.01
  * Plugin URI: https://blockons.com/
  * Description: WordPress & WooCommerce editor blocks for you to use when building your website
  * Author: Kaira
@@ -20,7 +20,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( !defined( 'BLOCKONS_PLUGIN_VERSION' ) ) {
-	define('BLOCKONS_PLUGIN_VERSION', '1.1.00001');
+	define('BLOCKONS_PLUGIN_VERSION', '1.1.01');
 }
 if ( !defined( 'BLOCKONS_PLUGIN_URL' ) ) {
 	define('BLOCKONS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

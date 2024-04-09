@@ -287,10 +287,9 @@ body.wp-admin.admin-bar .blockons-settings .blockons-page-loader {
 	}
 }
 /**
- * Blockons Inline Tooltip Settings
+ * Blockons Inline Tooltips
  */
 body.blockons-tooltips .blockons-inline-tooltip {
-	border-bottom: 1px solid #000;
 	position: relative;
 	overflow: hidden;
 }
@@ -301,13 +300,13 @@ body.blockons-tooltips .blockons-tooltip {
 	left: -999999999999px;
 	width: 180px;
 	margin-left: -90px;
-	padding: 6px 10px 8px;
+	padding: 6px 10px 10px;
 	text-align: left;
 	opacity: 0;
 	transition: opacity 0.2s ease-in-out 0.15s, bottom 0.2s ease-in-out 0.15s,
 		left 0.05s ease-in-out 0s;
 }
-body.blockons-tooltips .blockons-tooltip::after {
+body.blockons-tooltips .blockons-tooltip .blockons-tooltip-angle {
 	content: "";
 	position: absolute;
 	top: 100%;
@@ -337,18 +336,19 @@ body.blockons-tooltips .blockons-tooltip .blockons-tooltip-text a {
 body.blockons-tooltips .blockons-tooltip .blockons-tooltip-text a:hover {
 	text-decoration: underline;
 }
-body.blockons-tooltips .blockons-inline-tooltip.active {
-}
 body.blockons-tooltips .blockons-inline-tooltip.active .blockons-tooltip {
 	left: 50%;
 	opacity: 1;
 	bottom: calc(100% + 8px);
 }
+body.blockons-tooltips .tooltip-icon {
+	margin: 0 0 0 4px;
+}
 /* -- Theme One -- */
 body.blockons-tooltips .blockons-tooltip.one {
 	background-color: #424242;
 }
-body.blockons-tooltips .blockons-tooltip.one::after {
+body.blockons-tooltips .blockons-tooltip.one .blockons-tooltip-angle {
 	border-color: #424242 transparent transparent transparent;
 }
 body.blockons-tooltips .blockons-tooltip.one .blockons-tooltip-title {
@@ -365,7 +365,7 @@ body.blockons-tooltips .blockons-tooltip.two {
 	background-color: #fff;
 	box-shadow: 0 2px 12px rgb(0 0 0 / 20%);
 }
-body.blockons-tooltips .blockons-tooltip.two::after {
+body.blockons-tooltips .blockons-tooltip.two .blockons-tooltip-angle {
 	border-color: #fff transparent transparent transparent;
 }
 body.blockons-tooltips .blockons-tooltip.two .blockons-tooltip-title {
@@ -377,15 +377,23 @@ body.blockons-tooltips .blockons-tooltip.two .blockons-tooltip-text {
 body.blockons-tooltips .blockons-tooltip.two .blockons-tooltip-text a {
 	color: #000 !important;
 }
+/* -- Theme Custom -- */
+body.blockons-tooltips .blockons-tooltip.custom .blockons-tooltip-title,
+body.blockons-tooltips .blockons-tooltip.custom .blockons-tooltip-text {
+	color: inherit;
+}
 /* -- Styles -- */
-body.blockons-tooltips.blstyle-dashed .blockons-inline-tooltip {
+body.blockons-tooltips .blockons-inline-tooltip.underlined {
+	border-bottom: 1px solid #000;
+}
+body.blockons-tooltips .blockons-inline-tooltip.dashed {
 	border-bottom: 2px dashed #000;
 }
-body.blockons-tooltips.blstyle-highlight .blockons-inline-tooltip {
+body.blockons-tooltips .blockons-inline-tooltip.highlight {
 	border: 0;
 	position: relative;
 }
-body.blockons-tooltips.blstyle-highlight .blockons-inline-tooltip::before {
+body.blockons-tooltips .blockons-inline-tooltip.highlight::before {
 	display: inline-block;
 	content: "";
 	width: 100%;

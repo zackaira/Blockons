@@ -44,8 +44,8 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 
 	const activeFormat = getActiveFormat(value, "blockons/inline-tooltip");
 	const [selectedTooltip, setSelectedTooltip] = useState({
-		style: tooltipDefaults.style,
-		theme: tooltipDefaults.theme,
+		style: tooltipDefaults.style || "underlined",
+		theme: tooltipDefaults.theme || "one",
 		title: "",
 		text: "",
 		icon: "",
@@ -79,8 +79,8 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 			});
 		} else {
 			setSelectedTooltip({
-				style: tooltipDefaults.style,
-				theme: tooltipDefaults.theme,
+				style: tooltipDefaults.style || "underlined",
+				theme: tooltipDefaults.theme || "one",
 				title: "",
 				text: "",
 				icon: "",
