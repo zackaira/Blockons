@@ -102,7 +102,7 @@ const BlockExtensions = ({
 								<>
 									<SettingNote
 										note={__(
-											"Basic Tooltips are enabled. You can now create content tooltips within Heading and Paragraph blocks.",
+											"Tooltips are now enabled. Create content tooltips within core Heading and Paragraph blocks.",
 											"blockons"
 										)}
 									/>
@@ -143,7 +143,7 @@ const BlockExtensions = ({
 					)}
 
 					<SettingRow
-						title={__("Image Popups", "blockons")}
+						title={__("Image Lightbox", "blockons")}
 						description={__(
 							"Add image popups to your website images and galleries.",
 							"blockons"
@@ -233,7 +233,7 @@ const BlockExtensions = ({
 								<>
 									<SettingNote
 										note={__(
-											"Basic Image Popups are enabled. You can now create image imagepopups within the Image and Gallery blocks.",
+											"Image Lightbox is now enabled. Create image popups within Image and Gallery blocks.",
 											"blockons"
 										)}
 									/>
@@ -250,22 +250,22 @@ const BlockExtensions = ({
 											inputType="upgrade"
 											title={__("Premium Image Lightbox", "blockons")}
 											description={__(
-												"Upgrade to Blockons Pro to add premium image imagepopups.",
+												"Upgrade to Blockons Pro to add premium Image Lightboxes.",
 												"blockons"
 											)}
 											upgradeUrl={upgradeUrl}
 											proFeatures={[
 												__(
-													"Further customize lightboxes to suit your website.",
+													"Customize lightbox styles to suit your website.",
 													"blockons"
 												),
 												__(
-													"Select between Light & Dark lightbox themes.",
+													"Select between light & dark lightbox & icon themes.",
 													"blockons"
 												),
-												__("Edit icons and Icon color & position", "blockons"),
+												__("Edit icon design, colors & position", "blockons"),
 												__(
-													"Enable Lightboxes for Advanced Image Gallery block",
+													"Enable Lightbox popups for Advanced Image Gallery block",
 													"blockons"
 												),
 											]}

@@ -51,6 +51,8 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 		icon: "",
 		color: "",
 		fcolor: "",
+		pcolor: "#d6c0ff",
+		pfcolor: "#000",
 	});
 
 	// console.log("selectedTooltip", selectedTooltip);
@@ -72,6 +74,8 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 				icon: attributes["data-icon"] || "",
 				color: attributes["data-color"] || "",
 				fcolor: attributes["data-fcolor"] || "",
+				pcolor: attributes["data-pcolor"] || "#d6c0ff",
+				pfcolor: attributes["data-pfcolor"] || "#000",
 			});
 		} else {
 			setSelectedTooltip({
@@ -82,36 +86,14 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 				icon: "",
 				color: "",
 				fcolor: "",
+				pcolor: "#d6c0ff",
+				pfcolor: "#000",
 			});
 		}
 	}, [activeFormat]);
 
-	const handleStyleChange = (newValue) => {
-		setSelectedTooltip((prevState) => ({ ...prevState, style: newValue }));
-	};
-
-	const handleThemeChange = (newValue) => {
-		setSelectedTooltip((prevState) => ({ ...prevState, theme: newValue }));
-	};
-
-	const handleTitleChange = (newValue) => {
-		setSelectedTooltip((prevState) => ({ ...prevState, title: newValue }));
-	};
-
-	const handleTextChange = (newValue) => {
-		setSelectedTooltip((prevState) => ({ ...prevState, text: newValue }));
-	};
-
-	const handleIconChange = (newValue) => {
-		setSelectedTooltip((prevState) => ({ ...prevState, icon: newValue }));
-	};
-
-	const handleColorChange = (newValue) => {
-		setSelectedTooltip((prevState) => ({ ...prevState, color: newValue }));
-	};
-
-	const handleFontColorChange = (newValue) => {
-		setSelectedTooltip((prevState) => ({ ...prevState, fcolor: newValue }));
+	const handleTooltipChange = (property) => (newValue) => {
+		setSelectedTooltip((prevState) => ({ ...prevState, [property]: newValue }));
 	};
 
 	return (
@@ -124,7 +106,9 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 						popoverProps={{ placement: "bottom-start" }}
 						renderToggle={({ isOpen, onToggle }) => (
 							<ToolbarButton
-								icon={<span className="dashicons dashicons-info"></span>}
+								icon={
+									<span className="dashicons dashicons-format-status"></span>
+								}
 								title="Blockons Tooltip"
 								onClick={onToggle}
 								isActive={isActive}
@@ -135,12 +119,12 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 								<TextControl
 									label={__("Tooltip Title", "blockons")}
 									value={selectedTooltip.title}
-									onChange={handleTitleChange}
+									onChange={handleTooltipChange("title")}
 								/>
 								<TextareaControl
 									label={__("Tooltip Text", "blockons")}
 									value={selectedTooltip.text}
-									onChange={handleTextChange}
+									onChange={handleTooltipChange("text")}
 								/>
 								<div className="blockons-divider"></div>
 
@@ -197,7 +181,7 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 																{ label: "Underline Dashed", value: "dashed" },
 																{ label: "Highlighted", value: "highlight" },
 															]}
-															onChange={handleStyleChange}
+															onChange={handleTooltipChange("style")}
 														/>
 														<div className="blockons-tooltip-clrs">
 															<Dropdown
@@ -221,7 +205,7 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 																	<>
 																		<ColorPicker
 																			color={selectedTooltip.color}
-																			onChange={handleColorChange}
+																			onChange={handleTooltipChange("color")}
 																			defaultValue="#f4f4f4"
 																		/>
 																	</>
@@ -250,7 +234,7 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 																		<>
 																			<ColorPicker
 																				color={selectedTooltip.fcolor}
-																				onChange={handleFontColorChange}
+																				onChange={handleTooltipChange("fcolor")}
 																				defaultValue="#f4f4f4"
 																			/>
 																		</>
@@ -266,15 +250,85 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 															options={[
 																{ label: "Dark", value: "one" },
 																{ label: "Light", value: "two" },
+																{ label: "Custom Color", value: "custom" },
 															]}
-															onChange={handleThemeChange}
+															onChange={handleTooltipChange("theme")}
 														/>
 														<div className="blockons-divider"></div>
+
+														{selectedTooltip.theme === "custom" && (
+															<>
+																<div className="blockons-tooltip-clrs">
+																	<Dropdown
+																		className="blockons-tooltip-color"
+																		contentClassName="blockons-tooltip-color-picker"
+																		renderToggle={({ isOpen, onToggle }) => (
+																			<Button
+																				variant="link"
+																				onClick={onToggle}
+																				className="blockons-colorpicker-btn"
+																			>
+																				<ColorIndicator
+																					colorValue={selectedTooltip.pcolor}
+																				/>
+																				<span>
+																					{__("Popup Color", "blockons")}
+																				</span>
+																			</Button>
+																		)}
+																		renderContent={() => (
+																			<>
+																				<ColorPicker
+																					color={selectedTooltip.pcolor}
+																					onChange={handleTooltipChange(
+																						"pcolor"
+																					)}
+																					defaultValue="#d6c0ff"
+																				/>
+																			</>
+																		)}
+																	/>
+																	{(selectedTooltip.theme !== "one" ||
+																		selectedTooltip.theme !== "two") && (
+																		<Dropdown
+																			className="blockons-tooltip-color"
+																			contentClassName="blockons-tooltip-color-picker"
+																			renderToggle={({ isOpen, onToggle }) => (
+																				<Button
+																					variant="link"
+																					onClick={onToggle}
+																					className="blockons-colorpicker-btn"
+																				>
+																					<ColorIndicator
+																						colorValue={selectedTooltip.pfcolor}
+																					/>
+																					<span>
+																						{__("Popup Font Color", "blockons")}
+																					</span>
+																				</Button>
+																			)}
+																			renderContent={() => (
+																				<>
+																					<ColorPicker
+																						color={selectedTooltip.pfcolor}
+																						onChange={handleTooltipChange(
+																							"pfcolor"
+																						)}
+																						defaultValue="#000"
+																					/>
+																				</>
+																			)}
+																		/>
+																	)}
+																</div>
+																<div className="blockons-divider"></div>
+															</>
+														)}
 
 														<TextControl
 															label={__("Font Awesome Icon", "blockons")}
 															value={selectedTooltip.icon}
-															onChange={handleIconChange}
+															onChange={handleTooltipChange("icon")}
 															help={__(
 																"Add the name of the Font Awesome icon you want to add to the Tooltip",
 																"blockons"
@@ -285,65 +339,6 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 																{__("How to add Tooltip Icons", "blockons")}
 															</a>
 														</p>
-														<div className="blockons-divider"></div>
-
-														<div className="blockons-tooltip-clrs">
-															<Dropdown
-																className="blockons-tooltip-color"
-																contentClassName="blockons-tooltip-color-picker"
-																renderToggle={({ isOpen, onToggle }) => (
-																	<Button
-																		variant="link"
-																		onClick={onToggle}
-																		className="blockons-colorpicker-btn"
-																	>
-																		<ColorIndicator
-																			colorValue={selectedTooltip.color}
-																		/>
-																		<span>{__("Popup Color", "blockons")}</span>
-																	</Button>
-																)}
-																renderContent={() => (
-																	<>
-																		<ColorPicker
-																			color={selectedTooltip.color}
-																			onChange={handleColorChange}
-																			defaultValue="#f4f4f4"
-																		/>
-																	</>
-																)}
-															/>
-															{(selectedTooltip.theme !== "one" ||
-																selectedTooltip.theme !== "two") && (
-																<Dropdown
-																	className="blockons-tooltip-color"
-																	contentClassName="blockons-tooltip-color-picker"
-																	renderToggle={({ isOpen, onToggle }) => (
-																		<Button
-																			variant="link"
-																			onClick={onToggle}
-																			className="blockons-colorpicker-btn"
-																		>
-																			<ColorIndicator
-																				colorValue={selectedTooltip.fcolor}
-																			/>
-																			<span>
-																				{__("Popup Font Color", "blockons")}
-																			</span>
-																		</Button>
-																	)}
-																	renderContent={() => (
-																		<>
-																			<ColorPicker
-																				color={selectedTooltip.fcolor}
-																				onChange={handleFontColorChange}
-																				defaultValue="#f4f4f4"
-																			/>
-																		</>
-																	)}
-																/>
-															)}
-														</div>
 													</>
 												)}
 											/>
@@ -356,20 +351,26 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 										{selectedTooltip.style === "highlight" ? (
 											<mark
 												className={`blockons-tooltip-style ${selectedTooltip.style}`}
-												style={{ backgroundColor: selectedTooltip.color }}
+												style={{
+													backgroundColor: selectedTooltip.color,
+													...(selectedTooltip.fcolor
+														? { color: selectedTooltip.fcolor }
+														: {}),
+												}}
 											>
 												Tooltip Preview
 											</mark>
 										) : (
 											<span
 												className={`blockons-tooltip-style ${selectedTooltip.style}`}
-												{...(selectedTooltip.color !== ""
-													? {
-															style: {
-																borderBottomColor: selectedTooltip.color,
-															},
-													  }
-													: {})}
+												style={{
+													...(selectedTooltip.color
+														? { borderBottomColor: selectedTooltip.color }
+														: {}),
+													...(selectedTooltip.fcolor
+														? { color: selectedTooltip.fcolor }
+														: {}),
+												}}
 											>
 												Tooltip Preview
 											</span>
@@ -380,11 +381,30 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 												style={{ color: selectedTooltip.color }}
 											></span>
 										)}
-										<div className={`blockons-tooltip-preview-tooltip`}>
+										<div
+											className={`blockons-tooltip-preview-tooltip`}
+											{...(selectedTooltip.theme === "custom"
+												? {
+														style: {
+															backgroundColor: selectedTooltip.pcolor,
+															color: selectedTooltip.pfcolor,
+														},
+												  }
+												: {})}
+										>
 											<h6 className="preview-title">Tooltip Title</h6>
 											<p className="preview-text">Some tooltip text</p>
 
-											<span className="blockons-tooltip-arrow"></span>
+											<span
+												className="blockons-tooltip-arrow"
+												{...(selectedTooltip.theme === "custom"
+													? {
+															style: {
+																borderTopColor: selectedTooltip.pcolor,
+															},
+													  }
+													: {})}
+											></span>
 										</div>
 									</div>
 								</div>
@@ -408,6 +428,8 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 														"data-icon": selectedTooltip.icon,
 														"data-color": selectedTooltip.color,
 														"data-fcolor": selectedTooltip.fcolor,
+														"data-pcolor": selectedTooltip.pcolor,
+														"data-pfcolor": selectedTooltip.pfcolor,
 													},
 												})
 											);

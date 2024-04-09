@@ -7,9 +7,9 @@
  * Author: Kaira
  * Author URI: https://kairaweb.com/
  * Requires at least: 5.0
- * Tested up to: 6.4
+ * Tested up to: 6.5
  * WC requires at least: 3.2
- * WC tested up to: 8.6
+ * WC tested up to: 8.7
  * Text Domain: blockons
  * Domain Path: /lang/
  * 
