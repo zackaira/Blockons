@@ -11,6 +11,12 @@
 .blockons-hide {
 	display: none !important;
 }
+.note-link {
+	margin: 0;
+	padding: 5px 0 10px;
+	text-align: center;
+	font-size: 12px;
+}
 /**
  * Help / Read More Link
  */
@@ -308,8 +314,8 @@ body.blockons-imgpopup
 	position: absolute;
 	bottom: calc(100% + 5px);
 	left: -999999999999px;
-	width: 130px;
-	margin-left: -65px;
+	width: 134px;
+	margin-left: -70px;
 	padding: 6px 10px 8px;
 	text-align: left;
 	opacity: 0;
@@ -437,6 +443,45 @@ body.blockons-tooltips.blstyle-highlight .blockons-inline-tooltip::before {
 	width: 100%;
 	height: 100%;
 	opacity: 0.15;
+}
+.blockons-tooltip-img {
+	width: 100%;
+	margin: 0 0 5px;
+}
+.blockons-tooltip-img-prvw {
+	background-color: #999;
+	width: 100%;
+	height: 22px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+	color: #eee;
+}
+/* - Img - */
+.blockons-tooltip-imgpreview {
+	margin: 7px 0 8px;
+	display: flex;
+	align-items: center;
+}
+.blockons-tooltip-imgpreview-img {
+	max-width: 100px;
+	height: 60px;
+	margin: 0 12px 0 0;
+}
+.blockons-tooltip-imgpreview-img img {
+	max-height: 100%;
+	max-width: 100%;
+}
+button.blockons-tt-upload-button {
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 18%);
+	margin: 7px 0 8px;
+}
+button.blockons-tt-upload-button.remove {
+	flex: 1;
+	justify-content: center;
 }
 /**
  * Editor Note component

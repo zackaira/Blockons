@@ -298,8 +298,8 @@ body.blockons-tooltips .blockons-tooltip {
 	position: absolute;
 	bottom: calc(100% + 5px);
 	left: -999999999999px;
-	width: 180px;
-	margin-left: -90px;
+	width: 210px;
+	margin-left: -105px;
 	padding: 6px 10px 10px;
 	text-align: left;
 	opacity: 0;

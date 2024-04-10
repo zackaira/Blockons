@@ -352,6 +352,10 @@ class Blockons {
 				"enabled" => false,
 				"theme" => "one",
 				"style" => "underlined",
+				"color" => "#424242",
+				"fcolor" => "#000",
+				"pcolor" => "#424242",
+				"pfcolor" => "#FFF",
 			),
 			"imagepopups" => array(
 				"enabled" => false,

@@ -11,8 +11,6 @@ const defaultOptionImgEnabled = Boolean(defaultOptions.enabled);
 
 const allowedImgPopupBlockTypes = ["core/image"];
 
-console.log("loading it");
-
 /**
  * Add New Attributes to all blocks
  */

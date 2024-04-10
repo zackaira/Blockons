@@ -82,7 +82,7 @@ const BlockExtensions = ({
 									/>
 
 									<SettingRow
-										title={__("Tooltips Primary Color", "blockons")}
+										title={__("Tooltip Color", "blockons")}
 										slug="tooltips_color"
 										value={blockonsOptions.tooltips?.color}
 										inputType="colorpicker"
@@ -90,9 +90,26 @@ const BlockExtensions = ({
 										onChange={onSettingChange}
 									/>
 									<SettingRow
-										title={__("Tooltips Font Color", "blockons")}
+										title={__("Tooltip Font Color", "blockons")}
 										slug="tooltips_fcolor"
 										value={blockonsOptions.tooltips?.fcolor}
+										inputType="colorpicker"
+										defaultValue="#000"
+										onChange={onSettingChange}
+									/>
+
+									<SettingRow
+										title={__("Popup Color", "blockons")}
+										slug="tooltips_pcolor"
+										value={blockonsOptions.tooltips?.pcolor}
+										inputType="colorpicker"
+										defaultValue="#424242"
+										onChange={onSettingChange}
+									/>
+									<SettingRow
+										title={__("Popup Font Color", "blockons")}
+										slug="tooltips_pfcolor"
+										value={blockonsOptions.tooltips?.pfcolor}
 										inputType="colorpicker"
 										defaultValue="#FFF"
 										onChange={onSettingChange}

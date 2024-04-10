@@ -9,7 +9,7 @@ const {
 	removeFormat,
 	getActiveFormat,
 } = wp.richText;
-const { BlockControls } = wp.blockEditor;
+const { BlockControls, MediaUpload } = wp.blockEditor;
 const {
 	ToolbarGroup,
 	Dropdown,
@@ -31,8 +31,6 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 		return select("core/block-editor").getSelectedBlock();
 	}, []);
 
-	// console.log("selectedBlock", selectedBlock);
-
 	const allowedBlocks = [
 		"core/paragraph",
 		"core/heading",
@@ -49,13 +47,12 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 		title: "",
 		text: "",
 		icon: "",
-		color: "",
-		fcolor: "",
-		pcolor: "#d6c0ff",
-		pfcolor: "#000",
+		image: "",
+		color: tooltipDefaults.color,
+		fcolor: tooltipDefaults.fcolor,
+		pcolor: tooltipDefaults.pcolor,
+		pfcolor: tooltipDefaults.pfcolor,
 	});
-
-	// console.log("selectedTooltip", selectedTooltip);
 
 	useEffect(() => {
 		if (activeFormat) {
@@ -72,10 +69,11 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 				title: attributes["data-title"] || "",
 				text: attributes["data-text"] || "",
 				icon: attributes["data-icon"] || "",
-				color: attributes["data-color"] || "",
-				fcolor: attributes["data-fcolor"] || "",
-				pcolor: attributes["data-pcolor"] || "#d6c0ff",
-				pfcolor: attributes["data-pfcolor"] || "#000",
+				image: attributes["data-image"] || "",
+				color: attributes["data-color"] || tooltipDefaults.color,
+				fcolor: attributes["data-fcolor"] || tooltipDefaults.fcolor,
+				pcolor: attributes["data-pcolor"] || tooltipDefaults.pcolor,
+				pfcolor: attributes["data-pfcolor"] || tooltipDefaults.pfcolor,
 			});
 		} else {
 			setSelectedTooltip({
@@ -84,10 +82,11 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 				title: "",
 				text: "",
 				icon: "",
-				color: "",
-				fcolor: "",
-				pcolor: "#d6c0ff",
-				pfcolor: "#000",
+				image: "",
+				color: tooltipDefaults.color,
+				fcolor: tooltipDefaults.fcolor,
+				pcolor: tooltipDefaults.pcolor,
+				pfcolor: tooltipDefaults.pfcolor,
 			});
 		}
 	}, [activeFormat]);
@@ -244,6 +243,17 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 														</div>
 														<div className="blockons-divider"></div>
 
+														<TextControl
+															label={__("Tooltip Icon", "blockons")}
+															value={selectedTooltip.icon}
+															onChange={handleTooltipChange("icon")}
+															help={__(
+																"Add the CSS class names of the Font Awesome icon to be displayed in the Tooltip",
+																"blockons"
+															)}
+														/>
+														<div className="blockons-divider"></div>
+
 														<SelectControl
 															label={__("Tooltip Popup Theme", "blockons")}
 															value={selectedTooltip.theme}
@@ -325,18 +335,46 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 															</>
 														)}
 
-														<TextControl
-															label={__("Font Awesome Icon", "blockons")}
-															value={selectedTooltip.icon}
-															onChange={handleTooltipChange("icon")}
-															help={__(
-																"Add the name of the Font Awesome icon you want to add to the Tooltip",
-																"blockons"
-															)}
+														<MediaUpload
+															className="components-icon-button components-toolbar__control"
+															allowedTypes={["image"]}
+															value={selectedTooltip.image}
+															onSelect={(media) =>
+																handleTooltipChange("image")(media.url)
+															}
+															render={({ open }) => {
+																return selectedTooltip?.image ? (
+																	<div className="blockons-tooltip-imgpreview">
+																		<div className="blockons-tooltip-imgpreview-img">
+																			<img src={selectedTooltip.image} />
+																		</div>
+																		<Button
+																			className="blockons-tt-upload-button remove"
+																			onClick={() => {
+																				handleTooltipChange("image")("");
+																			}}
+																		>
+																			{__("Remove Image", "blockons")}
+																		</Button>
+																	</div>
+																) : (
+																	<Button
+																		className="blockons-tt-upload-button"
+																		icon="format-image"
+																		onClick={open}
+																	>
+																		{__("Add a Tooltip Image", "blockons")}
+																	</Button>
+																);
+															}}
 														/>
-														<p>
-															<a href="#" target="_blank">
-																{__("How to add Tooltip Icons", "blockons")}
+
+														<p className="note-link">
+															<a
+																href="https://blockons.com/documentation/content-tooltips/#adding-tooltips"
+																target="_blank"
+															>
+																{__("Read more on adding Tooltips", "blockons")}
 															</a>
 														</p>
 													</>
@@ -348,7 +386,7 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 									<div
 										className={`blockons-tooltip-preview  ${selectedTooltip.theme}`}
 									>
-										{selectedTooltip.style === "highlight" ? (
+										{isPremium && selectedTooltip.style === "highlight" ? (
 											<mark
 												className={`blockons-tooltip-style ${selectedTooltip.style}`}
 												style={{
@@ -363,19 +401,23 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 										) : (
 											<span
 												className={`blockons-tooltip-style ${selectedTooltip.style}`}
-												style={{
-													...(selectedTooltip.color
-														? { borderBottomColor: selectedTooltip.color }
-														: {}),
-													...(selectedTooltip.fcolor
-														? { color: selectedTooltip.fcolor }
-														: {}),
-												}}
+												{...(isPremium
+													? {
+															style: {
+																...(selectedTooltip.color
+																	? { borderBottomColor: selectedTooltip.color }
+																	: {}),
+																...(selectedTooltip.fcolor
+																	? { color: selectedTooltip.fcolor }
+																	: {}),
+															},
+													  }
+													: {})}
 											>
 												Tooltip Preview
 											</span>
 										)}
-										{selectedTooltip.icon && (
+										{isPremium && selectedTooltip.icon && (
 											<span
 												className={`blockons-icon ${selectedTooltip.icon}`}
 												style={{ color: selectedTooltip.color }}
@@ -383,7 +425,7 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 										)}
 										<div
 											className={`blockons-tooltip-preview-tooltip`}
-											{...(selectedTooltip.theme === "custom"
+											{...(isPremium && selectedTooltip.theme === "custom"
 												? {
 														style: {
 															backgroundColor: selectedTooltip.pcolor,
@@ -392,12 +434,17 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 												  }
 												: {})}
 										>
+											{isPremium && selectedTooltip.image && (
+												<div className="blockons-tooltip-img">
+													<div className="blockons-tooltip-img-prvw">Image</div>
+												</div>
+											)}
 											<h6 className="preview-title">Tooltip Title</h6>
-											<p className="preview-text">Some tooltip text</p>
+											<p className="preview-text">Some example text.</p>
 
 											<span
 												className="blockons-tooltip-arrow"
-												{...(selectedTooltip.theme === "custom"
+												{...(isPremium && selectedTooltip.theme === "custom"
 													? {
 															style: {
 																borderTopColor: selectedTooltip.pcolor,
@@ -426,6 +473,7 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 														"data-title": selectedTooltip.title,
 														"data-text": selectedTooltip.text,
 														"data-icon": selectedTooltip.icon,
+														"data-image": selectedTooltip.image,
 														"data-color": selectedTooltip.color,
 														"data-fcolor": selectedTooltip.fcolor,
 														"data-pcolor": selectedTooltip.pcolor,
