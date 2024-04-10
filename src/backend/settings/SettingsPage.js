@@ -65,7 +65,7 @@ const SettingsPage = () => {
 		});
 	};
 
-	console.log(blockonsOptions);
+	// console.log(blockonsOptions);
 
 	useEffect(() => {
 		blockonsGroupSettings();

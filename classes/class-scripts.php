@@ -165,15 +165,6 @@ class Blockons {
 			'isPremium' => $isPro,
 		));
 
-		// $allowed_block_names = array('core/image', 'core/gallery', 'blockons/image-gallery', 'blockons/image-carousel');
-		// $has_block = false;
-		// foreach ($allowed_block_names as $block_name) {
-		// 	if (has_block($block_name)) {
-		// 		$has_block = true;
-		// 		break;
-		// 	}
-		// }
-
 		if (isset($blockonsOptions->imagepopups->enabled) && $blockonsOptions->imagepopups->enabled == true) {
 			wp_enqueue_style('blockons-venobox-style');
 			wp_enqueue_style('blockons-venopopup-style');
@@ -222,14 +213,14 @@ class Blockons {
 		wp_enqueue_style('blockons-admin-style');
 
 		// Admin JS
-		// wp_register_script('blockons-admin-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/admin' . $suffix . '.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-admin-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/admin' . $suffix . '.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 		// wp_localize_script('blockons-admin-script', 'blockonsObj', array(
 		// 	'apiUrl' => esc_url( get_rest_url() ),
 		// 	'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 		// 	'nonce' => wp_create_nonce('wp_rest'),
 		// 	'wcActive' => Blockons_Admin::blockons_is_plugin_active('woocommerce.php'),
 		// ));
-		// wp_enqueue_script('blockons-admin-script');
+		wp_enqueue_script('blockons-admin-script');
 
 		wp_set_script_translations('blockons-admin-script', 'blockons', BLOCKONS_PLUGIN_DIR . 'lang');
 
