@@ -27,6 +27,10 @@ registerBlockType("blockons/accordion", {
 	icon: "welcome-add-page",
 	parent: ["blockons/accordions"],
 	attributes: {
+		hideFrontend: {
+			type: "boolean",
+			default: false,
+		},
 		labelTag: {
 			type: "string",
 			default: "h4",
@@ -87,6 +91,7 @@ registerBlockType("blockons/accordion", {
 			isSelected,
 			className,
 			attributes: {
+				hideFrontend,
 				labelTag,
 				stayOpen,
 				accordionLabel,
@@ -121,7 +126,7 @@ registerBlockType("blockons/accordion", {
 					accordionIcon === "circle-plus"
 						? "change " + accordionIcon
 						: "rotate"
-				}`}
+				} ${hideFrontend ? "hidden-frontend" : ""}`}
 				style={{ marginBottom: itemSpacing }}
 			>
 				{isSelected && (
@@ -130,6 +135,19 @@ registerBlockType("blockons/accordion", {
 							title={__("Accordion Settings", "blockons")}
 							initialOpen={true}
 						>
+							<ToggleControl
+								label={__("Hide from Frontend", "blockons")}
+								checked={hideFrontend}
+								help={__(
+									"Temporarily hide this panel from the frontend while editing.",
+									"blockons"
+								)}
+								onChange={(newValue) => {
+									setAttributes({ hideFrontend: newValue });
+								}}
+							/>
+							<div className="blockons-divider"></div>
+
 							<SelectControl
 								label={__("Label Element", "blockons")}
 								value={labelTag}
@@ -304,7 +322,7 @@ registerBlockType("blockons/accordion", {
 				attributes.accordionIcon === "circle-plus"
 					? "change " + attributes.accordionIcon
 					: "rotate"
-			}`,
+			} ${attributes.hideFrontend ? "hidden-frontend" : ""}`,
 			style: { marginBottom: attributes.itemSpacing },
 		});
 

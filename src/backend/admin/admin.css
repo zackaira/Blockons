@@ -16,7 +16,7 @@ body.wp-admin.blockons-free.plugins-php
 	display: none !important;
 }
 /* ---- Update Notice Styling ---- */
-/* .blockons-admin-notice {
+.blockons-admin-notice {
 	position: relative;
 	padding: 12px;
 }
@@ -42,4 +42,4 @@ body.wp-admin.blockons-free.plugins-php
 	display: inline-block;
 	vertical-align: baseline;
 	margin-right: 5px;
-} */
+}

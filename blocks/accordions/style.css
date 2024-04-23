@@ -2,6 +2,9 @@
  * Note that these styles are loaded *before* editor styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
+.hidden-frontend {
+	display: none !important;
+}
 .wp-block-blockons-accordions .accordion-label {
 	background-color: #efefef;
 	border-radius: 3px;

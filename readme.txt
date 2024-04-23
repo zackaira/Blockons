@@ -87,6 +87,7 @@ Showcase videos from YouTube, Vimeo, or your own hosting in an attractive video 
 Are you building an online store using WooCommerce?
 
 Blockons also includes the following WooCommerce blocks for your online WooCommerce store.
+**Note:** WooCommerce needs to be installed and active to use these blocks.
 
 &#9989; **WooCommerce Account Icon** - WooCommerce block
 Place an icon in your website's header or footer for easy account access or login. Choose from various icons and customize their colors. When a user is logged in, you can show quick links to different WooCommerce user account pages.
@@ -100,6 +101,15 @@ Place a standout block on your website to highlight a specific product, offering
 
 &#128312; Can't find the blocks you need?
 We're working on adding lots more blocks... Send us some ideas and maybe we can add on the blocks you need next!
+
+
+## Blockons Offers the following Block Extensions
+
+&#9989; **Content Tooltips**
+Integrate helpful tooltips across your website. These tooltips offer quick information when users hover over content links, keeping things simple and easy to understand.
+
+&#9989; **Image Lightbox**
+Set up image lightboxes on your website. These lightboxes allow users to view images in a larger, more detailed format without leaving the current page. It offers a seamless browsing experience and keeps visitors engaged with your content.
 
 
 ## Blockons Offers the following Site Add-ons
@@ -127,9 +137,9 @@ Our goal is to provide you with the finest plugin and top-notch support. While w
 
 Blockons is designed to be fast, lightweight, and user-friendly for building WordPress and WooCommerce websites.
 
-They follow WordPress standards, ensuring they are speedy and provide advanced editing capabilities.
+Blocks are build following the WordPress coding standards, ensuring they are speedy and provide advanced editing capabilities.
 
-We're confident that our Gutenberg editor blocks offer more customization options than other WP plugins in the market.
+We're confident that our Gutenberg editor blocks offer more customization options than other WP Block plugins on the market.
 
 
 = We're concerned about bloat code! =
@@ -210,9 +220,15 @@ This could be from the theme you're using, or another plugin. Again, please [con
 = 1.1.01 =
 * Styling tweaks/fixes
 * Fixed minor Search block placeholder bug
-* Version compatibility for WC 8.6
+* Version compatibility for WC 8.8
+* Update Freemius SDK
 * Fixed Blocks Sidebar bug breaking the editor
-* 
+* Updated the language .pot file
+* Added accordion setting to temporarily hide on frontend
+* NEW: Paragraph & Heading blocks "Content Tooltips" extension
+* NEW: Image blocks "Image Lightbox" extension
+* PREMIUM: Added pro version with 'Launch Special' pricing
+* BUSY: Building new Table of Contents block
 
 = 1.1.00 =
 * Styling tweaks/fixes

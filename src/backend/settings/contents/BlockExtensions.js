@@ -46,10 +46,10 @@ const BlockExtensions = ({
 						inputType="toggle"
 						onChange={onSettingChange}
 						tooltip={__(
-							"Add basic content tooltips to your website.",
+							"Enhance your website with informative tooltips! Tooltips act like regular links, but when users hover over the link text, a simple popup appears with more information or help.",
 							"blockons"
 						)}
-						documentation="https://blockons/documentation/tooltips"
+						documentation="https://blockons.com/documentation/content-tooltips/"
 					/>
 
 					{blockonsOptions.tooltips?.enabled && (
@@ -129,7 +129,7 @@ const BlockExtensions = ({
 										slug="tooltips_pro"
 										value={tooltipsPro}
 										onChange={() => setTooltipsPro(!tooltipsPro)}
-										documentation="https://blockons/documentation/tooltips"
+										// documentation="https://blockons/documentation/tooltips"
 									/>
 									{tooltipsPro && (
 										<SettingRow
@@ -173,8 +173,11 @@ const BlockExtensions = ({
 						value={blockonsOptions.imagepopups?.enabled}
 						inputType="toggle"
 						onChange={onSettingChange}
-						tooltip={__("Add image popups to your website.", "blockons")}
-						documentation="https://blockons/documentation/image-popups"
+						tooltip={__(
+							"Add image lightboxes to your website images for an engaging user experience. Image lightbox popups allow users to view enlarged versions of images with a simple click.",
+							"blockons"
+						)}
+						documentation="https://blockons.com/documentation/image-lightbox-popups/"
 					/>
 
 					{blockonsOptions.imagepopups?.enabled && (
@@ -260,7 +263,7 @@ const BlockExtensions = ({
 										slug="imagepopups_pro"
 										value={imgPopupsPro}
 										onChange={() => setImgPopupsPro(!imgPopupsPro)}
-										documentation="https://blockons/documentation/image-popups"
+										// documentation="https://blockons/documentation/image-popups"
 									/>
 									{imgPopupsPro && (
 										<SettingRow
@@ -310,6 +313,11 @@ const BlockExtensions = ({
 								value={blockonsOptions.blockvisibility?.enabled}
 								inputType="toggle"
 								onChange={onSettingChange}
+								tooltip={__(
+									"Add image visibility settings to your core layout blocks. This add on the features to show or hide certain elements depending on the user device screen size.",
+									"blockons"
+								)}
+								documentation="https://blockons.com/documentation/block-visibility-per-device/"
 							/>
 							{blockonsOptions.blockvisibility?.enabled && (
 								<>
@@ -337,12 +345,12 @@ const BlockExtensions = ({
 					) : (
 						<>
 							<SettingRow
-								title={__("Add Visibility", "blockons")}
+								title={__("Enable Block Visibility", "blockons")}
 								inputType="toggle"
 								slug="visibility_pro"
 								value={visibilityPro}
 								onChange={() => setVisibilityPro(!visibilityPro)}
-								documentation="https://blockons/documentation/block-visibility"
+								documentation="https://blockons.com/documentation/block-visibility-per-device/"
 							/>
 							{visibilityPro && (
 								<SettingRow
@@ -380,6 +388,11 @@ const BlockExtensions = ({
 								value={blockonsOptions.blockanimation?.enabled}
 								inputType="toggle"
 								onChange={onSettingChange}
+								tooltip={__(
+									"Add neat scroll in and/or out animations to core layout blocks. This boosts the visual appeal of your website and makes it more engaging for users.",
+									"blockons"
+								)}
+								documentation="https://blockons.com/documentation/block-animations-on-scroll/"
 							/>
 							{blockonsOptions.blockanimation?.enabled && (
 								<>
@@ -463,16 +476,16 @@ const BlockExtensions = ({
 					) : (
 						<>
 							<SettingRow
-								title={__("Add Animations", "blockons")}
+								title={__("Enable Block Animations", "blockons")}
 								inputType="toggle"
 								slug="animations_pro"
 								value={animationsPro}
 								onChange={() => setAnimationsPro(!animationsPro)}
 								tooltip={__(
-									"Add block animations to layout block in the WordPress Editor.",
+									"Add neat scroll in and/or out animations to core layout blocks. This boosts the visual appeal of your website and makes it more engaging for users.",
 									"blockons"
 								)}
-								documentation="https://blockons/documentation/block-animations"
+								documentation="https://blockons.com/documentation/block-animations-on-scroll/"
 							/>
 							{animationsPro && (
 								<SettingRow

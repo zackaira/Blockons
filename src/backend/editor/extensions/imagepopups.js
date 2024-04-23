@@ -7,7 +7,7 @@ const { createHigherOrderComponent } = wp.compose;
 
 const isPremium = Boolean(blockonsEditorObj.isPremium);
 const defaultOptions = blockonsEditorObj.blockonsOptions?.imagepopups;
-const defaultOptionImgEnabled = Boolean(defaultOptions.enabled);
+const defaultOptionImgEnabled = Boolean(defaultOptions?.enabled);
 
 const allowedImgPopupBlockTypes = ["core/image"];
 
@@ -28,15 +28,15 @@ function blockonsAddImgPopupAttributes(settings, name) {
 		},
 		blockonsPopupIcon: {
 			type: "string",
-			default: defaultOptions.icon || "one",
+			default: defaultOptions?.icon || "one",
 		},
 		blockonsPopupIconPos: {
 			type: "string",
-			default: defaultOptions.iconpos || "topleft",
+			default: defaultOptions?.iconpos || "topleft",
 		},
 		blockonsPopupIconColor: {
 			type: "string",
-			default: defaultOptions.iconcolor || "dark",
+			default: defaultOptions?.iconcolor || "dark",
 		},
 		blockonsGalleryId: {
 			type: "string",

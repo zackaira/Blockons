@@ -19,26 +19,27 @@ const allowedVisibilityBlockTypes = [
  * Add New Attributes to all blocks
  */
 function blockonsAddVisibilityAttributes(settings, name) {
+	if (!isPremium || !visibilityEnabled) return settings;
+
 	// console.log({ settings, name });
 	const showVisibilitySettings = allowedVisibilityBlockTypes.includes(name);
 
-	const blockVisibilityAtts =
-		showVisibilitySettings && visibilityEnabled === true
-			? {
-					blockonsHideOnDesktop: {
-						type: "boolean",
-						default: false,
-					},
-					blockonsHideOnTablet: {
-						type: "boolean",
-						default: false,
-					},
-					blockonsHideOnMobile: {
-						type: "boolean",
-						default: false,
-					},
-			  }
-			: {};
+	const blockVisibilityAtts = showVisibilitySettings
+		? {
+				blockonsHideOnDesktop: {
+					type: "boolean",
+					default: false,
+				},
+				blockonsHideOnTablet: {
+					type: "boolean",
+					default: false,
+				},
+				blockonsHideOnMobile: {
+					type: "boolean",
+					default: false,
+				},
+		  }
+		: {};
 
 	return assign({}, settings, {
 		attributes: merge(settings.attributes, blockVisibilityAtts),
@@ -73,11 +74,15 @@ const blockonsAddInspectorVisibilityControls = createHigherOrderComponent(
 
 			const showVisibilitySettings = allowedVisibilityBlockTypes.includes(name);
 
+			if (!isPremium || !visibilityEnabled) {
+				return <BlockEdit {...props} />;
+			}
+
 			return (
 				<Fragment>
 					<BlockEdit {...props} />
 
-					{visibilityEnabled === true && showVisibilitySettings && (
+					{showVisibilitySettings && (
 						<InspectorControls>
 							<PanelBody
 								title={__("Block Visibility", "blockons")}
@@ -90,7 +95,7 @@ const blockonsAddInspectorVisibilityControls = createHigherOrderComponent(
 										"Hide certain blocks by device screen size. For more information, click the link below.",
 										"blockons"
 									)}
-									docLink="https://blockons.com/documentation/block-visibility"
+									docLink="https://blockons.com/documentation/block-visibility-per-device/"
 								/>
 
 								<ToggleControl
@@ -140,15 +145,18 @@ const blockonsAddEditorVisibilityAttributes = createHigherOrderComponent(
 			} = props;
 			const showVisibilitySettings = allowedVisibilityBlockTypes.includes(name);
 
-			const newClassnames =
-				isPremium && showVisibilitySettings && visibilityEnabled === true
-					? classnames(
-							className,
-							`${blockonsHideOnDesktop ? "hide-on-desktop" : ""} ${
-								blockonsHideOnTablet ? "hide-on-tablet" : ""
-							} ${blockonsHideOnMobile ? "hide-on-mobile" : ""}`
-					  )
-					: className;
+			if (!isPremium || !visibilityEnabled) {
+				return <BlockListBlock {...props} />;
+			}
+
+			const newClassnames = showVisibilitySettings
+				? classnames(
+						className,
+						`${blockonsHideOnDesktop ? "hide-on-desktop" : ""} ${
+							blockonsHideOnTablet ? "hide-on-tablet" : ""
+						} ${blockonsHideOnMobile ? "hide-on-mobile" : ""}`
+				  )
+				: className;
 
 			return <BlockListBlock {...props} className={newClassnames} />;
 		};
@@ -168,7 +176,11 @@ const blockonsAddFrontendVisibilityAttributes = (
 	const { name } = blockType;
 	const showVisibilitySettings = allowedVisibilityBlockTypes.includes(name);
 
-	if (showVisibilitySettings && visibilityEnabled === true) {
+	if (!isPremium || !visibilityEnabled) {
+		return extraProps;
+	}
+
+	if (showVisibilitySettings) {
 		extraProps.className = classnames(extraProps.className, {
 			"hide-on-desktop": blockonsHideOnDesktop,
 			"hide-on-tablet": blockonsHideOnTablet,
@@ -182,25 +194,23 @@ const blockonsAddFrontendVisibilityAttributes = (
 /**
  * WP Editor Hooks
  */
-if (isPremium && visibilityEnabled === true) {
-	addFilter(
-		"blocks.registerBlockType",
-		"blockons/block-visibility-attributes",
-		blockonsAddVisibilityAttributes
-	);
-	addFilter(
-		"editor.BlockEdit",
-		"blockons/block-visibility-controls",
-		blockonsAddInspectorVisibilityControls
-	);
-	addFilter(
-		"blocks.getSaveContent.extraProps",
-		"blockons/block-visibility-frontend-clases",
-		blockonsAddFrontendVisibilityAttributes
-	);
-	addFilter(
-		"editor.BlockListBlock",
-		"blockons/block-visibility-editor-clases",
-		blockonsAddEditorVisibilityAttributes
-	);
-}
+addFilter(
+	"blocks.registerBlockType",
+	"blockons/block-visibility-attributes",
+	blockonsAddVisibilityAttributes
+);
+addFilter(
+	"editor.BlockEdit",
+	"blockons/block-visibility-controls",
+	blockonsAddInspectorVisibilityControls
+);
+addFilter(
+	"blocks.getSaveContent.extraProps",
+	"blockons/block-visibility-frontend-clases",
+	blockonsAddFrontendVisibilityAttributes
+);
+addFilter(
+	"editor.BlockListBlock",
+	"blockons/block-visibility-editor-clases",
+	blockonsAddEditorVisibilityAttributes
+);

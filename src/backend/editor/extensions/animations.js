@@ -19,46 +19,47 @@ const allowedAnimationBlockTypes = [
  * Add New Attributes to all blocks
  */
 function blockonsAddAnimationAttributes(settings, name) {
+	if (!isPremium || !animationsEnabled) return settings;
+
 	// console.log({ settings, name });
 	const showAnimationSettings = allowedAnimationBlockTypes.includes(name);
 
-	const blockAnimationAtts =
-		showAnimationSettings && animationsEnabled === true
-			? {
-					blockonsEnableAnimation: {
-						type: "boolean",
-						default: false,
-					},
-					blockonsAnimation: {
-						type: "string",
-						default: animationsSettings?.default_style || "fade",
-					},
-					blockonsAnimationDirection: {
-						type: "string",
-						default: animationsSettings?.default_direction || "-up",
-					},
-					blockonsAnimationDuration: {
-						type: "number",
-						default: animationsSettings?.default_duration || 850,
-					},
-					blockonsAnimationDelay: {
-						type: "number",
-						default: animationsSettings?.default_delay || 50,
-					},
-					blockonsAnimationOffset: {
-						type: "number",
-						default: animationsSettings?.default_offset || 80,
-					},
-					blockonsAnimationOnce: {
-						type: "boolean",
-						default: animationsSettings?.default_animate_once || false,
-					},
-					blockonsAnimationMirror: {
-						type: "boolean",
-						default: animationsSettings?.default_mirror || false,
-					},
-			  }
-			: {};
+	const blockAnimationAtts = showAnimationSettings
+		? {
+				blockonsEnableAnimation: {
+					type: "boolean",
+					default: false,
+				},
+				blockonsAnimation: {
+					type: "string",
+					default: animationsSettings?.default_style || "fade",
+				},
+				blockonsAnimationDirection: {
+					type: "string",
+					default: animationsSettings?.default_direction || "-up",
+				},
+				blockonsAnimationDuration: {
+					type: "number",
+					default: animationsSettings?.default_duration || 850,
+				},
+				blockonsAnimationDelay: {
+					type: "number",
+					default: animationsSettings?.default_delay || 50,
+				},
+				blockonsAnimationOffset: {
+					type: "number",
+					default: animationsSettings?.default_offset || 80,
+				},
+				blockonsAnimationOnce: {
+					type: "boolean",
+					default: animationsSettings?.default_animate_once || false,
+				},
+				blockonsAnimationMirror: {
+					type: "boolean",
+					default: animationsSettings?.default_mirror || false,
+				},
+		  }
+		: {};
 
 	return assign({}, settings, {
 		attributes: merge(settings.attributes, blockAnimationAtts),
@@ -91,11 +92,15 @@ const blockonsAddAnimationInspectorControls = createHigherOrderComponent(
 
 			const showAnimationSettings = allowedAnimationBlockTypes.includes(name);
 
+			if (!isPremium || !animationsEnabled) {
+				return <BlockEdit {...props} />;
+			}
+
 			return (
 				<Fragment>
 					<BlockEdit {...props} />
 
-					{animationsEnabled === true && showAnimationSettings && (
+					{showAnimationSettings && (
 						<InspectorControls>
 							<PanelBody
 								title={__("Block Animations", "blockons")}
@@ -108,7 +113,7 @@ const blockonsAddAnimationInspectorControls = createHigherOrderComponent(
 										"Add scroll animations for layout blocks in your WordPress editor. For more information, click the link below.",
 										"blockons"
 									)}
-									docLink="https://blockons.com/documentation/block-scroll-animations"
+									docLink="https://blockons.com/documentation/block-animations-on-scroll/"
 								/>
 
 								<ToggleControl
@@ -271,18 +276,21 @@ const blockonsAddEditorAnimationAttributes = createHigherOrderComponent(
 			} = props;
 			const showAnimationSettings = allowedAnimationBlockTypes.includes(name);
 
-			const newWrapperProps =
-				isPremium && showAnimationSettings && blockonsEnableAnimation === true
-					? {
-							"data-aos": `${blockonsAnimation}${blockonsAnimationDirection}`,
-							"data-aos-easing": "ease-in-out",
-							"data-aos-duration": blockonsAnimationDuration,
-							"data-aos-delay": blockonsAnimationDelay,
-							"data-aos-offset": blockonsAnimationOffset,
-							"data-aos-once": blockonsAnimationOnce,
-							"data-aos-mirror": blockonsAnimationMirror,
-					  }
-					: {};
+			if (!isPremium || !animationsEnabled || !showAnimationSettings) {
+				return <BlockListBlock {...props} />;
+			}
+
+			const newWrapperProps = blockonsEnableAnimation
+				? {
+						"data-aos": `${blockonsAnimation}${blockonsAnimationDirection}`,
+						"data-aos-easing": "ease-in-out",
+						"data-aos-duration": blockonsAnimationDuration,
+						"data-aos-delay": blockonsAnimationDelay,
+						"data-aos-offset": blockonsAnimationOffset,
+						"data-aos-once": blockonsAnimationOnce,
+						"data-aos-mirror": blockonsAnimationMirror,
+				  }
+				: {};
 
 			return (
 				<BlockListBlock
@@ -315,11 +323,11 @@ const blockonsAddFrontendAnimationAttributes = (
 	const { name } = blockType;
 	const showAnimationSettings = allowedAnimationBlockTypes.includes(name);
 
-	if (
-		showAnimationSettings &&
-		blockonsEnableAnimation &&
-		animationsEnabled === true
-	) {
+	if (!isPremium || !animationsEnabled || !showAnimationSettings) {
+		return extraProps;
+	}
+
+	if (blockonsEnableAnimation) {
 		extraProps[
 			"data-aos"
 		] = `${blockonsAnimation}${blockonsAnimationDirection}`;
@@ -337,25 +345,23 @@ const blockonsAddFrontendAnimationAttributes = (
 /**
  * WP Editor Hooks
  */
-if (isPremium && animationsEnabled === true) {
-	addFilter(
-		"blocks.registerBlockType",
-		"blockons/block-animations-attributes",
-		blockonsAddAnimationAttributes
-	);
-	addFilter(
-		"editor.BlockEdit",
-		"blockons/block-animations-controls",
-		blockonsAddAnimationInspectorControls
-	);
-	addFilter(
-		"blocks.getSaveContent.extraProps",
-		"blockons/block-animations-frontend-classes",
-		blockonsAddFrontendAnimationAttributes
-	);
-	addFilter(
-		"editor.BlockListBlock",
-		"blockons/block-animations-editor-classes",
-		blockonsAddEditorAnimationAttributes
-	);
-}
+addFilter(
+	"blocks.registerBlockType",
+	"blockons/block-animations-attributes",
+	blockonsAddAnimationAttributes
+);
+addFilter(
+	"editor.BlockEdit",
+	"blockons/block-animations-controls",
+	blockonsAddAnimationInspectorControls
+);
+addFilter(
+	"blocks.getSaveContent.extraProps",
+	"blockons/block-animations-frontend-classes",
+	blockonsAddFrontendAnimationAttributes
+);
+addFilter(
+	"editor.BlockListBlock",
+	"blockons/block-animations-editor-classes",
+	blockonsAddEditorAnimationAttributes
+);

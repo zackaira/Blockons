@@ -2,6 +2,48 @@
  * Note that these styles are loaded *after* common styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
+.hidden-frontend {
+	display: block !important;
+	box-shadow: 0 0 0 1px #454545;
+	position: relative;
+}
+.hidden-frontend::before {
+	display: block;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 28;
+	background: repeating-linear-gradient(
+		-45deg,
+		#e0e0e0 0px,
+		#e0e0e0 10px,
+		#b1b1b1 10px,
+		#b1b1b1 15px
+	);
+	opacity: 0.18;
+}
+.hidden-frontend::after {
+	display: block;
+	background-color: #c39ac8;
+	box-shadow: none !important;
+	content: "Hidden on Frontend" !important;
+	position: absolute !important;
+	top: 1px !important;
+	right: 1px !important;
+	left: auto !important;
+	font-size: 11px;
+	font-weight: 600;
+	color: #fff;
+	padding: 2px 5px;
+	letter-spacing: 0.3px;
+	z-index: 29 !important;
+	width: fit-content;
+	height: fit-content;
+}
+
 .wp-block-blockons-accordions {
 	position: relative;
 }

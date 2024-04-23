@@ -221,7 +221,7 @@ const SettingsPage = () => {
 									</a>
 								</li>
 
-								{isPremium && wcActive && (
+								{/* {isPremium && wcActive && (
 									<li>
 										<a
 											id="blockonstab-4"
@@ -233,7 +233,7 @@ const SettingsPage = () => {
 											{__("WooCommerce Addons", "blockons")}
 										</a>
 									</li>
-								)}
+								)} */}
 
 								<li className="help">
 									<a
@@ -299,7 +299,7 @@ const SettingsPage = () => {
 										/>
 									</div>
 
-									{isPremium && wcActive && (
+									{/* {isPremium && wcActive && (
 										<div
 											id="blockons-content-4"
 											className={`blockons-content ${
@@ -311,7 +311,7 @@ const SettingsPage = () => {
 												handleSettingChange={handleChange}
 											/>
 										</div>
-									)}
+									)} */}
 
 									<div
 										id="blockons-content-help"

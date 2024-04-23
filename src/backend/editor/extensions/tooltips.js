@@ -42,16 +42,16 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 
 	const activeFormat = getActiveFormat(value, "blockons/inline-tooltip");
 	const [selectedTooltip, setSelectedTooltip] = useState({
-		style: tooltipDefaults.style || "underlined",
-		theme: tooltipDefaults.theme || "one",
+		style: tooltipDefaults?.style || "underlined",
+		theme: tooltipDefaults?.theme || "one",
 		title: "",
 		text: "",
 		icon: "",
 		image: "",
-		color: tooltipDefaults.color,
-		fcolor: tooltipDefaults.fcolor,
-		pcolor: tooltipDefaults.pcolor,
-		pfcolor: tooltipDefaults.pfcolor,
+		color: tooltipDefaults?.color || "#424242",
+		fcolor: tooltipDefaults?.fcolor || "#000",
+		pcolor: tooltipDefaults?.pcolor || "#424242",
+		pfcolor: tooltipDefaults?.pfcolor || "#FFF",
 	});
 
 	useEffect(() => {
@@ -64,29 +64,32 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 					: "";
 
 			setSelectedTooltip({
-				style: attributes["data-style"] || tooltipDefaults.style,
-				theme: attributes["data-theme"] || tooltipDefaults.theme,
+				style:
+					attributes["data-style"] || tooltipDefaults?.style || "underlined",
+				theme: attributes["data-theme"] || tooltipDefaults?.theme || "one",
 				title: attributes["data-title"] || "",
 				text: attributes["data-text"] || "",
 				icon: attributes["data-icon"] || "",
 				image: attributes["data-image"] || "",
-				color: attributes["data-color"] || tooltipDefaults.color,
-				fcolor: attributes["data-fcolor"] || tooltipDefaults.fcolor,
-				pcolor: attributes["data-pcolor"] || tooltipDefaults.pcolor,
-				pfcolor: attributes["data-pfcolor"] || tooltipDefaults.pfcolor,
+				color: attributes["data-color"] || tooltipDefaults?.color || "#424242",
+				fcolor: attributes["data-fcolor"] || tooltipDefaults?.fcolor || "#000",
+				pcolor:
+					attributes["data-pcolor"] || tooltipDefaults?.pcolor || "#424242",
+				pfcolor:
+					attributes["data-pfcolor"] || tooltipDefaults?.pfcolor || "#FFF",
 			});
 		} else {
 			setSelectedTooltip({
-				style: tooltipDefaults.style || "underlined",
-				theme: tooltipDefaults.theme || "one",
+				style: tooltipDefaults?.style || "underlined",
+				theme: tooltipDefaults?.theme || "one",
 				title: "",
 				text: "",
 				icon: "",
 				image: "",
-				color: tooltipDefaults.color,
-				fcolor: tooltipDefaults.fcolor,
-				pcolor: tooltipDefaults.pcolor,
-				pfcolor: tooltipDefaults.pfcolor,
+				color: tooltipDefaults?.color || "#424242",
+				fcolor: tooltipDefaults?.fcolor || "#000",
+				pcolor: tooltipDefaults?.pcolor || "#424242",
+				pfcolor: tooltipDefaults?.pfcolor || "#FFF",
 			});
 		}
 	}, [activeFormat]);
@@ -148,7 +151,7 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 													<>
 														<p>
 															{__(
-																"Blockons Pro offers more advanced Tooltips with more customization options.",
+																"Blockons Pro offers advanced Tooltips with more customization options.",
 																"blockons"
 															)}
 														</p>
@@ -512,11 +515,9 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 	);
 };
 
-if (tooltipDefaults.enabled) {
-	registerFormatType("blockons/inline-tooltip", {
-		title: "Blockons Tooltip",
-		tagName: "span",
-		className: "blockons-inline-tooltip",
-		edit: BlockonsInlineBlockTooltip,
-	});
-}
+registerFormatType("blockons/inline-tooltip", {
+	title: "Blockons Tooltip",
+	tagName: "span",
+	className: "blockons-inline-tooltip",
+	edit: BlockonsInlineBlockTooltip,
+});
