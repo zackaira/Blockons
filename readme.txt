@@ -224,10 +224,9 @@ This could be from the theme you're using, or another plugin. Again, please [con
 * Version compatibility for WC 8.8
 * Update Freemius SDK
 * Fixed Blocks Sidebar bug breaking the editor
-* Updated the language .pot file
 * Added accordion setting to temporarily hide on frontend
-* Added new screenshot to show new Block Extensions
-* 
+* Added screenshot to show new Block Extensions
+* Updated the language .pot file
 * NEW: Paragraph & Heading blocks "Content Tooltips" extension
 * NEW: Image blocks "Image Lightbox" extension
 * PREMIUM: Added pro version with 'Launch Special' pricing
