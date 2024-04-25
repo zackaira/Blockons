@@ -141,14 +141,14 @@
 	text-decoration: none;
 	transition: all 0.3s;
 }
-a.blockons-account {
-	display: none !important;
-}
 a.blockons-account::before {
 	content: "\f110";
 }
 a.blockons-docs::before {
 	content: "\f468";
+}
+a.blockons-upgrade::before {
+	content: "\f317";
 }
 .blockons-delete {
 	cursor: pointer;
@@ -210,6 +210,9 @@ a.blockons-docs::before {
 }
 .blockonsSettingBarOptions a:hover {
 	color: #0c6e63;
+}
+.blockonsSettingBarOptions a.blockons-upgrade:hover {
+	color: #af2dbf;
 }
 .blockons-confirm-delete a:hover {
 	color: #fff;
@@ -732,7 +735,7 @@ a.blockons-docs::before {
 	box-sizing: border-box;
 }
 .blockons-block.disabled .blockons-block-inner {
-	min-height: 125px;
+	min-height: 116px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

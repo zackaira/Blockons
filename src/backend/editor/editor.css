@@ -264,7 +264,12 @@ body.blockons-imgpopup
  * Blockons Inline Tooltip Settings
  */
 .blockons-tooltip-settings {
-	min-width: 200px;
+	min-width: 215px;
+}
+.tooltip-link-hint {
+	font-size: 9px;
+	white-space: nowrap;
+	margin: 5px 0;
 }
 .blockons-tooltip-settings .blockons-tooltip-btns {
 	display: flex;

@@ -128,6 +128,12 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 									value={selectedTooltip.text}
 									onChange={handleTooltipChange("text")}
 								/>
+								{isPremium && (
+									<p className="tooltip-link-hint">
+										{__("Add links", "blockons")}: (Blockons
+										[*https://blockons.com/])
+									</p>
+								)}
 								<div className="blockons-divider"></div>
 
 								<div className="blockons-tooltip-extra">

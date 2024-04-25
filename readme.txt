@@ -174,8 +174,9 @@ Installing Blockons can be done either by searching for "Blockons" via `Plugins 
 
 == Screenshots ==
 
-1. **Blockons Blocks Manager** - Select which blocks to enable or disable
-2. **Blockons Site Add-Ons** - Add extra features to your WordPress website
+1. **Blockons Blocks Manager** - Select which editor blocks to enable or disable for your wordpress site
+2. **Blockons Blocks Extensions** - Add content Tooltips anywhere on your site, and Image Lightbox to your content images
+3. **Blockons Site Add-Ons** - Blockons offers extra site addons to further enhance your website usability
 
 
 == Frequently Asked Questions ==
@@ -225,6 +226,8 @@ This could be from the theme you're using, or another plugin. Again, please [con
 * Fixed Blocks Sidebar bug breaking the editor
 * Updated the language .pot file
 * Added accordion setting to temporarily hide on frontend
+* Added new screenshot to show new Block Extensions
+* 
 * NEW: Paragraph & Heading blocks "Content Tooltips" extension
 * NEW: Image blocks "Image Lightbox" extension
 * PREMIUM: Added pro version with 'Launch Special' pricing

@@ -159,19 +159,32 @@ const SettingsPage = () => {
 		<React.Fragment>
 			<div className="blockons-settings">
 				<div className="blockonsSettingBar">
-					<h2>{"Blockons Settings"}</h2>
+					<h2>
+						{isPremium
+							? __("Blockons Pro Settings", "blockons")
+							: __("Blockons Settings", "blockons")}
+					</h2>
 					<div className="blockonsSettingBarOptions">
+						{isPremium && (
+							<a
+								href={blockonsObject.accountUrl}
+								className="blockons-account"
+								title={__("My Account", "blockons")}
+							></a>
+						)}
 						<a
-							href={blockonsObject.accountUrl}
-							className="blockons-account"
-							title={__("My Account", "blockons")}
-						></a>
-						<a
-							href="https://blockons.com/support/"
+							href="https://blockons.com/documentation/"
 							className="blockons-docs"
 							title={__("Documentation", "blockons")}
 							target="_blank"
 						></a>
+						{!isPremium && (
+							<a
+								href={blockonsObject.upgradeUrl}
+								className="blockons-upgrade"
+								title={__("Upgrade to Blockons Pro", "blockons")}
+							></a>
+						)}
 					</div>
 				</div>
 
