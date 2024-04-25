@@ -26,13 +26,13 @@ const InfoTab = (props) => {
 					>
 						{__("Visit Our Website", "blockons")}
 					</a>
-					{/* <a
-						href="https://www.blockons.com/go-pro"
+					<a
+						href="https://www.blockons.com/pro/"
 						target="_blank"
 						className="blockons-button primary"
 					>
-						View Blockons Pro
-					</a> */}
+						{__("View Blockons Pro", "blockons")}
+					</a>
 				</div>
 
 				<div className="blockons-video addspace blockons-hide">

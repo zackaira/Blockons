@@ -61,15 +61,12 @@ if ( function_exists( 'blockons_fs' ) ) {
 							'slug' => 'options-general.php',
 						),
 					),
-					// Set the SDK to work in a sandbox mode (for development & testing).
-					// IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
-					'secret_key'          => 'sk_m$~kLYwaQ;nO{{y[Q.KW8+g8#^)Gy',
 				) );
 			}
 	
 			return $blockons_fs;
 		}
-
+	
 		// Init Freemius.
 		blockons_fs();
 		// Signal that SDK was initiated.

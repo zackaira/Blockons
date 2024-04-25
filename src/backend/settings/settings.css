@@ -579,9 +579,23 @@ a.blockons-upgrade::before {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin: 10px 0 30px 7px;
+	margin: 10px 0 20px 7px;
 }
-.blockons-feedback a {
+.blockons-propromo {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 30px 0 20px 7px;
+	min-height: 35px;
+}
+.blockons-propromo > div {
+	max-width: 60%;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 1.4;
+}
+.blockons-feedback a,
+.blockons-propromo a {
 	display: inline-block;
 	background-color: #f4f7fb;
 	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 25%);
@@ -601,6 +615,22 @@ a.blockons-upgrade::before {
 .blockons-feedback a:hover {
 	background-color: #ffffff;
 }
+a.propromo-see {
+	background-color: #107daf;
+	color: #fff;
+	padding: 8px 14px;
+}
+a.propromo-upgrade {
+	background-color: #f45b08;
+	color: #fff;
+	padding: 8px 14px;
+}
+a.propromo-see:hover {
+	background-color: #0567cf;
+}
+a.propromo-upgrade:hover {
+	background-color: #db4d01;
+}
 .ask-feedback,
 .blockons-reply {
 	display: none;
@@ -619,21 +649,21 @@ a.blockons-upgrade::before {
 .blockons-reply.show {
 	display: flex;
 }
-.blockons-feedback .blockons-feedback-dismiss {
+.blockons-feedback-dismiss {
 	display: inline-block;
 	margin: 0 0 -4px 18px;
 }
-.blockons-feedback .blockons-feedback-dismiss label {
+.blockons-feedback-dismiss label {
 	width: 20px;
 	height: 20px;
 	position: relative;
 	font-size: 12px;
 	color: #828587;
 }
-.blockons-feedback .blockons-feedback-dismiss label:hover {
+.blockons-feedback-dismiss label:hover {
 	color: red;
 }
-.blockons-feedback .blockons-feedback-dismiss label::before {
+.blockons-feedback-dismiss label::before {
 	display: block;
 	font-family: "Font Awesome 6 Free";
 	font-weight: 900;
@@ -642,7 +672,7 @@ a.blockons-upgrade::before {
 	top: 2px;
 	left: 6px;
 }
-.blockons-feedback .blockons-feedback-dismiss input.toggle-switch-checkbox {
+.blockons-feedback-dismiss input.toggle-switch-checkbox {
 	opacity: 1;
 	width: 20px;
 	height: 20px;
@@ -651,8 +681,8 @@ a.blockons-upgrade::before {
 	box-shadow: none;
 	margin: 0;
 }
-.blockons-feedback input.toggle-switch-checkbox::before,
-.blockons-feedback .blockons-feedback-dismiss .toggle-switch-slider {
+input.toggle-switch-checkbox::before,
+.blockons-feedback-dismiss .toggle-switch-slider {
 	display: none !important;
 }
 /* ---- Info Tab ---- */

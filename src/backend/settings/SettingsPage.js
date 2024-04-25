@@ -13,11 +13,13 @@ import { blockonsGroupSettings } from "../helpers";
 import PageLoader from "../../frontend/site-addons/pageloader/PageLoader";
 import BackToTop from "../../frontend/site-addons/backtotop/BackToTop";
 import ScrollIndicator from "../../frontend/site-addons/scrollindicator/ScrollIndicator";
+import ProPromo from "./components/UI/ProPromo";
 
 const SettingsPage = () => {
 	const blockonsObject = blockonsObj;
 	const url = `${blockonsObject.apiUrl}blcns/v1`;
 	const pluginUrl = blockonsObject.pluginUrl;
+	const upgradeUrl = blockonsObject.upgradeUrl;
 	const [loader, setLoader] = useState(false);
 	const [loadSetting, setLoadSetting] = useState(true);
 	const [activeTab, setActiveTab] = useState("1");
@@ -180,7 +182,7 @@ const SettingsPage = () => {
 						></a>
 						{!isPremium && (
 							<a
-								href={blockonsObject.upgradeUrl}
+								href={upgradeUrl}
 								className="blockons-upgrade"
 								title={__("Upgrade to Blockons Pro", "blockons")}
 							></a>
@@ -286,7 +288,7 @@ const SettingsPage = () => {
 									>
 										<BlockExtensions
 											blockonsOptions={blockonsOptions}
-											upgradeUrl={blockonsObject.upgradeUrl}
+											upgradeUrl={upgradeUrl}
 											isPremium={isPremium}
 											handleSettingChange={handleChange}
 										/>
@@ -302,7 +304,7 @@ const SettingsPage = () => {
 											blockonsOptions={blockonsOptions}
 											handleSettingChange={handleChange}
 											isPremium={isPremium}
-											upgradeUrl={blockonsObject.upgradeUrl}
+											upgradeUrl={upgradeUrl}
 											showPageLoader={showPageLoaderPreview}
 											setShowPageLoader={setShowPageLoaderPreview}
 											showBttb={showBttbPreview}
@@ -334,7 +336,7 @@ const SettingsPage = () => {
 									>
 										<InfoTab
 										// isPro={isPremium}
-										// upgrade={blockonsObject.upgradeUrl}
+										// upgrade={upgradeUrl}
 										/>
 									</div>
 								</div>
@@ -369,6 +371,14 @@ const SettingsPage = () => {
 						</div>
 					</form>
 				</div>
+
+				{!isPremium && (
+					<ProPromo
+						blockonsOptions={blockonsOptions}
+						clickClose={handleChange}
+						upgradeUrl={upgradeUrl}
+					/>
+				)}
 
 				{showPageLoaderPreview && (
 					<PageLoader
