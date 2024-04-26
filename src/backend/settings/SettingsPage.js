@@ -67,7 +67,7 @@ const SettingsPage = () => {
 		});
 	};
 
-	// console.log(blockonsOptions);
+	console.log(blockonsOptions);
 
 	useEffect(() => {
 		blockonsGroupSettings();
@@ -372,7 +372,7 @@ const SettingsPage = () => {
 					</form>
 				</div>
 
-				{!isPremium && (
+				{!isPremium && !blockonsOptions.disablepropromo && (
 					<ProPromo
 						blockonsOptions={blockonsOptions}
 						clickClose={handleChange}

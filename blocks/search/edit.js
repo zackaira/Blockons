@@ -1,6 +1,3 @@
-/**
- * WordPress dependencies
- */
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
@@ -575,8 +572,8 @@ const Edit = (props) => {
 									__("Search results pagination", "blockons"),
 									__("Design & layout customization settings", "blockons"),
 								]}
-								docLink="https://blockons.com/documentation/block-scroll-animations"
-								upgradeLink="https://blockons.com/documentation/block-scroll-animations"
+								docLink="https://blockons.com/documentation/search-bar-or-search-icon-block/#searchpro"
+								upgradeLink={searchObj.upgradeUrl}
 							/>
 						)}
 					</PanelBody>

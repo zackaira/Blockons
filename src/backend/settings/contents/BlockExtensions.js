@@ -253,7 +253,7 @@ const BlockExtensions = ({
 								<>
 									<SettingNote
 										note={__(
-											"Image Lightbox is now enabled. Create image popups within Image and Gallery blocks.",
+											"Image Lightbox is now enabled. Create image popups within core Image and Gallery blocks.",
 											"blockons"
 										)}
 									/>

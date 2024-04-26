@@ -5,7 +5,7 @@ Tags: gutenberg, editor blocks, page builder, slider, woocommerce
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.5
-Stable tag: 1.1.01
+Stable tag: 1.1.04
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -218,7 +218,7 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 == Changelog ==
 
-= 1.1.01 =
+= 1.1.04 =
 * Styling tweaks/fixes
 * Fixed minor Search block placeholder bug
 * Version compatibility for WC 8.8

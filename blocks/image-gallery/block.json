@@ -8,6 +8,10 @@
 	"category": "blockons-category",
 	"keywords": ["image", "gallery", "advanced", "blockons"],
 	"attributes": {
+		"isPremium": {
+			"type": "boolean",
+			"default": false
+		},
 		"uniqueId": {
 			"type": "string"
 		},

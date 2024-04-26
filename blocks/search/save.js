@@ -1,6 +1,3 @@
-/**
- * WordPress dependencies
- */
 import { RichText, useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {

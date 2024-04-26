@@ -1,6 +1,3 @@
-/**
- * WordPress dependencies
- */
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
@@ -338,24 +335,26 @@ const Edit = (props) => {
 										render={({ open }) => {
 											return (
 												<>
-													{slideItem.customVideo && slideItem.customVideo.url && (
-														<Button
-															className="blockons-upload-button remove"
-															onClick={() =>
-																handleCustomVideoRemove(slideItem.id)
-															}
-														>
-															{__("Remove Video", "blockons")}
-														</Button>
-													)}
-													{slideItem.customVideo && !slideItem.customVideo.url && (
-														<Button
-															className="blockons-upload-button"
-															onClick={open}
-														>
-															{__("Upload a Custom Video", "blockons")}
-														</Button>
-													)}
+													{slideItem.customVideo &&
+														slideItem.customVideo.url && (
+															<Button
+																className="blockons-upload-button remove"
+																onClick={() =>
+																	handleCustomVideoRemove(slideItem.id)
+																}
+															>
+																{__("Remove Video", "blockons")}
+															</Button>
+														)}
+													{slideItem.customVideo &&
+														!slideItem.customVideo.url && (
+															<Button
+																className="blockons-upload-button"
+																onClick={open}
+															>
+																{__("Upload a Custom Video", "blockons")}
+															</Button>
+														)}
 												</>
 											);
 										}}

@@ -1,6 +1,3 @@
-/**
- * WordPress dependencies
- */
 import { InnerBlocks, RichText, useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {

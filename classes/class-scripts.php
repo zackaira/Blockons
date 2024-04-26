@@ -101,6 +101,7 @@ class Blockons {
 			'apiUrl' => esc_url(get_rest_url()),
 			'adminUrl' => esc_url(admin_url()),
 			'wcActive' => Blockons_Admin::blockons_is_plugin_active('woocommerce.php'),
+			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
 		));
 		
 		// Progress Bars JS
@@ -122,8 +123,8 @@ class Blockons {
 		wp_register_style('blockons-venopopup-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.css'), array('blockons-venobox-style', 'blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
 		wp_register_script('blockons-venopopup', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.js'), array('blockons-venobox-script'), BLOCKONS_PLUGIN_VERSION, true);
 
-		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-frontend-script', 'blockons-venobox-script'), BLOCKONS_PLUGIN_VERSION, true);
-		
+		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-frontend-script', 'blockons-venobox-script', 'blockons-admin-editor-script'), BLOCKONS_PLUGIN_VERSION, true);
+
 		// AOS Animations
 		if (blockons_fs()->can_use_premium_code__premium_only()) {
 			wp_register_style('blockons-aos-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/aos/aos.css'), array(), BLOCKONS_PLUGIN_VERSION);
@@ -171,16 +172,7 @@ class Blockons {
 			wp_enqueue_script('blockons-venopopup');
 		}
 
-		if (blockons_fs()->can_use_premium_code__premium_only()) {			
-			if ( Blockons_Admin::blockons_is_plugin_active('woocommerce.php') ) {
-				if (isset($blockonsOptions->sidecart->enabled) && $blockonsOptions->sidecart->enabled == true) {
-					wp_register_style('blockons-sidecart-pro', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/cart-pro.min.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
-					wp_enqueue_style('blockons-sidecart-pro');
-
-					wp_enqueue_script('blockons-wc-mini-cart');
-				}
-			}
-
+		if ($isPro) {			
 			// Block Extension - Visibility CSS
 			if (isset($blockonsOptions->blockvisibility->enabled) && $blockonsOptions->blockvisibility->enabled == true) {
 				$blockons_tablet = isset($blockonsOptions->blockvisibility->tablet) ? $blockonsOptions->blockvisibility->tablet : '980';
@@ -197,6 +189,19 @@ class Blockons {
 				wp_enqueue_style('blockons-aos-style');
 				wp_enqueue_script('blockons-aos-script');
 				wp_add_inline_script('blockons-aos-script', 'AOS.init();');
+			}
+
+			/*
+			 * WOOCOMMERCE ADDONS
+			 */
+			// WC Sise Cart
+			if ( Blockons_Admin::blockons_is_plugin_active('woocommerce.php') ) {
+				if (isset($blockonsOptions->sidecart->enabled) && $blockonsOptions->sidecart->enabled == true) {
+					wp_register_style('blockons-sidecart-pro', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/cart-pro.min.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
+					wp_enqueue_style('blockons-sidecart-pro');
+
+					wp_enqueue_script('blockons-wc-mini-cart');
+				}
 			}
 		}
 	} // End blockons_frontend_scripts ()
@@ -247,18 +252,21 @@ class Blockons {
 	 */
 	public function blockons_block_editor_scripts() {
 		$suffix = (defined('WP_DEBUG') && true === WP_DEBUG) ? '' : '.min';
+		global $blockons_fs;
 		$blockonsSavedOptions = get_option('blockons_options');
 		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
+		$isPro = (boolean)blockons_fs()->can_use_premium_code__premium_only();
 		
 		wp_register_style('blockons-admin-editor-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/editor' . $suffix . '.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
 		wp_enqueue_style('blockons-admin-editor-style');
 
 		wp_register_script('blockons-admin-editor-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/editor' . $suffix . '.js'), array('wp-edit-post', 'wp-rich-text'), BLOCKONS_PLUGIN_VERSION, true);
 		wp_localize_script('blockons-admin-editor-script', 'blockonsEditorObj', array(
-			'isPremium' => blockons_fs()->can_use_premium_code(),
+			'isPremium' => $isPro,
 			'blockonsOptions' => $blockonsOptions,
 			'apiUrl' => esc_url( get_rest_url() ),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
+			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
 		));
 		wp_enqueue_script('blockons-admin-editor-script');
 	} // End blockons_block_editor_scripts ()

@@ -671,6 +671,7 @@ a.propromo-upgrade:hover {
 	position: absolute;
 	top: 2px;
 	left: 6px;
+	pointer-events: none;
 }
 .blockons-feedback-dismiss input.toggle-switch-checkbox {
 	opacity: 1;

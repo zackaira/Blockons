@@ -705,8 +705,8 @@ const Edit = (props) => {
 												"blockons"
 											),
 										]}
-										docLink="https://blockons.com/documentation/block-scroll-animations"
-										upgradeLink="https://blockons.com/documentation/block-scroll-animations"
+										docLink="https://blockons.com/documentation/advanced-image-gallery-block/#gallerypro"
+										upgradeLink={blockonsEditorObj.upgradeUrl}
 										noline
 									/>
 								)}

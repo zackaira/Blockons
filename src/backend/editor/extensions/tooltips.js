@@ -1,6 +1,5 @@
 const { addFilter } = wp.hooks;
 const { useState, useEffect } = wp.element;
-const { assign, merge } = lodash;
 const { __ } = wp.i18n;
 const {
 	registerFormatType,

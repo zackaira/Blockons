@@ -1,11 +1,7 @@
-/**
- * WordPress dependencies
- */
 import { useBlockProps } from "@wordpress/block-editor";
 
 const Save = ({ attributes }) => {
 	const pluginUrl = blockonsEditorObj.pluginUrl || "";
-	const isPro = Boolean(blockonsEditorObj.isPremium);
 	const blockProps = useBlockProps.save({
 		className: ``,
 	});
@@ -53,11 +49,11 @@ const Save = ({ attributes }) => {
 					{attributes.layout === "featured" && imageItem.imageUrl && (
 						<div
 							className={`blockons-gallery-img ${
-								attributes.popupEnable
+								attributes.isPremium && attributes.popupEnable
 									? `blockons-galvenobox icon-${attributes.popupIcon} ${attributes.popupIconPos} ${attributes.popupIconColor}`
 									: ""
 							}`}
-							{...(attributes.popupEnable
+							{...(attributes.isPremium && attributes.popupEnable
 								? {
 										"data-href": imageItem.imageUrl,
 										"data-title": imageItem.imageCaption || "",
@@ -76,7 +72,7 @@ const Save = ({ attributes }) => {
 						attributes.layout === "masonry") && (
 						<div
 							className={`blockons-gallery-img ${
-								attributes.popupEnable
+								attributes.isPremium && attributes.popupEnable
 									? `blockons-galvenobox icon-${attributes.popupIcon} ${attributes.popupIconPos} ${attributes.popupIconColor}`
 									: ""
 							}`}
@@ -87,7 +83,7 @@ const Save = ({ attributes }) => {
 									  }
 									: {}),
 							}}
-							{...(attributes.popupEnable
+							{...(attributes.isPremium && attributes.popupEnable
 								? {
 										"data-href": imageItem.imageUrl,
 										"data-title": imageItem.imageCaption || "",
