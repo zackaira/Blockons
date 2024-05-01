@@ -172,7 +172,7 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 			</div>
 		);
 
-	console.log("Results: ", searchResults);
+	// console.log("Results: ", searchResults);
 
 	return (
 		<React.Fragment>

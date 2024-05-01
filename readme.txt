@@ -29,7 +29,7 @@ We're continuously working on new blocks and features, tailored to your needs. O
 Transform your WordPress site today with Blockons, and experience the power of easy, effective website building!
 
 
-## Blockons Offers the following blocks
+## Blockons Offers the following Advanced Editor Blocks
 
 Use any of the following gutenberg blocks to build your website, they all come with customizable settings to fit your website design.
 
@@ -82,7 +82,7 @@ Showcase customer ratings and comments in a sleek testimonial slider or carousel
 &#9989; **Video Slider** block
 Showcase videos from YouTube, Vimeo, or your own hosting in an attractive video slider or carousel block. You can personalize it by changing the colors and setting a cover image. The videos will start playing when a user selects the slide they want to watch.
 
-= WooCommerce Blocks =
+= WooCommerce Editor Blocks =
 
 Are you building an online store using WooCommerce?
 
@@ -103,7 +103,7 @@ Place a standout block on your website to highlight a specific product, offering
 We're working on adding lots more blocks... Send us some ideas and maybe we can add on the blocks you need next!
 
 
-## Blockons Offers the following Block Extensions
+## Blockons Offers the following Core Block Extensions
 
 &#9989; **Content Tooltips**
 Integrate helpful tooltips across your website. These tooltips offer quick information when users hover over content links, keeping things simple and easy to understand.
@@ -217,6 +217,13 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 
 == Changelog ==
+
+= 1.1.05 =
+* Styling tweaks/fixes
+* Fixed nested accordions working properly
+* 
+* 
+* 
 
 = 1.1.04 =
 * Styling tweaks/fixes

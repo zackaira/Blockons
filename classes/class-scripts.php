@@ -123,7 +123,7 @@ class Blockons {
 		wp_register_style('blockons-venopopup-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.css'), array('blockons-venobox-style', 'blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
 		wp_register_script('blockons-venopopup', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.js'), array('blockons-venobox-script'), BLOCKONS_PLUGIN_VERSION, true);
 
-		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-frontend-script', 'blockons-venobox-script', 'blockons-admin-editor-script'), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-frontend-script', 'blockons-venobox-script'), BLOCKONS_PLUGIN_VERSION, true);
 
 		// AOS Animations
 		if (blockons_fs()->can_use_premium_code__premium_only()) {

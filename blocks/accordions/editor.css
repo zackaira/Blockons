@@ -74,11 +74,13 @@
 }
 .wp-block-blockons-accordions
 	.block-editor-block-list__block.is-selected
-	.accordion-content,
+	> .wp-block-blockons-accordion
+	> .accordion-content,
 .wp-block-blockons-accordions
 	.block-editor-block-list__block.has-child-selected
-	.accordion-content,
-.wp-block-blockons-accordion.selected .accordion-content {
+	> .wp-block-blockons-accordion
+	> .accordion-content,
+.wp-block-blockons-accordion.selected > .accordion-content {
 	display: block;
 }
 /* -- Appender Button -- */

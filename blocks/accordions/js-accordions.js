@@ -2,50 +2,48 @@
  * Functionality to show/hide the Blockons Accordions
  */
 document.addEventListener("DOMContentLoaded", () => {
-	const accordionBlocks = document.querySelectorAll(
-		".wp-block-blockons-accordions"
-	);
+	const accordions = document.getElementsByClassName("accordion-label");
 
-	if (accordionBlocks) {
-		accordionBlocks.forEach((accordionBlock, index) => {
-			const accPanels = accordionBlock.querySelectorAll(
-				".wp-block-blockons-accordion"
-			);
-			const closeAll = accordionBlock.classList.contains("close-all");
+	if (accordions.length > 0) {
+		for (let i = 0; i < accordions.length; i++) {
+			accordions[i].addEventListener("click", function () {
+				this.parentElement.classList.toggle("active");
+				const panel = this.nextElementSibling;
+				const accordionBlock = this.closest(".wp-block-blockons-accordions");
+				const closeAll = accordionBlock.classList.contains("close-all");
 
-			if (accPanels) {
-				accPanels.forEach((accPanel, i) => {
-					const panelTitle = accPanel.querySelector(".accordion-label");
-					const panelHeight =
-						accPanel.querySelector(".accordion-content").scrollHeight;
+				if (closeAll) {
+					const allPanels = accordionBlock.querySelectorAll(
+						".wp-block-blockons-accordion"
+					);
 
-					if (accPanel.classList.contains("active")) {
-						accPanel.querySelector(".accordion-content").style.maxHeight =
-							panelHeight + "px";
-					}
-
-					panelTitle.addEventListener("click", () => {
-						if (closeAll) {
-							accPanels.forEach((acc, i) => {
+					allPanels.forEach((acc, i) => {
+						if (acc !== this.parentElement) {
+							acc.querySelector(".accordion-content").style.maxHeight =
+								acc.querySelector(".accordion-content").scrollHeight + "px";
+							setTimeout(() => {
+								// This is a hack to make the transition smoother
 								acc.classList.remove("active");
 								acc.querySelector(".accordion-content").style.maxHeight = null;
-							});
-						}
-
-						const accPanelContent =
-							accPanel.querySelector(".accordion-content");
-
-						if (accPanel.classList.contains("active")) {
-							accPanel.classList.remove("active");
-							accPanelContent.style.maxHeight = null;
-						} else {
-							accPanel.classList.add("active");
-							accPanelContent.style.maxHeight =
-								accPanelContent.scrollHeight + "px";
+							}, 0);
 						}
 					});
-				}); // accPanels forEach
-			}
-		}); // accordionBlocks forEach
+				}
+
+				if (panel.style.maxHeight) {
+					// Closed
+					panel.style.maxHeight = panel.scrollHeight + "px";
+					setTimeout(() => {
+						panel.style.maxHeight = null;
+					}, 50);
+				} else {
+					// Opened
+					panel.style.maxHeight = panel.scrollHeight + "px";
+					setTimeout(() => {
+						panel.style.maxHeight = "unset";
+					}, 200);
+				}
+			});
+		}
 	}
 });
