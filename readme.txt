@@ -1,15 +1,15 @@
 === Blockons - Gutenberg blocks for WordPress and WooCommerce websites ===
 Contributors: Kaira
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PFZGBM92T8XSE&source=url
-Tags: gutenberg, editor blocks, page builder, slider, woocommerce
+Tags: gutenberg, editor blocks, woocommerce, page builder, gutenberg blocks
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.5
-Stable tag: 1.1.04
+Stable tag: 1.1.05
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WP editor blocks for WordPress and WooCommerce websites.
+Enhanced WordPress editor blocks for Gutenberg, including core Block Extensions and Site Addons for your WordPress site and WooCommerce online store
 
 
 == Description ==
@@ -36,10 +36,12 @@ Use any of the following gutenberg blocks to build your website, they all come w
 &#9989; **Search Bar / Icon** block
 You can add a search bar anywhere on your website, which allows visitors to easily search for and find information on your site.
 
+This search feature provides a standard search bar design, with options to display only the icon, and to reveal the search bar through a hover-over effect or within a sleek popup lightbox.
+
 &#9989; **Line Heading** block
 The line heading block is a tool that lets you create a title with decorative lines, making it more visually appealing. It also includes advanced options to customize how the title looks.
 
-&#9989; **Slider** block
+&#9989; **Advanced Slider** block
 The Slider block transforms your page with a neat, easy-to-use slider where you can spotlight your favorite images & text, or display top-selling WooCommerce products. Slide through your visuals with just a click or a simple swipe, bringing your content to life.
 
 &#9989; **Icon List** block
@@ -221,9 +223,8 @@ This could be from the theme you're using, or another plugin. Again, please [con
 = 1.1.05 =
 * Styling tweaks/fixes
 * Fixed nested accordions working properly
-* 
-* 
-* 
+* Enabled Tooltips for 'core/list-item' blocks
+* Fixed settings ColorPicker bug in Safari browser
 
 = 1.1.04 =
 * Styling tweaks/fixes

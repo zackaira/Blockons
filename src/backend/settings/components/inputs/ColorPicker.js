@@ -23,6 +23,8 @@ const ColorPicker = (props) => {
 			item.removeAttribute("id");
 		});
 
+		console.log(e.target);
+
 		e.target
 			.closest(".blockonsColorPicker")
 			.setAttribute("id", "openColorPicker");
@@ -74,8 +76,8 @@ const ColorPicker = (props) => {
 					<button
 						className="blockonsColorBtn"
 						style={{ backgroundColor: activeColor }}
-						onClick={(e) => e.preventDefault()}
-						onFocus={(e) => onButtonFocus(e)}
+						onClick={(e) => onButtonFocus(e)}
+						// onFocus={(e) => onButtonFocus(e)}
 						// onBlur={(e) => onButtonBlur(e)}
 					>
 						<span className="blockonsColorBtnTxt">

@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Blockons plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Blockons 1.1.02\n"
+"Project-Id-Version: Blockons 1.1.04\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/blockons\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-04-26T00:14:54+00:00\n"
+"POT-Creation-Date: 2024-05-04T04:46:52+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: blockons\n"
@@ -23,7 +23,7 @@ msgid "https://blockons.com/"
 msgstr ""
 
 #. Description of the plugin
-msgid "WordPress & WooCommerce editor blocks for you to use when building your website"
+msgid "Enhanced WordPress editor blocks for Gutenberg, including core Block Extensions and Site Addons for your WordPress site and WooCommerce online store"
 msgstr ""
 
 #. Author of the plugin
@@ -96,11 +96,11 @@ msgstr ""
 msgid "Go to the Blockons settings"
 msgstr ""
 
-#: classes/class-scripts.php:392
+#: classes/class-scripts.php:396
 msgid "Your Shopping Cart"
 msgstr ""
 
-#: classes/class-scripts.php:393
+#: classes/class-scripts.php:397
 msgid "Spend $100 to get FREE shipping!"
 msgstr ""
 
@@ -238,7 +238,7 @@ msgstr ""
 #: blocks/count-down-timer/edit.js:399
 #: blocks/icon-list/edit.js:405
 #: blocks/image-carousel/edit.js:411
-#: blocks/image-gallery/edit.js:607
+#: blocks/image-gallery/edit.js:605
 #: blocks/line-heading/edit.js:136
 msgid "Font Size"
 msgstr ""
@@ -268,7 +268,7 @@ msgstr ""
 #: blocks/accordions/single-accordion.js:222
 #: blocks/icon-list/edit.js:300
 #: blocks/icon-list/edit.js:431
-#: blocks/image-gallery/edit.js:676
+#: blocks/image-gallery/edit.js:674
 #: blocks/marketing-button/edit.js:345
 #: blocks/search/edit.js:298
 #: blocks/wc-account-icon/edit.js:276
@@ -392,9 +392,9 @@ msgstr ""
 
 #: blocks/count-down-timer/edit.js:180
 #: blocks/image-carousel/edit.js:355
-#: blocks/image-gallery/edit.js:395
-#: blocks/image-gallery/edit.js:414
-#: blocks/image-gallery/edit.js:522
+#: blocks/image-gallery/edit.js:393
+#: blocks/image-gallery/edit.js:412
+#: blocks/image-gallery/edit.js:520
 #: blocks/slider/edit.js:616
 #: blocks/wc-mini-cart/edit.js:178
 msgid "None"
@@ -596,42 +596,42 @@ msgid "Space Between Slides"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:293
-#: blocks/image-gallery/edit.js:386
+#: blocks/image-gallery/edit.js:384
 msgid "Image Settings"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:297
-#: blocks/image-gallery/edit.js:326
+#: blocks/image-gallery/edit.js:324
 #: blocks/slider/edit.js:1113
 msgid "Image Proportions"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:300
-#: blocks/image-gallery/edit.js:330
+#: blocks/image-gallery/edit.js:328
 #: blocks/slider/edit.js:1116
 msgid "Actual Image"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:301
-#: blocks/image-gallery/edit.js:333
+#: blocks/image-gallery/edit.js:331
 #: blocks/slider/edit.js:1117
 msgid "Square"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:303
-#: blocks/image-gallery/edit.js:335
+#: blocks/image-gallery/edit.js:333
 #: blocks/slider/edit.js:1119
 msgid "3:2 Rectangle"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:307
-#: blocks/image-gallery/edit.js:339
+#: blocks/image-gallery/edit.js:337
 #: blocks/slider/edit.js:1123
 msgid "4:3 Rectangle"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:311
-#: blocks/image-gallery/edit.js:343
+#: blocks/image-gallery/edit.js:341
 #: blocks/slider/edit.js:1127
 msgid "16:9 Panoramic"
 msgstr ""
@@ -667,8 +667,8 @@ msgid "Caption Position"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:356
-#: blocks/image-gallery/edit.js:409
-#: blocks/image-gallery/edit.js:428
+#: blocks/image-gallery/edit.js:407
+#: blocks/image-gallery/edit.js:426
 msgid "Below Image"
 msgstr ""
 
@@ -812,154 +812,154 @@ msgstr ""
 msgid "After"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:268
+#: blocks/image-gallery/edit.js:266
 msgid "Gallery Settings"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:296
+#: blocks/image-gallery/edit.js:294
 msgid "Gallery Layout"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:299
+#: blocks/image-gallery/edit.js:297
 msgid "Grid Layout"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:301
+#: blocks/image-gallery/edit.js:299
 msgid "Masonry Layout"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:305
+#: blocks/image-gallery/edit.js:303
 msgid "Featured Grid Layout"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:361
+#: blocks/image-gallery/edit.js:359
 msgid "Columns"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:371
+#: blocks/image-gallery/edit.js:369
 msgid "Grid Spacing"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:390
+#: blocks/image-gallery/edit.js:388
 msgid "Image Caption"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:397
+#: blocks/image-gallery/edit.js:395
 msgid "Over Image Plain Text"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:401
+#: blocks/image-gallery/edit.js:399
 msgid "Over Image Bottom"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:405
+#: blocks/image-gallery/edit.js:403
 msgid "Over Image Centered"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:416
+#: blocks/image-gallery/edit.js:414
 msgid "Plain text on Image"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:420
+#: blocks/image-gallery/edit.js:418
 msgid "Bottom Banner"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:424
+#: blocks/image-gallery/edit.js:422
 msgid "Centered Banner"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:432
+#: blocks/image-gallery/edit.js:430
 msgid "Flip Card (Up)"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:436
+#: blocks/image-gallery/edit.js:434
 msgid "Flip Card (Side)"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:448
+#: blocks/image-gallery/edit.js:446
 msgid "Cards will only 'flip' if the image has a caption"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:461
+#: blocks/image-gallery/edit.js:459
 msgid "Show Caption on Hover"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:469
+#: blocks/image-gallery/edit.js:467
 msgid "Caption Animation"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:475
-#: blocks/image-gallery/edit.js:493
+#: blocks/image-gallery/edit.js:473
+#: blocks/image-gallery/edit.js:491
 msgid "Fade In"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:479
-#: blocks/image-gallery/edit.js:497
+#: blocks/image-gallery/edit.js:477
+#: blocks/image-gallery/edit.js:495
 msgid "Zoom In"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:483
-#: blocks/image-gallery/edit.js:501
+#: blocks/image-gallery/edit.js:481
+#: blocks/image-gallery/edit.js:499
 msgid "Zoom Out"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:487
+#: blocks/image-gallery/edit.js:485
 msgid "Slide In"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:519
+#: blocks/image-gallery/edit.js:517
 msgid "Image Hover Effect"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:524
+#: blocks/image-gallery/edit.js:522
 msgid "Color to Greyscale"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:528
+#: blocks/image-gallery/edit.js:526
 msgid "Greyscale to Color"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:531
+#: blocks/image-gallery/edit.js:529
 msgid "Grow"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:532
+#: blocks/image-gallery/edit.js:530
 msgid "Shrink"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:534
+#: blocks/image-gallery/edit.js:532
 msgid "Normal to Blurry"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:538
+#: blocks/image-gallery/edit.js:536
 msgid "Blurry to Normal"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:541
+#: blocks/image-gallery/edit.js:539
 msgid "Zoom"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:542
+#: blocks/image-gallery/edit.js:540
 msgid "Zoom Long"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:543
+#: blocks/image-gallery/edit.js:541
 msgid "Light Border"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:545
+#: blocks/image-gallery/edit.js:543
 msgid "Slightly Raized"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:558
+#: blocks/image-gallery/edit.js:556
 msgid "Image Background Color"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:577
+#: blocks/image-gallery/edit.js:575
 msgid "Caption Background Color"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:585
+#: blocks/image-gallery/edit.js:583
 #: blocks/slider/edit.js:813
 #: blocks/slider/edit.js:857
 #: blocks/slider/edit.js:1167
@@ -968,53 +968,53 @@ msgstr ""
 msgid "Opacity"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:599
+#: blocks/image-gallery/edit.js:597
 msgid "Caption Font Color"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:621
+#: blocks/image-gallery/edit.js:619
 #: src/backend/editor/extensions/imagepopups.js:84
 msgid "Image Lightbox Settings"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:627
+#: blocks/image-gallery/edit.js:625
 msgid "Enable Lightbox"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:632
+#: blocks/image-gallery/edit.js:630
 msgid "Please check the website frontend to view the image popup"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:641
+#: blocks/image-gallery/edit.js:639
 #: src/backend/editor/extensions/imagepopups.js:99
 #: src/backend/settings/contents/BlockExtensions.js:188
 msgid "Icon"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:659
+#: blocks/image-gallery/edit.js:657
 #: blocks/marketing-button/edit.js:239
 #: src/backend/editor/extensions/imagepopups.js:117
 #: src/backend/settings/contents/BlockExtensions.js:203
 msgid "Icon Position"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:694
+#: blocks/image-gallery/edit.js:692
 msgid "Get Blockons Gallery Lightbox"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:695
+#: blocks/image-gallery/edit.js:693
 msgid "Upgrade to Pro to enable the lightbox feature with customization options."
 msgstr ""
 
-#: blocks/image-gallery/edit.js:700
+#: blocks/image-gallery/edit.js:698
 msgid "Click image to open a Lightbox"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:701
+#: blocks/image-gallery/edit.js:699
 msgid "Customize icon, and icon color and position"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:705
+#: blocks/image-gallery/edit.js:703
 msgid "Customize Lightbox color & other settings"
 msgstr ""
 

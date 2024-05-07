@@ -30,9 +30,12 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 		return select("core/block-editor").getSelectedBlock();
 	}, []);
 
+	console.log("selectedBlock", selectedBlock);
+
 	const allowedBlocks = [
 		"core/paragraph",
 		"core/heading",
+		"core/list-item",
 		"blockons/line-heading",
 	];
 	if (!selectedBlock || !allowedBlocks.includes(selectedBlock.name)) {
