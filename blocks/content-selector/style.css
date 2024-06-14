@@ -1,0 +1,89 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.wp-block-blockons-content-selector {
+	width: 100%;
+}
+
+.blockons-content-selector-title {
+	margin: 0;
+	padding: 0;
+}
+.blockons-content-selector-desc {
+	margin: 0;
+	padding: 0;
+}
+
+.blockons-content-selector-sections {
+}
+.blockons-content-selector-section {
+	padding: 15px;
+}
+
+/* -- Select Input -- */
+.blockons-content-selector-select {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 15px;
+}
+select.blockons-content-select {
+	min-width: 180px;
+}
+.blockons-content-selector-select.align-center,
+.blockons-content-select.align-center {
+	justify-content: center;
+}
+.blockons-content-selector-select.align-left,
+.blockons-content-select.align-left {
+	justify-content: flex-start;
+}
+.blockons-content-selector-select.align-right,
+.blockons-content-select.align-right {
+	justify-content: flex-end;
+}
+.blockons-cs-redirect {
+}
+
+.blockons-ds-countdown {
+	text-align: center;
+	padding: 12px;
+}
+.blockons-ds-countdown-txt p {
+	margin: 0;
+	padding: 0;
+}
+.blockons-dscount {
+	font-weight: 900;
+}
+.blockons-ds-countdown-notxt {
+	font-size: 12px;
+	text-align: center;
+}
+
+/* -- Alignment -- */
+.blockons-content-selector-section.align-center,
+.blockons-content-selector-title.align-center,
+.blockons-content-selector-desc.align-center {
+	text-align: center;
+}
+.blockons-content-selector-section.align-left,
+.blockons-content-selector-title.align-left,
+.blockons-content-selector-desc.align-left {
+	text-align: left;
+}
+.blockons-content-selector-section.align-right,
+.blockons-content-selector-title.align-right,
+.blockons-content-selector-desc.align-right {
+	text-align: right;
+}
+
+/* -- Select Input -- */
+.blockons-content-select {
+	position: relative;
+	z-index: 21;
+	display: flex;
+	align-items: center;
+	margin: 18px 0 30px;
+}

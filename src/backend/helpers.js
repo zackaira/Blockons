@@ -44,6 +44,14 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: __("NEW", "blockons"),
 	},
+	content_selector: {
+		desc: __(
+			"Let your users select which content they want to read.",
+			"blockons"
+		),
+		pluginSpecific: false,
+		isNew: __("NEW", "blockons"),
+	},
 	content_toggler: {
 		desc: __(
 			"Show / Hide sections of long content with a toggle button",

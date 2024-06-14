@@ -1,0 +1,46 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/content-selector",
+	"title": "Dynamic Content Selector",
+	"textdomain": "blockons",
+	"icon": "heart",
+	"category": "blockons-category",
+	"keywords": ["content", "selector", "dynamic", "blockons"],
+	"attributes": {
+		"uniqueId": {
+			"type": "string"
+		},
+		"alignment": {
+			"type": "string",
+			"default": "center"
+		},
+		"showTitle": {
+			"type": "boolean",
+			"default": true
+		},
+		"title": {
+			"type": "string"
+		},
+		"showDesc": {
+			"type": "boolean",
+			"default": true
+		},
+		"description": {
+			"type": "string"
+		},
+		"options": {
+			"type": "array",
+			"default": []
+		},
+		"selectedOption": {
+			"type": "string"
+		}
+	},
+	"providesContext": {
+		"blockons/selectedContent": "selectedOption"
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": ["file:./style-index.css", "blockons-fontawesome"]
+}

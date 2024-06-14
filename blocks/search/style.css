@@ -306,7 +306,9 @@
 .blockons-tresult:hover {
 	background-color: #f0f0f0;
 }
-.blockons-sresult {
+.blockons-sresult,
+.sidebar a.blockons-sresult {
+	border: none !important;
 	display: flex;
 	align-items: center;
 	text-decoration: none;

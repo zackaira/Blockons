@@ -20,10 +20,12 @@ const ResultsItem = ({ searchItem, set, previewChange }) => {
 			)}
 			<div className="blockons-sresult-center">
 				{searchItem.title && (
-					<h4 className="blockons-sresult-title">{searchItem.title}</h4>
+					<h4 className="blockons-sresult-title">{parse(searchItem.title)}</h4>
 				)}
 				{set.searchProDesc && searchItem.extras.excerpt && (
-					<p className="blockons-sresult-desc">{searchItem.extras.excerpt}</p>
+					<p className="blockons-sresult-desc">
+						{parse(searchItem.extras.excerpt)}
+					</p>
 				)}
 			</div>
 			{searchItem.subtype === "product" && set.searchProPrice && (
