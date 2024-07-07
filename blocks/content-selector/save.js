@@ -1,29 +1,39 @@
-import { InnerBlocks, useBlockProps, RichText } from "@wordpress/block-editor";
+import { __ } from "@wordpress/i18n";
+import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
+import Select from "react-select";
 
 const Save = ({ attributes }) => {
-	const { alignment, title, options, selectedOption } = attributes;
+	const { uniqueId, alignment, options, selectedOption } = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: `align-${alignment}`,
+		className: `blockons-ds-contents align-${alignment}`,
+		id: uniqueId,
 	});
+
+	console.log("options: ", options);
 
 	return (
 		<div {...blockProps}>
-			<RichText.Content
-				tagName="h4"
-				value={title}
-				className="blockons-content-selector-title"
-			/>
-			{options.map((option, index) => (
-				<div
-					key={option.id}
-					className={`content-option ${
-						selectedOption === index ? "active" : ""
-					}`}
-				>
-					{selectedOption === index && <InnerBlocks.Content />}
+			{options && options.length > 0 && (
+				<div className={`blockons-content-select align-${alignment}`}>
+					<div className="blockons-content-select-select">
+						<select className="blockons-ds-select">
+							{options.map((option, index) => (
+								<option value={option.value}>
+									{option.attributes.contentLabel}
+								</option>
+							))}
+						</select>
+					</div>
 				</div>
-			))}
+			)}
+			<div
+				className={`blockons-ds-contents ${
+					!options || options.length < 1 ? "none" : ""
+				}`}
+			>
+				<InnerBlocks.Content />
+			</div>
 		</div>
 	);
 };

@@ -34,7 +34,8 @@
 			"default": []
 		},
 		"selectedOption": {
-			"type": "string"
+			"type": "object",
+			"default": null
 		}
 	},
 	"providesContext": {
@@ -42,5 +43,6 @@
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
+	"viewScript": "file:./selectredirect.js",
 	"style": ["file:./style-index.css", "blockons-fontawesome"]
 }

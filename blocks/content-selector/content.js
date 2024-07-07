@@ -54,7 +54,6 @@ registerBlockType("blockons/ds-content", {
 			setAttributes({ clientId: clientId });
 		}, []);
 
-		// Default template for InnerBlocks
 		const TEMPLATE = [["core/paragraph", { content: "Tab Content" }]];
 
 		return (

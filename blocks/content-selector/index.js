@@ -15,11 +15,13 @@ import "./style.css";
 import "./content.js";
 
 const { name } = json;
+import { ContentSelectorIcon as svg } from "../svgIcons";
 
 /**
  * Register the Block
  */
 registerBlockType(name, {
+	icon: svg,
 	edit: Edit,
-	// save,
+	save,
 });

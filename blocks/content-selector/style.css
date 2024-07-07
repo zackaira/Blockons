@@ -87,3 +87,22 @@ select.blockons-content-select {
 	align-items: center;
 	margin: 18px 0 30px;
 }
+.blockons-content-select-select {
+	position: relative;
+	max-width: fit-content;
+	min-width: 280px;
+}
+.blockons-content-select-select select.blockons-ds-select {
+	appearance: none;
+	/*  safari  */
+	-webkit-appearance: none;
+	/*  other styles for aesthetics */
+	width: 100%;
+	font-size: 1.15rem;
+	padding: 0.675em 1.6em 0.675em 1em;
+	background-color: #fff;
+	border: 1px solid #c7c7c7;
+	border-radius: 0.25rem;
+	color: #000;
+	cursor: pointer;
+}

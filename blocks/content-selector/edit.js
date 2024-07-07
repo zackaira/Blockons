@@ -21,7 +21,6 @@ import {
 	Button,
 } from "@wordpress/components";
 import { v4 as uuidv4 } from "uuid";
-import Select from "react-select";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import { colorPickerPalette } from "../block-global";
 
@@ -30,7 +29,7 @@ const ALLOWED_BLOCKS = ["blockons/ds-content"];
 const Edit = (props) => {
 	const {
 		isSelected,
-		attributes: { uniqueId, alignment, options },
+		attributes: { uniqueId, alignment, options, selectedOption },
 		setAttributes,
 		clientId,
 	} = props;
@@ -54,13 +53,18 @@ const Edit = (props) => {
 	);
 
 	useEffect(() => {
-		setAttributes({
-			uniqueId: uuidv4(),
-		});
+		if (!uniqueId) setAttributes({ uniqueId: uuidv4() });
 	}, []);
 
 	useEffect(() => {
-		if (innerBlocks.length) setAttributes({ options: innerBlocks });
+		// if (innerBlocks.length) setAttributes({ options: innerBlocks });
+		if (innerBlocks && innerBlocks.length > 0) {
+			const filteredOptions = innerBlocks.map((block) => ({
+				clientId: block.clientId,
+				attributes: block.attributes,
+			}));
+			setAttributes({ options: filteredOptions });
+		}
 	}, [innerBlocks]);
 
 	const moveOptionPosition = (currentIndex, newIndex) => {
@@ -94,6 +98,7 @@ const Edit = (props) => {
 			removeBlock(innerBlocks[index].clientId);
 			setAttributes({ options: innerBlocks });
 		}
+		selectBlock(clientId);
 	};
 
 	const CustomOptionAppender = ({ buttonText, clientId }) => {
@@ -102,6 +107,7 @@ const Edit = (props) => {
 		const addBlock = () => {
 			const block = wp.blocks.createBlock("blockons/ds-content");
 			insertBlock(block, undefined, clientId);
+			selectBlock(clientId);
 		};
 
 		return (
@@ -205,7 +211,7 @@ const Edit = (props) => {
 																	<div className="blockons-divider"></div>
 
 																	<TextControl
-																		label={__("Count Down", "blockons")}
+																		label={__("Count Down from", "blockons")}
 																		type="number"
 																		value={option.attributes.countDown}
 																		onChange={(value) =>
@@ -213,6 +219,10 @@ const Edit = (props) => {
 																				countDown: parseInt(value),
 																			})
 																		}
+																		help={__(
+																			"Add 0 to remove the countdown",
+																			"blockons"
+																		)}
 																	/>
 																</>
 															)}
@@ -276,39 +286,31 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 
-			{options.length > 0 && (
-				<>
-					<div className={`blockons-content-select align-${alignment}`}>
-						<div className="blockons-content-select-select">
-							<Select
-								defaultValue=""
-								options={options.map((option, index) => ({
-									value: option.clientId,
-									label: option.attributes.contentLabel,
-								}))}
-								placeholder={__("Select...", "blockons")}
-								isSearchable={false}
-								onChange={(value) => selectContentSection(value)}
-								styles={{
-									control: (base) => ({
-										...base,
-										minWidth: "280px",
-									}),
-								}}
-							/>
-						</div>
+			{options && options.length > 0 && (
+				<div className={`blockons-content-select align-${alignment}`}>
+					<div className="blockons-content-select-select">
+						<select
+							className="blockons-ds-select"
+							onChange={selectContentSection}
+						>
+							{options.map((option, index) => (
+								<option value={option.value}>
+									{option.attributes.contentLabel}
+								</option>
+							))}
+						</select>
 					</div>
-				</>
+				</div>
 			)}
 
 			<div
 				className={`blockons-ds-contents ${
-					innerBlocks?.length < 1 ? "none" : ""
+					!options || options.length < 1 ? "none" : ""
 				}`}
 			>
 				<InnerBlocks
 					allowedBlocks={ALLOWED_BLOCKS}
-					{...(innerBlocks?.length < 1
+					{...(options.length < 1
 						? {
 								renderAppender: () => (
 									<CustomOptionAppender
