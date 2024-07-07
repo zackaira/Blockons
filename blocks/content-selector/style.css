@@ -15,8 +15,6 @@
 	padding: 0;
 }
 
-.blockons-content-selector-sections {
-}
 .blockons-content-selector-section {
 	padding: 15px;
 }
@@ -42,8 +40,6 @@ select.blockons-content-select {
 .blockons-content-selector-select.align-right,
 .blockons-content-select.align-right {
 	justify-content: flex-end;
-}
-.blockons-cs-redirect {
 }
 
 .blockons-ds-countdown {
