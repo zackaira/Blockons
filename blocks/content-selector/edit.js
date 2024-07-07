@@ -29,7 +29,14 @@ const ALLOWED_BLOCKS = ["blockons/ds-content"];
 const Edit = (props) => {
 	const {
 		isSelected,
-		attributes: { uniqueId, alignment, options, selectedOption },
+		attributes: {
+			uniqueId,
+			alignment,
+			emptyFirstOption,
+			emptyFirstText,
+			options,
+			selectedOption,
+		},
 		setAttributes,
 		clientId,
 	} = props;
@@ -83,10 +90,16 @@ const Edit = (props) => {
 		}
 	};
 
-	const selectContentSection = (value) => {
-		const selectedOption = options.find(
-			(option) => option.clientId === value.value
-		);
+	const selectContentSection = (e) => {
+		const selectedOption = e.target.value
+			? options.find((option) => option.clientId === e.target.value)
+			: { clientId: "" };
+
+		// const selectedOption = !emptyFirstOption
+		// 	? e.target.value
+		// 		? options.find((option) => option.clientId === e.target.value)
+		// 		: { clientId: "" }
+		// 	: options[0];
 
 		setAttributes({
 			selectedOption: selectedOption.clientId,
@@ -129,6 +142,20 @@ const Edit = (props) => {
 						title={__("Dynamic Content Settings", "blockons")}
 						initialOpen={true}
 					>
+						<ToggleControl
+							label={__("Empty First Option", "blockons")}
+							checked={emptyFirstOption}
+							onChange={(value) => setAttributes({ emptyFirstOption: value })}
+						/>
+						{emptyFirstOption && (
+							<TextControl
+								label={__("Empty First Option Text", "blockons")}
+								value={emptyFirstText}
+								onChange={(value) => setAttributes({ emptyFirstText: value })}
+							/>
+						)}
+						<div className="blockons-divider"></div>
+
 						<div className={`blockons-ds-repeatable-settings`}>
 							{options.map((option, index) => (
 								<div
@@ -293,8 +320,9 @@ const Edit = (props) => {
 							className="blockons-ds-select"
 							onChange={selectContentSection}
 						>
+							{emptyFirstOption && <option value="">{emptyFirstText}</option>}
 							{options.map((option, index) => (
-								<option value={option.value}>
+								<option value={option.clientId}>
 									{option.attributes.contentLabel}
 								</option>
 							))}

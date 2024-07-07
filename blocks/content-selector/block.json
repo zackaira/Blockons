@@ -15,19 +15,13 @@
 			"type": "string",
 			"default": "center"
 		},
-		"showTitle": {
+		"emptyFirstOption": {
 			"type": "boolean",
 			"default": true
 		},
-		"title": {
-			"type": "string"
-		},
-		"showDesc": {
-			"type": "boolean",
-			"default": true
-		},
-		"description": {
-			"type": "string"
+		"emptyFirstText": {
+			"type": "string",
+			"default": "Select an Option"
 		},
 		"options": {
 			"type": "array",
