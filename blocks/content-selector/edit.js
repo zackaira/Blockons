@@ -64,7 +64,6 @@ const Edit = (props) => {
 	}, []);
 
 	useEffect(() => {
-		// if (innerBlocks.length) setAttributes({ options: innerBlocks });
 		if (innerBlocks && innerBlocks.length > 0) {
 			const filteredOptions = innerBlocks.map((block) => ({
 				clientId: block.clientId,
@@ -73,6 +72,13 @@ const Edit = (props) => {
 			setAttributes({ options: filteredOptions });
 		}
 	}, [innerBlocks]);
+
+	useEffect(() => {
+		if (!emptyFirstOption) {
+			document.querySelector(".blockons-ds-select").value = options[0].clientId;
+			setAttributes({ selectedOption: options[0].clientId });
+		}
+	}, [emptyFirstOption]);
 
 	const moveOptionPosition = (currentIndex, newIndex) => {
 		if (newIndex >= 0 && newIndex < innerBlocks.length) {
