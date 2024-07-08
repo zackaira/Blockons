@@ -80,6 +80,7 @@ const Edit = (props) => {
 				attributes: block.attributes,
 			}));
 			setAttributes({ options: filteredOptions });
+			// setAttributes({ selectedOption: filteredOptions[0].clientId });
 		}
 	}, [innerBlocks]);
 
