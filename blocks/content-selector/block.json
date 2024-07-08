@@ -30,6 +30,38 @@
 		"selectedOption": {
 			"type": "object",
 			"default": null
+		},
+		"selectMinWidth": {
+			"type": "string",
+			"default": 280
+		},
+		"selectVertPadding": {
+			"type": "number",
+			"default": 10
+		},
+		"selectHorizPadding": {
+			"type": "number",
+			"default": 20
+		},
+		"selectBorderRadius": {
+			"type": "number",
+			"default": 4
+		},
+		"selectBgColor": {
+			"type": "string",
+			"default": "#FFFFFF"
+		},
+		"selectFontColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"selectBorder": {
+			"type": "boolean",
+			"default": true
+		},
+		"selectBorderColor": {
+			"type": "string",
+			"default": "#c7c7c7"
 		}
 	},
 	"providesContext": {

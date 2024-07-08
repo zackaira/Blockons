@@ -3,23 +3,56 @@ import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 import Select from "react-select";
 
 const Save = ({ attributes }) => {
-	const { uniqueId, alignment, options, selectedOption } = attributes;
+	const {
+		uniqueId,
+		alignment,
+		emptyFirstOption,
+		emptyFirstText,
+		options,
+		selectedOption,
+		selectMinWidth,
+		selectVertPadding,
+		selectHorizPadding,
+		selectBorderRadius,
+		selectBgColor,
+		selectFontColor,
+		selectBorder,
+		selectBorderColor,
+	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: `blockons-ds-contents align-${alignment}`,
+		className: `ds-contents`,
 		id: uniqueId,
 	});
-
-	console.log("options: ", options);
 
 	return (
 		<div {...blockProps}>
 			{options && options.length > 0 && (
 				<div className={`blockons-content-select align-${alignment}`}>
-					<div className="blockons-content-select-select">
-						<select className="blockons-ds-select">
+					<div
+						className="blockons-content-select-select"
+						style={{
+							minWidth: selectMinWidth,
+						}}
+					>
+						<select
+							className={`blockons-ds-select ${
+								!selectBorder ? "noborder" : ""
+							}`}
+							onChange={() => console.log("changed")}
+							style={{
+								padding: `${selectVertPadding}px ${
+									selectHorizPadding * 2
+								}px ${selectVertPadding}px ${selectHorizPadding}px`,
+								borderRadius: `${selectBorderRadius}px`,
+								backgroundColor: selectBgColor,
+								color: selectFontColor,
+								borderColor: selectBorderColor,
+							}}
+						>
+							{emptyFirstOption && <option value="">{emptyFirstText}</option>}
 							{options.map((option, index) => (
-								<option value={option.value}>
+								<option value={option.clientId}>
 									{option.attributes.contentLabel}
 								</option>
 							))}

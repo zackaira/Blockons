@@ -19,6 +19,7 @@ import {
 	SelectControl,
 	RangeControl,
 	Button,
+	__experimentalUnitControl as UnitControl,
 } from "@wordpress/components";
 import { v4 as uuidv4 } from "uuid";
 import BlockonsColorpicker from "../_components/BlockonsColorpicker";
@@ -36,6 +37,14 @@ const Edit = (props) => {
 			emptyFirstText,
 			options,
 			selectedOption,
+			selectMinWidth,
+			selectVertPadding,
+			selectHorizPadding,
+			selectBorderRadius,
+			selectBgColor,
+			selectFontColor,
+			selectBorder,
+			selectBorderColor,
 		},
 		setAttributes,
 		clientId,
@@ -49,7 +58,8 @@ const Edit = (props) => {
 	} = useDispatch(blockEditorStore);
 
 	const blockProps = useBlockProps({
-		className: ``,
+		className: `ds-contents`,
+		id: uniqueId,
 	});
 
 	console.log("options", options);
@@ -304,6 +314,73 @@ const Edit = (props) => {
 							)}
 						</div>
 					</PanelBody>
+					<PanelBody title={__("Dynamic Content Design Settings", "blockons")}>
+						<UnitControl
+							label={__("Search Min-Width", "blockons")}
+							value={selectMinWidth}
+							onChange={(value) => setAttributes({ selectMinWidth: value })}
+							units={[
+								{ value: "px", label: "px", default: 280 },
+								{ value: "%", label: "%", default: 50 },
+							]}
+							isResetValueOnUnitChange
+						/>
+						<div className="blockons-divider"></div>
+
+						<RangeControl
+							label={__("Select Vertical Padding", "blockons")}
+							value={selectVertPadding}
+							onChange={(value) => setAttributes({ selectVertPadding: value })}
+							min={0}
+							max={50}
+						/>
+						<RangeControl
+							label={__("Select Horizontal Padding", "blockons")}
+							value={selectHorizPadding}
+							onChange={(value) => setAttributes({ selectHorizPadding: value })}
+							min={5}
+							max={100}
+						/>
+						<div className="blockons-divider"></div>
+
+						<BlockonsColorpicker
+							label={__("Select Background Color", "blockons")}
+							value={selectBgColor}
+							onChange={(color) => setAttributes({ selectBgColor: color })}
+							paletteColors={colorPickerPalette}
+						/>
+						<BlockonsColorpicker
+							label={__("Select Font Color", "blockons")}
+							value={selectFontColor}
+							onChange={(color) => setAttributes({ selectFontColor: color })}
+							paletteColors={colorPickerPalette}
+						/>
+						<div className="blockons-divider"></div>
+
+						<ToggleControl
+							label={__("Select Border", "blockons")}
+							checked={selectBorder}
+							onChange={(value) => setAttributes({ selectBorder: value })}
+						/>
+						{selectBorder && (
+							<BlockonsColorpicker
+								label={__("Select Border Color", "blockons")}
+								value={selectBorderColor}
+								onChange={(color) =>
+									setAttributes({ selectBorderColor: color })
+								}
+								paletteColors={colorPickerPalette}
+							/>
+						)}
+
+						<RangeControl
+							label={__("Select Border Radius", "blockons")}
+							value={selectBorderRadius}
+							onChange={(value) => setAttributes({ selectBorderRadius: value })}
+							min={0}
+							max={100}
+						/>
+					</PanelBody>
 				</InspectorControls>
 			)}
 			{
@@ -321,15 +398,31 @@ const Edit = (props) => {
 
 			{options && options.length > 0 && (
 				<div className={`blockons-content-select align-${alignment}`}>
-					<div className="blockons-content-select-select">
+					<div
+						className="blockons-content-select-select"
+						style={{
+							minWidth: selectMinWidth,
+						}}
+					>
 						<select
-							className="blockons-ds-select"
+							className={`blockons-ds-select ${
+								!selectBorder ? "noborder" : ""
+							}`}
 							onChange={selectContentSection}
+							style={{
+								padding: `${selectVertPadding}px ${
+									selectHorizPadding * 2
+								}px ${selectVertPadding}px ${selectHorizPadding}px`,
+								borderRadius: `${selectBorderRadius}px`,
+								backgroundColor: selectBgColor,
+								color: selectFontColor,
+								borderColor: selectBorderColor,
+							}}
 						>
 							{emptyFirstOption && <option value="">{emptyFirstText}</option>}
 							{options.map((option, index) => (
 								<option value={option.clientId}>
-									{option.attributes.contentLabel}
+									{option.attributes.contentLabel + " - " + option.clientId}
 								</option>
 							))}
 						</select>

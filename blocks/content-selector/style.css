@@ -94,11 +94,24 @@ select.blockons-content-select {
 	-webkit-appearance: none;
 	/*  other styles for aesthetics */
 	width: 100%;
+	max-width: 100%;
 	font-size: 1.15rem;
-	padding: 0.675em 1.6em 0.675em 1em;
+	padding: 10px 30px 10px 20px;
 	background-color: #fff;
 	border: 1px solid #c7c7c7;
-	border-radius: 0.25rem;
+	border-radius: 4px;
 	color: #000;
 	cursor: pointer;
+}
+.blockons-content-select-select select.blockons-ds-select.noborder {
+	border: none;
+}
+
+/* -- Hide Non-Selected Blocks -- */
+/* .blockons-ds-content {
+	display: none;
+} */
+.blockons-ds-content.active {
+	/* display: block; */
+	background-color: bisque;
 }
