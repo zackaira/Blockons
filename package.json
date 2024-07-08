@@ -33,13 +33,16 @@
 		"css-minimizer-webpack-plugin": "^4.0.0",
 		"html-react-parser": "^1.4.14",
 		"imagesloaded": "^5.0.0",
+		"jest-environment-jsdom": "^29.7.0",
 		"masonry-layout": "^4.2.2",
+		"puppeteer-core": "^22.12.1",
 		"react-color": "^2.19.3",
 		"react-select": "^5.8.0",
 		"react-waypoint": "^10.1.0",
 		"swiper": "^8.4.5",
 		"uuid": "^8.3.2",
 		"venobox": "^2.1.6",
+		"webpack-bundle-analyzer": "^4.10.2",
 		"youtube-player": "^5.5.2"
 	},
 	"resolutions": {
