@@ -4,7 +4,6 @@ import { __ } from "@wordpress/i18n";
 import {
 	BlockControls,
 	AlignmentToolbar,
-	RichText,
 	InnerBlocks,
 	InspectorControls,
 	useBlockProps,
