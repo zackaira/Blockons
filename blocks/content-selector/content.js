@@ -2,6 +2,7 @@ import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
 import { registerBlockType } from "@wordpress/blocks";
 import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
+import { TextControl } from "@wordpress/components";
 
 registerBlockType("blockons/ds-content", {
 	title: __("Content", "blockons"),
@@ -69,11 +70,7 @@ registerBlockType("blockons/ds-content", {
 						)}
 					</div>
 				) : (
-					<>
-						{"SelectedOption: " + context["blockons/selectedContent"]}
-						{" | clientId: " + clientId}
-						<InnerBlocks template={TEMPLATE} templateLock={false} />
-					</>
+					<InnerBlocks template={TEMPLATE} templateLock={false} />
 				)}
 			</div>
 		);
@@ -90,10 +87,8 @@ registerBlockType("blockons/ds-content", {
 						{attributes.redirectUrl ? (
 							<div className="blockons-ds-countdown-txt">
 								<p>
-									{attributes.preText}
-									<span className="blockons-dscount">
-										{attributes.countDown}
-									</span>
+									{preText}
+									<span className="blockons-dscount">{countDown}</span>
 								</p>
 							</div>
 						) : (
