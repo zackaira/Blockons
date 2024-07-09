@@ -99,9 +99,7 @@ const Edit = (props) => {
 					clientId,
 					newIndex
 				);
-				// selectContentSection(newIndex);
 			}, 100);
-			// selectBlock(innerBlocks[currentIndex].clientId);
 			setAttributes({ options: innerBlocks });
 		}
 	};
@@ -110,12 +108,6 @@ const Edit = (props) => {
 		const selectedOption = e.target.value
 			? options.find((option) => option.clientId === e.target.value)
 			: { clientId: "" };
-
-		// const selectedOption = !emptyFirstOption
-		// 	? e.target.value
-		// 		? options.find((option) => option.clientId === e.target.value)
-		// 		: { clientId: "" }
-		// 	: options[0];
 
 		setAttributes({
 			selectedOption: selectedOption.clientId,
@@ -421,7 +413,7 @@ const Edit = (props) => {
 						>
 							{emptyFirstOption && <option value="">{emptyFirstText}</option>}
 							{options.map((option, index) => (
-								<option value={option.clientId}>
+								<option key={index} value={option.clientId}>
 									{option.attributes.contentLabel + " - " + option.clientId}
 								</option>
 							))}

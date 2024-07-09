@@ -23,5 +23,5 @@ import { ContentSelectorIcon as svg } from "../svgIcons";
 registerBlockType(name, {
 	icon: svg,
 	edit: Edit,
-	//save,
+	save,
 });

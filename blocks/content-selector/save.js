@@ -10,8 +10,6 @@ const Save = ({ attributes }) => {
 		id: uniqueId,
 	});
 
-	console.log("options: ", options);
-
 	return (
 		<div {...blockProps}>
 			{options && options.length > 0 && (
