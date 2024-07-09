@@ -96,10 +96,18 @@ select.blockons-content-select {
 	width: 100%;
 	min-width: 100%;
 	font-size: 1.15rem;
-	padding: 0.675em 1.6em 0.675em 1em;
+	padding: 10px 15px;
 	background-color: #fff;
-	border: 1px solid #c7c7c7;
-	border-radius: 0.25rem;
+	border: 1px solid #aeaeae;
+	border-radius: 4px;
 	color: #000;
 	cursor: pointer;
+}
+
+.blockons-ds-content {
+	display: none;
+}
+.blockons-ds-content.active {
+	display: block;
+	/* background-color: pink; */
 }

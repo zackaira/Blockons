@@ -46,7 +46,7 @@ export const blockListSettings = {
 	},
 	content_selector: {
 		desc: __(
-			"Let your site viewers select which content they want to read.",
+			"Let your viewers select which content they want to read.",
 			"blockons"
 		),
 		pluginSpecific: false,

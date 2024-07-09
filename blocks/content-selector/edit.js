@@ -80,6 +80,11 @@ const Edit = (props) => {
 				attributes: block.attributes,
 			}));
 			setAttributes({ options: filteredOptions });
+
+			if (!emptyFirstOption && innerBlocks?.length > 0) {
+				setAttributes({ selectedOption: filteredOptions[0].clientId });
+				console.log("run run run");
+			}
 		}
 	}, [innerBlocks]);
 
@@ -414,7 +419,7 @@ const Edit = (props) => {
 							{emptyFirstOption && <option value="">{emptyFirstText}</option>}
 							{options.map((option, index) => (
 								<option key={index} value={option.clientId}>
-									{option.attributes.contentLabel + " - " + option.clientId}
+									{option.attributes.contentLabel}
 								</option>
 							))}
 						</select>

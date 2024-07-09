@@ -2,7 +2,6 @@ import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
 import { registerBlockType } from "@wordpress/blocks";
 import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
-import { TextControl } from "@wordpress/components";
 
 registerBlockType("blockons/ds-content", {
 	title: __("Content", "blockons"),
@@ -87,8 +86,10 @@ registerBlockType("blockons/ds-content", {
 						{attributes.redirectUrl ? (
 							<div className="blockons-ds-countdown-txt">
 								<p>
-									{preText}
-									<span className="blockons-dscount">{countDown}</span>
+									{attributes.preText}
+									<span className="blockons-dscount">
+										{attributes.countDown}
+									</span>
 								</p>
 							</div>
 						) : (
