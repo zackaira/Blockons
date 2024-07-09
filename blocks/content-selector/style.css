@@ -103,6 +103,9 @@ select.blockons-content-select {
 	color: #000;
 	cursor: pointer;
 }
+.blockons-content-select-select select.blockons-ds-select.noborder {
+	border: none;
+}
 
 .blockons-ds-content {
 	display: none;

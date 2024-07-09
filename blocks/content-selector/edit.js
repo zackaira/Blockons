@@ -61,8 +61,8 @@ const Edit = (props) => {
 		className: `ds-contents`,
 		id: uniqueId,
 	});
-
-	console.log("options", options);
+	const [showOptions, setShowOptions] = useState(false);
+	// console.log("options", options);
 
 	const innerBlocks = useSelect(
 		(select) => select(blockEditorStore).getBlock(clientId).innerBlocks,
@@ -83,7 +83,6 @@ const Edit = (props) => {
 
 			if (!emptyFirstOption && innerBlocks?.length > 0) {
 				setAttributes({ selectedOption: filteredOptions[0].clientId });
-				console.log("run run run");
 			}
 		}
 	}, [innerBlocks]);
@@ -310,6 +309,17 @@ const Edit = (props) => {
 								/>
 							)}
 						</div>
+
+						<div className="blockons-divider"></div>
+						<ToggleControl
+							label={__("Show All Content Sections", "blockons")}
+							checked={showOptions}
+							onChange={() => setShowOptions((state) => !state)}
+							help={__(
+								"Show all content sections in the editor, for easier building for each option.",
+								"blockons"
+							)}
+						/>
 					</PanelBody>
 					<PanelBody title={__("Dynamic Content Design Settings", "blockons")}>
 						<UnitControl
@@ -336,7 +346,7 @@ const Edit = (props) => {
 							value={selectHorizPadding}
 							onChange={(value) => setAttributes({ selectHorizPadding: value })}
 							min={5}
-							max={100}
+							max={50}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -430,7 +440,7 @@ const Edit = (props) => {
 			<div
 				className={`blockons-ds-contents ${
 					!options || options.length < 1 ? "none" : ""
-				}`}
+				} ${showOptions ? "show-all" : ""}`}
 			>
 				<InnerBlocks
 					allowedBlocks={ALLOWED_BLOCKS}

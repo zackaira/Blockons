@@ -96,3 +96,13 @@
 .blockons-ds-controls button.components-button:not(:disabled):hover {
 	color: #b951c8;
 }
+
+.blockons-ds-contents.show-all .blockons-ds-content {
+	display: block !important;
+	border: 1px dashed #b5b5b5;
+	padding: 10px;
+	margin-bottom: 12px;
+}
+.blockons-ds-contents.show-all .blockons-ds-content.has-child-selected {
+	border: 1px dashed #000;
+}
