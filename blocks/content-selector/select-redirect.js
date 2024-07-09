@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-	console.log("DOM fully loaded !! Count Down !");
-
 	const dsContents = document.querySelectorAll(".ds-contents");
 
 	if (dsContents.length > 0) {
