@@ -44,8 +44,5 @@
 		"venobox": "^2.1.6",
 		"webpack-bundle-analyzer": "^4.10.2",
 		"youtube-player": "^5.5.2"
-	},
-	"resolutions": {
-		"ws": "^8.17.1"
 	}
 }
