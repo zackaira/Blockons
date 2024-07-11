@@ -1,10 +1,10 @@
 import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
+import { SelectControl } from "@wordpress/components";
 import axios from "axios";
-import Select from "react-select";
 
 const GetPostsSelect = (props) => {
-	const { label, multiple = false, value, onChange, posts, siteurl } = props;
+	const { label, value, onChange, posts, siteurl } = props;
 
 	const [loadingProducts, setLoadingProducts] = useState(false);
 	const [allProducts, setAllProducts] = useState([]);
@@ -21,25 +21,23 @@ const GetPostsSelect = (props) => {
 
 	return (
 		<div className="post-select-wrap">
-			<p>{label}</p>
-			<Select
-				// closeMenuOnSelect={true}
+			<SelectControl
+				label={label}
 				value={value}
+				options={[
+					{
+						label: loadingProducts
+							? __("Loading...", "blockons")
+							: __("Select Product...", "blockons"),
+						value: "",
+					},
+					...allProducts,
+				]}
 				onChange={onChange}
-				options={allProducts}
-				isLoading={loadingProducts}
-				classNamePrefix="blockons-postselect"
-				isMulti={multiple}
-				placeholder={
-					loadingProducts
-						? __("Loading...", "blockons")
-						: __("Select Product...", "blockons")
-				}
-				noOptionsMessage={() => __("No Products", "blockons")}
+				disabled={loadingProducts}
 			/>
 		</div>
 	);
 };
 
-// Combine the higher-order components
 export default GetPostsSelect;

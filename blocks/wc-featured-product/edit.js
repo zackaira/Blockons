@@ -67,15 +67,22 @@ const Edit = (props) => {
 	const [selectedProductDetails, setSelectedProductDetails] = useState([]);
 
 	// Load Product Details by product ID
-	useEffect(async () => {
-		const id = selectedProduct ? selectedProduct.value : "";
-		if (!id) return;
+	useEffect(() => {
+		const loadProductDetails = async () => {
+			const id = selectedProduct ? selectedProduct : "";
+			if (!id) return;
 
-		setLoadingProductDetails(true);
-		await axios.get(site_url + "blcns/v1/product/" + id).then((res) => {
-			setSelectedProductDetails(res.data);
-			setLoadingProductDetails(false);
-		});
+			setLoadingProductDetails(true);
+			try {
+				const res = await axios.get(`${site_url}blcns/v1/product/${id}`);
+				setSelectedProductDetails(res.data);
+			} catch (error) {
+				console.error("Error fetching product details", error);
+			} finally {
+				setLoadingProductDetails(false);
+			}
+		};
+		if (selectedProduct) loadProductDetails();
 	}, [selectedProduct]);
 
 	return (
@@ -340,13 +347,13 @@ const Edit = (props) => {
 				</BlockControls>
 			}
 
-			{Object.keys(selectedProduct).length < 1 && (
+			{!selectedProduct && (
 				<div className="no-selected-product">
 					{__("Select a product to display", "blockons")}
 				</div>
 			)}
 
-			{Object.keys(selectedProduct).length > 0 &&
+			{selectedProduct &&
 				(loadingProductDetails ? (
 					<div className="loading-product">
 						{loadingProductDetails && <BlockonsLoader />}

@@ -6,7 +6,7 @@
 	"textdomain": "blockons",
 	"icon": "editor-ul",
 	"category": "blockons-category",
-	"keywords": ["list", "icons", "items", "blockons"],
+	"keywords": ["icons", "lists", "items", "blockons"],
 	"attributes": {
 		"alignment": {
 			"type": "string",

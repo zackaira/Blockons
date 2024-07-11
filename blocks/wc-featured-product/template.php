@@ -8,7 +8,7 @@
  *
  * @package blockons
  */
-$product_id = isset($attributes['selectedProduct']) ? $attributes['selectedProduct']['value'] : '';
+$product_id = isset($attributes['selectedProduct']) ? $attributes['selectedProduct'] : '';
 
 if (!$product_id) return null;
 

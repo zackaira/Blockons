@@ -267,6 +267,7 @@ class Blockons {
 			'apiUrl' => esc_url( get_rest_url() ),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
+			'wcActive' => Blockons_Admin::blockons_is_plugin_active('woocommerce.php'),
 		));
 		wp_enqueue_script('blockons-admin-editor-script');
 	} // End blockons_block_editor_scripts ()

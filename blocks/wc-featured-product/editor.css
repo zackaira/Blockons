@@ -71,6 +71,7 @@ input.blockons-postselect__input {
 
 .post-select-wrap {
 	position: relative;
+	margin: 15px 0 0;
 }
 .post-select-wrap .blockons-loader {
 	position: absolute;

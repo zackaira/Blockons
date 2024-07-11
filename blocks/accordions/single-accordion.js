@@ -185,7 +185,7 @@ registerBlockType("blockons/accordion", {
 
 							<h4>{__("Accordion Labels", "blockons")}</h4>
 							<BlockonsColorpicker
-								label={__("Background Color", "blockons")}
+								label={__("Label Color", "blockons")}
 								value={itemLabelBgColor}
 								onChange={(newValue) =>
 									setAttributes({ itemLabelBgColor: newValue })
@@ -256,7 +256,10 @@ registerBlockType("blockons/accordion", {
 				)}
 				<div
 					className={"accordion-label"}
-					style={{ backgroundColor: itemLabelBgColor }}
+					style={{
+						backgroundColor: itemLabelBgColor,
+						borderColor: itemLabelBgColor,
+					}}
 				>
 					<RichText
 						tagName="h6"
@@ -332,6 +335,7 @@ registerBlockType("blockons/accordion", {
 					className={"accordion-label"}
 					style={{
 						backgroundColor: attributes.itemLabelBgColor,
+						borderColor: attributes.itemLabelBgColor,
 					}}
 				>
 					<RichText.Content

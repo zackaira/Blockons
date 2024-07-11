@@ -338,7 +338,7 @@ const Edit = (props) => {
 	const handleInsertProduct = (selectedProduct, index) => {
 		const newSlides = [...sliderSlides];
 
-		const id = selectedProduct ? selectedProduct.value : "";
+		const id = selectedProduct ? selectedProduct : "";
 		if (!id) return;
 
 		setLoadingProductDetails(true);

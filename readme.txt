@@ -222,9 +222,11 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.1.06 =
 * Styling tweaks/fixes
+* Fixed Accordions Block styling not working
 * 
-* 
-* 
+* Fixed WC Featured Block importing product info bug
+* Fixed Advanced Slider importing WC product info bug
+* NEW: Added a new Dynamic Content Selector block
 * PREMIUM: Fix parse bug in Instant Search Results excerpt
 * PREMIUM: Fix Advanced Search results display bug in Sidebar
 

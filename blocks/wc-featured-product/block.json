@@ -13,8 +13,8 @@
 			"default": "left"
 		},
 		"selectedProduct": {
-			"type": "object",
-			"default": {}
+			"type": "number",
+			"default": ""
 		},
 		"padding": {
 			"type": "number",

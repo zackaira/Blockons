@@ -23,8 +23,6 @@ const ColorPicker = (props) => {
 			item.removeAttribute("id");
 		});
 
-		console.log(e.target);
-
 		e.target
 			.closest(".blockonsColorPicker")
 			.setAttribute("id", "openColorPicker");

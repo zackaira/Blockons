@@ -37,7 +37,6 @@
 		"masonry-layout": "^4.2.2",
 		"puppeteer-core": "^22.12.1",
 		"react-color": "^2.19.3",
-		"react-select": "^5.8.0",
 		"react-waypoint": "^10.1.0",
 		"swiper": "^8.4.5",
 		"uuid": "^8.3.2",
