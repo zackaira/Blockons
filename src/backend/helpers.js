@@ -42,7 +42,7 @@ export const blockListSettings = {
 			"blockons"
 		),
 		pluginSpecific: false,
-		isNew: __("NEW", "blockons"),
+		isNew: false,
 	},
 	content_selector: {
 		desc: __(

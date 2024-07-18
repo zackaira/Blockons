@@ -255,7 +255,7 @@ const Edit = (props) => {
 																		value={option.attributes.countDown}
 																		onChange={(value) =>
 																			updateBlockAttributes(option.clientId, {
-																				countDown: parseInt(value),
+																				countDown: value,
 																			})
 																		}
 																		help={__(

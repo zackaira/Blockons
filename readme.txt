@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: gutenberg, editor blocks, woocommerce, page builder, gutenberg blocks
 Requires at least: 5.0
 Requires PHP: 5.6
-Tested up to: 6.5
+Tested up to: 6.6
 Stable tag: 1.1.06
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -36,25 +36,28 @@ Use any of the following gutenberg blocks to build your website, they all come w
 &#9989; **Search Bar / Icon** block
 You can add a search bar anywhere on your website, which allows visitors to easily search for and find information on your site.
 
-This search feature provides a standard search bar design, with options to display only the icon, and to reveal the search bar through a hover-over effect or within a sleek popup lightbox.
+This search feature provides a standard search bar design, with options to display only the icon, and to reveal the search bar through a hover-over effect or within a sleek popup lightbox. [See Example](https://blockons.com/documentation/search-bar-or-search-icon-block/)
 
 &#9989; **Line Heading** block
-The line heading block is a tool that lets you create a title with decorative lines, making it more visually appealing. It also includes advanced options to customize how the title looks.
+The line heading block is a tool that lets you create a title with decorative lines, making it more visually appealing. It also includes advanced options to customize how the title looks. [See Example](https://blockons.com/documentation/line-heading-block/)
 
 &#9989; **Advanced Slider** block
-The Slider block transforms your page with a neat, easy-to-use slider where you can spotlight your favorite images & text, or display top-selling WooCommerce products. Slide through your visuals with just a click or a simple swipe, bringing your content to life.
+The Slider block transforms your page with a neat, easy-to-use slider where you can spotlight your favorite images & text, or display top-selling WooCommerce products. Slide through your visuals with just a click or a simple swipe, bringing your content to life. [See Example](https://blockons.com/documentation/advanced-slider-block/)
 
 &#9989; **Icon List** block
-Improve your website by using customizable icon list items. Adding your own icons to lists not only makes them more visually appealing but also more attractive to your audience.
+Improve your website by using customizable icon list items. Adding your own icons to lists not only makes them more visually appealing but also more attractive to your audience. [See Example](https://blockons.com/documentation/icon-list-block/)
 
 &#9989; **Tabs** block
-The Tabs block organizes your content into a clean, streamlined format, making it easy for visitors to navigate through different sections without leaving the page. Perfect for FAQs, product descriptions, or service details, this block allows users to switch between tabs with just a click.
+The Tabs block organizes your content into a clean, streamlined format, making it easy for visitors to navigate through different sections without leaving the page. Perfect for FAQs, product descriptions, or service details, this block allows users to switch between tabs with just a click. [See Example](https://blockons.com/documentation/tabs-block/)
+
+&#9989; Dynamic **Content Selector** block
+The Dynamic Content Selector block enhances user interaction by allowing visitors to select specific options from a dropdown menu. Upon selection, the corresponding content is dynamically displayed, ensuring a streamlined and interactive experience. This block is perfect for showcasing different sections without overwhelming the page and providing an organized way to present information. [See Example](https://blockons.com/documentation/dynamic-content-selector-block/)
 
 &#9989; **Content Toggler** block
-The content toggler block helps organize your website by allowing you to hide and reveal large sections of content. Visitors can click on the toggler to view more details like text, images, or videos. This keeps your page neat and prevents clutter, making it great for detailed sections that you want available but not immediately visible.
+The content toggler block helps organize your website by allowing you to hide and reveal large sections of content. Visitors can click on the toggler to view more details like text, images, or videos. This keeps your page neat and prevents clutter, making it great for detailed sections that you want available but not immediately visible. [See Example](https://blockons.com/documentation/content-toggler-block/)
 
 &#9989; **Accordion(s)** block
-Show your content in a clickable accordion-style block, which is great for presenting a lot of information in an expandable area. This is especially useful for sections like Frequently Asked Questions (FAQs), where visitors can choose and click to see the specific content they're interested in.
+Show your content in a clickable accordion-style block, which is great for presenting a lot of information in an expandable area. This is especially useful for sections like Frequently Asked Questions (FAQs), where visitors can choose and click to see the specific content they're interested in. [See Example](https://blockons.com/documentation/accordion-block/)
 
 &#9989; **Advanced Image Gallery** block
 Choose from three attractive layouts for showcasing your galleries, complete with image hover animations and caption options:
@@ -62,27 +65,28 @@ Choose from three attractive layouts for showcasing your galleries, complete wit
 **Default Grid layout** - This standard, organized grid layout provides numerous customization options for your image gallery.
 **Masonry Gallery Layout** - Arrange your images in a masonry-style layout, similar to how a mason fits stones in a wall, or like the layout seen on Pinterest.
 **Featured Grid Layout** - This layout mixes small and large images in a neat tiled pattern, creating a visually appealing gallery.
+[See Example](https://blockons.com/documentation/advanced-image-gallery-block/)
 
 &#9989; **Image Carousel** block
-The Image Carousel block allows you to showcase multiple images in a single, interactive carousel format. Users can navigate through the images by clicking on arrows on either side of the carousel or by using a swipe gesture on touch-enabled devices.
+The Image Carousel block allows you to showcase multiple images in a single, interactive carousel format. Users can navigate through the images by clicking on arrows on either side of the carousel or by using a swipe gesture on touch-enabled devices. [See Example](https://blockons.com/documentation/image-carousel-block-or-image-slider/)
 
 &#9989; **Image Comparison** block
-The Image Comparison block lets you compare two images by placing them over each other and using a slider for a direct comparison. The slider can be dragged left or right, or up and down to compare the images. This block also includes further customzation options.
+The Image Comparison block lets you compare two images by placing them over each other and using a slider for a direct comparison. The slider can be dragged left or right, or up and down to compare the images. This block also includes further customzation options. [See Example](https://blockons.com/documentation/image-comparison-block/)
 
 &#9989; **Marketing Button** block
-The marketing button is an advanced version of a standard button block. It enables you to create an eye-catching call-to-action (CTA) button, complete with an icon, a heading, and text, designed to draw in users and encourage them to click through.
+The marketing button is an advanced version of a standard button block. It enables you to create an eye-catching call-to-action (CTA) button, complete with an icon, a heading, and text, designed to draw in users and encourage them to click through. [See Example](https://blockons.com/documentation/marketing-button-block/)
 
 &#9989; **Countdown Timer** block
-The Countdown Timer block adds excitement and urgency to your webpage by ticking away the seconds towards any special event or deadline you choose. Set it up in minutes to count down to sales, product launches, or the start of an eagerly awaited event.
+The Countdown Timer block adds excitement and urgency to your webpage by ticking away the seconds towards any special event or deadline you choose. Set it up in minutes to count down to sales, product launches, or the start of an eagerly awaited event. [See Example](https://blockons.com/documentation/countdown-timer-block/)
 
 &#9989; **Progress Bars** block
-Place animated progress bars on your website to show percentage values in a visual way. You can fully customize these bars, including their text, thickness, and colors.
+Place animated progress bars on your website to show percentage values in a visual way. You can fully customize these bars, including their text, thickness, and colors. [See Example](https://blockons.com/documentation/progress-bars/)
 
 &#9989; **Testimonials Slider** block
-Showcase customer ratings and comments in a sleek testimonial slider or carousel. These testimonials can build trust in your brand by displaying images, names, star ratings, and comments about your work or products. You can customize it with various layouts and colors to fit your style.
+Showcase customer ratings and comments in a sleek testimonial slider or carousel. These testimonials can build trust in your brand by displaying images, names, star ratings, and comments about your work or products. You can customize it with various layouts and colors to fit your style. [See Example](https://blockons.com/documentation/testimonials-block-slider-or-carousel/)
 
 &#9989; **Video Slider** block
-Showcase videos from YouTube, Vimeo, or your own hosting in an attractive video slider or carousel block. You can personalize it by changing the colors and setting a cover image. The videos will start playing when a user selects the slide they want to watch.
+Showcase videos from YouTube, Vimeo, or your own hosting in an attractive video slider or carousel block. You can personalize it by changing the colors and setting a cover image. The videos will start playing when a user selects the slide they want to watch. [See Example](https://blockons.com/documentation/video-slider-block/)
 
 = WooCommerce Editor Blocks =
 
@@ -92,13 +96,13 @@ Blockons also includes the following WooCommerce blocks for your online WooComme
 **Note:** WooCommerce needs to be installed and active to use these blocks.
 
 &#9989; **WooCommerce Account Icon** - WooCommerce block
-Place an icon in your website's header or footer for easy account access or login. Choose from various icons and customize their colors. When a user is logged in, you can show quick links to different WooCommerce user account pages.
+Place an icon in your website's header or footer for easy account access or login. Choose from various icons and customize their colors. When a user is logged in, you can show quick links to different WooCommerce user account pages. [See Example](https://blockons.com/documentation/woocommerce-account-icon-block/)
 
 &#9989; **WooCommerce Mini Cart** - WooCommerce block
-Place a customizable WooCommerce shopping cart anywhere on your site, like the header or footer, or anywhere within the content. The WooCOmmerce mini cart can also display an optional dropdown basket, allowing users to edit their cart or proceed directly to checkout for their purchase.
+Place a customizable WooCommerce shopping cart anywhere on your site, like the header or footer, or anywhere within the content. The WooCOmmerce mini cart can also display an optional dropdown basket, allowing users to edit their cart or proceed directly to checkout for their purchase. [See Example](https://blockons.com/documentation/woocommerce-mini-cart-block/)
 
 &#9989; **WooCommerce Featured Product** - WooCommerce block
-Place a standout block on your website to highlight a specific product, offering various display and design options to draw attention to it. This block allows viewers to either click through to the product's WooCommerce page or add it to their cart directly from the featured product block.
+Place a standout block on your website to highlight a specific product, offering various display and design options to draw attention to it. This block allows viewers to either click through to the product's WooCommerce page or add it to their cart directly from the featured product block. [See Example](https://blockons.com/documentation/woocommerce-featured-product-block/)
 
 
 &#128312; Can't find the blocks you need?
@@ -108,22 +112,22 @@ We're working on adding lots more blocks... Send us some ideas and maybe we can 
 ## Blockons Offers the following Core Block Extensions
 
 &#9989; **Content Tooltips**
-Integrate helpful tooltips across your website. These tooltips offer quick information when users hover over content links, keeping things simple and easy to understand.
+Integrate helpful tooltips across your website. These tooltips offer quick information when users hover over content links, keeping things simple and easy to understand. [See Example](https://blockons.com/documentation/content-tooltips/)
 
 &#9989; **Image Lightbox**
-Set up image lightboxes on your website. These lightboxes allow users to view images in a larger, more detailed format without leaving the current page. It offers a seamless browsing experience and keeps visitors engaged with your content.
+Set up image lightboxes on your website. These lightboxes allow users to view images in a larger, more detailed format without leaving the current page. It offers a seamless browsing experience and keeps visitors engaged with your content. [See Example](https://blockons.com/documentation/image-lightbox-popups/)
 
 
 ## Blockons Offers the following Site Add-ons
 
 &#9989; **Website Page Loader**
-Show a neat, simple loading animation while your page and images are loading. This stops visitors from seeing any unfinished layouts or images before they're fully loaded. You can also customize the loader's background and colors to match your website's style.
+Show a neat, simple loading animation while your page and images are loading. This stops visitors from seeing any unfinished layouts or images before they're fully loaded. You can also customize the loader's background and colors to match your website's style. [See Example](https://blockons.com/documentation/website-page-loader/)
 
 &#9989; **Page Scroll Indicator**
-Place a scroll progress bar at the top or bottom of your website pages to show visitors how much they have scrolled through a page or how much there is left to scroll on the page. This visual tool is especially helpful for readers navigating through long blog posts or extensive web pages, as it indicates their progress on the page.
+Place a scroll progress bar at the top or bottom of your website pages to show visitors how much they have scrolled through a page or how much there is left to scroll on the page. This visual tool is especially helpful for readers navigating through long blog posts or extensive web pages, as it indicates their progress on the page. [See Example](https://blockons.com/documentation/page-scroll-indicator/)
 
 &#9989; **Back To Top Button**
-Include a customizable "Back to Top" button on your website to enhance user convenience. This button allows users to quickly and effortlessly return to the top of the page with a single click, saving them from the need to scroll manually. It's especially useful for long pages, improving the overall browsing experience.
+Include a customizable "Back to Top" button on your website to enhance user convenience. This button allows users to quickly and effortlessly return to the top of the page with a single click, saving them from the need to scroll manually. It's especially useful for long pages, improving the overall browsing experience. [See Example](https://blockons.com/documentation/back-to-top-button/)
 
 
 &#128312; We're working on more site add-ons too!
@@ -222,13 +226,13 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.1.06 =
 * Styling tweaks/fixes
+* Update Freemius SDK
 * Fixed Accordions Block styling not working
-* 
 * Fixed WC Featured Block importing product info bug
 * Fixed Advanced Slider importing WC product info bug
 * NEW: Added a new Dynamic Content Selector block
-* PREMIUM: Fix parse bug in Instant Search Results excerpt
-* PREMIUM: Fix Advanced Search results display bug in Sidebar
+* PREMIUM: Fixed parse bug in Instant Search Results excerpt
+* PREMIUM: Fixed Advanced Search ascii display in Sidebar
 
 = 1.1.05 =
 * Styling tweaks/fixes

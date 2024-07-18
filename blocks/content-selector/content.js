@@ -27,8 +27,8 @@ registerBlockType("blockons/ds-content", {
 			default: "The page will redirect in: ",
 		},
 		countDown: {
-			type: "number",
-			default: 5,
+			type: "string",
+			default: "5",
 		},
 		clientId: {
 			type: "string",
@@ -59,11 +59,17 @@ registerBlockType("blockons/ds-content", {
 			<div {...blockProps}>
 				{type === "redirect" ? (
 					<div className="blockons-ds-countdown">
-						{countDown && countDown > 0 && (
+						{countDown && countDown > 0 && redirectUrl && (
 							<div className="blockons-ds-countdown-txt">
 								<p>
 									{preText}
-									<span className="blockons-dscount">{countDown}</span>
+									<span
+										className="blockons-dscount"
+										data-count={countDown}
+										data-redirect={redirectUrl}
+									>
+										{countDown}
+									</span>
 								</p>
 							</div>
 						)}
@@ -83,20 +89,22 @@ registerBlockType("blockons/ds-content", {
 			<div {...blockProps}>
 				{attributes.type === "redirect" ? (
 					<div className="blockons-ds-countdown">
-						{attributes.redirectUrl ? (
-							<div className="blockons-ds-countdown-txt">
-								<p>
-									{attributes.preText}
-									<span className="blockons-dscount">
-										{attributes.countDown}
-									</span>
-								</p>
-							</div>
-						) : (
-							<p className="blockons-ds-countdown-notxt">
-								{__("Please add a valid url", "blockons")}
-							</p>
-						)}
+						{attributes.countDown &&
+							attributes.countDown > 0 &&
+							attributes.redirectUrl && (
+								<div className="blockons-ds-countdown-txt">
+									<p>
+										{attributes.preText}
+										<span
+											className="blockons-dscount"
+											data-count={attributes.countDown}
+											data-redirect={attributes.redirectUrl}
+										>
+											{attributes.countDown}
+										</span>
+									</p>
+								</div>
+							)}
 					</div>
 				) : (
 					<InnerBlocks.Content />

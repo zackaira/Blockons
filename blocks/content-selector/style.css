@@ -114,3 +114,9 @@ select.blockons-content-select {
 	display: block;
 	/* background-color: pink; */
 }
+
+.blockons-ds-cancel {
+	display: none !important;
+	margin-left: 10px;
+	font-size: 10px;
+}
