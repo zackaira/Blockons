@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import PageLoader from "./site-addons/pageloader/PageLoader";
 import BackToTop from "./site-addons/backtotop/BackToTop";
 import ScrollIndicator from "./site-addons/scrollindicator/ScrollIndicator";
+import SiteBy from "./site-addons/siteby/SiteBy";
 import "./frontend.css";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -55,8 +56,17 @@ document.addEventListener("DOMContentLoaded", () => {
 		);
 	}
 
+	// Site By
+	const blockonsSiteBy = document.getElementById("blockons-siteby");
+	if (typeof blockonsSiteBy !== undefined && blockonsSiteBy !== null) {
+		ReactDOM.render(
+			<SiteBy sitebyOptions={blockonsOptions?.siteby} isPro={isPremium} />,
+			blockonsSiteBy
+		);
+	}
+
 	/*
-	 * Block Entensions
+	 * Block Extensions
 	 */
 	// Blockons Tooltips
 	if (blockonsOptions?.tooltips?.enabled) {

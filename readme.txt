@@ -224,6 +224,12 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 == Changelog ==
 
+= 1.1.07 =
+* Styling tweaks/fixes
+* 
+* 
+* Updated the language .pot file
+
 = 1.1.06 =
 * Styling tweaks/fixes
 * Update Freemius SDK

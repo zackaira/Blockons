@@ -76,6 +76,7 @@ if ( function_exists( 'blockons_fs' ) ) {
 	require_once 'classes/class-scripts.php';
 	require_once 'classes/class-rest-api.php';
 	require_once 'classes/class-admin.php';
+	// require_once 'classes/class-block-patterns.php';
 	require_once 'classes/class-notices.php';
 	require_once 'classes/class-frontend.php';
 

@@ -385,6 +385,18 @@ class Blockons {
 				"height" => 6,
 				"has_bg" => true,
 			),
+			"siteby" => array(
+				"enabled" => false,
+				"position" => "right",
+				"icon" => "fa-link",
+				"cicon" => "fa-leaf",
+				"text" => "Site built by (blockons[*https://blockons.com/])",
+				"size" => 30,
+				"iconbgcolor" => "#FFF",
+				"iconcolor" => "#444",
+				"bgcolor" => "#FFF",
+				"color" => "#444",
+			),
 			"sidecart" => array(
 				"enabled" => false,
 				"position" => "right",

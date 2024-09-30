@@ -38,6 +38,12 @@ class Blockons_Frontend {
 				add_action('wp_footer', array( $this, 'blockons_pro_add_footer_sidecart' ), 10, 1);
 			}
 		}
+
+		if (Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' )) {
+			if (isset($blockonsOptions->siteby->enabled) && $blockonsOptions->siteby->enabled == true) {
+				add_action('wp_footer', array( $this, 'blockons_pro_add_footer_siteby' ), 10, 1);
+			}
+		}
 	}
 
 	/**
@@ -103,6 +109,16 @@ class Blockons_Frontend {
 	public function blockons_add_scroll_indicator() {
 		$allowed_html = array( 'div' => array('id' => array()) );
 		$html = '<div id="blockons-scroll-indicator"></div>';
+	
+		echo wp_kses($html ,$allowed_html);
+	}
+
+	/**
+	 * Add SiteBy Element
+	 */
+	public function blockons_pro_add_footer_siteby() {
+		$allowed_html = array( 'div' => array('id' => array()) );
+		$html = '<div id="blockons-siteby"></div>';
 	
 		echo wp_kses($html ,$allowed_html);
 	}

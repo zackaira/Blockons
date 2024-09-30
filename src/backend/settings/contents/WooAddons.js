@@ -4,13 +4,18 @@ import SettingHeader from "../components/SettingHeader";
 import SettingRow from "../components/SettingRow";
 import SettingGroup from "../components/SettingGroup";
 
-const WooAddons = ({ blockonsOptions, handleSettingChange }) => {
+const WooAddons = ({
+	blockonsOptions,
+	handleSettingChange,
+	isPremium,
+	upgradeUrl,
+}) => {
 	const onSettingChange = (e) => {
 		handleSettingChange(e);
 	};
 
 	return (
-		<React.Fragment>
+		<>
 			<SettingHeader
 				title={__("WooCommerce Addons", "blockons")}
 				description={__(
@@ -49,174 +54,224 @@ const WooAddons = ({ blockonsOptions, handleSettingChange }) => {
 
 						{blockonsOptions.sidecart?.enabled && (
 							<>
-								<SettingRow
-									title={__("Position", "blockons")}
-									slug="sidecart_position"
-									value={blockonsOptions.sidecart?.position}
-									inputType="select"
-									options={{
-										right: __("Right", "blockons"),
-										left: __("Left", "blockons"),
-									}}
-									onChange={onSettingChange}
-								/>
+								{isPremium ? (
+									<>
+										<SettingRow
+											title={__("Position", "blockons")}
+											slug="sidecart_position"
+											value={blockonsOptions.sidecart?.position}
+											inputType="select"
+											options={{
+												right: __("Right", "blockons"),
+												left: __("Left", "blockons"),
+											}}
+											onChange={onSettingChange}
+										/>
 
-								<SettingGroup label={__("Edit Side Cart Icon", "blockons")}>
-									<SettingRow
-										title={__("Enable Icon", "blockons")}
-										slug="sidecart_has_icon"
-										value={blockonsOptions.sidecart?.has_icon}
-										inputType="toggle"
-										onChange={onSettingChange}
-									/>
-
-									{blockonsOptions.sidecart?.has_icon && (
-										<>
+										<SettingGroup label={__("Edit Side Cart Icon", "blockons")}>
 											<SettingRow
-												title={__("Select Icon", "blockons")}
-												slug="sidecart_icon"
-												value={blockonsOptions.sidecart?.icon}
-												inputType="select"
-												options={{
-													"cart-shopping": __("Shopping Cart", "blockons"),
-													"cart-arrow-down": __("Cart Arrow Down", "blockons"),
-													"basket-shopping": __("Shopping Basket", "blockons"),
-													suitcase: __("Shopping Suitcase", "blockons"),
-													bucket: __("Bucket", "blockons"),
-												}}
+												title={__("Enable Icon", "blockons")}
+												slug="sidecart_has_icon"
+												value={blockonsOptions.sidecart?.has_icon}
+												inputType="toggle"
+												onChange={onSettingChange}
+											/>
+
+											{blockonsOptions.sidecart?.has_icon && (
+												<>
+													<SettingRow
+														title={__("Select Icon", "blockons")}
+														slug="sidecart_icon"
+														value={blockonsOptions.sidecart?.icon}
+														inputType="select"
+														options={{
+															"cart-shopping": __("Shopping Cart", "blockons"),
+															"cart-arrow-down": __(
+																"Cart Arrow Down",
+																"blockons"
+															),
+															"basket-shopping": __(
+																"Shopping Basket",
+																"blockons"
+															),
+															suitcase: __("Shopping Suitcase", "blockons"),
+															bucket: __("Bucket", "blockons"),
+														}}
+														onChange={onSettingChange}
+													/>
+
+													<SettingRow
+														title={__("Background Color", "blockons")}
+														slug="sidecart_icon_bgcolor"
+														value={blockonsOptions.sidecart?.icon_bgcolor}
+														inputType="colorpicker"
+														defaultValue="#FFF"
+														onChange={onSettingChange}
+													/>
+													<SettingRow
+														title={__("Icon Color", "blockons")}
+														slug="sidecart_icon_color"
+														value={blockonsOptions.sidecart?.icon_color}
+														inputType="colorpicker"
+														defaultValue="#333"
+														onChange={onSettingChange}
+													/>
+
+													<SettingRow
+														title={__("Width / Height", "blockons")}
+														slug="sidecart_icon_padding"
+														value={blockonsOptions.sidecart?.icon_padding}
+														inputType="range"
+														defaultValue={60}
+														min={40}
+														max={100}
+														suffix="px"
+														onChange={onSettingChange}
+													/>
+													<SettingRow
+														title={__("Size", "blockons")}
+														slug="sidecart_icon_size"
+														value={blockonsOptions.sidecart?.icon_size}
+														inputType="range"
+														defaultValue={24}
+														min={12}
+														max={72}
+														// step={0.01}
+														suffix="px"
+														onChange={onSettingChange}
+													/>
+
+													<SettingRow
+														title={__("Show Cart Amount", "blockons")}
+														slug="sidecart_has_amount"
+														value={blockonsOptions.sidecart?.has_amount}
+														inputType="toggle"
+														onChange={onSettingChange}
+													/>
+													{blockonsOptions.sidecart?.has_amount && (
+														<>
+															<SettingRow
+																title={__("Background Color", "blockons")}
+																slug="sidecart_amount_bgcolor"
+																value={blockonsOptions.sidecart?.amount_bgcolor}
+																inputType="colorpicker"
+																defaultValue="#000"
+																onChange={onSettingChange}
+															/>
+															<SettingRow
+																title={__("Font Color", "blockons")}
+																slug="sidecart_amount_fcolor"
+																value={blockonsOptions.sidecart?.amount_fcolor}
+																inputType="colorpicker"
+																defaultValue="#FFF"
+																onChange={onSettingChange}
+															/>
+														</>
+													)}
+												</>
+											)}
+										</SettingGroup>
+
+										<SettingGroup label={__("Edit Side Cart", "blockons")}>
+											<SettingRow
+												title={__("Header Title")}
+												slug="sidecart_header_title"
+												value={blockonsOptions.sidecart?.header_title}
+												placeholder="Your Cart"
+												inputType="text"
+												onChange={onSettingChange}
+											/>
+											<SettingRow
+												title={__("Header text")}
+												slug="sidecart_header_text"
+												value={blockonsOptions.sidecart?.header_text}
+												placeholder="Your Cart"
+												inputType="text"
 												onChange={onSettingChange}
 											/>
 
 											<SettingRow
 												title={__("Background Color", "blockons")}
-												slug="sidecart_icon_bgcolor"
-												value={blockonsOptions.sidecart?.icon_bgcolor}
+												slug="sidecart_bgcolor"
+												value={blockonsOptions.sidecart?.bgcolor}
 												inputType="colorpicker"
 												defaultValue="#FFF"
 												onChange={onSettingChange}
 											/>
 											<SettingRow
-												title={__("Icon Color", "blockons")}
-												slug="sidecart_icon_color"
-												value={blockonsOptions.sidecart?.icon_color}
+												title={__("Font Color", "blockons")}
+												slug="sidecart_color"
+												value={blockonsOptions.sidecart?.color}
 												inputType="colorpicker"
 												defaultValue="#333"
 												onChange={onSettingChange}
 											/>
 
 											<SettingRow
-												title={__("Width / Height", "blockons")}
-												slug="sidecart_icon_padding"
-												value={blockonsOptions.sidecart?.icon_padding}
-												inputType="range"
-												defaultValue={60}
-												min={40}
-												max={100}
-												suffix="px"
+												title={__("Overlay Color", "blockons")}
+												slug="sidecart_overlay_color"
+												value={blockonsOptions.sidecart?.overlay_color}
+												inputType="colorpicker"
+												defaultValue="#000"
 												onChange={onSettingChange}
 											/>
 											<SettingRow
-												title={__("Size", "blockons")}
-												slug="sidecart_icon_size"
-												value={blockonsOptions.sidecart?.icon_size}
+												title={__("Opacity", "blockons")}
+												slug="sidecart_overlay_opacity"
+												value={blockonsOptions.sidecart?.overlay_opacity}
 												inputType="range"
-												defaultValue={24}
-												min={12}
-												max={72}
-												// step={0.01}
-												suffix="px"
+												defaultValue={0.6}
+												min={0}
+												max={1}
+												step={0.01}
 												onChange={onSettingChange}
+												suffix=""
 											/>
-
-											<SettingRow
-												title={__("Show Cart Amount", "blockons")}
-												slug="sidecart_has_amount"
-												value={blockonsOptions.sidecart?.has_amount}
-												inputType="toggle"
-												onChange={onSettingChange}
-											/>
-											{blockonsOptions.sidecart?.has_amount && (
-												<>
-													<SettingRow
-														title={__("Background Color", "blockons")}
-														slug="sidecart_amount_bgcolor"
-														value={blockonsOptions.sidecart?.amount_bgcolor}
-														inputType="colorpicker"
-														defaultValue="#000"
-														onChange={onSettingChange}
-													/>
-													<SettingRow
-														title={__("Font Color", "blockons")}
-														slug="sidecart_amount_fcolor"
-														value={blockonsOptions.sidecart?.amount_fcolor}
-														inputType="colorpicker"
-														defaultValue="#FFF"
-														onChange={onSettingChange}
-													/>
-												</>
-											)}
-										</>
-									)}
-								</SettingGroup>
-
-								<SettingGroup label={__("Edit Side Cart", "blockons")}>
+										</SettingGroup>
+									</>
+								) : (
 									<SettingRow
-										title={__("Header Title")}
-										slug="sidecart_header_title"
-										value={blockonsOptions.sidecart?.header_title}
-										placeholder="Your Cart"
-										inputType="text"
-										onChange={onSettingChange}
+										inputType="upgrade"
+										title={__("WooCommerce Side Cart", "blockons")}
+										description={__(
+											"Upgrade to Blockons Pro to add WooCommerce Side Cart to your store.",
+											"blockons"
+										)}
+										upgradeUrl={upgradeUrl}
+										proFeatures={[
+											__(
+												"Neat Slide in Cart with real-time updates.",
+												"blockons"
+											),
+											__("Fully Customizable Icon & Side Cart.", "blockons"),
+											__(
+												"Boost conversions with WooCommerce Side Cart.",
+												"blockons"
+											),
+										]}
 									/>
-									<SettingRow
-										title={__("Header text")}
-										slug="sidecart_header_text"
-										value={blockonsOptions.sidecart?.header_text}
-										placeholder="Your Cart"
-										inputType="text"
-										onChange={onSettingChange}
-									/>
-
-									<SettingRow
-										title={__("Background Color", "blockons")}
-										slug="sidecart_bgcolor"
-										value={blockonsOptions.sidecart?.bgcolor}
-										inputType="colorpicker"
-										defaultValue="#FFF"
-										onChange={onSettingChange}
-									/>
-									<SettingRow
-										title={__("Font Color", "blockons")}
-										slug="sidecart_color"
-										value={blockonsOptions.sidecart?.color}
-										inputType="colorpicker"
-										defaultValue="#333"
-										onChange={onSettingChange}
-									/>
-
-									<SettingRow
-										title={__("Overlay Color", "blockons")}
-										slug="sidecart_overlay_color"
-										value={blockonsOptions.sidecart?.overlay_color}
-										inputType="colorpicker"
-										defaultValue="#000"
-										onChange={onSettingChange}
-									/>
-									<SettingRow
-										title={__("Opacity", "blockons")}
-										slug="sidecart_overlay_opacity"
-										value={blockonsOptions.sidecart?.overlay_opacity}
-										inputType="range"
-										defaultValue={0.6}
-										min={0}
-										max={1}
-										step={0.01}
-										onChange={onSettingChange}
-										suffix=""
-									/>
-								</SettingGroup>
+								)}
 							</>
 						)}
+
+						{/* <SettingRow
+							title={__("Product Quick View for WooCommerce", "blockons")}
+							description={__(
+								"Add Quick View popups to your WooCommerce products",
+								"blockons"
+							)}
+							inputType="heading"
+							// nomargin
+						/>
+						<SettingRow
+							title={__("Enable Product Quick View", "blockons")}
+							slug="quickview_enabled"
+							value={blockonsOptions.quickview?.enabled}
+							inputType="toggle"
+							onChange={onSettingChange}
+						/>
+
+						{blockonsOptions.quickview?.enabled ? <>blah</> : <>blue</>} */}
 					</>
 				</tbody>
 			</table>
@@ -230,7 +285,7 @@ const WooAddons = ({ blockonsOptions, handleSettingChange }) => {
 					"blockons"
 				)}
 			</p>
-		</React.Fragment>
+		</>
 	);
 };
 

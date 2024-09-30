@@ -14,6 +14,7 @@ import PageLoader from "../../frontend/site-addons/pageloader/PageLoader";
 import BackToTop from "../../frontend/site-addons/backtotop/BackToTop";
 import ScrollIndicator from "../../frontend/site-addons/scrollindicator/ScrollIndicator";
 import ProPromo from "./components/UI/ProPromo";
+import SiteBy from "../../frontend/site-addons/siteby/SiteBy";
 
 const SettingsPage = () => {
 	const blockonsObject = blockonsObj;
@@ -31,6 +32,7 @@ const SettingsPage = () => {
 	const [showPageLoaderPreview, setShowPageLoaderPreview] = useState(false);
 	const [showBttbPreview, setShowBttbPreview] = useState(false);
 	const [showScrollIndPreview, setShowScrollIndPreview] = useState(false);
+	const [showSiteByPreview, setShowSiteByPreview] = useState(false);
 
 	const [blockonsOptions, setBlockonsOptions] = useState({});
 
@@ -236,7 +238,7 @@ const SettingsPage = () => {
 									</a>
 								</li>
 
-								{/* {isPremium && wcActive && (
+								{wcActive && (
 									<li>
 										<a
 											id="blockonstab-4"
@@ -248,7 +250,7 @@ const SettingsPage = () => {
 											{__("WooCommerce Addons", "blockons")}
 										</a>
 									</li>
-								)} */}
+								)}
 
 								<li className="help">
 									<a
@@ -291,6 +293,7 @@ const SettingsPage = () => {
 											upgradeUrl={upgradeUrl}
 											isPremium={isPremium}
 											handleSettingChange={handleChange}
+											wcActive={wcActive}
 										/>
 									</div>
 
@@ -311,10 +314,12 @@ const SettingsPage = () => {
 											setShowBttb={setShowBttbPreview}
 											showScrollInd={showScrollIndPreview}
 											setShowScrollInd={setShowScrollIndPreview}
+											showSiteBy={showSiteByPreview}
+											setShowSiteBy={setShowSiteByPreview}
 										/>
 									</div>
 
-									{/* {isPremium && wcActive && (
+									{wcActive && (
 										<div
 											id="blockons-content-4"
 											className={`blockons-content ${
@@ -324,9 +329,11 @@ const SettingsPage = () => {
 											<WooAddons
 												blockonsOptions={blockonsOptions}
 												handleSettingChange={handleChange}
+												isPremium={isPremium}
+												upgradeUrl={upgradeUrl}
 											/>
 										</div>
-									)} */}
+									)}
 
 									<div
 										id="blockons-content-help"
@@ -396,6 +403,14 @@ const SettingsPage = () => {
 				)}
 				{showScrollIndPreview && (
 					<ScrollIndicator scrollInOptions={blockonsOptions.scrollindicator} />
+				)}
+
+				{showSiteByPreview && (
+					<SiteBy
+						sitebyOptions={blockonsOptions.siteby}
+						isPro={isPremium}
+						isAdmin={isAdmin}
+					/>
 				)}
 			</div>
 		</React.Fragment>

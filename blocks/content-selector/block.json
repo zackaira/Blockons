@@ -4,7 +4,7 @@
 	"name": "blockons/content-selector",
 	"title": "Dynamic Content Selector",
 	"textdomain": "blockons",
-	"icon": "heart",
+	"icon": "menu",
 	"category": "blockons-category",
 	"keywords": ["content", "selector", "dynamic", "blockons"],
 	"attributes": {

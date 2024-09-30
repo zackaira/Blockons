@@ -15,6 +15,8 @@ const SiteAddons = ({
 	setShowBttb,
 	showScrollInd,
 	setShowScrollInd,
+	showSiteBy,
+	setShowSiteBy,
 }) => {
 	const onSettingChange = (e) => {
 		handleSettingChange(e);
@@ -27,6 +29,9 @@ const SiteAddons = ({
 	};
 	const onShowScrollInd = (e) => {
 		setShowScrollInd(e);
+	};
+	const onShowSiteBy = (e) => {
+		setShowSiteBy(e);
 	};
 
 	return (
@@ -56,7 +61,6 @@ const SiteAddons = ({
 						inputType="toggle"
 						onChange={onSettingChange}
 					/>
-
 					{blockonsOptions.pageloader?.enabled && (
 						<>
 							<SettingRow
@@ -107,7 +111,7 @@ const SiteAddons = ({
 								{blockonsOptions.pageloader?.has_text && (
 									<>
 										<SettingRow
-											title={__("Text")}
+											title={__("Text", "blockons")}
 											slug="pageloader_text"
 											value={blockonsOptions.pageloader?.text}
 											placeholder={__("Loading Website...", "blockons")}
@@ -158,7 +162,6 @@ const SiteAddons = ({
 							</SettingGroup>
 						</>
 					)}
-
 					<SettingRow
 						title={__("Page Scroll Indicator", "blockons")}
 						description={__(
@@ -174,7 +177,6 @@ const SiteAddons = ({
 						inputType="toggle"
 						onChange={onSettingChange}
 					/>
-
 					{blockonsOptions.scrollindicator?.enabled && (
 						<>
 							<SettingRow
@@ -236,7 +238,6 @@ const SiteAddons = ({
 							</SettingGroup>
 						</>
 					)}
-
 					<SettingRow
 						title={__("Back To Top Button", "blockons")}
 						description={__(
@@ -252,7 +253,6 @@ const SiteAddons = ({
 						inputType="toggle"
 						onChange={onSettingChange}
 					/>
-
 					{blockonsOptions.bttb?.enabled && (
 						<>
 							<SettingRow
@@ -439,6 +439,153 @@ const SiteAddons = ({
 											min={1}
 											max={6}
 											suffix="px"
+											onChange={onSettingChange}
+										/>
+									</>
+								)}
+							</SettingGroup>
+						</>
+					)}
+					<SettingRow
+						title={__("Site By Credit", "blockons")}
+						description={__(
+							"Add a 'Site By' linkback to this website.",
+							"blockons"
+						)}
+						inputType="heading"
+					/>
+					<SettingRow
+						title={__("Enable 'Site By'", "blockons")}
+						slug="siteby_enabled"
+						value={blockonsOptions.siteby?.enabled}
+						inputType="toggle"
+						onChange={onSettingChange}
+					/>
+
+					{blockonsOptions.siteby?.enabled && (
+						<>
+							<SettingRow
+								title={__("Show Preview", "blockons")}
+								slug="siteby_preview"
+								value={showSiteBy}
+								inputType="toggle"
+								onChange={() => onShowSiteBy((state) => !state)}
+							/>
+
+							<SettingGroup label={__("Edit 'Site By'", "blockons")}>
+								<SettingRow
+									title={__("Position", "blockons")}
+									slug="siteby_position"
+									value={blockonsOptions.siteby?.position}
+									inputType="select"
+									options={{
+										right: __("Bottom Right Icon", "blockons"),
+										left: __("Bottom Left Icon", "blockons"),
+										bottom: __("Bottom of Website", "blockons"),
+									}}
+									onChange={onSettingChange}
+								/>
+
+								{blockonsOptions.siteby?.position !== "bottom" && (
+									<>
+										<SettingRow
+											title={__("Icon", "blockons")}
+											slug="siteby_icon"
+											value={blockonsOptions.siteby?.icon}
+											inputType="select"
+											options={{
+												"fa-link": __("Link Icon", "blockons"),
+												"fa-up-right-from-square": __("Arrow Icon", "blockons"),
+												"fa-palette": __("Design", "blockons"),
+												"fa-pen-nib": __("Pen Nib", "blockons"),
+												"fa-pen-clip": __("Pen Clip", "blockons"),
+												"fa-pen-to-square": __("Pen Square", "blockons"),
+												"fa-cubes": __("Cubes", "blockons"),
+												"fa-heart": __("Heart", "blockons"),
+												custom: __("Custom Icon", "blockons"),
+											}}
+											onChange={onSettingChange}
+										/>
+										{blockonsOptions.siteby?.icon === "custom" && (
+											<SettingRow
+												title={__("Custom Icon", "blockons")}
+												slug="siteby_cicon"
+												value={blockonsOptions.siteby?.cicon}
+												placeholder={__("fa-leaf", "blockons")}
+												inputType="text"
+												onChange={onSettingChange}
+											/>
+										)}
+									</>
+								)}
+								<SettingRow
+									title={__("Text", "blockons")}
+									slug="siteby_text"
+									value={blockonsOptions.siteby?.text}
+									placeholder={__("Site By Blockons", "blockons")}
+									inputType="textarea"
+									onChange={onSettingChange}
+									note={__(
+										"to add a link, use: (blockons[*https://blockons.com/])",
+										"blockons"
+									)}
+								/>
+								{blockonsOptions.siteby?.position !== "bottom" && (
+									<>
+										<SettingRow
+											title={__("Size", "blockons")}
+											slug="siteby_size"
+											value={blockonsOptions.siteby?.size}
+											inputType="range"
+											defaultValue={30}
+											min={15}
+											max={80}
+											suffix="px"
+											onChange={onSettingChange}
+										/>
+										<SettingRow
+											title={__("Icon Size", "blockons")}
+											slug="siteby_iconsize"
+											value={blockonsOptions.siteby?.iconsize}
+											inputType="range"
+											defaultValue={16}
+											min={10}
+											max={60}
+											suffix="px"
+											onChange={onSettingChange}
+										/>
+
+										<SettingRow
+											title={__("Icon Background Color", "blockons")}
+											slug="siteby_iconbgcolor"
+											value={blockonsOptions.siteby?.iconbgcolor}
+											inputType="colorpicker"
+											defaultValue="#ffffff"
+											onChange={onSettingChange}
+										/>
+										<SettingRow
+											title={__("Icon Color", "blockons")}
+											slug="siteby_iconcolor"
+											value={blockonsOptions.siteby?.iconcolor}
+											inputType="colorpicker"
+											defaultValue="#444444"
+											onChange={onSettingChange}
+										/>
+
+										<SettingRow
+											title={__("Background Color", "blockons")}
+											slug="siteby_bgcolor"
+											value={blockonsOptions.siteby?.bgcolor}
+											inputType="colorpicker"
+											defaultValue="#ffffff"
+											onChange={onSettingChange}
+										/>
+										<SettingRow
+											title={__("Color", "blockons")}
+											slug="siteby_color"
+											value={blockonsOptions.siteby?.color}
+											inputType="colorpicker"
+											defaultValue="#444444"
 											onChange={onSettingChange}
 										/>
 									</>
