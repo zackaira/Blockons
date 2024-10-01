@@ -67,7 +67,7 @@ class Blockons {
 
 		// Frontend
 		wp_register_style('blockons-frontend-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
-		wp_register_script('blockons-frontend-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.js'), array('wp-i18n'), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-frontend-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.js'), array('wp-element', 'wp-i18n'), BLOCKONS_PLUGIN_VERSION, true);
 		
 		if ( Blockons_Admin::blockons_is_plugin_active('woocommerce.php') ) {
 			// WC Account Icon Block JS
@@ -125,14 +125,16 @@ class Blockons {
 
 		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-frontend-script', 'blockons-venobox-script'), BLOCKONS_PLUGIN_VERSION, true);
 
-		// AOS Animations
+		// Pro Addons
 		if (blockons_fs()->can_use_premium_code__premium_only()) {
 			wp_register_style('blockons-aos-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/aos/aos.css'), array(), BLOCKONS_PLUGIN_VERSION);
 			wp_register_script('blockons-aos-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/aos/aos.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
+
+			wp_register_script('blockons-quickview', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/quickview.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 		}
 
 		// Settings JS
-		wp_register_script('blockons-admin-settings-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/settings' . $suffix . '.js'), array('wp-i18n'), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-admin-settings-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/settings' . $suffix . '.js'), array('wp-element', 'wp-i18n'), BLOCKONS_PLUGIN_VERSION, true);
 		wp_localize_script('blockons-admin-settings-script', 'blockonsObj', array(
 			'apiUrl' => esc_url(get_rest_url()),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
@@ -191,10 +193,23 @@ class Blockons {
 				wp_add_inline_script('blockons-aos-script', 'AOS.init();');
 			}
 
+			// Block Extension - Product Quick View
+			if (isset($blockonsOptions->quickview->enabled) && $blockonsOptions->quickview->enabled == true) {
+				wp_enqueue_style('blockons-venobox-style');
+				wp_enqueue_style('blockons-venopopup-style');
+				wp_enqueue_script('blockons-venopopup');
+				
+				wp_enqueue_script('blockons-quickview');
+				wp_localize_script('blockons-quickview', 'blockonsQuickviewObj', array(
+					'apiUrl' => esc_url(get_rest_url()),
+					'quickviewOptions' => $blockonsOptions->quickview,
+				));
+			}
+
 			/*
 			 * WOOCOMMERCE ADDONS
 			 */
-			// WC Sise Cart
+			// WC Side Cart
 			if ( Blockons_Admin::blockons_is_plugin_active('woocommerce.php') ) {
 				if (isset($blockonsOptions->sidecart->enabled) && $blockonsOptions->sidecart->enabled == true) {
 					wp_register_style('blockons-sidecart-pro', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/cart-pro.min.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
@@ -264,6 +279,7 @@ class Blockons {
 		wp_localize_script('blockons-admin-editor-script', 'blockonsEditorObj', array(
 			'isPremium' => $isPro,
 			'blockonsOptions' => $blockonsOptions,
+			'adminUrl' => esc_url(admin_url()),
 			'apiUrl' => esc_url( get_rest_url() ),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
@@ -390,12 +406,17 @@ class Blockons {
 				"position" => "right",
 				"icon" => "fa-link",
 				"cicon" => "fa-leaf",
-				"text" => "Site built by (blockons[*https://blockons.com/])",
+				"text" => __("Site built by (blockons[*https://blockons.com/])", "blockons"),
 				"size" => 30,
 				"iconbgcolor" => "#FFF",
 				"iconcolor" => "#444",
 				"bgcolor" => "#FFF",
 				"color" => "#444",
+			),
+			"quickview" => array(
+				"enabled" => false,
+				"style" => "one",
+				"text" => __("Quick View", "blockons")
 			),
 			"sidecart" => array(
 				"enabled" => false,

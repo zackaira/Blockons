@@ -10,6 +10,7 @@ import {
 import {
 	PanelBody,
 	Dropdown,
+	TextControl,
 	ToggleControl,
 	SelectControl,
 	RangeControl,
@@ -41,6 +42,9 @@ const Edit = (props) => {
 			captionFontColor,
 			transition,
 			perView,
+			autoplay,
+			autoplayDelay,
+			autoplayDisable,
 			mode,
 			spaceBetween,
 			navigation,
@@ -268,6 +272,37 @@ const Edit = (props) => {
 									}}
 								/>
 
+								<ToggleControl
+									label={__("Auto Play", "blockons")}
+									checked={autoplay}
+									onChange={(newValue) =>
+										setAttributes({ autoplay: newValue })
+									}
+									help={autoplay ? __("Auto Play will ONLY work on the site frontend", "blockons") : ""}
+								/>
+								{autoplay && (
+									<>
+										<TextControl
+											label={__("Time Delay", "blockons")}
+											type="number"
+											value={autoplayDelay}
+											onChange={(newValue) => 
+												setAttributes({ autoplayDelay: newValue })
+											}
+											help={__("1000 = 1 second", "blockons")}
+										/>
+										<ToggleControl
+											label={__("Disable on Interaction", "blockons")}
+											checked={autoplayDisable}
+											onChange={(newValue) =>
+												setAttributes({ autoplayDisable: newValue })
+											}
+											help={__("Disable the Auto Play When the slider is interacted with", "blockons")}
+										/>
+									</>
+								)}
+								<div className="blockons-divider"></div>
+
 								{perView > 1 && (
 									<RangeControl
 										label={__("Space Between Slides", "blockons")}
@@ -460,8 +495,7 @@ const Edit = (props) => {
 
 										<div className="blockons-icon-select">
 											<Dropdown
-												className="blockons-icon-selector"
-												contentClassName="blockons-editor-popup icon-selector"
+												contentClassName="blockons-icon-selector"
 												popoverProps={{ placement: "bottom-end" }}
 												renderToggle={({ isOpen, onToggle }) => (
 													<FontAwesomeIcon

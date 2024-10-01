@@ -39,23 +39,4 @@ document.addEventListener("DOMContentLoaded", () => {
 			if (cartAmnt) cartNotif.appendChild(cartAmnt.cloneNode(true));
 		}
 	}
-
-	if (blockonsSideCart) {
-		const sideCartOpen = document.querySelectorAll(".blockons-opencart");
-
-		if (sideCartOpen) {
-			sideCartOpen.forEach((item) => {
-				item.addEventListener("click", (e) => {
-					e.preventDefault();
-					const body = document.body;
-
-					if (body.classList.contains("blockons-show-sidecart")) {
-						body.classList.remove("blockons-show-sidecart");
-					} else {
-						body.classList.add("blockons-show-sidecart");
-					}
-				});
-			});
-		}
-	}
 });

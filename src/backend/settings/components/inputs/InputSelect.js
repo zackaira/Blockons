@@ -1,4 +1,3 @@
-import React from "react";
 import { blockonsConvertToSlug } from "../../../helpers";
 
 const InputSelect = (props) => {
@@ -8,7 +7,7 @@ const InputSelect = (props) => {
 	const selectOptions = props.options;
 
 	return (
-		<React.Fragment>
+		<>
 			<select
 				id={selectTitleSlug}
 				name={selectTitleSlug}
@@ -22,7 +21,7 @@ const InputSelect = (props) => {
 					</option>
 				))}
 			</select>
-		</React.Fragment>
+		</>
 	);
 };
 

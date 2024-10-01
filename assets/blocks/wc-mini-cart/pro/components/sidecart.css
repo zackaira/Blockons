@@ -136,6 +136,10 @@ body.blockons-show-sidecart .blockons-side-cart-block.left {
 	flex-direction: column;
 	height: calc(100% - 80px);
 }
+.blockons-side-cart-content.center {
+	text-align: center;
+	padding: 40px 0;
+}
 .blockons-side-cart-content .blockons-mini-crt,
 .blockons-side-cart-content .blockons-mini-crt .widget_shopping_cart_content {
 	flex: 1;

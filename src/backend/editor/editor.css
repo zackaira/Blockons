@@ -545,6 +545,42 @@ button.blockons-tt-upload-button.remove {
 	color: #5b5b5b;
 	margin: 0 0 0 13px;
 }
+/* -- Product Quick View - THIS IS DUPLICATED IN frontend.css-- */
+.blockons-quickview.one {
+	margin-top: 12px;
+}
+.blockons-quickview.two {
+	margin: 12px 0 0;
+	font-size: 14px;
+}
+.blockons-quickview.three {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgb(0 0 0 / 38%);
+	color: #fff;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 0.25s ease-in-out 0s;
+}
+.blockons-quickview.three .blockons-quickview-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 40px;
+	color: inherit;
+}
+.wc-block-grid__product:hover .blockons-quickview.three {
+	opacity: 1;
+}
+.wc-block-grid__product img {
+	display: block;
+	margin: 0 auto;
+}
+body.wp-admin .blockons-quickview.three {
+	opacity: 1 !important;
+}
 /**
  * Visibility Settings added to all blocks - Blockons PRO
  */

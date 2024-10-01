@@ -90,8 +90,7 @@ const Edit = (props) => {
 
 	useEffect(() => {
 		if (selectedDateTime) {
-			console.log(selectedDateTime);
-			const currentTimer = runCountDownTimer(selectedDateTime, dateTime);
+			const currentTimer = runCountDownTimer(selectedDateTime, dateTime, onCompleteText, onCompleteHide);
 			setCurrentInterval(currentTimer);
 
 			const counterParent =
@@ -802,7 +801,7 @@ const Edit = (props) => {
 	);
 };
 
-function runCountDownTimer(elementId, dateTime) {
+function runCountDownTimer(elementId, dateTime, onCompleteText, onCompleteHide) {
 	const counterElement = document.getElementById(elementId);
 	const counterElementParent = counterElement?.parentElement || "";
 	const countDownDate = new Date(dateTime).getTime();
@@ -847,7 +846,7 @@ function runCountDownTimer(elementId, dateTime) {
 		}
 
 		if (distance < 0) {
-			clearInterval(x);
+			clearInterval(interval);
 			if (onCompleteText) {
 				counterElementParent.classList.add("blockons-expired-hide");
 			}

@@ -5,6 +5,10 @@
 	position: relative;
 	cursor: zoom-in;
 }
+.venobox-container {
+	display: none; /* Start hidden, will be shown when Venobox opens */
+	width: 100%;
+}
 .blockons-venobox-trigger {
 	display: flex;
 	align-items: center;

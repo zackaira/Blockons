@@ -1,5 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom";
+// import { createRoot } from "@wordpress/element";
 import PageLoader from "./site-addons/pageloader/PageLoader";
 import BackToTop from "./site-addons/backtotop/BackToTop";
 import ScrollIndicator from "./site-addons/scrollindicator/ScrollIndicator";
@@ -15,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	 */
 	// Website Page Loader
 	const blockonsPageLoader = document.getElementById("blockons-pageloader");
-	if (typeof blockonsPageLoader !== undefined && blockonsPageLoader !== null) {
+	if (blockonsPageLoader) {
 		ReactDOM.render(
 			<PageLoader
 				pageLoaderOptions={blockonsOptions?.pageloader}
@@ -23,6 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
 			/>,
 			blockonsPageLoader
 		);
+		// if (blockonsPageLoader) {
+		// 	createRoot(blockonsPageLoader).render(
+		// 		<PageLoader
+		// 			pageLoaderOptions={blockonsOptions?.pageloader}
+		// 			isPro={isPremium}
+		// 		/>
+		// 	);
 
 		setTimeout(() => {
 			document.body.classList.remove("blockons-page-loading");

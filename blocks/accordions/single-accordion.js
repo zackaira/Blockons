@@ -276,9 +276,8 @@ registerBlockType("blockons/accordion", {
 
 					<div className="accordion-icon" style={{ marginRight: labelSpacing }}>
 						<Dropdown
-							className="blockons-icon-selecter"
-							contentClassName="blockons-editor-popup"
-							popoverProps={{ placement: "bottom-start" }}
+							contentClassName="blockons-icon-selecter"
+							popoverProps={{ placement: "bottom-center" }}
 							renderToggle={({ isOpen, onToggle }) => (
 								<FontAwesomeIcon
 									icon={accordionIcon}

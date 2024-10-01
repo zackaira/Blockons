@@ -1,4 +1,3 @@
-import React from "react";
 import { __ } from "@wordpress/i18n";
 import SettingHeader from "../components/SettingHeader";
 import SettingRow from "../components/SettingRow";
@@ -35,7 +34,7 @@ const SiteAddons = ({
 	};
 
 	return (
-		<React.Fragment>
+		<>
 			<SettingHeader
 				title={__("Blockons Site Addons", "blockons")}
 				description={__(
@@ -464,6 +463,18 @@ const SiteAddons = ({
 
 					{blockonsOptions.siteby?.enabled && (
 						<>
+							{!isPremium && (
+								<SettingRow
+									inputType="upgrade"
+									title={__("Premium Feature", "blockons")}
+									description={__(
+										"The 'Site By' feature is a Blockons Pro feature. You can still test it out here, but it will only show on your site with the Pro version.",
+										"blockons"
+									)}
+									upgradeUrl={upgradeUrl}
+								/>
+							)}
+
 							<SettingRow
 								title={__("Show Preview", "blockons")}
 								slug="siteby_preview"
@@ -605,7 +616,7 @@ const SiteAddons = ({
 					"blockons"
 				)}
 			</p>
-		</React.Fragment>
+		</>
 	);
 };
 

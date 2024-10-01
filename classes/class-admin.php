@@ -19,6 +19,9 @@ class Blockons_Admin {
 		add_filter('block_categories_all', array($this, 'blockons_blocks_custom_category'), 10, 2);
 
 		add_filter('admin_body_class', array($this, 'blockons_admin_body_classes'));
+
+		// Add Quickview to WooCommerce Blocks
+		add_filter('woocommerce_blocks_product_grid_item_html', array( $this, 'blockons_add_quickview' ), 10, 3);
 	}
 
 	/**
@@ -153,5 +156,35 @@ class Blockons_Admin {
 
 		return $admin_classes;
 	}
+
+	function blockons_add_quickview( $html, $data, $product ) {
+		$blockonsSavedOptions = get_option('blockons_options');
+		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
+		$quickview = isset($blockonsOptions->quickview) ? $blockonsOptions->quickview : '';
+
+		if ( isset($quickview->enabled) && $quickview->enabled == false) return $html;
+
+		$position = isset($quickview->position) ? $quickview->position : 'one';
+		$text = isset($quickview->text) ? $quickview->text : __("Quick View", "blockons");
+		$oneclass = "one" == $position ? "wp-block-button__link wp-element-button add_to_cart_button" : "";
+	
+		$search = '</li>';
+		if ( 'three' == $position || 'four' == $position ) {
+			$search = '<img';
+		}
+	
+		// $add = 'three' == $position || 'four' == $position ? $search : '';
+		$add = '<div class="blockons-quickview ' . sanitize_html_class($position) . '">';
+		$add .=     '<div class="blockons-quickview-btn blockons-venobox ' . esc_attr($oneclass) . '" data-id="' . esc_attr( $product->get_id() ) . '">';
+		$add .=         esc_html($text);
+		$add .=     '</div>';
+		$add .= '</div>' . $search;
+		// $add .= 'one' == $position || 'two' == $position ? $search : '';
+	
+		$output = str_replace($search, $add, $html);
+	
+		return $output;
+	}
+	
 }
 new Blockons_Admin();

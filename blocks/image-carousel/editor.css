@@ -31,6 +31,17 @@
 .blockons-slider.bradius-round .blockons-slider-btns {
 	right: 85px;
 }
+.wp-block-blockons-image-carousel .blockons-slider-btns {
+	border-radius: 3px;
+	padding: 0;
+}
+.wp-block-blockons-image-carousel .blockons-slider-btns .blockons-slide-delete {
+	padding: 4px;
+  min-width: 25px;
+  width: 25px;
+  height: 25px;
+  display: flex;
+}
 /* -- Settings Popup -- */
 .blockons-icon-select {
 	display: flex;
@@ -43,6 +54,24 @@
 	display: flex;
 	flex-wrap: wrap;
 	width: 145px;
+}
+.blockons-icon-selector .components-popover__content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-width: 240px;
+}
+.blockons-icon-selector .components-popover__content .blockons-fontawesome {
+	height: 34px;
+	width: 34px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 2px;
+  }
+.blockons-icon-selector .components-popover__content .blockons-fontawesome:hover {
+	box-shadow: 0 0 0 1px #595959;
+	cursor: pointer;
 }
 /* -- Settings Need Reload -- */
 .blockons-slider-reload {

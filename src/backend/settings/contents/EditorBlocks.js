@@ -1,4 +1,3 @@
-import React from "react";
 import { __ } from "@wordpress/i18n";
 import SettingHeader from "../components/SettingHeader";
 import SettingBlock from "../components/SettingBlock";
@@ -15,7 +14,7 @@ const EditorBlocks = ({
 	};
 
 	return (
-		<React.Fragment>
+		<>
 			<SettingHeader
 				title={__("Blockons Editor Blocks", "blockons")}
 				description={__(
@@ -68,7 +67,7 @@ const EditorBlocks = ({
 					"blockons"
 				)}
 			</p>
-		</React.Fragment>
+		</>
 	);
 };
 

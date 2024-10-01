@@ -124,7 +124,24 @@
 	position: relative;
 	margin: 20px 0 0;
 }
-
+.blockons-icon-selecter .components-popover__content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-width: 240px;
+}
+.blockons-icon-selecter .components-popover__content .blockons-fontawesome {
+	height: 34px;
+	width: 34px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 2px;
+  }
+.blockons-icon-selecter .components-popover__content .blockons-fontawesome:hover {
+	box-shadow: 0 0 0 1px #595959;
+	cursor: pointer;
+}
 /* -- Child Block Selected -- */
 .block-editor-block-list__block.wp-block.wp-block-blockons-accordions.has-child-selected {
 	border: 2px solid #f5c48c;

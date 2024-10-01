@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import axios from "axios";
 import Loader from "../Loader";
@@ -66,22 +66,18 @@ const Settings = () => {
 	};
 
 	return (
-		<React.Fragment>
-			<div className="blockons-updatenotice">
-				<div className="blockons-updatenotice-txt">
-					{__("Thanks for updating! Please run the updater now", "blockons")}
-				</div>
-				<div className="blockons-updatenotice-btn">
-					{loader ? (
-						<Loader />
-					) : (
-						<a onClick={(e) => handleUpdate(e)}>
-							{__("Run Update", "blockons")}
-						</a>
-					)}
-				</div>
+		<div className="blockons-updatenotice">
+			<div className="blockons-updatenotice-txt">
+				{__("Thanks for updating! Please run the updater now", "blockons")}
 			</div>
-		</React.Fragment>
+			<div className="blockons-updatenotice-btn">
+				{loader ? (
+					<Loader />
+				) : (
+					<a onClick={(e) => handleUpdate(e)}>{__("Run Update", "blockons")}</a>
+				)}
+			</div>
+		</div>
 	);
 };
 

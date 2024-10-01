@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+import { useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { blockonsStringReplaceForLink } from "../../../backend/helpers";
 import parse from "html-react-parser";
@@ -10,15 +11,13 @@ const SiteBy = ({ sitebyOptions, isPro, isAdmin }) => {
 	const inAdmin = isAdmin ? Boolean(isAdmin) : false;
 	const [siteByOn, setSiteByOn] = useState(false);
 
-	console.log("siteBy", siteby);
-
-	if (!siteby.enabled) return null;
+	if (!siteby.enabled || (!inAdmin && !isPremium)) return null;
 
 	return (
 		<div
-			className={`blockons-siteby ${isAdmin ? "inadmin" : ""} ${
+			className={`blockons-siteby ${
 				siteby.position !== "bottom" ? siteby.position : "bottom"
-			} ${siteByOn ? "ison" : ""}`}
+			} ${siteByOn ? "ison" : ""} ${isAdmin ? "inadmin" : ""}`}
 			{...(siteby.position !== "bottom"
 				? {
 						style: {

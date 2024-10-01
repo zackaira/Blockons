@@ -3,8 +3,7 @@
  *
  * PREMIUM
  */
-import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "@wordpress/element";
 import SearchWrap from "./components/SearchWrap";
 import "../search";
 

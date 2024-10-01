@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
+import { useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
 const BackToTop = ({ bttOptions, isPro, isAdmin }) => {
@@ -69,7 +70,7 @@ const BackToTop = ({ bttOptions, isPro, isAdmin }) => {
 	}
 
 	return (
-		<React.Fragment>
+		<>
 			{(isPremium && bttb.type === "scroll") ||
 			(!isPremium && inAdmin && bttb.type === "scroll") ? (
 				<div
@@ -164,7 +165,7 @@ const BackToTop = ({ bttOptions, isPro, isAdmin }) => {
 					></span>
 				</div>
 			)}
-		</React.Fragment>
+		</>
 	);
 };
 

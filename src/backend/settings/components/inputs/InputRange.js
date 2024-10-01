@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "@wordpress/element";
 import { blockonsConvertToSlug } from "../../../helpers";
 
 const InputRange = (props) => {
@@ -13,28 +13,26 @@ const InputRange = (props) => {
 	}, [props.value]);
 
 	return (
-		<React.Fragment>
-			<div className="blockonsRange">
-				<div className="blockonsRangeInput">
-					<span>{props.min}</span>
-					<input
-						type="range"
-						id={rangeTitleSlug}
-						name={rangeTitleSlug}
-						onChange={props.onChange}
-						value={rangeValue}
-						min={props.min ? props.min : 0}
-						max={props.max ? props.max : 500}
-						step={props.step ? props.step : 1}
-					/>
-					<span>{props.max ? props.max : 500}</span>
-				</div>
-				<div className="blockonsRangeInputVal">
-					<input type="text" value={rangeValue} readOnly />
-					{props.suffix ? props.suffix : ""}
-				</div>
+		<div className="blockonsRange">
+			<div className="blockonsRangeInput">
+				<span>{props.min}</span>
+				<input
+					type="range"
+					id={rangeTitleSlug}
+					name={rangeTitleSlug}
+					onChange={props.onChange}
+					value={rangeValue}
+					min={props.min ? props.min : 0}
+					max={props.max ? props.max : 500}
+					step={props.step ? props.step : 1}
+				/>
+				<span>{props.max ? props.max : 500}</span>
 			</div>
-		</React.Fragment>
+			<div className="blockonsRangeInputVal">
+				<input type="text" value={rangeValue} readOnly />
+				{props.suffix ? props.suffix : ""}
+			</div>
+		</div>
 	);
 };
 

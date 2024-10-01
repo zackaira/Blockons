@@ -71,6 +71,18 @@
 			"type": "number",
 			"default": 1
 		},
+		"autoplay": {
+			"type": "boolean",
+			"default": false
+		},
+		"autoplayDelay": {
+			"type": "string",
+			"default": "4000"
+		},
+		"autoplayDisable": {
+			"type": "boolean",
+			"default": false
+		},
 		"mode": {
 			"type": "string",
 			"default": "default"

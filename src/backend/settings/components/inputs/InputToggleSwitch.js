@@ -1,4 +1,3 @@
-import React from "react";
 import { blockonsConvertToSlug } from "../../../helpers";
 
 const InputToggleSwitch = ({ slug, title, value, onChange }) => {
@@ -8,19 +7,17 @@ const InputToggleSwitch = ({ slug, title, value, onChange }) => {
 	const isChecked = value ? true : false;
 
 	return (
-		<React.Fragment>
-			<label className="toggle-switch">
-				<input
-					id={inputTitleSlug}
-					name={inputTitleSlug}
-					type="checkbox"
-					onChange={onChange}
-					checked={isChecked}
-					className="toggle-switch-checkbox"
-				/>
-				<span className="toggle-switch-slider"></span>
-			</label>
-		</React.Fragment>
+		<label className="toggle-switch">
+			<input
+				id={inputTitleSlug}
+				name={inputTitleSlug}
+				type="checkbox"
+				onChange={onChange}
+				checked={isChecked}
+				className="toggle-switch-checkbox"
+			/>
+			<span className="toggle-switch-slider"></span>
+		</label>
 	);
 };
 

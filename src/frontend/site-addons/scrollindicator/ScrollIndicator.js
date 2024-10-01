@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { __ } from "@wordpress/i18n";
 
 const ScrollIndicator = ({ scrollInOptions }) => {
@@ -22,34 +22,30 @@ const ScrollIndicator = ({ scrollInOptions }) => {
 	window.addEventListener("scroll", blockonsScrollProgress);
 
 	return (
-		<React.Fragment>
+		<div
+			className={`blockons-scroll-indicator ${
+				scrollInd.position ? scrollInd.position : "top"
+			} ${scrollInd.has_bg ? "hasbg" : "nobg"}`}
+			style={{
+				...(scrollInd.bgcolor !== "#ccc"
+					? { backgroundColor: scrollInd.bgcolor }
+					: {}),
+				...(scrollInd.height !== 6 ? { height: scrollInd.height + "px" } : {}),
+			}}
+		>
 			<div
-				className={`blockons-scroll-indicator ${
-					scrollInd.position ? scrollInd.position : "top"
-				} ${scrollInd.has_bg ? "hasbg" : "nobg"}`}
+				className="progressbar"
+				id="blockons-scrollind"
 				style={{
-					...(scrollInd.bgcolor !== "#ccc"
-						? { backgroundColor: scrollInd.bgcolor }
+					...(scrollInd.color !== "#af2dbf"
+						? { backgroundColor: scrollInd.color }
 						: {}),
 					...(scrollInd.height !== 6
 						? { height: scrollInd.height + "px" }
 						: {}),
 				}}
-			>
-				<div
-					className="progressbar"
-					id="blockons-scrollind"
-					style={{
-						...(scrollInd.color !== "#af2dbf"
-							? { backgroundColor: scrollInd.color }
-							: {}),
-						...(scrollInd.height !== 6
-							? { height: scrollInd.height + "px" }
-							: {}),
-					}}
-				></div>
-			</div>
-		</React.Fragment>
+			></div>
+		</div>
 	);
 };
 

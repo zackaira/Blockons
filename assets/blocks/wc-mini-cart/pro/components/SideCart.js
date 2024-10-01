@@ -1,11 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { __ } from "@wordpress/i18n";
 import "./sidecart.css";
 
-const SideCart = () => {
-	const sidecart = wcCartObj.sidecart ? wcCartObj.sidecart : { enabled: false };
+const SideCart = ({ sidecartOptions, isAdmin }) => {
+	const sidecart = sidecartOptions
+		? sidecartOptions
+		: wcCartObj.sidecart
+		? wcCartObj.sidecart
+		: { enabled: false };
 
 	if (!sidecart?.enabled) return null;
+
+	useEffect(() => {
+		const sideCartOpen = document.querySelectorAll(".blockons-opencart");
+
+		if (sideCartOpen.length > 0) {
+			sideCartOpen.forEach((item) => {
+				item.addEventListener("click", (e) => {
+					e.preventDefault();
+					const body = document.body;
+
+					if (body.classList.contains("blockons-show-sidecart")) {
+						body.classList.remove("blockons-show-sidecart");
+					} else {
+						body.classList.add("blockons-show-sidecart");
+					}
+				});
+			});
+		}
+
+		// Cleanup function to remove event listeners when component unmounts
+		return () => {
+			if (sideCartOpen.length > 0) {
+				sideCartOpen.forEach((item) => {
+					item.removeEventListener("click", (e) => {
+						e.preventDefault();
+					});
+				});
+			}
+		};
+	}, []);
 
 	return (
 		<React.Fragment>
@@ -42,7 +76,9 @@ const SideCart = () => {
 									? { color: sidecart.amount_fcolor }
 									: {}),
 							}}
-						></span>
+						>
+							{isAdmin ? "2" : ""}
+						</span>
 					)}
 					<span
 						className={`fa-solid fa-${
@@ -68,7 +104,11 @@ const SideCart = () => {
 							{sidecart.header_text ? <p>{sidecart.header_text}</p> : ""}
 						</div>
 					)}
-					<div className="blockons-side-cart-content"></div>
+					<div
+						className={`blockons-side-cart-content ${isAdmin ? "center" : ""}`}
+					>
+						{isAdmin ? __("Products Displayed Here", "blockons") : ""}
+					</div>
 				</div>
 			</div>
 			<div

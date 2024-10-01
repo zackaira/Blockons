@@ -15,7 +15,8 @@
 .blockons-siteby.right {
 	right: 12px;
 }
-.blockons-siteby-icon {
+.blockons-siteby .blockons-siteby-icon {
+	border-radius: 4px;
 	width: 30px;
 	height: 30px;
 	display: flex;
@@ -25,11 +26,12 @@
 	color: #444;
 	cursor: pointer;
 }
-.blockons-siteby-block-wrap.icon {
+.blockons-siteby .blockons-siteby-block-wrap.icon {
 	position: absolute;
 	top: 0;
+	font-size: 13px;
 }
-.blockons-siteby-block.icon {
+.blockons-siteby .blockons-siteby-block.icon {
 	white-space: nowrap;
 	width: fit-content;
 	height: 30px;
@@ -60,15 +62,15 @@
 .blockons-siteby.ison .blockons-siteby-block {
 	opacity: 1;
 }
-.blockons-siteby-block.icon a {
+.blockons-siteby .blockons-siteby-block.icon a {
 	display: inline-block;
 	margin: 0 4px;
 }
-.blockons-siteby-block.bottom {
+.blockons-siteby .blockons-siteby-block.bottom {
 	box-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
 	text-align: center;
 	padding: 12px 10px;
 }
-.blockons-siteby-block.bottom .blockons-siteby-block a {
+.blockons-siteby .blockons-siteby-block.bottom .blockons-siteby-block a {
 	margin: 0;
 }

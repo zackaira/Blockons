@@ -21,6 +21,10 @@ $sliderOptions = array(
 		"prevEl" => ".swiper-button-prev",
 		"nextEl" => ".swiper-button-next",
 	) : false,
+	"autoplay" => isset($attributes['autoplay']) && $attributes['autoplay'] == true ? array(
+		"delay" => isset($attributes['autoplayDelay']) ? $attributes['autoplayDelay'] : 4000,
+		"disableOnInteraction" => isset($attributes['autoplayDisable']) && $attributes['autoplayDisable'] == true ? true : false,
+	) : false,
 	"pagination" => isset($attributes['pagination']) && $attributes['pagination'] == true ? array(
 		"el" => ".swiper-pagination",
 		"type" => $attributes['paginationStyle'] == "fraction" ? "fraction" : "bullets",

@@ -177,11 +177,11 @@ const Edit = (props) => {
 							options={[
 								{ label: __("None", "blockons"), value: "none" },
 								{ label: __("Drop Down Cart", "blockons"), value: "dropdown" },
-								// {
-								// 	label: __("Side Cart", "blockons"),
-								// 	value: "sidecart",
-								// 	disabled: !isPremium ? true : false,
-								// },
+								{
+									label: __("WooCommerce Side Cart", "blockons"),
+									value: "sidecart",
+									disabled: !isPremium ? true : false,
+								},
 							]}
 							onChange={(newValue) =>
 								setAttributes({
@@ -238,10 +238,15 @@ const Edit = (props) => {
 
 						{cartType === "sidecart" && (
 							<div className="helplink">
-								{__(
-									"Side Cart is added in the main settings area. Click to enable and edit the Side Cart settings.",
-									"blockons"
-								)}
+								{isPremium
+									? __(
+											"Side Cart is added in the main settings area. Click to enable and edit the Side Cart settings.",
+											"blockons"
+									  )
+									: __(
+											"Side Cart (Pro feature) is added in the main settings area. Click to enable and edit the Side Cart settings.",
+											"blockons"
+									  )}
 								<br />
 								<br />
 								<a

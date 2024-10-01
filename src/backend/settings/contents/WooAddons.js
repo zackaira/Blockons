@@ -1,4 +1,3 @@
-import React from "react";
 import { __ } from "@wordpress/i18n";
 import SettingHeader from "../components/SettingHeader";
 import SettingRow from "../components/SettingRow";
@@ -9,9 +8,15 @@ const WooAddons = ({
 	handleSettingChange,
 	isPremium,
 	upgradeUrl,
+	showSidecartPreview,
+	setShowSidecartPreview,
 }) => {
 	const onSettingChange = (e) => {
 		handleSettingChange(e);
+	};
+
+	const onShowSidecart = (e) => {
+		setShowSidecartPreview(e);
 	};
 
 	return (
@@ -54,6 +59,14 @@ const WooAddons = ({
 
 						{blockonsOptions.sidecart?.enabled && (
 							<>
+								<SettingRow
+									title={__("Preview Side Cart", "blockons")}
+									slug="sidecart_preview"
+									value={showSidecartPreview}
+									inputType="toggle"
+									onChange={() => onShowSidecart((state) => !state)}
+								/>
+
 								{isPremium ? (
 									<>
 										<SettingRow

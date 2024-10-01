@@ -1,4 +1,3 @@
-import React from "react";
 import { __ } from "@wordpress/i18n";
 import InputToggleSwitch from "./inputs/InputToggleSwitch";
 import InputSelect from "./inputs/InputSelect";
@@ -46,35 +45,33 @@ const SettingRow = (props) => {
 	}
 
 	return (
-		<React.Fragment>
-			<tr className="blockons-row">
-				<th scope="row">
-					<label htmlFor={props.parent != "" ? theTitleSlug : props.value}>
-						{props.title}
-					</label>
-				</th>
-				<td>
-					<div className="blockons-row-cols">
-						<div className="blockons-row-col-left">
-							{theInput}
-							{props.note ? <p className="snNote">{props.note}</p> : ""}
-						</div>
-						<div className="blockons-row-col-right">
-							{props.tooltip && <SettingTooltip tooltip={props.tooltip} />}
-
-							{props.documentation && (
-								<a
-									href={props.documentation}
-									target="_blank"
-									className="blockonsdoclink"
-									title={__("Documentation", "blockons")}
-								></a>
-							)}
-						</div>
+		<tr className="blockons-row">
+			<th scope="row">
+				<label htmlFor={props.parent != "" ? theTitleSlug : props.value}>
+					{props.title}
+				</label>
+			</th>
+			<td>
+				<div className="blockons-row-cols">
+					<div className="blockons-row-col-left">
+						{theInput}
+						{props.note ? <p className="snNote">{props.note}</p> : ""}
 					</div>
-				</td>
-			</tr>
-		</React.Fragment>
+					<div className="blockons-row-col-right">
+						{props.tooltip && <SettingTooltip tooltip={props.tooltip} />}
+
+						{props.documentation && (
+							<a
+								href={props.documentation}
+								target="_blank"
+								className="blockonsdoclink"
+								title={__("Documentation", "blockons")}
+							></a>
+						)}
+					</div>
+				</div>
+			</td>
+		</tr>
 	);
 };
 

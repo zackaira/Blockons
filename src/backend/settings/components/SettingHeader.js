@@ -1,13 +1,12 @@
-import React from "react";
-
-const SettingHeader = ({ title, description }) => {
+const SettingHeader = ({ title, description, topSpace }) => {
 	return (
-		<React.Fragment>
-			<div className="blockons-header">
-				{title && <h3 className="blockons-title">{title}</h3>}
-				{description && <p>{description}</p>}
-			</div>
-		</React.Fragment>
+		<div
+			className="blockons-header"
+			{...(topSpace ? { style: { marginTop: `${topSpace}px` } } : {})}
+		>
+			{title && <h3 className="blockons-title">{title}</h3>}
+			{description && <p>{description}</p>}
+		</div>
 	);
 };
 

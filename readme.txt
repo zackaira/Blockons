@@ -221,14 +221,15 @@ Please [contact us](https://blockons.com/go/contact/) so we can post a fix and g
 = Something doesn't look right or is slightly out in the design?
 This could be from the theme you're using, or another plugin. Again, please [contact us](https://blockons.com/go/contact/) so we can post a fix or give you custom CSS to fix it.
 
-
 == Changelog ==
 
 = 1.1.07 =
 * Styling tweaks/fixes
-* 
+* Code Refactoring & Editor improvments
 * 
 * Updated the language .pot file
+* PREMIUM: Added new 'Site By' feature to Site Addons
+* PREMIUM: Added new 'WooCOmmerce Side Cart' feature
 
 = 1.1.06 =
 * Styling tweaks/fixes

@@ -1,4 +1,3 @@
-import React from "react";
 import { __ } from "@wordpress/i18n";
 
 const BlockonsNote = ({
@@ -7,6 +6,7 @@ const BlockonsNote = ({
 	text,
 	docLink,
 	upgradeLink,
+	upgradeText,
 	proFeatures,
 	noline,
 }) => {
@@ -42,7 +42,7 @@ const BlockonsNote = ({
 							className="bl-note-link upgrade"
 							target="_blank"
 						>
-							{__("Upgrade to Pro", "blockons")}
+							{upgradeText ? upgradeText : __("Upgrade to Pro", "blockons")}
 						</a>
 					)}
 				</div>

@@ -1,24 +1,20 @@
-import React from "react";
-
 const SettingGroup = ({ label, children }) => {
 	return (
-		<React.Fragment>
-			<tr className="blockons-row blockons-group-row">
-				<th>{label}</th>
-				<td>
-					<div className="blockons-group">
-						<a className="blockons-group-btn">
-							<span className="dashicons dashicons-edit"></span>
-						</a>
-						<div className="blockons-group-container">
-							<table className="form-table" role="presentation">
-								<tbody>{children}</tbody>
-							</table>
-						</div>
+		<tr className="blockons-row blockons-group-row">
+			<th>{label}</th>
+			<td>
+				<div className="blockons-group">
+					<a className="blockons-group-btn">
+						<span className="dashicons dashicons-edit"></span>
+					</a>
+					<div className="blockons-group-container">
+						<table className="form-table" role="presentation">
+							<tbody>{children}</tbody>
+						</table>
 					</div>
-				</td>
-			</tr>
-		</React.Fragment>
+				</div>
+			</td>
+		</tr>
 	);
 };
 

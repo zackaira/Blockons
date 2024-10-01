@@ -21,17 +21,30 @@ const config = {
 		// Premium Files
 		"cart-pro.min": "./assets/blocks/wc-mini-cart/pro/cart.js",
 		"search-pro.min": "./assets/blocks/search/pro/search.js",
+		"quickview.min": "./assets/venobox/quickview.js",
 	},
 	output: {
 		// filename: "[name].js", // Uses the name of the file
 		filename: (pathData) => {
 			return pathData.chunk.name === "search-pro.min" ||
-				pathData.chunk.name === "cart-pro.min"
+				pathData.chunk.name === "cart-pro.min" ||
+				pathData.chunk.name === "quickview.min"
 				? "pro/[name].js"
 				: "[name].js";
 		},
 		// path: path.resolve(process.cwd(), "dist"),
 		path: path.resolve(__dirname, "dist"),
+	},
+	externals: {
+		"@wordpress/element": "wp.element",
+		"@wordpress/components": "wp.components",
+		"@wordpress/data": "wp.data",
+		"@wordpress/i18n": "wp.i18n",
+		"@wordpress/plugins": "wp.plugins",
+		"@wordpress/edit-post": "wp.editPost",
+		"@wordpress/api-fetch": "wp.apiFetch",
+		react: "React",
+		"react-dom": "ReactDOM",
 	},
 	optimization: {
 		minimize: true,

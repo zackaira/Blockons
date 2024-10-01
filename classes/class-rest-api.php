@@ -38,6 +38,13 @@ class Blockons_WC_Rest_Routes {
 				'callback' => [$this, 'blockons_get_wc_product_by_id'],
 				'permission_callback' => [$this, 'blockons_get_settings_permission'],
 			]);
+
+			// Quickview Product
+			register_rest_route('blcns/v1', '/product-data/(?P<id>\d+)', [
+				'methods' => 'GET',
+				'callback' => [$this, 'blockons_get_product_data_by_id'],
+				'permission_callback' => [$this, 'blockons_get_settings_permission'],
+			]);
 		}
 
 		register_rest_route( 'blcns/v1', '/post/(?P<id>\d+)', [
@@ -75,6 +82,40 @@ class Blockons_WC_Rest_Routes {
 				}
 			},
 		) );
+	}
+
+	public function blockons_get_product_data_by_id( $request ) {
+		global $wpdb;
+
+		$product_id = intval( $request->get_param( 'id' ) );
+
+		// Use a custom SQL query to retrieve necessary product data.
+		$product_data = $wpdb->get_row( $wpdb->prepare( "
+			SELECT p.ID, p.post_title, p.post_excerpt, p.post_content, pm_price.meta_value AS price, pm_sku.meta_value AS sku, pm_image.meta_value AS image_id
+			FROM {$wpdb->posts} p
+			LEFT JOIN {$wpdb->postmeta} pm_price ON p.ID = pm_price.post_id AND pm_price.meta_key = '_price'
+			LEFT JOIN {$wpdb->postmeta} pm_sku ON p.ID = pm_sku.post_id AND pm_sku.meta_key = '_sku'
+			LEFT JOIN {$wpdb->postmeta} pm_image ON p.ID = pm_image.post_id AND pm_image.meta_key = '_thumbnail_id'
+			WHERE p.ID = %d AND p.post_type = 'product' AND p.post_status = 'publish'
+		", $product_id ) );
+
+		if ( ! $product_data ) {
+			return new WP_REST_Response( [ 'message' => 'Product not found.' ], 404 );
+		}
+
+		// Prepare the product data for the REST response.
+		$response = [
+			'id'           => $product_data->ID,
+			'title'        => $product_data->post_title,
+			'short_desc'   => $product_data->post_excerpt,
+			'description'  => $product_data->post_content,
+			'price'        => wc_price( $product_data->price ),
+			'sku'          => $product_data->sku,
+			'image'        => wp_get_attachment_image_url( $product_data->image_id, 'full' ), // Get formatted image URL.
+			'permalink'    => get_permalink( $product_data->ID ),
+		];
+
+		return new WP_REST_Response( $response, 200 );
 	}
 
 	/*

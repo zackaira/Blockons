@@ -1,4 +1,3 @@
-import React from "react";
 import { blockonsConvertToSlug } from "../../../helpers";
 
 const InputText = (props) => {
@@ -10,7 +9,7 @@ const InputText = (props) => {
 	const suffix = props.suffix ? props.suffix : "";
 
 	return (
-		<React.Fragment>
+		<>
 			{prefix && <span className="prefix">{prefix}</span>}
 			{props.inputType === "text" ? (
 				<input
@@ -44,7 +43,7 @@ const InputText = (props) => {
 				></textarea>
 			)}
 			{suffix && <span className="suffix">{suffix}</span>}
-		</React.Fragment>
+		</>
 	);
 };
 

@@ -1,5 +1,4 @@
-// Localized JS object - blockonsObj
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import axios from "axios";
 import Loader from "../Loader";
@@ -15,6 +14,7 @@ import BackToTop from "../../frontend/site-addons/backtotop/BackToTop";
 import ScrollIndicator from "../../frontend/site-addons/scrollindicator/ScrollIndicator";
 import ProPromo from "./components/UI/ProPromo";
 import SiteBy from "../../frontend/site-addons/siteby/SiteBy";
+import SideCart from "../../../assets/blocks/wc-mini-cart/pro/components/SideCart";
 
 const SettingsPage = () => {
 	const blockonsObject = blockonsObj;
@@ -33,6 +33,7 @@ const SettingsPage = () => {
 	const [showBttbPreview, setShowBttbPreview] = useState(false);
 	const [showScrollIndPreview, setShowScrollIndPreview] = useState(false);
 	const [showSiteByPreview, setShowSiteByPreview] = useState(false);
+	const [showSidecartPreview, setShowSidecartPreview] = useState(false);
 
 	const [blockonsOptions, setBlockonsOptions] = useState({});
 
@@ -160,260 +161,268 @@ const SettingsPage = () => {
 	}, []);
 
 	return (
-		<React.Fragment>
-			<div className="blockons-settings">
-				<div className="blockonsSettingBar">
-					<h2>
-						{isPremium
-							? __("Blockons Pro Settings", "blockons")
-							: __("Blockons Settings", "blockons")}
-					</h2>
-					<div className="blockonsSettingBarOptions">
-						{isPremium && (
-							<a
-								href={blockonsObject.accountUrl}
-								className="blockons-account"
-								title={__("My Account", "blockons")}
-							></a>
-						)}
+		<div className="blockons-settings">
+			<div className="blockonsSettingBar">
+				<h2>
+					{isPremium
+						? __("Blockons Pro Settings", "blockons")
+						: __("Blockons Settings", "blockons")}
+				</h2>
+				<div className="blockonsSettingBarOptions">
+					{isPremium && (
 						<a
-							href="https://blockons.com/documentation/"
-							className="blockons-docs"
-							title={__("Documentation", "blockons")}
-							target="_blank"
+							href={blockonsObject.accountUrl}
+							className="blockons-account"
+							title={__("My Account", "blockons")}
 						></a>
-						{!isPremium && (
-							<a
-								href={upgradeUrl}
-								className="blockons-upgrade"
-								title={__("Upgrade to Blockons Pro", "blockons")}
-							></a>
-						)}
-					</div>
-				</div>
-
-				{Object.keys(blockonsOptions).length > 0 &&
-					!blockonsOptions.disablerating && (
-						<GiveFeedback
-							blockonsOptions={blockonsOptions}
-							clickClose={handleChange}
-						/>
 					)}
+					<a
+						href="https://blockons.com/documentation/"
+						className="blockons-docs"
+						title={__("Documentation", "blockons")}
+						target="_blank"
+					></a>
+					{!isPremium && (
+						<a
+							href={upgradeUrl}
+							className="blockons-upgrade"
+							title={__("Upgrade to Blockons Pro", "blockons")}
+						></a>
+					)}
+				</div>
+			</div>
 
-				<div className="blockons-settings-content">
-					<form id="blockons-settings-form" onSubmit={(e) => handleSubmit(e)}>
-						<div className="blockons-tabs">
-							<ul>
+			{Object.keys(blockonsOptions).length > 0 &&
+				!blockonsOptions.disablerating && (
+					<GiveFeedback
+						blockonsOptions={blockonsOptions}
+						clickClose={handleChange}
+					/>
+				)}
+
+			<div className="blockons-settings-content">
+				<form id="blockons-settings-form" onSubmit={(e) => handleSubmit(e)}>
+					<div className="blockons-tabs">
+						<ul>
+							<li>
+								<a
+									id="blockonstab-1"
+									className={`blockons-tab ${
+										activeTab === "1" ? "active" : ""
+									}`}
+									onClick={() => changeTab("1")}
+								>
+									{__("Blocks", "blockons")}
+								</a>
+							</li>
+							<li>
+								<a
+									id="blockonstab-2"
+									className={`blockons-tab ${
+										activeTab === "2" ? "active" : ""
+									}`}
+									onClick={() => changeTab("2")}
+								>
+									{__("Block Extensions", "blockons")}
+								</a>
+							</li>
+							<li>
+								<a
+									id="blockonstab-3"
+									className={`blockons-tab ${
+										activeTab === "3" ? "active" : ""
+									}`}
+									onClick={() => changeTab("3")}
+								>
+									{__("Site Addons", "blockons")}
+								</a>
+							</li>
+
+							{wcActive && (
 								<li>
 									<a
-										id="blockonstab-1"
+										id="blockonstab-4"
 										className={`blockons-tab ${
-											activeTab === "1" ? "active" : ""
+											activeTab === "4" ? "active" : ""
 										}`}
-										onClick={() => changeTab("1")}
+										onClick={() => changeTab("4")}
 									>
-										{__("Blocks", "blockons")}
+										{__("WooCommerce Addons", "blockons")}
 									</a>
 								</li>
-								<li>
-									<a
-										id="blockonstab-2"
-										className={`blockons-tab ${
-											activeTab === "2" ? "active" : ""
-										}`}
-										onClick={() => changeTab("2")}
-									>
-										{__("Block Extensions", "blockons")}
-									</a>
-								</li>
-								<li>
-									<a
-										id="blockonstab-3"
-										className={`blockons-tab ${
-											activeTab === "3" ? "active" : ""
-										}`}
-										onClick={() => changeTab("3")}
-									>
-										{__("Site Addons", "blockons")}
-									</a>
-								</li>
+							)}
 
-								{wcActive && (
-									<li>
-										<a
-											id="blockonstab-4"
-											className={`blockons-tab ${
-												activeTab === "4" ? "active" : ""
-											}`}
-											onClick={() => changeTab("4")}
-										>
-											{__("WooCommerce Addons", "blockons")}
-										</a>
-									</li>
-								)}
+							<li className="help">
+								<a
+									id="blockonstab-help"
+									className={`blockons-tab ${
+										activeTab === "9" ? "active" : ""
+									}`}
+									onClick={() => changeTab("9")}
+								>
+									{__("Welcome", "blockons")}
+								</a>
+							</li>
+						</ul>
 
-								<li className="help">
-									<a
-										id="blockonstab-help"
-										className={`blockons-tab ${
-											activeTab === "9" ? "active" : ""
-										}`}
-										onClick={() => changeTab("9")}
-									>
-										{__("Welcome", "blockons")}
-									</a>
-								</li>
-							</ul>
-
-							<div className="blockons-content-wrap">
-								<div className="blockons-content-wrap-inner">
-									{(loadSetting || loader) && <Loader />}
-									<div
-										id="blockons-content-1"
-										className={`blockons-content ${
-											activeTab === "1" ? "active" : ""
-										}`}
-									>
-										<EditorBlocks
-											defaults={defaults}
-											blockonsOptions={blockonsOptions}
-											wcActive={wcActive}
-											handleSettingChange={handleChange}
-										/>
-									</div>
-
-									<div
-										id="blockons-content-2"
-										className={`blockons-content ${
-											activeTab === "2" ? "active" : ""
-										}`}
-									>
-										<BlockExtensions
-											blockonsOptions={blockonsOptions}
-											upgradeUrl={upgradeUrl}
-											isPremium={isPremium}
-											handleSettingChange={handleChange}
-											wcActive={wcActive}
-										/>
-									</div>
-
-									<div
-										id="blockons-content-3"
-										className={`blockons-content ${
-											activeTab === "3" ? "active" : ""
-										}`}
-									>
-										<SiteAddons
-											blockonsOptions={blockonsOptions}
-											handleSettingChange={handleChange}
-											isPremium={isPremium}
-											upgradeUrl={upgradeUrl}
-											showPageLoader={showPageLoaderPreview}
-											setShowPageLoader={setShowPageLoaderPreview}
-											showBttb={showBttbPreview}
-											setShowBttb={setShowBttbPreview}
-											showScrollInd={showScrollIndPreview}
-											setShowScrollInd={setShowScrollIndPreview}
-											showSiteBy={showSiteByPreview}
-											setShowSiteBy={setShowSiteByPreview}
-										/>
-									</div>
-
-									{wcActive && (
-										<div
-											id="blockons-content-4"
-											className={`blockons-content ${
-												activeTab === "4" ? "active" : ""
-											}`}
-										>
-											<WooAddons
-												blockonsOptions={blockonsOptions}
-												handleSettingChange={handleChange}
-												isPremium={isPremium}
-												upgradeUrl={upgradeUrl}
-											/>
-										</div>
-									)}
-
-									<div
-										id="blockons-content-help"
-										className={`blockons-content ${
-											activeTab === "9" ? "active" : ""
-										}`}
-									>
-										<InfoTab
-										// isPro={isPremium}
-										// upgrade={upgradeUrl}
-										/>
-									</div>
+						<div className="blockons-content-wrap">
+							<div className="blockons-content-wrap-inner">
+								{(loadSetting || loader) && <Loader />}
+								<div
+									id="blockons-content-1"
+									className={`blockons-content ${
+										activeTab === "1" ? "active" : ""
+									}`}
+								>
+									<EditorBlocks
+										defaults={defaults}
+										blockonsOptions={blockonsOptions}
+										wcActive={wcActive}
+										handleSettingChange={handleChange}
+									/>
 								</div>
 
-								<div className="blockonsSettingBar bottom">
-									<div className="blockonsSettingBarMain">
-										<button
-											type="submit"
-											className="button blockonsSaveBtn button-primary"
-										>
-											{__("Save Settings", "blockons")}
-										</button>
-										<div className="blockonsSaveBtnLoader">
-											{(loadSetting || loader) && <Loader />}
-										</div>
+								<div
+									id="blockons-content-2"
+									className={`blockons-content ${
+										activeTab === "2" ? "active" : ""
+									}`}
+								>
+									<BlockExtensions
+										blockonsOptions={blockonsOptions}
+										upgradeUrl={upgradeUrl}
+										isPremium={isPremium}
+										handleSettingChange={handleChange}
+										wcActive={wcActive}
+									/>
+								</div>
+
+								<div
+									id="blockons-content-3"
+									className={`blockons-content ${
+										activeTab === "3" ? "active" : ""
+									}`}
+								>
+									<SiteAddons
+										blockonsOptions={blockonsOptions}
+										handleSettingChange={handleChange}
+										isPremium={isPremium}
+										upgradeUrl={upgradeUrl}
+										showPageLoader={showPageLoaderPreview}
+										setShowPageLoader={setShowPageLoaderPreview}
+										showBttb={showBttbPreview}
+										setShowBttb={setShowBttbPreview}
+										showScrollInd={showScrollIndPreview}
+										setShowScrollInd={setShowScrollIndPreview}
+										showSiteBy={showSiteByPreview}
+										setShowSiteBy={setShowSiteByPreview}
+									/>
+								</div>
+
+								{wcActive && (
+									<div
+										id="blockons-content-4"
+										className={`blockons-content ${
+											activeTab === "4" ? "active" : ""
+										}`}
+									>
+										<WooAddons
+											blockonsOptions={blockonsOptions}
+											handleSettingChange={handleChange}
+											isPremium={isPremium}
+											upgradeUrl={upgradeUrl}
+											showSidecartPreview={showSidecartPreview}
+											setShowSidecartPreview={setShowSidecartPreview}
+										/>
 									</div>
-									<div className="blockonsSettingBarOptions">
-										<div
-											className="blockons-delete"
-											title={__("Reset Settings", "blockons")}
-											onClick={confirmDelete}
-										>
-											<div className="blockons-confirm-delete">
-												<a onClick={handleDeleteOptions}>
-													{__("Confirm... Reset All Settings!", "blockons")}
-												</a>
-											</div>
+								)}
+
+								<div
+									id="blockons-content-help"
+									className={`blockons-content ${
+										activeTab === "9" ? "active" : ""
+									}`}
+								>
+									<InfoTab
+									// isPro={isPremium}
+									// upgrade={upgradeUrl}
+									/>
+								</div>
+							</div>
+
+							<div className="blockonsSettingBar bottom">
+								<div className="blockonsSettingBarMain">
+									<button
+										type="submit"
+										className="button blockonsSaveBtn button-primary"
+									>
+										{__("Save Settings", "blockons")}
+									</button>
+									<div className="blockonsSaveBtnLoader">
+										{(loadSetting || loader) && <Loader />}
+									</div>
+								</div>
+								<div className="blockonsSettingBarOptions">
+									<div
+										className="blockons-delete"
+										title={__("Reset Settings", "blockons")}
+										onClick={confirmDelete}
+									>
+										<div className="blockons-confirm-delete">
+											<a onClick={handleDeleteOptions}>
+												{__("Confirm... Reset All Settings!", "blockons")}
+											</a>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</form>
-				</div>
-
-				{!isPremium && !blockonsOptions.disablepropromo && (
-					<ProPromo
-						blockonsOptions={blockonsOptions}
-						clickClose={handleChange}
-						upgradeUrl={upgradeUrl}
-					/>
-				)}
-
-				{showPageLoaderPreview && (
-					<PageLoader
-						pageLoaderOptions={blockonsOptions.pageloader}
-						isPro={isPremium}
-						isAdmin={isAdmin}
-					/>
-				)}
-				{showBttbPreview && (
-					<BackToTop
-						bttOptions={blockonsOptions.bttb}
-						isPro={isPremium}
-						isAdmin={isAdmin}
-					/>
-				)}
-				{showScrollIndPreview && (
-					<ScrollIndicator scrollInOptions={blockonsOptions.scrollindicator} />
-				)}
-
-				{showSiteByPreview && (
-					<SiteBy
-						sitebyOptions={blockonsOptions.siteby}
-						isPro={isPremium}
-						isAdmin={isAdmin}
-					/>
-				)}
+					</div>
+				</form>
 			</div>
-		</React.Fragment>
+
+			{!isPremium && !blockonsOptions.disablepropromo && (
+				<ProPromo
+					blockonsOptions={blockonsOptions}
+					clickClose={handleChange}
+					upgradeUrl={upgradeUrl}
+				/>
+			)}
+
+			{showPageLoaderPreview && (
+				<PageLoader
+					pageLoaderOptions={blockonsOptions.pageloader}
+					isPro={isPremium}
+					isAdmin={isAdmin}
+				/>
+			)}
+			{showBttbPreview && (
+				<BackToTop
+					bttOptions={blockonsOptions.bttb}
+					isPro={isPremium}
+					isAdmin={isAdmin}
+				/>
+			)}
+			{showScrollIndPreview && (
+				<ScrollIndicator scrollInOptions={blockonsOptions.scrollindicator} />
+			)}
+
+			{showSiteByPreview && (
+				<SiteBy
+					sitebyOptions={blockonsOptions.siteby}
+					isPro={isPremium}
+					isAdmin={isAdmin}
+				/>
+			)}
+
+			{showSidecartPreview && (
+				<SideCart
+					sidecartOptions={blockonsOptions.sidecart}
+					isPro={isPremium}
+					isAdmin={isAdmin}
+				/>
+			)}
+		</div>
 	);
 };
 

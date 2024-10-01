@@ -11,14 +11,16 @@
 		"woocommerce"
 	],
 	"devDependencies": {
-		"@wordpress/env": "^5.2.0",
-		"@wordpress/i18n": "^4.15.0",
-		"@wordpress/scripts": "^23.7.2",
+		"@wordpress/scripts": "^30.0.2",
 		"copy-webpack-plugin": "^10.2.4",
-		"eslint-plugin-prettier": "^4.0.0",
+		"css-minimizer-webpack-plugin": "^7.0.0",
+		"eslint-plugin-prettier": "^5.2.1",
 		"gulp": "^5.0.0",
 		"gulp-zip": "^5.1.0",
-		"prettier": "^2.7.1"
+		"jest-environment-jsdom": "^29.7.0",
+		"prettier": "^3.3.3",
+		"puppeteer-core": "^23.4.1",
+		"webpack-bundle-analyzer": "^4.10.2"
 	},
 	"scripts": {
 		"start": "wp-scripts start --mode=development --webpack-copy-php --webpack-src-dir=blocks",
@@ -30,18 +32,14 @@
 		"aos": "^3.0.0-beta.6",
 		"axios": "^1.7.2",
 		"classnames": "^2.3.2",
-		"css-minimizer-webpack-plugin": "^4.0.0",
 		"html-react-parser": "^1.4.14",
 		"imagesloaded": "^5.0.0",
-		"jest-environment-jsdom": "^29.7.0",
 		"masonry-layout": "^4.2.2",
-		"puppeteer-core": "^22.12.1",
 		"react-color": "^2.19.3",
 		"react-waypoint": "^10.1.0",
 		"swiper": "^8.4.5",
 		"uuid": "^8.3.2",
 		"venobox": "^2.1.6",
-		"webpack-bundle-analyzer": "^4.10.2",
 		"youtube-player": "^5.5.2"
 	}
 }
