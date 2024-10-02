@@ -16,7 +16,8 @@ const config = {
 		frontend: "./src/frontend/frontend.js",
 		"frontend.min": "./src/frontend/frontend.js",
 		"swiper-video.min": "./assets/slider/swiper-video.js",
-		"imagegallery.min": "./assets/blocks/image-gallery/imagegallery.js",
+		"image.min": "./assets/blocks/image/image.js",
+		"imagegallery.min": "./assets/blocks/image/imagegallery.js",
 		"venopopup.min": "./assets/venobox/venopopup.js",
 		// Premium Files
 		"cart-pro.min": "./assets/blocks/wc-mini-cart/pro/cart.js",

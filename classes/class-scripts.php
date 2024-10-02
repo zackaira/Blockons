@@ -118,12 +118,14 @@ class Blockons {
 		wp_register_script('blockons-img-comparison', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/image-comparison.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 
 		// Venobox Popup
-		wp_register_style('blockons-venobox-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/venobox/venobox.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
-		wp_register_script('blockons-venobox-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/venobox/venobox.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
-		wp_register_style('blockons-venopopup-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.css'), array('blockons-venobox-style', 'blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
-		wp_register_script('blockons-venopopup', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.js'), array('blockons-venobox-script'), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_style('blockons-animate-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/popups/animate.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
+		wp_register_style('blockons-sweetalert-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/popups/sweetalert2.min.css'), array('blockons-animate-style', 'blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
+		wp_register_script('blockons-sweetalert-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/popups/sweetalert2.all.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
+		// wp_register_style('blockons-venopopup-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.css'), array('blockons-venobox-style', 'blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
+		// wp_register_script('blockons-venopopup', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.js'), array('blockons-venobox-script'), BLOCKONS_PLUGIN_VERSION, true);
 
-		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-frontend-script', 'blockons-venobox-script'), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-image-block', esc_url(BLOCKONS_PLUGIN_URL . 'dist/image.min.js'), array('blockons-frontend-script', 'blockons-sweetalert-script'), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-frontend-script', 'blockons-sweetalert-script'), BLOCKONS_PLUGIN_VERSION, true);
 
 		// Pro Addons
 		if (blockons_fs()->can_use_premium_code__premium_only()) {
@@ -172,6 +174,11 @@ class Blockons {
 			wp_enqueue_style('blockons-venobox-style');
 			wp_enqueue_style('blockons-venopopup-style');
 			wp_enqueue_script('blockons-venopopup');
+
+			if ( has_block('core/image') ) {
+				wp_enqueue_style('blockons-sweetalert-style');
+				wp_enqueue_script('blockons-image-block');
+			}
 		}
 
 		if ($isPro) {			

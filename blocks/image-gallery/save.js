@@ -50,20 +50,14 @@ const Save = ({ attributes }) => {
 						<div
 							className={`blockons-gallery-img ${
 								attributes.isPremium && attributes.popupEnable
-									? `blockons-galvenobox icon-${attributes.popupIcon} ${attributes.popupIconPos} ${attributes.popupIconColor}`
+									? `blockons-popup icon-${attributes.popupIcon} ${attributes.popupIconPos} ${attributes.popupIconColor}`
 									: ""
 							}`}
-							{...(attributes.isPremium && attributes.popupEnable
-								? {
-										"data-href": imageItem.imageUrl,
-										"data-title": imageItem.imageCaption || "",
-										"data-popup": JSON.stringify({
-											iconpos: attributes.popupIconPos || "topleft",
-											caption: imageItem.imageCaption || "",
-										}),
-										"data-gall": attributes.uniqueId,
-								  }
-								: {})}
+							{...(attributes.isPremium && attributes.popupEnable ? {
+								"data-img": imageItem.imageUrl,
+								"data-imgcaption": imageItem.imageCaption
+							} : {})}
+							// {...(attributes.isPremium && attributes.popupEnable ? { onClick: () => showPopup(imageItem.imageUrl, imageItem.imageCaption) } : {})}
 						>
 							<img src={imageItem.imageUrl} alt={imageItem.alt} />
 						</div>
@@ -73,7 +67,7 @@ const Save = ({ attributes }) => {
 						<div
 							className={`blockons-gallery-img ${
 								attributes.isPremium && attributes.popupEnable
-									? `blockons-galvenobox icon-${attributes.popupIcon} ${attributes.popupIconPos} ${attributes.popupIconColor}`
+									? `blockons-popup icon-${attributes.popupIcon} ${attributes.popupIconPos} ${attributes.popupIconColor}`
 									: ""
 							}`}
 							style={{
@@ -83,17 +77,11 @@ const Save = ({ attributes }) => {
 									  }
 									: {}),
 							}}
-							{...(attributes.isPremium && attributes.popupEnable
-								? {
-										"data-href": imageItem.imageUrl,
-										"data-title": imageItem.imageCaption || "",
-										"data-popup": JSON.stringify({
-											iconpos: attributes.popupIconPos || "topleft",
-											caption: imageItem.imageCaption || "",
-										}),
-										"data-gall": attributes.uniqueId,
-								  }
-								: {})}
+							{...(attributes.isPremium && attributes.popupEnable ? {
+								"data-img": imageItem.imageUrl,
+								"data-imgcaption": imageItem.imageCaption
+							} : {})}
+							// {...(attributes.isPremium && attributes.popupEnable ? { onClick: () => showPopup(imageItem.imageUrl, imageItem.imageCaption) } : {})}
 						>
 							{attributes.imageProportion === "actual" ? (
 								imageItem.imageUrl && (

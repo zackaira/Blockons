@@ -18,11 +18,13 @@ import { colorPickerPalette } from "../block-global";
 import BlockonsNote from "../../src/backend/settings/components/UI/BlockonsNote";
 const Masonry = require("masonry-layout");
 var imagesLoaded = require("imagesloaded");
+import showGalleryPopup from "../../assets/popups/GalleryPopup";
 
 const Edit = (props) => {
 	const {
 		isSelected,
 		attributes: {
+			isPremium,
 			uniqueId,
 			galleryImages,
 			columns,
@@ -52,7 +54,18 @@ const Edit = (props) => {
 	const isPro = Boolean(blockonsEditorObj.isPremium);
 	const [masonry, setMasonry] = useState();
 
+	// Initialize the Image Popup
+	const handleGalleryPopup = (startIndex) => {
+		const images = galleryImages.map((img) => ({
+			imageUrl: img.imageUrl,
+			imageCaption: img.imageCaption,
+			imageAlt: img.imageAlt,
+		}));
+		showGalleryPopup({ images, startIndex });
+	};
+
 	useEffect(() => {
+		setAttributes({ isPremium: isPro }); // SETS PREMIUM
 		setAttributes({
 			uniqueId: uuidv4(),
 		});
@@ -155,19 +168,15 @@ const Edit = (props) => {
 						<div
 							className={`blockons-gallery-img ${
 								isPro && popupEnable
-									? `blockons-galvenobox icon-${popupIcon} ${popupIconPos} ${popupIconColor}`
+									? `blockons-popup icon-${popupIcon} ${popupIconPos} ${popupIconColor}`
 									: ""
 							}`}
-							{...(isPro && popupEnable
-								? {
-										"data-href": imageItem.imageUrl,
-										"data-title": imageItem.imageCaption || "",
-										"data-popup": JSON.stringify({
-											iconpos: popupIconPos || "topleft",
-										}),
-										"data-gall": uniqueId,
-								  }
-								: {})}
+							{...(isPro && popupEnable ? {
+								"data-img": imageItem.imageUrl,
+								"data-imgcaption": imageItem.imageCaption
+							} : {})}
+							{...(isPro && popupEnable ? { onClick: () => handleGalleryPopup(index) } : {})}
+							// onClick={() => isSelected && isPro && popupEnable && handleGalleryPopup(index)}
 						>
 							<img src={imageItem.imageUrl} alt={imageItem.alt} />
 						</div>
@@ -176,7 +185,7 @@ const Edit = (props) => {
 						<div
 							className={`blockons-gallery-img ${
 								isPro && popupEnable
-									? `blockons-galvenobox icon-${popupIcon} ${popupIconPos} ${popupIconColor}`
+									? `blockons-popup icon-${popupIcon} ${popupIconPos} ${popupIconColor}`
 									: ""
 							}`}
 							style={{
@@ -186,16 +195,12 @@ const Edit = (props) => {
 									  }
 									: {}),
 							}}
-							{...(isPro && popupEnable
-								? {
-										"data-href": imageItem.imageUrl,
-										"data-title": imageItem.imageCaption || "",
-										"data-popup": JSON.stringify({
-											iconpos: popupIconPos || "topleft",
-										}),
-										"data-gall": uniqueId,
-								  }
-								: {})}
+							{...(isPro && popupEnable ? {
+								"data-img": imageItem.imageUrl,
+								"data-imgcaption": imageItem.imageCaption
+							} : {})}
+							{...(isPro && popupEnable ? { onClick: () => handleGalleryPopup(index) } : {})}
+							// onClick={() => handleGalleryPopup(index)}
 						>
 							{imageProportion === "actual" ? (
 								imageItem.imageUrl && (

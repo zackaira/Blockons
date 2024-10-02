@@ -94,6 +94,6 @@
 	"style": [
 		"file:./style-index.css",
 		"blockons-fontawesome",
-		"blockons-venobox-style"
+		"blockons-sweetalert-style"
 	]
 }

@@ -400,6 +400,150 @@ body.blockons-tooltips .blockons-inline-tooltip.highlight::before {
 	height: 100%;
 	opacity: 0.15;
 }
+/* -- Single Image Popups -- */
+.wp-block-image.blockons-popup {
+	position: relative;
+	cursor: pointer;
+}
+.wp-block-image.blockons-popup {
+	display: inline-block;
+	position: relative;
+  }
+.wp-block-image.blockons-popup::before {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	z-index: 99;
+	border-radius: 4px;
+	width: 32px;
+	height: 32px;
+	font-size: 19px;
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
+}
+.wp-block-image.blockons-popup:hover::before {
+	opacity: 1;
+}
+.wp-block-image.blockons-popup.dark::before {
+	background-color: rgb(0 0 0 / 55%);
+	color: #fff;
+}
+.wp-block-image.blockons-popup.light::before {
+	background-color: rgb(255 255 255 / 45%);
+	box-shadow: 0 0 6px rgb(0 0 0 / 20%);
+	color: #000;
+}
+.wp-block-image.blockons-popup.topleft::before {
+	top: 15px;
+	left: 15px;
+}
+.wp-block-image.blockons-popup.topright::before {
+	top: 15px;
+	right: 15px;
+}
+.wp-block-image.blockons-popup.bottomleft::before {
+	bottom: 15px;
+	left: 15px;
+}
+.wp-block-image.blockons-popup.bottomright::before {
+	bottom: 15px;
+	right: 15px;
+}
+.wp-block-image.blockons-popup.center::before {
+	top: 50%;
+	left: 50%;
+	margin: -16px 0 0 -16px;
+}
+/* magnifying glass */
+.wp-block-image.blockons-popup.icon-one::before {
+	content: "\f002";
+}
+/* expand */
+.wp-block-image.blockons-popup.icon-two::before {
+	content: "\f065";
+}
+/* up right and down left arrow */
+.wp-block-image.blockons-popup.icon-three::before {
+	content: "\f424";
+}
+/* maximize */
+.wp-block-image.blockons-popup.icon-four::before {
+	content: "\f31e";
+}
+/* plus */
+.wp-block-image.blockons-popup.icon-five::before {
+	content: "\2b";
+}
+/* arrows up down left right */
+.wp-block-image.blockons-popup.icon-six::before {
+	content: "\f047";
+}
+/**
+ * Sweetalert2 Design - THIS IS DUPLICATED IN editor.css
+ */
+ .swal2-popup.blockons-popup-swal {
+	box-shadow: 0 1px 20px rgb(0 0 0 / 18%);
+	padding: 0;
+	position: relative;
+	max-width: 84%;
+}
+.swal2-popup.blockons-popup-swal button.swal2-close {
+	font-size: 22px;
+	color: #000;
+	position: absolute;
+	top: 4px;
+	right: 4px;
+}
+.swal2-popup.blockons-popup-swal .swal2-html-container {
+	padding: 0;
+	margin: 0;
+}
+/* .swal2-popup.blockons-popup-swal .blockons-popup-wrap {} */
+.swal2-popup.blockons-popup-swal .blockons-popup-wrap .blockons-popup-img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 0;
+}
+.swal2-popup.blockons-popup-swal .blockons-popup-wrap p.blockons-popup-caption {
+	margin: 0;
+	padding: 15px 20px;
+	color: #FFF;
+	font-size: 13px;
+	font-weight: normal;
+	letter-spacing: 0.1px;
+	line-height: 1.4;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgb(0 0 0 / 42%);
+}
+.swal2-popup.blockons-popup-swal .swal2-actions {
+	margin: 0;
+	padding: 0;
+	height: 0;
+}
+.swal2-popup.blockons-popup-swal .swal2-actions .blockons-popup-btn {
+	box-shadow: none;
+	position: absolute;
+	top: 50%;
+	margin: -30px 0 0;
+	padding: 0;
+	width: 45px;
+	height: 60px;
+	background: none !important;
+	font-size: 36px;
+}
+.swal2-popup.blockons-popup-swal .swal2-actions .blockons-popup-btn.prev {
+	right: 100%;
+}
+.swal2-popup.blockons-popup-swal .swal2-actions .blockons-popup-btn.next {
+	left: 100%;
+}
 
 /* -- Product Quick View - THIS IS DUPLICATED IN editor.css-- */
 .blockons-quickview.one {

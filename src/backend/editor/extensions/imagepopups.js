@@ -90,6 +90,7 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 								onChange={(newValue) =>
 									setAttributes({ blockonsPopupEnabled: newValue })
 								}
+								help={__("This block popup extension will only work on the frontend", "blockons")}
 							/>
 
 							{blockonsPopupEnabled && (
@@ -214,20 +215,16 @@ const blockonsAddEditorImgPopupAttributes = createHigherOrderComponent(
 				defaultOptionImgEnabled && blockonsPopupEnabled
 					? {
 							"data-href": url,
-							"data-title": caption || "",
-							"data-popup": JSON.stringify({
-								enabled: blockonsPopupEnabled || false,
-								iconpos: blockonsPopupIconPos || "topleft",
-							}),
+							"data-imgcaption": caption || "",
 							...(isPremium && blockonsGalleryId !== ""
-								? { "data-gall": blockonsGalleryId }
+								? { "data-gallery": blockonsGalleryId }
 								: {}),
 					  }
 					: {};
 
 			const newClasses =
 				defaultOptionImgEnabled && blockonsPopupEnabled
-					? `blockons-venobox icon-${blockonsPopupIcon} ${blockonsPopupIconPos} ${blockonsPopupIconColor}`
+					? `blockons-popup blockons-img-${blockonsGalleryId ? "gal" : "single"} icon-${blockonsPopupIcon} ${blockonsPopupIconPos} ${blockonsPopupIconColor}`
 					: className;
 			const newClassnames = classnames(className, newClasses);
 
@@ -267,20 +264,16 @@ const blockonsAddFrontendImgPopupAttributes = (
 	}
 
 	if (blockonsPopupEnabled) {
-		const newClasses = `blockons-venobox icon-${blockonsPopupIcon} ${blockonsPopupIconPos} ${blockonsPopupIconColor}`;
+		const newClasses = `blockons-popup blockons-img-${blockonsGalleryId ? "gal" : "single"} icon-${blockonsPopupIcon} ${blockonsPopupIconPos} ${blockonsPopupIconColor}`;
 		extraProps.className = classnames(extraProps.className, {
 			[newClasses]: true,
 		});
 
 		extraProps["data-href"] = url;
-		extraProps["data-title"] = caption || "";
-		extraProps["data-popup"] = JSON.stringify({
-			enabled: blockonsPopupEnabled || false,
-			iconpos: blockonsPopupIconPos || "topleft",
-		});
+		extraProps["data-imgcaption"] = caption || "";
 
 		if (isPremium && blockonsGalleryId !== "") {
-			extraProps["data-gall"] = blockonsGalleryId;
+			extraProps["data-gallery"] = blockonsGalleryId;
 		}
 	}
 
