@@ -248,19 +248,19 @@ a.blockons-upgrade::before {
 .blockons-tab:hover {
 	color: #000;
 }
-.blockons-tabs li.help {
+.blockons-tabs li.info {
 	position: absolute;
 	right: 4px;
 	top: 6px;
 }
-.blockons-tabs li.help .blockons-tab {
+.blockons-tabs li.info .blockons-tab {
 	background-color: #5a93f8;
 	border: 1px solid #7a8896;
 	color: #fff;
 	padding: 8px 25px;
 }
 .blockons-tab.active,
-.blockons-tabs li.help .blockons-tab.active {
+.blockons-tabs li.info .blockons-tab.active {
 	background-color: #fff;
 	border-color: #7a8896;
 	color: #107daf;
@@ -290,7 +290,7 @@ a.blockons-upgrade::before {
 .blockons-content .form-table {
 	margin: 0;
 }
-#blockons-content-help {
+#blockons-content-info {
 	margin-bottom: -125px;
 	padding-bottom: 25px;
 	background-color: #fff;
@@ -562,7 +562,7 @@ a.blockons-upgrade::before {
 	color: #787878;
 }
 .blockonsInfoTab .blockons-video,
-.blockonsInfoTab .blockons-help,
+.blockonsInfoTab .blockons-info,
 .center {
 	text-align: center;
 }
@@ -589,7 +589,7 @@ a.blockons-upgrade::before {
 	min-height: 35px;
 }
 .blockons-propromo > div {
-	max-width: 60%;
+	max-width: 54%;
 	font-weight: bold;
 	font-size: 15px;
 	line-height: 1.4;

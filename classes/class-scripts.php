@@ -175,7 +175,7 @@ class Blockons {
 			wp_enqueue_style('blockons-venopopup-style');
 			wp_enqueue_script('blockons-venopopup');
 
-			if ( has_block('core/image') ) {
+			if ( ( isset($blockonsOptions->imagepopups->enable_all) && $blockonsOptions->imagepopups->enable_all == true ) || has_block('core/image') ) {
 				wp_enqueue_style('blockons-sweetalert-style');
 				wp_enqueue_script('blockons-image-block');
 			}
@@ -383,6 +383,7 @@ class Blockons {
 			),
 			"imagepopups" => array(
 				"enabled" => false,
+				"enable_all" => false,
 				"icon" => "one",
 				"iconpos" => "topleft",
 				"theme" => "dark",

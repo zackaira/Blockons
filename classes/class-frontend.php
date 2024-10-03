@@ -71,6 +71,17 @@ class Blockons_Frontend {
 			}
 		}
 
+		// Global Lightbox
+		if (isset($blockonsOptions->imagepopups->enabled) && $blockonsOptions->imagepopups->enabled == true) {
+			$classes[] = sanitize_html_class('blockons-popups');
+			if (isset($blockonsOptions->imagepopups->enable_all) && $blockonsOptions->imagepopups->enable_all == true) {
+				$classes[] = sanitize_html_class('global');
+			}
+			if (isset($blockonsOptions->imagepopups->popuptheme)) {
+				$classes[] = sanitize_html_class('popup-' . $blockonsOptions->imagepopups->popuptheme);
+			}
+		}
+
 		return $classes;
 	}
 

@@ -168,7 +168,7 @@ const Edit = (props) => {
 						<div
 							className={`blockons-gallery-img ${
 								isPro && popupEnable
-									? `blockons-popup icon-${popupIcon} ${popupIconPos} ${popupIconColor}`
+									? `blockons-popup blcks-icon-${popupIcon} blcks-pos-${popupIconPos} blcks-theme-${popupIconColor}`
 									: ""
 							}`}
 							{...(isPro && popupEnable ? {
@@ -185,7 +185,7 @@ const Edit = (props) => {
 						<div
 							className={`blockons-gallery-img ${
 								isPro && popupEnable
-									? `blockons-popup icon-${popupIcon} ${popupIconPos} ${popupIconColor}`
+									? `blockons-popup blcks-icon-${popupIcon} blcks-pos-${popupIconPos} blcks-theme-${popupIconColor}`
 									: ""
 							}`}
 							style={{

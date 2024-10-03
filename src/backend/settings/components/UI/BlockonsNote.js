@@ -5,6 +5,7 @@ const BlockonsNote = ({
 	title,
 	text,
 	docLink,
+	docText,
 	upgradeLink,
 	upgradeText,
 	proFeatures,
@@ -33,7 +34,7 @@ const BlockonsNote = ({
 				<div className="bl-note-links">
 					{docLink && (
 						<a href={docLink} className="bl-note-link" target="_blank">
-							{__("Read Documentation", "blockons")}
+							{docText ? docText : __("Read Documentation", "blockons")}
 						</a>
 					)}
 					{upgradeLink && (

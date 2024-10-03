@@ -226,6 +226,8 @@ This could be from the theme you're using, or another plugin. Again, please [con
 = 1.1.07 =
 * Styling tweaks/fixes
 * Code Refactoring & Editor improvments
+* Updated Settings Page to store current tab
+* 
 * 
 * Updated the language .pot file
 * PREMIUM: Added new 'Site By' feature to Site Addons

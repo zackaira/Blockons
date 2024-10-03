@@ -1,6 +1,48 @@
 import showGalleryPopup from "../../popups/GalleryPopup";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const isGlobal = document.body.classList.contains("blockons-popups") && document.body.classList.contains("global") ? true : false;
+  const popup = blockonsFrontendObj.blockonsOptions?.imagepopups;
+
+  if (isGlobal) {
+    const allImages = document.querySelectorAll(".wp-block-image");
+    const filteredImages = Array.from(allImages).filter((image) => {
+        return !image.closest("header") && !image.closest("footer") && !image.classList.contains("global-off");
+    });
+
+    allImages.forEach((image) => {
+      if (!filteredImages.includes(image)) {
+        image.classList.remove("blockons-popup");
+      }
+    });
+
+    console.log('filteredImages', filteredImages);
+
+    filteredImages.forEach((image) => {
+        const classListCopy = Array.from(image.classList);
+        classListCopy.forEach((className) => {
+            if (className.startsWith("blcks-") || className === 'blockons-img-gal' || className === 'blockons-img-single') image.classList.remove(className)
+        });
+        image.classList.add("blockons-popup", "blockons-img-single", `blcks-icon-${popup.icon}`, `blcks-pos-${popup.iconpos}`, `blcks-theme-${popup.iconcolor}`);
+
+        // Step 4: Check for the specific HTML structure and add data attributes
+        const imgElement = image.querySelector("img");
+        const captionElement = image.querySelector("figcaption");
+
+        if (imgElement) {
+            // Add data-href with the image's src URL
+            image.setAttribute("data-href", imgElement.src);
+
+            // Add data-imgcaption with the image caption text, if <figcaption> is present
+            if (captionElement) {
+                image.setAttribute("data-imgcaption", captionElement.innerText.trim());
+            }
+        }
+    });
+  }
+
+  // THEN
+
   const blockonsSingleImgs = document.querySelectorAll(".wp-block-image.blockons-popup");
 
   // Create a list of all images with their details

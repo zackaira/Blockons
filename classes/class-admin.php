@@ -152,6 +152,13 @@ class Blockons_Admin {
 		// Image Lightbox
 		if (isset($blockonsOptions->imagepopups->enabled) && $blockonsOptions->imagepopups->enabled == true) {
 			$admin_classes .= ' ' . sanitize_html_class('blockons-imgpopup');
+			if (isset($blockonsOptions->imagepopups->enable_all) && $blockonsOptions->imagepopups->enable_all == true) {
+				$admin_classes .= ' ' . sanitize_html_class('global');
+			}
+
+			if (isset($blockonsOptions->imagepopups->popuptheme)) {
+				$admin_classes .= ' ' . sanitize_html_class('popup-' . $blockonsOptions->imagepopups->popuptheme);
+			}
 		}
 
 		return $admin_classes;

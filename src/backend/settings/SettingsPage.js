@@ -23,7 +23,11 @@ const SettingsPage = () => {
 	const upgradeUrl = blockonsObject.upgradeUrl;
 	const [loader, setLoader] = useState(false);
 	const [loadSetting, setLoadSetting] = useState(true);
-	const [activeTab, setActiveTab] = useState("1");
+	const getInitialTab = () => {
+		const params = new URLSearchParams(window.location.search);
+		return params.get("tab") || "blocks";
+	};
+	const [activeTab, setActiveTab] = useState(getInitialTab());
 	const isPremium = Boolean(blockonsObject.isPremium);
 	const isAdmin = Boolean(blockonsObject.isAdmin);
 	const wcActive = Boolean(blockonsObject.wcActive);
@@ -39,6 +43,10 @@ const SettingsPage = () => {
 
 	const changeTab = (tabId) => {
 		setActiveTab(tabId);
+
+		const params = new URLSearchParams(window.location.search);
+		params.set("tab", tabId);
+		window.history.replaceState(null, "", "?" + params.toString());
 	};
 
 	// setState dynamically for each setting
@@ -206,33 +214,33 @@ const SettingsPage = () => {
 						<ul>
 							<li>
 								<a
-									id="blockonstab-1"
+									id="blockonstab-blocks"
 									className={`blockons-tab ${
-										activeTab === "1" ? "active" : ""
+										activeTab === "blocks" ? "active" : ""
 									}`}
-									onClick={() => changeTab("1")}
+									onClick={() => changeTab("blocks")}
 								>
 									{__("Blocks", "blockons")}
 								</a>
 							</li>
 							<li>
 								<a
-									id="blockonstab-2"
+									id="blockonstab-extensions"
 									className={`blockons-tab ${
-										activeTab === "2" ? "active" : ""
+										activeTab === "extensions" ? "active" : ""
 									}`}
-									onClick={() => changeTab("2")}
+									onClick={() => changeTab("extensions")}
 								>
 									{__("Block Extensions", "blockons")}
 								</a>
 							</li>
 							<li>
 								<a
-									id="blockonstab-3"
+									id="blockonstab-addons"
 									className={`blockons-tab ${
-										activeTab === "3" ? "active" : ""
+										activeTab === "addons" ? "active" : ""
 									}`}
-									onClick={() => changeTab("3")}
+									onClick={() => changeTab("addons")}
 								>
 									{__("Site Addons", "blockons")}
 								</a>
@@ -241,24 +249,24 @@ const SettingsPage = () => {
 							{wcActive && (
 								<li>
 									<a
-										id="blockonstab-4"
+										id="blockonstab-wc-addons"
 										className={`blockons-tab ${
-											activeTab === "4" ? "active" : ""
+											activeTab === "wc-addons" ? "active" : ""
 										}`}
-										onClick={() => changeTab("4")}
+										onClick={() => changeTab("wc-addons")}
 									>
 										{__("WooCommerce Addons", "blockons")}
 									</a>
 								</li>
 							)}
 
-							<li className="help">
+							<li className="info">
 								<a
-									id="blockonstab-help"
+									id="blockonstab-info"
 									className={`blockons-tab ${
-										activeTab === "9" ? "active" : ""
+										activeTab === "info" ? "active" : ""
 									}`}
-									onClick={() => changeTab("9")}
+									onClick={() => changeTab("info")}
 								>
 									{__("Welcome", "blockons")}
 								</a>
@@ -269,9 +277,9 @@ const SettingsPage = () => {
 							<div className="blockons-content-wrap-inner">
 								{(loadSetting || loader) && <Loader />}
 								<div
-									id="blockons-content-1"
+									id="blockons-content-blocks"
 									className={`blockons-content ${
-										activeTab === "1" ? "active" : ""
+										activeTab === "blocks" ? "active" : ""
 									}`}
 								>
 									<EditorBlocks
@@ -283,9 +291,9 @@ const SettingsPage = () => {
 								</div>
 
 								<div
-									id="blockons-content-2"
+									id="blockons-content-extensions"
 									className={`blockons-content ${
-										activeTab === "2" ? "active" : ""
+										activeTab === "extensions" ? "active" : ""
 									}`}
 								>
 									<BlockExtensions
@@ -298,9 +306,9 @@ const SettingsPage = () => {
 								</div>
 
 								<div
-									id="blockons-content-3"
+									id="blockons-content-addons"
 									className={`blockons-content ${
-										activeTab === "3" ? "active" : ""
+										activeTab === "addons" ? "active" : ""
 									}`}
 								>
 									<SiteAddons
@@ -321,9 +329,9 @@ const SettingsPage = () => {
 
 								{wcActive && (
 									<div
-										id="blockons-content-4"
+										id="blockons-content-wc-addons"
 										className={`blockons-content ${
-											activeTab === "4" ? "active" : ""
+											activeTab === "wc-addons" ? "active" : ""
 										}`}
 									>
 										<WooAddons
@@ -338,9 +346,9 @@ const SettingsPage = () => {
 								)}
 
 								<div
-									id="blockons-content-help"
+									id="blockons-content-info"
 									className={`blockons-content ${
-										activeTab === "9" ? "active" : ""
+										activeTab === "info" ? "active" : ""
 									}`}
 								>
 									<InfoTab

@@ -50,7 +50,7 @@ const Save = ({ attributes }) => {
 						<div
 							className={`blockons-gallery-img ${
 								attributes.isPremium && attributes.popupEnable
-									? `blockons-popup icon-${attributes.popupIcon} ${attributes.popupIconPos} ${attributes.popupIconColor}`
+									? `blockons-popup blcks-icon-${attributes.popupIcon} blcks-pos-${attributes.popupIconPos} blcks-theme-${attributes.popupIconColor}`
 									: ""
 							}`}
 							{...(attributes.isPremium && attributes.popupEnable ? {
@@ -67,7 +67,7 @@ const Save = ({ attributes }) => {
 						<div
 							className={`blockons-gallery-img ${
 								attributes.isPremium && attributes.popupEnable
-									? `blockons-popup icon-${attributes.popupIcon} ${attributes.popupIconPos} ${attributes.popupIconColor}`
+									? `blockons-popup blcks-icon-${attributes.popupIcon} blcks-pos-${attributes.popupIconPos} blcks-theme-${attributes.popupIconColor}`
 									: ""
 							}`}
 							style={{

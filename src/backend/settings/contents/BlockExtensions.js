@@ -183,84 +183,90 @@ const BlockExtensions = ({
 						)}
 						documentation="https://blockons.com/documentation/image-lightbox-popups/"
 					/>
+					{!isPremium && blockonsOptions.imagepopups?.enabled && (
+						<SettingNote
+							note={__(
+								"Image Lightbox is now enabled. Create image popups within core Image and Gallery blocks.",
+								"blockons"
+							)}
+						/>
+					)}
 
 					{blockonsOptions.imagepopups?.enabled && (
 						<>
+							<SettingRow
+								title={__("Enable on ALL images", "blockons")}
+								slug="imagepopups_enable_all"
+								value={blockonsOptions.imagepopups?.enable_all}
+								inputType="toggle"
+								onChange={onSettingChange}
+								tooltip={__(
+									"This will add a lightbox to ALL images within the content area. Excluding header & footer images.",
+									"blockons"
+								)}
+							/>
+							
 							{isPremium ? (
 								<>
-									<SettingRow
-										title={__("Icon", "blockons")}
-										slug="imagepopups_icon"
-										value={blockonsOptions.imagepopups?.icon}
-										inputType="select"
-										options={{
-											one: "Magnifying Glass",
-											two: "Expand",
-											three: "Diagonal Arrows",
-											four: "Maximize",
-											five: "Plus",
-											six: "Cross Arrows",
-										}}
-										onChange={onSettingChange}
-									/>
-									<SettingRow
-										title={__("Icon Position", "blockons")}
-										slug="imagepopups_iconpos"
-										value={blockonsOptions.imagepopups?.iconpos}
-										inputType="select"
-										options={{
-											topleft: "Top Left",
-											topright: "Top Right",
-											bottomleft: "Bottom Left",
-											bottomright: "Bottom Right",
-											center: "Center Center",
-										}}
-										onChange={onSettingChange}
-									/>
-									<SettingRow
-										title={__("Icon Color", "blockons")}
-										slug="imagepopups_iconcolor"
-										value={blockonsOptions.imagepopups?.iconcolor}
-										inputType="select"
-										options={{
-											dark: "Dark",
-											light: "Light",
-										}}
-										onChange={onSettingChange}
-									/>
+									{blockonsOptions.imagepopups?.enable_all && (
+										<>
+											<SettingRow
+												title={__("Icon", "blockons")}
+												slug="imagepopups_icon"
+												value={blockonsOptions.imagepopups?.icon}
+												inputType="select"
+												options={{
+													one: "Magnifying Glass",
+													two: "Expand",
+													three: "Diagonal Arrows",
+													four: "Maximize",
+													five: "Plus",
+													six: "Cross Arrows",
+												}}
+												onChange={onSettingChange}
+											/>
+											<SettingRow
+												title={__("Icon Position", "blockons")}
+												slug="imagepopups_iconpos"
+												value={blockonsOptions.imagepopups?.iconpos}
+												inputType="select"
+												options={{
+													topleft: "Top Left",
+													topright: "Top Right",
+													bottomleft: "Bottom Left",
+													bottomright: "Bottom Right",
+													center: "Center Center",
+												}}
+												onChange={onSettingChange}
+											/>
+											<SettingRow
+												title={__("Icon Color", "blockons")}
+												slug="imagepopups_iconcolor"
+												value={blockonsOptions.imagepopups?.iconcolor}
+												inputType="select"
+												options={{
+													dark: "Dark",
+													light: "Light",
+												}}
+												onChange={onSettingChange}
+											/>
 
-									<SettingRow
-										title={__("Lightbox Color Theme", "blockons")}
-										slug="imagepopups_popuptheme"
-										value={blockonsOptions.imagepopups?.popuptheme}
-										inputType="select"
-										options={{
-											dark: "Dark",
-											light: "Light",
-										}}
-										onChange={onSettingChange}
-									/>
-									<SettingRow
-										title={__("Lightbox Caption Position", "blockons")}
-										slug="imagepopups_captionpos"
-										value={blockonsOptions.imagepopups?.captionpos}
-										inputType="select"
-										options={{
-											none: "No Caption",
-											top: "Top",
-											bottom: "Bottom",
-										}}
-										onChange={onSettingChange}
-									/>
+											<SettingRow
+												title={__("Lightbox Color Theme", "blockons")}
+												slug="imagepopups_popuptheme"
+												value={blockonsOptions.imagepopups?.popuptheme}
+												inputType="select"
+												options={{
+													dark: "Dark",
+													light: "Light",
+												}}
+												onChange={onSettingChange}
+											/>
+										</>
+									)}
 								</>
 							) : (
 								<>
-									<SettingNote
-										note={__(
-											"Image Lightbox is now enabled. Create image popups within core Image and Gallery blocks.",
-											"blockons"
-										)}
-									/>
 									<SettingRow
 										title={__("Premium Image Lightbox", "blockons")}
 										inputType="toggle"

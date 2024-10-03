@@ -9,6 +9,8 @@ const isPremium = Boolean(blockonsEditorObj.isPremium);
 const defaultOptions = blockonsEditorObj.blockonsOptions?.imagepopups;
 const defaultOptionImgEnabled = Boolean(defaultOptions?.enabled);
 
+const enabledAllBlocks = defaultOptions?.enable_all;
+
 const allowedImgPopupBlockTypes = ["core/image"];
 
 /**
@@ -26,17 +28,21 @@ function blockonsAddImgPopupAttributes(settings, name) {
 			type: "boolean",
 			default: false,
 		},
+		blockonsGlobalDisable: {
+			type: "boolean",
+			default: false,
+		},
 		blockonsPopupIcon: {
 			type: "string",
-			default: defaultOptions?.icon || "one",
+			default: "one",
 		},
 		blockonsPopupIconPos: {
 			type: "string",
-			default: defaultOptions?.iconpos || "topleft",
+			default: "topleft",
 		},
 		blockonsPopupIconColor: {
 			type: "string",
-			default: defaultOptions?.iconcolor || "dark",
+			default: "dark",
 		},
 		blockonsGalleryId: {
 			type: "string",
@@ -61,6 +67,7 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 			const {
 				attributes: {
 					blockonsPopupEnabled,
+					blockonsGlobalDisable,
 					blockonsPopupIcon,
 					blockonsPopupIconPos,
 					blockonsPopupIconColor,
@@ -84,98 +91,125 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 							title={__("Image Lightbox Settings", "blockons")}
 							initialOpen={false}
 						>
-							<ToggleControl
-								checked={blockonsPopupEnabled}
-								label={__("Enable Image Lightbox", "blockons")}
-								onChange={(newValue) =>
-									setAttributes({ blockonsPopupEnabled: newValue })
-								}
-								help={__("This block popup extension will only work on the frontend", "blockons")}
-							/>
-
-							{blockonsPopupEnabled && (
+							{enabledAllBlocks ? (
 								<>
+									<BlockonsNote
+										imageUrl=""
+										title={__("Lightbox Enabled Globally", "blockons")}
+										text={__(
+											"Global lightbox enabled. Please disable it in the settings to add lightboxes manually to images.",
+											"blockons"
+										)}
+										docLink={`${blockonsEditorObj.adminUrl}options-general.php?page=blockons-settings&tab=extensions`}
+										docText={__("View Settings", "blockons")}
+										noline
+									/>
 									<div className="blockons-divider"></div>
-									<SelectControl
-										label={__("Icon", "blockons")}
-										value={blockonsPopupIcon}
-										options={[
-											{ label: "Magnifying Glass", value: "one" },
-											{ label: "Expand", value: "two" },
-											{ label: "Diagonal Arrows", value: "three" },
-											{ label: "Maximize", value: "four" },
-											{ label: "Plus", value: "five" },
-											{ label: "Cross Arrows", value: "six" },
-										]}
-										onChange={(newValue) =>
-											setAttributes({
-												blockonsPopupIcon: newValue,
-											})
-										}
-										__nextHasNoMarginBottom
+									<ToggleControl
+											checked={blockonsGlobalDisable}
+											label={__("Disable Lightbox", "blockons")}
+											onChange={(newValue) =>
+												setAttributes({ blockonsGlobalDisable: newValue })
+											}
+											help={__("Disable the global popup on this image", "blockons")}
 									/>
-									<SelectControl
-										label={__("Icon Position", "blockons")}
-										value={blockonsPopupIconPos}
-										options={[
-											{ label: "Top Left", value: "topleft" },
-											{ label: "Top Right", value: "topright" },
-											{ label: "Bottom Left", value: "bottomleft" },
-											{ label: "Bottom Right", value: "bottomright" },
-											{ label: "Center Center", value: "center" },
-										]}
+								</>
+							) : (
+								<>
+									<ToggleControl
+										checked={blockonsPopupEnabled}
+										label={__("Enable Image Lightbox", "blockons")}
 										onChange={(newValue) =>
-											setAttributes({
-												blockonsPopupIconPos: newValue,
-											})
+											setAttributes({ blockonsPopupEnabled: newValue })
 										}
-										__nextHasNoMarginBottom
-									/>
-									<SelectControl
-										label={__("Icon Color", "blockons")}
-										value={blockonsPopupIconColor}
-										options={[
-											{ label: "Dark", value: "dark" },
-											{ label: "Light", value: "light" },
-										]}
-										onChange={(newValue) =>
-											setAttributes({
-												blockonsPopupIconColor: newValue,
-											})
-										}
-										__nextHasNoMarginBottom
+										help={__("This block popup extension will only work on the frontend", "blockons")}
 									/>
 
-									{isPremium && (
+									{blockonsPopupEnabled && (
 										<>
 											<div className="blockons-divider"></div>
-											<TextControl
-												label={__("Gallery ID", "blockons")}
-												value={blockonsGalleryId}
+											<SelectControl
+												label={__("Icon", "blockons")}
+												value={blockonsPopupIcon}
+												options={[
+													{ label: "Magnifying Glass", value: "one" },
+													{ label: "Expand", value: "two" },
+													{ label: "Diagonal Arrows", value: "three" },
+													{ label: "Maximize", value: "four" },
+													{ label: "Plus", value: "five" },
+													{ label: "Cross Arrows", value: "six" },
+												]}
 												onChange={(newValue) =>
 													setAttributes({
-														blockonsGalleryId: newValue,
+														blockonsPopupIcon: newValue,
 													})
 												}
-												help={__(
-													"Enter a unique ID for the gallery. All images with the same ID will be grouped together.",
+												__nextHasNoMarginBottom
+											/>
+											<SelectControl
+												label={__("Icon Position", "blockons")}
+												value={blockonsPopupIconPos}
+												options={[
+													{ label: "Top Left", value: "topleft" },
+													{ label: "Top Right", value: "topright" },
+													{ label: "Bottom Left", value: "bottomleft" },
+													{ label: "Bottom Right", value: "bottomright" },
+													{ label: "Center Center", value: "center" },
+												]}
+												onChange={(newValue) =>
+													setAttributes({
+														blockonsPopupIconPos: newValue,
+													})
+												}
+												__nextHasNoMarginBottom
+											/>
+											<SelectControl
+												label={__("Icon Color", "blockons")}
+												value={blockonsPopupIconColor}
+												options={[
+													{ label: "Dark", value: "dark" },
+													{ label: "Light", value: "light" },
+												]}
+												onChange={(newValue) =>
+													setAttributes({
+														blockonsPopupIconColor: newValue,
+													})
+												}
+												__nextHasNoMarginBottom
+											/>
+
+											{isPremium && (
+												<>
+													<div className="blockons-divider"></div>
+													<TextControl
+														label={__("Gallery ID", "blockons")}
+														value={blockonsGalleryId}
+														onChange={(newValue) =>
+															setAttributes({
+																blockonsGalleryId: newValue,
+															})
+														}
+														help={__(
+															"Enter a unique ID for the gallery. All images with the same ID will be grouped together.",
+															"blockons"
+														)}
+													/>
+												</>
+											)}
+
+											<div className="blockons-divider"></div>
+											<BlockonsNote
+												imageUrl=""
+												title={__("Using Image Popups", "blockons")}
+												text={__(
+													"Enable this option to show the image in a popup when clicked.",
 													"blockons"
 												)}
+												docLink="https://blockons.com/documentation/block-visibility"
+												noline
 											/>
 										</>
 									)}
-
-									<div className="blockons-divider"></div>
-									<BlockonsNote
-										imageUrl=""
-										title={__("Using Image Popups", "blockons")}
-										text={__(
-											"Enable this option to show the image in a popup when clicked.",
-											"blockons"
-										)}
-										docLink="https://blockons.com/documentation/block-visibility"
-										noline
-									/>
 								</>
 							)}
 						</PanelBody>
@@ -197,6 +231,7 @@ const blockonsAddEditorImgPopupAttributes = createHigherOrderComponent(
 					caption,
 					url,
 					blockonsPopupEnabled,
+					blockonsGlobalDisable,
 					blockonsPopupIcon,
 					blockonsPopupIconPos,
 					blockonsPopupIconColor,
@@ -224,9 +259,10 @@ const blockonsAddEditorImgPopupAttributes = createHigherOrderComponent(
 
 			const newClasses =
 				defaultOptionImgEnabled && blockonsPopupEnabled
-					? `blockons-popup blockons-img-${blockonsGalleryId ? "gal" : "single"} icon-${blockonsPopupIcon} ${blockonsPopupIconPos} ${blockonsPopupIconColor}`
+					? `blockons-popup ${blockonsGalleryId ? "blockons-img-gal" : "blockons-img-single"} blcks-icon-${blockonsPopupIcon} blcks-pos-${blockonsPopupIconPos} blcks-theme-${blockonsPopupIconColor}`
 					: className;
-			const newClassnames = classnames(className, newClasses);
+			const anotherClass = blockonsGlobalDisable ? "global-off" : "";
+			const newClassnames = classnames(className, newClasses, anotherClass);
 
 			return (
 				<BlockListBlock
@@ -251,6 +287,7 @@ const blockonsAddFrontendImgPopupAttributes = (
 		caption,
 		url,
 		blockonsPopupEnabled,
+		blockonsGlobalDisable,
 		blockonsPopupIcon,
 		blockonsPopupIconPos,
 		blockonsPopupIconColor,
@@ -263,12 +300,14 @@ const blockonsAddFrontendImgPopupAttributes = (
 		return extraProps;
 	}
 
-	if (blockonsPopupEnabled) {
-		const newClasses = `blockons-popup blockons-img-${blockonsGalleryId ? "gal" : "single"} icon-${blockonsPopupIcon} ${blockonsPopupIconPos} ${blockonsPopupIconColor}`;
-		extraProps.className = classnames(extraProps.className, {
-			[newClasses]: true,
-		});
+	
+	const newClasses = blockonsPopupEnabled ? `blockons-popup ${blockonsGalleryId ? "blockons-img-gal" : "blockons-img-single"} blcks-icon-${blockonsPopupIcon} blcks-pos-${blockonsPopupIconPos} blcks-theme-${blockonsPopupIconColor}` : "";
+	const anotherClass = blockonsGlobalDisable ? "global-off" : "";
+	const newClassnames = classnames(extraProps.className, newClasses, anotherClass);
 
+	extraProps.className = newClassnames;
+
+	if (blockonsPopupEnabled) {
 		extraProps["data-href"] = url;
 		extraProps["data-imgcaption"] = caption || "";
 
