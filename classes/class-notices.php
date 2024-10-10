@@ -62,7 +62,7 @@ class Blockons_Notices {
 								<?php endif; ?>
 
 								<?php if (isset($notice['link']) && isset($notice['link_text'])) : ?>
-									<a href="<?php echo esc_url($notice['link']); ?>" class="blockons-notice-btn">
+									<a href="<?php echo esc_url($notice['link']); ?>" target="_blank" class="blockons-notice-btn">
 										<?php esc_html_e($notice['link_text']); ?>
 									</a>
 								<?php endif; ?>
@@ -96,12 +96,12 @@ class Blockons_Notices {
 		$settings = array();
 		
 		$settings['new_blocks_added'] = array(
-			'id'    => 'newblocks_006', // Increment this when adding new blocks
-			'type'  => 'info', // info | error | warning | success
-			'title' => __( 'New Dynamic Content Selector & Tab blocks have been added to the Blockons plugin', 'blockons' ),
-			'text'  => __( 'To enable the new blocks and start using them in the WordPress editor:', 'blockons' ),
-			'link'  => admin_url( 'options-general.php?page=blockons-settings' ),
-			'link_text' => __( 'Go to the Blockons settings', 'blockons' ),
+			'id'    => 'newblocks_007', // Increment this when adding new blocks
+			'type'  => 'warning', // info | error | warning | success
+			'title' => __( 'Please Note! Blockons Plugin Update!', 'blockons' ),
+			'text'  => __( '<b>If you\'ve just installed Blockons, please ignore this message.</b> - Updates & Improvements have been made to Blockons Popup Images the Image blocks. Please check over these blocks to ensure they are working as expected. Apologies if any inconvenience caused.', 'blockons' ),
+			'link'  => 'https://blockons.com/blockons-latest-updates/', // admin_url( 'options-general.php?page=blockons-settings' ),
+			'link_text' => __( 'Read more on this.', 'blockons' ),
 			'inline' => true, // To display the link & text inline
 		);
 

@@ -1,61 +1,57 @@
-document.addEventListener("DOMContentLoaded", function () {
-	// Function to normalize text content for comparison
-	function normalizeText(text) {
-		return text.trim().toLowerCase();
-	}
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('TOC script loaded!');
 
-	// Function to create a unique ID for a heading based on its text
-	function createHeadingId(heading) {
-		return heading.textContent.trim().toLowerCase().replace(/\s+/g, "-");
-	}
+    const tocLinks = document.querySelectorAll('.blockons-toc-link');
+    console.log('Number of TOC links found:', tocLinks.length);
 
-	// Find all .blockons-toc-link elements and process each
-	document.querySelectorAll(".blockons-toc-link").forEach((tocLink, index) => {
-		const tocLinkText = normalizeText(tocLink.textContent);
-		let matchedHeading = null;
+    // Create an array of heading data from TOC links
+    const tocHeadings = Array.from(tocLinks).map((link, index) => ({
+        text: link.textContent.trim(),
+        anchor: link.getAttribute('data-target'),
+        index: index
+    }));
 
-		// Search for a matching heading
-		document.querySelectorAll(".wp-block-heading").forEach((heading) => {
-			if (normalizeText(heading.textContent) === tocLinkText) {
-				matchedHeading = heading;
-			}
-		});
+    console.log('TOC Headings:', tocHeadings);
 
-		// If a matching heading is found, assign an ID and update the TOC link
-		if (matchedHeading) {
-			const id = createHeadingId(matchedHeading) + "-" + index;
-			matchedHeading.id = id;
-			tocLink.href = "#" + id;
-		}
-	});
+    // Find and label the correct headings
+    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    let headingIndex = 0;
 
-	// Function to handle the click event on each table of contents link
-	function scrollToHeading(event) {
-		event.preventDefault(); // Prevent the default anchor link behavior
+    headings.forEach((heading) => {
+        const headingText = heading.textContent.trim();
+        const matchingTocHeading = tocHeadings.find(h => h.text === headingText && h.index === headingIndex);
 
-		// Extract the target heading ID from the clicked link's href attribute
-		const targetId = event.currentTarget.getAttribute("href").substring(1);
+        if (matchingTocHeading) {
+            heading.setAttribute('data-toc-anchor', matchingTocHeading.anchor);
+            console.log('Labeled heading:', headingText, 'with anchor:', matchingTocHeading.anchor);
+            headingIndex++;
+        }
+    });
 
-		// Find the heading element with the corresponding ID
-		const targetElement = document.getElementById(targetId);
+    tocLinks.forEach((link) => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Link clicked:', this.textContent);
+            
+            const targetAnchor = this.getAttribute('data-target');
+            console.log('Target anchor:', targetAnchor);
+            
+            const targetElement = document.querySelector(`[data-toc-anchor="${targetAnchor}"]`);
+            console.log('Target element found:', targetElement);
+            
+            if (targetElement) {
+                console.log('Scrolling to:', targetElement.textContent);
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                console.log('Target element not found');
+            }
+        });
+    });
 
-		if (targetElement) {
-			// Calculate position to scroll to, with an offset (e.g., 50 pixels)
-			const offset = 50; // Adjust this value as needed
-			const elementPosition =
-				targetElement.getBoundingClientRect().top + window.pageYOffset;
-			const offsetPosition = elementPosition - offset;
-
-			// Scroll to the target position smoothly
-			window.scrollTo({
-				top: offsetPosition,
-				behavior: "smooth",
-			});
-		}
-	}
-
-	// Add event listeners to all .blockons-toc-link elements
-	document.querySelectorAll(".blockons-toc-link").forEach((link) => {
-		link.addEventListener("click", scrollToHeading);
-	});
+    // Log all elements with data-toc-anchor attribute
+    const allAnchors = document.querySelectorAll('[data-toc-anchor]');
+    console.log('Number of elements with data-toc-anchor:', allAnchors.length);
+    allAnchors.forEach((el, index) => {
+        console.log(`Anchor ${index}:`, el.textContent, 'data-toc-anchor:', el.getAttribute('data-toc-anchor'));
+    });
 });

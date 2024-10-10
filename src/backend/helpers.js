@@ -113,11 +113,11 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: __("NEW", "blockons"),
 	},
-	// table_of_contents: {
-	// 	desc: __("Display a neat table of contents", "blockons"),
-	// 	pluginSpecific: false,
-	// 	isNew: __("NEW", "blockons"),
-	// },
+	table_of_contents: {
+		desc: __("Display a Table of Contents with clickable headings", "blockons"),
+		pluginSpecific: false,
+		isNew: __("NEW", "blockons"),
+	},
 	testimonials: {
 		desc: __("Display client testimonials in a slider or carousel", "blockons"),
 		pluginSpecific: false,

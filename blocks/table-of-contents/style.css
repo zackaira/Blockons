@@ -9,8 +9,7 @@ html {
 	font-size: 1.4em;
 	font-weight: bold;
 }
-.blockons-toc-desc {
-}
+.blockons-toc-desc {}
 .blockons-toc-ul {
 	display: flex;
 	flex-direction: column;
@@ -23,16 +22,18 @@ html {
 	padding: 0;
 	display: flex;
 }
-
-.blockons-toc-number {
-	margin-right: 8px;
-}
-a.blockons-toc-link {
-	display: block;
-}
+.blockons-toc-item {}
+.blockons-toc-number {}
+.blockons-toc-number span {}
+a.blockons-toc-link {}
 
 /* -- Alignment -- */
 .align-center {
 }
 .align-right {
 }
+
+/* -- Style -- */
+/* - One - */
+/* - Two - */
+/* - three - */

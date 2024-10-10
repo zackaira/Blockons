@@ -10,19 +10,51 @@
 	"attributes": {
 		"headings": {
 			"type": "array",
-			"default": []
+			"default": [],
+			"items": {
+				"type": "object",
+				"properties": {
+					"content": {
+						"type": "string"
+					},
+					"level": {
+						"type": "string"
+					},
+					"padding": {
+						"type": "number"
+					},
+					"anchor": {
+						"type": "string"
+					},
+					"blurb": {
+						"type": "string"
+					}
+				}
+			}
 		},
-		"tocHeading": {
+		"title": {
 			"type": "string",
 			"default": "Table of Contents"
 		},
-		"tocBefore": {
+		"showDeskTop": {
+			"type": "boolean",
+			"default": true
+		},
+		"descTop": {
 			"type": "string",
 			"default": "Click the relevant heading to jump to that section."
 		},
-		"tocStyle": {
+		"showDeskBottom": {
+			"type": "boolean",
+			"default": false
+		},
+		"descBottom": {
 			"type": "string",
-			"default": "left"
+			"default": "Click the relevant heading to jump to that section."
+		},
+		"design": {
+			"type": "string",
+			"default": "one"
 		},
 		"showNumbers": {
 			"type": "boolean",
@@ -54,11 +86,15 @@
 		},
 		"paddingIn": {
 			"type": "number",
-			"default": 15
+			"default": 10
 		},
 		"spacing": {
 			"type": "number",
 			"default": 10
+		},
+		"showBlurbs": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"editorScript": "file:./index.js",
