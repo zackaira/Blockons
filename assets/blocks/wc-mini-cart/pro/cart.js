@@ -4,8 +4,7 @@
  *
  * PREMIUM
  */
-import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "@wordpress/element";
 import SideCart from "./components/SideCart";
 import "../cart";
 

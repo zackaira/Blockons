@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import ResultsItem from "./ResultsItem";
 import Loader from "../../../../../src/backend/Loader";

@@ -183,29 +183,31 @@ const Edit = (props) => {
 					width: maxWidth,
 				}}
 			>
-				<MediaUpload
-					className="components-icon-button components-toolbar__control"
-					allowedTypes={["image"]}
-					value={imageBefore}
-					onSelect={(media) => handleImageUpload(media, "imageBefore")}
-					render={({ open }) => {
-						return (
-							<>
-								{imageBefore?.url ? (
-									<Button
-										className="blockons-ic-button before remove fa-xmark"
-										onClick={() => handleImageRemove("imageBefore")}
-									></Button>
-								) : (
-									<Button
-										className="blockons-ic-button before fa-upload"
-										onClick={open}
-									></Button>
-								)}
-							</>
-						);
-					}}
-				/>
+				{imageAfter?.url && (
+					<MediaUpload
+						className="components-icon-button components-toolbar__control"
+						allowedTypes={["image"]}
+						value={imageBefore}
+						onSelect={(media) => handleImageUpload(media, "imageBefore")}
+						render={({ open }) => {
+							return (
+								<>
+									{imageBefore?.url ? (
+										<Button
+											className="blockons-ic-button before remove fa-xmark"
+											onClick={() => handleImageRemove("imageBefore")}
+										></Button>
+									) : (
+										<Button
+											className="blockons-ic-button before fa-upload"
+											onClick={open}
+										></Button>
+									)}
+								</>
+							);
+						}}
+					/>
+				)}
 				<MediaUpload
 					className="components-icon-button components-toolbar__control"
 					allowedTypes={["image"]}
@@ -230,94 +232,90 @@ const Edit = (props) => {
 					}}
 				/>
 
-				<img-comparison-slider
-					tabindex="0"
-					className="rendered"
-					{...(automatic ? { hover: "hover" } : { hover: false })}
-					direction={slideDirection}
-					style={{
-						"--divider-color": handleColor,
-						"--default-handle-color": handleColor,
-						...(handle === "four"
-							? {
-									"--divider-width": 4,
-									"--default-handle-opacity": 0,
-							  }
-							: {}),
-					}}
-				>
-					<div slot="first" className="before">
-						<img
-							width="100%"
-							src={
-								imageBefore?.url
-									? imageBefore.url
-									: `${pluginUrl}assets/images/placeholder.png`
-							}
-						/>
-						{imageLabels && (
-							<RichText
-								tagName="div"
-								placeholder={__("Before", "blockons")}
-								keepPlaceholderOnFocus
-								value={before}
-								className="blockons-ic-title before"
-								onChange={(value) => setAttributes({ before: value })}
-								style={{
-									color: labelColor,
-								}}
-							/>
-						)}
-					</div>
-					<div slot="second" className="after">
-						<img
-							width="100%"
-							src={
-								imageAfter?.url
-									? imageAfter.url
-									: `${pluginUrl}assets/images/placeholder2.png`
-							}
-						/>
-						{imageLabels && (
-							<RichText
-								tagName="div"
-								placeholder={__("After", "blockons")}
-								keepPlaceholderOnFocus
-								value={after}
-								className="blockons-ic-title after"
-								onChange={(value) => setAttributes({ after: value })}
-								style={{
-									color: labelColor,
-								}}
-							/>
-						)}
-					</div>
+				{imageBefore.url && imageAfter.url ? (
+					<img-comparison-slider
+						tabindex="0"
+						className="rendered"
+						{...(automatic ? { hover: "hover" } : { hover: false })}
+						direction={slideDirection}
+						style={{
+							"--divider-color": handleColor,
+							"--default-handle-color": handleColor,
+							...(handle === "four"
+								? {
+										"--divider-width": 4,
+										"--default-handle-opacity": 0,
+								}
+								: {}),
+						}}
+					>
+						<div slot="first" className="before">
+							<img width="100%" src={imageBefore.url} />
 
-					{handle === "one" && (
-						<div
-							className="handle-bar"
-							slot="handle"
-							style={{ backgroundColor: handleColor, borderColor: handleColor }}
-						></div>
-					)}
-					{handle === "three" && (
-						<svg
-							slot="handle"
-							class="large-arrow-handle"
-							xmlns="http://www.w3.org/2000/svg"
-							width="100"
-							viewBox="-8 -3 16 6"
-						>
-							<path
-								stroke={handleColor}
-								d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2"
-								stroke-width="1"
-								fill={handleColor}
-								vector-effect="non-scaling-stroke"
-							></path>
-						</svg>
-					)}
-				</img-comparison-slider>
+							{imageLabels && (
+								<RichText
+									tagName="div"
+									placeholder={__("Before", "blockons")}
+									keepPlaceholderOnFocus
+									value={before}
+									className="blockons-ic-title before"
+									onChange={(value) => setAttributes({ before: value })}
+									style={{
+										color: labelColor,
+									}}
+								/>
+							)}
+						</div>
+						<div slot="second" className="after">
+							<img width="100%" src={imageAfter.url} />
+
+							{imageLabels && (
+								<RichText
+									tagName="div"
+									placeholder={__("After", "blockons")}
+									keepPlaceholderOnFocus
+									value={after}
+									className="blockons-ic-title after"
+									onChange={(value) => setAttributes({ after: value })}
+									style={{
+										color: labelColor,
+									}}
+								/>
+							)}
+						</div>
+
+						{handle === "one" && (
+							<div
+								className="handle-bar"
+								slot="handle"
+								style={{ backgroundColor: handleColor, borderColor: handleColor }}
+							></div>
+						)}
+						{handle === "three" && (
+							<svg
+								slot="handle"
+								class="large-arrow-handle"
+								xmlns="http://www.w3.org/2000/svg"
+								width="100"
+								viewBox="-8 -3 16 6"
+							>
+								<path
+									stroke={handleColor}
+									d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2"
+									stroke-width="1"
+									fill={handleColor}
+									vector-effect="non-scaling-stroke"
+								></path>
+							</svg>
+						)}
+					</img-comparison-slider>
+				) : (
+					<div className="aspect-ratio ratio-32rectangle noimg">
+						<div className="aspect-img">
+							{imageAfter.url && `<-- ${__("Add A Second Image", "blockons")}`}
+						</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);

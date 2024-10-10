@@ -160,6 +160,18 @@
 			"type": "string",
 			"default": "default"
 		},
+		"autoplay": {
+			"type": "boolean",
+			"default": false
+		},
+		"autoplayDelay": {
+			"type": "string",
+			"default": "4000"
+		},
+		"autoplayDisable": {
+			"type": "boolean",
+			"default": false
+		},
 		"spaceBetween": {
 			"type": "number",
 			"default": 0

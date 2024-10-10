@@ -39,6 +39,34 @@
 .wp-block-blockons-image-comparison img-comparison-slider .handle-container {
 	cursor: col-resize;
 }
+/* -- Aspect Ration - No Image -- */
+.wp-block-blockons-image-comparison .aspect-ratio {
+	background-image: url(../../assets/images/placeholder.png);
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	position: relative;
+	width: 100%;
+}
+.wp-block-blockons-image-comparison .aspect-ratio::before {
+	content: "";
+	display: block;
+}
+/* 3:2 Aspect Ratio */
+.wp-block-blockons-image-comparison .ratio-32rectangle::before {
+	padding-top: 56.2%;
+}
+.wp-block-blockons-image-comparison .aspect-img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	padding-top: 30px;
+}
 /* -- Handle -- */
 .handle-bar {
 	position: absolute;

@@ -16,8 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    console.log('filteredImages', filteredImages);
-
     filteredImages.forEach((image) => {
         const classListCopy = Array.from(image.classList);
         classListCopy.forEach((className) => {

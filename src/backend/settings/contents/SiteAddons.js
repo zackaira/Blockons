@@ -448,7 +448,7 @@ const SiteAddons = ({
 					<SettingRow
 						title={__("Site By Credit", "blockons")}
 						description={__(
-							"Add a 'Site By' linkback to this website.",
+							"Add a 'Site By' linkback to your website.",
 							"blockons"
 						)}
 						inputType="heading"

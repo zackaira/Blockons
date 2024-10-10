@@ -105,14 +105,18 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 										noline
 									/>
 									<div className="blockons-divider"></div>
-									<ToggleControl
-											checked={blockonsGlobalDisable}
-											label={__("Disable Lightbox", "blockons")}
-											onChange={(newValue) =>
-												setAttributes({ blockonsGlobalDisable: newValue })
-											}
-											help={__("Disable the global popup on this image", "blockons")}
-									/>
+									{isPremium ? (
+										<ToggleControl
+												checked={blockonsGlobalDisable}
+												label={__("Disable Lightbox", "blockons")}
+												onChange={(newValue) =>
+													setAttributes({ blockonsGlobalDisable: newValue })
+												}
+												help={__("Disable the global popup on this image", "blockons")}
+										/>
+									) : (
+										<p>{__("Disable selected images from the global lightbox in Blockons Premium", "blockons")}</p>
+									)}
 								</>
 							) : (
 								<>
@@ -261,7 +265,7 @@ const blockonsAddEditorImgPopupAttributes = createHigherOrderComponent(
 				defaultOptionImgEnabled && blockonsPopupEnabled
 					? `blockons-popup ${blockonsGalleryId ? "blockons-img-gal" : "blockons-img-single"} blcks-icon-${blockonsPopupIcon} blcks-pos-${blockonsPopupIconPos} blcks-theme-${blockonsPopupIconColor}`
 					: className;
-			const anotherClass = blockonsGlobalDisable ? "global-off" : "";
+			const anotherClass = isPremium && blockonsGlobalDisable ? "global-off" : "";
 			const newClassnames = classnames(className, newClasses, anotherClass);
 
 			return (
@@ -302,7 +306,7 @@ const blockonsAddFrontendImgPopupAttributes = (
 
 	
 	const newClasses = blockonsPopupEnabled ? `blockons-popup ${blockonsGalleryId ? "blockons-img-gal" : "blockons-img-single"} blcks-icon-${blockonsPopupIcon} blcks-pos-${blockonsPopupIconPos} blcks-theme-${blockonsPopupIconColor}` : "";
-	const anotherClass = blockonsGlobalDisable ? "global-off" : "";
+	const anotherClass = isPremium && blockonsGlobalDisable ? "global-off" : "";
 	const newClassnames = classnames(extraProps.className, newClasses, anotherClass);
 
 	extraProps.className = newClassnames;

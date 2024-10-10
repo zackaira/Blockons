@@ -1,5 +1,3 @@
-import React from "react";
-
 const TaxResults = ({ taxItems, title }) => {
 	if (!taxItems || taxItems.length === 0) return;
 

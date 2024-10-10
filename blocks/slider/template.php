@@ -19,6 +19,10 @@ $sliderOptions = array(
 		"prevEl" => ".swiper-button-prev",
 		"nextEl" => ".swiper-button-next",
 	) : false,
+	"autoplay" => isset($attributes['autoplay']) && $attributes['autoplay'] == true ? array(
+		"delay" => isset($attributes['autoplayDelay']) ? $attributes['autoplayDelay'] : 4000,
+		"disableOnInteraction" => isset($attributes['autoplayDisable']) && $attributes['autoplayDisable'] == true ? true : false,
+	) : false,
 	"pagination" => isset($attributes['pagination']) && $attributes['pagination'] == true ? array(
 		"el" => ".swiper-pagination",
 		"type" => $attributes['paginationStyle'] == "fraction" ? "fraction" : "bullets",
@@ -35,23 +39,15 @@ $sliderOptions = array(
 					<div class="swiper-slide">
 
 						<div class="swiper-slide-inner <?php echo isset($slide['style']['position']) && $slide['style']['position'] != "" ? sanitize_html_class($slide['style']['position']) : sanitize_html_class($attributes['position']); ?> <?php echo (isset($attributes['forceFullWidth']) && $attributes['forceFullWidth'] == true) || (isset($attributes['imageProportion']) && $attributes['imageProportion'] != 'actual') ? 'imgfull' : ''; ?>">
-							<div class="blockons-slider-image" style="background-image: url(<?php echo (isset($slide['image']) && isset($slide['image']['url']) && $slide['image']['url'] != "") ? esc_url($slide['image']['url']) : esc_url(BLOCKONS_PLUGIN_URL . 'assets/images/placeholder.png'); ?>);">
+							<div class="blockons-slider-image <?php echo isset($attributes['imageProportion']) && $attributes['imageProportion'] != "actual" ? esc_attr("aspect-ratio ratio-" . $attributes['imageProportion']) : (isset($slide['image']) && isset($slide['image']['url']) ? "" : esc_attr("aspect-ratio ratio-169panoramic")); ?> <?php echo isset($slide['image']) && isset($slide['image']['url']) ? "" : "noimg"; ?>">
 								<?php if (isset($attributes['imageOverlay']) && $attributes['imageOverlay'] == true) : ?>
 									<div class="blockons-slider-imgoverlay" style="<?php echo isset($slide['style']['bgOverlayColor']) && $slide['style']['bgOverlayColor'] != "" ? 'background-color:' . esc_attr($slide['style']['bgOverlayColor']) . '; ' : 'background-color:' . esc_attr($attributes['imageOverlayColor']) . '; '; ?> <?php echo isset($slide['style']['bgOverlayOpacity']) && $slide['style']['bgOverlayOpacity'] != "" ? 'opacity:' . esc_attr($slide['style']['bgOverlayOpacity']) . '; ' : 'opacity:' . esc_attr($attributes['imageOverlayOpacity']) . '; '; ?>"></div>
 								<?php endif; ?>
 								
-								<?php if (isset($attributes['imageProportion']) && $attributes['imageProportion'] == "actual") : ?>
-
-									<?php if (isset($slide['image']) && isset($slide['image']['url']) && $slide['image']['url'] != "") : ?>
+								<?php if (isset($slide['image']) && isset($slide['image']['url']) && $slide['image']['url'] != "") : ?>
+									<div class="aspect-img">
 										<img src="<?php echo esc_url($slide['image']['url']); ?>" alt="<?php echo isset($slide['image']) && isset($slide['image']['alt']) ? esc_attr($slide['image']['alt']) : ''; ?>" />
-									<?php else : ?>
-										<img src="<?php echo esc_url(BLOCKONS_PLUGIN_URL . 'assets/images/placeholder.png'); ?>" />
-									<?php endif; ?>
-
-								<?php else : ?>
-
-									<img src="<?php echo esc_url(BLOCKONS_PLUGIN_URL . 'assets/images/' . $attributes['imageProportion'] . '.png'); ?>" />
-
+									</div>
 								<?php endif; ?>
 							</div><!-- .blockons-slider-image -->
 							

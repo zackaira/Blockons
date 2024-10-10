@@ -38,7 +38,7 @@ const BlockonsInlineBlockTooltip = ({ isActive, onChange, value }) => {
 		"core/list-item",
 		"blockons/line-heading",
 	];
-	if (!selectedBlock || !allowedBlocks.includes(selectedBlock.name)) {
+	if (!tooltipDefaults.enabled || !selectedBlock || !allowedBlocks.includes(selectedBlock.name)) {
 		return null;
 	}
 

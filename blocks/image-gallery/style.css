@@ -24,6 +24,49 @@
 	display: block;
 	margin: 0 !important;
 }
+/* -- Image Aspect Ratios -- */
+.wp-block-blockons-image-gallery .aspect-ratio {
+	position: relative;
+	width: 100%;
+}
+.wp-block-blockons-image-gallery .aspect-ratio::before {
+	content: "";
+	display: block;
+}
+.wp-block-blockons-image-gallery .aspect-ratio .aspect-img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.wp-block-blockons-image-gallery .blockons-gallery-item.grid .blockons-gallery-img.aspect-ratio .aspect-img img,
+.wp-block-blockons-image-gallery .blockons-gallery-item.masonry .blockons-gallery-img.aspect-ratio .aspect-img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+/* 3:2 Aspect Ratio */
+.wp-block-blockons-image-gallery .ratio-32rectangle::before {
+	padding-top: 66.67%; /* (2 / 3) * 100% */
+}
+/* 4:3 Aspect Ratio */
+.wp-block-blockons-image-gallery .ratio-43rectangle::before {
+	padding-top: 75%; /* (3 / 4) * 100% */
+}
+/* 16:9 Aspect Ratio */
+.wp-block-blockons-image-gallery .ratio-169panoramic::before {
+	padding-top: 56.25%; /* (9 / 16) * 100% */
+}
+/* 1:1 Aspect Ratio (Square) */
+.wp-block-blockons-image-gallery .ratio-square::before {
+	padding-top: 100%; /* (1 / 1) * 100% */
+}
+.wp-block-blockons-image-gallery .blockons-gallery-img.aspect-ratio img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
 /* -- Grid Layout -- */
 .wp-block-blockons-image-gallery .blockons-gallery.grid {
 	display: grid;
@@ -779,14 +822,14 @@
 .wp-block-blockons-image-gallery
 	.blockons-gallery.effect-border
 	.blockons-gallery-item
-	.blockons-gallery-img {
+	.blockons-gallery-img img {
 	box-shadow: none;
 	transition: box-shadow 0.3s ease-in-out 0s;
 }
 .wp-block-blockons-image-gallery
 	.blockons-gallery.effect-border
 	.blockons-gallery-item:hover
-	.blockons-gallery-img {
+	.blockons-gallery-img img {
 	box-shadow: inset 0 0 0 12px rgb(0 0 0 / 14%),
 		inset 0 0 0 2px rgb(0 0 0 / 18%);
 }

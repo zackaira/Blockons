@@ -7,7 +7,8 @@ const BlockonsPostTypeSelect = (props) => {
 	const { label, value, onChange, exclude = [], siteurl } = props;
 	const [postTypes, setPostTypes] = useState([]);
 	const [loadingPostTypes, setLoadingPostTypes] = useState(true);
-	const excludedPostTypes = [...exclude];
+	const autoExclude = ["attachment", "revision", "nav_menu_item", "wp_global_styles", "wp_font_family", "wp_font_face"];
+	const excludedPostTypes = [...autoExclude, ...exclude];
 
 	useEffect(() => {
 		if (!siteurl) return;

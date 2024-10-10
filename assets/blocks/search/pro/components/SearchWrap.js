@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "@wordpress/element";
 import axios from "axios";
 import Loader from "../../../../../src/backend/Loader";
 import { __ } from "@wordpress/i18n";

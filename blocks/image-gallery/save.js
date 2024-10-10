@@ -69,30 +69,14 @@ const Save = ({ attributes }) => {
 								attributes.isPremium && attributes.popupEnable
 									? `blockons-popup blcks-icon-${attributes.popupIcon} blcks-pos-${attributes.popupIconPos} blcks-theme-${attributes.popupIconColor}`
 									: ""
-							}`}
-							style={{
-								...(attributes.imageProportion !== "actual"
-									? {
-											backgroundImage: `url(${imageItem.imageUrl})`,
-									  }
-									: {}),
-							}}
+							} ${attributes.imageProportion !== "actual" ? `aspect-ratio ratio-${attributes.imageProportion}` : !imageItem.imageUrl ? `aspect-ratio ratio-169panoramic` : ""} ${!imageItem.imageUrl ? `noimg` : ""}`}
 							{...(attributes.isPremium && attributes.popupEnable ? {
 								"data-img": imageItem.imageUrl,
 								"data-imgcaption": imageItem.imageCaption
 							} : {})}
 							// {...(attributes.isPremium && attributes.popupEnable ? { onClick: () => showPopup(imageItem.imageUrl, imageItem.imageCaption) } : {})}
 						>
-							{attributes.imageProportion === "actual" ? (
-								imageItem.imageUrl && (
-									<img src={imageItem.imageUrl} alt={imageItem.alt} />
-								)
-							) : (
-								<img
-									src={`${pluginUrl}assets/images/${attributes.imageProportion}.png`}
-									alt={imageItem.alt}
-								/>
-							)}
+							{imageItem.imageUrl && <div class="aspect-img"><img src={imageItem.imageUrl} alt={imageItem.alt} /></div>}
 						</div>
 					)}
 

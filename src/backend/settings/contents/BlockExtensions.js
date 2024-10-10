@@ -525,7 +525,7 @@ const BlockExtensions = ({
 				</tbody>
 			</table>
 
-			{wcActive && (
+			{/* {wcActive && (
 				<>
 					<SettingHeader
 						title={__("Blockons WooCommerce Block Extensions", "blockons")}
@@ -624,7 +624,7 @@ const BlockExtensions = ({
 
 			{blockonsOptions.quickview?.enabled && quickviewPreview && (
 				<TestProduct settings={blockonsOptions?.quickview} />
-			)}
+			)} */}
 		</>
 	);
 };

@@ -187,14 +187,7 @@ const Edit = (props) => {
 								isPro && popupEnable
 									? `blockons-popup blcks-icon-${popupIcon} blcks-pos-${popupIconPos} blcks-theme-${popupIconColor}`
 									: ""
-							}`}
-							style={{
-								...(imageProportion !== "actual"
-									? {
-											backgroundImage: `url(${imageItem.imageUrl})`,
-									  }
-									: {}),
-							}}
+							} ${imageProportion !== "actual" ? `aspect-ratio ratio-${imageProportion}` : !imageItem.imageUrl ? `aspect-ratio ratio-169panoramic` : ""} ${!imageItem.imageUrl ? `noimg` : ""}`}
 							{...(isPro && popupEnable ? {
 								"data-img": imageItem.imageUrl,
 								"data-imgcaption": imageItem.imageCaption
@@ -202,16 +195,7 @@ const Edit = (props) => {
 							{...(isPro && popupEnable ? { onClick: () => handleGalleryPopup(index) } : {})}
 							// onClick={() => handleGalleryPopup(index)}
 						>
-							{imageProportion === "actual" ? (
-								imageItem.imageUrl && (
-									<img src={imageItem.imageUrl} alt={imageItem.alt} />
-								)
-							) : (
-								<img
-									src={`${pluginUrl}assets/images/${imageProportion}.png`}
-									alt={imageItem.alt}
-								/>
-							)}
+							{imageItem.imageUrl && <div class="aspect-img"><img src={imageItem.imageUrl} alt={imageItem.alt} /></div>}
 						</div>
 					)}
 

@@ -202,7 +202,7 @@ const Edit = (props) => {
 
 	const slides = sliderSlides.map((slideItem, index) => (
 		<div className="swiper-slide-inner blockons-videos">
-			<div className="swiper-slide-video">
+			<div className="swiper-slide-video aspect-ratio ratio-32rectangle">
 				{slideItem.videoType === "youtube" && slideItem.videoId && (
 					<iframe
 						className="blockons-video youtube"
@@ -235,7 +235,7 @@ const Edit = (props) => {
 					</video>
 				)}
 
-				<img src={`${pluginUrl}assets/images/169panoramic.png`} />
+				<div className="aspect-img"></div>
 			</div>
 
 			<div
@@ -243,9 +243,7 @@ const Edit = (props) => {
 				style={{
 					...(slideItem.coverImage && slideItem.coverImage.url
 						? { backgroundImage: `url(${slideItem.coverImage.url})` }
-						: {
-								backgroundImage: `url(${pluginUrl}assets/images/placeholder.png)`,
-						  }),
+						: {}),
 				}}
 			>
 				{(((slideItem.videoType === "youtube" ||

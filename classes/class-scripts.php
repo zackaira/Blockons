@@ -78,9 +78,9 @@ class Blockons {
 
 			// WC Cart Icon Block JS
 			if (blockons_fs()->can_use_premium_code__premium_only()) {
-				wp_register_script('blockons-wc-mini-cart', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/cart-pro.min.js'), array(), BLOCKONS_PLUGIN_VERSION);
+				wp_register_script('blockons-wc-mini-cart', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/cart-pro.min.js'), array('wp-element'), BLOCKONS_PLUGIN_VERSION);
 			} else {
-				wp_register_script('blockons-wc-mini-cart', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-mini-cart/cart.js'), array(), BLOCKONS_PLUGIN_VERSION);
+				wp_register_script('blockons-wc-mini-cart', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-mini-cart/cart.js'), array('wp-element'), BLOCKONS_PLUGIN_VERSION);
 			}
 			wp_localize_script('blockons-wc-mini-cart', 'wcCartObj', array(
 				'adminUrl' => esc_url(admin_url()),
@@ -92,9 +92,9 @@ class Blockons {
 		
 		// Search JS - FREE & PREMIUM
 		if (blockons_fs()->can_use_premium_code__premium_only()) {
-			wp_register_script('blockons-search', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/search-pro.min.js'), array(), BLOCKONS_PLUGIN_VERSION);
+			wp_register_script('blockons-search', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/search-pro.min.js'), array('wp-element', 'wp-i18n'), BLOCKONS_PLUGIN_VERSION);
 		} else {
-			wp_register_script('blockons-search', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/search/search.js'), array(), BLOCKONS_PLUGIN_VERSION);
+			wp_register_script('blockons-search', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/search/search.js'), array('wp-element', 'wp-i18n'), BLOCKONS_PLUGIN_VERSION);
 		}
 		wp_localize_script('blockons-search', 'searchObj', array(
 			'isPremium' => $isPro,

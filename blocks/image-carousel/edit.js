@@ -125,25 +125,10 @@ const Edit = (props) => {
 			<div
 				className={`blockons-slider-img ${
 					forceFullWidth || imageProportion !== "actual" ? "imgfull" : ""
-				}`}
-				style={{
-					...(imageProportion === "actual"
-						? ""
-						: {
-								background: `url("${slideItem.imageUrl}") center center / cover no-repeat`,
-						  }),
-				}}
+				} ${imageProportion !== "actual" ? `aspect-ratio ratio-${imageProportion}` : !slideItem.imageUrl ? `aspect-ratio ratio-169panoramic` : ""} ${!slideItem.imageUrl ? `noimg` : ""}`}
 			>
-				{imageProportion === "actual" ? (
-					slideItem.imageUrl && (
-						<img src={slideItem.imageUrl} alt={slideItem.alt} />
-					)
-				) : (
-					<img
-						src={`${pluginUrl}assets/images/${imageProportion}.png`}
-						alt={slideItem.alt}
-					/>
-				)}
+
+				{slideItem.imageUrl ? <div class="aspect-img"><img src={slideItem.imageUrl} alt={slideItem.alt} /></div> : ""}
 			</div>
 
 			{captionPosition !== "none" && slideItem.imageCaption && (

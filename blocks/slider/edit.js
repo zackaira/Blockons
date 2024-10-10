@@ -10,6 +10,7 @@ import {
 import {
 	PanelBody,
 	Dropdown,
+	TextControl,
 	ToggleControl,
 	SelectControl,
 	RangeControl,
@@ -52,6 +53,9 @@ const Edit = (props) => {
 			transition,
 			perView,
 			mode,
+			autoplay,
+			autoplayDelay,
+			autoplayDisable,
 			spaceBetween,
 			navigation,
 			navigationStyle,
@@ -410,20 +414,7 @@ const Edit = (props) => {
 				slideItem.style?.position ? slideItem.style.position : position
 			} ${forceFullWidth || imageProportion !== "actual" ? "imgfull" : ""}`}
 		>
-			<div
-				className="blockons-slider-image"
-				{...(slideItem.image?.url
-					? {
-							style: {
-								backgroundImage: `url(${slideItem.image.url})`,
-							},
-					  }
-					: {
-							style: {
-								backgroundImage: `url(${pluginUrl}assets/images/placeholder.png)`,
-							},
-					  })}
-			>
+			<div className={`blockons-slider-image ${imageProportion !== "actual" ? `aspect-ratio ratio-${imageProportion}` : !slideItem.image.url ? `aspect-ratio ratio-169panoramic` : ""} ${!slideItem.image.url ? `noimg` : ""}`}>
 				{imageOverlay && (
 					<div
 						className="blockons-slider-imgoverlay"
@@ -440,15 +431,8 @@ const Edit = (props) => {
 					></div>
 				)}
 
-				{imageProportion === "actual" ? (
-					slideItem.image?.url ? (
-						<img src={slideItem.image.url} alt={slideItem.image.alt} />
-					) : (
-						<img src={`${pluginUrl}assets/images/placeholder.png`} />
-					)
-				) : (
-					<img src={`${pluginUrl}assets/images/${imageProportion}.png`} />
-				)}
+				
+				{slideItem.image?.url ? <div class="aspect-img"><img src={slideItem.image.url} alt={slideItem.image.alt} /></div> : ""}
 			</div>
 
 			<div // Turn to a link on full slide selection
@@ -1318,6 +1302,37 @@ const Edit = (props) => {
 							/>
 						)}
 
+						<ToggleControl
+							label={__("Auto Play", "blockons")}
+							checked={autoplay}
+							onChange={(newValue) =>
+								setAttributes({ autoplay: newValue })
+							}
+							help={autoplay ? __("Auto Play will ONLY work on the site frontend", "blockons") : ""}
+						/>
+						{autoplay && (
+							<>
+								<TextControl
+									label={__("Time Delay", "blockons")}
+									type="number"
+									value={autoplayDelay}
+									onChange={(newValue) => 
+										setAttributes({ autoplayDelay: newValue })
+									}
+									help={__("1000 = 1 second", "blockons")}
+								/>
+								<ToggleControl
+									label={__("Disable on Interaction", "blockons")}
+									checked={autoplayDisable}
+									onChange={(newValue) =>
+										setAttributes({ autoplayDisable: newValue })
+									}
+									help={__("Disable the Auto Play When the slider is interacted with", "blockons")}
+								/>
+							</>
+						)}
+						<div className="blockons-divider"></div>
+						
 						<SelectControl
 							label="Slider Mode"
 							value={mode}
