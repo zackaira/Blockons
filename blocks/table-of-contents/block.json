@@ -2,12 +2,24 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "blockons/table-of-contents",
-	"title": "Blockons Table of Contents",
+	"title": "Table of Contents",
 	"textdomain": "blockons",
 	"icon": "editor-table",
 	"category": "blockons-category",
-	"keywords": ["toc", "contents", "table", "blockons"],
+	"keywords": ["table", "contents", "toc", "blockons"],
 	"attributes": {
+		"maxWidth": {
+			"type": "string",
+			"default": "100%"
+		},
+		"align": {
+			"type": "string",
+			"default": "left"
+		},
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		},
 		"headings": {
 			"type": "array",
 			"default": [],
@@ -32,11 +44,15 @@
 				}
 			}
 		},
+		"showTitle" : {
+			"type": "boolean",
+			"default": true
+		},
 		"title": {
 			"type": "string",
 			"default": "Table of Contents"
 		},
-		"showDeskTop": {
+		"showDescTop": {
 			"type": "boolean",
 			"default": true
 		},
@@ -44,21 +60,45 @@
 			"type": "string",
 			"default": "Click the relevant heading to jump to that section."
 		},
-		"showDeskBottom": {
+		"showDescBottom": {
 			"type": "boolean",
 			"default": false
 		},
 		"descBottom": {
 			"type": "string",
-			"default": "Click the relevant heading to jump to that section."
+			"default": "Add some extra text if you need it."
 		},
-		"design": {
+		"border": {
 			"type": "string",
 			"default": "one"
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 2
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 4
+		},
+		"titleColor": {
+			"type": "string",
+			"default": "#222"
+		},
+		"titleSize": {
+			"type": "number",
+			"default": 24
 		},
 		"showNumbers": {
 			"type": "boolean",
 			"default": true
+		},
+		"numberSize": {
+			"type": "number",
+			"default": 18
+		},
+		"numberSpacing": {
+			"type": "number",
+			"default": 8
 		},
 		"includeH1": {
 			"type": "boolean",
@@ -84,6 +124,14 @@
 			"type": "boolean",
 			"default": true
 		},
+		"paddingHoriz": {
+			"type": "number",
+			"default": 15
+		},
+		"paddingVert": {
+			"type": "number",
+			"default": 10
+		},
 		"paddingIn": {
 			"type": "number",
 			"default": 10
@@ -93,6 +141,50 @@
 			"default": 10
 		},
 		"showBlurbs": {
+			"type": "boolean",
+			"default": false
+		},
+		"bgColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"headColor": {
+			"type": "string",
+			"default": "#222"
+		},
+		"headSize": {
+			"type": "number",
+			"default": 16
+		},
+		"descColor": {
+			"type": "string",
+			"default": "#5b5b5b"
+		},
+		"descSize": {
+			"type": "number",
+			"default": 15
+		},
+		"blurbColor": {
+			"type": "string",
+			"default": "#868686"
+		},
+		"blurbSize": {
+			"type": "number",
+			"default": 14
+		},
+		"numberColor": {
+			"type": "string",
+			"default": "#333"
+		},
+		"isPremium": {
+			"type": "boolean",
+			"default": false
+		},
+		"addAnchors": {
 			"type": "boolean",
 			"default": false
 		}

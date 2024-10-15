@@ -1,57 +1,57 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('TOC script loaded!');
-
+    const tocElement = document.querySelector('.blockons-toc');
     const tocLinks = document.querySelectorAll('.blockons-toc-link');
-    console.log('Number of TOC links found:', tocLinks.length);
-
-    // Create an array of heading data from TOC links
-    const tocHeadings = Array.from(tocLinks).map((link, index) => ({
-        text: link.textContent.trim(),
-        anchor: link.getAttribute('data-target'),
-        index: index
-    }));
-
-    console.log('TOC Headings:', tocHeadings);
-
-    // Find and label the correct headings
     const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    let headingIndex = 0;
 
+    const dataAnchor = tocElement.getAttribute('data-anchor');
+
+    // Create a map of heading text to their elements
+    const headingMap = new Map();
     headings.forEach((heading) => {
-        const headingText = heading.textContent.trim();
-        const matchingTocHeading = tocHeadings.find(h => h.text === headingText && h.index === headingIndex);
-
-        if (matchingTocHeading) {
-            heading.setAttribute('data-toc-anchor', matchingTocHeading.anchor);
-            console.log('Labeled heading:', headingText, 'with anchor:', matchingTocHeading.anchor);
-            headingIndex++;
+        const text = heading.textContent.trim();
+        if (!headingMap.has(text)) {
+            headingMap.set(text, heading);
         }
     });
 
+    // Process TOC links and match with headings
     tocLinks.forEach((link) => {
+        const linkText = link.textContent.trim();
+        const targetAnchor = link.getAttribute('href').substring(1); // Remove the '#'
+        const matchingHeading = headingMap.get(linkText);
+
+        if (matchingHeading) {
+            matchingHeading.id = targetAnchor;
+
+            // Add anchor and copy icons
+            if (dataAnchor) {
+                const iconContainer = document.createElement('span');
+                iconContainer.className = 'blockons-toc-icons';
+
+                if (dataAnchor) {
+                    const anchorIcon = document.createElement('span');
+                    anchorIcon.className = 'toc-icon fa-solid fa-link';
+                    anchorIcon.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const newUrl = window.location.href.split('#')[0] + '#' + targetAnchor;
+                        window.history.pushState(null, '', newUrl);
+                        navigator.clipboard.writeText(newUrl);
+                        matchingHeading.scrollIntoView({ behavior: 'smooth' });
+                    });
+                    iconContainer.appendChild(anchorIcon);
+                }
+
+                matchingHeading.appendChild(iconContainer);
+            }
+        }
+
+        // Add click event listener for smooth scrolling
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('Link clicked:', this.textContent);
-            
-            const targetAnchor = this.getAttribute('data-target');
-            console.log('Target anchor:', targetAnchor);
-            
-            const targetElement = document.querySelector(`[data-toc-anchor="${targetAnchor}"]`);
-            console.log('Target element found:', targetElement);
-            
+            const targetElement = document.getElementById(targetAnchor);
             if (targetElement) {
-                console.log('Scrolling to:', targetElement.textContent);
                 targetElement.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                console.log('Target element not found');
             }
         });
-    });
-
-    // Log all elements with data-toc-anchor attribute
-    const allAnchors = document.querySelectorAll('[data-toc-anchor]');
-    console.log('Number of elements with data-toc-anchor:', allAnchors.length);
-    allAnchors.forEach((el, index) => {
-        console.log(`Anchor ${index}:`, el.textContent, 'data-toc-anchor:', el.getAttribute('data-toc-anchor'));
     });
 });

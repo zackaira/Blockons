@@ -229,6 +229,7 @@ This could be from the theme you're using, or another plugin. Again, please [con
 * Updated Settings Page to store current tab
 * Added Auto Play options to Slider, Testimonial & Carousel blocks
 * 
+* NEW: Added new Table Of Contents block
 * Updated the language .pot file
 * PREMIUM: Added new 'Site By' feature to Site Addons
 * PREMIUM: Added new 'WooCommerce Side Cart' Addon

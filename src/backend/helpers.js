@@ -111,7 +111,7 @@ export const blockListSettings = {
 	tabs: {
 		desc: __("Display your site information in tabbed content", "blockons"),
 		pluginSpecific: false,
-		isNew: __("NEW", "blockons"),
+		isNew: false,
 	},
 	table_of_contents: {
 		desc: __("Display a Table of Contents with clickable headings", "blockons"),

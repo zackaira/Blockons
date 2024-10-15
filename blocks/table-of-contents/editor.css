@@ -2,3 +2,31 @@
  * Note that these styles are loaded *after* common styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
+.blockons-toc-icon {
+	pointer-events: none;
+}
+
+.blockons-set-title {
+	font-size: 11px;
+	font-weight: 500;
+	line-height: 1.4;
+	text-transform: uppercase;
+	display: inline-block;
+	margin-bottom: calc(8px);
+	padding: 0px;
+}
+h4.blockons-anchor-example {
+	margin: 0 0 10px;
+	padding: 0;
+	font-size: 20px;
+}
+h4.blockons-anchor-example span {
+	font-size: 0.75em;
+  	margin-left: 7px;
+	opacity: 0.55;
+	cursor: pointer;
+	transition: opacity 0.3s;
+}
+h4.blockons-anchor-example span:hover {
+	opacity: 1;
+}

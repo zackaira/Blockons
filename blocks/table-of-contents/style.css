@@ -5,35 +5,113 @@
 html {
 	scroll-behavior: smooth;
 }
-.blockons-toc-title {
-	font-size: 1.4em;
-	font-weight: bold;
+.wp-block-blockons-table-of-contents {
+	display: flex;
 }
-.blockons-toc-desc {}
-.blockons-toc-ul {
+.wp-block-blockons-table-of-contents .blockons-toc {
+	box-sizing: border-box;
+	flex: 1;
+	padding: 10px;
+}
+.wp-block-blockons-table-of-contents .blockons-toc-title {
+	font-size: 24px;
+	font-weight: bold;
+	margin: 0 0 8px;
+  	padding: 0;
+	color: inherit;
+}
+.wp-block-blockons-table-of-contents .blockons-toc-desc {
+	margin: 0 0 10px;
+	padding: 0;
+	font-size: 15px;
+}
+.wp-block-blockons-table-of-contents .blockons-toc-botdesc {
+	margin: 10px 0 0;
+	padding: 0;
+	font-size: 15px;
+}
+.wp-block-blockons-table-of-contents .blockons-toc-ul {
 	display: flex;
 	flex-direction: column;
 	margin: 0;
 	padding: 0;
 }
-.blockons-toc-li {
+.wp-block-blockons-table-of-contents .blockons-toc-li {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	display: flex;
+  	align-items: center;
 }
-.blockons-toc-item {}
-.blockons-toc-number {}
-.blockons-toc-number span {}
-a.blockons-toc-link {}
+.wp-block-blockons-table-of-contents .blockons-toc-item {
+	display: flex;
+  	flex-direction: column;
+}
+.wp-block-blockons-table-of-contents .blockons-toc-number {
+	margin-right: 8px;
+}
+.wp-block-blockons-table-of-contents .blockons-toc-item a.blockons-toc-link {
+	font-size: 16px;
+}
+.wp-block-blockons-table-of-contents .blockons-toc-item .blockons-toc-blurb {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
 
 /* -- Alignment -- */
-.align-center {
+.wp-block-blockons-table-of-contents.alignment-left .blockons-toc {
+	text-align: left;
 }
-.align-right {
+.wp-block-blockons-table-of-contents.alignment-center .blockons-toc {
+	text-align: center;
+}
+.wp-block-blockons-table-of-contents.alignment-right .blockons-toc {
+	text-align: right;
+}
+.wp-block-blockons-table-of-contents.alignment-left .blockons-toc .blockons-toc-ul {
+	align-items: flex-start;
+}
+.wp-block-blockons-table-of-contents.alignment-center .blockons-toc .blockons-toc-ul {
+	align-items: center;
+}
+.wp-block-blockons-table-of-contents.alignment-right .blockons-toc .blockons-toc-ul {
+	align-items: flex-end;
+}
+/* -- Align -- */
+.wp-block-blockons-table-of-contents.left-align {
+	justify-content: flex-start;
+}
+.wp-block-blockons-table-of-contents.center-align {
+	justify-content: center;
+}
+.wp-block-blockons-table-of-contents.right-align {
+	justify-content: flex-end;
 }
 
-/* -- Style -- */
-/* - One - */
-/* - Two - */
-/* - three - */
+/* -- Border -- */
+.wp-block-blockons-table-of-contents.style-one .blockons-toc {
+	border: 2px solid #2b2b2b;
+}
+.wp-block-blockons-table-of-contents.style-two .blockons-toc {
+	border: 2px dashed #2b2b2b;
+}
+.wp-block-blockons-table-of-contents.style-three .blockons-toc {
+	border: 0;
+}
+
+/* -- Premium Heading Link Icons -- */
+span.blockons-toc-icons {
+	position: relative;
+	top: -4px;
+}
+span.blockons-toc-icons span.toc-icon {
+	font-size: 0.6em;
+	margin-left: 10px;
+	opacity: 0.5;
+	cursor: pointer;
+	transition: opacity 0.3s;
+}
+span.blockons-toc-icons span.toc-icon:hover {
+	opacity: 1;
+}
