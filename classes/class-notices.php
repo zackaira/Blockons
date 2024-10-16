@@ -94,14 +94,24 @@ class Blockons_Notices {
 			return;
 
 		$settings = array();
-		
+
 		$settings['new_blocks_added'] = array(
+			'id'    => 'newblocks_008', // Increment this when adding new blocks
+			'type'  => 'info', // info | error | warning | success
+			'title' => __( 'New \'Table of Contents\' block added', 'blockons' ),
+			'text'  => __( 'Please go to the Blockons settings to enable it in the editor if you want to use it.', 'blockons' ),
+			'link'  => admin_url( 'options-general.php?page=blockons-settings' ), // admin_url( 'options-general.php?page=blockons-settings' ),
+			'link_text' => __( 'Go to Blockons Settings', 'blockons' ),
+			'inline' => true, // To display the link & text inline
+		);
+
+		$settings['new_big_update'] = array(
 			'id'    => 'newblocks_007', // Increment this when adding new blocks
 			'type'  => 'warning', // info | error | warning | success
 			'title' => __( 'Please Note! Blockons Plugin Update!', 'blockons' ),
 			'text'  => __( '<b>If you\'ve just installed Blockons, please ignore this message.</b> - Updates & Improvements have been made to Blockons Popup Images the Image blocks. Please check over these blocks to ensure they are working as expected. Apologies if any inconvenience caused.', 'blockons' ),
 			'link'  => 'https://blockons.com/blockons-latest-updates/', // admin_url( 'options-general.php?page=blockons-settings' ),
-			'link_text' => __( 'Read more on this.', 'blockons' ),
+			'link_text' => __( 'Read more on this', 'blockons' ),
 			'inline' => true, // To display the link & text inline
 		);
 

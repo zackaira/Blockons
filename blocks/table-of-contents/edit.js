@@ -27,6 +27,7 @@ const Edit = (props) => {
             alignment,
             align,
             headings,
+            canCollapse,
             showTitle,
             title,
             showDescTop,
@@ -64,6 +65,7 @@ const Edit = (props) => {
             isPremium,
             addAnchors,
         },
+        isSelected,
         setAttributes,
     } = props;
     const isPro = Boolean(blockonsEditorObj.isPremium);
@@ -71,6 +73,7 @@ const Edit = (props) => {
     const [extractedHeadings, setExtractedHeadings] = useState([]);
     const [blurbs, setBlurbs] = useState({});
     const [lastParsedContent, setLastParsedContent] = useState("");
+    const [isOpen, setIsOpen] = useState(false);
 
     const postContent = useSelect((select) =>
         select("core/editor").getEditedPostContent()
@@ -227,6 +230,14 @@ const Edit = (props) => {
         <div {...blockProps}>
             <InspectorControls>
                 <PanelBody title={__("Table of Contents Settings", "blockons")}>
+                    <ToggleControl
+                        label={__("Turn on Toggle Mode", "blockons")}
+                        checked={canCollapse}
+                        onChange={(newValue) => setAttributes({ canCollapse: newValue })}
+                        help={canCollapse ? __("The Table of headings will now collapse when not selected.", "blockons") : ""}
+                    />
+                    <div className="blockons-divider"></div>
+
                     <UnitControl
                         label={__("Table Of Contents Max-Width", "blockons")}
                         value={maxWidth}
@@ -239,6 +250,7 @@ const Edit = (props) => {
                         ]}
                         isResetValueOnUnitChange
                     />
+                    <div className="blockons-divider"></div>
 
                     <ToggleControl
                         label={__("Show Title", "blockons")}
@@ -484,7 +496,7 @@ const Edit = (props) => {
                 />
             </BlockControls>
             <div
-                className="blockons-toc"
+                className={`blockons-toc ${canCollapse ? "collapsible" : ""} ${isOpen || isSelected ? "open" : ""}`}
                 style={{
                     maxWidth,
                     padding: `${paddingVert}px ${paddingHoriz}px`,
@@ -494,99 +506,112 @@ const Edit = (props) => {
                     ...(border !== "three" && borderColor ? { borderColor } : {}),
                 }}
                 {...(isPremium && addAnchors ? { "data-anchor": "link" } : {})}>
-                {showTitle && (
-                    <RichText
-                        tagName="p"
-                        value={title}
-                        className="blockons-toc-title"
-                        onChange={(newValue) => setAttributes({ title: newValue })}
-                        allowedFormats={["core/bold", "core/italic"]}
-                        placeholder={__("Table of Contents", "blockons")}
-                        style={{
-                            ...(titleSize !== 24 ? { fontSize: `${titleSize}px` } : {}),
-                            color: titleColor
-                        }}
-                    />
-                )}
-                {showDescTop && (
-                    <RichText
-                        tagName="p"
-                        value={descTop}
-                        className="blockons-toc-desc"
-                        onChange={(newValue) => setAttributes({ descTop: newValue })}
-                        allowedFormats={["core/bold", "core/italic"]}
-                        placeholder={__("Click the relevant heading to jump to that section.", "blockons")}
-                        style={{
-                            ...(descSize !== 15 ? { fontSize: `${descSize}px` } : {}),
-                            color: descColor
-                        }}
-                    />
-                )}
-                <ul className="blockons-toc-ul">
-                    {headings.map((heading, index) => (
-                        <li
-                            key={`heading-${index}`}
-                            className="blockons-toc-li"
-                            style={{
-                                paddingLeft: `${heading.padding}px`,
-                                marginBottom: `${spacing}px`,
-                            }}
-                        >
-                            {showNumbers && (
-                                <div className="blockons-toc-number" style={{
-                                    ...(numberSpacing !== 8 ? { marginRight: `${numberSpacing}px` } : {}),
-                                    ...(numberSize !== 18 ? { fontSize: `${numberSize}px` } : {}),
-                                    color: numberColor
-                                }}>
-                                        <span>
-                                            {(index + 1).toString().padStart(2, '0')}
-                                        </span>
-                                </div>
-                            )}
-                            <div className="blockons-toc-item">
-                                <a 
-                                    href={`#${heading.anchor}`}
-                                    className="blockons-toc-link"
-                                    data-target={heading.anchor}
-                                    style={{
-                                        ...(headSize !== 16 ? { fontSize: `${headSize}px` } : {}),
-                                        color: headColor
-                                    }}
-                                >
-                                    {heading.content}
-                                </a>
-                                {showBlurbs && (
-                                    <RichText
-                                        tagName="p"
-                                        value={blurbs[index] || ''}
-                                        className="blockons-toc-blurb"
-                                        onChange={(newBlurb) => updateHeadingBlurb(index, newBlurb)}
-                                        allowedFormats={["core/bold", "core/italic"]}
-                                        placeholder={__("Enter a short description", "blockons")}
-                                        style={{
-                                            ...(blurbSize !== 13 ? { fontSize: `${blurbSize}px` } : {}),
-                                            color: blurbColor
-                                        }}
-                                    />
+                <div className={`header ${canCollapse ? "toggle" : ""}`}>
+                    <div className="header-txt">
+                        {showTitle && (
+                            <RichText
+                                tagName="p"
+                                value={title}
+                                className="blockons-toc-title"
+                                onChange={(newValue) => setAttributes({ title: newValue })}
+                                allowedFormats={["core/bold", "core/italic"]}
+                                placeholder={__("Table of Contents", "blockons")}
+                                style={{
+                                    ...(titleSize !== 24 ? { fontSize: `${titleSize}px` } : {}),
+                                    color: titleColor
+                                }}
+                            />
+                        )}
+                        {showDescTop && (
+                            <RichText
+                                tagName="p"
+                                value={descTop}
+                                className="blockons-toc-desc"
+                                onChange={(newValue) => setAttributes({ descTop: newValue })}
+                                allowedFormats={["core/bold", "core/italic"]}
+                                placeholder={__("Click the relevant heading to jump to that section.", "blockons")}
+                                style={{
+                                    ...(descSize !== 15 ? { fontSize: `${descSize}px` } : {}),
+                                    color: descColor
+                                }}
+                            />
+                        )}
+                    </div>
+                    {canCollapse && (
+                        <div className="blockons-toggle-btn">
+                            <span className="toggle-btn fa-solid fa-chevron-right"></span>
+                        </div>
+                    )}
+                </div>
+                <div className="blockons-toc-content">
+                    <ul className="blockons-toc-ul">
+                        {headings.map((heading, index) => (
+                            <li
+                                key={`heading-${index}`}
+                                className="blockons-toc-li"
+                                style={{
+                                    paddingLeft: `${heading.padding}px`,
+                                    marginBottom: `${spacing}px`,
+                                }}
+                            >
+                                {showNumbers && (
+                                    <div className="blockons-toc-number" style={{
+                                        ...(numberSpacing !== 8 ? { marginRight: `${numberSpacing}px` } : {}),
+                                        ...(numberSize !== 18 ? { fontSize: `${numberSize}px` } : {}),
+                                        color: numberColor
+                                    }}>
+                                            <span>
+                                                {(index + 1).toString().padStart(2, '0')}
+                                            </span>
+                                    </div>
                                 )}
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-                {showDescBottom && (
-                    <RichText
-                        tagName="p"
-                        value={descBottom}
-                        className="blockons-toc-botdesc"
-                        onChange={(newValue) => setAttributes({ descBottom: newValue })}
-                        allowedFormats={["core/bold", "core/italic"]}
-                        placeholder={__("Click the relevant heading to jump to that section.", "blockons")}
-                        style={{
-                            ...(descSize !== 15 ? { fontSize: `${descSize}px` } : {}),
-                            color: descColor
-                        }}
-                    />
-                )}
+                                <div className="blockons-toc-item">
+                                    <a 
+                                        href={`#${heading.anchor}`}
+                                        className="blockons-toc-link"
+                                        data-target={heading.anchor}
+                                        style={{
+                                            ...(headSize !== 16 ? { fontSize: `${headSize}px` } : {}),
+                                            color: headColor
+                                        }}
+                                    >
+                                        {heading.content}
+                                    </a>
+                                    {showBlurbs && (
+                                        <RichText
+                                            tagName="p"
+                                            value={blurbs[index] || ''}
+                                            className="blockons-toc-blurb"
+                                            onChange={(newBlurb) => updateHeadingBlurb(index, newBlurb)}
+                                            allowedFormats={["core/bold", "core/italic"]}
+                                            placeholder={__("Enter a short description", "blockons")}
+                                            style={{
+                                                ...(blurbSize !== 13 ? { fontSize: `${blurbSize}px` } : {}),
+                                                color: blurbColor
+                                            }}
+                                        />
+                                    )}
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                    {showDescBottom && (
+                        <div className="footer">
+                            <RichText
+                                tagName="p"
+                                value={descBottom}
+                                className="blockons-toc-botdesc"
+                                onChange={(newValue) => setAttributes({ descBottom: newValue })}
+                                allowedFormats={["core/bold", "core/italic"]}
+                                placeholder={__("Click the relevant heading to jump to that section.", "blockons")}
+                                style={{
+                                    ...(descSize !== 15 ? { fontSize: `${descSize}px` } : {}),
+                                    color: descColor
+                                }}
+                            />
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

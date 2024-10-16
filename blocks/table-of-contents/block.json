@@ -44,6 +44,10 @@
 				}
 			}
 		},
+		"canCollapse": {
+			"type": "boolean",
+			"default": false
+		},
 		"showTitle" : {
 			"type": "boolean",
 			"default": true
@@ -78,7 +82,7 @@
 		},
 		"borderRadius": {
 			"type": "number",
-			"default": 4
+			"default": 20
 		},
 		"titleColor": {
 			"type": "string",
@@ -146,11 +150,11 @@
 		},
 		"bgColor": {
 			"type": "string",
-			"default": "#ffffff"
+			"default": "#F6F6F7"
 		},
 		"borderColor": {
 			"type": "string",
-			"default": "#000000"
+			"default": "#9CADCE"
 		},
 		"headColor": {
 			"type": "string",
@@ -178,7 +182,7 @@
 		},
 		"numberColor": {
 			"type": "string",
-			"default": "#333"
+			"default": "#546EA4"
 		},
 		"isPremium": {
 			"type": "boolean",

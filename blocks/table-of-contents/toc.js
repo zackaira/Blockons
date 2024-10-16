@@ -14,6 +14,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Add toggle functionality if .blockons-toc has .collapsible class
+    if (tocElement.classList.contains('collapsible')) {
+        const tocUl = tocElement.querySelector('.blockons-toc-content');
+        const tocClick = tocElement.querySelector('.header.toggle');
+
+        if (tocClick ) {
+            tocClick.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent event from bubbling up
+                tocElement.classList.toggle('open');
+                // this.innerHTML = tocElement.classList.contains('open') ? '▲' : '▼';
+                
+                if (tocElement.classList.contains('open')) {
+                    tocUl.style.maxHeight = tocUl.scrollHeight + "px";
+                } else {
+                    tocUl.style.maxHeight = "0";
+                }
+            });
+        }
+
+        // Initially hide the list
+        tocUl.style.maxHeight = "0";
+        tocElement.classList.remove('open');
+    }
+
     // Process TOC links and match with headings
     tocLinks.forEach((link) => {
         const linkText = link.textContent.trim();
