@@ -51,12 +51,12 @@ html {
 	margin-right: 8px;
 }
 .wp-block-blockons-table-of-contents .blockons-toc-item a.blockons-toc-link {
-	font-size: 16px;
+	font-size: 18px;
 }
 .wp-block-blockons-table-of-contents .blockons-toc-item .blockons-toc-blurb {
 	margin: 0;
 	padding: 0;
-	font-size: 14px;
+	font-size: 13px;
 }
 
 /* -- Alignment -- */

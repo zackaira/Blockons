@@ -564,7 +564,7 @@ const Edit = (props) => {
                                         allowedFormats={["core/bold", "core/italic"]}
                                         placeholder={__("Enter a short description", "blockons")}
                                         style={{
-                                            ...(blurbSize !== 14 ? { fontSize: `${blurbSize}px` } : {}),
+                                            ...(blurbSize !== 13 ? { fontSize: `${blurbSize}px` } : {}),
                                             color: blurbColor
                                         }}
                                     />
