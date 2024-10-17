@@ -303,7 +303,6 @@ const blockonsAddFrontendImgPopupAttributes = (
 	if (!showOnImageBlock || !defaultOptionImgEnabled) {
 		return extraProps;
 	}
-
 	
 	const newClasses = blockonsPopupEnabled ? `blockons-popup ${blockonsGalleryId ? "blockons-img-gal" : "blockons-img-single"} blcks-icon-${blockonsPopupIcon} blcks-pos-${blockonsPopupIconPos} blcks-theme-${blockonsPopupIconColor}` : "";
 	const anotherClass = isPremium && blockonsGlobalDisable ? "global-off" : "";

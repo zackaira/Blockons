@@ -63,7 +63,7 @@ class Blockons {
 		$blockonsDefaults = get_option('blockons_default_options');
 
 		// Font Awesome Free
-		wp_register_style('blockons-fontawesome', esc_url(BLOCKONS_PLUGIN_URL . 'assets/font-awesome/css/all.min.css'), array('dashicons'), BLOCKONS_PLUGIN_VERSION);
+		wp_register_style('blockons-fontawesome', esc_url(BLOCKONS_PLUGIN_URL . 'assets/font-awesome/css/all.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
 
 		// Frontend
 		wp_register_style('blockons-frontend-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
@@ -124,8 +124,8 @@ class Blockons {
 		// wp_register_style('blockons-venopopup-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.css'), array('blockons-venobox-style', 'blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
 		// wp_register_script('blockons-venopopup', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.js'), array('blockons-venobox-script'), BLOCKONS_PLUGIN_VERSION, true);
 
-		wp_register_script('blockons-image-block', esc_url(BLOCKONS_PLUGIN_URL . 'dist/image.min.js'), array('blockons-frontend-script', 'blockons-sweetalert-script'), BLOCKONS_PLUGIN_VERSION, true);
-		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-frontend-script', 'blockons-sweetalert-script'), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-image-block', esc_url(BLOCKONS_PLUGIN_URL . 'dist/image.min.js'), array('blockons-sweetalert-script'), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-sweetalert-script'), BLOCKONS_PLUGIN_VERSION, true);
 
 		// Pro Addons
 		if (blockons_fs()->can_use_premium_code__premium_only()) {

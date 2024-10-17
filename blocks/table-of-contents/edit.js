@@ -280,7 +280,7 @@ const Edit = (props) => {
                     <div className="blockons-divider"></div>
 
                     <ToggleControl
-                        label={__("Show Blurbs", "blockons")}
+                        label={__("Show Heading Blurbs", "blockons")}
                         checked={showBlurbs}
                         onChange={(newValue) => setAttributes({ showBlurbs: newValue })}
                     />

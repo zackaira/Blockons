@@ -401,14 +401,14 @@ body.blockons-tooltips .blockons-inline-tooltip.highlight::before {
 	opacity: 0.15;
 }
 /* -- Single Image Popups -- */
-body:not(.blockons-popups) .wp-block-image.blockons-popup::before {
+body:not(.blockons-popups) .blockons-popup::before {
     display: none !important;
 }
-.wp-block-image.blockons-popup {
+.blockons-popup {
 	position: relative;
 	cursor: pointer;
   }
-.wp-block-image.blockons-popup::before {
+.blockons-popup::before {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -418,79 +418,79 @@ body:not(.blockons-popups) .wp-block-image.blockons-popup::before {
 	width: 32px;
 	height: 32px;
 	font-size: 19px;
-	font-family: "Font Awesome 5 Free";
+	font-family: "Font Awesome 6 Free";
 	font-weight: 900;
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out;
 }
-.wp-block-image.blockons-popup:hover::before {
+.blockons-popup:hover::before {
 	opacity: 1;
 }
-.wp-block-image.blockons-popup.blcks-theme-dark::before,
-body.blockons-popups.global .wp-block-image.blockons-popup.blcks-theme-dark::before {
+.blockons-popup.blcks-theme-dark::before,
+body.blockons-popups.global .blockons-popup.blcks-theme-dark::before {
 	background-color: rgb(0 0 0 / 55%);
 	color: #fff;
 }
-.wp-block-image.blockons-popup.blcks-theme-light::before,
-body.blockons-popups.global .wp-block-image.blockons-popup.blcks-theme-light::before {
+.blockons-popup.blcks-theme-light::before,
+body.blockons-popups.global .blockons-popup.blcks-theme-light::before {
 	background-color: rgb(255 255 255 / 45%);
 	box-shadow: 0 0 6px rgb(0 0 0 / 20%);
 	color: #000;
 }
-.wp-block-image.blockons-popup.blcks-pos-topleft::before,
-body.blockons-popups.global .wp-block-image.blockons-popup.blcks-pos-topleft::before {
+.blockons-popup.blcks-pos-topleft::before,
+body.blockons-popups.global .blockons-popup.blcks-pos-topleft::before {
 	top: 15px;
 	left: 15px;
 }
-.wp-block-image.blockons-popup.blcks-pos-topright::before,
-body.blockons-popups.global .wp-block-image.blockons-popup.blcks-pos-topright::before {
+.blockons-popup.blcks-pos-topright::before,
+body.blockons-popups.global .blockons-popup.blcks-pos-topright::before {
 	top: 15px;
 	right: 15px;
 }
-.wp-block-image.blockons-popup.blcks-pos-bottomleft::before,
-body.blockons-popups.global .wp-block-image.blockons-popup.blcks-pos-bottomleft::before {
+.blockons-popup.blcks-pos-bottomleft::before,
+body.blockons-popups.global .blockons-popup.blcks-pos-bottomleft::before {
 	bottom: 15px;
 	left: 15px;
 }
-.wp-block-image.blockons-popup.blcks-pos-bottomright::before,
-body.blockons-popups.global .wp-block-image.blockons-popup.blcks-pos-bottomright::before {
+.blockons-popup.blcks-pos-bottomright::before,
+body.blockons-popups.global .blockons-popup.blcks-pos-bottomright::before {
 	bottom: 15px;
 	right: 15px;
 }
-.wp-block-image.blockons-popup.blcks-pos-center::before,
-body.blockons-popups.global .wp-block-image.blockons-popup.blcks-pos-center::before {
+.blockons-popup.blcks-pos-center::before,
+body.blockons-popups.global .blockons-popup.blcks-pos-center::before {
 	top: 50%;
 	left: 50%;
 	margin: -16px 0 0 -16px;
 }
 /* magnifying glass */
-.wp-block-image.blockons-popup.blcks-icon-one::before,
-body.blockons-popups.global .wp-block-image.blockons-popup.blcks-icon-one::before {
+.blockons-popup.blcks-icon-one::before,
+body.blockons-popups.global .blockons-popup.blcks-icon-one::before {
 	content: "\f002";
 }
 /* expand */
-.wp-block-image.blockons-popup.blcks-icon-two::before,
-body.blockons-popups.global .wp-block-image.blockons-popup.blcks-icon-two::before {
+.blockons-popup.blcks-icon-two::before,
+body.blockons-popups.global .blockons-popup.blcks-icon-two::before {
 	content: "\f065";
 }
 /* up right and down left arrow */
-.wp-block-image.blockons-popup.blcks-icon-three::before,
-body.blockons-popups.global .wp-block-image.blockons-popup.blcks-icon-three::before {
+.blockons-popup.blcks-icon-three::before,
+body.blockons-popups.global .blockons-popup.blcks-icon-three::before {
 	content: "\f424";
 }
 /* maximize */
-.wp-block-image.blockons-popup.blcks-icon-four::before,
-body.blockons-popups.global .wp-block-image.blockons-popup.blcks-icon-four::before {
+.blockons-popup.blcks-icon-four::before,
+body.blockons-popups.global .blockons-popup.blcks-icon-four::before {
 	content: "\f31e";
 }
 /* plus */
-.wp-block-image.blockons-popup.blcks-icon-five::before,
-body.blockons-popups.global .wp-block-image.blockons-popup.blcks-icon-five::before {
+.blockons-popup.blcks-icon-five::before,
+body.blockons-popups.global .blockons-popup.blcks-icon-five::before {
 	content: "\2b";
 }
 /* arrows up down left right */
-.wp-block-image.blockons-popup.blcks-icon-six::before,
-body.blockons-popups.global .wp-block-image.blockons-popup.blcks-icon-six::before {
+.blockons-popup.blcks-icon-six::before,
+body.blockons-popups.global .blockons-popup.blcks-icon-six::before {
 	content: "\f047";
 }
 /* -- Popup Color -- */

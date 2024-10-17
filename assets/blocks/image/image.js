@@ -41,13 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // THEN
 
-  const blockonsSingleImgs = document.querySelectorAll(".wp-block-image.blockons-popup");
+  const blockonsSingleImgs = document.querySelectorAll(".blockons-popup");
 
   // Create a list of all images with their details
   const imagesArray = Array.from(blockonsSingleImgs).map((image) => {
     return {
       imageUrl: image.dataset?.href || "",
-      imageCaption: image.dataset?.imgcaption || "",
+      imageCaption: image.dataset?.imgcaption || image.querySelector('figcaption')?.textContent || "",
       galleryGroup: image.dataset?.gallery || "",  // Capture the data-gallery attribute
       element: image  // Keep a reference to the DOM element
     };
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Prepare a single image array if the current image isSingle
       const singleImageArray = [{
         imageUrl: image.dataset?.href || "",
-        imageCaption: image.dataset?.imgcaption || "",
+        imageCaption: image.dataset?.imgcaption || image.querySelector('figcaption')?.textContent || "",
       }];
 
       // Filter images belonging to the same gallery group
