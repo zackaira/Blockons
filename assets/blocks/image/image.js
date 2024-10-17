@@ -7,7 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (isGlobal) {
     const allImages = document.querySelectorAll(".wp-block-image");
     const filteredImages = Array.from(allImages).filter((image) => {
-        return !image.closest("header") && !image.closest("footer") && !image.classList.contains("global-off");
+      return !image.closest("header") && 
+        !image.closest("footer") && 
+        !image.classList.contains("global-off") && 
+        !image.querySelector("figure.global-off");
     });
 
     allImages.forEach((image) => {
