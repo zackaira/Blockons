@@ -250,20 +250,20 @@ const BlockExtensions = ({
 												}}
 												onChange={onSettingChange}
 											/>
-
-											<SettingRow
-												title={__("Lightbox Color Theme", "blockons")}
-												slug="imagepopups_popuptheme"
-												value={blockonsOptions.imagepopups?.popuptheme}
-												inputType="select"
-												options={{
-													dark: "Dark",
-													light: "Light",
-												}}
-												onChange={onSettingChange}
-											/>
 										</>
 									)}
+									
+									<SettingRow
+										title={__("Lightbox Color Theme", "blockons")}
+										slug="imagepopups_popuptheme"
+										value={blockonsOptions.imagepopups?.popuptheme}
+										inputType="select"
+										options={{
+											dark: "Dark",
+											light: "Light",
+										}}
+										onChange={onSettingChange}
+									/>
 								</>
 							) : (
 								<>

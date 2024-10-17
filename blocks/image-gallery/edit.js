@@ -18,7 +18,6 @@ import { colorPickerPalette } from "../block-global";
 import BlockonsNote from "../../src/backend/settings/components/UI/BlockonsNote";
 const Masonry = require("masonry-layout");
 var imagesLoaded = require("imagesloaded");
-import showGalleryPopup from "../../assets/popups/GalleryPopup";
 
 const Edit = (props) => {
 	const {
@@ -53,16 +52,6 @@ const Edit = (props) => {
 	});
 	const isPro = Boolean(blockonsEditorObj.isPremium);
 	const [masonry, setMasonry] = useState();
-
-	// Initialize the Image Popup
-	const handleGalleryPopup = (startIndex) => {
-		const images = galleryImages.map((img) => ({
-			imageUrl: img.imageUrl,
-			imageCaption: img.imageCaption,
-			imageAlt: img.imageAlt,
-		}));
-		showGalleryPopup({ images, startIndex });
-	};
 
 	useEffect(() => {
 		setAttributes({ isPremium: isPro }); // SETS PREMIUM
@@ -168,15 +157,12 @@ const Edit = (props) => {
 						<div
 							className={`blockons-gallery-img ${
 								isPro && popupEnable
-									? `blockons-popup blcks-icon-${popupIcon} blcks-pos-${popupIconPos} blcks-theme-${popupIconColor}`
+									? `blockons-popup icon-${popupIcon} icon-${popupIconPos} icon-${popupIconColor}`
 									: ""
 							}`}
-							{...(isPro && popupEnable ? {
-								"data-img": imageItem.imageUrl,
+							{...(isPro && popupEnable && imageItem.imageCaption ? {
 								"data-imgcaption": imageItem.imageCaption
 							} : {})}
-							{...(isPro && popupEnable ? { onClick: () => handleGalleryPopup(index) } : {})}
-							// onClick={() => isSelected && isPro && popupEnable && handleGalleryPopup(index)}
 						>
 							<img src={imageItem.imageUrl} alt={imageItem.alt} />
 						</div>
@@ -185,15 +171,12 @@ const Edit = (props) => {
 						<div
 							className={`blockons-gallery-img ${
 								isPro && popupEnable
-									? `blockons-popup blcks-icon-${popupIcon} blcks-pos-${popupIconPos} blcks-theme-${popupIconColor}`
+									? `blockons-popup icon-${popupIcon} icon-${popupIconPos} icon-${popupIconColor}`
 									: ""
 							} ${imageProportion !== "actual" ? `aspect-ratio ratio-${imageProportion}` : !imageItem.imageUrl ? `aspect-ratio ratio-169panoramic` : ""} ${!imageItem.imageUrl ? `noimg` : ""}`}
-							{...(isPro && popupEnable ? {
-								"data-img": imageItem.imageUrl,
+							{...(isPro && popupEnable && imageItem.imageCaption ? {
 								"data-imgcaption": imageItem.imageCaption
 							} : {})}
-							{...(isPro && popupEnable ? { onClick: () => handleGalleryPopup(index) } : {})}
-							// onClick={() => handleGalleryPopup(index)}
 						>
 							{imageItem.imageUrl && <div class="aspect-img"><img src={imageItem.imageUrl} alt={imageItem.alt} /></div>}
 						</div>

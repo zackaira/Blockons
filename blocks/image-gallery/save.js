@@ -50,14 +50,12 @@ const Save = ({ attributes }) => {
 						<div
 							className={`blockons-gallery-img ${
 								attributes.isPremium && attributes.popupEnable
-									? `blockons-popup blcks-icon-${attributes.popupIcon} blcks-pos-${attributes.popupIconPos} blcks-theme-${attributes.popupIconColor}`
+									? `blockons-popup icon-${attributes.popupIcon} icon-${attributes.popupIconPos} icon-${attributes.popupIconColor}`
 									: ""
 							}`}
-							{...(attributes.isPremium && attributes.popupEnable ? {
-								"data-img": imageItem.imageUrl,
+							{...(attributes.isPremium && attributes.popupEnable && imageItem.imageCaption ? {
 								"data-imgcaption": imageItem.imageCaption
 							} : {})}
-							// {...(attributes.isPremium && attributes.popupEnable ? { onClick: () => showPopup(imageItem.imageUrl, imageItem.imageCaption) } : {})}
 						>
 							<img src={imageItem.imageUrl} alt={imageItem.alt} />
 						</div>
@@ -67,14 +65,12 @@ const Save = ({ attributes }) => {
 						<div
 							className={`blockons-gallery-img ${
 								attributes.isPremium && attributes.popupEnable
-									? `blockons-popup blcks-icon-${attributes.popupIcon} blcks-pos-${attributes.popupIconPos} blcks-theme-${attributes.popupIconColor}`
+									? `blockons-popup icon-${attributes.popupIcon} icon-${attributes.popupIconPos} icon-${attributes.popupIconColor}`
 									: ""
 							} ${attributes.imageProportion !== "actual" ? `aspect-ratio ratio-${attributes.imageProportion}` : !imageItem.imageUrl ? `aspect-ratio ratio-169panoramic` : ""} ${!imageItem.imageUrl ? `noimg` : ""}`}
-							{...(attributes.isPremium && attributes.popupEnable ? {
-								"data-img": imageItem.imageUrl,
+							{...(attributes.isPremium && attributes.popupEnable && imageItem.imageCaption ? {
 								"data-imgcaption": imageItem.imageCaption
 							} : {})}
-							// {...(attributes.isPremium && attributes.popupEnable ? { onClick: () => showPopup(imageItem.imageUrl, imageItem.imageCaption) } : {})}
 						>
 							{imageItem.imageUrl && <div class="aspect-img"><img src={imageItem.imageUrl} alt={imageItem.alt} /></div>}
 						</div>

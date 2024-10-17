@@ -23,14 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
 	);
 	const imagesArray = Array.from(blockonsGalleryImages).map((image) => {
 		const img = image.querySelector("img");
-		if (!img) return null;
+		if (!image) return null;
+
 		return {
-			imageUrl: img.parentElement.dataset.img,
-			imageCaption: img.parentElement.dataset.imgcaption,
+			imageUrl: img?.src || "",
+			imageCaption: image.dataset?.imgcaption || "",
 		};
 	}).filter(Boolean);
 
-	if (blockonsGalleryImages.length) {
+	console.log('imagesArray', imagesArray);
+
+	if (isPro && blockonsGalleryImages.length > 0) {
 		blockonsGalleryImages.forEach((image, index) => {
 			const img = image.querySelector("img");
 			if (!img) return;

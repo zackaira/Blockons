@@ -81,11 +81,16 @@
 	max-width: 84%;
 }
 .swal2-popup.blockons-popup-swal button.swal2-close {
-	font-size: 22px;
 	color: #000;
 	position: absolute;
 	top: 4px;
 	right: 4px;
+	background-color: #FFF !important;
+	border: 0;
+	border-radius: 3px;
+	width: 24px;
+	height: 24px;
+	font-size: 17px;
 }
 .swal2-popup.blockons-popup-swal .swal2-html-container {
 	padding: 0;
@@ -134,8 +139,107 @@
 	left: 100%;
 }
 
-/* -- Image Popups -- */
-body.blockons-imgpopup
+/* -- Single Image Popups -- */
+body.blockons-popups .blockons-img-popup .components-resizable-box__container {
+	position: relative;
+}
+body.blockons-popups .blockons-img-popup .components-resizable-box__container::before {
+	box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	z-index: 99;
+	border-radius: 3px;
+	width: 28px;
+	height: 28px;
+	font-size: 13px;
+	font-family: "Font Awesome 6 Free";
+	font-weight: 900;
+	opacity: 1;
+	transition: opacity 0.3s ease-in-out;
+}
+body.blockons-popups.global .blockons-img-popup.global-off .components-resizable-box__container::before {
+	display: none !important;
+}
+
+/* - Icons - */
+body.blockons-popups .blockons-img-popup.blcks-one .components-resizable-box__container::before,
+body.blockons-popups.global.blcks-one .blockons-img-popup .components-resizable-box__container::before {
+	content: "\f002";
+}
+body.blockons-popups .blockons-img-popup.blcks-two .components-resizable-box__container::before,
+body.blockons-popups.global.blcks-two .blockons-img-popup .components-resizable-box__container::before {
+	content: "\f065";
+}
+body.blockons-popups .blockons-img-popup.blcks-three .components-resizable-box__container::before,
+body.blockons-popups.global.blcks-three .blockons-img-popup .components-resizable-box__container::before {
+	content: "\f424";
+}
+body.blockons-popups .blockons-img-popup.blcks-four .components-resizable-box__container::before,
+body.blockons-popups.global.blcks-four .blockons-img-popup .components-resizable-box__container::before {
+	content: "\f31e";
+}
+body.blockons-popups .blockons-img-popup.blcks-five .components-resizable-box__container::before,
+body.blockons-popups.global.blcks-five .blockons-img-popup .components-resizable-box__container::before {
+	content: "\2b";
+}
+body.blockons-popups .blockons-img-popup.blcks-six .components-resizable-box__container::before,
+body.blockons-popups.global.blcks-six .blockons-img-popup .components-resizable-box__container::before {
+	content: "\f047";
+}
+
+/* - Position - */
+body.blockons-popups .blockons-img-popup.blcks-topleft .components-resizable-box__container::before,
+body.blockons-popups.global.blcks-topleft .blockons-img-popup .components-resizable-box__container::before {
+	top: 5px;
+	left: 5px;
+	bottom: auto;
+	right: auto;
+}
+body.blockons-popups .blockons-img-popup.blcks-topright .components-resizable-box__container::before,
+body.blockons-popups.global.blcks-topright .blockons-img-popup .components-resizable-box__container::before {
+	top: 5px;
+	right: 5px;
+	bottom: auto;
+	left: auto;
+}
+body.blockons-popups .blockons-img-popup.blcks-bottomleft .components-resizable-box__container::before,
+body.blockons-popups.global.blcks-bottomleft .blockons-img-popup .components-resizable-box__container::before {
+	bottom: 5px;
+	left: 5px;
+	top: auto;
+	right: auto;
+}
+body.blockons-popups .blockons-img-popup.blcks-bottomright .components-resizable-box__container::before,
+body.blockons-popups.global.blcks-bottomright .blockons-img-popup .components-resizable-box__container::before {
+	bottom: 5px;
+	right: 5px;
+	top: auto;
+	left: auto;
+}
+body.blockons-popups .blockons-img-popup.blcks-center .components-resizable-box__container::before,
+body.blockons-popups.global.blcks-center .blockons-img-popup .components-resizable-box__container::before {
+	top: 50%;
+	left: 50%;
+	margin: -14px 0 0 -14px;
+	bottom: auto;
+	right: auto;
+}
+
+/* - Theme - */
+body.blockons-popups .blockons-img-popup.blcks-dark .components-resizable-box__container::before,
+body.blockons-popups.global.blcks-dark .blockons-img-popup .components-resizable-box__container::before {
+	background-color: rgb(0 0 0 / 45%);
+	color: #fff;
+}
+body.blockons-popups .blockons-img-popup.blcks-light .components-resizable-box__container::before,
+body.blockons-popups.global.blcks-light .blockons-img-popup .components-resizable-box__container::before {
+	background-color: rgb(255 255 255 / 40%);
+	color: #222;
+}
+
+/* body.blockons-imgpopup
 	.blockons-popup
 	.components-resizable-box__container {
 	position: relative;
@@ -232,54 +336,54 @@ body.blockons-imgpopup
 	top: 50%;
 	left: 50%;
 	margin: -16px 0 0 -16px;
-}
+} */
 /* magnifying glass */
-body.blockons-imgpopup
+/* body.blockons-imgpopup
 	.blockons-popup.blcks-icon-one
 	.components-resizable-box__container::before,
 body.blockons-imgpopup
 	.wp-block-gallery
 	.blockons-popup.blcks-icon-one::before {
 	content: "\f002";
-}
+} */
 /* expand */
-body.blockons-imgpopup
+/* body.blockons-imgpopup
 	.blockons-popup.blcks-icon-two
 	.components-resizable-box__container::before,
 body.blockons-imgpopup
 	.wp-block-gallery
 	.blockons-popup.blcks-icon-two::before {
 	content: "\f065";
-}
+} */
 /* up right and down left arrow */
-body.blockons-imgpopup
+/* body.blockons-imgpopup
 	.blockons-popup.blcks-icon-three
 	.components-resizable-box__container::before,
 body.blockons-imgpopup
 	.wp-block-gallery
 	.blockons-popup.blcks-icon-three::before {
 	content: "\f424";
-}
+} */
 /* maximize */
-body.blockons-imgpopup
+/* body.blockons-imgpopup
 	.blockons-popup.blcks-icon-four
 	.components-resizable-box__container::before,
 body.blockons-imgpopup
 	.wp-block-gallery
 	.blockons-popup.blcks-icon-four::before {
 	content: "\f31e";
-}
+} */
 /* plus */
-body.blockons-imgpopup
+/* body.blockons-imgpopup
 	.blockons-popup.blcks-icon-five
 	.components-resizable-box__container::before,
 body.blockons-imgpopup
 	.wp-block-gallery
 	.blockons-popup.blcks-icon-five::before {
 	content: "\2b";
-}
+} */
 /* arrows up down left right */
-body.blockons-imgpopup
+/* body.blockons-imgpopup
 	.blockons-popup.blcks-icon-six
 	.components-resizable-box__container::before,
 body.blockons-imgpopup
@@ -290,7 +394,7 @@ body.blockons-imgpopup
 
 body.blockons-imgpopup.global .blockons-popup .components-resizable-box__container::before {
 	display: none !important;
-}
+} */
 
 /* -- Popup Color -- */
 body.blockons-imgpopup.popup-light .swal2-container.blockons-popup-container.swal2-backdrop-show {

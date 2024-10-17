@@ -401,103 +401,100 @@ body.blockons-tooltips .blockons-inline-tooltip.highlight::before {
 	opacity: 0.15;
 }
 /* -- Single Image Popups -- */
-body:not(.blockons-popups) .blockons-popup::before {
-    display: none !important;
-}
-.blockons-popup {
+body.blockons-popups .blockons-img-popup .blockons-popup-img {
 	position: relative;
 	cursor: pointer;
-  }
-.blockons-popup::before {
+}
+body.blockons-popups .blockons-img-popup .blockons-popup-img::before {
+	box-shadow: 0 1px 5px rgb(0 0 0 / 20%);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	position: absolute;
 	z-index: 99;
-	border-radius: 4px;
-	width: 32px;
-	height: 32px;
-	font-size: 19px;
+	border-radius: 3px;
+	width: 28px;
+	height: 28px;
+	font-size: 13px;
 	font-family: "Font Awesome 6 Free";
 	font-weight: 900;
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out;
 }
-.blockons-popup:hover::before {
+body.blockons-popups .blockons-img-popup .blockons-popup-img:hover::before {
 	opacity: 1;
 }
-.blockons-popup.blcks-theme-dark::before,
-body.blockons-popups.global .blockons-popup.blcks-theme-dark::before {
-	background-color: rgb(0 0 0 / 55%);
-	color: #fff;
-}
-.blockons-popup.blcks-theme-light::before,
-body.blockons-popups.global .blockons-popup.blcks-theme-light::before {
-	background-color: rgb(255 255 255 / 45%);
-	box-shadow: 0 0 6px rgb(0 0 0 / 20%);
-	color: #000;
-}
-.blockons-popup.blcks-pos-topleft::before,
-body.blockons-popups.global .blockons-popup.blcks-pos-topleft::before {
-	top: 15px;
-	left: 15px;
-}
-.blockons-popup.blcks-pos-topright::before,
-body.blockons-popups.global .blockons-popup.blcks-pos-topright::before {
-	top: 15px;
-	right: 15px;
-}
-.blockons-popup.blcks-pos-bottomleft::before,
-body.blockons-popups.global .blockons-popup.blcks-pos-bottomleft::before {
-	bottom: 15px;
-	left: 15px;
-}
-.blockons-popup.blcks-pos-bottomright::before,
-body.blockons-popups.global .blockons-popup.blcks-pos-bottomright::before {
-	bottom: 15px;
-	right: 15px;
-}
-.blockons-popup.blcks-pos-center::before,
-body.blockons-popups.global .blockons-popup.blcks-pos-center::before {
-	top: 50%;
-	left: 50%;
-	margin: -16px 0 0 -16px;
-}
-/* magnifying glass */
-.blockons-popup.blcks-icon-one::before,
-body.blockons-popups.global .blockons-popup.blcks-icon-one::before {
+
+/* - Icons - */
+body.blockons-popups .blockons-img-popup.blcks-one .blockons-popup-img::before,
+body.blockons-popups.global.blcks-one .blockons-img-popup .blockons-popup-img::before {
 	content: "\f002";
 }
-/* expand */
-.blockons-popup.blcks-icon-two::before,
-body.blockons-popups.global .blockons-popup.blcks-icon-two::before {
+body.blockons-popups .blockons-img-popup.blcks-two .blockons-popup-img::before,
+body.blockons-popups.global.blcks-two .blockons-img-popup .blockons-popup-img::before {
 	content: "\f065";
 }
-/* up right and down left arrow */
-.blockons-popup.blcks-icon-three::before,
-body.blockons-popups.global .blockons-popup.blcks-icon-three::before {
+body.blockons-popups .blockons-img-popup.blcks-three .blockons-popup-img::before,
+body.blockons-popups.global.blcks-three .blockons-img-popup .blockons-popup-img::before {
 	content: "\f424";
 }
-/* maximize */
-.blockons-popup.blcks-icon-four::before,
-body.blockons-popups.global .blockons-popup.blcks-icon-four::before {
+body.blockons-popups .blockons-img-popup.blcks-four .blockons-popup-img::before,
+body.blockons-popups.global.blcks-four .blockons-img-popup .blockons-popup-img::before {
 	content: "\f31e";
 }
-/* plus */
-.blockons-popup.blcks-icon-five::before,
-body.blockons-popups.global .blockons-popup.blcks-icon-five::before {
+body.blockons-popups .blockons-img-popup.blcks-five .blockons-popup-img::before,
+body.blockons-popups.global.blcks-five .blockons-img-popup .blockons-popup-img::before {
 	content: "\2b";
 }
-/* arrows up down left right */
-.blockons-popup.blcks-icon-six::before,
-body.blockons-popups.global .blockons-popup.blcks-icon-six::before {
+body.blockons-popups .blockons-img-popup.blcks-six .blockons-popup-img::before,
+body.blockons-popups.global.blcks-six .blockons-img-popup .blockons-popup-img::before {
 	content: "\f047";
 }
+
+/* - Position - */
+body.blockons-popups .blockons-img-popup.blcks-topleft .blockons-popup-img::before,
+body.blockons-popups.global.blcks-topleft .blockons-img-popup .blockons-popup-img::before {
+	top: 5px;
+	left: 5px;
+}
+body.blockons-popups .blockons-img-popup.blcks-topright .blockons-popup-img::before,
+body.blockons-popups.global.blcks-topright .blockons-img-popup .blockons-popup-img::before {
+	top: 5px;
+	right: 5px;
+}
+body.blockons-popups .blockons-img-popup.blcks-bottomleft .blockons-popup-img::before,
+body.blockons-popups.global.blcks-bottomleft .blockons-img-popup .blockons-popup-img::before {
+	bottom: 5px;
+	left: 5px;
+}
+body.blockons-popups .blockons-img-popup.blcks-bottomright .blockons-popup-img::before,
+body.blockons-popups.global.blcks-bottomright .blockons-img-popup .blockons-popup-img::before {
+	bottom: 5px;
+	right: 5px;
+}
+body.blockons-popups .blockons-img-popup.blcks-center .blockons-popup-img::before,
+body.blockons-popups.global.blcks-center .blockons-img-popup .blockons-popup-img::before {
+	top: 50%;
+	left: 50%;
+	margin: -14px 0 0 -14px;
+}
+
+/* - Theme - */
+body.blockons-popups .blockons-img-popup.blcks-dark .blockons-popup-img::before,
+body.blockons-popups.global.blcks-dark .blockons-img-popup .blockons-popup-img::before {
+	background-color: rgb(0 0 0 / 45%);
+	color: #fff;
+}
+body.blockons-popups .blockons-img-popup.blcks-light .blockons-popup-img::before,
+body.blockons-popups.global.blcks-light .blockons-img-popup .blockons-popup-img::before {
+	background-color: rgb(255 255 255 / 40%);
+	color: #222;
+}
 /* -- Popup Color -- */
-body.blockons-popups.popup-light .swal2-container.blockons-popup-container.swal2-backdrop-show {
+body.blockons-pro.blockons-popups.popup-light .swal2-container.blockons-popup-container.swal2-backdrop-show {
 	background: rgb(255 255 255 / 35%) !important;
 }
-body.blockons-popups.popup-dark .swal2-container.blockons-popup-container.swal2-backdrop-show {
+body.blockons-pro.blockons-popups.popup-dark .swal2-container.blockons-popup-container.swal2-backdrop-show {
 	background: rgb(0 0 0 / 40%) !important;
 }
 /**
@@ -510,11 +507,16 @@ body.blockons-popups.popup-dark .swal2-container.blockons-popup-container.swal2-
 	max-width: 84%;
 }
 .swal2-popup.blockons-popup-swal button.swal2-close {
-	font-size: 22px;
 	color: #000;
 	position: absolute;
 	top: 4px;
 	right: 4px;
+	background-color: #FFF !important;
+	border: 0;
+	border-radius: 3px;
+	width: 24px;
+	height: 24px;
+	font-size: 17px;
 }
 .swal2-popup.blockons-popup-swal .swal2-html-container {
 	padding: 0;

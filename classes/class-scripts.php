@@ -384,9 +384,8 @@ class Blockons {
 				"enable_all" => false,
 				"icon" => "one",
 				"iconpos" => "topleft",
-				"theme" => "dark",
+				"iconcolor" => "dark",
 				"popuptheme" => "dark",
-				"captionpos" => "top",
 			),
 			"pageloader" => array(
 				"enabled" => false,
