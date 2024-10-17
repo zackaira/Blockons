@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	const isPro = Boolean(blockonsFrontendObj.isPremium);
 	const defaultOptions = blockonsFrontendObj.blockonsOptions?.imagepopups;
 
-	// console.log('slkdhgrfkjgrdkjwghfesakdhwje');
-
 	const blockonsGalleryImages = document.querySelectorAll(
 		"body.blockons-pro .blockons-gallery-img"
 	);
