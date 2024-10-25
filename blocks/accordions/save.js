@@ -1,11 +1,11 @@
-import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
 		className: `design-${attributes.accordionDesign} ${
-			attributes.closeAll ? "close-all" : ""
-		} ${attributes.iconFirst ? "icon-start" : "icon-end"} ${
-			attributes.centeredLabel ? "centered" : ""
+			attributes.closeAll ? 'close-all' : ''
+		} ${attributes.iconFirst ? 'icon-start' : 'icon-end'} ${
+			attributes.centeredLabel ? 'centered' : ''
 		}`,
 	});
 

@@ -50,7 +50,7 @@ body.blockons-page-loading {
 }
 body.blockons-page-loading::before {
 	display: block;
-	content: " ";
+	content: ' ';
 	background-color: inherit;
 	position: fixed;
 	top: 0;
@@ -213,7 +213,7 @@ body.admin-bar .blockons-page-loader {
 	z-index: 4;
 	color: inherit;
 	transform: translate(-50%, -50%);
-	font-feature-settings: "tnum";
+	font-feature-settings: 'tnum';
 	font-variant-numeric: tabular-nums;
 }
 
@@ -303,11 +303,13 @@ body.blockons-tooltips .blockons-tooltip {
 	padding: 6px 10px 10px;
 	text-align: left;
 	opacity: 0;
-	transition: opacity 0.2s ease-in-out 0.15s, bottom 0.2s ease-in-out 0.15s,
+	transition:
+		opacity 0.2s ease-in-out 0.15s,
+		bottom 0.2s ease-in-out 0.15s,
 		left 0.05s ease-in-out 0s;
 }
 body.blockons-tooltips .blockons-tooltip .blockons-tooltip-angle {
-	content: "";
+	content: '';
 	position: absolute;
 	top: 100%;
 	left: 50%;
@@ -395,7 +397,7 @@ body.blockons-tooltips .blockons-inline-tooltip.highlight {
 }
 body.blockons-tooltips .blockons-inline-tooltip.highlight::before {
 	display: inline-block;
-	content: "";
+	content: '';
 	width: 100%;
 	height: 100%;
 	opacity: 0.15;
@@ -420,7 +422,7 @@ body.blockons-popups .blockons-img-popup .blockons-popup-img::before {
 	width: 28px;
 	height: 28px;
 	font-size: 13px;
-	font-family: "Font Awesome 6 Free";
+	font-family: 'Font Awesome 6 Free';
 	font-weight: 900;
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out;
@@ -428,67 +430,103 @@ body.blockons-popups .blockons-img-popup .blockons-popup-img::before {
 body.blockons-popups .blockons-img-popup .blockons-popup-img:hover::before {
 	opacity: 1;
 }
-body.blockons-popups.global .blockons-img-popup.global-off .blockons-popup-img::before {
+body.blockons-popups.global
+	.blockons-img-popup.global-off
+	.blockons-popup-img::before {
 	display: none !important;
 }
 
 /* - Icons - */
 body.blockons-popups .blockons-img-popup.blcks-one .blockons-popup-img::before,
-body.blockons-popups.global.blcks-one .blockons-img-popup .blockons-popup-img::before {
-	content: "\f002";
+body.blockons-popups.global.blcks-one
+	.blockons-img-popup
+	.blockons-popup-img::before {
+	content: '\f002';
 }
 body.blockons-popups .blockons-img-popup.blcks-two .blockons-popup-img::before,
-body.blockons-popups.global.blcks-two .blockons-img-popup .blockons-popup-img::before {
-	content: "\f065";
+body.blockons-popups.global.blcks-two
+	.blockons-img-popup
+	.blockons-popup-img::before {
+	content: '\f065';
 }
-body.blockons-popups .blockons-img-popup.blcks-three .blockons-popup-img::before,
-body.blockons-popups.global.blcks-three .blockons-img-popup .blockons-popup-img::before {
-	content: "\f424";
+body.blockons-popups
+	.blockons-img-popup.blcks-three
+	.blockons-popup-img::before,
+body.blockons-popups.global.blcks-three
+	.blockons-img-popup
+	.blockons-popup-img::before {
+	content: '\f424';
 }
 body.blockons-popups .blockons-img-popup.blcks-four .blockons-popup-img::before,
-body.blockons-popups.global.blcks-four .blockons-img-popup .blockons-popup-img::before {
-	content: "\f31e";
+body.blockons-popups.global.blcks-four
+	.blockons-img-popup
+	.blockons-popup-img::before {
+	content: '\f31e';
 }
 body.blockons-popups .blockons-img-popup.blcks-five .blockons-popup-img::before,
-body.blockons-popups.global.blcks-five .blockons-img-popup .blockons-popup-img::before {
-	content: "\2b";
+body.blockons-popups.global.blcks-five
+	.blockons-img-popup
+	.blockons-popup-img::before {
+	content: '\2b';
 }
 body.blockons-popups .blockons-img-popup.blcks-six .blockons-popup-img::before,
-body.blockons-popups.global.blcks-six .blockons-img-popup .blockons-popup-img::before {
-	content: "\f047";
+body.blockons-popups.global.blcks-six
+	.blockons-img-popup
+	.blockons-popup-img::before {
+	content: '\f047';
 }
 
 /* - Position - */
-body.blockons-popups .blockons-img-popup.blcks-topleft .blockons-popup-img::before,
-body.blockons-popups.global.blcks-topleft .blockons-img-popup .blockons-popup-img::before {
+body.blockons-popups
+	.blockons-img-popup.blcks-topleft
+	.blockons-popup-img::before,
+body.blockons-popups.global.blcks-topleft
+	.blockons-img-popup
+	.blockons-popup-img::before {
 	top: 5px;
 	left: 5px;
 	bottom: auto;
 	right: auto;
 }
-body.blockons-popups .blockons-img-popup.blcks-topright .blockons-popup-img::before,
-body.blockons-popups.global.blcks-topright .blockons-img-popup .blockons-popup-img::before {
+body.blockons-popups
+	.blockons-img-popup.blcks-topright
+	.blockons-popup-img::before,
+body.blockons-popups.global.blcks-topright
+	.blockons-img-popup
+	.blockons-popup-img::before {
 	top: 5px;
 	right: 5px;
 	bottom: auto;
 	left: auto;
 }
-body.blockons-popups .blockons-img-popup.blcks-bottomleft .blockons-popup-img::before,
-body.blockons-popups.global.blcks-bottomleft .blockons-img-popup .blockons-popup-img::before {
+body.blockons-popups
+	.blockons-img-popup.blcks-bottomleft
+	.blockons-popup-img::before,
+body.blockons-popups.global.blcks-bottomleft
+	.blockons-img-popup
+	.blockons-popup-img::before {
 	bottom: 5px;
 	left: 5px;
 	top: auto;
 	right: auto;
 }
-body.blockons-popups .blockons-img-popup.blcks-bottomright .blockons-popup-img::before,
-body.blockons-popups.global.blcks-bottomright .blockons-img-popup .blockons-popup-img::before {
+body.blockons-popups
+	.blockons-img-popup.blcks-bottomright
+	.blockons-popup-img::before,
+body.blockons-popups.global.blcks-bottomright
+	.blockons-img-popup
+	.blockons-popup-img::before {
 	bottom: 5px;
 	right: 5px;
 	top: auto;
 	left: auto;
 }
-body.blockons-popups .blockons-img-popup.blcks-center .blockons-popup-img::before,
-body.blockons-popups.global.blcks-center .blockons-img-popup .blockons-popup-img::before {
+body.blockons-popups
+	.blockons-img-popup.blcks-center
+	.blockons-popup-img::before,
+body.blockons-popups.global.blcks-center
+	.blockons-img-popup
+	.blockons-popup-img::before {
 	top: 50%;
 	left: 50%;
 	bottom: auto;
@@ -498,26 +536,34 @@ body.blockons-popups.global.blcks-center .blockons-img-popup .blockons-popup-img
 
 /* - Theme - */
 body.blockons-popups .blockons-img-popup.blcks-dark .blockons-popup-img::before,
-body.blockons-popups.global.blcks-dark .blockons-img-popup .blockons-popup-img::before {
+body.blockons-popups.global.blcks-dark
+	.blockons-img-popup
+	.blockons-popup-img::before {
 	background-color: rgb(0 0 0 / 45%);
 	color: #fff;
 }
-body.blockons-popups .blockons-img-popup.blcks-light .blockons-popup-img::before,
-body.blockons-popups.global.blcks-light .blockons-img-popup .blockons-popup-img::before {
+body.blockons-popups
+	.blockons-img-popup.blcks-light
+	.blockons-popup-img::before,
+body.blockons-popups.global.blcks-light
+	.blockons-img-popup
+	.blockons-popup-img::before {
 	background-color: rgb(255 255 255 / 40%);
 	color: #222;
 }
 /* -- Popup Color -- */
-body.blockons-pro.blockons-popups.popup-light .swal2-container.blockons-popup-container.swal2-backdrop-show {
+body.blockons-pro.blockons-popups.popup-light
+	.swal2-container.blockons-popup-container.swal2-backdrop-show {
 	background: rgb(255 255 255 / 35%) !important;
 }
-body.blockons-pro.blockons-popups.popup-dark .swal2-container.blockons-popup-container.swal2-backdrop-show {
+body.blockons-pro.blockons-popups.popup-dark
+	.swal2-container.blockons-popup-container.swal2-backdrop-show {
 	background: rgb(0 0 0 / 40%) !important;
 }
 /**
  * Sweetalert2 Design - THIS IS DUPLICATED IN editor.css
  */
- .swal2-popup.blockons-popup-swal {
+.swal2-popup.blockons-popup-swal {
 	box-shadow: 0 1px 20px rgb(0 0 0 / 18%);
 	padding: 0;
 	position: relative;
@@ -528,7 +574,7 @@ body.blockons-pro.blockons-popups.popup-dark .swal2-container.blockons-popup-con
 	position: absolute;
 	top: 4px;
 	right: 4px;
-	background-color: #FFF !important;
+	background-color: #fff !important;
 	border: 0;
 	border-radius: 3px;
 	width: 24px;
@@ -549,7 +595,7 @@ body.blockons-pro.blockons-popups.popup-dark .swal2-container.blockons-popup-con
 .swal2-popup.blockons-popup-swal .blockons-popup-wrap p.blockons-popup-caption {
 	margin: 0;
 	padding: 15px 20px;
-	color: #FFF;
+	color: #fff;
 	font-size: 13px;
 	font-weight: normal;
 	letter-spacing: 0.1px;
@@ -581,38 +627,4 @@ body.blockons-pro.blockons-popups.popup-dark .swal2-container.blockons-popup-con
 }
 .swal2-popup.blockons-popup-swal .swal2-actions .blockons-popup-btn.next {
 	left: 100%;
-}
-
-/* -- Product Quick View - THIS IS DUPLICATED IN editor.css-- */
-.blockons-quickview.one {
-	margin-top: 12px;
-}
-.blockons-quickview.two {
-	margin: 12px 0 0;
-	font-size: 14px;
-}
-.blockons-quickview.three {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: rgb(0 0 0 / 38%);
-	color: #fff;
-	cursor: pointer;
-	opacity: 0;
-	transition: opacity 0.25s ease-in-out 0s;
-}
-.blockons-quickview.three .blockons-quickview-btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 40px;
-	color: inherit;
-}
-.wc-block-grid__product:hover .blockons-quickview.three {
-	opacity: 1;
-}
-.wc-block-grid__product img {
-	display: block;
-	margin: 0 auto;
 }

@@ -85,38 +85,49 @@ class Blockons_WC_Rest_Routes {
 	}
 
 	public function blockons_get_product_data_by_id( $request ) {
-		global $wpdb;
+        try {
+            $product_id = intval( $request->get_param( 'id' ) );
+            $product = wc_get_product($product_id);
 
-		$product_id = intval( $request->get_param( 'id' ) );
+            if ( ! $product ) {
+                return new WP_REST_Response( [ 'message' => 'Product not found.' ], 404 );
+            }
 
-		// Use a custom SQL query to retrieve necessary product data.
-		$product_data = $wpdb->get_row( $wpdb->prepare( "
-			SELECT p.ID, p.post_title, p.post_excerpt, p.post_content, pm_price.meta_value AS price, pm_sku.meta_value AS sku, pm_image.meta_value AS image_id
-			FROM {$wpdb->posts} p
-			LEFT JOIN {$wpdb->postmeta} pm_price ON p.ID = pm_price.post_id AND pm_price.meta_key = '_price'
-			LEFT JOIN {$wpdb->postmeta} pm_sku ON p.ID = pm_sku.post_id AND pm_sku.meta_key = '_sku'
-			LEFT JOIN {$wpdb->postmeta} pm_image ON p.ID = pm_image.post_id AND pm_image.meta_key = '_thumbnail_id'
-			WHERE p.ID = %d AND p.post_type = 'product' AND p.post_status = 'publish'
-		", $product_id ) );
+            // Prepare the product data for the REST response.
+            $response = [
+                'id'           => $product->get_id(),
+                'title'        => $product->get_name(),
+                'short_desc'   => $product->get_short_description(),
+                'description'  => $product->get_description(),
+                'price'        => $product->get_price_html(),
+                'sku'          => $product->get_sku(),
+                'image'        => wp_get_attachment_image_url( $product->get_image_id(), 'full' ),
+                'permalink'    => $product->get_permalink(),
+                'add_to_cart_form' => $this->get_add_to_cart_form($product),
+            ];
 
-		if ( ! $product_data ) {
-			return new WP_REST_Response( [ 'message' => 'Product not found.' ], 404 );
-		}
+            return new WP_REST_Response( $response, 200 );
 
-		// Prepare the product data for the REST response.
-		$response = [
-			'id'           => $product_data->ID,
-			'title'        => $product_data->post_title,
-			'short_desc'   => $product_data->post_excerpt,
-			'description'  => $product_data->post_content,
-			'price'        => wc_price( $product_data->price ),
-			'sku'          => $product_data->sku,
-			'image'        => wp_get_attachment_image_url( $product_data->image_id, 'full' ), // Get formatted image URL.
-			'permalink'    => get_permalink( $product_data->ID ),
-		];
+        } catch ( Exception $e ) {
+            return new WP_REST_Response( [ 'message' => 'An error occurred while fetching product data: ' . $e->getMessage() ], 500 );
+        }
+    }
 
-		return new WP_REST_Response( $response, 200 );
-	}
+    private function get_add_to_cart_form($product) {
+        ob_start();
+        try {
+            global $post;
+            $post = get_post($product->get_id());
+            setup_postdata($post);
+            woocommerce_template_single_add_to_cart();
+            wp_reset_postdata();
+        } catch ( Exception $e ) {
+            error_log( 'Error in get_add_to_cart_form: ' . $e->getMessage() );
+        }
+        $form_html = ob_get_clean();
+        
+        return $form_html;
+    }
 
 	/*
 	 * Get saved options from database
@@ -168,7 +179,7 @@ class Blockons_WC_Rest_Routes {
 	/*
 	 * Get & Sort posts for 'Post Select' Component
 	 */
-	function blockons_get_wc_products($request) {
+	public function blockons_get_wc_products($request) {
 		$all_products = array();
 
 		$products = get_posts( array(

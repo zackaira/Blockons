@@ -24,7 +24,7 @@ class Blockons {
 	public $file;
 
 	/**
-	 * Constructor funtion
+	 * Constructor function
 	 */
 	public function __construct($file = '', $version = BLOCKONS_PLUGIN_VERSION) {
 		$this->file     = $file;
@@ -121,8 +121,6 @@ class Blockons {
 		wp_register_style('blockons-animate-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/popups/animate.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
 		wp_register_style('blockons-sweetalert-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/popups/sweetalert2.min.css'), array('blockons-animate-style', 'blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
 		wp_register_script('blockons-sweetalert-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/popups/sweetalert2.all.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
-		// wp_register_style('blockons-venopopup-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.css'), array('blockons-venobox-style', 'blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
-		// wp_register_script('blockons-venopopup', esc_url(BLOCKONS_PLUGIN_URL . 'dist/venopopup.min.js'), array('blockons-venobox-script'), BLOCKONS_PLUGIN_VERSION, true);
 
 		wp_register_script('blockons-image-block', esc_url(BLOCKONS_PLUGIN_URL . 'dist/image.min.js'), array('blockons-sweetalert-script'), BLOCKONS_PLUGIN_VERSION, true);
 		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-sweetalert-script'), BLOCKONS_PLUGIN_VERSION, true);
@@ -132,7 +130,8 @@ class Blockons {
 			wp_register_style('blockons-aos-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/aos/aos.css'), array(), BLOCKONS_PLUGIN_VERSION);
 			wp_register_script('blockons-aos-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/aos/aos.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 
-			wp_register_script('blockons-quickview', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/quickview.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
+			wp_register_style('blockons-quickview-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/quickview.min.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
+			wp_register_script('blockons-quickview', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/quickview.min.js'), array('jquery', 'wc-add-to-cart-variation', 'wc-add-to-cart', 'wc-cart-fragments'), BLOCKONS_PLUGIN_VERSION, true);
 		}
 
 		// Settings JS
@@ -171,10 +170,6 @@ class Blockons {
 		));
 
 		if (isset($blockonsOptions->imagepopups->enabled) && $blockonsOptions->imagepopups->enabled == true) {
-			wp_enqueue_style('blockons-venobox-style');
-			wp_enqueue_style('blockons-venopopup-style');
-			wp_enqueue_script('blockons-venopopup');
-
 			wp_enqueue_style('blockons-sweetalert-style');
 			wp_enqueue_script('blockons-image-block');
 		}
@@ -200,14 +195,14 @@ class Blockons {
 
 			// Block Extension - Product Quick View
 			if (isset($blockonsOptions->quickview->enabled) && $blockonsOptions->quickview->enabled == true) {
-				wp_enqueue_style('blockons-venobox-style');
-				wp_enqueue_style('blockons-venopopup-style');
-				wp_enqueue_script('blockons-venopopup');
-				
+				wp_enqueue_style('blockons-quickview-style');
 				wp_enqueue_script('blockons-quickview');
 				wp_localize_script('blockons-quickview', 'blockonsQuickviewObj', array(
 					'apiUrl' => esc_url(get_rest_url()),
 					'quickviewOptions' => $blockonsOptions->quickview,
+					'ajaxurl' => admin_url('admin-ajax.php'),
+					'nonce' => wp_create_nonce('blockons_quickview_nonce'),
+					'wc_ajax_url' => WC_AJAX::get_endpoint('%%endpoint%%'),
 				));
 			}
 

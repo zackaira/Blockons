@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	const isPro = Boolean(blockonsFrontendObj.isPremium);
-	const defaultOptions = blockonsFrontendObj.blockonsOptions?.imagepopups;
+	// const defaultOptions = blockonsFrontendObj.blockonsOptions?.imagepopups;
 
 	const blockonsGalleryImages = document.querySelectorAll(
 		"body.blockons-pro .blockons-gallery-img"
@@ -30,8 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			imageCaption: image.dataset?.imgcaption || "",
 		};
 	}).filter(Boolean);
-
-	console.log('imagesArray', imagesArray);
 
 	if (isPro && blockonsGalleryImages.length > 0) {
 		blockonsGalleryImages.forEach((image, index) => {
