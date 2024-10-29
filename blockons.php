@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Blockons
- * Version: 1.2.00
+ * Version: 1.2.01
  * Plugin URI: https://blockons.com/
  * Description: Enhanced WordPress editor blocks for Gutenberg, including core Block Extensions and Site Addons for your WordPress site and WooCommerce online store
  * Author: Kaira
@@ -20,7 +20,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( !defined( 'BLOCKONS_PLUGIN_VERSION' ) ) {
-	define('BLOCKONS_PLUGIN_VERSION', '1.2.00');
+	define('BLOCKONS_PLUGIN_VERSION', '1.2.01');
 }
 if ( !defined( 'BLOCKONS_PLUGIN_URL' ) ) {
 	define('BLOCKONS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
