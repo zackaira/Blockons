@@ -5,7 +5,7 @@ import { blockonsStringReplaceForLink } from '../../../backend/helpers';
 import parse from 'html-react-parser';
 import './siteby.css';
 
-const SiteBy = ({ sitebyOptions }) => {
+const SiteBy = ({ sitebyOptions, isAdmin }) => {
 	const siteby = sitebyOptions
 		? sitebyOptions
 		: {
