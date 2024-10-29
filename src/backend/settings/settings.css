@@ -134,7 +134,7 @@
 }
 .blockonsSettingBarOptions > a {
 	color: #8b8b8b;
-	font-family: "Dashicons";
+	font-family: 'Dashicons';
 	font-size: 25px;
 	margin: 0 0 0 15px;
 	padding: 5px;
@@ -142,13 +142,13 @@
 	transition: all 0.3s;
 }
 a.blockons-account::before {
-	content: "\f110";
+	content: '\f110';
 }
 a.blockons-docs::before {
-	content: "\f468";
+	content: '\f468';
 }
 a.blockons-upgrade::before {
-	content: "\f317";
+	content: '\f317';
 }
 .blockons-delete {
 	cursor: pointer;
@@ -160,7 +160,7 @@ a.blockons-upgrade::before {
 }
 .blockonsSettingBarOptions .blockons-delete::before {
 	color: #c9c9c9;
-	content: "\f182";
+	content: '\f182';
 	font-family: Dashicons;
 	font-size: 20px;
 	line-height: 20px;
@@ -189,7 +189,7 @@ a.blockons-upgrade::before {
 }
 .blockons-confirm-delete::after {
 	display: block;
-	content: "";
+	content: '';
 	width: 0px;
 	height: 0px;
 	border-top: 6px solid transparent;
@@ -350,9 +350,9 @@ a.blockons-upgrade::before {
 	text-decoration: none;
 }
 .blockonsdoclink::before {
-	font-family: "Dashicons";
+	font-family: 'Dashicons';
 	display: block;
-	content: "\f504";
+	content: '\f504';
 }
 
 .blockons-tooltip {
@@ -364,9 +364,9 @@ a.blockons-upgrade::before {
 	vertical-align: middle;
 }
 .blockons-tooltip::before {
-	font-family: "Dashicons";
+	font-family: 'Dashicons';
 	display: block;
-	content: "\f223";
+	content: '\f223';
 }
 .blockons-tooltip .blockons-tooltiptxt {
 	background-color: #404040;
@@ -389,7 +389,7 @@ a.blockons-upgrade::before {
 	z-index: 1;
 }
 .blockons-tooltip .blockons-tooltiptxt::after {
-	content: "";
+	content: '';
 	position: absolute;
 	top: 100%;
 	left: 50%;
@@ -411,7 +411,7 @@ a.blockons-upgrade::before {
 }
 .blockons-row .regular-text,
 .blockons-row select,
-.blockons-row input[type="number"] {
+.blockons-row input[type='number'] {
 	border: 1px solid #ccc;
 	padding: 5px 10px;
 	width: 100%;
@@ -420,12 +420,12 @@ a.blockons-upgrade::before {
 }
 .blockons-row .regular-text:hover,
 .blockons-row select:hover,
-.blockons-row input[type="number"]:hover,
+.blockons-row input[type='number']:hover,
 .blockons-repeater input:hover,
 .blockons-repeater .blockons-repeater-right .rdt input:hover {
 	border: 1px solid #868686;
 }
-.blockons-row input[type="number"] {
+.blockons-row input[type='number'] {
 	max-width: 110px;
 }
 .blockons-row span.prefix {
@@ -438,7 +438,7 @@ a.blockons-upgrade::before {
 .blockons-row .blockons-post-select__menu {
 	max-width: 440px;
 }
-.blockons-row .blockons-post-select__control input[type="text"] {
+.blockons-row .blockons-post-select__control input[type='text'] {
 	box-shadow: none;
 }
 .blockons-row-cols {
@@ -490,7 +490,7 @@ a.blockons-upgrade::before {
 .toggle-switch-slider:before {
 	border-radius: 34px;
 	position: absolute;
-	content: "";
+	content: '';
 	height: 18px;
 	width: 18px;
 	left: 3px;
@@ -665,9 +665,9 @@ a.propromo-upgrade:hover {
 }
 .blockons-feedback-dismiss label::before {
 	display: block;
-	font-family: "Font Awesome 6 Free";
+	font-family: 'Font Awesome 6 Free';
 	font-weight: 900;
-	content: "\f00d";
+	content: '\f00d';
 	position: absolute;
 	top: 2px;
 	left: 6px;
@@ -704,7 +704,9 @@ input.toggle-switch-checkbox::before,
 }
 .blockons-settings a.blockons-button:hover {
 	background-color: #ededed;
-	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 25%), 0 1px 5px rgb(0 0 0 / 18%);
+	box-shadow:
+		inset 0 0 0 1px rgb(0 0 0 / 25%),
+		0 1px 5px rgb(0 0 0 / 18%);
 	color: #585858;
 }
 .blockons-settings a.blockons-button.primary {
@@ -725,7 +727,9 @@ input.toggle-switch-checkbox::before,
 .blockons-block-inner {
 	background-color: #fcfcfc;
 	border-radius: 4px;
-	box-shadow: 0 0 0 1px rgb(0 0 0 / 20%), 0 1px 6px rgb(0 0 0 / 8%);
+	box-shadow:
+		0 0 0 1px rgb(0 0 0 / 20%),
+		0 1px 6px rgb(0 0 0 / 8%);
 	text-align: center;
 	padding: 35px 15px;
 	position: relative;
@@ -733,7 +737,9 @@ input.toggle-switch-checkbox::before,
 	overflow: hidden;
 }
 .blockons-block .blockons-block-inner:hover {
-	box-shadow: 0 0 0 1px rgb(0 0 0 / 28%), 0 1px 8px rgb(0 0 0 / 28%);
+	box-shadow:
+		0 0 0 1px rgb(0 0 0 / 28%),
+		0 1px 8px rgb(0 0 0 / 28%);
 }
 .blockons-block-title {
 	margin: 5px 0 8px;
@@ -776,7 +782,7 @@ input.toggle-switch-checkbox::before,
 }
 .blockons-block.disabled::before {
 	display: block;
-	content: "";
+	content: '';
 	background-color: rgb(255 255 255 / 60%);
 	position: absolute;
 	top: -5px;
@@ -837,7 +843,9 @@ input.toggle-switch-checkbox::before,
 	left: 55px;
 	background-color: #fff;
 	border-radius: 5px;
-	box-shadow: inset 0 0 0 1px rgb(204 204 204), 0 2px 10px rgb(0 0 0 / 12%);
+	box-shadow:
+		inset 0 0 0 1px rgb(204 204 204),
+		0 2px 10px rgb(0 0 0 / 12%);
 	padding: 12px 10px 8px;
 	z-index: 8;
 	width: 366px;
@@ -861,7 +869,7 @@ input.toggle-switch-checkbox::before,
 }
 .blockons-group-container .blockons-row .regular-text,
 .blockons-group-container .blockons-row select,
-.blockons-group-container .blockons-row input[type="number"] {
+.blockons-group-container .blockons-row input[type='number'] {
 	padding: 2px 8px;
 }
 
@@ -891,7 +899,7 @@ input.toggle-switch-checkbox::before,
 	width: 100%;
 	top: -22px;
 }
-.blockonsRange input[type="text"] {
+.blockonsRange input[type='text'] {
 	background: none;
 	box-shadow: none;
 	border: 0;
@@ -901,7 +909,7 @@ input.toggle-switch-checkbox::before,
 	width: 35px;
 	padding: 0 2px 0 0;
 }
-.blockonsRange:hover input[type="text"] {
+.blockonsRange:hover input[type='text'] {
 	color: #000 !important;
 }
 /* -- Color Picker -- */
@@ -1093,7 +1101,9 @@ input.toggle-switch-checkbox::before,
 /* -- Test Product -- */
 .blockons-test-product {
 	background-color: #fff;
-	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 15%), 0 1px 8px rgb(0 0 0 / 14%);
+	box-shadow:
+		inset 0 0 0 1px rgb(0 0 0 / 15%),
+		0 1px 8px rgb(0 0 0 / 14%);
 	border-radius: 4px;
 	position: fixed;
 	bottom: 10px;

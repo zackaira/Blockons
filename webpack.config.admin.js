@@ -45,6 +45,7 @@ const config = {
 		'@wordpress/api-fetch': 'wp.apiFetch',
 		react: 'React',
 		'react-dom': 'ReactDOM',
+		lodash: 'lodash',
 	},
 	optimization: {
 		minimize: true,

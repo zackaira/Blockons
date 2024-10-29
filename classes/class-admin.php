@@ -21,10 +21,10 @@ class Blockons_Admin {
 		add_filter('admin_body_class', array($this, 'blockons_admin_body_classes'));
 
 		// Add Quickview to WooCommerce Blocks
-		add_filter('woocommerce_blocks_product_grid_item_html', array( $this, 'blockons_add_quickview' ), 10, 3);
+		// add_filter('woocommerce_blocks_product_grid_item_html', array( $this, 'blockons_add_quickview' ), 10, 3);
 		// Add AJAX actions for add to cart
-		add_action('wp_ajax_blockons_get_product_data', array($this, 'blockons_get_product_data_ajax'));
-    	add_action('wp_ajax_nopriv_blockons_get_product_data', array($this, 'blockons_get_product_data_ajax'));
+		// add_action('wp_ajax_blockons_get_product_data', array($this, 'blockons_get_product_data_ajax'));
+    	// add_action('wp_ajax_nopriv_blockons_get_product_data', array($this, 'blockons_get_product_data_ajax'));
 	}
 
 	/**

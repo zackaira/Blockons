@@ -1,6 +1,6 @@
-import { blockonsConvertToSlug } from "../../../helpers";
+import { blockonsConvertToSlug } from '../../../helpers';
 
-const InputToggleSwitch = ({ slug, title, value, onChange }) => {
+const InputToggleSwitch = ({ slug, title, value, onChange, closeIcon }) => {
 	const inputTitleSlug = blockonsConvertToSlug(slug)
 		? blockonsConvertToSlug(slug)
 		: blockonsConvertToSlug(title);

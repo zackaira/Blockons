@@ -1,18 +1,19 @@
-import classnames from "classnames";
-import BlockonsNote from "../../settings/components/UI/BlockonsNote";
+import classnames from 'classnames';
+import BlockonsNote from '../../settings/components/UI/BlockonsNote';
 const { __ } = wp.i18n;
 const { addFilter } = wp.hooks;
-const { assign, merge } = lodash;
+const { assign, merge } = window.lodash;
 const { createHigherOrderComponent } = wp.compose;
 
 const isPremium = Boolean(blockonsEditorObj.isPremium);
 const visibilityEnabled =
-	Boolean(blockonsEditorObj.blockonsOptions?.blockvisibility?.enabled) || false;
+	Boolean(blockonsEditorObj.blockonsOptions?.blockvisibility?.enabled) ||
+	false;
 
 const allowedVisibilityBlockTypes = [
-	"core/group",
-	"core/columns",
-	"core/column",
+	'core/group',
+	'core/columns',
+	'core/column',
 ];
 
 /**
@@ -27,18 +28,18 @@ function blockonsAddVisibilityAttributes(settings, name) {
 	const blockVisibilityAtts = showVisibilitySettings
 		? {
 				blockonsHideOnDesktop: {
-					type: "boolean",
+					type: 'boolean',
 					default: false,
 				},
 				blockonsHideOnTablet: {
-					type: "boolean",
+					type: 'boolean',
 					default: false,
 				},
 				blockonsHideOnMobile: {
-					type: "boolean",
+					type: 'boolean',
 					default: false,
 				},
-		  }
+			}
 		: {};
 
 	return assign({}, settings, {
@@ -72,7 +73,8 @@ const blockonsAddInspectorVisibilityControls = createHigherOrderComponent(
 				name,
 			} = props;
 
-			const showVisibilitySettings = allowedVisibilityBlockTypes.includes(name);
+			const showVisibilitySettings =
+				allowedVisibilityBlockTypes.includes(name);
 
 			if (!isPremium || !visibilityEnabled) {
 				return <BlockEdit {...props} />;
@@ -85,38 +87,47 @@ const blockonsAddInspectorVisibilityControls = createHigherOrderComponent(
 					{showVisibilitySettings && (
 						<InspectorControls>
 							<PanelBody
-								title={__("Block Visibility", "blockons")}
+								title={__('Block Visibility', 'blockons')}
 								initialOpen={false}
 							>
 								<BlockonsNote
 									imageUrl=""
-									title={__("Using Block Visibility", "blockons")}
+									title={__(
+										'Using Block Visibility',
+										'blockons',
+									)}
 									text={__(
-										"Hide certain blocks by device screen size. For more information, click the link below.",
-										"blockons"
+										'Hide certain blocks by device screen size. For more information, click the link below.',
+										'blockons',
 									)}
 									docLink="https://blockons.com/documentation/block-visibility-per-device/"
 								/>
 
 								<ToggleControl
 									checked={blockonsHideOnDesktop}
-									label={__("Hide on desktop", "blockons")}
+									label={__('Hide on desktop', 'blockons')}
 									onChange={(newValue) =>
-										setAttributes({ blockonsHideOnDesktop: newValue })
+										setAttributes({
+											blockonsHideOnDesktop: newValue,
+										})
 									}
 								/>
 								<ToggleControl
 									checked={blockonsHideOnTablet}
-									label={__("Hide on tablet", "blockons")}
+									label={__('Hide on tablet', 'blockons')}
 									onChange={(newValue) =>
-										setAttributes({ blockonsHideOnTablet: newValue })
+										setAttributes({
+											blockonsHideOnTablet: newValue,
+										})
 									}
 								/>
 								<ToggleControl
 									checked={blockonsHideOnMobile}
-									label={__("Hide on mobile", "blockons")}
+									label={__('Hide on mobile', 'blockons')}
 									onChange={(newValue) =>
-										setAttributes({ blockonsHideOnMobile: newValue })
+										setAttributes({
+											blockonsHideOnMobile: newValue,
+										})
 									}
 								/>
 							</PanelBody>
@@ -126,7 +137,7 @@ const blockonsAddInspectorVisibilityControls = createHigherOrderComponent(
 			);
 		};
 	},
-	"blockonsAddInspectorVisibilityControls"
+	'blockonsAddInspectorVisibilityControls',
 );
 /**
  * Add CSS Classes to the blocks in the editor
@@ -143,7 +154,8 @@ const blockonsAddEditorVisibilityAttributes = createHigherOrderComponent(
 				className,
 				name,
 			} = props;
-			const showVisibilitySettings = allowedVisibilityBlockTypes.includes(name);
+			const showVisibilitySettings =
+				allowedVisibilityBlockTypes.includes(name);
 
 			if (!isPremium || !visibilityEnabled) {
 				return <BlockListBlock {...props} />;
@@ -152,16 +164,16 @@ const blockonsAddEditorVisibilityAttributes = createHigherOrderComponent(
 			const newClassnames = showVisibilitySettings
 				? classnames(
 						className,
-						`${blockonsHideOnDesktop ? "hide-on-desktop" : ""} ${
-							blockonsHideOnTablet ? "hide-on-tablet" : ""
-						} ${blockonsHideOnMobile ? "hide-on-mobile" : ""}`
-				  )
+						`${blockonsHideOnDesktop ? 'hide-on-desktop' : ''} ${
+							blockonsHideOnTablet ? 'hide-on-tablet' : ''
+						} ${blockonsHideOnMobile ? 'hide-on-mobile' : ''}`,
+					)
 				: className;
 
 			return <BlockListBlock {...props} className={newClassnames} />;
 		};
 	},
-	"blockonsAddEditorVisibilityAttributes"
+	'blockonsAddEditorVisibilityAttributes',
 );
 /**
  * Add Classes to the blocks on the Frontend
@@ -169,10 +181,13 @@ const blockonsAddEditorVisibilityAttributes = createHigherOrderComponent(
 const blockonsAddFrontendVisibilityAttributes = (
 	extraProps,
 	blockType,
-	attributes
+	attributes,
 ) => {
-	const { blockonsHideOnDesktop, blockonsHideOnTablet, blockonsHideOnMobile } =
-		attributes;
+	const {
+		blockonsHideOnDesktop,
+		blockonsHideOnTablet,
+		blockonsHideOnMobile,
+	} = attributes;
 	const { name } = blockType;
 	const showVisibilitySettings = allowedVisibilityBlockTypes.includes(name);
 
@@ -182,9 +197,9 @@ const blockonsAddFrontendVisibilityAttributes = (
 
 	if (showVisibilitySettings) {
 		extraProps.className = classnames(extraProps.className, {
-			"hide-on-desktop": blockonsHideOnDesktop,
-			"hide-on-tablet": blockonsHideOnTablet,
-			"hide-on-mobile": blockonsHideOnMobile,
+			'hide-on-desktop': blockonsHideOnDesktop,
+			'hide-on-tablet': blockonsHideOnTablet,
+			'hide-on-mobile': blockonsHideOnMobile,
 		});
 	}
 
@@ -195,22 +210,22 @@ const blockonsAddFrontendVisibilityAttributes = (
  * WP Editor Hooks
  */
 addFilter(
-	"blocks.registerBlockType",
-	"blockons/block-visibility-attributes",
-	blockonsAddVisibilityAttributes
+	'blocks.registerBlockType',
+	'blockons/block-visibility-attributes',
+	blockonsAddVisibilityAttributes,
 );
 addFilter(
-	"editor.BlockEdit",
-	"blockons/block-visibility-controls",
-	blockonsAddInspectorVisibilityControls
+	'editor.BlockEdit',
+	'blockons/block-visibility-controls',
+	blockonsAddInspectorVisibilityControls,
 );
 addFilter(
-	"blocks.getSaveContent.extraProps",
-	"blockons/block-visibility-frontend-clases",
-	blockonsAddFrontendVisibilityAttributes
+	'blocks.getSaveContent.extraProps',
+	'blockons/block-visibility-frontend-clases',
+	blockonsAddFrontendVisibilityAttributes,
 );
 addFilter(
-	"editor.BlockListBlock",
-	"blockons/block-visibility-editor-clases",
-	blockonsAddEditorVisibilityAttributes
+	'editor.BlockListBlock',
+	'blockons/block-visibility-editor-clases',
+	blockonsAddEditorVisibilityAttributes,
 );

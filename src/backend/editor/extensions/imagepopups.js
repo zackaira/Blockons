@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import BlockonsNote from '../../settings/components/UI/BlockonsNote';
 const { __ } = wp.i18n;
 const { addFilter } = wp.hooks;
-const { assign, merge } = lodash;
+const { assign, merge } = window.lodash;
 const { createHigherOrderComponent } = wp.compose;
 
 const isPremium = Boolean(blockonsEditorObj.isPremium);

@@ -1,18 +1,19 @@
-import BlockonsNote from "../../settings/components/UI/BlockonsNote";
+import BlockonsNote from '../../settings/components/UI/BlockonsNote';
 const { __ } = wp.i18n;
 const { addFilter } = wp.hooks;
-const { assign, merge } = lodash;
+const { assign, merge } = window.lodash;
 const { createHigherOrderComponent } = wp.compose;
 
 const isPremium = Boolean(blockonsEditorObj.isPremium);
 const animationsEnabled =
-	Boolean(blockonsEditorObj.blockonsOptions?.blockanimation?.enabled) || false;
+	Boolean(blockonsEditorObj.blockonsOptions?.blockanimation?.enabled) ||
+	false;
 const animationsSettings = blockonsEditorObj.blockonsOptions?.blockanimation;
 
 const allowedAnimationBlockTypes = [
-	"core/group",
-	"core/columns",
-	"core/column",
+	'core/group',
+	'core/columns',
+	'core/column',
 ];
 
 /**
@@ -27,38 +28,38 @@ function blockonsAddAnimationAttributes(settings, name) {
 	const blockAnimationAtts = showAnimationSettings
 		? {
 				blockonsEnableAnimation: {
-					type: "boolean",
+					type: 'boolean',
 					default: false,
 				},
 				blockonsAnimation: {
-					type: "string",
-					default: animationsSettings?.default_style || "fade",
+					type: 'string',
+					default: animationsSettings?.default_style || 'fade',
 				},
 				blockonsAnimationDirection: {
-					type: "string",
-					default: animationsSettings?.default_direction || "-up",
+					type: 'string',
+					default: animationsSettings?.default_direction || '-up',
 				},
 				blockonsAnimationDuration: {
-					type: "number",
+					type: 'number',
 					default: animationsSettings?.default_duration || 850,
 				},
 				blockonsAnimationDelay: {
-					type: "number",
+					type: 'number',
 					default: animationsSettings?.default_delay || 50,
 				},
 				blockonsAnimationOffset: {
-					type: "number",
+					type: 'number',
 					default: animationsSettings?.default_offset || 80,
 				},
 				blockonsAnimationOnce: {
-					type: "boolean",
+					type: 'boolean',
 					default: animationsSettings?.default_animate_once || false,
 				},
 				blockonsAnimationMirror: {
-					type: "boolean",
+					type: 'boolean',
 					default: animationsSettings?.default_mirror || false,
 				},
-		  }
+			}
 		: {};
 
 	return assign({}, settings, {
@@ -90,7 +91,8 @@ const blockonsAddAnimationInspectorControls = createHigherOrderComponent(
 				name,
 			} = props;
 
-			const showAnimationSettings = allowedAnimationBlockTypes.includes(name);
+			const showAnimationSettings =
+				allowedAnimationBlockTypes.includes(name);
 
 			if (!isPremium || !animationsEnabled) {
 				return <BlockEdit {...props} />;
@@ -103,24 +105,32 @@ const blockonsAddAnimationInspectorControls = createHigherOrderComponent(
 					{showAnimationSettings && (
 						<InspectorControls>
 							<PanelBody
-								title={__("Block Animations", "blockons")}
+								title={__('Block Animations', 'blockons')}
 								initialOpen={false}
 							>
 								<BlockonsNote
 									imageUrl=""
-									title={__("Using Block Animations", "blockons")}
+									title={__(
+										'Using Block Animations',
+										'blockons',
+									)}
 									text={__(
-										"Add scroll animations for layout blocks in your WordPress editor. For more information, click the link below.",
-										"blockons"
+										'Add scroll animations for layout blocks in your WordPress editor. For more information, click the link below.',
+										'blockons',
 									)}
 									docLink="https://blockons.com/documentation/block-animations-on-scroll/"
 								/>
 
 								<ToggleControl
 									checked={blockonsEnableAnimation}
-									label={__("Enable Block Animations", "blockons")}
+									label={__(
+										'Enable Block Animations',
+										'blockons',
+									)}
 									onChange={(newValue) => {
-										setAttributes({ blockonsEnableAnimation: newValue });
+										setAttributes({
+											blockonsEnableAnimation: newValue,
+										});
 									}}
 								/>
 
@@ -130,15 +140,31 @@ const blockonsAddAnimationInspectorControls = createHigherOrderComponent(
 											label="Style"
 											value={blockonsAnimation}
 											options={[
-												{ label: "Fade", value: "fade" },
-												{ label: "Slide", value: "slide" },
-												{ label: "Flip", value: "flip" },
-												{ label: "Zoom In", value: "zoom-in" },
-												{ label: "Zoom Out", value: "zoom-out" },
+												{
+													label: 'Fade',
+													value: 'fade',
+												},
+												{
+													label: 'Slide',
+													value: 'slide',
+												},
+												{
+													label: 'Flip',
+													value: 'flip',
+												},
+												{
+													label: 'Zoom In',
+													value: 'zoom-in',
+												},
+												{
+													label: 'Zoom Out',
+													value: 'zoom-out',
+												},
 											]}
 											onChange={(newAnimationStyle) => {
 												setAttributes({
-													blockonsAnimation: newAnimationStyle,
+													blockonsAnimation:
+														newAnimationStyle,
 												});
 											}}
 											__nextHasNoMarginBottom
@@ -147,100 +173,155 @@ const blockonsAddAnimationInspectorControls = createHigherOrderComponent(
 											label="Direction"
 											value={blockonsAnimationDirection}
 											options={[
-												{ label: "Up", value: "-up" },
-												{ label: "Down", value: "-down" },
-												{ label: "Left", value: "-left" },
-												{ label: "Right", value: "-right" },
+												{ label: 'Up', value: '-up' },
+												{
+													label: 'Down',
+													value: '-down',
+												},
+												{
+													label: 'Left',
+													value: '-left',
+												},
+												{
+													label: 'Right',
+													value: '-right',
+												},
 												// Zoom Extra Options
-												...(blockonsAnimation === "zoom-in" ||
-												blockonsAnimation === "zoom-out"
-													? [{ label: "None", value: "" }]
+												...(blockonsAnimation ===
+													'zoom-in' ||
+												blockonsAnimation === 'zoom-out'
+													? [
+															{
+																label: 'None',
+																value: '',
+															},
+														]
 													: []),
 												// Fade Extra Options
-												...(blockonsAnimation === "fade"
+												...(blockonsAnimation === 'fade'
 													? [
-															{ label: "Up Right", value: "-up-right" },
-															{ label: "Up Left", value: "-up-left" },
-															{ label: "Down Right", value: "-down-right" },
-															{ label: "Down Left", value: "-down-left" },
-													  ]
+															{
+																label: 'Up Right',
+																value: '-up-right',
+															},
+															{
+																label: 'Up Left',
+																value: '-up-left',
+															},
+															{
+																label: 'Down Right',
+																value: '-down-right',
+															},
+															{
+																label: 'Down Left',
+																value: '-down-left',
+															},
+														]
 													: []),
 											]}
-											onChange={(newAnimationDirection) => {
+											onChange={(
+												newAnimationDirection,
+											) => {
 												setAttributes({
-													blockonsAnimationDirection: newAnimationDirection,
+													blockonsAnimationDirection:
+														newAnimationDirection,
 												});
 											}}
 											__nextHasNoMarginBottom
 										/>
 										<RangeControl
-											label={__("Duration", "blockons")}
-											value={parseInt(blockonsAnimationDuration)}
+											label={__('Duration', 'blockons')}
+											value={parseInt(
+												blockonsAnimationDuration,
+											)}
 											onChange={(newDurationValue) =>
 												setAttributes({
-													blockonsAnimationDuration: parseInt(newDurationValue),
+													blockonsAnimationDuration:
+														parseInt(
+															newDurationValue,
+														),
 												})
 											}
 											min={50}
 											max={3000}
 											step={50}
 											help={__(
-												"How long the animation takes - 1000 = 1 second",
-												"blockons"
+												'How long the animation takes - 1000 = 1 second',
+												'blockons',
 											)}
 										/>
 										<RangeControl
-											label={__("Delay", "blockons")}
-											value={parseInt(blockonsAnimationDelay)}
+											label={__('Delay', 'blockons')}
+											value={parseInt(
+												blockonsAnimationDelay,
+											)}
 											onChange={(newDelayValue) =>
 												setAttributes({
-													blockonsAnimationDelay: parseInt(newDelayValue),
+													blockonsAnimationDelay:
+														parseInt(newDelayValue),
 												})
 											}
 											min={0}
 											max={3000}
 											step={50}
 											help={__(
-												"The milliseconds before the animation starts - 1000 = 1 second",
-												"blockons"
+												'The milliseconds before the animation starts - 1000 = 1 second',
+												'blockons',
 											)}
 										/>
 										<RangeControl
-											label={__("Offset", "blockons")}
-											value={parseInt(blockonsAnimationOffset)}
+											label={__('Offset', 'blockons')}
+											value={parseInt(
+												blockonsAnimationOffset,
+											)}
 											onChange={(newOffsetValue) =>
 												setAttributes({
-													blockonsAnimationOffset: parseInt(newOffsetValue),
+													blockonsAnimationOffset:
+														parseInt(
+															newOffsetValue,
+														),
 												})
 											}
 											min={0}
 											max={600}
 											step={5}
 											help={__(
-												"The offset in pixels from the bottom of the window",
-												"blockons"
+												'The offset in pixels from the bottom of the window',
+												'blockons',
 											)}
 										/>
 										<ToggleControl
 											checked={blockonsAnimationOnce}
-											label={__("Animate Once", "blockons")}
+											label={__(
+												'Animate Once',
+												'blockons',
+											)}
 											onChange={(newValue) => {
-												setAttributes({ blockonsAnimationOnce: newValue });
+												setAttributes({
+													blockonsAnimationOnce:
+														newValue,
+												});
 											}}
 											help={__(
-												"Whether animation should happen only once - while scrolling down",
-												"blockons"
+												'Whether animation should happen only once - while scrolling down',
+												'blockons',
 											)}
 										/>
 										<ToggleControl
 											checked={blockonsAnimationMirror}
-											label={__("Mirror Animations", "blockons")}
+											label={__(
+												'Mirror Animations',
+												'blockons',
+											)}
 											onChange={(newValue) => {
-												setAttributes({ blockonsAnimationMirror: newValue });
+												setAttributes({
+													blockonsAnimationMirror:
+														newValue,
+												});
 											}}
 											help={__(
-												"Whether elements should animate out while scrolling past them",
-												"blockons"
+												'Whether elements should animate out while scrolling past them',
+												'blockons',
 											)}
 										/>
 									</>
@@ -252,7 +333,7 @@ const blockonsAddAnimationInspectorControls = createHigherOrderComponent(
 			);
 		};
 	},
-	"blockonsAddAnimationInspectorControls"
+	'blockonsAddAnimationInspectorControls',
 );
 /**
  * Add CSS Classes to the blocks in the editor
@@ -274,7 +355,8 @@ const blockonsAddEditorAnimationAttributes = createHigherOrderComponent(
 				className,
 				name,
 			} = props;
-			const showAnimationSettings = allowedAnimationBlockTypes.includes(name);
+			const showAnimationSettings =
+				allowedAnimationBlockTypes.includes(name);
 
 			if (!isPremium || !animationsEnabled || !showAnimationSettings) {
 				return <BlockListBlock {...props} />;
@@ -282,14 +364,14 @@ const blockonsAddEditorAnimationAttributes = createHigherOrderComponent(
 
 			const newWrapperProps = blockonsEnableAnimation
 				? {
-						"data-aos": `${blockonsAnimation}${blockonsAnimationDirection}`,
-						"data-aos-easing": "ease-in-out",
-						"data-aos-duration": blockonsAnimationDuration,
-						"data-aos-delay": blockonsAnimationDelay,
-						"data-aos-offset": blockonsAnimationOffset,
-						"data-aos-once": blockonsAnimationOnce,
-						"data-aos-mirror": blockonsAnimationMirror,
-				  }
+						'data-aos': `${blockonsAnimation}${blockonsAnimationDirection}`,
+						'data-aos-easing': 'ease-in-out',
+						'data-aos-duration': blockonsAnimationDuration,
+						'data-aos-delay': blockonsAnimationDelay,
+						'data-aos-offset': blockonsAnimationOffset,
+						'data-aos-once': blockonsAnimationOnce,
+						'data-aos-mirror': blockonsAnimationMirror,
+					}
 				: {};
 
 			return (
@@ -300,7 +382,7 @@ const blockonsAddEditorAnimationAttributes = createHigherOrderComponent(
 			);
 		};
 	},
-	"blockonsAddEditorAnimationAttributes"
+	'blockonsAddEditorAnimationAttributes',
 );
 /**
  * Add Classes to the blocks on the Frontend
@@ -308,7 +390,7 @@ const blockonsAddEditorAnimationAttributes = createHigherOrderComponent(
 const blockonsAddFrontendAnimationAttributes = (
 	extraProps,
 	blockType,
-	attributes
+	attributes,
 ) => {
 	const {
 		blockonsEnableAnimation,
@@ -328,15 +410,14 @@ const blockonsAddFrontendAnimationAttributes = (
 	}
 
 	if (blockonsEnableAnimation) {
-		extraProps[
-			"data-aos"
-		] = `${blockonsAnimation}${blockonsAnimationDirection}`;
-		extraProps["data-aos-easing"] = "ease-in-out";
-		extraProps["data-aos-duration"] = blockonsAnimationDuration;
-		extraProps["data-aos-delay"] = blockonsAnimationDelay;
-		extraProps["data-aos-offset"] = blockonsAnimationOffset;
-		extraProps["data-aos-once"] = blockonsAnimationOnce;
-		extraProps["data-aos-mirror"] = blockonsAnimationMirror;
+		extraProps['data-aos'] =
+			`${blockonsAnimation}${blockonsAnimationDirection}`;
+		extraProps['data-aos-easing'] = 'ease-in-out';
+		extraProps['data-aos-duration'] = blockonsAnimationDuration;
+		extraProps['data-aos-delay'] = blockonsAnimationDelay;
+		extraProps['data-aos-offset'] = blockonsAnimationOffset;
+		extraProps['data-aos-once'] = blockonsAnimationOnce;
+		extraProps['data-aos-mirror'] = blockonsAnimationMirror;
 	}
 
 	return extraProps;
@@ -346,22 +427,22 @@ const blockonsAddFrontendAnimationAttributes = (
  * WP Editor Hooks
  */
 addFilter(
-	"blocks.registerBlockType",
-	"blockons/block-animations-attributes",
-	blockonsAddAnimationAttributes
+	'blocks.registerBlockType',
+	'blockons/block-animations-attributes',
+	blockonsAddAnimationAttributes,
 );
 addFilter(
-	"editor.BlockEdit",
-	"blockons/block-animations-controls",
-	blockonsAddAnimationInspectorControls
+	'editor.BlockEdit',
+	'blockons/block-animations-controls',
+	blockonsAddAnimationInspectorControls,
 );
 addFilter(
-	"blocks.getSaveContent.extraProps",
-	"blockons/block-animations-frontend-classes",
-	blockonsAddFrontendAnimationAttributes
+	'blocks.getSaveContent.extraProps',
+	'blockons/block-animations-frontend-classes',
+	blockonsAddFrontendAnimationAttributes,
 );
 addFilter(
-	"editor.BlockListBlock",
-	"blockons/block-animations-editor-classes",
-	blockonsAddEditorAnimationAttributes
+	'editor.BlockListBlock',
+	'blockons/block-animations-editor-classes',
+	blockonsAddEditorAnimationAttributes,
 );

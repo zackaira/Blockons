@@ -1,20 +1,20 @@
-import { useState, useEffect } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
-import axios from "axios";
-import Loader from "../Loader";
-import GiveFeedback from "./components/GiveFeedback";
-import EditorBlocks from "./contents/EditorBlocks";
-import BlockExtensions from "./contents/BlockExtensions";
-import SiteAddons from "./contents/SiteAddons";
-import WooAddons from "./contents/WooAddons";
-import InfoTab from "./contents/InfoTab";
-import { blockonsGroupSettings } from "../helpers";
-import PageLoader from "../../frontend/site-addons/pageloader/PageLoader";
-import BackToTop from "../../frontend/site-addons/backtotop/BackToTop";
-import ScrollIndicator from "../../frontend/site-addons/scrollindicator/ScrollIndicator";
-import ProPromo from "./components/UI/ProPromo";
-import SiteBy from "../../frontend/site-addons/siteby/SiteBy";
-import SideCart from "../../../assets/blocks/wc-mini-cart/pro/components/SideCart";
+import { useState, useEffect } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
+import axios from 'axios';
+import Loader from '../Loader';
+import GiveFeedback from './components/GiveFeedback';
+import EditorBlocks from './contents/EditorBlocks';
+import BlockExtensions from './contents/BlockExtensions';
+import SiteAddons from './contents/SiteAddons';
+import WooAddons from './contents/WooAddons';
+import InfoTab from './contents/InfoTab';
+import { blockonsGroupSettings } from '../helpers';
+import PageLoader from '../../frontend/site-addons/pageloader/PageLoader';
+import BackToTop from '../../frontend/site-addons/backtotop/BackToTop';
+import ScrollIndicator from '../../frontend/site-addons/scrollindicator/ScrollIndicator';
+import ProPromo from './components/UI/ProPromo';
+import SiteBy from '../../frontend/site-addons/siteby/SiteBy';
+import SideCart from '../../../assets/blocks/wc-mini-cart/pro/components/SideCart';
 
 const SettingsPage = () => {
 	const blockonsObject = blockonsObj;
@@ -25,7 +25,7 @@ const SettingsPage = () => {
 	const [loadSetting, setLoadSetting] = useState(true);
 	const getInitialTab = () => {
 		const params = new URLSearchParams(window.location.search);
-		return params.get("tab") || "blocks";
+		return params.get('tab') || 'blocks';
 	};
 	const [activeTab, setActiveTab] = useState(getInitialTab());
 	const isPremium = Boolean(blockonsObject.isPremium);
@@ -45,36 +45,38 @@ const SettingsPage = () => {
 		setActiveTab(tabId);
 
 		const params = new URLSearchParams(window.location.search);
-		params.set("tab", tabId);
-		window.history.replaceState(null, "", "?" + params.toString());
+		params.set('tab', tabId);
+		window.history.replaceState(null, '', '?' + params.toString());
 	};
+
+	// console.log('blockonsOptions', blockonsOptions);
 
 	// setState dynamically for each setting
 	const handleChange = ({
 		target: { type, checked, name, value, className },
 	}) => {
 		if (
-			type === "checkbox" &&
-			(className === "checkbox-single" ||
-				className === "toggle-switch-checkbox")
+			type === 'checkbox' &&
+			(className === 'checkbox-single' ||
+				className === 'toggle-switch-checkbox')
 		)
 			value = checked;
 
-		const settingGroup = name.substring(0, name.indexOf("_")); // Splits by the first _ and saves that as the group name
-		const settingName = name.substring(name.indexOf("_") + 1); // Setting name within group, anything after the first _
+		const settingGroup = name.substring(0, name.indexOf('_')); // Splits by the first _ and saves that as the group name
+		const settingName = name.substring(name.indexOf('_') + 1); // Setting name within group, anything after the first _
 
-		const groupKey = settingGroup === "global" ? name.substring(7) : name;
+		const groupKey = settingGroup === 'global' ? name.substring(7) : name;
 
 		setBlockonsOptions({
 			...blockonsOptions,
-			...(!settingGroup || settingGroup === "global" // sn_ name gets saved as default / in no group
+			...(!settingGroup || settingGroup === 'global' // sn_ name gets saved as default / in no group
 				? { [groupKey]: value }
 				: {
 						[settingGroup]: {
 							...blockonsOptions[settingGroup],
 							[settingName]: value,
 						},
-				  }),
+					}),
 		});
 	};
 
@@ -91,17 +93,17 @@ const SettingsPage = () => {
 
 		axios
 			.post(
-				url + "/settings",
+				url + '/settings',
 				{
 					blockonsOptions: JSON.stringify(blockonsOptions),
 				},
 				{
 					// Add Nonce to prevent this working elsewhere
 					headers: {
-						"content-type": "application/json",
-						"X-WP-NONCE": blockonsObject.nonce,
+						'content-type': 'application/json',
+						'X-WP-NONCE': blockonsObject.nonce,
 					},
-				}
+				},
 			)
 			.then((res) => {
 				// console.log(res);
@@ -111,10 +113,10 @@ const SettingsPage = () => {
 	};
 
 	const confirmDelete = (e) => {
-		const deleteBtn = document.getElementsByClassName("blockons-delete");
-		deleteBtn[0].classList.add("show-confirm");
+		const deleteBtn = document.getElementsByClassName('blockons-delete');
+		deleteBtn[0].classList.add('show-confirm');
 		setTimeout(function () {
-			deleteBtn[0].classList.remove("show-confirm");
+			deleteBtn[0].classList.remove('show-confirm');
 		}, 2500);
 	};
 
@@ -122,15 +124,15 @@ const SettingsPage = () => {
 		e.preventDefault();
 		if (
 			window.confirm(
-				__("Are you sure you want to delete all settings?", "blockons")
+				__('Are you sure you want to delete all settings?', 'blockons'),
 			)
 		) {
 			setLoader(true);
 			setLoadSetting(true);
 			axios
-				.delete(url + "/delete", {
+				.delete(url + '/delete', {
 					headers: {
-						"X-WP-NONCE": blockonsObject.nonce,
+						'X-WP-NONCE': blockonsObject.nonce,
 					},
 				})
 				.then((res) => {
@@ -143,18 +145,20 @@ const SettingsPage = () => {
 	// Get Settings from db
 	useEffect(() => {
 		axios
-			.get(url + "/settings")
+			.get(url + '/settings')
 			.then((res) => {
 				const blockonsOptions = res.data
 					? JSON.parse(res.data)
-					: console.log("Blockons Options Empty");
+					: console.log('Blockons Options Empty');
 
 				// setState dynamically for all settings
 				if (blockonsOptions) {
 					for (const key in blockonsOptions) {
 						setBlockonsOptions((prevState) => ({
 							...prevState,
-							[key]: blockonsOptions[key] ? blockonsOptions[key] : "",
+							[key]: blockonsOptions[key]
+								? blockonsOptions[key]
+								: '',
 						}));
 					}
 				} else {
@@ -173,28 +177,28 @@ const SettingsPage = () => {
 			<div className="blockonsSettingBar">
 				<h2>
 					{isPremium
-						? __("Blockons Pro Settings", "blockons")
-						: __("Blockons Settings", "blockons")}
+						? __('Blockons Pro Settings', 'blockons')
+						: __('Blockons Settings', 'blockons')}
 				</h2>
 				<div className="blockonsSettingBarOptions">
 					{isPremium && (
 						<a
 							href={blockonsObject.accountUrl}
 							className="blockons-account"
-							title={__("My Account", "blockons")}
+							title={__('My Account', 'blockons')}
 						></a>
 					)}
 					<a
 						href="https://blockons.com/documentation/"
 						className="blockons-docs"
-						title={__("Documentation", "blockons")}
+						title={__('Documentation', 'blockons')}
 						target="_blank"
 					></a>
 					{!isPremium && (
 						<a
 							href={upgradeUrl}
 							className="blockons-upgrade"
-							title={__("Upgrade to Blockons Pro", "blockons")}
+							title={__('Upgrade to Blockons Pro', 'blockons')}
 						></a>
 					)}
 				</div>
@@ -209,40 +213,45 @@ const SettingsPage = () => {
 				)}
 
 			<div className="blockons-settings-content">
-				<form id="blockons-settings-form" onSubmit={(e) => handleSubmit(e)}>
+				<form
+					id="blockons-settings-form"
+					onSubmit={(e) => handleSubmit(e)}
+				>
 					<div className="blockons-tabs">
 						<ul>
 							<li>
 								<a
 									id="blockonstab-blocks"
 									className={`blockons-tab ${
-										activeTab === "blocks" ? "active" : ""
+										activeTab === 'blocks' ? 'active' : ''
 									}`}
-									onClick={() => changeTab("blocks")}
+									onClick={() => changeTab('blocks')}
 								>
-									{__("Blocks", "blockons")}
+									{__('Blocks', 'blockons')}
 								</a>
 							</li>
 							<li>
 								<a
 									id="blockonstab-extensions"
 									className={`blockons-tab ${
-										activeTab === "extensions" ? "active" : ""
+										activeTab === 'extensions'
+											? 'active'
+											: ''
 									}`}
-									onClick={() => changeTab("extensions")}
+									onClick={() => changeTab('extensions')}
 								>
-									{__("Block Extensions", "blockons")}
+									{__('Block Extensions', 'blockons')}
 								</a>
 							</li>
 							<li>
 								<a
 									id="blockonstab-addons"
 									className={`blockons-tab ${
-										activeTab === "addons" ? "active" : ""
+										activeTab === 'addons' ? 'active' : ''
 									}`}
-									onClick={() => changeTab("addons")}
+									onClick={() => changeTab('addons')}
 								>
-									{__("Site Addons", "blockons")}
+									{__('Site Addons', 'blockons')}
 								</a>
 							</li>
 
@@ -251,11 +260,13 @@ const SettingsPage = () => {
 									<a
 										id="blockonstab-wc-addons"
 										className={`blockons-tab ${
-											activeTab === "wc-addons" ? "active" : ""
+											activeTab === 'wc-addons'
+												? 'active'
+												: ''
 										}`}
-										onClick={() => changeTab("wc-addons")}
+										onClick={() => changeTab('wc-addons')}
 									>
-										{__("WooCommerce Addons", "blockons")}
+										{__('WooCommerce Addons', 'blockons')}
 									</a>
 								</li>
 							)}
@@ -264,11 +275,11 @@ const SettingsPage = () => {
 								<a
 									id="blockonstab-info"
 									className={`blockons-tab ${
-										activeTab === "info" ? "active" : ""
+										activeTab === 'info' ? 'active' : ''
 									}`}
-									onClick={() => changeTab("info")}
+									onClick={() => changeTab('info')}
 								>
-									{__("Welcome", "blockons")}
+									{__('Welcome', 'blockons')}
 								</a>
 							</li>
 						</ul>
@@ -279,7 +290,7 @@ const SettingsPage = () => {
 								<div
 									id="blockons-content-blocks"
 									className={`blockons-content ${
-										activeTab === "blocks" ? "active" : ""
+										activeTab === 'blocks' ? 'active' : ''
 									}`}
 								>
 									<EditorBlocks
@@ -293,7 +304,9 @@ const SettingsPage = () => {
 								<div
 									id="blockons-content-extensions"
 									className={`blockons-content ${
-										activeTab === "extensions" ? "active" : ""
+										activeTab === 'extensions'
+											? 'active'
+											: ''
 									}`}
 								>
 									<BlockExtensions
@@ -308,7 +321,7 @@ const SettingsPage = () => {
 								<div
 									id="blockons-content-addons"
 									className={`blockons-content ${
-										activeTab === "addons" ? "active" : ""
+										activeTab === 'addons' ? 'active' : ''
 									}`}
 								>
 									<SiteAddons
@@ -317,11 +330,15 @@ const SettingsPage = () => {
 										isPremium={isPremium}
 										upgradeUrl={upgradeUrl}
 										showPageLoader={showPageLoaderPreview}
-										setShowPageLoader={setShowPageLoaderPreview}
+										setShowPageLoader={
+											setShowPageLoaderPreview
+										}
 										showBttb={showBttbPreview}
 										setShowBttb={setShowBttbPreview}
 										showScrollInd={showScrollIndPreview}
-										setShowScrollInd={setShowScrollIndPreview}
+										setShowScrollInd={
+											setShowScrollIndPreview
+										}
 										showSiteBy={showSiteByPreview}
 										setShowSiteBy={setShowSiteByPreview}
 									/>
@@ -331,7 +348,9 @@ const SettingsPage = () => {
 									<div
 										id="blockons-content-wc-addons"
 										className={`blockons-content ${
-											activeTab === "wc-addons" ? "active" : ""
+											activeTab === 'wc-addons'
+												? 'active'
+												: ''
 										}`}
 									>
 										<WooAddons
@@ -339,8 +358,12 @@ const SettingsPage = () => {
 											handleSettingChange={handleChange}
 											isPremium={isPremium}
 											upgradeUrl={upgradeUrl}
-											showSidecartPreview={showSidecartPreview}
-											setShowSidecartPreview={setShowSidecartPreview}
+											showSidecartPreview={
+												showSidecartPreview
+											}
+											setShowSidecartPreview={
+												setShowSidecartPreview
+											}
 										/>
 									</div>
 								)}
@@ -348,7 +371,7 @@ const SettingsPage = () => {
 								<div
 									id="blockons-content-info"
 									className={`blockons-content ${
-										activeTab === "info" ? "active" : ""
+										activeTab === 'info' ? 'active' : ''
 									}`}
 								>
 									<InfoTab
@@ -364,7 +387,7 @@ const SettingsPage = () => {
 										type="submit"
 										className="button blockonsSaveBtn button-primary"
 									>
-										{__("Save Settings", "blockons")}
+										{__('Save Settings', 'blockons')}
 									</button>
 									<div className="blockonsSaveBtnLoader">
 										{(loadSetting || loader) && <Loader />}
@@ -373,12 +396,15 @@ const SettingsPage = () => {
 								<div className="blockonsSettingBarOptions">
 									<div
 										className="blockons-delete"
-										title={__("Reset Settings", "blockons")}
+										title={__('Reset Settings', 'blockons')}
 										onClick={confirmDelete}
 									>
 										<div className="blockons-confirm-delete">
 											<a onClick={handleDeleteOptions}>
-												{__("Confirm... Reset All Settings!", "blockons")}
+												{__(
+													'Confirm... Reset All Settings!',
+													'blockons',
+												)}
 											</a>
 										</div>
 									</div>
@@ -412,7 +438,9 @@ const SettingsPage = () => {
 				/>
 			)}
 			{showScrollIndPreview && (
-				<ScrollIndicator scrollInOptions={blockonsOptions.scrollindicator} />
+				<ScrollIndicator
+					scrollInOptions={blockonsOptions.scrollindicator}
+				/>
 			)}
 
 			{showSiteByPreview && (

@@ -1,12 +1,12 @@
-import { useState, useEffect } from "@wordpress/element";
-import { ChromePicker } from "react-color";
-import { blockonsConvertToSlug } from "../../../helpers";
-import { __ } from "@wordpress/i18n";
+import { useState, useEffect } from '@wordpress/element';
+import { ChromePicker } from 'react-color';
+import { blockonsConvertToSlug } from '../../../helpers';
+import { __ } from '@wordpress/i18n';
 
 const ColorPicker = (props) => {
 	const colorTitleSlug =
 		blockonsConvertToSlug(props.slug) || blockonsConvertToSlug(props.title);
-	const defaultValue = props.defaultValue || "#BBB";
+	const defaultValue = props.defaultValue || '#BBB';
 	const [activeColor, setActiveColor] = useState(defaultValue);
 	const [isPickerOpen, setIsPickerOpen] = useState(false);
 
@@ -25,12 +25,20 @@ const ColorPicker = (props) => {
 	// Handle color change in the ChromePicker component
 	const handleColorChange = (newColor) => {
 		setActiveColor(newColor.hex);
-		props.onChange({ name: colorTitleSlug, value: newColor.hex }); // Call parent's onChange handler
+
+		const syntheticEvent = {
+			target: {
+				type: 'text',
+				name: colorTitleSlug,
+				value: newColor.hex,
+			},
+		};
+		props.onChange(syntheticEvent);
 	};
 
 	// Close the color picker if clicked outside
 	const handleOutsideClick = (e) => {
-		if (!e.target.closest(".blockonsColorPicker") && isPickerOpen) {
+		if (!e.target.closest('.blockonsColorPicker') && isPickerOpen) {
 			setIsPickerOpen(false);
 		}
 	};
@@ -38,18 +46,18 @@ const ColorPicker = (props) => {
 	// Add event listener for clicks outside the component
 	useEffect(() => {
 		if (isPickerOpen) {
-			window.addEventListener("click", handleOutsideClick);
+			window.addEventListener('click', handleOutsideClick);
 		} else {
-			window.removeEventListener("click", handleOutsideClick);
+			window.removeEventListener('click', handleOutsideClick);
 		}
 
-		return () => window.removeEventListener("click", handleOutsideClick); // Clean up
+		return () => window.removeEventListener('click', handleOutsideClick); // Clean up
 	}, [isPickerOpen]);
 
 	return (
 		<div
 			className={`blockonsColorPicker ${
-				isPickerOpen ? "blockonsButton-active" : ""
+				isPickerOpen ? 'blockonsButton-active' : ''
 			}`}
 		>
 			<div className="blockonsColorDisplay">
@@ -59,13 +67,13 @@ const ColorPicker = (props) => {
 					onClick={toggleColorPicker}
 				>
 					<span className="blockonsColorBtnTxt">
-						{__("Select Color", "blockons")}
+						{__('Select Color', 'blockons')}
 					</span>
 				</button>
 				<input
 					type="text"
 					id={colorTitleSlug}
-					value={activeColor || ""}
+					value={activeColor || ''}
 					className="blockonsColorInput"
 					disabled
 					onChange={props.onChange}
