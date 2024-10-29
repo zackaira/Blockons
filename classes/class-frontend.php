@@ -39,9 +39,11 @@ class Blockons_Frontend {
 			}
 		}
 
-		if (Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' )) {
-			if (isset($blockonsOptions->siteby->enabled) && $blockonsOptions->siteby->enabled == true) {
-				add_action('wp_footer', array( $this, 'blockons_pro_add_footer_siteby' ), 99, 1);
+		if (blockons_fs()->can_use_premium_code__premium_only()) {
+			if (Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' )) {
+				if (isset($blockonsOptions->siteby->enabled) && $blockonsOptions->siteby->enabled == true) {
+					add_action('wp_footer', array( $this, 'blockons_pro_add_footer_siteby' ), 99, 1);
+				}
 			}
 		}
 	}

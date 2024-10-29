@@ -444,11 +444,7 @@ const SettingsPage = () => {
 			)}
 
 			{showSiteByPreview && (
-				<SiteBy
-					sitebyOptions={blockonsOptions.siteby}
-					isPro={isPremium}
-					isAdmin={isAdmin}
-				/>
+				<SiteBy sitebyOptions={blockonsOptions.siteby} />
 			)}
 
 			{showSidecartPreview && (

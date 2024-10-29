@@ -5,18 +5,16 @@ import { blockonsStringReplaceForLink } from '../../../backend/helpers';
 import parse from 'html-react-parser';
 import './siteby.css';
 
-const SiteBy = ({ sitebyOptions, isPro, isAdmin }) => {
+const SiteBy = ({ sitebyOptions }) => {
 	const siteby = sitebyOptions
 		? sitebyOptions
 		: {
 				enabled: false,
 				text: 'Site features by (blockons[*https://blockons.com/])',
 			};
-	const isPremium = isPro ? Boolean(isPro) : false;
-	const inAdmin = isAdmin ? Boolean(isAdmin) : false;
 	const [siteByOn, setSiteByOn] = useState(false);
 
-	if (!siteby.enabled || (!isPremium && inAdmin)) return null;
+	if (!siteby.enabled) return null;
 
 	return (
 		<div
