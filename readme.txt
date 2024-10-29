@@ -5,7 +5,7 @@ Tags: gutenberg, editor blocks, woocommerce, page builder, gutenberg blocks
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.6
-Stable tag: 1.1.07
+Stable tag: 1.2.00
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -223,11 +223,12 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 == Changelog ==
 
-= 1.1.07 =
+= 1.2.00 =
 * Styling tweaks/fixes
 * Code Refactoring & Editor improvments
 * Updated Settings Page to store current tab
 * Added Auto Play options to Slider, Testimonial & Carousel blocks
+* Fixed broken Font Awesome icons - uses cdnjs.com
 * Updated the language .pot file
 * NEW: Added new Table Of Contents block
 * PREMIUM: Added new 'Site By' feature to Site Addons

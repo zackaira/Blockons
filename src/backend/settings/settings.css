@@ -1030,6 +1030,8 @@ input.toggle-switch-checkbox::before,
 	padding: 0;
 }
 
+/* <fs_premium_only> */
+
 /* -- Multi Checkbox Inputs -- */
 /* .blockons-multioption {
 	display: inline-block;
@@ -1187,6 +1189,8 @@ input.toggle-switch-checkbox::before,
 .blockons-test-product .blockons-quickview.one .wp-block-button {
 	margin-bottom: 12px;
 }
+
+/* </fs_premium_only> */
 
 @media only screen and (max-width: 980px) {
 	.blockons-block {
