@@ -16,7 +16,7 @@ const SiteBy = ({ sitebyOptions, isPro, isAdmin }) => {
 	const inAdmin = isAdmin ? Boolean(isAdmin) : false;
 	const [siteByOn, setSiteByOn] = useState(false);
 
-	if (!siteby.enabled || (!inAdmin && !isPremium)) return null;
+	if (!siteby.enabled || (!isPremium && inAdmin)) return null;
 
 	return (
 		<div
