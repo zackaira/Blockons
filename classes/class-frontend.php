@@ -76,12 +76,12 @@ class Blockons_Frontend {
 			$classes[] = sanitize_html_class('blockons-popups');
 			if (isset($blockonsOptions->imagepopups->enable_all) && $blockonsOptions->imagepopups->enable_all == true) {
 				$classes[] = sanitize_html_class('global');
-				$classes[] = sanitize_html_class('blcks-' . $blockonsOptions->imagepopups->icon);
-				$classes[] = sanitize_html_class('blcks-' . $blockonsOptions->imagepopups->iconpos);
-				$classes[] = sanitize_html_class('blcks-' . $blockonsOptions->imagepopups->iconcolor);
+				$classes[] = sanitize_html_class('blcks-' . ($blockonsOptions->imagepopups->icon ?? 'one'));
+				$classes[] = sanitize_html_class('blcks-' . ($blockonsOptions->imagepopups->iconpos ?? 'topleft'));
+				$classes[] = sanitize_html_class('blcks-' . ($blockonsOptions->imagepopups->iconcolor ?? 'dark'));
 			}
 			if (isset($blockonsOptions->imagepopups->popuptheme)) {
-				$classes[] = sanitize_html_class('popup-' . $blockonsOptions->imagepopups->popuptheme);
+				$classes[] = sanitize_html_class('popup-' . ($blockonsOptions->imagepopups->popuptheme ?? 'dark'));
 			}
 		}
 

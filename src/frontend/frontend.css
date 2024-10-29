@@ -406,6 +406,7 @@ body.blockons-tooltips .blockons-inline-tooltip.highlight::before {
 body.blockons-popups .blockons-img-popup .blockons-popup-img {
 	position: relative;
 	cursor: pointer;
+	width: fit-content;
 }
 body.blockons-popups .blockons-img-popup .blockons-popup-img img {
 	display: block;

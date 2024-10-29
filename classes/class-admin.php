@@ -157,7 +157,7 @@ class Blockons_Admin {
 			$admin_classes .= ' ' . sanitize_html_class('blockons-popups');
 			if (isset($blockonsOptions->imagepopups->enable_all) && $blockonsOptions->imagepopups->enable_all == true) {
 				$admin_classes .= ' ' . sanitize_html_class('global');
-				$admin_classes .= ' ' . sanitize_html_class('blcks-' . $blockonsOptions->imagepopups->icon) . ' ' . sanitize_html_class('blcks-' . $blockonsOptions->imagepopups->iconpos) . ' ' . sanitize_html_class('blcks-' . $blockonsOptions->imagepopups->iconcolor);
+				$admin_classes .= ' ' . sanitize_html_class('blcks-' . ($blockonsOptions->imagepopups->icon ?? 'one')) . ' ' . sanitize_html_class('blcks-' . ($blockonsOptions->imagepopups->iconpos ?? 'topleft')) . ' ' . sanitize_html_class('blcks-' . ($blockonsOptions->imagepopups->iconcolor ?? 'dark'));
 			}
 		}
 

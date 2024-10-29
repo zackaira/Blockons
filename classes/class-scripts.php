@@ -35,6 +35,8 @@ class Blockons {
 		// Register Scripts for plugin.
 		add_action( 'init', array( $this, 'blockons_register_scripts' ), 10 );
 
+		add_action( 'wp_head', array( $this, 'blockons_preload_fonts' ), 1);
+
 		// Update/fix defaults on plugins_loaded hook
 		add_action( 'plugins_loaded', array( $this, 'blockons_update_plugin_defaults' ) );
 
@@ -51,6 +53,12 @@ class Blockons {
 		add_action( 'init', array( $this, 'blockons_load_localisation' ), 0 );
 	} // End __construct ()
 
+	public function blockons_preload_fonts() { ?>
+		<link rel="preload" href="<?php echo esc_url(BLOCKONS_PLUGIN_URL . 'assets/fontawesome/webfonts/fa-solid-900.woff2'); ?>" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="<?php echo esc_url(BLOCKONS_PLUGIN_URL . 'assets/fontawesome/webfonts/fa-regular-400.woff2'); ?>" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="<?php echo esc_url(BLOCKONS_PLUGIN_URL . 'assets/fontawesome/webfonts/fa-brands-400.woff2'); ?>" as="font" type="font/woff2" crossorigin><?php
+	}
+
 	/**
 	 * Register Scripts & Styles
 	 */
@@ -63,7 +71,7 @@ class Blockons {
 		$blockonsDefaults = get_option('blockons_default_options');
 
 		// Font Awesome Free
-		wp_register_style('blockons-fontawesome', esc_url(BLOCKONS_PLUGIN_URL . 'assets/fontawesome/css/all.min.css'), array(), '6.6.0');
+		wp_register_style('blockons-fontawesome', esc_url(BLOCKONS_PLUGIN_URL . 'assets/fontawesome/css/all.min.css'), array(), '6.6.0', 'all');
 
 		// Frontend
 		wp_register_style('blockons-frontend-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
@@ -147,6 +155,10 @@ class Blockons {
 			'isAdmin' => (boolean)is_admin(),
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
 		));
+
+		if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], 'fontawesome/webfonts/') !== false) {
+            header('Access-Control-Allow-Origin: *');
+        }
 	} // End blockons_register_scripts ()
 
 	/**
@@ -275,7 +287,7 @@ class Blockons {
 		wp_register_style('blockons-admin-editor-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/editor' . $suffix . '.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
 		wp_enqueue_style('blockons-admin-editor-style');
 
-		wp_register_script('blockons-admin-editor-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/editor' . $suffix . '.js'), array('wp-edit-post', 'wp-rich-text'), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-admin-editor-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/editor' . $suffix . '.js'), array('wp-edit-post', 'wp-rich-text', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components', 'wp-data', 'lodash'), BLOCKONS_PLUGIN_VERSION, true);
 		wp_localize_script('blockons-admin-editor-script', 'blockonsEditorObj', array(
 			'isPremium' => $isPro,
 			'blockonsOptions' => $blockonsOptions,
