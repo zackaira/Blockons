@@ -6,7 +6,7 @@ const ProPromo = ({ blockonsOptions, clickClose, upgradeUrl }) => {
 		<div className="blockons-propromo">
 			<div>
 				{__(
-					'Exciting news! Blockons Pro is here with a special launch deal! Purchase Blockons Pro now and enjoy this price for life! No matter what gets added!',
+					'Pricing will go up soon with more advanced features. Purchase Blockons Pro now and enjoy this price forever!',
 					'blockons',
 				)}
 			</div>
