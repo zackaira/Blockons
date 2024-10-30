@@ -1,6 +1,6 @@
-import { useState, useEffect } from "@wordpress/element";
-import { useSelect, useDispatch } from "@wordpress/data";
-import { __ } from "@wordpress/i18n";
+import { useState, useEffect, useRef } from '@wordpress/element';
+import { useSelect, useDispatch } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
 import {
 	BlockControls,
 	AlignmentToolbar,
@@ -9,19 +9,19 @@ import {
 	InspectorControls,
 	useBlockProps,
 	store as blockEditorStore,
-} from "@wordpress/block-editor";
+} from '@wordpress/block-editor';
 import {
 	PanelBody,
 	ToggleControl,
 	SelectControl,
 	RangeControl,
 	Button,
-} from "@wordpress/components";
-import { v4 as uuidv4 } from "uuid";
-import BlockonsColorpicker from "../_components/BlockonsColorpicker";
-import { colorPickerPalette } from "../block-global";
+} from '@wordpress/components';
+import { v4 as uuidv4 } from 'uuid';
+import BlockonsColorpicker from '../_components/BlockonsColorpicker';
+import { colorPickerPalette } from '../block-global';
 
-const ALLOWED_BLOCKS = ["blockons/tab"];
+const ALLOWED_BLOCKS = ['blockons/tab'];
 
 const Edit = (props) => {
 	const {
@@ -63,15 +63,17 @@ const Edit = (props) => {
 		removeBlock,
 	} = useDispatch(blockEditorStore);
 
+	const blockRef = useRef(null);
 	const blockProps = useBlockProps({
 		className: `${
-			tabsSideLayout ? "side-layout" : "top-layout"
+			tabsSideLayout ? 'side-layout' : 'top-layout'
 		} design-${tabDesign} load-content`,
+		ref: blockRef,
 	});
 
 	const innerBlocks = useSelect(
 		(select) => select(blockEditorStore).getBlock(clientId).innerBlocks,
-		[clientId]
+		[clientId],
 	);
 
 	useEffect(() => {
@@ -96,7 +98,7 @@ const Edit = (props) => {
 					innerBlocks[currentIndex].clientId,
 					clientId,
 					clientId,
-					newIndex
+					newIndex,
 				);
 				selectTab(newIndex);
 			}, 300);
@@ -123,7 +125,7 @@ const Edit = (props) => {
 		const { insertBlock } = useDispatch(blockEditorStore);
 
 		const addBlock = () => {
-			const block = wp.blocks.createBlock("blockons/tab");
+			const block = wp.blocks.createBlock('blockons/tab');
 			insertBlock(block, undefined, clientId);
 		};
 
@@ -131,51 +133,50 @@ const Edit = (props) => {
 			<Button
 				className="blockons-new-button"
 				onClick={addBlock}
-				title={__("Add New Tab", "blockons")}
+				title={__('Add New Tab', 'blockons')}
 			>
-				{buttonText || "+"}
+				{buttonText || '+'}
 			</Button>
 		);
 	};
 
 	function tabChange() {
-		const tabBlocks = document.querySelectorAll(".wp-block-blockons-tabs");
+		if (!blockRef.current) return;
 
-		if (tabBlocks) {
-			tabBlocks.forEach((block) => {
-				const selectedTab = block.querySelector(".blockons-tab.active");
+		const block = blockRef.current;
+		const selectedTab = block.querySelector('.blockons-tab.active');
 
-				if (selectedTab) {
-					const selectedClass = "content-" + selectedTab.id.slice(4);
+		if (selectedTab) {
+			const selectedClass = 'content-' + selectedTab.id.slice(4);
 
-					if (innerBlocks.length > 1) {
-						const allContent = block.querySelectorAll(".blockons-content");
-						if (allContent) {
-							allContent.forEach((content) => {
-								content.style.display = "none";
-							});
-						}
-						const selectedContent = block.querySelector(`.${selectedClass}`);
-						if (selectedContent) {
-							selectedContent.style.display = "block";
-						} else {
-							const firstContent = block.querySelector(".blockons-content");
-							if (firstContent) {
-								firstContent.style.display = "block";
-							}
-						}
-					} else {
-						const allContent =
-							block.getElementsByClassName(".blockons-content");
-
-						if (allContent) {
-							for (const content of allContent) {
-								content.style.display = "block";
-							}
-						}
+			if (innerBlocks.length > 1) {
+				const allContent = block.querySelectorAll('.blockons-content');
+				if (allContent) {
+					allContent.forEach((content) => {
+						content.style.display = 'none';
+					});
+				}
+				const selectedContent = block.querySelector(
+					`.${selectedClass}`,
+				);
+				if (selectedContent) {
+					selectedContent.style.display = 'block';
+				} else {
+					const firstContent =
+						block.querySelector('.blockons-content');
+					if (firstContent) {
+						firstContent.style.display = 'block';
 					}
 				}
-			});
+			} else {
+				const allContent =
+					block.getElementsByClassName('blockons-content');
+				if (allContent) {
+					for (const content of allContent) {
+						content.style.display = 'block';
+					}
+				}
+			}
 		}
 	}
 
@@ -183,31 +184,46 @@ const Edit = (props) => {
 		<div {...blockProps} id={uniqueId}>
 			{isSelected && (
 				<InspectorControls>
-					<PanelBody title={__("Tabs Settings", "blockons")} initialOpen={true}>
+					<PanelBody
+						title={__('Tabs Settings', 'blockons')}
+						initialOpen={true}
+					>
 						<SelectControl
-							label={__("Tab Design", "blockons")}
+							label={__('Tab Design', 'blockons')}
 							value={tabDesign}
 							options={[
-								{ label: __("Normal Tab Design", "blockons"), value: "one" },
 								{
-									label: __("Underlined & Selected", "blockons"),
-									value: "two",
+									label: __('Normal Tab Design', 'blockons'),
+									value: 'one',
 								},
 								{
-									label: __("Top Line & Subtle Background", "blockons"),
-									value: "three",
+									label: __(
+										'Underlined & Selected',
+										'blockons',
+									),
+									value: 'two',
+								},
+								{
+									label: __(
+										'Top Line & Subtle Background',
+										'blockons',
+									),
+									value: 'three',
 								},
 							]}
 							onChange={(newValue) =>
 								setAttributes({
-									tabDesign: newValue === undefined ? "one" : newValue,
+									tabDesign:
+										newValue === undefined
+											? 'one'
+											: newValue,
 								})
 							}
 						/>
 						<div className="blockons-divider"></div>
 
 						<ToggleControl
-							label={__("Switch to side tab layout", "blockons")}
+							label={__('Switch to side tab layout', 'blockons')}
 							checked={tabsSideLayout}
 							onChange={(newValue) => {
 								setAttributes({ tabsSideLayout: newValue });
@@ -218,10 +234,15 @@ const Edit = (props) => {
 							<>
 								<div className="blockons-divider"></div>
 								<ToggleControl
-									label={__("Set Tabs Full Width", "blockons")}
+									label={__(
+										'Set Tabs Full Width',
+										'blockons',
+									)}
 									checked={tabsJustified}
 									onChange={(newValue) => {
-										setAttributes({ tabsJustified: newValue });
+										setAttributes({
+											tabsJustified: newValue,
+										});
 									}}
 								/>
 								<div className="blockons-divider"></div>
@@ -231,12 +252,14 @@ const Edit = (props) => {
 						{tabsSideLayout && (
 							<>
 								<RangeControl
-									label={__("Tab Width", "blockons")}
+									label={__('Tab Width', 'blockons')}
 									value={tabWidth}
 									onChange={(newValue) =>
 										setAttributes({
 											tabWidth:
-												newValue === undefined ? 200 : parseInt(newValue),
+												newValue === undefined
+													? 200
+													: parseInt(newValue),
 										})
 									}
 									min={0}
@@ -248,12 +271,14 @@ const Edit = (props) => {
 						{!tabsSideLayout && !tabsJustified && (
 							<>
 								<RangeControl
-									label={__("Tab Min Width", "blockons")}
+									label={__('Tab Min Width', 'blockons')}
 									value={tabMinWidth}
 									onChange={(newValue) =>
 										setAttributes({
 											tabMinWidth:
-												newValue === undefined ? 120 : parseInt(newValue),
+												newValue === undefined
+													? 120
+													: parseInt(newValue),
 										})
 									}
 									min={0}
@@ -263,26 +288,33 @@ const Edit = (props) => {
 							</>
 						)}
 						<RangeControl
-							label={__("Content Min Height", "blockons")}
+							label={__('Content Min Height', 'blockons')}
 							value={contentMinHeight}
 							onChange={(newValue) =>
 								setAttributes({
 									contentMinHeight:
-										newValue === undefined ? 100 : parseInt(newValue),
+										newValue === undefined
+											? 100
+											: parseInt(newValue),
 								})
 							}
 							min={10}
 							max={800}
 						/>
 					</PanelBody>
-					<PanelBody title={__("Tabs Design", "blockons")} initialOpen={true}>
+					<PanelBody
+						title={__('Tabs Design', 'blockons')}
+						initialOpen={true}
+					>
 						<RangeControl
-							label={__("Tab Vertical Padding", "blockons")}
+							label={__('Tab Vertical Padding', 'blockons')}
 							value={tabVertPadding}
 							onChange={(newValue) =>
 								setAttributes({
 									tabVertPadding:
-										newValue === undefined ? 8 : parseInt(newValue),
+										newValue === undefined
+											? 8
+											: parseInt(newValue),
 								})
 							}
 							min={2}
@@ -291,12 +323,17 @@ const Edit = (props) => {
 						{!tabsJustified && (
 							<>
 								<RangeControl
-									label={__("Tab Horizontal Padding", "blockons")}
+									label={__(
+										'Tab Horizontal Padding',
+										'blockons',
+									)}
 									value={tabHorizPadding}
 									onChange={(newValue) =>
 										setAttributes({
 											tabHorizPadding:
-												newValue === undefined ? 16 : parseInt(newValue),
+												newValue === undefined
+													? 16
+													: parseInt(newValue),
 										})
 									}
 									min={2}
@@ -306,43 +343,53 @@ const Edit = (props) => {
 							</>
 						)}
 
-						{!tabsSideLayout && (tabDesign === "one" || tabDesign === "two") && (
-							<>
-								<RangeControl
-									label={__("Tab Border Radius", "blockons")}
-									value={tabBorderRadius}
-									onChange={(newValue) =>
-										setAttributes({
-											tabBorderRadius:
-												newValue === undefined ? 4 : parseInt(newValue),
-										})
-									}
-									min={0}
-									max={50}
-								/>
-								<div className="blockons-divider"></div>
-							</>
-						)}
+						{!tabsSideLayout &&
+							(tabDesign === 'one' || tabDesign === 'two') && (
+								<>
+									<RangeControl
+										label={__(
+											'Tab Border Radius',
+											'blockons',
+										)}
+										value={tabBorderRadius}
+										onChange={(newValue) =>
+											setAttributes({
+												tabBorderRadius:
+													newValue === undefined
+														? 4
+														: parseInt(newValue),
+											})
+										}
+										min={0}
+										max={50}
+									/>
+									<div className="blockons-divider"></div>
+								</>
+							)}
 
 						<RangeControl
-							label={__("Content Vertical Padding", "blockons")}
+							label={__('Content Vertical Padding', 'blockons')}
 							value={contentVertPadding}
 							onChange={(newValue) =>
 								setAttributes({
 									contentVertPadding:
-										newValue === undefined ? 20 : parseInt(newValue),
+										newValue === undefined
+											? 20
+											: parseInt(newValue),
 								})
 							}
 							min={1}
 							max={300}
 						/>
 						<RangeControl
-							label={__("Content Horizontal Padding", "blockons")}
+							label={__('Content Horizontal Padding', 'blockons')}
 							value={contentHorizPadding}
 							onChange={(newValue) =>
 								setAttributes({
 									contentHorizPadding:
-										newValue === undefined ? 20 : parseInt(newValue),
+										newValue === undefined
+											? 20
+											: parseInt(newValue),
 								})
 							}
 							min={1}
@@ -350,13 +397,16 @@ const Edit = (props) => {
 						/>
 						<div className="blockons-divider"></div>
 
-						{tabDesign === "one" && (
+						{tabDesign === 'one' && (
 							<BlockonsColorpicker
-								label={__("Tab Color", "blockons")}
+								label={__('Tab Color', 'blockons')}
 								value={tabColor}
 								onChange={(colorValue) =>
 									setAttributes({
-										tabColor: colorValue === undefined ? "#ececec" : colorValue,
+										tabColor:
+											colorValue === undefined
+												? '#ececec'
+												: colorValue,
 									})
 								}
 								paletteColors={colorPickerPalette}
@@ -364,7 +414,7 @@ const Edit = (props) => {
 						)}
 
 						<BlockonsColorpicker
-							label={__("Tab Font Color", "blockons")}
+							label={__('Tab Font Color', 'blockons')}
 							value={tabFontColor}
 							onChange={(colorValue) =>
 								setAttributes({
@@ -375,36 +425,40 @@ const Edit = (props) => {
 						/>
 						<div className="blockons-divider"></div>
 
-						{tabDesign === "one" && (
+						{tabDesign === 'one' && (
 							<BlockonsColorpicker
-								label={__("Tab Active Color", "blockons")}
+								label={__('Tab Active Color', 'blockons')}
 								value={tabActiveColor}
 								onChange={(colorValue) =>
 									setAttributes({
 										tabActiveColor:
-											colorValue === undefined ? "#FFF" : colorValue,
+											colorValue === undefined
+												? '#FFF'
+												: colorValue,
 									})
 								}
 								paletteColors={colorPickerPalette}
 							/>
 						)}
-						{tabDesign !== "one" && (
+						{tabDesign !== 'one' && (
 							<BlockonsColorpicker
-								label={__("Tab Active Color", "blockons")}
+								label={__('Tab Active Color', 'blockons')}
 								value={tabSelectedColor}
 								onChange={(colorValue) =>
 									setAttributes({
 										tabSelectedColor:
-											colorValue === undefined ? "#000" : colorValue,
+											colorValue === undefined
+												? '#000'
+												: colorValue,
 									})
 								}
 								paletteColors={colorPickerPalette}
 							/>
 						)}
 
-						{tabDesign !== "two" && (
+						{tabDesign !== 'two' && (
 							<BlockonsColorpicker
-								label={__("Tab Active Font Color", "blockons")}
+								label={__('Tab Active Font Color', 'blockons')}
 								value={tabActiveFontColor}
 								onChange={(colorValue) =>
 									setAttributes({
@@ -414,9 +468,9 @@ const Edit = (props) => {
 								paletteColors={colorPickerPalette}
 							/>
 						)}
-						{tabDesign === "two" && (
+						{tabDesign === 'two' && (
 							<BlockonsColorpicker
-								label={__("Tab Active Font Color", "blockons")}
+								label={__('Tab Active Font Color', 'blockons')}
 								value={tabSelectedFontColor}
 								onChange={(colorValue) =>
 									setAttributes({
@@ -429,27 +483,37 @@ const Edit = (props) => {
 
 						<div className="blockons-divider"></div>
 
-						{tabDesign !== "three" && (
+						{tabDesign !== 'three' && (
 							<BlockonsColorpicker
-								label={__("Content Background Color", "blockons")}
+								label={__(
+									'Content Background Color',
+									'blockons',
+								)}
 								value={contentColor}
 								onChange={(colorValue) =>
 									setAttributes({
 										contentColor:
-											colorValue === undefined ? "inherit" : colorValue,
+											colorValue === undefined
+												? 'inherit'
+												: colorValue,
 									})
 								}
 								paletteColors={colorPickerPalette}
 							/>
 						)}
-						{tabDesign === "three" && (
+						{tabDesign === 'three' && (
 							<BlockonsColorpicker
-								label={__("Content Background Color", "blockons")}
+								label={__(
+									'Content Background Color',
+									'blockons',
+								)}
 								value={contentOtherColor}
 								onChange={(colorValue) =>
 									setAttributes({
 										contentOtherColor:
-											colorValue === undefined ? "#f7f7f7" : colorValue,
+											colorValue === undefined
+												? '#f7f7f7'
+												: colorValue,
 									})
 								}
 								paletteColors={colorPickerPalette}
@@ -457,12 +521,14 @@ const Edit = (props) => {
 						)}
 
 						<BlockonsColorpicker
-							label={__("Content Font Color", "blockons")}
+							label={__('Content Font Color', 'blockons')}
 							value={contentFontColor}
 							onChange={(colorValue) =>
 								setAttributes({
 									contentFontColor:
-										colorValue === undefined ? "inherit" : colorValue,
+										colorValue === undefined
+											? 'inherit'
+											: colorValue,
 								})
 							}
 							paletteColors={colorPickerPalette}
@@ -485,24 +551,24 @@ const Edit = (props) => {
 
 			<div
 				className={`blockons-tabs ${
-					!tabsSideLayout && tabsJustified ? "full" : ""
+					!tabsSideLayout && tabsJustified ? 'full' : ''
 				}`}
 				style={{
 					...(tabsSideLayout
 						? {
 								width: tabWidth,
-						  }
+							}
 						: {}),
-					...(tabDesign === "two"
+					...(tabDesign === 'two'
 						? {
 								...(tabsSideLayout
 									? {
 											boxShadow: `#000 0px 0px, #000 0px 0px, #000 0px 0px, ${tabSelectedColor} -4px 0px inset`,
-									  }
+										}
 									: {
 											boxShadow: `0 0 #000, 0 3px ${tabSelectedColor}, 0 0 #000, 0 0 #000`,
-									  }),
-						  }
+										}),
+							}
 						: {}),
 				}}
 			>
@@ -510,7 +576,7 @@ const Edit = (props) => {
 					<div
 						key={index}
 						className={`blockons-tab ${
-							index === activeTab ? "active" : "na"
+							index === activeTab ? 'active' : 'na'
 						} align-${alignment}`}
 						id={`tab-${block.clientId}`}
 						onClick={() => selectTab(index)}
@@ -519,42 +585,48 @@ const Edit = (props) => {
 							...(!tabsSideLayout
 								? {
 										minWidth: tabMinWidth,
-								  }
+									}
 								: {}),
-							...(tabDesign === "one"
+							...(tabDesign === 'one'
 								? {
-										"--tab-color": tabColor,
-										"--tab-font-color": tabFontColor,
-										"--tab-active-color": tabActiveColor,
-										"--tab-active-font-color": tabActiveFontColor,
+										'--tab-color': tabColor,
+										'--tab-font-color': tabFontColor,
+										'--tab-active-color': tabActiveColor,
+										'--tab-active-font-color':
+											tabActiveFontColor,
 										...(!tabsSideLayout
 											? {
 													borderRadius: `${tabBorderRadius}px ${tabBorderRadius}px 0 0`,
-											  }
+												}
 											: {}),
-								  }
+									}
 								: {}),
-							...(tabDesign === "two"
+							...(tabDesign === 'two'
 								? {
-										"--tab-color": "transparent",
-										"--tab-font-color": tabFontColor,
-										"--tab-selected-color": tabSelectedColor,
-										"--tab-selected-font-color": tabSelectedFontColor,
+										'--tab-color': 'transparent',
+										'--tab-font-color': tabFontColor,
+										'--tab-selected-color':
+											tabSelectedColor,
+										'--tab-selected-font-color':
+											tabSelectedFontColor,
 										...(!tabsSideLayout
 											? {
 													borderRadius: `${tabBorderRadius}px ${tabBorderRadius}px 0 0`,
-											  }
+												}
 											: {}),
-								  }
+									}
 								: {}),
-							...(tabDesign === "three"
+							...(tabDesign === 'three'
 								? {
-										"--tab-color": "transparent",
-										"--tab-font-color": tabFontColor,
-										"--content-other-color": contentOtherColor,
-										"--tab-active-font-color": tabActiveFontColor,
-										"--tab-selected-color": tabSelectedColor,
-								  }
+										'--tab-color': 'transparent',
+										'--tab-font-color': tabFontColor,
+										'--content-other-color':
+											contentOtherColor,
+										'--tab-active-font-color':
+											tabActiveFontColor,
+										'--tab-selected-color':
+											tabSelectedColor,
+									}
 								: {}),
 						}}
 					>
@@ -563,10 +635,12 @@ const Edit = (props) => {
 							value={block.attributes.tabLabel}
 							className="blockons-tab-label"
 							onChange={(newTitle) =>
-								updateBlockAttributes(block.clientId, { tabLabel: newTitle })
+								updateBlockAttributes(block.clientId, {
+									tabLabel: newTitle,
+								})
 							}
-							allowedFormats={["core/bold", "core/italic"]}
-							placeholder={__("Tab Title", "blockons")}
+							allowedFormats={['core/bold', 'core/italic']}
+							placeholder={__('Tab Title', 'blockons')}
 							disableLineBreaks
 						/>
 						{isSelected && tabs.length > 0 && (
@@ -576,17 +650,20 @@ const Edit = (props) => {
 									onClick={() => moveTab(index, index - 1)}
 									disabled={index === 0}
 								>
-									{tabsSideLayout ? "↑" : "←"}
+									{tabsSideLayout ? '↑' : '←'}
 								</Button>
 								<Button
 									isSmall
 									onClick={() => moveTab(index, index + 1)}
 									disabled={index === tabs.length - 1}
 								>
-									{tabsSideLayout ? "↓" : "→"}
+									{tabsSideLayout ? '↓' : '→'}
 								</Button>
 								{tabs.length > 1 && (
-									<Button isSmall onClick={() => deleteTab(index)}>
+									<Button
+										isSmall
+										onClick={() => deleteTab(index)}
+									>
 										x
 									</Button>
 								)}
@@ -598,22 +675,22 @@ const Edit = (props) => {
 			</div>
 			<div
 				className={`blockons-tabs-innerblocks ${
-					tabs.length > 0 ? "blockons-nbb" : ""
+					tabs.length > 0 ? 'blockons-nbb' : ''
 				}`}
 				style={{
 					padding: `${contentVertPadding}px ${contentHorizPadding}px`,
 					...(tabs.length > 0 ? { minHeight: contentMinHeight } : {}),
-					...(tabDesign === "three"
+					...(tabDesign === 'three'
 						? {
 								backgroundColor: contentOtherColor,
-						  }
+							}
 						: {
 								backgroundColor: contentColor,
-						  }),
+							}),
 					...(contentFontColor
 						? {
 								color: contentFontColor,
-						  }
+							}
 						: {}),
 				}}
 			>
@@ -623,11 +700,14 @@ const Edit = (props) => {
 						? {
 								renderAppender: () => (
 									<CustomAppender
-										buttonText={__("Add New Tab", "blockons")}
+										buttonText={__(
+											'Add New Tab',
+											'blockons',
+										)}
 										clientId={clientId}
 									/>
 								),
-						  }
+							}
 						: { renderAppender: false })}
 					templateLock={false}
 				/>

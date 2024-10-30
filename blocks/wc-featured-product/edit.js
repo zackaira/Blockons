@@ -1,25 +1,25 @@
-import { useState, useEffect } from "@wordpress/element";
-import axios from "axios";
-import { __ } from "@wordpress/i18n";
+import { useState, useEffect } from '@wordpress/element';
+import axios from 'axios';
+import { __ } from '@wordpress/i18n';
 import {
 	RichText,
 	AlignmentToolbar,
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
-} from "@wordpress/block-editor";
+} from '@wordpress/block-editor';
 import {
 	PanelBody,
 	ToggleControl,
 	SelectControl,
 	RangeControl,
-} from "@wordpress/components";
-import GetPostsSelect from "../_components/GetPostsSelect";
-import BlockonsLoader from "../_components/BlockonsLoader";
-import parse from "html-react-parser";
-import BlockonsColorpicker from "../_components/BlockonsColorpicker";
-import { colorPickerPalette } from "../block-global";
-import "./editor.css";
+} from '@wordpress/components';
+import GetPostsSelect from '../_components/GetPostsSelect';
+import BlockonsLoader from '../_components/BlockonsLoader';
+import parse from 'html-react-parser';
+import BlockonsColorpicker from '../_components/BlockonsColorpicker';
+import { colorPickerPalette } from '../block-global';
+import './editor.css';
 
 const Edit = (props) => {
 	const site_url = blockonsEditorObj.apiUrl;
@@ -59,7 +59,7 @@ const Edit = (props) => {
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
-			alignment: newAlignment === undefined ? "left" : newAlignment,
+			alignment: newAlignment === undefined ? 'left' : newAlignment,
 		});
 	};
 
@@ -69,15 +69,17 @@ const Edit = (props) => {
 	// Load Product Details by product ID
 	useEffect(() => {
 		const loadProductDetails = async () => {
-			const id = selectedProduct ? selectedProduct : "";
+			const id = selectedProduct ? selectedProduct : '';
 			if (!id) return;
 
 			setLoadingProductDetails(true);
 			try {
-				const res = await axios.get(`${site_url}blcns/v1/product/${id}`);
+				const res = await axios.get(
+					`${site_url}blcns/v1/product/${id}`,
+				);
 				setSelectedProductDetails(res.data);
 			} catch (error) {
-				console.error("Error fetching product details", error);
+				console.error('Error fetching product details', error);
 			} finally {
 				setLoadingProductDetails(false);
 			}
@@ -90,11 +92,14 @@ const Edit = (props) => {
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody
-						title={__("WC Featured Product Settings", "blockons")}
+						title={__('WC Featured Product Settings', 'blockons')}
 						initialOpen={true}
 					>
 						<GetPostsSelect
-							label={__("Select a product to display", "blockons")}
+							label={__(
+								'Select a product to display',
+								'blockons',
+							)}
 							value={selectedProduct}
 							onChange={(newValue) =>
 								setAttributes({ selectedProduct: newValue })
@@ -103,21 +108,30 @@ const Edit = (props) => {
 						/>
 						<br />
 						<SelectControl
-							label={__("WC Featured Product Layout", "blockons")}
+							label={__('WC Featured Product Layout', 'blockons')}
 							value={layout}
 							options={[
-								{ label: __("2 Column", "blockons"), value: "one" },
-								{ label: __("Overlayed Layout", "blockons"), value: "two" },
+								{
+									label: __('2 Column', 'blockons'),
+									value: 'one',
+								},
+								{
+									label: __('Overlayed Layout', 'blockons'),
+									value: 'two',
+								},
 							]}
 							onChange={(newValue) =>
 								setAttributes({
-									layout: newValue === undefined ? "one" : newValue,
+									layout:
+										newValue === undefined
+											? 'one'
+											: newValue,
 								})
 							}
 						/>
-						{layout === "one" && (
+						{layout === 'one' && (
 							<ToggleControl
-								label={__("Switch Layout", "blockons")}
+								label={__('Switch Layout', 'blockons')}
 								checked={layoutSwitch}
 								onChange={(newValue) =>
 									setAttributes({ layoutSwitch: newValue })
@@ -125,35 +139,42 @@ const Edit = (props) => {
 							/>
 						)}
 
-						{layout === "two" && (
+						{layout === 'two' && (
 							<ToggleControl
-								label={__("Image Overlay", "blockons")}
+								label={__('Image Overlay', 'blockons')}
 								checked={layoutTwoOverlay}
 								onChange={(newValue) =>
-									setAttributes({ layoutTwoOverlay: newValue })
+									setAttributes({
+										layoutTwoOverlay: newValue,
+									})
 								}
 							/>
 						)}
 
 						<RangeControl
-							label={__("Block Padding", "blockons")}
+							label={__('Block Padding', 'blockons')}
 							value={padding}
 							onChange={(newValue) =>
 								setAttributes({
-									padding: newValue === undefined ? 15 : parseInt(newValue),
+									padding:
+										newValue === undefined
+											? 15
+											: parseInt(newValue),
 								})
 							}
 							min={0}
 							max={120}
 						/>
-						{layout === "one" && (
+						{layout === 'one' && (
 							<RangeControl
-								label={__("Product Padding", "blockons")}
+								label={__('Product Padding', 'blockons')}
 								value={innerPadding}
 								onChange={(newValue) =>
 									setAttributes({
 										innerPadding:
-											newValue === undefined ? 30 : parseInt(newValue),
+											newValue === undefined
+												? 30
+												: parseInt(newValue),
 									})
 								}
 								min={0}
@@ -162,20 +183,26 @@ const Edit = (props) => {
 						)}
 
 						<ToggleControl
-							label={__("Show Description", "blockons")}
+							label={__('Show Description', 'blockons')}
 							checked={showDesc}
-							onChange={(newValue) => setAttributes({ showDesc: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ showDesc: newValue })
+							}
 						/>
 						<ToggleControl
-							label={__("Show Price", "blockons")}
+							label={__('Show Price', 'blockons')}
 							checked={showPrice}
-							onChange={(newValue) => setAttributes({ showPrice: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ showPrice: newValue })
+							}
 						/>
 
 						<ToggleControl
-							label={__("Show Button", "blockons")}
+							label={__('Show Button', 'blockons')}
 							checked={showButton}
-							onChange={(newValue) => setAttributes({ showButton: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ showButton: newValue })
+							}
 						/>
 						{/* {showButton && (
 							<>
@@ -205,16 +232,17 @@ const Edit = (props) => {
 						)} */}
 					</PanelBody>
 					<PanelBody
-						title={__("WC Featured Product Design", "blockons")}
+						title={__('WC Featured Product Design', 'blockons')}
 						initialOpen={false}
 					>
-						{layout === "two" && (
+						{layout === 'two' && (
 							<RangeControl
-								label={__("Overlay Opacity", "blockons")}
+								label={__('Overlay Opacity', 'blockons')}
 								value={overlayOpacity}
 								onChange={(value) =>
 									setAttributes({
-										overlayOpacity: value === undefined ? 0.35 : value,
+										overlayOpacity:
+											value === undefined ? 0.35 : value,
 									})
 								}
 								min={0}
@@ -224,33 +252,41 @@ const Edit = (props) => {
 						)}
 
 						<BlockonsColorpicker
-							label={__("Block Background Color", "blockons")}
+							label={__('Block Background Color', 'blockons')}
 							value={blockBgColor}
 							onChange={(colorValue) => {
 								setAttributes({
-									blockBgColor: colorValue === undefined ? "#FFF" : colorValue,
+									blockBgColor:
+										colorValue === undefined
+											? '#FFF'
+											: colorValue,
 								});
 							}}
 							paletteColors={colorPickerPalette}
 						/>
 						<BlockonsColorpicker
-							label={__("Product Background Color", "blockons")}
+							label={__('Product Background Color', 'blockons')}
 							value={blockDetailColor}
 							onChange={(colorValue) => {
 								setAttributes({
 									blockDetailColor:
-										colorValue === undefined ? "#FFF" : colorValue,
+										colorValue === undefined
+											? '#FFF'
+											: colorValue,
 								});
 							}}
 							paletteColors={colorPickerPalette}
 						/>
 
 						<RangeControl
-							label={__("Product Title Size", "blockons")}
+							label={__('Product Title Size', 'blockons')}
 							value={titleSize}
 							onChange={(newValue) =>
 								setAttributes({
-									titleSize: newValue === undefined ? "" : parseInt(newValue),
+									titleSize:
+										newValue === undefined
+											? ''
+											: parseInt(newValue),
 								})
 							}
 							min={12}
@@ -258,11 +294,14 @@ const Edit = (props) => {
 							allowReset
 						/>
 						<BlockonsColorpicker
-							label={__("Product Title Color", "blockons")}
+							label={__('Product Title Color', 'blockons')}
 							value={titleColor}
 							onChange={(colorValue) => {
 								setAttributes({
-									titleColor: colorValue === undefined ? "#444" : colorValue,
+									titleColor:
+										colorValue === undefined
+											? '#444'
+											: colorValue,
 								});
 							}}
 							paletteColors={colorPickerPalette}
@@ -271,12 +310,14 @@ const Edit = (props) => {
 						{showPrice && (
 							<>
 								<RangeControl
-									label={__("Price Size", "blockons")}
+									label={__('Price Size', 'blockons')}
 									value={priceSize}
 									onChange={(newValue) =>
 										setAttributes({
 											priceSize:
-												newValue === undefined ? "inherit" : parseInt(newValue),
+												newValue === undefined
+													? 'inherit'
+													: parseInt(newValue),
 										})
 									}
 									min={12}
@@ -284,12 +325,14 @@ const Edit = (props) => {
 									allowReset
 								/>
 								<BlockonsColorpicker
-									label={__("Price Color", "blockons")}
+									label={__('Price Color', 'blockons')}
 									value={priceColor}
 									onChange={(colorValue) =>
 										setAttributes({
 											priceColor:
-												colorValue === undefined ? "#444" : colorValue,
+												colorValue === undefined
+													? '#444'
+													: colorValue,
 										})
 									}
 									paletteColors={colorPickerPalette}
@@ -299,26 +342,30 @@ const Edit = (props) => {
 
 						{showDesc && (
 							<BlockonsColorpicker
-								label={__("Description Font Color", "blockons")}
+								label={__('Description Font Color', 'blockons')}
 								value={blockFontColor}
 								onChange={(colorValue) => {
 									setAttributes({
 										blockFontColor:
-											colorValue === undefined ? "#444" : colorValue,
+											colorValue === undefined
+												? '#444'
+												: colorValue,
 									});
 								}}
 								paletteColors={colorPickerPalette}
 							/>
 						)}
 
-						{layout === "one" && (
+						{layout === 'one' && (
 							<RangeControl
-								label={__("Product Info Width", "blockons")}
+								label={__('Product Info Width', 'blockons')}
 								value={detailWidth}
 								onChange={(newValue) =>
 									setAttributes({
 										detailWidth:
-											newValue === undefined ? 50 : parseInt(newValue),
+											newValue === undefined
+												? 50
+												: parseInt(newValue),
 									})
 								}
 								min={20}
@@ -326,12 +373,14 @@ const Edit = (props) => {
 							/>
 						)}
 						<RangeControl
-							label={__("Product Image Height", "blockons")}
+							label={__('Product Image Height', 'blockons')}
 							value={imgHeight}
 							onChange={(newValue) =>
 								setAttributes({
 									imgHeight:
-										newValue === undefined ? "auto" : parseInt(newValue),
+										newValue === undefined
+											? 'auto'
+											: parseInt(newValue),
 								})
 							}
 							min={100}
@@ -343,13 +392,16 @@ const Edit = (props) => {
 			)}
 			{
 				<BlockControls>
-					<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
+					<AlignmentToolbar
+						value={alignment}
+						onChange={onChangeAlignment}
+					/>
 				</BlockControls>
 			}
 
 			{!selectedProduct && (
 				<div className="no-selected-product">
-					{__("Select a product to display", "blockons")}
+					{__('Select a product to display', 'blockons')}
 				</div>
 			)}
 
@@ -361,7 +413,9 @@ const Edit = (props) => {
 				) : (
 					<div
 						className={`blockons-wc-featured-product-block ${
-							layout === "one" && layoutSwitch ? "switch" : "noswitch"
+							layout === 'one' && layoutSwitch
+								? 'switch'
+								: 'noswitch'
 						}`}
 						style={{ backgroundColor: blockBgColor, padding }}
 					>
@@ -370,18 +424,27 @@ const Edit = (props) => {
 							style={{
 								backgroundColor: blockDetailColor,
 								color:
-									layout === "two" && blockFontColor === "inherit"
-										? "#FFF"
+									layout === 'two' &&
+									blockFontColor === 'inherit'
+										? '#FFF'
 										: blockFontColor,
-								width: layout === "one" ? detailWidth + "%" : "auto",
-								padding: innerPadding / 2 + "px " + innerPadding + "px",
+								width:
+									layout === 'one'
+										? detailWidth + '%'
+										: 'auto',
+								padding:
+									innerPadding + 'px ' + innerPadding + 'px',
 							}}
 						>
 							<h2
 								className="blockons-wc-featured-product-title"
 								style={{
-									...(titleSize ? { fontSize: titleSize } : ""),
-									...(titleColor ? { color: titleColor } : ""),
+									...(titleSize
+										? { fontSize: titleSize }
+										: ''),
+									...(titleColor
+										? { color: titleColor }
+										: ''),
 								}}
 							>
 								{selectedProductDetails.title}
@@ -391,36 +454,44 @@ const Edit = (props) => {
 								<div
 									className="blockons-wc-featured-product-price"
 									style={{
-										...(priceSize ? { fontSize: priceSize } : ""),
-										...(priceColor ? { color: priceColor } : ""),
+										...(priceSize
+											? { fontSize: priceSize }
+											: ''),
+										...(priceColor
+											? { color: priceColor }
+											: ''),
 									}}
 								>
 									{selectedProductDetails.price
 										? parse(selectedProductDetails.price)
-										: ""}
+										: ''}
 								</div>
 							)}
 
-							{showDesc && <p>{selectedProductDetails.short_desc}</p>}
+							{showDesc && (
+								<p>{selectedProductDetails.short_desc}</p>
+							)}
 
 							{showButton && (
 								<div className="blockons-wc-featured-product-btn">
-									{buttonType === "atc" ? (
+									{buttonType === 'atc' ? (
 										<div className="wc-fproduct-btn">
-											{__("Add To Cart", "blockons")}
+											{__('Add To Cart', 'blockons')}
 										</div>
 									) : (
 										<RichText
-											placeholder={__("View Product")}
+											placeholder={__('View Product')}
 											value={buttonText}
 											onChange={(value) =>
 												setAttributes({
 													buttonText:
-														value === undefined ? "View Product" : value,
+														value === undefined
+															? 'View Product'
+															: value,
 												})
 											}
 											// withoutInteractiveFormatting
-											className={"wc-fproduct-btn"}
+											className={'wc-fproduct-btn'}
 										/>
 									)}
 								</div>
@@ -432,12 +503,14 @@ const Edit = (props) => {
 								...(selectedProductDetails.featured_media
 									? {
 											backgroundImage:
-												"url(" + selectedProductDetails.featured_media + ")",
-									  }
-									: ""),
+												'url(' +
+												selectedProductDetails.featured_media +
+												')',
+										}
+									: ''),
 							}}
 						>
-							{layout === "two" && layoutTwoOverlay && (
+							{layout === 'two' && layoutTwoOverlay && (
 								<div
 									className="img-overlay"
 									style={{
@@ -449,7 +522,10 @@ const Edit = (props) => {
 								src={selectedProductDetails.featured_media}
 								alt={selectedProductDetails.title}
 								style={{
-									height: imgHeight !== "auto" ? imgHeight : "auto",
+									height:
+										imgHeight !== 'auto'
+											? imgHeight
+											: 'auto',
 								}}
 							/>
 						</div>

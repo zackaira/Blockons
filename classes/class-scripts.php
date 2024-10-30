@@ -35,8 +35,6 @@ class Blockons {
 		// Register Scripts for plugin.
 		add_action( 'init', array( $this, 'blockons_register_scripts' ), 10 );
 
-		add_action( 'wp_head', array( $this, 'blockons_preload_fonts' ), 1);
-
 		// Update/fix defaults on plugins_loaded hook
 		add_action( 'plugins_loaded', array( $this, 'blockons_update_plugin_defaults' ) );
 
@@ -52,12 +50,6 @@ class Blockons {
 		$this->blockons_load_plugin_textdomain();
 		add_action( 'init', array( $this, 'blockons_load_localisation' ), 0 );
 	} // End __construct ()
-
-	public function blockons_preload_fonts() { ?>
-		<link rel="preload" href="<?php echo esc_url(BLOCKONS_PLUGIN_URL . 'assets/fontawesome/webfonts/fa-solid-900.woff2'); ?>" as="font" type="font/woff2" crossorigin>
-		<link rel="preload" href="<?php echo esc_url(BLOCKONS_PLUGIN_URL . 'assets/fontawesome/webfonts/fa-regular-400.woff2'); ?>" as="font" type="font/woff2" crossorigin>
-		<link rel="preload" href="<?php echo esc_url(BLOCKONS_PLUGIN_URL . 'assets/fontawesome/webfonts/fa-brands-400.woff2'); ?>" as="font" type="font/woff2" crossorigin><?php
-	}
 
 	/**
 	 * Register Scripts & Styles
@@ -125,13 +117,13 @@ class Blockons {
 
 		wp_register_script('blockons-img-comparison', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/image-comparison.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 
-		// Venobox Popup
+		// Sweetalert Popup
 		wp_register_style('blockons-animate-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/popups/animate.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
 		wp_register_style('blockons-sweetalert-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/popups/sweetalert2.min.css'), array('blockons-animate-style', 'blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
 		wp_register_script('blockons-sweetalert-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/popups/sweetalert2.all.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 
 		wp_register_script('blockons-image-block', esc_url(BLOCKONS_PLUGIN_URL . 'dist/image.min.js'), array('blockons-sweetalert-script'), BLOCKONS_PLUGIN_VERSION, true);
-		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('blockons-sweetalert-script'), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('wp-element', 'blockons-sweetalert-script'), BLOCKONS_PLUGIN_VERSION, true);
 
 		// Pro Addons
 		if (blockons_fs()->can_use_premium_code__premium_only()) {
@@ -284,7 +276,7 @@ class Blockons {
 		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
 		$isPro = (boolean)blockons_fs()->can_use_premium_code__premium_only();
 		
-		wp_register_style('blockons-admin-editor-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/editor' . $suffix . '.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
+		wp_register_style('blockons-admin-editor-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/editor' . $suffix . '.css'), array('blockons-fontawesome', 'dashicons'), BLOCKONS_PLUGIN_VERSION);
 		wp_enqueue_style('blockons-admin-editor-style');
 
 		wp_register_script('blockons-admin-editor-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/editor' . $suffix . '.js'), array('wp-edit-post', 'wp-rich-text', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components', 'wp-data', 'lodash'), BLOCKONS_PLUGIN_VERSION, true);

@@ -5,32 +5,65 @@
  *
  * FREE
  */
-document.addEventListener("DOMContentLoaded", function () {
-	const blockonsCartItems = document.querySelectorAll(
-		".blockons-wc-mini-cart-block-icon"
-	);
+document.addEventListener('DOMContentLoaded', function () {
+	// Configuration object for selectors
+	const selectors = {
+		cartIcon: '.blockons-wc-mini-cart-block-icon',
+		cartAmount: '.blockons-cart-amnt',
+		dropdownCart: '.wp-block-blockons-wc-mini-cart.cart-dropdown',
+		miniCart: '.blockons-mini-crt',
+	};
 
-	if (blockonsCartItems) {
-		blockonsCartItems.forEach((item) => {
-			const cartItem = document.querySelector(".blockons-cart-amnt");
-			if (cartItem) item.appendChild(cartItem.cloneNode(true));
+	/**
+	 * Safely clones and appends an element
+	 */
+	function cloneAndAppend(sourceSelector, targetParent) {
+		const sourceElement = document.querySelector(sourceSelector);
+		if (!sourceElement || !targetParent) return false;
+
+		try {
+			const clone = sourceElement.cloneNode(true);
+			targetParent.appendChild(clone);
+			return true;
+		} catch (error) {
+			return false;
+		}
+	}
+
+	/**
+	 * Initializes cart icons with amount indicators
+	 */
+	function initializeCartIcons() {
+		const cartIcons = document.querySelectorAll(selectors.cartIcon);
+		if (!cartIcons.length) return;
+
+		cartIcons.forEach((icon, index) => {
+			cloneAndAppend(selectors.cartAmount, icon);
 		});
 	}
 
-	const blockonsDropDownCarts = document.querySelectorAll(
-		".wp-block-blockons-wc-mini-cart.cart-dropdown"
-	);
+	/**
+	 * Initializes dropdown carts
+	 */
+	function initializeDropdownCarts() {
+		const dropdownCarts = document.querySelectorAll(selectors.dropdownCart);
+		if (!dropdownCarts.length) return;
 
-	if (blockonsDropDownCarts) {
-		blockonsDropDownCarts.forEach((item) => {
-			const miniCartParent = document.querySelector(
-				`.${item.classList[0]} .blockons-wc-mini-cart-inner`
+		dropdownCarts.forEach((cart, index) => {
+			const innerContainer = cart.querySelector(
+				'.blockons-wc-mini-cart-inner',
 			);
-
-			if (miniCartParent) {
-				const miniCart = document.querySelector(".blockons-mini-crt");
-				if (miniCart) miniCartParent.appendChild(miniCart.cloneNode(true));
+			if (innerContainer) {
+				cloneAndAppend(selectors.miniCart, innerContainer);
 			}
 		});
+	}
+
+	// Initialize all cart components
+	try {
+		initializeCartIcons();
+		initializeDropdownCarts();
+	} catch (error) {
+		console.error('Failed to initialize cart components:', error);
 	}
 });

@@ -229,6 +229,7 @@ This could be from the theme you're using, or another plugin. Again, please [con
 * Updated Settings Page to store current tab
 * Added Auto Play options to Slider, Testimonial & Carousel blocks
 * Fixed broken Font Awesome icons - uses cdnjs.com
+* Fixed block bugs in Site Editor
 * Updated the language .pot file
 * NEW: Added new Table Of Contents block
 * PREMIUM: Added new 'Site By' feature to Site Addons
