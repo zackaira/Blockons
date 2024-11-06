@@ -15,6 +15,7 @@ import ScrollIndicator from '../../frontend/site-addons/scrollindicator/ScrollIn
 import ProPromo from './components/UI/ProPromo';
 import SiteBy from '../../frontend/site-addons/siteby/SiteBy';
 import SideCart from '../../../assets/blocks/wc-mini-cart/pro/components/SideCart';
+import GlobalSettings from './contents/GlobalSettings';
 
 const SettingsPage = () => {
 	const blockonsObject = blockonsObj;
@@ -49,7 +50,7 @@ const SettingsPage = () => {
 		window.history.replaceState(null, '', '?' + params.toString());
 	};
 
-	// console.log('blockonsOptions', blockonsOptions);
+	console.log('blockonsOptions', blockonsOptions);
 
 	// setState dynamically for each setting
 	const handleChange = ({
@@ -271,6 +272,17 @@ const SettingsPage = () => {
 								</li>
 							)}
 
+							<li className="settings">
+								<a
+									id="blockonstab-settings"
+									className={`blockons-tab ${
+										activeTab === 'settings' ? 'active' : ''
+									}`}
+									onClick={() => changeTab('settings')}
+								>
+									{__('Settings', 'blockons')}
+								</a>
+							</li>
 							<li className="info">
 								<a
 									id="blockonstab-info"
@@ -279,7 +291,7 @@ const SettingsPage = () => {
 									}`}
 									onClick={() => changeTab('info')}
 								>
-									{__('Welcome', 'blockons')}
+									{__('Info', 'blockons')}
 								</a>
 							</li>
 						</ul>
@@ -368,6 +380,19 @@ const SettingsPage = () => {
 									</div>
 								)}
 
+								<div
+									id="blockons-content-settings"
+									className={`blockons-content ${
+										activeTab === 'settings' ? 'active' : ''
+									}`}
+								>
+									<GlobalSettings
+										blockonsOptions={blockonsOptions}
+										handleSettingChange={handleChange}
+										isPremium={isPremium}
+										upgradeUrl={upgradeUrl}
+									/>
+								</div>
 								<div
 									id="blockons-content-info"
 									className={`blockons-content ${

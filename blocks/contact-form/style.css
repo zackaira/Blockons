@@ -1,0 +1,115 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.blockons-contact-form {
+	display: flex;
+}
+/* -- Alignment -- */
+.blockons-contact-form.alignment-left .form-field .form-label,
+.blockons-contact-form.alignment-left .blockons-cf--footer {
+	text-align: left;
+}
+.blockons-contact-form.alignment-center .form-field .form-label,
+.blockons-contact-form.alignment-center .blockons-cf--footer {
+	text-align: center;
+}
+.blockons-contact-form.alignment-right .form-field .form-label,
+.blockons-contact-form.alignment-right .blockons-cf--footer {
+	text-align: right;
+}
+/* -- Align -- */
+.blockons-contact-form.left-align {
+	justify-content: flex-start;
+}
+.blockons-contact-form.center-align {
+	justify-content: center;
+}
+.blockons-contact-form.right-align {
+	justify-content: flex-end;
+}
+
+.blockons-contact-form .blockons-cf-wrap {
+	width: 100%;
+	padding: 10px;
+}
+.blockons-contact-form .blockons-cf-fields .form-field {
+	margin-bottom: 12px;
+}
+.blockons-contact-form .blockons-cfh-field {
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 0;
+	width: 0;
+	z-index: -1;
+	overflow: hidden;
+}
+.blockons-contact-form .blockons-cf-fields .form-field .form-label {
+	display: block;
+	margin: 0 0 5px;
+	font-size: 15px;
+}
+.blockons-contact-form .blockons-cf-fields .form-label span.required {
+	margin: 0 4px;
+}
+.blockons-contact-form .blockons-cf-fields .form-field input.form-input,
+.blockons-contact-form .blockons-cf-fields .form-field textarea.form-textarea,
+.blockons-contact-form .blockons-cf-fields .form-field select.form-select {
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+	width: 100%;
+	max-width: 100%;
+	margin: 0;
+	padding: 8px 15px;
+	background-color: #fff;
+	border: 1px solid #dbdbdb;
+	font-size: 15px;
+	border-radius: 4px;
+	color: #555;
+}
+
+.blockons-contact-form .blockons-cf--footer {
+	margin-top: 25px;
+}
+.blockons-contact-form .blockons-cf--button .blockons-cf-submit-btn {
+	background-color: #31a2eb;
+	color: #fff;
+	border: 1px solid rgb(0 0 0 / 25%);
+	border-radius: 4px;
+	margin: 0;
+	padding: 12px 24px;
+	font-size: 14px;
+	letter-spacing: 0.4px;
+}
+.blockons-contact-form .blockons-cf--button .blockons-cf-submit-btn:hover {
+	filter: brightness(0.92);
+}
+.blockons-contact-form .blockons-cf-messages {
+	margin: 20px 0 0;
+}
+.blockons-contact-form .blockons-cf-messages .blockons-cf-msg-success {
+	display: none;
+	color: #0ba204;
+	background-color: #f2fdf2;
+	border: 1px solid #0ba204;
+	font-size: 15px;
+	margin: 20px 2px 0;
+	padding: 10px 15px;
+}
+.blockons-contact-form .blockons-cf-messages .blockons-cf-msg-error {
+	display: none;
+	color: #dc0606;
+	background-color: #fff3f3;
+	border: 1px solid #dc0506;
+	font-size: 15px;
+	margin: 20px 2px 0;
+	padding: 10px 15px;
+}
+.blockons-contact-form .blockons-cf-fields .form-label span.required {
+	color: #dc0606;
+}
+.blockons-contact-form .blockons-cf-fields .field-error {
+	color: #dc0606;
+	font-size: 0.85em;
+}

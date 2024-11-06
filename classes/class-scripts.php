@@ -103,7 +103,17 @@ class Blockons {
 			'wcActive' => Blockons_Admin::blockons_is_plugin_active('woocommerce.php'),
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
 		));
-		
+
+		// Contact Form Block JS
+		wp_register_script('blockons-form-handler', esc_url(BLOCKONS_PLUGIN_URL . 'dist/form-handler.min.js'), array('wp-api'), BLOCKONS_PLUGIN_VERSION, true);
+		wp_localize_script('blockons-form-handler', 'blockonsFormObj', array(
+			'apiUrl' => esc_url(get_rest_url()),
+			'nonce' => wp_create_nonce('wp_rest'),
+			'isPremium' => $isPro,
+			'recaptcha' => isset($blockonsOptions->contactforms->recaptcha) ? (bool)$blockonsOptions->contactforms->recaptcha : false,
+    		'recaptcha_key' => isset($blockonsOptions->contactforms->recaptcha_key) ? sanitize_text_field($blockonsOptions->contactforms->recaptcha_key) : null,
+		));
+
 		// Progress Bars JS
 		wp_register_script('blockons-waypoint', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/waypoints.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 		wp_register_script('blockons-waypoint-inview', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/inview.min.js'), array('blockons-waypoint'), BLOCKONS_PLUGIN_VERSION, true);
@@ -333,6 +343,7 @@ class Blockons {
 	public static function blockonsDefaults() {
 		$initialSettings = array(
 			"blocks" => array( // For adding a new block, update this AND ../src/backend/helpers.js AND class-notices.php newblocks number
+				"contact_form" => true, // 21
 				"table_of_contents" => true, // 20
 				"content_selector" => true, // 19
 				"tabs" => true, // 18

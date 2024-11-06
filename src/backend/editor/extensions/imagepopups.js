@@ -294,7 +294,7 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 													'Enable this option to show the image in a popup when clicked.',
 													'blockons',
 												)}
-												docLink="https://blockons.com/documentation/block-visibility"
+												docLink="https://blockons.com/documentation/image-lightbox-popups/"
 												noline
 											/>
 										</>

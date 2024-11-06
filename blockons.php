@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Blockons
- * Version: 1.2.01
+ * Version: 1.2.02
  * Plugin URI: https://blockons.com/
  * Description: Enhanced WordPress editor blocks for Gutenberg, including core Block Extensions and Site Addons for your WordPress site and WooCommerce online store
  * Author: Kaira
@@ -20,7 +20,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( !defined( 'BLOCKONS_PLUGIN_VERSION' ) ) {
-	define('BLOCKONS_PLUGIN_VERSION', '1.2.01');
+	define('BLOCKONS_PLUGIN_VERSION', '1.2.02');
 }
 if ( !defined( 'BLOCKONS_PLUGIN_URL' ) ) {
 	define('BLOCKONS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -76,9 +76,12 @@ if ( function_exists( 'blockons_fs' ) ) {
 	require_once 'classes/class-scripts.php';
 	require_once 'classes/class-rest-api.php';
 	require_once 'classes/class-admin.php';
-	// require_once 'classes/class-block-patterns.php';
 	require_once 'classes/class-notices.php';
 	require_once 'classes/class-frontend.php';
+
+	require_once 'classes/class-blockons-security.php';
+	require_once 'classes/class-blockons-error-handler.php';
+	require_once 'classes/class-form-submissions.php';
 
 	$blockonsDefaults = json_decode( get_option('blockons_default_options') );
 	$blockonsOptions = json_decode( get_option('blockons_options') );

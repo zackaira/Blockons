@@ -248,16 +248,23 @@ a.blockons-upgrade::before {
 .blockons-tab:hover {
 	color: #000;
 }
-.blockons-tabs li.info {
+.blockons-tabs li.info,
+.blockons-tabs li.settings {
 	position: absolute;
 	right: 4px;
 	top: 6px;
+}
+.blockons-tabs li.settings {
+	right: 63px;
 }
 .blockons-tabs li.info .blockons-tab {
 	background-color: #5a93f8;
 	border: 1px solid #7a8896;
 	color: #fff;
-	padding: 8px 25px;
+	padding: 8px 16px;
+}
+.blockons-tabs li.settings .blockons-tab {
+	padding: 8px 16px;
 }
 .blockons-tab.active,
 .blockons-tabs li.info .blockons-tab.active {

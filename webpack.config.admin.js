@@ -18,6 +18,7 @@ const config = {
 		'swiper-video.min': './assets/slider/swiper-video.js',
 		'image.min': './assets/blocks/image/image.js',
 		'imagegallery.min': './assets/blocks/image/imagegallery.js',
+		'form-handler.min': './assets/blocks/contact-form/form-handler.js',
 		// Premium Files
 		'cart-pro.min': './assets/blocks/wc-mini-cart/pro/cart.js',
 		'search-pro.min': './assets/blocks/search/pro/search.js',

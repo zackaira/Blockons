@@ -1,17 +1,17 @@
 body.wp-admin.blockons-free.plugins-php
 	.wp-list-table
 	#the-list
-	tr[data-plugin*="blockons/blockons.php"]
+	tr[data-plugin*='blockons/blockons.php']
 	span.upgrade,
 body.wp-admin.blockons-free.plugins-php
 	.wp-list-table
 	#the-list
-	tr[data-plugin*="blockons/blockons.php"]
+	tr[data-plugin*='blockons/blockons.php']
 	span.activate-license,
 body.wp-admin.blockons-free.plugins-php
 	.wp-list-table
 	#the-list
-	tr[data-plugin*="blockons/blockons.php"]
+	tr[data-plugin*='blockons/blockons.php']
 	span.opt-in-or-opt-out {
 	display: none !important;
 }
@@ -42,4 +42,108 @@ body.wp-admin.blockons-free.plugins-php
 	display: inline-block;
 	vertical-align: baseline;
 	margin-right: 5px;
+}
+/* ---- Admin Form Subbmission Page Styling ---- */
+body.post-type-blockons_submission.post-php #post-body .postbox-header {
+	pointer-events: none;
+}
+body.post-type-blockons_submission.post-php .wrap h1.wp-heading-inline {
+	visibility: hidden;
+	opacity: 0;
+	height: 5px;
+	line-height: 0;
+}
+body.post-type-blockons_submission.post-php
+	#post-body
+	.postbox-header
+	.handle-actions {
+	display: none !important;
+}
+body.post-type-blockons_submission.post-php
+	#post-body
+	#blockons_submission_details
+	h2 {
+	font-size: 16px;
+	margin: 0;
+	padding: 14px 12px;
+}
+body.post-type-blockons_submission.post-php
+	#post-body
+	#minor-publishing-actions,
+body.post-type-blockons_submission.post-php #post-body #misc-publishing-actions,
+body.post-type-blockons_submission.post-php #post-body-content {
+	display: none !important;
+}
+body.post-type-blockons_submission.post-php
+	#post-body
+	#major-publishing-actions {
+	border-top: 0;
+}
+body.post-type-blockons_submission.post-php #post-body .blockons-form-details {
+	background-color: #f6f7f7;
+	border-top: 1px solid #c3c4c7;
+	padding: 0 12px 12px;
+	margin: 0;
+}
+body.post-type-blockons_submission.post-php
+	#blockons_submission_details
+	.inside {
+	margin: 0;
+	padding: 0;
+}
+body.post-type-blockons_submission.post-php
+	.form-submission-details
+	.form-details {
+	margin: 0;
+}
+body.post-type-blockons_submission.post-php
+	.form-submission-details
+	.form-details
+	th {
+	background-color: #f6f7f7;
+	padding: 20px 12px 20px;
+}
+body.post-type-blockons_submission.post-php
+	.form-submission-details
+	.form-details
+	th,
+body.post-type-blockons_submission.post-php
+	.form-submission-details
+	.form-details
+	td {
+	border-bottom: 1px solid #dfe0e1;
+}
+body.post-type-blockons_submission.post-php
+	.form-submission-details
+	.form-details
+	tr:last-child
+	th,
+body.post-type-blockons_submission.post-php
+	.form-submission-details
+	.form-details
+	tr:last-child
+	td {
+	border: 0;
+}
+body.post-type-blockons_submission.post-php
+	#post-body
+	.blockons-form-details
+	table
+	th,
+body.post-type-blockons_submission.post-php
+	#post-body
+	.blockons-form-details
+	table
+	td {
+	padding: 8px 0;
+}
+body.post-type-blockons_submission.post-php
+	#post-body
+	.form-submission-details
+	h3 {
+	background-color: #fff;
+	margin: 0 -12px;
+	padding: 14px 12px;
+	border-bottom: 1px solid #c3c4c7;
+	font-size: 16px;
 }

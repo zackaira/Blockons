@@ -54,6 +54,14 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: __('NEW', 'blockons'),
 	},
+	contact_form: {
+		desc: __(
+			'Add a neat contact form block to your WordPress pages.',
+			'blockons',
+		),
+		pluginSpecific: false,
+		isNew: __('NEW', 'blockons'),
+	},
 	content_toggler: {
 		desc: __(
 			'Show / Hide sections of long content with a toggle button',

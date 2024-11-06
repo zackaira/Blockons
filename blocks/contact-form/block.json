@@ -1,0 +1,156 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/contact-form",
+	"title": "Contact Form",
+	"category": "blockons-category",
+	"textdomain": "blockons",
+	"keywords": ["contact", "form", "email", "blockons"],
+	"icon": "email",
+	"description": "Add a customizable contact form",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"isPremium": {
+			"type": "boolean",
+			"default": false
+		},
+		"formWidth": {
+			"type": "number",
+			"default": "400px"
+		},
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"align": {
+			"type": "string",
+			"default": "left"
+		},
+		"formName": {
+			"type": "string",
+			"default": "Contact Form"
+		},
+		"emailTo": {
+			"type": "string",
+			"default": ""
+		},
+		"emailSubject": {
+			"type": "string",
+			"default": "New Contact Form Submission"
+		},
+		"fromEmail": {
+			"type": "string",
+			"default": ""
+		},
+		"fromName": {
+			"type": "string",
+			"default": ""
+		},
+		"replyToEmail": {
+			"type": "string",
+			"default": ""
+		},
+		"ccEmails": {
+			"type": "string",
+			"default": ""
+		},
+		"bccEmails": {
+			"type": "string",
+			"default": ""
+		},
+		"includeMetadata": {
+			"type": "boolean",
+			"default": true
+		},
+		"submitButtonText": {
+			"type": "string",
+			"default": "Send Message"
+		},
+		"successMessage": {
+			"type": "string",
+			"default": "Thank you for your message. We'll get back to you soon!"
+		},
+		"errorMessage": {
+			"type": "string",
+			"default": "There was an error sending your message. Please try again."
+		},
+		"rowSpacing": {
+			"type": "number",
+			"default": 12
+		},
+		"showLabels": {
+			"type": "boolean",
+			"default": true
+		},
+		"labelSize": {
+			"type": "number",
+			"default": 15
+		},
+		"labelSpacing": {
+			"type": "number",
+			"default": 5
+		},
+		"labelColor": {
+			"type": "string",
+			"default": "#333"
+		},
+		"inputSize": {
+			"type": "number",
+			"default": 15
+		},
+		"inputPadHoriz": {
+			"type": "number",
+			"default": 15
+		},
+		"inputPadVert": {
+			"type": "number",
+			"default": 8
+		},
+		"inputBgColor": {
+			"type": "string",
+			"default": "#f9f9f9"
+		},
+		"inputTextColor": {
+			"type": "string",
+			"default": "#333"
+		},
+		"inputBorder": {
+			"type": "boolean",
+			"default": true
+		},
+		"inputBorderColor": {
+			"type": "string",
+			"default": "#dbdbdb"
+		},
+		"inputBorderRadius": {
+			"type": "number",
+			"default": 4
+		},
+		"buttonColor": {
+			"type": "string",
+			"default": "#31a2eb"
+		},
+		"buttonFontColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"useRecaptcha": {
+			"type": "boolean",
+			"default": false
+		},
+		"recaptchaSiteKey": {
+			"type": "string",
+			"default": ""
+		},
+		"recaptchaSecretKey": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"viewScript": "blockons-form-handler",
+	"style": "file:./style-index.css"
+}

@@ -1,0 +1,48 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.blockons-contact-form .blockons-cf-fields .block-editor-block-list__layout {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+.blockons-contact-form
+	.blockons-cf-wrap
+	.blockons-cf-fields
+	.block-list-appender.wp-block {
+	position: relative;
+	display: flex;
+	justify-content: flex-end;
+	margin: 5px 0 -12px;
+}
+.blockons-contact-form .blockons-cf--button .blockons-cf-submit-btn {
+	pointer-events: none;
+}
+.blockons-contact-form
+	.blockons-cf-fields
+	.form-field
+	input.form-input::placeholder,
+.blockons-contact-form
+	.blockons-cf-fields
+	.form-field
+	input.form-textarea::placeholder {
+	color: inherit;
+}
+
+.blockons-cf-option-row {
+	position: relative;
+}
+.blockons-cf-option-row .blockons-cf-remove-option {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0 3px;
+	height: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+	line-height: 1;
+}

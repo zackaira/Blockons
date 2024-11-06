@@ -58,6 +58,13 @@ class Blockons_WC_Rest_Routes {
 			'permission_callback' => [$this, 'blockons_get_settings_permission'],
 		));
 
+		// Contact Form Block - Form Submission Endpoint
+		register_rest_route('blcns/v1', '/submit-form', array(
+            'methods' => 'POST',
+            'callback' => [$this, 'blockons_handle_contact_form_submission'],
+            'permission_callback' => [$this, 'blockons_get_settings_permission'],
+        ));
+
 		// Add Excerpt to Search Results
 		register_rest_field( 'search-result', 'extras', array(
 			'get_callback' => function ( $post_arr ) {
@@ -129,7 +136,7 @@ class Blockons_WC_Rest_Routes {
         return $form_html;
     }
 
-	/*
+	/**
 	 * Get saved options from database
 	 */
 	public function blockons_get_settings() {
@@ -141,14 +148,14 @@ class Blockons_WC_Rest_Routes {
 		return rest_ensure_response($blockonsPluginOptions);
 	}
 
-	/*
+	/**
 	 * Allow permissions for get options
 	 */
 	public function blockons_get_settings_permission() {
 		return true;
 	}
 
-	/*
+	/**
 	 * Save settings as JSON string
 	 */
 	public function blockons_save_settings() {
@@ -160,14 +167,14 @@ class Blockons_WC_Rest_Routes {
 		return rest_ensure_response('Success!');
 	}
 
-	/*
+	/**
 	 * Set save permissions for admin users
 	 */
 	public function blockons_save_settings_permission() {
 		return current_user_can('publish_posts') ? true : false;
 	}
 
-	/*
+	/**
 	 * Delete the plugin settings
 	 */
 	public function blockons_delete_settings() {
@@ -176,7 +183,7 @@ class Blockons_WC_Rest_Routes {
 		return rest_ensure_response('Success!');
 	}
 	
-	/*
+	/**
 	 * Get & Sort posts for 'Post Select' Component
 	 */
 	public function blockons_get_wc_products($request) {
@@ -198,7 +205,7 @@ class Blockons_WC_Rest_Routes {
 		return $all_products;
 	}
 
-	/*
+	/**
 	 * Get WC Product by ID
 	 */
 	function blockons_get_wc_product_by_id($request) {
@@ -222,7 +229,7 @@ class Blockons_WC_Rest_Routes {
 		return $product_data;
 	}
 
-	/*
+	/**
 	 * Get Post by ID
 	 */
 	function blockons_get_post_by_id($request) {
@@ -249,7 +256,7 @@ class Blockons_WC_Rest_Routes {
 		return $post_data;
 	}
 
-	/*
+	/**
 	 * Get All Post Types
 	 */
 	function blockons_get_all_post_types() {
@@ -266,6 +273,442 @@ class Blockons_WC_Rest_Routes {
 		}
 	
 		return $post_types_data;
+	}
+
+	/**
+	 * Handle Form Submission for Contact Form Blocks
+	 */
+	public function blockons_handle_contact_form_submission($request) {
+		try {
+			// Debug logging
+			error_log('Form submission request: ' . print_r($request->get_params(), true));
+			error_log('Options value: ' . print_r(get_option('blockons_options'), true));
+
+			// Initialize security manager
+			$security = Blockons_Security_Manager::get_instance();
+			
+			// Check submission rate
+			$ip_address = $this->get_client_ip();
+			if (!$security->check_submission_rate($ip_address)) {
+				return new WP_Error(
+					'rate_limit_exceeded',
+					__('Too many submissions. Please try again later.', 'blockons'),
+					array('status' => 429)
+				);
+			}
+
+			// Get and validate form data
+			$form_data = $request->get_params();
+			$validation_result = $security->validate_request($form_data);
+			if (is_wp_error($validation_result)) {
+				return $validation_result;
+			}
+
+			// Sanitize form data
+			$form_data = $security->sanitize_form_data($form_data);
+
+			// Check if fields exist and their structure
+			if (isset($form_data['fields'])) {
+				error_log('Fields array structure: ' . print_r($form_data['fields'], true));
+			} else {
+				error_log('Fields array is missing from form data');
+			}
+
+			// Get options for reCAPTCHA check
+			$options = get_option('blockons_options');
+			if (is_string($options)) {
+				$options = json_decode($options, true);
+			}
+
+			// Verify reCAPTCHA if enabled
+			$recaptcha_enabled = !empty($options['contactforms']['recaptcha']) && 
+				!empty($options['contactforms']['recaptcha_key']) && 
+				!empty($options['contactforms']['recaptcha_secret']);
+
+			if ($recaptcha_enabled) {
+				$recaptcha_token = isset($form_data['recaptchaToken']) ? $form_data['recaptchaToken'] : '';
+				
+				error_log('reCAPTCHA check started');
+				error_log('Token received: ' . ($recaptcha_token ? 'Yes' : 'No'));
+				
+				// Skip reCAPTCHA check for localhost/development
+				if (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false || 
+					in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1'])) {
+					error_log('Development environment - skipping reCAPTCHA verification');
+				} else {
+					if (empty($recaptcha_token)) {
+						error_log('No reCAPTCHA token provided');
+						return new WP_Error(
+							'recaptcha_missing',
+							__('reCAPTCHA verification failed', 'blockons'),
+							array('status' => 400)
+						);
+					}
+
+					$verify_url = 'https://www.google.com/recaptcha/api/siteverify';
+					$response = wp_remote_post($verify_url, array(
+						'body' => array(
+							'secret' => $options['contactforms']['recaptcha_secret'],
+							'response' => $recaptcha_token
+						)
+					));
+
+					error_log('reCAPTCHA verification response: ' . print_r($response, true));
+
+					if (is_wp_error($response)) {
+						error_log('reCAPTCHA verification error: ' . $response->get_error_message());
+						return new WP_Error(
+							'recaptcha_error',
+							__('Failed to verify reCAPTCHA', 'blockons'),
+							array('status' => 500)
+						);
+					}
+
+					$body = json_decode(wp_remote_retrieve_body($response), true);
+					error_log('reCAPTCHA verification result: ' . print_r($body, true));
+					
+					$threshold = !empty($options['contactforms']['recaptcha_threshold']) 
+						? floatval($options['contactforms']['recaptcha_threshold']) 
+						: 0.5;
+
+					if (!$body['success'] || $body['score'] < $threshold) {
+						error_log('reCAPTCHA verification failed. Score: ' . ($body['score'] ?? 'N/A'));
+						return new WP_Error(
+							'recaptcha_failed',
+							__('reCAPTCHA verification failed', 'blockons'),
+							array('status' => 400)
+						);
+					}
+
+					error_log('reCAPTCHA verification successful. Score: ' . $body['score']);
+				}
+			}
+
+			// Basic validation
+			if (!isset($form_data['emailTo']) || empty($form_data['emailTo'])) {
+				return new WP_Error(
+					'missing_recipient', 
+					__('Recipient email is required', 'blockons'), 
+					array('status' => 400)
+				);
+			}
+
+			// Validate recipient email(s)
+			$to_emails = array_map('trim', explode(',', $form_data['emailTo']));
+			$valid_emails = array_filter($to_emails, function($email) {
+				return filter_var($email, FILTER_VALIDATE_EMAIL);
+			});
+
+			if (empty($valid_emails)) {
+				return new WP_Error(
+					'invalid_email',
+					__('No valid recipient email addresses provided', 'blockons'),
+					array('status' => 400)
+				);
+			}
+
+			// Validate form fields
+			$form_fields = isset($form_data['fields']) ? $form_data['fields'] : array();
+			$compiled_message = '';
+			$errors = array();
+
+			foreach ($form_fields as $field) {
+				// Skip honeypot field if it exists
+				if (!empty($field['name']) && $field['name'] === 'asite' && !empty($field['value'])) {
+					// Silently return success if honeypot is filled
+					return array(
+						'success' => true,
+						'message' => __('Form submitted successfully', 'blockons')
+					);
+				}
+
+				$value = isset($field['value']) ? sanitize_text_field($field['value']) : '';
+				$label = isset($field['label']) ? sanitize_text_field($field['label']) : '';
+				$required = isset($field['required']) ? (bool)$field['required'] : false;
+				$type = isset($field['type']) ? sanitize_text_field($field['type']) : 'text';
+
+				// Check required fields
+				if ($required && empty($value)) {
+					$errors[] = sprintf(
+						/* translators: %s: field label */
+						__('%s is required', 'blockons'),
+						esc_html($label)
+					);
+					continue;
+				}
+
+				// Type-specific validation
+				if (!empty($value)) {
+					switch ($type) {
+						case 'email':
+							if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+								$errors[] = sprintf(
+									/* translators: %s: field label */
+									__('%s must be a valid email address', 'blockons'),
+									esc_html($label)
+								);
+							}
+							break;
+						case 'url':
+							if (!filter_var($value, FILTER_VALIDATE_URL)) {
+								$errors[] = sprintf(
+									/* translators: %s: field label */
+									__('%s must be a valid URL', 'blockons'),
+									esc_html($label)
+								);
+							}
+							break;
+						case 'number':
+							if (!is_numeric($value)) {
+								$errors[] = sprintf(
+									/* translators: %s: field label */
+									__('%s must be a number', 'blockons'),
+									esc_html($label)
+								);
+							}
+							break;
+					}
+				}
+
+				// Add to compiled message only if it's not the honeypot
+				if (!empty($field['name']) && $field['name'] !== 'asite') {
+					$compiled_message .= sprintf("%s: %s\n", esc_html($label), esc_html($value));
+				}
+			}
+
+			if (!empty($errors)) {
+				return new WP_Error('validation_failed', __('Form validation failed', 'blockons'), array(
+					'status' => 400,
+					'errors' => $errors
+				));
+			}
+
+			// Setup email
+			$subject = isset($form_data['emailSubject']) 
+				? sanitize_text_field($form_data['emailSubject']) 
+				: __('New Contact Form Submission', 'blockons');
+			
+			// Add metadata if requested
+			if (isset($form_data['includeMetadata']) && $form_data['includeMetadata']) {
+				$compiled_message .= "\n\n" . __('Submission Details:', 'blockons') . "\n";
+				$compiled_message .= sprintf(__('Date: %s', 'blockons'), current_time('mysql')) . "\n";
+				$compiled_message .= sprintf(
+					__('Page URL: %s', 'blockons'), 
+					isset($_SERVER['HTTP_REFERER']) ? esc_url($_SERVER['HTTP_REFERER']) : __('N/A', 'blockons')
+				) . "\n";
+				$compiled_message .= sprintf(__('IP Address: %s', 'blockons'), esc_html($this->get_client_ip())) . "\n";
+			}
+
+			// Setup email headers
+			$headers = array('Content-Type: text/plain; charset=UTF-8');
+			
+			// From email and name
+			if (isset($form_data['fromEmail']) && filter_var($form_data['fromEmail'], FILTER_VALIDATE_EMAIL)) {
+				$from_name = isset($form_data['fromName']) ? sanitize_text_field($form_data['fromName']) : '';
+				$headers[] = 'From: ' . esc_html($from_name) . ' <' . sanitize_email($form_data['fromEmail']) . '>';
+			}
+
+			// Reply-To
+			if (isset($form_data['replyToEmail']) && filter_var($form_data['replyToEmail'], FILTER_VALIDATE_EMAIL)) {
+				$headers[] = sprintf('Reply-To: %s', sanitize_email($form_data['replyToEmail']));
+			}
+
+			// Add CC headers
+			if (isset($form_data['ccEmails']) && !empty($form_data['ccEmails'])) {
+				$cc_headers = validate_and_format_email_addresses($form_data['ccEmails'], 'Cc');
+				$headers = array_merge($headers, $cc_headers);
+			}
+
+			// Add BCC headers
+			if (isset($form_data['bccEmails']) && !empty($form_data['bccEmails'])) {
+				$bcc_headers = validate_and_format_email_addresses($form_data['bccEmails'], 'Bcc');
+				$headers = array_merge($headers, $bcc_headers);
+			}
+
+			// Check if form submissions should be saved
+			$save_submissions = false;
+			if (is_array($options) && 
+				isset($options['contactforms']) && 
+				is_array($options['contactforms']) && 
+				isset($options['contactforms']['save_to_dashboard'])) {
+				$save_submissions = (bool)$options['contactforms']['save_to_dashboard'];
+			}
+
+			if ($save_submissions) {
+				try {
+					// Debug log the form fields
+					error_log('Incoming form fields before sanitization: ' . print_r($form_data['fields'], true));
+			
+					// Get email from form fields if it exists
+					$submitter_email = '';
+					foreach ($form_data['fields'] as $field) {
+						if (isset($field['type']) && $field['type'] === 'email' && !empty($field['value'])) {
+							$submitter_email = sanitize_email($field['value']);
+							break;
+						}
+					}
+			
+					// Generate post title
+					$post_title = !empty($submitter_email) 
+						? $submitter_email 
+						: (isset($form_data['formId']) 
+							? sanitize_text_field($form_data['formId']) 
+							: __('Contact Form', 'blockons'));
+			
+					// Prepare post data
+					$post_data = array(
+						'post_title'    => wp_strip_all_tags($post_title),
+						'post_content'  => $compiled_message,
+						'post_status'   => 'publish',
+						'post_type'     => 'blockons_submission'
+					);
+			
+					// Insert post
+					$post_id = wp_insert_post($post_data);
+			
+					if (is_wp_error($post_id)) {
+						throw new Exception('Failed to save submission: ' . $post_id->get_error_message());
+					}
+			
+					if ($post_id) {
+						// Save form fields directly
+						error_log('Saving fields to post meta: ' . print_r($form_data['fields'], true));
+						update_post_meta($post_id, '_form_data', $form_data['fields']);
+			
+						// Save other meta data
+						update_post_meta($post_id, '_form_id', 
+							isset($form_data['formId']) ? sanitize_text_field($form_data['formId']) : 'contact_form'
+						);
+						update_post_meta($post_id, '_email_to', sanitize_email($form_data['emailTo']));
+						update_post_meta($post_id, '_submission_date', current_time('mysql'));
+						update_post_meta($post_id, '_ip_address', $this->get_client_ip());
+						update_post_meta($post_id, '_page_url', 
+							isset($_SERVER['HTTP_REFERER']) ? esc_url_raw($_SERVER['HTTP_REFERER']) : ''
+						);
+						update_post_meta($post_id, '_submission_status', 'unread');
+			
+						error_log('Successfully saved form submission with ID: ' . $post_id);
+						
+						// Verify saved data
+						$saved_fields = get_post_meta($post_id, '_form_data', true);
+						error_log('Verified saved fields: ' . print_r($saved_fields, true));
+					}
+			
+				} catch (Exception $e) {
+					error_log('Error saving form submission: ' . $e->getMessage());
+					throw $e;
+				}
+			}
+
+			// For localhost/development environment
+			if (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false || 
+				in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1'])) {
+				
+				// Log the attempted email for debugging
+				error_log('Development Mode - Email would have been sent:');
+				error_log('To: ' . sanitize_email($form_data['emailTo']));
+				error_log('Subject: ' . esc_html($subject));
+				error_log('Headers: ' . print_r(array_map('esc_html', $headers), true));
+				error_log('Message: ' . esc_html($compiled_message));
+				
+				return array(
+					'success' => true,
+					'message' => $save_submissions 
+						? __('Form submission logged but email not sent (development mode)', 'blockons')
+						: __('Form submission received but email not sent (development mode)', 'blockons')
+				);
+			}
+
+			// Send email
+			try {
+				// Convert array of emails to comma-separated string for wp_mail()
+				$to_emails_string = implode(',', $valid_emails);
+    
+				$mail_sent = wp_mail(
+					$to_emails_string,
+					$subject,
+					$compiled_message,
+					$headers
+				);
+			
+				if (!$mail_sent) {
+					throw new Exception('Failed to send email');
+				}
+				
+				// Log successful sending
+				error_log('Email sent successfully to recipients: ' . $to_emails_string);
+			} catch (Exception $e) {
+				Blockons_Error_Handler::log_error('Form submission processing failed', [
+					'error' => $e->getMessage(),
+					'form_data' => $form_data,
+					'recipients' => $valid_emails
+				]);
+				throw $e;
+			}
+
+			return array(
+				'success' => true,
+				'message' => __('Form submitted successfully', 'blockons')
+			);
+
+		} catch (Exception $e) {
+			error_log('Contact form error: ' . $e->getMessage());
+			return new WP_Error(
+				'submission_error', 
+				__('An error occurred while processing your submission. Please try again later.', 'blockons'),
+				array('status' => 500)
+			);
+		}
+	}
+
+	// Function to validate and format email headers
+	function validate_and_format_email_addresses($emails, $header_type) {
+		if (empty($emails)) {
+			return [];
+		}
+
+		$email_array = array_map('trim', explode(',', $emails));
+		$valid_headers = [];
+		$invalid_emails = [];
+
+		foreach ($email_array as $email) {
+			if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+				// Format according to RFC 2822
+				$valid_headers[] = sprintf('%s: %s', $header_type, sanitize_email($email));
+			} else if (!empty($email)) {
+				$invalid_emails[] = $email;
+			}
+		}
+
+		if (!empty($invalid_emails)) {
+			error_log(sprintf(
+				'Invalid %s email(s) were skipped: %s',
+				$header_type,
+				implode(', ', $invalid_emails)
+			));
+		}
+
+		return $valid_headers;
+	}
+	
+	// Helper function to get client IP
+	private function get_client_ip() {
+		$ipaddress = '';
+		if (isset($_SERVER['HTTP_CLIENT_IP']))
+			$ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+		else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+			$ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		else if(isset($_SERVER['HTTP_X_FORWARDED']))
+			$ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+		else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+			$ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+		else if(isset($_SERVER['HTTP_FORWARDED']))
+			$ipaddress = $_SERVER['HTTP_FORWARDED'];
+		else if(isset($_SERVER['REMOTE_ADDR']))
+			$ipaddress = $_SERVER['REMOTE_ADDR'];
+		else
+			$ipaddress = 'UNKNOWN';
+		return $ipaddress;
 	}
 }
 new Blockons_WC_Rest_Routes();
