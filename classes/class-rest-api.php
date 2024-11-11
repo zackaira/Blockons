@@ -422,11 +422,11 @@ class Blockons_WC_Rest_Routes {
 					);
 				}
 	
-				$value = isset($field['value']) ? sanitize_text_field($field['value']) : '';
-				$label = isset($field['label']) ? sanitize_text_field($field['label']) : '';
+				$value = isset($field['value']) ? $this->decode_form_content(sanitize_text_field($field['value'])) : '';
+				$label = isset($field['label']) ? $this->decode_form_content(sanitize_text_field($field['label'])) : '';
 				$required = isset($field['required']) ? (bool)$field['required'] : false;
 				$type = isset($field['type']) ? sanitize_text_field($field['type']) : 'text';
-	
+
 				// Check required fields
 				if ($required && empty($value)) {
 					$errors[] = sprintf(
@@ -665,7 +665,7 @@ class Blockons_WC_Rest_Routes {
 		// System shortcodes
 		$replacements = [
 			'[form_name]' => isset($form_data['formId']) 
-				? sanitize_text_field($form_data['formId']) 
+				? $this->decode_form_content(sanitize_text_field($form_data['formId'])) 
 				: '',
 			'[submission_date]' => current_time('Y-m-d'),
 			'[submission_time]' => current_time('H:i:s'),
@@ -683,7 +683,7 @@ class Blockons_WC_Rest_Routes {
 	
 				// Create shortcode from label
 				$code = sanitize_title($field['label']); // Matches frontend shortcode generation
-				$replacements["[$code]"] = sanitize_text_field($field['value']);
+				$replacements["[$code]"] = $this->decode_form_content(sanitize_text_field($field['value']));
 	
 				// Special handling for name and email fields
 				if (isset($field['type'])) {
@@ -693,7 +693,7 @@ class Blockons_WC_Rest_Routes {
 							break;
 						case 'text':
 							if (strtolower($field['label']) === 'name') {
-								$replacements['[name]'] = sanitize_text_field($field['value']);
+								$replacements['[name]'] = $this->decode_form_content(sanitize_text_field($field['value']));
 							}
 							break;
 					}
@@ -702,11 +702,18 @@ class Blockons_WC_Rest_Routes {
 		}
 	
 		// Replace all shortcodes
-		return str_replace(
+		$processed_content = str_replace(
 			array_keys($replacements),
 			array_values($replacements),
 			$content
 		);
+	
+		// Decode any remaining HTML entities in the final content
+		return $this->decode_form_content($processed_content);
+	}
+
+	private function decode_form_content($content) {
+		return html_entity_decode($content, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 	}
 
 	// Function to validate and format email headers

@@ -80,6 +80,10 @@
 			"type": "string",
 			"default": "There was an error sending your message. Please try again."
 		},
+		"columnSpacing": {
+			"type": "number",
+			"default": 4
+		},
 		"rowSpacing": {
 			"type": "number",
 			"default": 12

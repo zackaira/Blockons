@@ -105,6 +105,7 @@ const Edit = (props) => {
 			submitButtonText,
 			successMessage,
 			errorMessage,
+			columnSpacing,
 			rowSpacing,
 			showLabels,
 			labelSize,
@@ -166,6 +167,7 @@ const Edit = (props) => {
 	// Create a function to get all current design settings
 	const getCurrentDesignSettings = useCallback(() => {
 		return {
+			columnSpacing,
 			rowSpacing,
 			showLabels,
 			labelSize,
@@ -181,6 +183,7 @@ const Edit = (props) => {
 			inputBorderRadius,
 		};
 	}, [
+		columnSpacing,
 		rowSpacing,
 		showLabels,
 		labelSize,
@@ -241,6 +244,7 @@ const Edit = (props) => {
 			}
 		});
 	}, [
+		columnSpacing,
 		rowSpacing,
 		showLabels,
 		labelSize,
@@ -668,6 +672,18 @@ const Edit = (props) => {
 						initialOpen={false}
 					>
 						<RangeControl
+							label={__('Form Column Spacing', 'blockons')}
+							value={columnSpacing}
+							onChange={(value) => {
+								setAttributes({ columnSpacing: value });
+								updateInnerBlocksStyles({
+									columnSpacing: value,
+								});
+							}}
+							min={0}
+							max={40}
+						/>
+						<RangeControl
 							label={__('Form Row Spacing', 'blockons')}
 							value={rowSpacing}
 							onChange={(value) => {
@@ -881,6 +897,15 @@ const Edit = (props) => {
 
 			{emailForm || newsletterSignup ? (
 				<div className="blockons-cf-wrap" style={{ width: formWidth }}>
+					<div className="blockons-cfh-field">
+						<input
+							type="text"
+							name="asite"
+							tabIndex="-1"
+							autoComplete="off"
+						/>
+					</div>
+
 					<div className="blockons-cf-fields">
 						<InnerBlocks
 							allowedBlocks={ALLOWED_BLOCKS}
@@ -891,19 +916,13 @@ const Edit = (props) => {
 							}
 							templateLock={false}
 						/>
-					</div>
 
-					<div className="blockons-cfh-field">
-						<input
-							type="text"
-							name="asite"
-							tabIndex="-1"
-							autoComplete="off"
-						/>
-					</div>
-
-					<div className="blockons-cf--footer">
-						<div className="blockons-cf--button">
+						<div
+							className="blockons-cf--button"
+							style={{
+								padding: `0 ${columnSpacing}px`,
+							}}
+						>
 							<button
 								type="button"
 								className="blockons-cf-submit-btn"
@@ -916,7 +935,9 @@ const Edit = (props) => {
 									__('Send Message', 'blockons')}
 							</button>
 						</div>
+					</div>
 
+					<div className="blockons-cf--footer">
 						{isSelected && (
 							<div className="blockons-cf-messages">
 								<div className="blockons-cf-msg-success">

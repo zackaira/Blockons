@@ -8,6 +8,7 @@ const Save = ({ attributes }) => {
 	const {
 		isPremium,
 		formWidth,
+		columnSpacing,
 		alignment,
 		align,
 		formName,
@@ -62,10 +63,6 @@ const Save = ({ attributes }) => {
 					/>
 					<input type="hidden" name="form_id" value={formName} />
 
-					<div className="blockons-cf-fields">
-						<InnerBlocks.Content />
-					</div>
-
 					<div className="blockons-cfh-field">
 						<input
 							type="text"
@@ -75,8 +72,15 @@ const Save = ({ attributes }) => {
 						/>
 					</div>
 
-					<div className="blockons-cf--footer">
-						<div className="blockons-cf--button">
+					<div className="blockons-cf-fields">
+						<InnerBlocks.Content />
+
+						<div
+							className="blockons-cf--button"
+							style={{
+								padding: `0 ${columnSpacing}px`,
+							}}
+						>
 							<button
 								type="submit"
 								className="blockons-cf-submit-btn"
@@ -89,7 +93,9 @@ const Save = ({ attributes }) => {
 									__('Send Message', 'blockons')}
 							</button>
 						</div>
+					</div>
 
+					<div className="blockons-cf--footer">
 						<div className="blockons-cf-messages">
 							<div className="blockons-cf-msg-success">
 								{successMessage ||

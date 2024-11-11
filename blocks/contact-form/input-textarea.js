@@ -1,7 +1,12 @@
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-import { PanelBody, TextControl, ToggleControl } from '@wordpress/components';
+import {
+	PanelBody,
+	TextControl,
+	ToggleControl,
+	SelectControl,
+} from '@wordpress/components';
 
 const getFieldClasses = (baseClass, required) => {
 	return [baseClass, required ? 'required-field' : '', 'form-control']
@@ -26,7 +31,15 @@ registerBlockType('blockons/form-textarea', {
 			type: 'boolean',
 			default: false,
 		},
+		width: {
+			type: 'string',
+			default: '100',
+		},
 		rows: {
+			type: 'number',
+			default: 4,
+		},
+		columnSpacing: {
 			type: 'number',
 			default: 4,
 		},
@@ -92,6 +105,8 @@ registerBlockType('blockons/form-textarea', {
 				placeholder,
 				required,
 				rows,
+				width,
+				columnSpacing,
 				rowSpacing,
 				showLabels,
 				labelSize,
@@ -110,7 +125,7 @@ registerBlockType('blockons/form-textarea', {
 		} = props;
 
 		const blockProps = useBlockProps({
-			className: `blockons-form-textarea`,
+			className: `blockons-form-textarea col-${width}`,
 		});
 
 		const inputId = label
@@ -203,6 +218,23 @@ registerBlockType('blockons/form-textarea', {
 									setAttributes({ required: value })
 								}
 							/>
+
+							<div className="blockons-divider"></div>
+							<SelectControl
+								label={__('Width', 'blockons')}
+								value={width}
+								options={[
+									{ label: '100%', value: '100' },
+									{ label: '80%', value: '80' },
+									{ label: '75%', value: '75' },
+									{ label: '50%', value: '50' },
+									{ label: '25%', value: '25' },
+									{ label: '20%', value: '20' },
+								]}
+								onChange={(value) =>
+									setAttributes({ width: value })
+								}
+							/>
 						</PanelBody>
 					</InspectorControls>
 				)}
@@ -211,6 +243,7 @@ registerBlockType('blockons/form-textarea', {
 					className="form-field"
 					style={{
 						marginBottom: `${rowSpacing}px`,
+						padding: `0 ${columnSpacing}px`,
 						position: 'relative',
 					}}
 				>
@@ -246,6 +279,7 @@ registerBlockType('blockons/form-textarea', {
 			placeholder,
 			required,
 			rows,
+			columnSpacing,
 			rowSpacing,
 			showLabels,
 			labelSize,
@@ -317,6 +351,7 @@ registerBlockType('blockons/form-textarea', {
 					className="form-field"
 					style={{
 						marginBottom: `${rowSpacing}px`,
+						padding: `0 ${columnSpacing}px`,
 						position: 'relative',
 					}}
 				>

@@ -231,14 +231,20 @@ class Blockons_Form_Submissions {
 						<th><label><?php esc_html_e('Sent To:', 'blockons'); ?></label></th>
 						<td><?php echo esc_html($email_to); ?></td>
 					</tr>
-                    <tr>
-						<th><label><?php esc_html_e('CC\'d To:', 'blockons'); ?></label></th>
-						<td><?php echo esc_html($cc_to); ?></td>
-					</tr>
-                    <tr>
-						<th><label><?php esc_html_e('BCC\'d To:', 'blockons'); ?></label></th>
-						<td><?php echo esc_html($bcc_to); ?></td>
-					</tr>
+
+                    <?php if ($bcc_to) : ?>
+                        <tr>
+                            <th><label><?php esc_html_e('CC\'d To:', 'blockons'); ?></label></th>
+                            <td><?php echo esc_html($cc_to); ?></td>
+                        </tr>
+                    <?php endif; ?>
+
+                    <?php if ($bcc_to) : ?>
+                        <tr>
+                            <th><label><?php esc_html_e('BCC\'d To:', 'blockons'); ?></label></th>
+                            <td><?php echo esc_html($bcc_to); ?></td>
+                        </tr>
+                    <?php endif; ?>
 					<tr>
 						<th><label><?php esc_html_e('Page URL:', 'blockons'); ?></label></th>
 						<td><?php echo esc_url($page_url); ?></td>

@@ -7,6 +7,7 @@ import {
 	PanelBody,
 	TextControl,
 	ToggleControl,
+	SelectControl,
 	Button,
 } from '@wordpress/components';
 import { slugify } from '../block-global';
@@ -37,6 +38,14 @@ registerBlockType('blockons/form-select', {
 		options: {
 			type: 'array',
 			default: [{ value: 'option-1', label: 'Option 1' }],
+		},
+		width: {
+			type: 'string',
+			default: '100',
+		},
+		columnSpacing: {
+			type: 'number',
+			default: 4,
 		},
 		rowSpacing: {
 			type: 'number',
@@ -100,6 +109,8 @@ registerBlockType('blockons/form-select', {
 				placeholder,
 				required,
 				options,
+				width,
+				columnSpacing,
 				rowSpacing,
 				showLabels,
 				labelSize,
@@ -119,7 +130,7 @@ registerBlockType('blockons/form-select', {
 		} = props;
 
 		const blockProps = useBlockProps({
-			className: `blockons-form-select`,
+			className: `blockons-form-select col-${width}`,
 		});
 
 		const selectId = label
@@ -249,6 +260,23 @@ registerBlockType('blockons/form-select', {
 							/>
 							<div className="blockons-divider"></div>
 
+							<SelectControl
+								label={__('Width', 'blockons')}
+								value={width}
+								options={[
+									{ label: '100%', value: '100' },
+									{ label: '80%', value: '80' },
+									{ label: '75%', value: '75' },
+									{ label: '50%', value: '50' },
+									{ label: '25%', value: '25' },
+									{ label: '20%', value: '20' },
+								]}
+								onChange={(value) =>
+									setAttributes({ width: value })
+								}
+							/>
+							<div className="blockons-divider"></div>
+
 							{options.map((option, index) => (
 								<div
 									key={index}
@@ -282,6 +310,7 @@ registerBlockType('blockons/form-select', {
 					className="form-field"
 					style={{
 						marginBottom: `${rowSpacing}px`,
+						padding: `0 ${columnSpacing}px`,
 						position: 'relative',
 					}}
 				>
@@ -337,6 +366,7 @@ registerBlockType('blockons/form-select', {
 			placeholder,
 			required,
 			options,
+			columnSpacing,
 			rowSpacing,
 			showLabels,
 			labelSize,
@@ -402,6 +432,7 @@ registerBlockType('blockons/form-select', {
 					className="form-field"
 					style={{
 						marginBottom: `${rowSpacing}px`,
+						padding: `0 ${columnSpacing}px`,
 						position: 'relative',
 					}}
 				>

@@ -33,9 +33,33 @@
 	width: 100%;
 	padding: 10px;
 }
+.blockons-contact-form .blockons-cf-fields {
+	display: flex;
+	flex-wrap: wrap;
+}
 .blockons-contact-form .blockons-cf-fields .form-field {
 	margin-bottom: 12px;
 }
+/* - Cols - */
+.blockons-contact-form .blockons-cf-fields .col-100 {
+	width: 100%;
+}
+.blockons-contact-form .blockons-cf-fields .col-80 {
+	width: 80%;
+}
+.blockons-contact-form .blockons-cf-fields .col-75 {
+	width: 75%;
+}
+.blockons-contact-form .blockons-cf-fields .col-50 {
+	width: 50%;
+}
+.blockons-contact-form .blockons-cf-fields .col-25 {
+	width: 25%;
+}
+.blockons-contact-form .blockons-cf-fields .col-20 {
+	width: 20%;
+}
+/* - Cols - */
 .blockons-contact-form .blockons-cfh-field {
 	opacity: 0;
 	position: absolute;

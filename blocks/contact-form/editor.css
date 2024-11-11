@@ -2,11 +2,57 @@
  * Note that these styles are loaded *after* common styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.blockons-contact-form .blockons-cf-fields .block-editor-block-list__layout {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
+.blockons-contact-form .blockons-cf-fields .block-editor-inner-blocks {
+	flex: 1;
 }
+.blockons-contact-form .blockons-cf-fields > .block-editor-inner-blocks {
+}
+.blockons-contact-form
+	.blockons-cf-fields
+	> .block-editor-inner-blocks
+	.block-editor-block-list__layout {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+/* - Cols - */
+.blockons-contact-form
+	.blockons-cf-fields
+	.block-editor-block-list__block.wp-block:has(> .col-100) {
+	width: 100%;
+}
+.blockons-contact-form
+	.blockons-cf-fields
+	.block-editor-block-list__block.wp-block:has(> .col-80) {
+	width: 80%;
+}
+.blockons-contact-form
+	.blockons-cf-fields
+	.block-editor-block-list__block.wp-block:has(> .col-75) {
+	width: 75%;
+}
+.blockons-contact-form
+	.blockons-cf-fields
+	.block-editor-block-list__block.wp-block:has(> .col-50) {
+	width: 50%;
+}
+.blockons-contact-form
+	.blockons-cf-fields
+	.block-editor-block-list__block.wp-block:has(> .col-25) {
+	width: 25%;
+}
+.blockons-contact-form
+	.blockons-cf-fields
+	.block-editor-block-list__block.wp-block:has(> .col-20) {
+	width: 20%;
+}
+.blockons-contact-form
+	.blockons-cf-fields
+	> .block-editor-inner-blocks
+	.block-editor-block-list__block {
+	width: 100%;
+}
+/* - Cols - */
 .blockons-contact-form
 	.blockons-cf-wrap
 	.blockons-cf-fields
