@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';
 
 const Save = ({ attributes }) => {
 	const {
@@ -14,7 +15,6 @@ const Save = ({ attributes }) => {
 		emailSubject,
 		fromEmail,
 		fromName,
-		replyToEmail,
 		ccEmails,
 		bccEmails,
 		includeMetadata,
@@ -23,13 +23,20 @@ const Save = ({ attributes }) => {
 		errorMessage,
 		buttonColor,
 		buttonFontColor,
+		availableShortcodes,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
 		className: `blockons-contact-form ${align}-align alignment-${alignment}`,
 	});
 
-	console.log('Save.js isPremium: ', isPremium);
+	// Store shortcodes data as a hidden input
+	const shortcodesData = Array.isArray(availableShortcodes)
+		? availableShortcodes.map((shortcode) => ({
+				code: shortcode.code,
+				fieldId: shortcode.fieldId,
+			}))
+		: [];
 
 	return (
 		<div {...blockProps}>
@@ -42,10 +49,10 @@ const Save = ({ attributes }) => {
 				}
 				data-from-email={fromEmail || ''}
 				data-from-name={fromName || ''}
-				data-reply-to-email={replyToEmail || ''}
 				data-cc-emails={ccEmails || ''}
 				data-bcc-emails={bccEmails || ''}
 				data-include-metadata={includeMetadata || false}
+				data-shortcodes={JSON.stringify(shortcodesData)}
 			>
 				<form className="blockons-cf-form" data-form-id={formName}>
 					<input

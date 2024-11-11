@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		const honeypot = form.querySelector('input[name="asite"]');
 
 		if (!submitBtn || !successMsg || !errorMsg) {
-			console.log('Required form elements not found');
+			console.error('Required form elements not found');
 			return;
 		}
 
@@ -59,21 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			// Get form settings from wrapper div
 			const formWrapper = form.closest('.blockons-cf-wrap');
 			if (!formWrapper) {
-				console.log('Form wrapper not found');
+				console.error('Form wrapper not found');
 				return;
 			}
-
-			const formSettings = {
-				emailTo: formWrapper.dataset.emailTo,
-				emailSubject: formWrapper.dataset.emailSubject,
-				fromEmail: formWrapper.dataset.fromEmail,
-				fromName: formWrapper.dataset.fromName,
-				replyToEmail: formWrapper.dataset.replyToEmail,
-				ccEmails: formWrapper.dataset.ccEmails,
-				bccEmails: formWrapper.dataset.bccEmails,
-				includeMetadata: formWrapper.dataset.includeMetadata === 'true',
-				formId: form.dataset.formId,
-			};
 
 			// Collect form fields (excluding honeypot and hidden fields)
 			const fields = [];
@@ -86,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			// Reset previous error states
 			form.querySelectorAll('.field-error').forEach((el) => el.remove());
 
+			// Collect and validate form fields
 			inputs.forEach((input) => {
 				const fieldWrapper = input.closest('.form-field');
 				const field = {
@@ -106,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function () {
 						field.type === 'select' ||
 						field.type === 'select-one'
 					) {
-						// For select elements, check if a real option is selected
 						const selectedOption =
 							input.options[input.selectedIndex];
 						const isValidSelection =
@@ -121,14 +109,13 @@ document.addEventListener('DOMContentLoaded', function () {
 							if (!firstErrorField) firstErrorField = input;
 						}
 					} else if (!field.value.trim()) {
-						// For all other inputs
 						hasErrors = true;
 						showFieldError(input, 'This field is required');
 						if (!firstErrorField) firstErrorField = input;
 					}
 				}
 
-				// Additional type-specific validation for non-empty fields
+				// Type-specific validation
 				if (field.value.trim()) {
 					switch (field.type) {
 						case 'email':
@@ -146,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
 								hasErrors = true;
 								showFieldError(
 									input,
-									'Please enter a valid URL (must start with http:// or https://)',
+									'Please enter a valid URL',
 								);
 								if (!firstErrorField) firstErrorField = input;
 							}
@@ -169,7 +156,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			if (hasErrors) {
 				errorMsg.style.display = 'block';
-				// Scroll to the first error field instead of the error message
 				if (firstErrorField) {
 					firstErrorField.scrollIntoView({
 						behavior: 'smooth',
@@ -179,25 +165,46 @@ document.addEventListener('DOMContentLoaded', function () {
 				return;
 			}
 
+			// Find the email and name fields
+			const fromEmail =
+				fields.find((field) => field.type === 'email')?.value || '';
+			const fromName =
+				fields.find(
+					(field) =>
+						field.type === 'text' &&
+						(field.name.toLowerCase().includes('name') ||
+							field.label.toLowerCase().includes('name')),
+				)?.value || '';
+
+			// Prepare form settings
+			const formSettings = {
+				emailTo: formWrapper.dataset.emailTo || '',
+				emailSubject:
+					formWrapper.dataset.emailSubject ||
+					'New Contact Form Submission',
+				fromEmail: fromEmail, // Use actual email from form
+				fromName: fromName, // Use actual name from form
+				ccEmails: formWrapper.dataset.ccEmails || '',
+				bccEmails: formWrapper.dataset.bccEmails || '',
+				includeMetadata: formWrapper.dataset.includeMetadata === 'true',
+				formId: form.dataset.formId || '',
+			};
+
 			// Disable submit button and show loading state
 			submitBtn.disabled = true;
 			submitBtn.textContent = 'Sending...';
 
 			try {
-				// Get reCAPTCHA token only if enabled
+				// Get reCAPTCHA token if enabled
 				let recaptchaToken = '';
-				if (recaptchaEnabled && recaptchaSiteKey) {
+				if (recaptchaEnabled && recaptchaSiteKey && window.grecaptcha) {
 					try {
-						if (window.grecaptcha) {
-							recaptchaToken = await grecaptcha.execute(
-								recaptchaSiteKey,
-								{
-									action: 'submit',
-								},
-							);
-						} else {
-							console.warn('reCAPTCHA script not loaded');
-						}
+						recaptchaToken = await grecaptcha.execute(
+							recaptchaSiteKey,
+							{
+								action: 'submit',
+							},
+						);
 					} catch (recaptchaError) {
 						console.error('reCAPTCHA error:', recaptchaError);
 					}
@@ -210,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					...(recaptchaToken && { recaptchaToken }),
 				};
 
-				console.log('Submitting form data:', formData);
+				console.log('Sending form data:', formData);
 
 				const response = await fetch(
 					`${blockonsFormObj.apiUrl}blcns/v1/submit-form`,
@@ -224,7 +231,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				);
 
 				const data = await response.json();
-				console.log('Server response:', data);
 
 				if (response.ok) {
 					// Clear form
@@ -236,12 +242,10 @@ document.addEventListener('DOMContentLoaded', function () {
 						block: 'center',
 					});
 				} else {
-					// Show specific error message from server if available
 					throw new Error(data.message || 'Form submission failed');
 				}
 			} catch (error) {
 				console.error('Form submission error:', error);
-				// Show error message
 				errorMsg.textContent =
 					error.message || 'An error occurred. Please try again.';
 				errorMsg.style.display = 'block';
@@ -258,56 +262,24 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-	const selects = document.querySelectorAll('select');
-	selects.forEach((select) => {
-		select.addEventListener('change', function () {
-			const fieldWrapper = this.closest('.form-field');
-			const errorDiv = fieldWrapper?.querySelector('.field-error');
-
-			// Clear existing error
-			if (errorDiv) {
-				errorDiv.remove();
-				this.setAttribute('aria-invalid', 'false');
-			}
-
-			// Check if valid option is selected
-			if (this.required) {
-				const selectedOption = this.options[this.selectedIndex];
-				const isValidSelection =
-					selectedOption &&
-					selectedOption.value &&
-					selectedOption.value !== '' &&
-					!selectedOption.disabled;
-
-				if (!isValidSelection) {
-					showFieldError(this, 'Please select an option');
-				}
-			}
-		});
-	});
-});
-
 // Helper functions
 function showFieldError(input, message) {
-	// Remove any existing error first
 	const fieldWrapper = input.closest('.form-field');
 	const existingError = fieldWrapper?.querySelector('.field-error');
 	if (existingError) {
 		existingError.remove();
 	}
 
-	// Create new error message
 	const errorDiv = document.createElement('div');
 	errorDiv.className = 'field-error';
 	errorDiv.textContent = message;
-
-	// Set ARIA attributes
 	errorDiv.setAttribute('role', 'alert');
 	errorDiv.setAttribute('aria-live', 'polite');
 	input.setAttribute('aria-invalid', 'true');
 
-	fieldWrapper?.appendChild(errorDiv);
+	if (fieldWrapper) {
+		fieldWrapper.appendChild(errorDiv);
+	}
 }
 
 function isValidEmail(email) {
@@ -322,40 +294,4 @@ function isValidUrl(url) {
 	} catch {
 		return false;
 	}
-}
-
-function isValidSelectValue(value) {
-	// Add any additional invalid values to this array
-	const invalidValues = ['', 'default', 'select', '-1'];
-	return value && !invalidValues.includes(value.toLowerCase());
-}
-
-// Update the form field validation with more specific select validation
-function validateFormField(input) {
-	const field = {
-		name: input.name || input.id || '',
-		label:
-			input
-				.closest('.form-field')
-				?.querySelector('.form-label')
-				?.textContent.replace('*', '')
-				.trim() || input.name,
-		value: input.value,
-		required: input.required,
-		type: input.type,
-		valid: true,
-		error: '',
-	};
-
-	if (field.required) {
-		if (field.type === 'select-one' && !isValidSelectValue(field.value)) {
-			field.valid = false;
-			field.error = 'Please select an option';
-		} else if (!field.value) {
-			field.valid = false;
-			field.error = 'This field is required';
-		}
-	}
-
-	return field;
 }

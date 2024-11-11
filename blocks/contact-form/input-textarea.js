@@ -16,11 +16,11 @@ registerBlockType('blockons/form-textarea', {
 	attributes: {
 		label: {
 			type: 'string',
-			default: '',
+			default: 'Textarea Label',
 		},
 		placeholder: {
 			type: 'string',
-			default: '',
+			default: 'Placeholder text',
 		},
 		required: {
 			type: 'boolean',

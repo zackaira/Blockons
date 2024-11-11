@@ -46,3 +46,35 @@
 	font-size: 12px;
 	line-height: 1;
 }
+
+.components-text-control__input.has-error {
+	border-color: #cc1818 !important;
+}
+.error-message {
+	color: #cc1818;
+	margin-top: -16px;
+	margin-bottom: 16px;
+	font-size: 12px;
+}
+
+.blockons-shortcode-list {
+	margin: -8px 0 15px;
+}
+.blockons-shortcode-list .blockons-shortcode-btn {
+	background-color: #fff;
+	border: 0;
+	margin: 0 2px 5px;
+	color: #656565;
+	font-size: 13px;
+	letter-spacing: 0.3px;
+	cursor: pointer;
+}
+.blockons-shortcode-list .blockons-shortcode-btn:hover {
+	color: #000;
+}
+.blockons-shortcode-list .blockons-shortcode-btn:first-child {
+	margin-left: 0;
+}
+.blockons-shortcode-list .blockons-shortcode-btn.is-copied {
+	color: #11b411;
+}

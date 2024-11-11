@@ -175,7 +175,10 @@ class Blockons_Form_Submissions {
         // Get all the stored meta data
         $form_data = get_post_meta($post->ID, '_form_data', true);
         $form_id = get_post_meta($post->ID, '_form_id', true);
+        $form_subject = get_post_meta($post->ID, '_form_subject', true);
         $email_to = get_post_meta($post->ID, '_email_to', true);
+        $cc_to = get_post_meta($post->ID, '_cc_to', true);
+        $bcc_to = get_post_meta($post->ID, '_bcc_to', true);
         $submission_date = get_post_meta($post->ID, '_submission_date', true);
         $ip_address = get_post_meta($post->ID, '_ip_address', true);
         $page_url = get_post_meta($post->ID, '_page_url', true);
@@ -220,9 +223,21 @@ class Blockons_Form_Submissions {
 						<th><label><?php esc_html_e('Form Name:', 'blockons'); ?></label></th>
 						<td><?php echo esc_html($form_id); ?></td>
 					</tr>
+                    <tr>
+						<th><label><?php esc_html_e('Form Subject:', 'blockons'); ?></label></th>
+						<td><?php echo esc_html($form_subject); ?></td>
+					</tr>
 					<tr>
 						<th><label><?php esc_html_e('Sent To:', 'blockons'); ?></label></th>
 						<td><?php echo esc_html($email_to); ?></td>
+					</tr>
+                    <tr>
+						<th><label><?php esc_html_e('CC\'d To:', 'blockons'); ?></label></th>
+						<td><?php echo esc_html($cc_to); ?></td>
+					</tr>
+                    <tr>
+						<th><label><?php esc_html_e('BCC\'d To:', 'blockons'); ?></label></th>
+						<td><?php echo esc_html($bcc_to); ?></td>
 					</tr>
 					<tr>
 						<th><label><?php esc_html_e('Page URL:', 'blockons'); ?></label></th>

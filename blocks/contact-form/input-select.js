@@ -1,4 +1,6 @@
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useEffect } from '@wordpress/element';
+import { useSelect, dispatch, select } from '@wordpress/data';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 import {
@@ -34,7 +36,7 @@ registerBlockType('blockons/form-select', {
 		},
 		options: {
 			type: 'array',
-			default: [],
+			default: [{ value: 'option-1', label: 'Option 1' }],
 		},
 		rowSpacing: {
 			type: 'number',
@@ -113,6 +115,7 @@ registerBlockType('blockons/form-select', {
 				inputBorderRadius,
 			},
 			setAttributes,
+			clientId,
 		} = props;
 
 		const blockProps = useBlockProps({
@@ -178,6 +181,40 @@ registerBlockType('blockons/form-select', {
 			style: inputStyles,
 			disabled: !options.length,
 		};
+
+		// Get parent block's clientId
+		const parentClientId = useSelect((select) => {
+			const { getBlockParents } = select('core/block-editor');
+			const parents = getBlockParents(clientId);
+			return parents[0];
+		}, []);
+
+		// Update parent's shortcodes when this block's label changes
+		useEffect(() => {
+			if (parentClientId) {
+				const parentBlock =
+					select('core/block-editor').getBlock(parentClientId);
+				if (parentBlock) {
+					const { updateBlockAttributes } =
+						dispatch('core/block-editor');
+					updateBlockAttributes(parentClientId, {
+						availableShortcodes: [
+							...parentBlock.attributes.availableShortcodes.filter(
+								(s) => s.fieldId !== clientId,
+							),
+							{
+								code: label
+									.toLowerCase()
+									.replace(/[^a-z0-9]/g, '_'),
+								label,
+								type: 'select',
+								fieldId: clientId,
+							},
+						],
+					});
+				}
+			}
+		}, [label]);
 
 		return (
 			<div {...blockProps}>

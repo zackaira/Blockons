@@ -1,4 +1,6 @@
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useEffect } from '@wordpress/element';
+import { useSelect, dispatch, select } from '@wordpress/data';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 import {
@@ -41,11 +43,11 @@ registerBlockType('blockons/form-text-input', {
 	attributes: {
 		label: {
 			type: 'string',
-			default: '',
+			default: 'Input Label',
 		},
 		placeholder: {
 			type: 'string',
-			default: '',
+			default: 'Placeholder text',
 		},
 		required: {
 			type: 'boolean',
@@ -132,6 +134,7 @@ registerBlockType('blockons/form-text-input', {
 				inputBorderRadius,
 			},
 			setAttributes,
+			clientId,
 		} = props;
 
 		const blockProps = useBlockProps({
@@ -181,6 +184,40 @@ registerBlockType('blockons/form-text-input', {
 			pattern: getInputPattern(inputType),
 			disabled: isSelected,
 		};
+
+		// Get parent block's clientId
+		const parentClientId = useSelect((select) => {
+			const { getBlockParents } = select('core/block-editor');
+			const parents = getBlockParents(clientId);
+			return parents[0];
+		}, []);
+
+		// Update parent's shortcodes when this block's label or type changes
+		useEffect(() => {
+			if (parentClientId && ['text', 'email'].includes(inputType)) {
+				const parentBlock =
+					select('core/block-editor').getBlock(parentClientId);
+				if (parentBlock) {
+					const { updateBlockAttributes } =
+						dispatch('core/block-editor');
+					updateBlockAttributes(parentClientId, {
+						availableShortcodes: [
+							...parentBlock.attributes.availableShortcodes.filter(
+								(s) => s.fieldId !== clientId,
+							),
+							{
+								code: label
+									.toLowerCase()
+									.replace(/[^a-z0-9]/g, '_'),
+								label,
+								type: inputType,
+								fieldId: clientId,
+							},
+						],
+					});
+				}
+			}
+		}, [label, inputType]);
 
 		return (
 			<div {...blockProps}>

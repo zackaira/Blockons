@@ -16,6 +16,14 @@
 			"type": "boolean",
 			"default": false
 		},
+		"emailForm": {
+			"type": "boolean",
+			"default": false
+		},
+		"newsletterSignup": {
+			"type": "boolean",
+			"default": false
+		},
 		"formWidth": {
 			"type": "number",
 			"default": "400px"
@@ -30,7 +38,7 @@
 		},
 		"formName": {
 			"type": "string",
-			"default": "Contact Form"
+			"default": "New Website Form"
 		},
 		"emailTo": {
 			"type": "string",
@@ -45,10 +53,6 @@
 			"default": ""
 		},
 		"fromName": {
-			"type": "string",
-			"default": ""
-		},
-		"replyToEmail": {
 			"type": "string",
 			"default": ""
 		},
@@ -136,17 +140,22 @@
 			"type": "string",
 			"default": "#FFF"
 		},
-		"useRecaptcha": {
-			"type": "boolean",
-			"default": false
-		},
-		"recaptchaSiteKey": {
-			"type": "string",
-			"default": ""
-		},
-		"recaptchaSecretKey": {
-			"type": "string",
-			"default": ""
+		"availableShortcodes": {
+			"type": "array",
+			"default": [
+				{ "code": "form_name", "label": "Form Name", "type": "system" },
+				{
+					"code": "submission_date",
+					"label": "Submission Date",
+					"type": "system"
+				},
+				{
+					"code": "submission_time",
+					"label": "Submission Time",
+					"type": "system"
+				},
+				{ "code": "page_url", "label": "Page URL", "type": "system" }
+			]
 		}
 	},
 	"editorScript": "file:./index.js",
