@@ -1,5 +1,5 @@
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import { useSelect, dispatch, select } from '@wordpress/data';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -10,30 +10,52 @@ import {
 	SelectControl,
 } from '@wordpress/components';
 
+// Constants
 const INPUT_TYPES = [
-	{ label: 'Text', value: 'text' },
-	{ label: 'Email', value: 'email' },
-	{ label: 'Number', value: 'number' },
-	{ label: 'URL', value: 'url' },
+	{ label: __('Text', 'blockons'), value: 'text' },
+	{ label: __('Email', 'blockons'), value: 'email' },
+	{ label: __('Number', 'blockons'), value: 'number' },
+	{ label: __('URL', 'blockons'), value: 'url' },
 ];
 
+const WIDTH_OPTIONS = [
+	{ label: '100%', value: '100' },
+	{ label: '80%', value: '80' },
+	{ label: '75%', value: '75' },
+	{ label: '50%', value: '50' },
+	{ label: '25%', value: '25' },
+	{ label: '20%', value: '20' },
+];
+
+// Utility functions
 const getInputPattern = (type) => {
 	switch (type) {
 		case 'email':
-			// Simpler, valid pattern for HTML5 email validation
-			return '[^@]+@[^@]+\\.[^@]+';
+			return '[^@\\s]+@[^@\\s]+\\.[^@\\s]+';
 		case 'url':
-			// Simpler, valid pattern for HTML5 URL validation
 			return 'https?:\\/\\/.+';
+		case 'number':
+			return '[0-9]*';
 		default:
 			return undefined;
 	}
 };
 
-const getFieldClasses = (baseClass, required) => {
-	return [baseClass, required ? 'required-field' : '', 'form-control']
+const getFieldClasses = (baseClass, required, width) => {
+	return [
+		baseClass,
+		required ? 'required-field' : '',
+		'form-control',
+		`col-${width}`,
+	]
 		.filter(Boolean)
 		.join(' ');
+};
+
+const generateInputId = (label) => {
+	return label
+		? `form-input-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`
+		: `form-input-${Math.random().toString(36).substring(7)}`;
 };
 
 registerBlockType('blockons/form-text-input', {
@@ -43,11 +65,11 @@ registerBlockType('blockons/form-text-input', {
 	attributes: {
 		label: {
 			type: 'string',
-			default: 'Input Label',
+			default: __('Input Label', 'blockons'),
 		},
 		placeholder: {
 			type: 'string',
-			default: 'Placeholder text',
+			default: __('Placeholder text', 'blockons'),
 		},
 		required: {
 			type: 'boolean',
@@ -120,114 +142,139 @@ registerBlockType('blockons/form-text-input', {
 	},
 
 	edit: (props) => {
+		const { isSelected, attributes, setAttributes, clientId } = props;
+
 		const {
-			isSelected,
-			attributes: {
-				label,
-				placeholder,
+			label,
+			placeholder,
+			required,
+			inputType,
+			width,
+			columnSpacing,
+			rowSpacing,
+			showLabels,
+			labelSize,
+			labelSpacing,
+			labelColor,
+			inputSize,
+			inputPadHoriz,
+			inputPadVert,
+			inputBgColor,
+			inputTextColor,
+			inputBorder,
+			inputBorderColor,
+			inputBorderRadius,
+		} = attributes;
+
+		// Memoized values
+		const blockProps = useBlockProps({
+			className: getFieldClasses(
+				'blockons-form-text-input',
 				required,
-				inputType,
 				width,
-				columnSpacing,
-				rowSpacing,
-				showLabels,
-				labelSize,
-				labelSpacing,
-				labelColor,
+			),
+		});
+
+		const inputId = useMemo(() => generateInputId(label), [label]);
+		const errorMessageId = `${inputId}-error`;
+
+		const inputStyles = useMemo(
+			() => ({
+				fontSize: `${inputSize}px`,
+				padding: `${inputPadVert}px ${inputPadHoriz}px`,
+				backgroundColor: inputBgColor,
+				color: inputTextColor,
+				...(inputBorder
+					? {
+							border: `1px solid ${inputBorderColor}`,
+							borderRadius: `${inputBorderRadius}px`,
+						}
+					: {
+							border: '0',
+						}),
+			}),
+			[
 				inputSize,
-				inputPadHoriz,
 				inputPadVert,
+				inputPadHoriz,
 				inputBgColor,
 				inputTextColor,
 				inputBorder,
 				inputBorderColor,
 				inputBorderRadius,
-			},
-			setAttributes,
-			clientId,
-		} = props;
+			],
+		);
 
-		const blockProps = useBlockProps({
-			className: `blockons-form-text-input col-${width}`,
-		});
+		const labelStyles = useMemo(
+			() => ({
+				color: labelColor,
+				fontSize: `${labelSize}px`,
+				marginBottom: `${labelSpacing}px`,
+				display: showLabels ? 'block' : 'none',
+			}),
+			[labelColor, labelSize, labelSpacing, showLabels],
+		);
 
-		const inputId = label
-			? `form-input-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`
-			: `form-input-${Math.random().toString(36).substring(7)}`;
+		const commonProps = useMemo(
+			() => ({
+				id: inputId,
+				name: inputId,
+				type: inputType,
+				placeholder,
+				required,
+				'aria-required': required,
+				'aria-label': label,
+				'aria-invalid': false,
+				'aria-describedby': errorMessageId,
+				className: getFieldClasses('form-input', required, width),
+				style: inputStyles,
+				pattern: getInputPattern(inputType),
+				disabled: isSelected,
+			}),
+			[
+				inputId,
+				inputType,
+				placeholder,
+				required,
+				label,
+				errorMessageId,
+				inputStyles,
+				isSelected,
+				width,
+			],
+		);
 
-		const errorMessageId = `${inputId}-error`;
-
-		const inputStyles = {
-			fontSize: `${inputSize}px`,
-			padding: `${inputPadVert}px ${inputPadHoriz}px`,
-			backgroundColor: inputBgColor,
-			color: inputTextColor,
-			...(inputBorder
-				? {
-						border: `1px solid ${inputBorderColor}`,
-						borderRadius: `${inputBorderRadius}px`,
-					}
-				: {
-						border: '0',
-					}),
-		};
-
-		const labelStyles = {
-			color: labelColor,
-			fontSize: `${labelSize}px`,
-			marginBottom: `${labelSpacing}px`,
-			display: showLabels ? 'block' : 'none',
-		};
-
-		const commonProps = {
-			id: inputId,
-			name: inputId,
-			type: inputType,
-			placeholder,
-			required,
-			'aria-required': required,
-			'aria-label': label,
-			'aria-invalid': false,
-			'aria-describedby': errorMessageId,
-			className: getFieldClasses('form-input', required),
-			style: inputStyles,
-			pattern: getInputPattern(inputType),
-			disabled: isSelected,
-		};
-
-		// Get parent block's clientId
+		// Parent block updates
 		const parentClientId = useSelect((select) => {
 			const { getBlockParents } = select('core/block-editor');
 			const parents = getBlockParents(clientId);
 			return parents[0];
 		}, []);
 
-		// Update parent's shortcodes when this block's label or type changes
 		useEffect(() => {
-			if (parentClientId && ['text', 'email'].includes(inputType)) {
-				const parentBlock =
-					select('core/block-editor').getBlock(parentClientId);
-				if (parentBlock) {
-					const { updateBlockAttributes } =
-						dispatch('core/block-editor');
-					updateBlockAttributes(parentClientId, {
-						availableShortcodes: [
-							...parentBlock.attributes.availableShortcodes.filter(
-								(s) => s.fieldId !== clientId,
-							),
-							{
-								code: label
-									.toLowerCase()
-									.replace(/[^a-z0-9]/g, '_'),
-								label,
-								type: inputType,
-								fieldId: clientId,
-							},
-						],
-					});
-				}
-			}
-		}, [label, inputType]);
+			if (!parentClientId || !['text', 'email'].includes(inputType))
+				return;
+
+			const parentBlock =
+				select('core/block-editor').getBlock(parentClientId);
+			if (!parentBlock) return;
+
+			const { updateBlockAttributes } = dispatch('core/block-editor');
+			const code = label.toLowerCase().replace(/[^a-z0-9]/g, '_');
+
+			const existingShortcodes =
+				parentBlock.attributes.availableShortcodes || [];
+			const filteredShortcodes = existingShortcodes.filter(
+				(s) => s.fieldId !== clientId,
+			);
+
+			updateBlockAttributes(parentClientId, {
+				availableShortcodes: [
+					...filteredShortcodes,
+					{ code, label, type: inputType, fieldId: clientId },
+				],
+			});
+		}, [label, inputType, parentClientId]);
 
 		return (
 			<div {...blockProps}>
@@ -245,7 +292,7 @@ registerBlockType('blockons/form-text-input', {
 									setAttributes({ inputType: value })
 								}
 							/>
-							<div className="blockons-divider"></div>
+							<div className="blockons-divider" />
 
 							<TextControl
 								label={__('Label', 'blockons')}
@@ -261,7 +308,7 @@ registerBlockType('blockons/form-text-input', {
 									setAttributes({ placeholder: value })
 								}
 							/>
-							<div className="blockons-divider"></div>
+							<div className="blockons-divider" />
 
 							<ToggleControl
 								label={__('Required', 'blockons')}
@@ -270,19 +317,12 @@ registerBlockType('blockons/form-text-input', {
 									setAttributes({ required: value })
 								}
 							/>
-							<div className="blockons-divider"></div>
+							<div className="blockons-divider" />
 
 							<SelectControl
 								label={__('Width', 'blockons')}
 								value={width}
-								options={[
-									{ label: '100%', value: '100' },
-									{ label: '80%', value: '80' },
-									{ label: '75%', value: '75' },
-									{ label: '50%', value: '50' },
-									{ label: '25%', value: '25' },
-									{ label: '20%', value: '20' },
-								]}
+								options={WIDTH_OPTIONS}
 								onChange={(value) =>
 									setAttributes({ width: value })
 								}
@@ -319,7 +359,7 @@ registerBlockType('blockons/form-text-input', {
 						className="field-error"
 						role="alert"
 						aria-live="polite"
-					></div>
+					/>
 				</div>
 			</div>
 		);
@@ -331,6 +371,7 @@ registerBlockType('blockons/form-text-input', {
 			placeholder,
 			required,
 			inputType,
+			width,
 			columnSpacing,
 			rowSpacing,
 			showLabels,
@@ -348,13 +389,14 @@ registerBlockType('blockons/form-text-input', {
 		} = attributes;
 
 		const blockProps = useBlockProps.save({
-			className: `blockons-form-text-input`,
+			className: getFieldClasses(
+				'blockons-form-text-input',
+				required,
+				width,
+			),
 		});
 
-		const inputId = label
-			? `form-input-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`
-			: `form-input-${Math.random().toString(36).substring(7)}`;
-
+		const inputId = generateInputId(label);
 		const errorMessageId = `${inputId}-error`;
 
 		const inputStyles = {
@@ -383,13 +425,13 @@ registerBlockType('blockons/form-text-input', {
 			id: inputId,
 			name: inputId,
 			type: inputType,
-			placeholder,
+			placeholder: placeholder,
 			required,
 			'aria-required': required,
 			'aria-label': label,
 			'aria-invalid': false,
 			'aria-describedby': errorMessageId,
-			className: getFieldClasses('form-input', required),
+			className: getFieldClasses('form-input', required, width),
 			style: inputStyles,
 			pattern: getInputPattern(inputType),
 		};
@@ -424,7 +466,7 @@ registerBlockType('blockons/form-text-input', {
 						className="field-error"
 						role="alert"
 						aria-live="polite"
-					></div>
+					/>
 				</div>
 			</div>
 		);

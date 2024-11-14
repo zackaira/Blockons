@@ -2,10 +2,11 @@
  * Note that these styles are loaded *after* common styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
+.blockons-contact-form .blockons-cf-fields {
+	display: block;
+}
 .blockons-contact-form .blockons-cf-fields .block-editor-inner-blocks {
 	flex: 1;
-}
-.blockons-contact-form .blockons-cf-fields > .block-editor-inner-blocks {
 }
 .blockons-contact-form
 	.blockons-cf-fields
@@ -53,14 +54,12 @@
 	width: 100%;
 }
 /* - Cols - */
-.blockons-contact-form
-	.blockons-cf-wrap
-	.blockons-cf-fields
-	.block-list-appender.wp-block {
+.blockons-contact-form .blockons-cf-fields .block-list-appender.wp-block {
 	position: relative;
 	display: flex;
-	justify-content: flex-end;
-	margin: 5px 0 -12px;
+	justify-content: center;
+	margin: -5px 4px 10px;
+	width: 100%;
 }
 .blockons-contact-form .blockons-cf--button .blockons-cf-submit-btn {
 	pointer-events: none;
@@ -72,7 +71,7 @@
 .blockons-contact-form
 	.blockons-cf-fields
 	.form-field
-	input.form-textarea::placeholder {
+	textarea.form-textarea::placeholder {
 	color: inherit;
 }
 
@@ -123,4 +122,20 @@
 }
 .blockons-shortcode-list .blockons-shortcode-btn.is-copied {
 	color: #11b411;
+}
+.blockons-shortcode-list label.components-base-control__label {
+	font-size: 11px;
+	font-weight: 500;
+	line-height: 1.4;
+	text-transform: uppercase;
+	display: inline-block;
+	margin-bottom: calc(8px);
+	padding: 0px;
+}
+.blockons-shortcode-list .components-base-control__help {
+	margin-top: 14px;
+	font-size: 12px;
+	font-style: normal;
+	color: rgb(117, 117, 117);
+	margin-bottom: revert;
 }

@@ -7,6 +7,7 @@ import {
 	TextControl,
 	ToggleControl,
 	SelectControl,
+	RangeControl,
 } from '@wordpress/components';
 
 // Constants
@@ -19,10 +20,27 @@ const WIDTH_OPTIONS = [
 	{ label: '20%', value: '20' },
 ];
 
-const DEFAULT_MIN_HEIGHT = '120px';
-const MIN_ROWS = 2;
-const MAX_ROWS = 20;
-const MIN_LENGTH = 3;
+const FILE_TYPES = {
+	documents: {
+		label: __('Documents', 'blockons'),
+		types: '.pdf,.doc,.docx,.txt',
+		description: __('Accepted formats: PDF, DOC, TXT', 'blockons'),
+	},
+	images: {
+		label: __('Images', 'blockons'),
+		types: '.jpg,.jpeg,.png,.gif',
+		description: __('Accepted formats: JPG, PNG, GIF', 'blockons'),
+	},
+	media: {
+		label: __('Media', 'blockons'),
+		types: '.jpg,.jpeg,.png,.gif,.webp,.mp4,.mp3,.wav',
+		description: __('Accepted formats: Images, MP4, MP3, WAV', 'blockons'),
+	},
+};
+
+const MIN_FILE_SIZE = 1; // MB
+const MAX_FILE_SIZE = 50; // MB
+const DEFAULT_FILE_SIZE = 2; // MB
 
 // Utility functions
 const getFieldClasses = (baseClass, required, width) => {
@@ -36,36 +54,39 @@ const getFieldClasses = (baseClass, required, width) => {
 		.join(' ');
 };
 
-const generateTextareaId = (label) => {
+const generateFileId = (label) => {
 	return label
-		? `form-textarea-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`
-		: `form-textarea-${Math.random().toString(36).substring(7)}`;
+		? `form-file-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`
+		: `form-file-${Math.random().toString(36).substring(7)}`;
 };
 
-registerBlockType('blockons/form-textarea', {
-	title: __('Form Textarea', 'blockons'),
-	icon: 'text',
+const bytesToMB = (bytes) => bytes / (1024 * 1024);
+const mbToBytes = (mb) => mb * 1024 * 1024;
+
+registerBlockType('blockons/form-file-upload', {
+	title: __('Form File Upload', 'blockons'),
+	icon: 'upload',
 	parent: ['blockons/contact-form'],
 	attributes: {
 		label: {
 			type: 'string',
-			default: __('Textarea Label', 'blockons'),
-		},
-		placeholder: {
-			type: 'string',
-			default: __('Placeholder text', 'blockons'),
+			default: __('Upload File', 'blockons'),
 		},
 		required: {
 			type: 'boolean',
 			default: false,
 		},
+		maxFileSize: {
+			type: 'number',
+			default: DEFAULT_FILE_SIZE,
+		},
+		fileTypeOption: {
+			type: 'string',
+			default: 'documents',
+		},
 		width: {
 			type: 'string',
 			default: '100',
-		},
-		rows: {
-			type: 'number',
-			default: 4,
 		},
 		columnSpacing: {
 			type: 'number',
@@ -95,33 +116,9 @@ registerBlockType('blockons/form-textarea', {
 			type: 'number',
 			default: 15,
 		},
-		inputPadHoriz: {
-			type: 'number',
-			default: 15,
-		},
-		inputPadVert: {
-			type: 'number',
-			default: 8,
-		},
-		inputBgColor: {
-			type: 'string',
-			default: '#f9f9f9',
-		},
 		inputTextColor: {
 			type: 'string',
 			default: '#333',
-		},
-		inputBorder: {
-			type: 'boolean',
-			default: true,
-		},
-		inputBorderColor: {
-			type: 'string',
-			default: '#dbdbdb',
-		},
-		inputBorderRadius: {
-			type: 'number',
-			default: 4,
 		},
 	},
 
@@ -130,9 +127,9 @@ registerBlockType('blockons/form-textarea', {
 
 		const {
 			label,
-			placeholder,
 			required,
-			rows,
+			maxFileSize,
+			fileTypeOption,
 			width,
 			columnSpacing,
 			rowSpacing,
@@ -141,55 +138,19 @@ registerBlockType('blockons/form-textarea', {
 			labelSpacing,
 			labelColor,
 			inputSize,
-			inputPadHoriz,
-			inputPadVert,
-			inputBgColor,
 			inputTextColor,
-			inputBorder,
-			inputBorderColor,
-			inputBorderRadius,
 		} = attributes;
 
-		// Memoized values
 		const blockProps = useBlockProps({
 			className: getFieldClasses(
-				'blockons-form-textarea',
+				'blockons-form-file-upload',
 				required,
 				width,
 			),
 		});
 
-		const inputId = useMemo(() => generateTextareaId(label), [label]);
+		const inputId = useMemo(() => generateFileId(label), [label]);
 		const errorMessageId = `${inputId}-error`;
-
-		const inputStyles = useMemo(
-			() => ({
-				fontSize: `${inputSize}px`,
-				padding: `${inputPadVert}px ${inputPadHoriz}px`,
-				backgroundColor: inputBgColor,
-				color: inputTextColor,
-				minHeight: DEFAULT_MIN_HEIGHT,
-				resize: 'vertical',
-				...(inputBorder
-					? {
-							border: `1px solid ${inputBorderColor}`,
-							borderRadius: `${inputBorderRadius}px`,
-						}
-					: {
-							border: '0',
-						}),
-			}),
-			[
-				inputSize,
-				inputPadVert,
-				inputPadHoriz,
-				inputBgColor,
-				inputTextColor,
-				inputBorder,
-				inputBorderColor,
-				inputBorderRadius,
-			],
-		);
 
 		const labelStyles = useMemo(
 			() => ({
@@ -201,48 +162,49 @@ registerBlockType('blockons/form-textarea', {
 			[labelColor, labelSize, labelSpacing, showLabels],
 		);
 
+		const selectedFileType = useMemo(
+			() => FILE_TYPES[fileTypeOption] || FILE_TYPES.documents,
+			[fileTypeOption],
+		);
+
 		const commonProps = useMemo(
 			() => ({
 				id: inputId,
 				name: inputId,
-				rows,
-				placeholder,
+				type: 'file',
 				required,
+				multiple: false,
+				accept: selectedFileType.types,
 				'aria-required': required,
 				'aria-label': label,
 				'aria-invalid': false,
 				'aria-describedby': errorMessageId,
-				className: getFieldClasses('form-textarea', required, width),
-				style: inputStyles,
-				minLength: MIN_LENGTH,
-				spellCheck: 'true',
+				className: getFieldClasses('form-file-upload', required, width),
 				disabled: isSelected,
+				style: {
+					fontSize: `${inputSize}px`,
+					color: inputTextColor,
+				},
 			}),
 			[
 				inputId,
-				rows,
-				placeholder,
 				required,
+				selectedFileType.types,
 				label,
 				errorMessageId,
 				width,
-				inputStyles,
 				isSelected,
+				inputSize,
+				inputTextColor,
 			],
 		);
-
-		const fieldWrapperStyles = {
-			marginBottom: `${rowSpacing}px`,
-			padding: `0 ${columnSpacing}px`,
-			position: 'relative',
-		};
 
 		return (
 			<div {...blockProps}>
 				{isSelected && (
 					<InspectorControls>
 						<PanelBody
-							title={__('Textarea Settings', 'blockons')}
+							title={__('File Upload Settings', 'blockons')}
 							initialOpen={true}
 						>
 							<TextControl
@@ -252,25 +214,6 @@ registerBlockType('blockons/form-textarea', {
 									setAttributes({ label: value })
 								}
 							/>
-							<TextControl
-								label={__('Placeholder', 'blockons')}
-								value={placeholder}
-								onChange={(value) =>
-									setAttributes({ placeholder: value })
-								}
-							/>
-							<div className="blockons-divider" />
-
-							<TextControl
-								type="number"
-								label={__('Rows', 'blockons')}
-								value={rows}
-								onChange={(value) =>
-									setAttributes({ rows: parseInt(value) })
-								}
-								min={MIN_ROWS}
-								max={MAX_ROWS}
-							/>
 							<div className="blockons-divider" />
 
 							<ToggleControl
@@ -279,6 +222,36 @@ registerBlockType('blockons/form-textarea', {
 								onChange={(value) =>
 									setAttributes({ required: value })
 								}
+							/>
+							<div className="blockons-divider" />
+
+							<SelectControl
+								label={__('Accepted File Types', 'blockons')}
+								value={fileTypeOption}
+								options={Object.entries(FILE_TYPES).map(
+									([value, type]) => ({
+										value,
+										label: type.label,
+									}),
+								)}
+								onChange={(value) =>
+									setAttributes({ fileTypeOption: value })
+								}
+							/>
+							<div className="blockons-divider" />
+
+							<RangeControl
+								label={__('Maximum File Size (MB)', 'blockons')}
+								value={maxFileSize}
+								onChange={(value) =>
+									setAttributes({ maxFileSize: value })
+								}
+								min={MIN_FILE_SIZE}
+								max={MAX_FILE_SIZE}
+								help={__(
+									'Please ensure server configurations allow uploads to this limit.',
+									'blockons',
+								)}
 							/>
 							<div className="blockons-divider" />
 
@@ -294,22 +267,33 @@ registerBlockType('blockons/form-textarea', {
 					</InspectorControls>
 				)}
 
-				<div className="form-field" style={fieldWrapperStyles}>
-					{label && (
-						<label
-							className="form-label"
-							htmlFor={inputId}
-							style={labelStyles}
-						>
-							{label}
-							{required && (
-								<span className="required" aria-hidden="true">
-									*
-								</span>
-							)}
-						</label>
-					)}
-					<textarea {...commonProps} />
+				<div
+					className="form-field"
+					style={{
+						marginBottom: `${rowSpacing}px`,
+						padding: `0 ${columnSpacing}px`,
+						position: 'relative',
+					}}
+				>
+					<label
+						className="form-label"
+						htmlFor={inputId}
+						style={labelStyles}
+					>
+						{label}
+						{required && (
+							<span className="required" aria-hidden="true">
+								*
+							</span>
+						)}
+					</label>
+					<div className="file-upload-wrapper">
+						<input {...commonProps} />
+						<div className="file-description">
+							{selectedFileType.description}
+							{` - ${maxFileSize}MB limit`}
+						</div>
+					</div>
 					<div
 						id={errorMessageId}
 						className="field-error"
@@ -324,9 +308,9 @@ registerBlockType('blockons/form-textarea', {
 	save: ({ attributes }) => {
 		const {
 			label,
-			placeholder,
 			required,
-			rows,
+			maxFileSize,
+			fileTypeOption,
 			width,
 			columnSpacing,
 			rowSpacing,
@@ -335,42 +319,21 @@ registerBlockType('blockons/form-textarea', {
 			labelSpacing,
 			labelColor,
 			inputSize,
-			inputPadHoriz,
-			inputPadVert,
-			inputBgColor,
 			inputTextColor,
-			inputBorder,
-			inputBorderColor,
-			inputBorderRadius,
 		} = attributes;
 
 		const blockProps = useBlockProps.save({
 			className: getFieldClasses(
-				'blockons-form-textarea',
+				'blockons-form-file-upload',
 				required,
 				width,
 			),
 		});
 
-		const inputId = generateTextareaId(label);
+		const inputId = generateFileId(label);
 		const errorMessageId = `${inputId}-error`;
-
-		const inputStyles = {
-			fontSize: `${inputSize}px`,
-			padding: `${inputPadVert}px ${inputPadHoriz}px`,
-			backgroundColor: inputBgColor,
-			color: inputTextColor,
-			minHeight: DEFAULT_MIN_HEIGHT,
-			resize: 'vertical',
-			...(inputBorder
-				? {
-						border: `1px solid ${inputBorderColor}`,
-						borderRadius: `${inputBorderRadius}px`,
-					}
-				: {
-						border: '0',
-					}),
-		};
+		const selectedFileType =
+			FILE_TYPES[fileTypeOption] || FILE_TYPES.documents;
 
 		const labelStyles = {
 			color: labelColor,
@@ -382,43 +345,52 @@ registerBlockType('blockons/form-textarea', {
 		const commonProps = {
 			id: inputId,
 			name: inputId,
-			rows,
-			placeholder,
+			type: 'file',
 			required,
+			multiple: false,
+			accept: selectedFileType.types,
 			'aria-required': required,
 			'aria-label': label,
 			'aria-invalid': false,
 			'aria-describedby': errorMessageId,
-			className: getFieldClasses('form-textarea', required, width),
-			style: inputStyles,
-			minLength: MIN_LENGTH,
-			spellCheck: 'true',
-		};
-
-		const fieldWrapperStyles = {
-			marginBottom: `${rowSpacing}px`,
-			padding: `0 ${columnSpacing}px`,
-			position: 'relative',
+			className: getFieldClasses('form-file-upload', required, width),
+			'data-max-size': mbToBytes(maxFileSize),
+			'data-max-files': 1,
+			style: {
+				fontSize: `${inputSize}px`,
+				color: inputTextColor,
+			},
 		};
 
 		return (
 			<div {...blockProps}>
-				<div className="form-field" style={fieldWrapperStyles}>
-					{label && (
-						<label
-							className="form-label"
-							htmlFor={inputId}
-							style={labelStyles}
-						>
-							{label}
-							{required && (
-								<span className="required" aria-hidden="true">
-									*
-								</span>
-							)}
-						</label>
-					)}
-					<textarea {...commonProps} />
+				<div
+					className="form-field"
+					style={{
+						marginBottom: `${rowSpacing}px`,
+						padding: `0 ${columnSpacing}px`,
+						position: 'relative',
+					}}
+				>
+					<label
+						className="form-label"
+						htmlFor={inputId}
+						style={labelStyles}
+					>
+						{label}
+						{required && (
+							<span className="required" aria-hidden="true">
+								*
+							</span>
+						)}
+					</label>
+					<div className="file-upload-wrapper">
+						<input {...commonProps} />
+						<div className="file-description">
+							{selectedFileType.description}
+							{` - Max ${maxFileSize}MB per file`}
+						</div>
+					</div>
 					<div
 						id={errorMessageId}
 						className="field-error"

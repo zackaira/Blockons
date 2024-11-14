@@ -2,12 +2,12 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "blockons/contact-form",
-	"title": "Contact Form",
+	"title": "Email Forms",
 	"category": "blockons-category",
 	"textdomain": "blockons",
-	"keywords": ["contact", "form", "email", "blockons"],
+	"keywords": ["contact", "forms", "email", "blockons"],
 	"icon": "email",
-	"description": "Add a customizable contact form",
+	"description": "Add a customizable form to your website",
 	"supports": {
 		"html": false
 	},

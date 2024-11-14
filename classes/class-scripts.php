@@ -112,6 +112,15 @@ class Blockons {
 			'isPremium' => $isPro,
 			'recaptcha' => isset($blockonsOptions->contactforms->recaptcha) ? (bool)$blockonsOptions->contactforms->recaptcha : false,
     		'recaptcha_key' => isset($blockonsOptions->contactforms->recaptcha_key) ? sanitize_text_field($blockonsOptions->contactforms->recaptcha_key) : null,
+			'translations' => array(
+				'required' => __('This field is required', 'blockons'),
+				'select_option' => __('Please select an option', 'blockons'),
+				'required_url' => __('Please enter a valid URL', 'blockons'),
+				'required_email' => __('Please enter a Email Address', 'blockons'),
+				'required_number' => __('Please enter a valid number', 'blockons'),
+				'subject' => __('New Contact Form Submission', 'blockons'),
+				'error' => __('An error occurred. Please try again.', 'blockons'),
+			),
 		));
 
 		// Progress Bars JS

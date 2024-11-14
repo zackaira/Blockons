@@ -1,5 +1,5 @@
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import { useSelect, dispatch, select } from '@wordpress/data';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -12,10 +12,30 @@ import {
 } from '@wordpress/components';
 import { slugify } from '../block-global';
 
-const getFieldClasses = (baseClass, required) => {
-	return [baseClass, required ? 'required-field' : '', 'form-control']
+const WIDTH_OPTIONS = [
+	{ label: '100%', value: '100' },
+	{ label: '80%', value: '80' },
+	{ label: '75%', value: '75' },
+	{ label: '50%', value: '50' },
+	{ label: '25%', value: '25' },
+	{ label: '20%', value: '20' },
+];
+
+const getFieldClasses = (baseClass, required, width) => {
+	return [
+		baseClass,
+		required ? 'required-field' : '',
+		'form-control',
+		`col-${width}`,
+	]
 		.filter(Boolean)
 		.join(' ');
+};
+
+const generateSelectId = (label) => {
+	return label
+		? `form-select-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`
+		: `form-select-${Math.random().toString(36).substring(7)}`;
 };
 
 registerBlockType('blockons/form-select', {
@@ -25,11 +45,11 @@ registerBlockType('blockons/form-select', {
 	attributes: {
 		label: {
 			type: 'string',
-			default: 'Select Label',
+			default: __('Select Label', 'blockons'),
 		},
 		placeholder: {
 			type: 'string',
-			default: 'Select an option',
+			default: __('Select an option', 'blockons'),
 		},
 		required: {
 			type: 'boolean',
@@ -102,130 +122,149 @@ registerBlockType('blockons/form-select', {
 	},
 
 	edit: (props) => {
+		const { isSelected, attributes, setAttributes, clientId } = props;
+
 		const {
-			isSelected,
-			attributes: {
-				label,
-				placeholder,
-				required,
-				options,
-				width,
-				columnSpacing,
-				rowSpacing,
-				showLabels,
-				labelSize,
-				labelSpacing,
-				labelColor,
+			label,
+			placeholder,
+			required,
+			options,
+			width,
+			columnSpacing,
+			rowSpacing,
+			showLabels,
+			labelSize,
+			labelSpacing,
+			labelColor,
+			inputSize,
+			inputPadHoriz,
+			inputPadVert,
+			inputBgColor,
+			inputTextColor,
+			inputBorder,
+			inputBorderColor,
+			inputBorderRadius,
+		} = attributes;
+
+		const blockProps = useBlockProps({
+			className: getFieldClasses('blockons-form-select', required, width),
+		});
+
+		const selectId = useMemo(() => generateSelectId(label), [label]);
+		const errorMessageId = `${selectId}-error`;
+
+		const inputStyles = useMemo(
+			() => ({
+				fontSize: `${inputSize}px`,
+				padding: `${inputPadVert}px ${inputPadHoriz}px`,
+				backgroundColor: inputBgColor,
+				color: inputTextColor,
+				...(inputBorder
+					? {
+							border: `1px solid ${inputBorderColor}`,
+							borderRadius: `${inputBorderRadius}px`,
+						}
+					: {
+							border: '0',
+						}),
+			}),
+			[
 				inputSize,
-				inputPadHoriz,
 				inputPadVert,
+				inputPadHoriz,
 				inputBgColor,
 				inputTextColor,
 				inputBorder,
 				inputBorderColor,
 				inputBorderRadius,
-			},
-			setAttributes,
-			clientId,
-		} = props;
+			],
+		);
 
-		const blockProps = useBlockProps({
-			className: `blockons-form-select col-${width}`,
-		});
-
-		const selectId = label
-			? `form-select-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`
-			: `form-select-${Math.random().toString(36).substring(7)}`;
-
-		const errorMessageId = `${selectId}-error`;
-
-		const inputStyles = {
-			fontSize: `${inputSize}px`,
-			padding: `${inputPadVert}px ${inputPadHoriz}px`,
-			backgroundColor: inputBgColor,
-			color: inputTextColor,
-			...(inputBorder
-				? {
-						border: `1px solid ${inputBorderColor}`,
-						borderRadius: `${inputBorderRadius}px`,
-					}
-				: {
-						border: '0',
-					}),
-		};
-
-		const labelStyles = {
-			color: labelColor,
-			fontSize: `${labelSize}px`,
-			marginBottom: `${labelSpacing}px`,
-			display: showLabels ? 'block' : 'none',
-		};
+		const labelStyles = useMemo(
+			() => ({
+				color: labelColor,
+				fontSize: `${labelSize}px`,
+				marginBottom: `${labelSpacing}px`,
+				display: showLabels ? 'block' : 'none',
+			}),
+			[labelColor, labelSize, labelSpacing, showLabels],
+		);
 
 		const addOption = () => {
-			const newOptions = [...options, { value: '', label: '' }];
-			setAttributes({ options: newOptions });
+			setAttributes({
+				options: [...options, { value: '', label: '' }],
+			});
 		};
 
 		const removeOption = (index) => {
-			const newOptions = options.filter((_, i) => i !== index);
-			setAttributes({ options: newOptions });
+			setAttributes({
+				options: options.filter((_, i) => i !== index),
+			});
 		};
 
-		const updateOption = (index, label) => {
+		const updateOption = (index, newLabel) => {
 			const newOptions = [...options];
 			newOptions[index] = {
-				label: label,
-				value: slugify(label),
+				label: newLabel,
+				value: slugify(newLabel),
 			};
 			setAttributes({ options: newOptions });
 		};
 
-		const commonProps = {
-			id: selectId,
-			name: selectId,
-			required,
-			'aria-required': required,
-			'aria-label': label,
-			'aria-invalid': false,
-			'aria-describedby': errorMessageId,
-			className: getFieldClasses('form-select', required),
-			style: inputStyles,
-			disabled: !options.length,
-		};
-
-		// Get parent block's clientId
 		const parentClientId = useSelect((select) => {
 			const { getBlockParents } = select('core/block-editor');
 			const parents = getBlockParents(clientId);
 			return parents[0];
 		}, []);
 
-		// Update parent's shortcodes when this block's label changes
 		useEffect(() => {
-			if (parentClientId) {
-				const parentBlock =
-					select('core/block-editor').getBlock(parentClientId);
-				if (parentBlock) {
-					const { updateBlockAttributes } =
-						dispatch('core/block-editor');
-					updateBlockAttributes(parentClientId, {
-						availableShortcodes: [
-							...parentBlock.attributes.availableShortcodes.filter(
-								(s) => s.fieldId !== clientId,
-							),
-							{
-								code: label
-									.toLowerCase()
-									.replace(/[^a-z0-9]/g, '_'),
-								label,
-								type: 'select',
-								fieldId: clientId,
-							},
-						],
-					});
-				}
-			}
-		}, [label]);
+			if (!parentClientId) return;
+
+			const parentBlock =
+				select('core/block-editor').getBlock(parentClientId);
+			if (!parentBlock) return;
+
+			const code = label.toLowerCase().replace(/[^a-z0-9]/g, '_');
+			const existingShortcodes =
+				parentBlock.attributes.availableShortcodes || [];
+			const filteredShortcodes = existingShortcodes.filter(
+				(s) => s.fieldId !== clientId,
+			);
+
+			dispatch('core/block-editor').updateBlockAttributes(
+				parentClientId,
+				{
+					availableShortcodes: [
+						...filteredShortcodes,
+						{ code, label, type: 'select', fieldId: clientId },
+					],
+				},
+			);
+		}, [label, parentClientId]);
+
+		const commonProps = useMemo(
+			() => ({
+				id: selectId,
+				name: selectId,
+				required,
+				'aria-required': required,
+				'aria-label': label,
+				'aria-invalid': false,
+				'aria-describedby': errorMessageId,
+				className: getFieldClasses('form-select', required, width),
+				style: inputStyles,
+				disabled: !options.length,
+			}),
+			[
+				selectId,
+				required,
+				label,
+				errorMessageId,
+				width,
+				inputStyles,
+				options.length,
+			],
+		);
 
 		return (
 			<div {...blockProps}>
@@ -249,7 +288,7 @@ registerBlockType('blockons/form-select', {
 									setAttributes({ placeholder: value })
 								}
 							/>
-							<div className="blockons-divider"></div>
+							<div className="blockons-divider" />
 
 							<ToggleControl
 								label={__('Required', 'blockons')}
@@ -258,50 +297,56 @@ registerBlockType('blockons/form-select', {
 									setAttributes({ required: value })
 								}
 							/>
-							<div className="blockons-divider"></div>
+							<div className="blockons-divider" />
 
 							<SelectControl
 								label={__('Width', 'blockons')}
 								value={width}
-								options={[
-									{ label: '100%', value: '100' },
-									{ label: '80%', value: '80' },
-									{ label: '75%', value: '75' },
-									{ label: '50%', value: '50' },
-									{ label: '25%', value: '25' },
-									{ label: '20%', value: '20' },
-								]}
+								options={WIDTH_OPTIONS}
 								onChange={(value) =>
 									setAttributes({ width: value })
 								}
 							/>
-							<div className="blockons-divider"></div>
+							<div className="blockons-divider" />
 
-							{options.map((option, index) => (
-								<div
-									key={index}
-									className="blockons-cf-option-row"
-								>
-									<TextControl
-										label={__('Option Label', 'blockons')}
-										value={option.label}
-										onChange={(value) =>
-											updateOption(index, value)
-										}
-									/>
-									<Button
-										isDestructive
-										onClick={() => removeOption(index)}
-										className="blockons-cf-remove-option"
+							<div className="blockons-cf-options">
+								{options.map((option, index) => (
+									<div
+										key={index}
+										className="blockons-cf-option-row"
 									>
-										X
-									</Button>
-								</div>
-							))}
+										<TextControl
+											label={__(
+												'Option Label',
+												'blockons',
+											)}
+											value={option.label}
+											onChange={(value) =>
+												updateOption(index, value)
+											}
+										/>
+										<Button
+											isDestructive
+											onClick={() => removeOption(index)}
+											className="blockons-cf-remove-option"
+											aria-label={__(
+												'Remove option',
+												'blockons',
+											)}
+										>
+											×
+										</Button>
+									</div>
+								))}
 
-							<Button isPrimary onClick={addOption}>
-								{__('Add Option', 'blockons')}
-							</Button>
+								<Button
+									isPrimary
+									onClick={addOption}
+									className="blockons-cf-add-option"
+								>
+									{__('Add Option', 'blockons')}
+								</Button>
+							</div>
 						</PanelBody>
 					</InspectorControls>
 				)}
@@ -330,12 +375,7 @@ registerBlockType('blockons/form-select', {
 					)}
 					<select {...commonProps}>
 						{placeholder && (
-							<option
-								value=""
-								selected={
-									!options.length || options.length === 0
-								}
-							>
+							<option value="" selected={!options.length}>
 								{placeholder}
 							</option>
 						)}
@@ -354,7 +394,7 @@ registerBlockType('blockons/form-select', {
 						className="field-error"
 						role="alert"
 						aria-live="polite"
-					></div>
+					/>
 				</div>
 			</div>
 		);
@@ -366,6 +406,7 @@ registerBlockType('blockons/form-select', {
 			placeholder,
 			required,
 			options,
+			width,
 			columnSpacing,
 			rowSpacing,
 			showLabels,
@@ -383,13 +424,10 @@ registerBlockType('blockons/form-select', {
 		} = attributes;
 
 		const blockProps = useBlockProps.save({
-			className: `blockons-form-select`,
+			className: getFieldClasses('blockons-form-select', required, width),
 		});
 
-		const selectId = label
-			? `form-select-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`
-			: `form-select-${Math.random().toString(36).substring(7)}`;
-
+		const selectId = generateSelectId(label);
 		const errorMessageId = `${selectId}-error`;
 
 		const inputStyles = {
@@ -422,7 +460,7 @@ registerBlockType('blockons/form-select', {
 			'aria-label': label,
 			'aria-invalid': false,
 			'aria-describedby': errorMessageId,
-			className: getFieldClasses('form-select', required),
+			className: getFieldClasses('form-select', required, width),
 			style: inputStyles,
 		};
 
@@ -452,12 +490,7 @@ registerBlockType('blockons/form-select', {
 					)}
 					<select {...commonProps}>
 						{placeholder && (
-							<option
-								value=""
-								selected={
-									!options.length || options.length === 0
-								}
-							>
+							<option value="" selected={!options.length}>
 								{placeholder}
 							</option>
 						)}
@@ -476,7 +509,7 @@ registerBlockType('blockons/form-select', {
 						className="field-error"
 						role="alert"
 						aria-live="polite"
-					></div>
+					/>
 				</div>
 			</div>
 		);

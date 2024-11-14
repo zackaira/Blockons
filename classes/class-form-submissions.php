@@ -187,52 +187,93 @@ class Blockons_Form_Submissions {
         if (get_post_meta($post->ID, '_submission_status', true) === 'unread') {
             update_post_meta($post->ID, '_submission_status', 'read');
         }
-
         ?>
         <div class="form-submission-details">
             <table class="form-table form-details">
                 <?php
                 if (is_array($form_data) && !empty($form_data)) {
-					foreach ($form_data as $field) {
-						if (isset($field['label']) || isset($field['name'])) {
-							$label = isset($field['label']) ? $field['label'] : $field['name'];
-							?>
-							<tr>
-								<th><label><?php echo esc_html($label); ?>:</label></th>
-								<td>
-									<?php 
-									if (isset($field['type']) && $field['type'] === 'textarea') {
-										echo nl2br(esc_html($field['value']));
-									} else {
-										echo esc_html($field['value']); 
-									}
-									?>
-								</td>
-							</tr>
-							<?php
-						}
-					}
-				}
+                    foreach ($form_data as $field) {
+                        if (isset($field['label']) || isset($field['name'])) {
+                            $label = isset($field['label']) ? $field['label'] : $field['name'];
+                            ?>
+                            <tr>
+                                <th><label><?php echo esc_html($label); ?>:</label></th>
+                                <td>
+                                    <?php
+                                    switch ($field['type']) {
+                                        case 'textarea':
+                                            echo nl2br(esc_html($field['value']));
+                                            break;
+                                            
+                                        case 'file':
+                                            if (!empty($field['value'])) {
+                                                $file_url = $field['value'];
+                                                $file_name = basename($file_url);
+                                                $file_extension = strtolower(pathinfo($file_url, PATHINFO_EXTENSION));
+                                                
+                                                // Add icon based on file type
+                                                $icon_class = $this->get_file_icon_class($file_extension);
+                                                
+                                                echo sprintf(
+                                                    '<div class="form-file-attachment">
+                                                        <span class="dashicons %s"></span>
+                                                        <a href="%s" target="_blank">%s</a>
+                                                        <span class="file-meta">%s</span>
+                                                    </div>',
+                                                    esc_attr($icon_class),
+                                                    esc_url($file_url),
+                                                    esc_html($file_name),
+                                                    esc_html($this->format_file_size($field['size'] ?? 0))
+                                                );
+                                            }
+                                            break;
+
+                                        case 'checkbox':
+                                            echo $field['value'] === '1' ? __('Yes', 'blockons') : __('No', 'blockons');
+                                            break;
+
+                                        case 'checkbox_group':
+                                            if (is_array($field['value'])) {
+                                                echo '<ul class="checkbox-group-values">';
+                                                foreach ($field['value'] as $checkbox) {
+                                                    if (isset($checkbox['label'])) {
+                                                        echo '<li>' . esc_html($checkbox['label']) . '</li>';
+                                                    }
+                                                }
+                                                echo '</ul>';
+                                            }
+                                            break;
+
+                                        default:
+                                            echo esc_html($field['value']);
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    }
+                }
                 ?>
             </table>
 
-			<div class="blockons-form-details">
-				<h3><?php esc_html_e('Form Details', 'blockons'); ?></h3>
-				<table class="form-table">
-					<tr>
-						<th><label><?php esc_html_e('Form Name:', 'blockons'); ?></label></th>
-						<td><?php echo esc_html($form_id); ?></td>
-					</tr>
+            <div class="blockons-form-details">
+                <h3><?php esc_html_e('Form Details', 'blockons'); ?></h3>
+                <table class="form-table">
                     <tr>
-						<th><label><?php esc_html_e('Form Subject:', 'blockons'); ?></label></th>
-						<td><?php echo esc_html($form_subject); ?></td>
-					</tr>
-					<tr>
-						<th><label><?php esc_html_e('Sent To:', 'blockons'); ?></label></th>
-						<td><?php echo esc_html($email_to); ?></td>
-					</tr>
+                        <th><label><?php esc_html_e('Form Name:', 'blockons'); ?></label></th>
+                        <td><?php echo esc_html($form_id); ?></td>
+                    </tr>
+                    <tr>
+                        <th><label><?php esc_html_e('Form Subject:', 'blockons'); ?></label></th>
+                        <td><?php echo esc_html($form_subject); ?></td>
+                    </tr>
+                    <tr>
+                        <th><label><?php esc_html_e('Sent To:', 'blockons'); ?></label></th>
+                        <td><?php echo esc_html($email_to); ?></td>
+                    </tr>
 
-                    <?php if ($bcc_to) : ?>
+                    <?php if ($cc_to) : ?>
                         <tr>
                             <th><label><?php esc_html_e('CC\'d To:', 'blockons'); ?></label></th>
                             <td><?php echo esc_html($cc_to); ?></td>
@@ -245,22 +286,101 @@ class Blockons_Form_Submissions {
                             <td><?php echo esc_html($bcc_to); ?></td>
                         </tr>
                     <?php endif; ?>
-					<tr>
-						<th><label><?php esc_html_e('Page URL:', 'blockons'); ?></label></th>
-						<td><?php echo esc_url($page_url); ?></td>
-					</tr>
                     <tr>
-						<th><label><?php esc_html_e('IP Address:', 'blockons'); ?></label></th>
-						<td><?php echo esc_html($ip_address); ?></td>
-					</tr>
+                        <th><label><?php esc_html_e('Page URL:', 'blockons'); ?></label></th>
+                        <td><a href="<?php echo esc_url($page_url); ?>" target="_blank"><?php echo esc_url($page_url); ?></a></td>
+                    </tr>
                     <tr>
-						<th><label><?php esc_html_e('Submission Date:', 'blockons'); ?></label></th>
-						<td><?php echo esc_html($submission_date); ?></td>
-					</tr>
-				</table>
-			</div>
+                        <th><label><?php esc_html_e('IP Address:', 'blockons'); ?></label></th>
+                        <td><?php echo esc_html($ip_address); ?></td>
+                    </tr>
+                    <tr>
+                        <th><label><?php esc_html_e('Submission Date:', 'blockons'); ?></label></th>
+                        <td><?php echo esc_html($submission_date); ?></td>
+                    </tr>
+                </table>
+            </div>
+
+            <?php
+            var_dump('<pre>');
+            var_dump($form_data);
+            var_dump('</pre>');
+            ?>
         </div>
+        
+        <style>
+            .form-file-attachment {
+                display: flex;
+                align-items: center;
+                margin-bottom: 5px;
+                padding: 8px;
+                background: #f0f0f1;
+                border-radius: 4px;
+            }
+            .form-file-attachment .dashicons {
+                margin-right: 8px;
+                color: #666;
+            }
+            .form-file-attachment a {
+                text-decoration: none;
+                margin-right: 8px;
+            }
+            .form-file-attachment .file-meta {
+                color: #666;
+                font-size: 12px;
+            }
+            .checkbox-group-values {
+                margin: 0;
+                padding-left: 20px;
+            }
+            .checkbox-group-values li {
+                margin-bottom: 4px;
+            }
+        </style>
         <?php
+    }
+
+    /**
+     * Get the appropriate dashicon class for a file type
+     */
+    private function get_file_icon_class($extension) {
+        $icon_map = [
+            // Documents
+            'pdf' => 'dashicons-pdf',
+            'doc' => 'dashicons-media-document',
+            'docx' => 'dashicons-media-document',
+            'txt' => 'dashicons-text',
+            
+            // Images
+            'jpg' => 'dashicons-format-image',
+            'jpeg' => 'dashicons-format-image',
+            'png' => 'dashicons-format-image',
+            'gif' => 'dashicons-format-image',
+            'webp' => 'dashicons-format-image',
+            
+            // Audio/Video
+            'mp3' => 'dashicons-format-audio',
+            'wav' => 'dashicons-format-audio',
+            'mp4' => 'dashicons-format-video',
+        ];
+
+        return isset($icon_map[$extension]) ? $icon_map[$extension] : 'dashicons-media-default';
+    }
+
+    /**
+     * Format file size in human readable format
+     */
+    private function format_file_size($bytes) {
+        if ($bytes === 0) return '0 B';
+
+        $units = ['B', 'KB', 'MB', 'GB'];
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+
+        $bytes /= pow(1024, $pow);
+
+        return round($bytes, 1) . ' ' . $units[$pow];
     }
 
     /**

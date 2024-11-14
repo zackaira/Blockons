@@ -17,6 +17,9 @@ import './style.css';
 import './input-text';
 import './input-textarea';
 import './input-select';
+import './input-acceptance';
+import './input-checkbox';
+import './input-file-upload';
 
 const { name } = json;
 

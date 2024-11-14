@@ -1,7 +1,5 @@
-import { useSelect, useDispatch, select } from '@wordpress/data';
-import { useEffect, useState, useCallback } from '@wordpress/element';
-import { createBlock } from '@wordpress/blocks';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { useSelect, useDispatch } from '@wordpress/data';
+import { useEffect, useState, useCallback, useMemo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import {
 	InnerBlocks,
@@ -18,24 +16,27 @@ import {
 	RangeControl,
 	Placeholder,
 	__experimentalUnitControl as UnitControl,
-	SelectControl,
+	Button,
 } from '@wordpress/components';
 import BlockonsColorpicker from '../_components/BlockonsColorpicker';
 import { colorPickerPalette, isValidEmail } from '../block-global';
 
+// Constants moved to top level
 const ALLOWED_BLOCKS = [
 	'blockons/form-text-input',
 	'blockons/form-textarea',
 	'blockons/form-select',
+	'blockons/form-acceptance',
+	'blockons/form-checkbox',
+	'blockons/form-file-upload',
 ];
 
 const EMAIL_LIMITS = {
-	emailTo: 3, // Maximum 3 primary recipients
-	ccEmails: 2, // Maximum 2 CC recipients
-	bccEmails: 2, // Maximum 2 BCC recipients
+	emailTo: 3,
+	ccEmails: 2,
+	bccEmails: 2,
 };
 
-// Default template with name, email and message fields
 const DEFAULT_EMAIL_TEMPLATE = [
 	[
 		'blockons/form-text-input',
@@ -61,35 +62,88 @@ const DEFAULT_EMAIL_TEMPLATE = [
 			label: 'Message',
 			placeholder: 'Enter your message',
 			required: true,
+			inputType: 'textarea',
 		},
 	],
 ];
-const DEFAULT_NEWSLETTER_TEMPLATE = [
-	[
-		'blockons/form-text-input',
-		{
-			label: 'Name',
-			placeholder: 'Enter your name',
-			required: true,
-			inputType: 'text',
-		},
-	],
-	[
-		'blockons/form-text-input',
-		{
-			label: 'Email',
-			placeholder: 'Enter your email',
-			required: true,
-			inputType: 'email',
-		},
-	],
-];
+
+const ShortcodesList = ({ availableShortcodes }) => {
+	const [copiedCode, setCopiedCode] = useState(null);
+	const [copiedText, setCopiedText] = useState(
+		__('Click to copy shortcode:', 'blockons'),
+	);
+
+	const copyToClipboard = async (code) => {
+		try {
+			await navigator.clipboard.writeText(`[${code}]`);
+			setCopiedCode(code);
+			setCopiedText(__('Copied to Clipboard!', 'blockons'));
+			setTimeout(() => {
+				setCopiedCode(null);
+				setCopiedText(__('Click to copy shortcode:', 'blockons'));
+			}, 1000);
+		} catch (err) {
+			console.error('Failed to copy text: ', err);
+		}
+	};
+
+	return (
+		<div className="blockons-shortcode-list">
+			<label className="components-base-control__label">
+				{__('Form Field Shortcodes', 'blockons')}
+			</label>
+			<div className="blockons-shortcodes-btns">
+				{availableShortcodes.map(({ code, label }) => (
+					<button
+						key={code}
+						type="button"
+						onClick={() => copyToClipboard(code)}
+						className={`blockons-shortcode-btn ${copiedCode === code ? 'is-copied' : ''}`}
+					>
+						[{code}]
+					</button>
+				))}
+			</div>
+			<p className="components-base-control__help">{copiedText}</p>
+		</div>
+	);
+};
+
+// Email validation utilities
+const validateEmails = (emails, type = 'emailTo') => {
+	if (!emails) return false;
+	const emailList = emails
+		.split(',')
+		.map((email) => email.trim())
+		.filter(Boolean);
+	return (
+		emailList.length <= EMAIL_LIMITS[type] && emailList.every(isValidEmail)
+	);
+};
+
+const getEmailValidationMessage = (emails, type = 'emailTo') => {
+	if (!emails) return '';
+	const emailList = emails
+		.split(',')
+		.map((email) => email.trim())
+		.filter(Boolean);
+
+	if (emailList.length > EMAIL_LIMITS[type]) {
+		return __(
+			`Maximum ${EMAIL_LIMITS[type]} email addresses allowed`,
+			'blockons',
+		);
+	}
+
+	return emailList.some((email) => !isValidEmail(email))
+		? __('Invalid email address', 'blockons')
+		: '';
+};
 
 const Edit = (props) => {
 	const {
 		attributes: {
 			isPremium,
-			emailForm,
 			newsletterSignup,
 			formWidth,
 			alignment,
@@ -133,147 +187,57 @@ const Edit = (props) => {
 		className: `blockons-contact-form ${align}-align alignment-${alignment}`,
 	});
 
-	useEffect(() => {
-		setAttributes({ isPremium: isPro }); // SETS PREMIUM
-	}, []);
-
-	const { replaceInnerBlocks } = useDispatch(blockEditorStore);
-
-	useEffect(() => {
-		if (emailForm || newsletterSignup) {
-			const template = emailForm
-				? DEFAULT_EMAIL_TEMPLATE
-				: DEFAULT_NEWSLETTER_TEMPLATE;
-			const newBlocks = template.map(([name, attributes]) =>
-				wp.blocks.createBlock(name, attributes),
-			);
-			replaceInnerBlocks(clientId, newBlocks, false);
-		}
-	}, [emailForm, newsletterSignup]);
-
+	// Custom hooks for block operations
 	const { innerBlocksClientIds, getBlock } = useSelect(
-		(select) => {
-			const { getBlockOrder, getBlock } = select('core/block-editor');
-			return {
-				innerBlocksClientIds: getBlockOrder(clientId),
-				getBlock,
-			};
-		},
+		(select) => ({
+			innerBlocksClientIds:
+				select('core/block-editor').getBlockOrder(clientId),
+			getBlock: select('core/block-editor').getBlock,
+		}),
 		[clientId],
 	);
 
 	const { updateBlockAttributes } = useDispatch('core/block-editor');
 
-	// Create a function to get all current design settings
-	const getCurrentDesignSettings = useCallback(() => {
-		return {
-			columnSpacing,
-			rowSpacing,
-			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
-			inputSize,
-			inputPadHoriz,
-			inputPadVert,
-			inputBgColor,
-			inputTextColor,
-			inputBorder,
-			inputBorderColor,
-			inputBorderRadius,
-		};
-	}, [
-		columnSpacing,
-		rowSpacing,
-		showLabels,
-		labelSize,
-		labelSpacing,
-		labelColor,
-		inputSize,
-		inputPadHoriz,
-		inputPadVert,
-		inputBgColor,
-		inputTextColor,
-		inputBorder,
-		inputBorderColor,
-		inputBorderRadius,
-	]);
+	// Memoized design settings
+	const getCurrentDesignSettings = useMemo(
+		() => ({
+			columnSpacing: columnSpacing,
+			rowSpacing: rowSpacing,
+			showLabels: showLabels,
+			labelSize: labelSize,
+			labelSpacing: labelSpacing,
+			labelColor: labelColor,
+			inputSize: inputSize,
+			inputPadHoriz: inputPadHoriz,
+			inputPadVert: inputPadVert,
+			inputBgColor: inputBgColor,
+			inputTextColor: inputTextColor,
+			inputBorder: inputBorder,
+			inputBorderColor: inputBorderColor,
+			inputBorderRadius: inputBorderRadius,
+		}),
+		[props.attributes],
+	);
 
-	// Function to apply styles to a single block
+	// Update styles for a single block
 	const applyStylesToBlock = useCallback(
 		(blockClientId) => {
 			const block = getBlock(blockClientId);
-			if (!block) return;
-
-			const isFormField = [
-				'blockons/form-text-input',
-				'blockons/form-textarea',
-				'blockons/form-select',
-			].includes(block.name);
-
-			if (isFormField) {
-				updateBlockAttributes(
-					blockClientId,
-					getCurrentDesignSettings(),
-				);
-			}
+			if (!block || !ALLOWED_BLOCKS.includes(block.name)) return;
+			updateBlockAttributes(blockClientId, getCurrentDesignSettings);
 		},
 		[getBlock, updateBlockAttributes, getCurrentDesignSettings],
 	);
 
-	// Listen for changes in innerBlocks
-	useEffect(() => {
-		innerBlocksClientIds.forEach(applyStylesToBlock);
-	}, [innerBlocksClientIds, applyStylesToBlock]);
-
-	// Update all blocks when design settings change
-	useEffect(() => {
-		const designSettings = getCurrentDesignSettings();
-		innerBlocksClientIds.forEach((blockId) => {
-			const block = getBlock(blockId);
-			if (!block) return;
-
-			if (
-				[
-					'blockons/form-text-input',
-					'blockons/form-textarea',
-					'blockons/form-select',
-				].includes(block.name)
-			) {
-				updateBlockAttributes(blockId, designSettings);
-			}
-		});
-	}, [
-		columnSpacing,
-		rowSpacing,
-		showLabels,
-		labelSize,
-		labelSpacing,
-		labelColor,
-		inputSize,
-		inputPadHoriz,
-		inputPadVert,
-		inputBgColor,
-		inputTextColor,
-		inputBorder,
-		inputBorderColor,
-		inputBorderRadius,
-	]);
-
-	// Modify your existing updateInnerBlocksStyles function
+	// Update styles for all inner blocks
 	const updateInnerBlocksStyles = useCallback(
 		(newStyles) => {
 			innerBlocksClientIds.forEach((innerBlockClientId) => {
 				const block = getBlock(innerBlockClientId);
 				if (!block) return;
 
-				if (
-					[
-						'blockons/form-text-input',
-						'blockons/form-textarea',
-						'blockons/form-select',
-					].includes(block.name)
-				) {
+				if (ALLOWED_BLOCKS.includes(block.name)) {
 					updateBlockAttributes(innerBlockClientId, newStyles);
 				}
 			});
@@ -281,51 +245,14 @@ const Edit = (props) => {
 		[innerBlocksClientIds, getBlock, updateBlockAttributes],
 	);
 
-	const validateEmails = (emails, type = 'emailTo') => {
-		if (!emails) return false;
-		const emailList = emails
-			.split(',')
-			.map((email) => email.trim())
-			.filter(Boolean);
+	// Effect for updating styles
+	useEffect(() => {
+		innerBlocksClientIds.forEach(applyStylesToBlock);
+	}, [innerBlocksClientIds, applyStylesToBlock]);
 
-		// Check number of email addresses
-		if (emailList.length > EMAIL_LIMITS[type]) {
-			return false;
-		}
-
-		// Validate each email address
-		return emailList.every((email) => isValidEmail(email));
-	};
-
-	const getEmailValidationMessage = (emails, type = 'emailTo') => {
-		if (!emails) return '';
-
-		const emailList = emails
-			.split(',')
-			.map((email) => email.trim())
-			.filter(Boolean);
-
-		if (emailList.length > EMAIL_LIMITS[type]) {
-			return __(
-				`Maximum ${EMAIL_LIMITS[type]} email addresses allowed`,
-				'blockons',
-			);
-		}
-
-		const invalidEmails = emailList.filter((email) => !isValidEmail(email));
-		if (invalidEmails.length > 0) {
-			return __('Invalid email address format', 'blockons');
-		}
-
-		return '';
-	};
-
-	/**
-	 * Form Block Shortcodes
-	 */
-	const updateAvailableShortcodes = () => {
+	// Update available shortcodes
+	const updateAvailableShortcodes = useCallback(() => {
 		const newShortcodes = [
-			// System shortcodes
 			{ code: 'form_name', label: 'Form Name', type: 'system' },
 			{
 				code: 'submission_date',
@@ -340,14 +267,12 @@ const Edit = (props) => {
 			{ code: 'page_url', label: 'Page URL', type: 'system' },
 		];
 
-		// Get all inner blocks
 		innerBlocksClientIds.forEach((blockId) => {
 			const block = getBlock(blockId);
 			if (!block) return;
 
 			const { attributes: blockAttributes, name: blockName } = block;
 
-			// Only process form input blocks
 			if (
 				!['blockons/form-text-input', 'blockons/form-select'].includes(
 					blockName,
@@ -356,7 +281,6 @@ const Edit = (props) => {
 				return;
 			}
 
-			// For text inputs, only include if type is text or email
 			if (
 				blockName === 'blockons/form-text-input' &&
 				!['text', 'email'].includes(blockAttributes.inputType)
@@ -381,57 +305,11 @@ const Edit = (props) => {
 		});
 
 		setAttributes({ availableShortcodes: newShortcodes });
-	};
+	}, [innerBlocksClientIds, getBlock, setAttributes]);
 
-	// Add this to the Edit component to watch for inner block changes
 	useEffect(() => {
 		updateAvailableShortcodes();
-	}, [innerBlocksClientIds.length]); // Trigger when blocks are added/removed
-
-	// Add a ShortcodesList component for the UI
-	const ShortcodesList = () => {
-		const [copiedCode, setCopiedCode] = useState(null);
-		const [copiedText, setCopiedText] = useState(
-			__('Click to copy shortcode:', 'blockons'),
-		);
-
-		const copyToClipboard = async (code) => {
-			try {
-				await navigator.clipboard.writeText(`[${code}]`);
-				setCopiedCode(code);
-				setCopiedText(__('Copied to Clipboard!', 'blockons'));
-
-				// Reset the copied state after 1 second
-				setTimeout(() => {
-					setCopiedCode(null);
-					setCopiedText(__('Click to copy shortcode:', 'blockons'));
-				}, 1000);
-			} catch (err) {
-				console.error('Failed to copy text: ', err);
-			}
-		};
-
-		return (
-			<div className="blockons-shortcode-list">
-				<p className="components-base-control__label">{copiedText}</p>
-				<div className="blockons-shortcodes-btns">
-					{availableShortcodes.map(({ code, label, type }) => (
-						<button
-							key={code}
-							type="button"
-							onClick={() => copyToClipboard(code)}
-							className={`
-								blockons-shortcode-btn
-								${copiedCode === code ? 'is-copied' : ''}
-							`}
-						>
-							[{code}]
-						</button>
-					))}
-				</div>
-			</div>
-		);
-	};
+	}, [innerBlocksClientIds.length, updateAvailableShortcodes]);
 
 	return (
 		<div {...blockProps}>
@@ -440,25 +318,30 @@ const Edit = (props) => {
 					title={__('Form Settings', 'blockons')}
 					initialOpen={true}
 				>
-					<ToggleControl
-						label={__('Email Form', 'blockons')}
-						checked={emailForm}
-						onChange={(value) =>
-							setAttributes({ emailForm: value })
-						}
+					<TextControl
+						label={__('Email To', 'blockons')}
+						help={__(
+							`Add up to ${EMAIL_LIMITS.emailTo} emails separated by a comma`,
+							'blockons',
+						)}
+						value={emailTo}
+						className={`blockons-cf-emailto ${validateEmails(emailTo, 'emailTo') ? '' : 'has-error'}`}
+						onChange={(value) => setAttributes({ emailTo: value })}
 					/>
+					{emailTo && !validateEmails(emailTo, 'emailTo') && (
+						<div className="components-form-field-help-text error-message">
+							{getEmailValidationMessage(emailTo, 'emailTo')}
+						</div>
+					)}
 
-					<ToggleControl
-						label={__('Newsletter Signup Form', 'blockons')}
-						checked={newsletterSignup}
-						onChange={(value) =>
-							setAttributes({ newsletterSignup: value })
-						}
-					/>
-
-					{(emailForm || newsletterSignup) && (
+					{emailTo && validateEmails(emailTo, 'emailTo') && (
 						<>
 							<div className="blockons-divider"></div>
+							<ShortcodesList
+								availableShortcodes={availableShortcodes}
+							/>
+							<div className="blockons-divider"></div>
+
 							<TextControl
 								label={__('Form Name', 'blockons')}
 								value={formName}
@@ -466,188 +349,152 @@ const Edit = (props) => {
 									setAttributes({ formName: value })
 								}
 							/>
+
+							<TextControl
+								label={__('Email Subject', 'blockons')}
+								value={emailSubject}
+								onChange={(value) =>
+									setAttributes({ emailSubject: value })
+								}
+							/>
 							<div className="blockons-divider"></div>
 
-							<UnitControl
-								label={__('Form Width', 'blockons')}
-								value={formWidth}
-								onChange={(newValue) =>
-									setAttributes({ formWidth: newValue })
+							<TextControl
+								label={__('From Name', 'blockons')}
+								value={fromName}
+								onChange={(value) =>
+									setAttributes({ fromName: value })
 								}
-								units={[
-									{
-										value: '%',
-										label: '%',
-										default: 100,
-									},
-									{
-										value: 'px',
-										label: 'px',
-										default: 400,
-									},
-								]}
-								isResetValueOnUnitChange
+								help={__(
+									'Add the NAME shortcode here',
+									'blockons',
+								)}
+							/>
+							<TextControl
+								label={__('From Email', 'blockons')}
+								value={fromEmail}
+								onChange={(value) =>
+									setAttributes({ fromEmail: value })
+								}
+								help={__(
+									'Add the EMAIL shortcode here',
+									'blockons',
+								)}
+							/>
+							<div className="blockons-divider"></div>
+
+							{/* {fromName && fromEmail && (
+								<>
+									<ToggleControl
+										label={__(
+											'Newsletter Signup',
+											'blockons',
+										)}
+										checked={newsletterSignup}
+										onChange={(value) =>
+											setAttributes({
+												newsletterSignup: value,
+											})
+										}
+										help={__(
+											'Add ',
+											'blockons',
+										)}
+									/>
+									<div className="blockons-divider"></div>
+								</>
+							)} */}
+
+							<TextControl
+								label={__('CC Emails', 'blockons')}
+								help={__(
+									`Add up to ${EMAIL_LIMITS.ccEmails} emails separated by a comma`,
+									'blockons',
+								)}
+								value={ccEmails}
+								className={`${validateEmails(ccEmails, 'ccEmails') ? '' : 'has-error'}`}
+								onChange={(value) =>
+									setAttributes({ ccEmails: value })
+								}
+							/>
+							{ccEmails &&
+								!validateEmails(ccEmails, 'ccEmails') && (
+									<div className="components-form-field-help-text error-message">
+										{getEmailValidationMessage(
+											ccEmails,
+											'ccEmails',
+										)}
+									</div>
+								)}
+
+							<TextControl
+								label={__('BCC Emails', 'blockons')}
+								help={__(
+									`Add up to ${EMAIL_LIMITS.bccEmails} emails separated by a comma`,
+									'blockons',
+								)}
+								value={bccEmails}
+								className={`${validateEmails(bccEmails, 'bccEmails') ? '' : 'has-error'}`}
+								onChange={(value) =>
+									setAttributes({ bccEmails: value })
+								}
+							/>
+							{bccEmails &&
+								!validateEmails(bccEmails, 'bccEmails') && (
+									<div className="components-form-field-help-text error-message">
+										{getEmailValidationMessage(
+											bccEmails,
+											'bccEmails',
+										)}
+									</div>
+								)}
+							<div className="blockons-divider"></div>
+
+							<TextControl
+								label={__('Submit Button Text', 'blockons')}
+								value={submitButtonText}
+								onChange={(value) =>
+									setAttributes({
+										submitButtonText: value,
+									})
+								}
+							/>
+							<div className="blockons-divider"></div>
+
+							<TextControl
+								label={__('Form Success Message', 'blockons')}
+								value={successMessage}
+								onChange={(value) =>
+									setAttributes({ successMessage: value })
+								}
+							/>
+							<TextControl
+								label={__('Form Error Message', 'blockons')}
+								value={errorMessage}
+								onChange={(value) =>
+									setAttributes({ errorMessage: value })
+								}
+							/>
+							<div className="blockons-divider"></div>
+
+							<ToggleControl
+								label={__('Include Metadata', 'blockons')}
+								help={__(
+									'Include date, time and page URL in the email',
+									'blockons',
+								)}
+								checked={includeMetadata}
+								onChange={(value) =>
+									setAttributes({
+										includeMetadata: value,
+									})
+								}
 							/>
 						</>
 					)}
 				</PanelBody>
 
-				{emailForm && (
-					<PanelBody
-						title={__('Email Settings', 'blockons')}
-						initialOpen={false}
-					>
-						<TextControl
-							label={__('Email To', 'blockons')}
-							help={__(
-								`Add up to ${EMAIL_LIMITS.emailTo} emails separated by a comma`,
-								'blockons',
-							)}
-							value={emailTo}
-							className={`blockons-cf-emailto ${validateEmails(emailTo, 'emailTo') ? '' : 'has-error'}`}
-							onChange={(value) =>
-								setAttributes({ emailTo: value })
-							}
-						/>
-						{emailTo && !validateEmails(emailTo, 'emailTo') && (
-							<div className="components-form-field-help-text error-message">
-								{getEmailValidationMessage(emailTo, 'emailTo')}
-							</div>
-						)}
-
-						{emailTo && validateEmails(emailTo, 'emailTo') && (
-							<>
-								<div className="blockons-divider"></div>
-								<ShortcodesList />
-								<div className="blockons-divider"></div>
-
-								<TextControl
-									label={__('Email Subject', 'blockons')}
-									value={emailSubject}
-									onChange={(value) =>
-										setAttributes({ emailSubject: value })
-									}
-								/>
-								<div className="blockons-divider"></div>
-
-								<TextControl
-									label={__('From Email', 'blockons')}
-									value={fromEmail}
-									onChange={(value) =>
-										setAttributes({ fromEmail: value })
-									}
-									help={__(
-										'Add the EMAIL shortcode here',
-										'blockons',
-									)}
-								/>
-								<TextControl
-									label={__('From Name', 'blockons')}
-									value={fromName}
-									onChange={(value) =>
-										setAttributes({ fromName: value })
-									}
-									help={__(
-										'Add the NAME shortcode here',
-										'blockons',
-									)}
-								/>
-								<div className="blockons-divider"></div>
-
-								<TextControl
-									label={__('CC Emails', 'blockons')}
-									help={__(
-										`Add up to ${EMAIL_LIMITS.ccEmails} emails separated by a comma`,
-										'blockons',
-									)}
-									value={ccEmails}
-									className={`${validateEmails(ccEmails, 'ccEmails') ? '' : 'has-error'}`}
-									onChange={(value) =>
-										setAttributes({ ccEmails: value })
-									}
-								/>
-								{ccEmails &&
-									!validateEmails(ccEmails, 'ccEmails') && (
-										<div className="components-form-field-help-text error-message">
-											{getEmailValidationMessage(
-												ccEmails,
-												'ccEmails',
-											)}
-										</div>
-									)}
-
-								<TextControl
-									label={__('BCC Emails', 'blockons')}
-									help={__(
-										`Add up to ${EMAIL_LIMITS.bccEmails} emails separated by a comma`,
-										'blockons',
-									)}
-									value={bccEmails}
-									className={`${validateEmails(bccEmails, 'bccEmails') ? '' : 'has-error'}`}
-									onChange={(value) =>
-										setAttributes({ bccEmails: value })
-									}
-								/>
-								{bccEmails &&
-									!validateEmails(bccEmails, 'bccEmails') && (
-										<div className="components-form-field-help-text error-message">
-											{getEmailValidationMessage(
-												bccEmails,
-												'bccEmails',
-											)}
-										</div>
-									)}
-								<div className="blockons-divider"></div>
-
-								<TextControl
-									label={__('Submit Button Text', 'blockons')}
-									value={submitButtonText}
-									onChange={(value) =>
-										setAttributes({
-											submitButtonText: value,
-										})
-									}
-								/>
-								<div className="blockons-divider"></div>
-
-								<TextControl
-									label={__(
-										'Form Success Message',
-										'blockons',
-									)}
-									value={successMessage}
-									onChange={(value) =>
-										setAttributes({ successMessage: value })
-									}
-								/>
-								<TextControl
-									label={__('Form Error Message', 'blockons')}
-									value={errorMessage}
-									onChange={(value) =>
-										setAttributes({ errorMessage: value })
-									}
-								/>
-								<div className="blockons-divider"></div>
-
-								<ToggleControl
-									label={__('Include Metadata', 'blockons')}
-									help={__(
-										'Include date, time and page URL in the email',
-										'blockons',
-									)}
-									checked={includeMetadata}
-									onChange={(value) =>
-										setAttributes({
-											includeMetadata: value,
-										})
-									}
-								/>
-							</>
-						)}
-					</PanelBody>
-				)}
-
-				{newsletterSignup && (
+				{/* {newsletterSignup && (
 					<PanelBody
 						title={__('Newsletter Signup', 'blockons')}
 						initialOpen={false}
@@ -664,13 +511,35 @@ const Edit = (props) => {
 							}
 						/>
 					</PanelBody>
-				)}
+				)} */}
 
-				{(emailForm || newsletterSignup) && (
+				{emailTo && validateEmails(emailTo, 'emailTo') && (
 					<PanelBody
 						title={__('Form Design Settings', 'blockons')}
 						initialOpen={false}
 					>
+						<UnitControl
+							label={__('Form Width', 'blockons')}
+							value={formWidth}
+							onChange={(newValue) =>
+								setAttributes({ formWidth: newValue })
+							}
+							units={[
+								{
+									value: '%',
+									label: '%',
+									default: 100,
+								},
+								{
+									value: 'px',
+									label: 'px',
+									default: 400,
+								},
+							]}
+							isResetValueOnUnitChange
+						/>
+						<div className="blockons-divider"></div>
+
 						<RangeControl
 							label={__('Form Column Spacing', 'blockons')}
 							value={columnSpacing}
@@ -682,6 +551,10 @@ const Edit = (props) => {
 							}}
 							min={0}
 							max={40}
+							help={__(
+								'Adjust the space between form fields IF you edit field widths',
+								'blockons',
+							)}
 						/>
 						<RangeControl
 							label={__('Form Row Spacing', 'blockons')}
@@ -868,6 +741,7 @@ const Edit = (props) => {
 						/>
 					</PanelBody>
 				)}
+
 				{/* <PanelBody
 					title={__('Security Settings', 'blockons')}
 					initialOpen={false}
@@ -895,7 +769,7 @@ const Edit = (props) => {
 				/>
 			</BlockControls>
 
-			{emailForm || newsletterSignup ? (
+			{emailTo && validateEmails(emailTo) ? (
 				<div className="blockons-cf-wrap" style={{ width: formWidth }}>
 					<div className="blockons-cfh-field">
 						<input
@@ -909,11 +783,7 @@ const Edit = (props) => {
 					<div className="blockons-cf-fields">
 						<InnerBlocks
 							allowedBlocks={ALLOWED_BLOCKS}
-							template={
-								emailForm
-									? DEFAULT_EMAIL_TEMPLATE
-									: DEFAULT_NEWSLETTER_TEMPLATE
-							}
+							template={DEFAULT_EMAIL_TEMPLATE}
 							templateLock={false}
 						/>
 
@@ -961,30 +831,25 @@ const Edit = (props) => {
 			) : (
 				<Placeholder
 					icon="email"
-					label={__('Select Form Type', 'blockons')}
+					label={__('Blockons Form', 'blockons')}
 					instructions={__(
-						'Please select if this is an Email form or a Newsletter Signup form.',
+						'Enter the Send To email to further configure this form.',
 						'blockons',
 					)}
 				>
 					{isSelected && (
-						<>
-							<ToggleControl
-								label={__('Email Form', 'blockons')}
-								checked={emailForm}
-								onChange={(value) =>
-									setAttributes({ emailForm: value })
-								}
-							/>
-
-							<ToggleControl
-								label={__('Newsletter Signup Form', 'blockons')}
-								checked={newsletterSignup}
-								onChange={(value) =>
-									setAttributes({ newsletterSignup: value })
-								}
-							/>
-						</>
+						<Button
+							isPrimary
+							onClick={() => {
+								// Focus on the email field in settings
+								const emailField = document.querySelector(
+									'.blockons-cf-emailto input',
+								);
+								if (emailField) emailField.focus();
+							}}
+						>
+							{__('Configure Email', 'blockons')}
+						</Button>
 					)}
 				</Placeholder>
 			)}

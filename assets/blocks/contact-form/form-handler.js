@@ -1,297 +1,641 @@
 document.addEventListener('DOMContentLoaded', function () {
-	// Check if reCAPTCHA is enabled and key exists
+	// Initialize reCAPTCHA if enabled
 	const recaptchaEnabled = blockonsFormObj.recaptcha || false;
 	const recaptchaSiteKey = blockonsFormObj.recaptcha_key || '';
+	const translations = blockonsFormObj.translations;
 
-	// Load reCAPTCHA if enabled
 	if (recaptchaEnabled && recaptchaSiteKey) {
 		const script = document.createElement('script');
 		script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
 		document.head.appendChild(script);
 	}
 
-	const forms = document.querySelectorAll('.blockons-cf-form');
+	// Helper functions
+	const showFieldError = (element, message) => {
+		// Find the appropriate wrapper
+		const fieldWrapper =
+			element.closest('.form-field') ||
+			element.closest('.checkbox-group') ||
+			element;
 
-	forms.forEach((form) => {
-		const submitBtn = form.querySelector('.blockons-cf-submit-btn');
-		const successMsg = form.querySelector('.blockons-cf-msg-success');
-		const errorMsg = form.querySelector('.blockons-cf-msg-error');
-		const honeypot = form.querySelector('input[name="asite"]');
+		if (!fieldWrapper) return;
 
-		if (!submitBtn || !successMsg || !errorMsg) {
-			console.error('Required form elements not found');
-			return;
+		// Remove any existing errors
+		const existingError = fieldWrapper.querySelector('.field-error');
+		if (existingError) {
+			existingError.remove();
 		}
 
-		// Add input event listeners to clear errors on typing
-		const allInputs = form.querySelectorAll('input, textarea, select');
-		allInputs.forEach((input) => {
-			input.addEventListener('input', function () {
-				const errorDiv =
-					this.closest('.form-field')?.querySelector('.field-error');
-				if (errorDiv) {
-					errorDiv.remove();
+		// Create and add error message
+		const errorDiv = document.createElement('div');
+		errorDiv.className = 'field-error';
+		errorDiv.textContent = message;
+		errorDiv.setAttribute('role', 'alert');
+		errorDiv.setAttribute('aria-live', 'polite');
+
+		// Set aria-invalid on appropriate element
+		if (element instanceof HTMLInputElement) {
+			element.setAttribute('aria-invalid', 'true');
+		}
+
+		fieldWrapper.appendChild(errorDiv);
+	};
+
+	const clearFieldError = (element) => {
+		const fieldWrapper =
+			element.closest('.form-field') ||
+			element.closest('.checkbox-group') ||
+			element;
+
+		if (!fieldWrapper) return;
+
+		const errorDiv = fieldWrapper.querySelector('.field-error');
+		if (errorDiv) {
+			errorDiv.remove();
+		}
+
+		if (element instanceof HTMLInputElement) {
+			element.setAttribute('aria-invalid', 'false');
+		}
+	};
+
+	const isValidEmail = (email) => {
+		const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+		return emailRegex.test(String(email).toLowerCase());
+	};
+
+	const isValidUrl = (url) => {
+		try {
+			const parsed = new URL(url);
+			return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+		} catch {
+			return false;
+		}
+	};
+
+	// Field data collection and validation
+	const collectFieldData = (form) => {
+		const fields = [];
+		const processedGroups = new Set();
+
+		// Get all form inputs
+		const inputs = form.querySelectorAll(
+			'input:not([name="asite"]):not([type="hidden"]), textarea, select',
+		);
+
+		inputs.forEach((input) => {
+			// Skip if this is a checkbox in a group we've already processed
+			if (input.type === 'checkbox' && input.name.includes('[]')) {
+				const groupName = input.getAttribute('name').replace('[]', '');
+				if (processedGroups.has(groupName)) {
+					return;
 				}
-			});
-		});
-
-		// Store original button text
-		const originalBtnText = submitBtn.textContent;
-
-		// Prevent default form submission
-		form.addEventListener('submit', (e) => {
-			e.preventDefault();
-		});
-
-		submitBtn.addEventListener('click', async function (e) {
-			e.preventDefault();
-
-			// Check honeypot - if it's filled out, silently return
-			if (honeypot && honeypot.value) {
-				console.log('Honeypot triggered');
-				return;
 			}
 
-			// Hide any existing messages
-			successMsg.style.display = 'none';
-			errorMsg.style.display = 'none';
+			const fieldWrapper = input.closest('.form-field');
+			const label =
+				fieldWrapper
+					?.querySelector(
+						'.form-label, .acceptance-label, .checkbox-group-label-txt',
+					)
+					?.textContent.replace('*', '')
+					.trim() || input.name;
 
-			// Get form settings from wrapper div
-			const formWrapper = form.closest('.blockons-cf-wrap');
-			if (!formWrapper) {
+			// Handle different input types
+			if (input.type === 'checkbox') {
+				// Check if this is part of a checkbox group
+				if (input.name.includes('[]')) {
+					const groupName = input
+						.getAttribute('name')
+						.replace('[]', '');
+					if (!processedGroups.has(groupName)) {
+						processedGroups.add(groupName);
+
+						// Get all checkboxes in this group
+						const groupInputs = form.querySelectorAll(
+							`input[name="${input.getAttribute('name')}"]`,
+						);
+						const checkedValues = Array.from(groupInputs)
+							.filter((cb) => cb.checked)
+							.map((cb) => ({
+								value: cb.value,
+								label:
+									cb.nextElementSibling?.textContent.trim() ||
+									cb.value,
+							}));
+
+						fields.push({
+							name: groupName,
+							label: label,
+							value: checkedValues,
+							type: 'checkbox_group',
+							required: input.required,
+						});
+					}
+				} else {
+					// Single checkbox (like acceptance)
+					fields.push({
+						name: input.name || input.id,
+						label: label,
+						value: input.checked,
+						type: 'checkbox',
+						required: input.required,
+					});
+				}
+			} else if (input.type === 'file') {
+				fields.push({
+					name: input.name || input.id,
+					label: label,
+					value: input.files[0] || null,
+					type: 'file',
+					required: input.required,
+					maxSize: input.dataset.maxSize,
+					accept: input.accept,
+				});
+			} else {
+				// Handle text, email, textarea, select, etc.
+				fields.push({
+					name: input.name || input.id,
+					label: label,
+					value: input.value,
+					type: input.type || input.tagName.toLowerCase(),
+					required: input.required,
+				});
+			}
+		});
+
+		return fields;
+	};
+
+	const validateField = (input, fieldData) => {
+		if (!fieldData.required) return true;
+
+		// Handle file inputs
+		if (fieldData.type === 'file') {
+			if (!input.files || input.files.length === 0) {
+				showFieldError(input, translations.required);
+				return false;
+			}
+			return true;
+		}
+
+		// Handle single checkboxes (like acceptance)
+		if (fieldData.type === 'checkbox') {
+			const isAcceptanceField = input.closest(
+				'.blockons-form-acceptance',
+			);
+			const isCheckboxGroup = input.closest('.blockons-form-checkbox');
+
+			if (isAcceptanceField || (!isAcceptanceField && !isCheckboxGroup)) {
+				// This is a single checkbox
+				if (!input.checked) {
+					showFieldError(input, translations.required);
+					return false;
+				}
+				return true;
+			} else if (isCheckboxGroup) {
+				// Checkbox group validation
+				const groupName = input.getAttribute('name').replace('[]', '');
+				const checkboxGroup = input
+					.closest('form')
+					.querySelectorAll(`input[name="${groupName}[]"]`);
+
+				const hasChecked = Array.from(checkboxGroup).some(
+					(cb) => cb.checked,
+				);
+
+				if (!hasChecked) {
+					showFieldError(
+						input.closest('.checkbox-group'),
+						translations.select_option,
+					);
+					return false;
+				}
+				return true;
+			}
+			return true;
+		}
+
+		// Handle checkbox groups (already validated above)
+		if (fieldData.type === 'checkbox_group') {
+			return true;
+		}
+
+		// Handle select fields
+		if (fieldData.type === 'select' || fieldData.type === 'select-one') {
+			const selectedOption = input.options[input.selectedIndex];
+			const isValidSelection =
+				selectedOption &&
+				selectedOption.value &&
+				selectedOption.value !== '' &&
+				!selectedOption.disabled;
+
+			if (!isValidSelection) {
+				showFieldError(input, translations.select_option);
+				return false;
+			}
+			return true;
+		}
+
+		// Handle text-based fields
+		if (fieldData.value === undefined || fieldData.value === null) {
+			showFieldError(input, translations.required);
+			return false;
+		}
+
+		// Convert to string for trim if needed
+		const value = String(fieldData.value).trim();
+		if (value === '') {
+			showFieldError(input, translations.required);
+			return false;
+		}
+
+		// Type-specific validation for non-empty fields
+		switch (fieldData.type) {
+			case 'email':
+				if (!isValidEmail(value)) {
+					showFieldError(input, translations.required_email);
+					return false;
+				}
+				break;
+			case 'url':
+				if (!isValidUrl(value)) {
+					showFieldError(input, translations.required_url);
+					return false;
+				}
+				break;
+			case 'number':
+				if (isNaN(value)) {
+					showFieldError(input, translations.required_number);
+					return false;
+				}
+				break;
+		}
+
+		return true;
+	};
+
+	// Form processing
+	const processForms = () => {
+		const forms = document.querySelectorAll('.blockons-cf-form');
+
+		forms.forEach((form) => {
+			// Get the wrapper
+			const wrapper = form.closest('.blockons-cf-wrap');
+			if (!wrapper) {
 				console.error('Form wrapper not found');
 				return;
 			}
 
-			// Collect form fields (excluding honeypot and hidden fields)
-			const fields = [];
-			const inputs = form.querySelectorAll(
-				'input:not([name="asite"]):not([type="hidden"]), textarea, select',
-			);
-			let hasErrors = false;
-			let firstErrorField = null;
+			// Initialize elements object
+			const elements = {
+				submitBtn: form.querySelector('.blockons-cf-submit-btn'),
+				successMsg: form.querySelector('.blockons-cf-msg-success'),
+				errorMsg: form.querySelector('.blockons-cf-msg-error'),
+				honeypot: form.querySelector('input[name="asite"]'),
+				inputs: form.querySelectorAll(
+					'input:not([name="asite"]):not([type="hidden"]), textarea, select',
+				),
+			};
 
-			// Reset previous error states
-			form.querySelectorAll('.field-error').forEach((el) => el.remove());
-
-			// Collect and validate form fields
-			inputs.forEach((input) => {
-				const fieldWrapper = input.closest('.form-field');
-				const field = {
-					name: input.name || input.id || '',
-					label:
-						fieldWrapper
-							?.querySelector('.form-label')
-							?.textContent.replace('*', '')
-							.trim() || input.name,
-					value: input.value,
-					required: input.required,
-					type: input.type || input.tagName.toLowerCase(),
-				};
-
-				// Client-side validation
-				if (field.required) {
-					if (
-						field.type === 'select' ||
-						field.type === 'select-one'
-					) {
-						const selectedOption =
-							input.options[input.selectedIndex];
-						const isValidSelection =
-							selectedOption &&
-							selectedOption.value &&
-							selectedOption.value !== '' &&
-							!selectedOption.disabled;
-
-						if (!isValidSelection) {
-							hasErrors = true;
-							showFieldError(input, 'Please select an option');
-							if (!firstErrorField) firstErrorField = input;
-						}
-					} else if (!field.value.trim()) {
-						hasErrors = true;
-						showFieldError(input, 'This field is required');
-						if (!firstErrorField) firstErrorField = input;
-					}
-				}
-
-				// Type-specific validation
-				if (field.value.trim()) {
-					switch (field.type) {
-						case 'email':
-							if (!isValidEmail(field.value)) {
-								hasErrors = true;
-								showFieldError(
-									input,
-									'Please enter a valid email address',
-								);
-								if (!firstErrorField) firstErrorField = input;
-							}
-							break;
-						case 'url':
-							if (!isValidUrl(field.value)) {
-								hasErrors = true;
-								showFieldError(
-									input,
-									'Please enter a valid URL',
-								);
-								if (!firstErrorField) firstErrorField = input;
-							}
-							break;
-						case 'number':
-							if (isNaN(field.value)) {
-								hasErrors = true;
-								showFieldError(
-									input,
-									'Please enter a valid number',
-								);
-								if (!firstErrorField) firstErrorField = input;
-							}
-							break;
-					}
-				}
-
-				fields.push(field);
-			});
-
-			if (hasErrors) {
-				errorMsg.style.display = 'block';
-				if (firstErrorField) {
-					firstErrorField.scrollIntoView({
-						behavior: 'smooth',
-						block: 'center',
-					});
-				}
+			// Verify required elements exist
+			if (
+				!elements.submitBtn ||
+				!elements.successMsg ||
+				!elements.errorMsg
+			) {
+				console.error('Required form elements missing');
 				return;
 			}
 
-			// Find the email and name fields
-			const fromEmail =
-				fields.find((field) => field.type === 'email')?.value || '';
-			const fromName =
-				fields.find(
-					(field) =>
-						field.type === 'text' &&
-						(field.name.toLowerCase().includes('name') ||
-							field.label.toLowerCase().includes('name')),
-				)?.value || '';
+			// Store original button text
+			const originalBtnText = elements.submitBtn.textContent;
 
-			// Prepare form settings
-			const formSettings = {
-				emailTo: formWrapper.dataset.emailTo || '',
-				emailSubject:
-					formWrapper.dataset.emailSubject ||
-					'New Contact Form Submission',
-				fromEmail: fromEmail, // Use actual email from form
-				fromName: fromName, // Use actual name from form
-				ccEmails: formWrapper.dataset.ccEmails || '',
-				bccEmails: formWrapper.dataset.bccEmails || '',
-				includeMetadata: formWrapper.dataset.includeMetadata === 'true',
-				formId: form.dataset.formId || '',
-			};
+			// Setup input event listeners
+			setupInputListeners(elements.inputs);
 
-			// Disable submit button and show loading state
-			submitBtn.disabled = true;
-			submitBtn.textContent = 'Sending...';
+			// Handle form submission
+			form.addEventListener('submit', (e) => e.preventDefault());
 
-			try {
-				// Get reCAPTCHA token if enabled
-				let recaptchaToken = '';
-				if (recaptchaEnabled && recaptchaSiteKey && window.grecaptcha) {
-					try {
-						recaptchaToken = await grecaptcha.execute(
-							recaptchaSiteKey,
-							{
-								action: 'submit',
-							},
-						);
-					} catch (recaptchaError) {
-						console.error('reCAPTCHA error:', recaptchaError);
-					}
+			elements.submitBtn.addEventListener('click', async (e) => {
+				e.preventDefault();
+
+				// Check honeypot
+				if (elements.honeypot?.value) {
+					console.log('Honeypot triggered');
+					return;
 				}
 
-				// Prepare form data
-				const formData = {
-					...formSettings,
-					fields,
-					...(recaptchaToken && { recaptchaToken }),
-				};
+				try {
+					// Validate form
+					const { isValid, fields } = validateForm(
+						form,
+						elements.inputs,
+					);
+					if (!isValid) {
+						if (elements.errorMsg) {
+							elements.errorMsg.style.display = 'block';
+							elements.errorMsg.scrollIntoView({
+								behavior: 'smooth',
+								block: 'center',
+							});
+						}
+						return;
+					}
 
-				console.log('Sending form data:', formData);
+					// Submit form
+					await submitForm(form, elements, originalBtnText);
+				} catch (error) {
+					console.error('Form processing error:', error);
+					handleSubmissionError(error, elements);
+				}
+			});
+		});
+	};
 
-				const response = await fetch(
-					`${blockonsFormObj.apiUrl}blcns/v1/submit-form`,
-					{
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-						},
-						body: JSON.stringify(formData),
-					},
-				);
+	const setupInputListeners = (inputs) => {
+		inputs.forEach((input) => {
+			input.addEventListener('input', function () {
+				clearFieldError(this);
 
-				const data = await response.json();
+				// For checkbox groups, clear group error when any checkbox is clicked
+				if (this.type === 'checkbox') {
+					const checkboxGroup = this.closest(
+						'.blockons-form-checkbox',
+					);
+					if (checkboxGroup) {
+						const groupError =
+							checkboxGroup.querySelector('.field-error');
+						if (groupError) {
+							groupError.remove();
+						}
+					}
+				}
+			});
 
-				if (response.ok) {
-					// Clear form
-					inputs.forEach((input) => (input.value = ''));
-					// Show success message
-					successMsg.style.display = 'block';
-					successMsg.scrollIntoView({
+			// Add change event listener specifically for checkboxes
+			if (input.type === 'checkbox') {
+				input.addEventListener('change', function () {
+					const checkboxGroup = this.closest(
+						'.blockons-form-checkbox',
+					);
+					if (checkboxGroup) {
+						const groupName = this.getAttribute('name').replace(
+							'[]',
+							'',
+						);
+						const allCheckboxes = checkboxGroup.querySelectorAll(
+							`input[name="${groupName}[]"]`,
+						);
+						const isRequired = Array.from(allCheckboxes).some(
+							(cb) => cb.required,
+						);
+						const hasChecked = Array.from(allCheckboxes).some(
+							(cb) => cb.checked,
+						);
+
+						// Clear error if at least one is checked
+						if (hasChecked) {
+							const groupError =
+								checkboxGroup.querySelector('.field-error');
+							if (groupError) {
+								groupError.remove();
+							}
+						}
+					}
+				});
+			}
+		});
+	};
+
+	const validateForm = (form, inputs) => {
+		console.log('Starting form validation');
+
+		// Clear existing errors
+		form.querySelectorAll('.field-error').forEach((el) => el.remove());
+
+		let isValid = true;
+		let firstErrorField = null;
+
+		// Collect fields data
+		const fields = collectFieldData(form);
+		console.log('Collected fields:', fields);
+
+		if (!fields || fields.length === 0) {
+			console.error('No fields found in form');
+			return { isValid: false, fields: [] };
+		}
+
+		fields.forEach((fieldData) => {
+			const input =
+				form.querySelector(`[name="${fieldData.name}"]`) ||
+				form.querySelector(`[name="${fieldData.name}[]"]`);
+
+			if (!input) {
+				console.error('Input not found for field:', fieldData);
+				return;
+			}
+
+			console.log('Validating field:', fieldData.name);
+			if (!validateField(input, fieldData)) {
+				isValid = false;
+				if (!firstErrorField) {
+					firstErrorField = input;
+				}
+			}
+		});
+
+		if (firstErrorField) {
+			firstErrorField.scrollIntoView({
+				behavior: 'smooth',
+				block: 'center',
+			});
+		}
+
+		return { isValid, fields };
+	};
+
+	const submitForm = async (form, elements, originalBtnText) => {
+		// Check if elements object and submit button exist
+		if (!elements || !elements.submitBtn) {
+			console.error('Form elements not properly initialized', {
+				elements,
+			});
+			return;
+		}
+
+		try {
+			// Debug form state
+			console.log('Starting form submission', {
+				form,
+				elements,
+				originalBtnText,
+			});
+
+			// Disable submit button and update text
+			elements.submitBtn.disabled = true;
+			elements.submitBtn.textContent =
+				translations.sending || 'Sending...';
+
+			// Clear previous messages
+			if (elements.successMsg) elements.successMsg.style.display = 'none';
+			if (elements.errorMsg) elements.errorMsg.style.display = 'none';
+
+			// Get form wrapper
+			const wrapper = form.closest('.blockons-cf-wrap');
+			if (!wrapper) {
+				throw new Error('Form wrapper not found');
+			}
+
+			// Debug wrapper data
+			console.log('Form wrapper data:', {
+				emailTo: wrapper.dataset.emailTo,
+				formName: wrapper.dataset.formName,
+				emailSubject: wrapper.dataset.emailSubject,
+				fromName: wrapper.dataset.fromName,
+				fromEmail: wrapper.dataset.fromEmail,
+				ccEmails: wrapper.dataset.ccEmails,
+				bccEmails: wrapper.dataset.bccEmails,
+				includeMetadata: wrapper.dataset.includeMetadata,
+			});
+
+			// Validate form first
+			console.log('Validating form...');
+			const { isValid, fields } = validateForm(form, elements.inputs);
+
+			if (!isValid) {
+				console.error('Form validation failed');
+				if (elements.errorMsg) {
+					elements.errorMsg.style.display = 'block';
+					elements.errorMsg.scrollIntoView({
 						behavior: 'smooth',
 						block: 'center',
 					});
-				} else {
-					throw new Error(data.message || 'Form submission failed');
 				}
-			} catch (error) {
-				console.error('Form submission error:', error);
-				errorMsg.textContent =
-					error.message || 'An error occurred. Please try again.';
-				errorMsg.style.display = 'block';
-				errorMsg.scrollIntoView({
-					behavior: 'smooth',
-					block: 'center',
-				});
-			} finally {
-				// Reset submit button
-				submitBtn.disabled = false;
-				submitBtn.textContent = originalBtnText;
+				throw new Error('Form validation failed');
 			}
-		});
-	});
+
+			if (!fields || fields.length === 0) {
+				console.error('No form fields collected');
+				throw new Error('No form fields found');
+			}
+
+			console.log('Form validation passed. Fields:', fields);
+
+			// Prepare form data
+			console.log('Preparing form data...');
+			const formData = new FormData();
+
+			// Add main form data
+			formData.append('emailTo', wrapper.dataset.emailTo || '');
+			formData.append('formName', wrapper.dataset.formId || '');
+			formData.append(
+				'emailSubject',
+				wrapper.dataset.emailSubject || translations.subject,
+			);
+			formData.append('fromName', wrapper.dataset.fromName || '');
+			formData.append('fromEmail', wrapper.dataset.fromEmail || '');
+			formData.append('ccEmails', wrapper.dataset.ccEmails || '');
+			formData.append('bccEmails', wrapper.dataset.bccEmails || '');
+			formData.append(
+				'includeMetadata',
+				wrapper.dataset.includeMetadata === 'true',
+			);
+
+			// Add fields data
+			console.log('Adding fields to FormData:', fields);
+			formData.append('fields', JSON.stringify(fields));
+
+			// Handle file uploads
+			const fileFields = fields.filter(
+				(field) => field.type === 'file' && field.value,
+			);
+			fileFields.forEach((field, index) => {
+				const input = form.querySelector(`[name="${field.name}"]`);
+				if (input && input.files.length > 0) {
+					formData.append(`file_${index}`, input.files[0]);
+					console.log(`Added file: ${input.files[0].name}`);
+				}
+			});
+
+			// Log the final FormData
+			console.log('Final FormData entries:');
+			for (let pair of formData.entries()) {
+				console.log(pair[0], pair[1]);
+			}
+
+			// Submit the form
+			console.log(
+				'Submitting to:',
+				`${blockonsFormObj.apiUrl}blcns/v1/submit-form`,
+			);
+			const response = await fetch(
+				`${blockonsFormObj.apiUrl}blcns/v1/submit-form`,
+				{
+					method: 'POST',
+					body: formData,
+				},
+			);
+
+			console.log('Response status:', response.status);
+			const data = await response.json();
+			console.log('Response data:', data);
+
+			if (!response.ok) {
+				throw new Error(data.message || translations.error);
+			}
+
+			// Handle successful submission
+			console.log('Form submitted successfully');
+			handleSuccessfulSubmission(form, elements);
+		} catch (error) {
+			console.error('Form submission error details:', {
+				message: error.message,
+				stack: error.stack,
+				error,
+			});
+			handleSubmissionError(error, elements);
+		} finally {
+			// Always re-enable submit button and restore text
+			if (elements && elements.submitBtn) {
+				elements.submitBtn.disabled = false;
+				elements.submitBtn.textContent = originalBtnText || '';
+			}
+		}
+	};
+
+	// Helper function for successful submission
+	const handleSuccessfulSubmission = (form, elements) => {
+		if (!form || !elements) return;
+
+		// Clear form
+		form.reset();
+
+		// Show success message if it exists
+		if (elements.successMsg) {
+			elements.successMsg.style.display = 'block';
+			elements.successMsg.scrollIntoView({
+				behavior: 'smooth',
+				block: 'center',
+			});
+		}
+	};
+
+	// Helper function for submission errors
+	const handleSubmissionError = (error, elements) => {
+		if (!elements) return;
+
+		// Show error message if it exists
+		if (elements.errorMsg) {
+			elements.errorMsg.textContent = error.message || translations.error;
+			elements.errorMsg.style.display = 'block';
+			elements.errorMsg.scrollIntoView({
+				behavior: 'smooth',
+				block: 'center',
+			});
+		}
+	};
+
+	// Initialize form processing
+	processForms();
 });
-
-// Helper functions
-function showFieldError(input, message) {
-	const fieldWrapper = input.closest('.form-field');
-	const existingError = fieldWrapper?.querySelector('.field-error');
-	if (existingError) {
-		existingError.remove();
-	}
-
-	const errorDiv = document.createElement('div');
-	errorDiv.className = 'field-error';
-	errorDiv.textContent = message;
-	errorDiv.setAttribute('role', 'alert');
-	errorDiv.setAttribute('aria-live', 'polite');
-	input.setAttribute('aria-invalid', 'true');
-
-	if (fieldWrapper) {
-		fieldWrapper.appendChild(errorDiv);
-	}
-}
-
-function isValidEmail(email) {
-	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-	return emailRegex.test(email);
-}
-
-function isValidUrl(url) {
-	try {
-		const parsed = new URL(url);
-		return parsed.protocol === 'http:' || parsed.protocol === 'https:';
-	} catch {
-		return false;
-	}
-}

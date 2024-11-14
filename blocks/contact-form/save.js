@@ -1,6 +1,3 @@
-/**
- * WordPress dependencies
- */
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
@@ -31,13 +28,24 @@ const Save = ({ attributes }) => {
 		className: `blockons-contact-form ${align}-align alignment-${alignment}`,
 	});
 
-	// Store shortcodes data as a hidden input
 	const shortcodesData = Array.isArray(availableShortcodes)
-		? availableShortcodes.map((shortcode) => ({
-				code: shortcode.code,
-				fieldId: shortcode.fieldId,
+		? availableShortcodes.map(({ code, fieldId }) => ({
+				code,
+				fieldId,
 			}))
 		: [];
+
+	console.log('Form attributes:', {
+		emailTo,
+		formName,
+		emailSubject,
+		fromEmail,
+		fromName,
+		ccEmails,
+		bccEmails,
+		includeMetadata,
+		shortcodesData,
+	});
 
 	return (
 		<div {...blockProps}>
@@ -46,16 +54,18 @@ const Save = ({ attributes }) => {
 				style={{ width: formWidth }}
 				data-email-to={emailTo || ''}
 				data-email-subject={
-					emailSubject || 'Email from website contact form'
+					emailSubject || 'New Contact Form Submission'
 				}
 				data-from-email={fromEmail || ''}
 				data-from-name={fromName || ''}
 				data-cc-emails={ccEmails || ''}
 				data-bcc-emails={bccEmails || ''}
-				data-include-metadata={includeMetadata || false}
+				data-include-metadata={includeMetadata ? 'true' : 'false'}
+				data-form-id={formName || ''}
 				data-shortcodes={JSON.stringify(shortcodesData)}
+				data-debug="true"
 			>
-				<form className="blockons-cf-form" data-form-id={formName}>
+				<form className="blockons-cf-form">
 					<input
 						type="hidden"
 						name="action"
@@ -82,7 +92,7 @@ const Save = ({ attributes }) => {
 							}}
 						>
 							<button
-								type="submit"
+								type="button"
 								className="blockons-cf-submit-btn"
 								style={{
 									backgroundColor: buttonColor,
