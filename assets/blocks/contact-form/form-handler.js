@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
+	// Initialize all datepickers
+	const datepickers = document.querySelectorAll('.blockons-datepicker');
+	datepickers.forEach((input) => {
+		flatpickr(input, {
+			enableTime: input.dataset.enableTime === 'true',
+			dateFormat: input.dataset.dateFormat || 'Y-m-d',
+			minDate: input.dataset.minDate || undefined,
+			maxDate: input.dataset.maxDate || undefined,
+			disableMobile: true,
+		});
+	});
+
 	// Initialize reCAPTCHA if enabled
 	const recaptchaEnabled = blockonsFormObj.recaptcha || false;
 	const recaptchaSiteKey = blockonsFormObj.recaptcha_key || '';
@@ -161,6 +173,29 @@ document.addEventListener('DOMContentLoaded', function () {
 						required: input.required,
 					});
 				}
+			} else if (input.type === 'radio') {
+				// Get all radio buttons in this group
+				const groupInputs = form.querySelectorAll(
+					`input[name="${input.name}"]`,
+				);
+				const selectedRadio = Array.from(groupInputs).find(
+					(radio) => radio.checked,
+				);
+
+				fields.push({
+					name: input.name,
+					label: label,
+					value: selectedRadio
+						? {
+								value: selectedRadio.value,
+								label:
+									selectedRadio.nextElementSibling?.textContent.trim() ||
+									selectedRadio.value,
+							}
+						: null,
+					type: 'radio_group',
+					required: input.required,
+				});
 			} else {
 				// Handle text, email, textarea, select, etc.
 				fields.push({
@@ -224,6 +259,24 @@ document.addEventListener('DOMContentLoaded', function () {
 					return false;
 				}
 				return true;
+			}
+			return true;
+		}
+
+		if (fieldData.type === 'radio_group') {
+			const groupInputs = input
+				.closest('form')
+				.querySelectorAll(`input[name="${fieldData.name}"]`);
+			const hasSelection = Array.from(groupInputs).some(
+				(radio) => radio.checked,
+			);
+
+			if (!hasSelection && fieldData.required) {
+				showFieldError(
+					input.closest('.radio-group'),
+					translations.select_option,
+				);
+				return false;
 			}
 			return true;
 		}

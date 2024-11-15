@@ -1,4 +1,38 @@
 /**
+ * Inserter PRO Tag
+ */
+body.blockons-free
+	.block-editor-inserter__panel-content
+	.components-button.editor-block-list-item-blockons-form-file-upload
+	.block-editor-block-types-list__item-title
+	span.components-truncate::after,
+body.blockons-free
+	.block-editor-inserter__panel-content
+	.components-button.editor-block-list-item-blockons-form-datepicker
+	.block-editor-block-types-list__item-title
+	span.components-truncate::after,
+body.blockons-free
+	.block-editor-inserter__panel-content
+	.components-button.editor-block-list-item-blockons-form-checkbox
+	.block-editor-block-types-list__item-title
+	span.components-truncate::after,
+body.blockons-free
+	.block-editor-inserter__panel-content
+	.components-button.editor-block-list-item-blockons-form-radio
+	.block-editor-block-types-list__item-title
+	span.components-truncate::after {
+	display: inline-block;
+	content: 'PRO';
+	margin: 2px 0 0 4px;
+	padding: 2px 5px;
+	background-color: #fffafa;
+	border: 1px solid #feabab;
+	color: #c61818;
+	border-radius: 4px;
+	font-size: 10px;
+	font-weight: bold;
+}
+/**
  * Settings Divider
  */
 .blockons-divider {

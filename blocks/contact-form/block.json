@@ -16,14 +16,6 @@
 			"type": "boolean",
 			"default": false
 		},
-		"emailForm": {
-			"type": "boolean",
-			"default": false
-		},
-		"newsletterSignup": {
-			"type": "boolean",
-			"default": false
-		},
 		"formWidth": {
 			"type": "number",
 			"default": "400px"

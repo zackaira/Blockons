@@ -36,19 +36,19 @@ const getFieldClasses = (baseClass, width) => {
 
 const generateGroupId = (label) => {
 	return label
-		? `form-checkbox-group-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`
-		: `form-checkbox-group-${Math.random().toString(36).substring(7)}`;
+		? `form-radio-group-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`
+		: `form-radio-group-${Math.random().toString(36).substring(7)}`;
 };
 
 const createDefaultOption = (index) => ({
 	value: `option-${index + 1}`,
 	label: `Option ${index + 1}`,
-	checked: false,
+	selected: index === 0, // First option selected by default
 });
 
-registerBlockType('blockons/form-checkbox', {
-	title: __('Form Checkbox Group', 'blockons'),
-	icon: 'button',
+registerBlockType('blockons/form-radio', {
+	title: __('Form Radio Group', 'blockons'),
+	icon: 'marker',
 	parent: ['blockons/contact-form'],
 	attributes: {
 		isPremium: {
@@ -57,7 +57,7 @@ registerBlockType('blockons/form-checkbox', {
 		},
 		label: {
 			type: 'string',
-			default: __('Checkbox Group', 'blockons'),
+			default: __('Radio Group', 'blockons'),
 		},
 		description: {
 			type: 'string',
@@ -145,7 +145,7 @@ registerBlockType('blockons/form-checkbox', {
 		} = attributes;
 
 		const blockProps = useBlockProps({
-			className: getFieldClasses('blockons-form-checkbox', width),
+			className: getFieldClasses('blockons-form-radio', width),
 		});
 
 		const groupId = useMemo(() => generateGroupId(label), [label]);
@@ -162,7 +162,7 @@ registerBlockType('blockons/form-checkbox', {
 			[labelColor, labelSize, labelSpacing, showLabels],
 		);
 
-		const checkboxGroupStyles = useMemo(
+		const radioGroupStyles = useMemo(
 			() => ({
 				display: inline ? 'flex' : 'block',
 				flexWrap: inline ? 'wrap' : undefined,
@@ -183,9 +183,12 @@ registerBlockType('blockons/form-checkbox', {
 		};
 
 		const removeOption = (index) => {
-			setAttributes({
-				options: options.filter((_, i) => i !== index),
-			});
+			const newOptions = options.filter((_, i) => i !== index);
+			// Ensure at least one option is selected after removal
+			if (options[index].selected && newOptions.length > 0) {
+				newOptions[0] = { ...newOptions[0], selected: true };
+			}
+			setAttributes({ options: newOptions });
 		};
 
 		const updateOption = (index, field, value) => {
@@ -196,11 +199,14 @@ registerBlockType('blockons/form-checkbox', {
 					label: value,
 					value: slugify(value),
 				};
-			} else if (field === 'checked') {
-				newOptions[index] = {
-					...newOptions[index],
-					checked: value,
-				};
+			} else if (field === 'selected') {
+				// Unselect all other options when one is selected
+				newOptions.forEach((option, i) => {
+					newOptions[i] = {
+						...option,
+						selected: i === index,
+					};
+				});
 			}
 			setAttributes({ options: newOptions });
 		};
@@ -234,7 +240,7 @@ registerBlockType('blockons/form-checkbox', {
 						{
 							code,
 							label,
-							type: 'checkbox_group',
+							type: 'radio_group',
 							fieldId: clientId,
 						},
 					],
@@ -258,7 +264,7 @@ registerBlockType('blockons/form-checkbox', {
 				{isSelected && (
 					<InspectorControls>
 						<PanelBody
-							title={__('Checkbox Group Settings', 'blockons')}
+							title={__('Radio Group Settings', 'blockons')}
 							initialOpen={true}
 						>
 							<TextControl
@@ -280,7 +286,7 @@ registerBlockType('blockons/form-checkbox', {
 							<ToggleControl
 								label={__('Required', 'blockons')}
 								help={__(
-									'At least one option must be selected',
+									'One option must be selected',
 									'blockons',
 								)}
 								checked={required}
@@ -293,13 +299,6 @@ registerBlockType('blockons/form-checkbox', {
 								checked={inline}
 								onChange={(value) =>
 									setAttributes({ inline: value })
-								}
-							/>
-							<ToggleControl
-								label={__('Option Box', 'blockons')}
-								checked={optionBox}
-								onChange={(value) =>
-									setAttributes({ optionBox: value })
 								}
 							/>
 							<div className="blockons-divider" />
@@ -322,6 +321,13 @@ registerBlockType('blockons/form-checkbox', {
 								}
 								min={0}
 								max={60}
+							/>
+							<ToggleControl
+								label={__('Option Box', 'blockons')}
+								checked={optionBox}
+								onChange={(value) =>
+									setAttributes({ optionBox: value })
+								}
 							/>
 							<div className="blockons-divider" />
 
@@ -347,29 +353,33 @@ registerBlockType('blockons/form-checkbox', {
 										/>
 										<ToggleControl
 											label={__(
-												'Checked by Default',
+												'Selected by Default',
 												'blockons',
 											)}
-											checked={option.checked}
+											checked={option.selected}
 											onChange={(value) =>
 												updateOption(
 													index,
-													'checked',
+													'selected',
 													value,
 												)
 											}
 										/>
-										<Button
-											isDestructive
-											onClick={() => removeOption(index)}
-											className="blockons-cf-remove-option"
-											aria-label={__(
-												'Remove option',
-												'blockons',
-											)}
-										>
-											×
-										</Button>
+										{options.length > 1 && (
+											<Button
+												isDestructive
+												onClick={() =>
+													removeOption(index)
+												}
+												className="blockons-cf-remove-option"
+												aria-label={__(
+													'Remove option',
+													'blockons',
+												)}
+											>
+												×
+											</Button>
+										)}
 									</div>
 								))}
 
@@ -394,15 +404,15 @@ registerBlockType('blockons/form-checkbox', {
 					}}
 				>
 					<label
-						className="form-label checkbox-label"
+						className="form-label radio-label"
 						style={labelStyles}
 					>
 						<RichText
 							tagName="p"
-							placeholder={__('Checkbox Group Label', 'blockons')}
+							placeholder={__('Radio Group Label', 'blockons')}
 							value={label}
 							multiline={false}
-							className="checkbox-group-label-txt"
+							className="radio-group-label-txt"
 							onChange={(value) =>
 								setAttributes({ label: value })
 							}
@@ -419,11 +429,11 @@ registerBlockType('blockons/form-checkbox', {
 						<RichText
 							tagName="div"
 							placeholder={__(
-								'Checkbox Group Description',
+								'Radio Group Description',
 								'blockons',
 							)}
 							value={description}
-							className="form-description checkbox-description"
+							className="form-description radio-description"
 							onChange={(value) =>
 								setAttributes({ description: value })
 							}
@@ -432,16 +442,16 @@ registerBlockType('blockons/form-checkbox', {
 					)}
 
 					<div
-						className="checkbox-group"
-						style={checkboxGroupStyles}
-						role="group"
+						className="radio-group"
+						style={radioGroupStyles}
+						role="radiogroup"
 						aria-labelledby={groupId}
 						data-group-name={groupId}
 					>
 						{options.map((option, index) => (
 							<div
 								key={index}
-								className={`checkbox-option ${optionBox ? 'box' : ''}`}
+								className={`radio-option ${optionBox ? 'box' : ''}`}
 								style={
 									inline
 										? { marginLeft: `${optionSpacing}px` }
@@ -449,15 +459,15 @@ registerBlockType('blockons/form-checkbox', {
 								}
 							>
 								<input
-									type="checkbox"
+									type="radio"
 									id={`${groupId}-${option.value}`}
-									name={`${groupId}[]`}
+									name={groupId}
 									value={option.value}
-									checked={option.checked}
+									checked={option.selected}
 									onChange={(e) =>
 										updateOption(
 											index,
-											'checked',
+											'selected',
 											e.target.checked,
 										)
 									}
@@ -480,7 +490,6 @@ registerBlockType('blockons/form-checkbox', {
 			</div>
 		);
 	},
-
 	save: ({ attributes }) => {
 		const {
 			label,
@@ -502,7 +511,7 @@ registerBlockType('blockons/form-checkbox', {
 		} = attributes;
 
 		const blockProps = useBlockProps.save({
-			className: getFieldClasses('blockons-form-checkbox', width),
+			className: getFieldClasses('blockons-form-radio', width),
 		});
 
 		const groupId = generateGroupId(label);
@@ -515,7 +524,7 @@ registerBlockType('blockons/form-checkbox', {
 			display: showLabels ? 'flex' : 'none',
 		};
 
-		const checkboxGroupStyles = {
+		const radioGroupStyles = {
 			display: inline ? 'flex' : 'block',
 			flexWrap: inline ? 'wrap' : undefined,
 			gap: inline
@@ -536,7 +545,7 @@ registerBlockType('blockons/form-checkbox', {
 					}}
 				>
 					<label
-						className="form-label checkbox-label"
+						className="form-label radio-label"
 						style={labelStyles}
 					>
 						<RichText.Content value={label} />
@@ -549,7 +558,7 @@ registerBlockType('blockons/form-checkbox', {
 
 					{description && (
 						<div
-							className="form-description checkbox-description"
+							className="form-description radio-description"
 							style={{
 								marginBottom: `${labelSpacing}px`,
 							}}
@@ -559,16 +568,16 @@ registerBlockType('blockons/form-checkbox', {
 					)}
 
 					<div
-						className="checkbox-group"
-						style={checkboxGroupStyles}
-						role="group"
+						className="radio-group"
+						style={radioGroupStyles}
+						role="radiogroup"
 						aria-labelledby={groupId}
 						data-group-name={groupId}
 					>
 						{options.map((option, index) => (
 							<div
 								key={index}
-								className={`checkbox-option ${optionBox ? 'box' : ''}`}
+								className={`radio-option ${optionBox ? 'box' : ''}`}
 								style={
 									inline
 										? { marginLeft: `${optionSpacing}px` }
@@ -576,13 +585,13 @@ registerBlockType('blockons/form-checkbox', {
 								}
 							>
 								<input
-									type="checkbox"
+									type="radio"
 									id={`${groupId}-${option.value}`}
-									name={`${groupId}[]`}
+									name={groupId}
 									value={option.value}
-									defaultChecked={option.checked}
-									required={required && index === 0}
-									data-default-checked={option.checked}
+									defaultChecked={option.selected}
+									required={required}
+									data-default-checked={option.selected}
 								/>
 								<label htmlFor={`${groupId}-${option.value}`}>
 									{option.label}

@@ -39,7 +39,7 @@ const FILE_TYPES = {
 };
 
 const MIN_FILE_SIZE = 1; // MB
-const MAX_FILE_SIZE = 50; // MB
+const MAX_FILE_SIZE = 10; // MB
 const DEFAULT_FILE_SIZE = 2; // MB
 
 // Utility functions
@@ -68,6 +68,10 @@ registerBlockType('blockons/form-file-upload', {
 	icon: 'upload',
 	parent: ['blockons/contact-form'],
 	attributes: {
+		isPremium: {
+			type: 'boolean',
+			default: false,
+		},
 		label: {
 			type: 'string',
 			default: __('Upload File', 'blockons'),
@@ -126,6 +130,7 @@ registerBlockType('blockons/form-file-upload', {
 		const { isSelected, attributes, setAttributes } = props;
 
 		const {
+			isPremium,
 			label,
 			required,
 			maxFileSize,
@@ -157,7 +162,7 @@ registerBlockType('blockons/form-file-upload', {
 				color: labelColor,
 				fontSize: `${labelSize}px`,
 				marginBottom: `${labelSpacing}px`,
-				display: showLabels ? 'block' : 'none',
+				display: showLabels ? 'flex' : 'none',
 			}),
 			[labelColor, labelSize, labelSpacing, showLabels],
 		);
@@ -198,6 +203,17 @@ registerBlockType('blockons/form-file-upload', {
 				inputTextColor,
 			],
 		);
+
+		if (!isPremium) {
+			return (
+				<div className="blockons-form-upgrade">
+					{__('This is a Premium Block feature', 'blockons')}{' '}
+					<a href={blockonsEditorObj.upgradeUrl} target="_blank">
+						{__('Upgrade', 'blockons')}
+					</a>
+				</div>
+			);
+		}
 
 		return (
 			<div {...blockProps}>
@@ -249,7 +265,7 @@ registerBlockType('blockons/form-file-upload', {
 								min={MIN_FILE_SIZE}
 								max={MAX_FILE_SIZE}
 								help={__(
-									'Please ensure server configurations allow uploads to this limit.',
+									'Please ensure server configurations allow uploads to this limit. Recommended maximum size is 2MB.',
 									'blockons',
 								)}
 							/>
@@ -307,6 +323,7 @@ registerBlockType('blockons/form-file-upload', {
 
 	save: ({ attributes }) => {
 		const {
+			isPremium,
 			label,
 			required,
 			maxFileSize,
@@ -330,6 +347,8 @@ registerBlockType('blockons/form-file-upload', {
 			),
 		});
 
+		console.log('FILE UPLOAD Save.js: ', isPremium);
+
 		const inputId = generateFileId(label);
 		const errorMessageId = `${inputId}-error`;
 		const selectedFileType =
@@ -339,7 +358,7 @@ registerBlockType('blockons/form-file-upload', {
 			color: labelColor,
 			fontSize: `${labelSize}px`,
 			marginBottom: `${labelSpacing}px`,
-			display: showLabels ? 'block' : 'none',
+			display: showLabels ? 'flex' : 'none',
 		};
 
 		const commonProps = {

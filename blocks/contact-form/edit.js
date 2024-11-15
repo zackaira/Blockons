@@ -28,7 +28,9 @@ const ALLOWED_BLOCKS = [
 	'blockons/form-select',
 	'blockons/form-acceptance',
 	'blockons/form-checkbox',
+	'blockons/form-radio',
 	'blockons/form-file-upload',
+	'blockons/form-datepicker',
 ];
 
 const EMAIL_LIMITS = {
@@ -144,7 +146,6 @@ const Edit = (props) => {
 	const {
 		attributes: {
 			isPremium,
-			newsletterSignup,
 			formWidth,
 			alignment,
 			align,
@@ -187,6 +188,10 @@ const Edit = (props) => {
 		className: `blockons-contact-form ${align}-align alignment-${alignment}`,
 	});
 
+	useEffect(() => {
+		setAttributes({ isPremium: isPro }); // SETS PREMIUM
+	}, []);
+
 	// Custom hooks for block operations
 	const { innerBlocksClientIds, getBlock } = useSelect(
 		(select) => ({
@@ -202,6 +207,7 @@ const Edit = (props) => {
 	// Memoized design settings
 	const getCurrentDesignSettings = useMemo(
 		() => ({
+			isPremium: isPremium,
 			columnSpacing: columnSpacing,
 			rowSpacing: rowSpacing,
 			showLabels: showLabels,
@@ -405,61 +411,60 @@ const Edit = (props) => {
 								</>
 							)} */}
 
-							<TextControl
-								label={__('CC Emails', 'blockons')}
-								help={__(
-									`Add up to ${EMAIL_LIMITS.ccEmails} emails separated by a comma`,
-									'blockons',
-								)}
-								value={ccEmails}
-								className={`${validateEmails(ccEmails, 'ccEmails') ? '' : 'has-error'}`}
-								onChange={(value) =>
-									setAttributes({ ccEmails: value })
-								}
-							/>
-							{ccEmails &&
-								!validateEmails(ccEmails, 'ccEmails') && (
-									<div className="components-form-field-help-text error-message">
-										{getEmailValidationMessage(
+							{isPremium && (
+								<>
+									<TextControl
+										label={__('CC Emails', 'blockons')}
+										help={__(
+											`Add up to ${EMAIL_LIMITS.ccEmails} emails separated by a comma`,
+											'blockons',
+										)}
+										value={ccEmails}
+										className={`${validateEmails(ccEmails, 'ccEmails') ? '' : 'has-error'}`}
+										onChange={(value) =>
+											setAttributes({ ccEmails: value })
+										}
+									/>
+									{ccEmails &&
+										!validateEmails(
 											ccEmails,
 											'ccEmails',
+										) && (
+											<div className="components-form-field-help-text error-message">
+												{getEmailValidationMessage(
+													ccEmails,
+													'ccEmails',
+												)}
+											</div>
 										)}
-									</div>
-								)}
 
-							<TextControl
-								label={__('BCC Emails', 'blockons')}
-								help={__(
-									`Add up to ${EMAIL_LIMITS.bccEmails} emails separated by a comma`,
-									'blockons',
-								)}
-								value={bccEmails}
-								className={`${validateEmails(bccEmails, 'bccEmails') ? '' : 'has-error'}`}
-								onChange={(value) =>
-									setAttributes({ bccEmails: value })
-								}
-							/>
-							{bccEmails &&
-								!validateEmails(bccEmails, 'bccEmails') && (
-									<div className="components-form-field-help-text error-message">
-										{getEmailValidationMessage(
+									<TextControl
+										label={__('BCC Emails', 'blockons')}
+										help={__(
+											`Add up to ${EMAIL_LIMITS.bccEmails} emails separated by a comma`,
+											'blockons',
+										)}
+										value={bccEmails}
+										className={`${validateEmails(bccEmails, 'bccEmails') ? '' : 'has-error'}`}
+										onChange={(value) =>
+											setAttributes({ bccEmails: value })
+										}
+									/>
+									{bccEmails &&
+										!validateEmails(
 											bccEmails,
 											'bccEmails',
+										) && (
+											<div className="components-form-field-help-text error-message">
+												{getEmailValidationMessage(
+													bccEmails,
+													'bccEmails',
+												)}
+											</div>
 										)}
-									</div>
-								)}
-							<div className="blockons-divider"></div>
-
-							<TextControl
-								label={__('Submit Button Text', 'blockons')}
-								value={submitButtonText}
-								onChange={(value) =>
-									setAttributes({
-										submitButtonText: value,
-									})
-								}
-							/>
-							<div className="blockons-divider"></div>
+									<div className="blockons-divider"></div>
+								</>
+							)}
 
 							<TextControl
 								label={__('Form Success Message', 'blockons')}
@@ -723,6 +728,17 @@ const Edit = (props) => {
 						)}
 
 						<div className="blockons-divider"></div>
+						<TextControl
+							label={__('Submit Button Text', 'blockons')}
+							value={submitButtonText}
+							onChange={(value) =>
+								setAttributes({
+									submitButtonText: value,
+								})
+							}
+						/>
+						<div className="blockons-divider"></div>
+
 						<BlockonsColorpicker
 							label={__('Submit Button Color', 'blockons')}
 							value={buttonColor}

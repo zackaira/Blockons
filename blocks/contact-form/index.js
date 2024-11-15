@@ -19,7 +19,9 @@ import './input-textarea';
 import './input-select';
 import './input-acceptance';
 import './input-checkbox';
+import './input-radio';
 import './input-file-upload';
+import './input-datepicker';
 
 const { name } = json;
 

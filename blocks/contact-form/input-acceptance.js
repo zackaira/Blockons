@@ -115,12 +115,8 @@ registerBlockType('blockons/form-acceptance', {
 			width,
 			columnSpacing,
 			rowSpacing,
-			showLabels,
 			labelSize,
-			labelSpacing,
 			labelColor,
-			inputSize,
-			inputTextColor,
 		} = attributes;
 
 		const blockProps = useBlockProps({
@@ -243,7 +239,7 @@ registerBlockType('blockons/form-acceptance', {
 						</div>
 						<div className="acceptance-copy">
 							<label
-								className="acceptance-label"
+								className="form-label acceptance-label"
 								htmlFor={inputId}
 								style={{
 									marginBottom: description ? '4px' : '0',
@@ -283,7 +279,7 @@ registerBlockType('blockons/form-acceptance', {
 									)}
 									value={description}
 									multiline={false}
-									className="acceptance-description"
+									className="form-description acceptance-description"
 									onChange={(value) =>
 										setAttributes({ description: value })
 									}
@@ -387,7 +383,7 @@ registerBlockType('blockons/form-acceptance', {
 								<RichText.Content
 									tagName="div"
 									value={description}
-									className="acceptance-description"
+									className="form-description acceptance-description"
 								/>
 							)}
 						</div>

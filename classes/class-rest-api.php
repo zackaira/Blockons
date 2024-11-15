@@ -282,16 +282,8 @@ class Blockons_WC_Rest_Routes {
 		try {
 			// Initialize security manager
 			$security = Blockons_Security_Manager::get_instance();
-			
 			// Get client IP address
 			$ip_address = $this->get_client_ip();
-			
-			// Debug logging
-			if (defined('WP_DEBUG') && WP_DEBUG) {
-				error_log('Form submission request data: ' . print_r($request->get_params(), true));
-				error_log('Files received: ' . print_r($_FILES, true));
-				error_log('Client IP: ' . $ip_address);
-			}
 
 			// Validate request data
 			$form_data = $security->validate_request($request);
@@ -362,11 +354,6 @@ class Blockons_WC_Rest_Routes {
 
 			// Check if we're in development environment
 			if ($this->is_development_environment()) {
-				error_log('Development environment detected - skipping actual email sending');
-				error_log('Email would have been sent with:');
-				error_log('To: ' . implode(', ', $valid_emails));
-				error_log('Form data: ' . print_r($form_data, true));
-
 				// Save submission if enabled
 				if ($this->should_save_submission($options)) {
 					$email_result = [
@@ -469,10 +456,6 @@ class Blockons_WC_Rest_Routes {
 	 */
 	private function process_form_submission($form_data, $valid_emails) {
 		try {
-			// Debug incoming data
-			error_log('Processing form submission with data: ' . print_r($form_data, true));
-			error_log('Recipient emails: ' . print_r($valid_emails, true));
-	
 			// Prepare email components
 			$email_content = $this->prepare_email_content($form_data);
 			$headers = $this->prepare_email_headers($form_data);
@@ -480,12 +463,12 @@ class Blockons_WC_Rest_Routes {
 	
 			// Check if we're in a development environment
 			if ($this->is_development_environment()) {
-				error_log('Development environment detected - skipping actual email sending');
-				error_log('Email would have been sent with:');
-				error_log('To: ' . implode(', ', $valid_emails));
-				error_log('Subject: ' . $subject);
-				error_log('Content: ' . $email_content);
-				error_log('Headers: ' . print_r($headers, true));
+				// error_log('Development environment detected - skipping actual email sending');
+				// error_log('Email would have been sent with:');
+				// error_log('To: ' . implode(', ', $valid_emails));
+				// error_log('Subject: ' . $subject);
+				// error_log('Content: ' . $email_content);
+				// error_log('Headers: ' . print_r($headers, true));
 	
 				// Return success for development environment
 				return [
@@ -569,8 +552,6 @@ class Blockons_WC_Rest_Routes {
 			$uploads = [];
 			$upload_dir = wp_upload_dir();
 			$form_upload_dir = $upload_dir['basedir'] . '/blockons/form-uploads/' . date('Y/m');
-			
-			error_log('Starting file upload process...');
 	
 			// Create necessary directories
 			$dirs = [
@@ -581,7 +562,6 @@ class Blockons_WC_Rest_Routes {
 	
 			foreach ($dirs as $dir) {
 				if (!wp_mkdir_p($dir)) {
-					error_log('Failed to create directory: ' . $dir);
 					throw new Exception(__('Failed to create upload directory', 'blockons'));
 				}
 			}
@@ -594,8 +574,6 @@ class Blockons_WC_Rest_Routes {
 				if (in_array($key, $processed_files) || $file['error'] !== UPLOAD_ERR_OK) {
 					continue;
 				}
-	
-				error_log('Processing file: ' . $key);
 				
 				try {
 					// Basic validation
@@ -635,8 +613,6 @@ class Blockons_WC_Rest_Routes {
 					$mime_type = finfo_file($finfo, $file['tmp_name']);
 					finfo_close($finfo);
 	
-					error_log('File MIME type: ' . $mime_type);
-	
 					if (!isset($allowed_types[$mime_type])) {
 						throw new Exception(__('Invalid file type', 'blockons') . ': ' . $mime_type);
 					}
@@ -646,8 +622,6 @@ class Blockons_WC_Rest_Routes {
 					$filename = sanitize_file_name(pathinfo($file['name'], PATHINFO_FILENAME) . '.' . $file_extension);
 					$unique_filename = wp_unique_filename($form_upload_dir, $filename);
 					$upload_path = $form_upload_dir . '/' . $unique_filename;
-	
-					error_log('Attempting to move file to: ' . $upload_path);
 	
 					if (@move_uploaded_file($file['tmp_name'], $upload_path)) {
 						@chmod($upload_path, 0644);
@@ -683,15 +657,12 @@ class Blockons_WC_Rest_Routes {
 						}
 	
 						$processed_files[] = $key;
-						error_log('File uploaded successfully: ' . $file_url);
 					} else {
 						$upload_error = error_get_last();
-						error_log('Move failed. PHP error: ' . ($upload_error ? json_encode($upload_error) : 'No error details'));
 						throw new Exception(__('Failed to move uploaded file', 'blockons'));
 					}
 	
 				} catch (Exception $e) {
-					error_log('File upload error for ' . $key . ': ' . $e->getMessage());
 					throw $e;
 				}
 			}
@@ -699,7 +670,6 @@ class Blockons_WC_Rest_Routes {
 			return $uploads;
 	
 		} catch (Exception $e) {
-			error_log('File upload handler error: ' . $e->getMessage());
 			throw $e;
 		}
 	}
@@ -817,6 +787,22 @@ class Blockons_WC_Rest_Routes {
 						);
 						break;
 	
+					case 'radio_group':
+						if (!empty($field['value'])) {
+							$value = is_array($field['value']) ? 
+								(isset($field['value']['label']) ? 
+									esc_html($field['value']['label']) : 
+									esc_html($field['value']['value'])) : 
+								esc_html($field['value']);
+							
+							$compiled_message .= sprintf(
+								"%s: %s\n",
+								esc_html($label),
+								$value
+							);
+						}
+						break;
+						
 					case 'textarea':
 						$compiled_message .= sprintf(
 							"%s:\n%s\n",
@@ -903,11 +889,9 @@ class Blockons_WC_Rest_Routes {
 				}
 			}
 	
-			error_log('Prepared headers: ' . print_r($headers, true));
 			return $headers;
 	
 		} catch (Exception $e) {
-			error_log('Error preparing email headers: ' . $e->getMessage());
 			throw $e;
 		}
 	}
@@ -944,9 +928,6 @@ class Blockons_WC_Rest_Routes {
 	
 			// Clean the subject line
 			$processed_subject = wp_strip_all_tags(trim($processed_subject));
-	
-			error_log('Original subject: ' . $subject);
-			error_log('Processed subject: ' . $processed_subject);
 	
 			return $processed_subject;
 	
@@ -1022,11 +1003,14 @@ class Blockons_WC_Rest_Routes {
 	 */
 	private function process_shortcodes($content, $form_data) {
 		try {
+			$timezone = wp_timezone();
+			$current_datetime = new DateTime('now', $timezone);
+
 			// Initialize base shortcodes
 			$shortcodes = [
 				'form_name' => $form_data['formName'] ?? '',
-				'submission_date' => current_time('mysql'),
-				'submission_time' => current_time('mysql', true),
+				'submission_date' => $current_datetime->format('F j, Y'),
+				'submission_time' => $current_datetime->format('g:i a'),
 				'page_url' => $_SERVER['HTTP_REFERER'] ?? ''
 			];
 	
@@ -1061,9 +1045,6 @@ class Blockons_WC_Rest_Routes {
 				}
 			}
 	
-			error_log('Available shortcodes: ' . print_r($shortcodes, true));
-			error_log('Content before processing: ' . $content);
-	
 			// Replace all shortcodes
 			$processed_content = $content;
 			foreach ($shortcodes as $code => $value) {
@@ -1074,7 +1055,6 @@ class Blockons_WC_Rest_Routes {
 				);
 			}
 	
-			error_log('Content after processing: ' . $processed_content);
 			return $processed_content;
 	
 		} catch (Exception $e) {

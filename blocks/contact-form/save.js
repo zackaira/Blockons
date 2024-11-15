@@ -35,18 +35,6 @@ const Save = ({ attributes }) => {
 			}))
 		: [];
 
-	console.log('Form attributes:', {
-		emailTo,
-		formName,
-		emailSubject,
-		fromEmail,
-		fromName,
-		ccEmails,
-		bccEmails,
-		includeMetadata,
-		shortcodesData,
-	});
-
 	return (
 		<div {...blockProps}>
 			<div

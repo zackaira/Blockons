@@ -244,15 +244,25 @@ class Blockons_Security_Manager {
 
             // Handle field value based on type
             if (isset($field['value'])) {
-                $sanitized_field['value'] = $this->sanitize_field_value(
-                    $field['value'],
-                    $field['type'] ?? 'text'
-                );
+                if ($field['type'] === 'radio_group' && is_array($field['value'])) {
+                    $sanitized_field['value'] = [
+                        'value' => sanitize_text_field($field['value']['value'] ?? ''),
+                        'label' => sanitize_text_field($field['value']['label'] ?? '')
+                    ];
+                } else {
+                    $sanitized_field['value'] = $this->sanitize_field_value(
+                        $field['value'],
+                        $field['type'] ?? 'text'
+                    );
+                }
             }
 
-            // Handle checkbox specific data
+            // Handle checkbox/radio specific data
             if (isset($field['checked'])) {
                 $sanitized_field['checked'] = (bool)$field['checked'];
+            }
+            if (isset($field['selected'])) {
+                $sanitized_field['selected'] = (bool)$field['selected'];
             }
 
             $sanitized_fields[] = $sanitized_field;

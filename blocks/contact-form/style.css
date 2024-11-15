@@ -41,6 +41,10 @@
 .blockons-contact-form .blockons-cf-fields .form-field {
 	margin-bottom: 12px;
 }
+.blockons-contact-form .blockons-cf-fields .form-field label p {
+	margin: 0;
+	padding: 0;
+}
 /* - Cols - */
 .blockons-contact-form .blockons-cf-fields .col-100 {
 	width: 100%;
@@ -72,16 +76,25 @@
 	overflow: hidden;
 }
 .blockons-contact-form .blockons-cf-fields .form-field .form-label {
-	display: block;
+	display: flex;
 	margin: 0 0 5px;
 	font-size: 15px;
 }
 .blockons-contact-form .blockons-cf-fields .form-label span.required {
 	margin: 0 4px;
 }
+.blockons-contact-form .blockons-cf-fields .form-description {
+	font-size: 0.85em;
+	opacity: 0.8;
+	margin: 0 0 12px;
+}
 .blockons-contact-form .blockons-cf-fields .form-field input.form-input,
 .blockons-contact-form .blockons-cf-fields .form-field textarea.form-textarea,
-.blockons-contact-form .blockons-cf-fields .form-field select.form-select {
+.blockons-contact-form .blockons-cf-fields .form-field select.form-select,
+.blockons-contact-form
+	.blockons-cf-fields
+	.form-field
+	input.blockons-datepicker {
 	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
 	width: 100%;
 	max-width: 100%;
@@ -106,6 +119,7 @@
 	padding: 12px 24px;
 	font-size: 14px;
 	letter-spacing: 0.4px;
+	cursor: pointer;
 }
 .blockons-contact-form .blockons-cf--button .blockons-cf-submit-btn:hover {
 	filter: brightness(0.92);
@@ -139,6 +153,10 @@
 	color: #dc0606;
 	font-size: 0.85em;
 }
+.blockons-contact-form .blockons-cf-fields .form-field .checkbox-option input,
+.blockons-contact-form .blockons-cf-fields .form-field .radio-option input {
+	margin-right: 8px;
+}
 /* - Acceptance - */
 .blockons-form-acceptance .acceptance-wrap {
 	display: flex;
@@ -151,42 +169,7 @@
 .blockons-form-acceptance .acceptance-copy {
 	flex: 1;
 }
-.blockons-form-acceptance .acceptance-label {
-	display: flex;
-	gap: 5px;
-}
-.blockons-form-acceptance .acceptance-label .acceptance-label-txt {
-	margin: 0;
-	padding: 0;
-}
-.blockons-form-acceptance .acceptance-description {
-	font-size: 0.85em;
-	opacity: 0.8;
-	white-space: pre-wrap;
-	min-width: 1px;
-}
-/* - Checkboxes - */
-.blockons-form-checkbox .form-field .checkbox-label {
-	display: flex;
-	gap: 5px;
-}
-.blockons-form-checkbox .form-field .checkbox-label .checkbox-group-label-txt {
-	margin: 0;
-	padding: 0;
-}
-.blockons-form-checkbox .form-field .checkbox-group-description {
-	font-size: 0.85em;
-	opacity: 0.8;
-	white-space: pre-wrap;
-	min-width: 1px;
-	margin: 0 0 5px;
-}
 /* - File Upload - */
 .blockons-form-file-upload .form-field .file-upload-wrapper input {
 	background: none;
-}
-.blockons-form-file-upload .form-field .file-upload-wrapper .file-description {
-	font-size: 0.82em;
-	opacity: 0.82;
-	margin-top: 4px;
 }

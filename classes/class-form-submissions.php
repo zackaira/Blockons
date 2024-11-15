@@ -246,6 +246,33 @@ class Blockons_Form_Submissions {
                                         }
                                         break;
 
+                                    case 'radio_group':
+                                        if (is_array($field['value']) && isset($field['value']['label'])) {
+                                            echo esc_html($field['value']['label']);
+                                        } elseif (is_array($field['value']) && isset($field['value']['value'])) {
+                                            echo esc_html($field['value']['value']);
+                                        } else {
+                                            echo esc_html($field['value']);
+                                        }
+                                        break;
+
+                                    case 'date':
+                                        if (!empty($field['value'])) {
+                                            // Convert to local timezone if needed
+                                            $date_value = $field['value'];
+                                            if (DateTime::createFromFormat('Y-m-d', $date_value)) {
+                                                // Date only
+                                                echo esc_html(date_i18n(get_option('date_format'), strtotime($date_value)));
+                                            } elseif (DateTime::createFromFormat('Y-m-d H:i', $date_value)) {
+                                                // Date and time
+                                                echo esc_html(date_i18n(get_option('date_format') . ' ' . get_option('time_format'), strtotime($date_value)));
+                                            } else {
+                                                // Fallback
+                                                echo esc_html($date_value);
+                                            }
+                                        }
+                                        break;
+
                                     default:
                                         echo esc_html($field['value']);
                                 }
@@ -309,36 +336,6 @@ class Blockons_Form_Submissions {
             // var_dump('</pre>');
             ?>
         </div>
-        
-        <style>
-            .form-file-attachment {
-                display: flex;
-                align-items: center;
-                margin-bottom: 5px;
-                padding: 8px;
-                background: #f0f0f1;
-                border-radius: 4px;
-            }
-            .form-file-attachment .dashicons {
-                margin-right: 8px;
-                color: #666;
-            }
-            .form-file-attachment a {
-                text-decoration: none;
-                margin-right: 8px;
-            }
-            .form-file-attachment .file-meta {
-                color: #666;
-                font-size: 12px;
-            }
-            .checkbox-group-values {
-                margin: 0;
-                padding-left: 20px;
-            }
-            .checkbox-group-values li {
-                margin-bottom: 4px;
-            }
-        </style>
         <?php
     }
 
@@ -352,20 +349,17 @@ class Blockons_Form_Submissions {
             'doc' => 'dashicons-media-document',
             'docx' => 'dashicons-media-document',
             'txt' => 'dashicons-text',
-            
             // Images
             'jpg' => 'dashicons-format-image',
             'jpeg' => 'dashicons-format-image',
             'png' => 'dashicons-format-image',
             'gif' => 'dashicons-format-image',
             'webp' => 'dashicons-format-image',
-            
             // Audio/Video
             'mp3' => 'dashicons-format-audio',
             'wav' => 'dashicons-format-audio',
             'mp4' => 'dashicons-format-video',
         ];
-
         return isset($icon_map[$extension]) ? $icon_map[$extension] : 'dashicons-media-default';
     }
 

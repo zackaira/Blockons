@@ -139,3 +139,17 @@
 	color: rgb(117, 117, 117);
 	margin-bottom: revert;
 }
+
+/* -- Pro Upgrade Block -- */
+.blockons-form-upgrade {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	margin: 10px;
+	background-color: #fffafa;
+	border: 1px solid #feabab;
+	border-radius: 4px;
+	font-size: 13px;
+}

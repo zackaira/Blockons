@@ -79,8 +79,8 @@ if ( function_exists( 'blockons_fs' ) ) {
 	require_once 'classes/class-notices.php';
 	require_once 'classes/class-frontend.php';
 
+	// require_once 'classes/class-blockons-error-handler.php';
 	require_once 'classes/class-blockons-security.php';
-	require_once 'classes/class-blockons-error-handler.php';
 	require_once 'classes/class-form-submissions.php';
 
 	$blockonsDefaults = json_decode( get_option('blockons_default_options') );
