@@ -190,71 +190,73 @@ class Blockons_Form_Submissions {
         ?>
         <div class="form-submission-details">
             <table class="form-table form-details">
-                <?php
-                if (is_array($form_data) && !empty($form_data)) {
-                    foreach ($form_data as $field) {
-                        if (isset($field['label']) || isset($field['name'])) {
-                            $label = isset($field['label']) ? $field['label'] : $field['name'];
-                            ?>
-                            <tr>
-                                <th><label><?php echo esc_html($label); ?>:</label></th>
-                                <td>
-                                    <?php
-                                    switch ($field['type']) {
-                                        case 'textarea':
-                                            echo nl2br(esc_html($field['value']));
-                                            break;
+            <?php
+            if (is_array($form_data) && !empty($form_data)) {
+                foreach ($form_data as $field) {
+                    if (isset($field['label']) || isset($field['name'])) {
+                        $label = isset($field['label']) ? $field['label'] : $field['name'];
+                        ?>
+                        <tr>
+                            <th><label><?php echo esc_html($label); ?>:</label></th>
+                            <td>
+                                <?php
+                                switch ($field['type']) {
+                                    case 'textarea':
+                                        echo nl2br(esc_html($field['value']));
+                                        break;
+                                        
+                                    case 'file':
+                                        if (!empty($field['value']) && is_array($field['value'])) {
+                                            $file_info = $field['value'];
+                                            $file_url = isset($file_info['url']) ? $file_info['url'] : '';
+                                            $file_name = isset($file_info['name']) ? $file_info['name'] : basename($file_url);
+                                            $file_size = isset($file_info['size']) ? $file_info['size'] : 0;
+                                            $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
                                             
-                                        case 'file':
-                                            if (!empty($field['value'])) {
-                                                $file_url = $field['value'];
-                                                $file_name = basename($file_url);
-                                                $file_extension = strtolower(pathinfo($file_url, PATHINFO_EXTENSION));
-                                                
-                                                // Add icon based on file type
-                                                $icon_class = $this->get_file_icon_class($file_extension);
-                                                
-                                                echo sprintf(
-                                                    '<div class="form-file-attachment">
-                                                        <span class="dashicons %s"></span>
-                                                        <a href="%s" target="_blank">%s</a>
-                                                        <span class="file-meta">%s</span>
-                                                    </div>',
-                                                    esc_attr($icon_class),
-                                                    esc_url($file_url),
-                                                    esc_html($file_name),
-                                                    esc_html($this->format_file_size($field['size'] ?? 0))
-                                                );
-                                            }
-                                            break;
+                                            // Add icon based on file type
+                                            $icon_class = $this->get_file_icon_class($file_extension);
+                                            
+                                            echo sprintf(
+                                                '<div class="form-file-attachment">
+                                                    <span class="dashicons %s"></span>
+                                                    <a href="%s" target="_blank">%s</a>
+                                                    <span class="file-meta">%s</span>
+                                                </div>',
+                                                esc_attr($icon_class),
+                                                esc_url($file_url),
+                                                esc_html($file_name),
+                                                esc_html($this->format_file_size($file_size))
+                                            );
+                                        }
+                                        break;
 
-                                        case 'checkbox':
-                                            echo $field['value'] === '1' ? __('Yes', 'blockons') : __('No', 'blockons');
-                                            break;
+                                    case 'checkbox':
+                                        echo $field['value'] ? __('Yes', 'blockons') : __('No', 'blockons');
+                                        break;
 
-                                        case 'checkbox_group':
-                                            if (is_array($field['value'])) {
-                                                echo '<ul class="checkbox-group-values">';
-                                                foreach ($field['value'] as $checkbox) {
-                                                    if (isset($checkbox['label'])) {
-                                                        echo '<li>' . esc_html($checkbox['label']) . '</li>';
-                                                    }
+                                    case 'checkbox_group':
+                                        if (is_array($field['value'])) {
+                                            echo '<ul class="checkbox-group-values">';
+                                            foreach ($field['value'] as $checkbox) {
+                                                if (isset($checkbox['label'])) {
+                                                    echo '<li>' . esc_html($checkbox['label']) . '</li>';
                                                 }
-                                                echo '</ul>';
                                             }
-                                            break;
+                                            echo '</ul>';
+                                        }
+                                        break;
 
-                                        default:
-                                            echo esc_html($field['value']);
-                                    }
-                                    ?>
-                                </td>
-                            </tr>
-                            <?php
-                        }
+                                    default:
+                                        echo esc_html($field['value']);
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <?php
                     }
                 }
-                ?>
+            }
+            ?>
             </table>
 
             <div class="blockons-form-details">
@@ -302,9 +304,9 @@ class Blockons_Form_Submissions {
             </div>
 
             <?php
-            var_dump('<pre>');
-            var_dump($form_data);
-            var_dump('</pre>');
+            // var_dump('<pre>');
+            // var_dump($form_data);
+            // var_dump('</pre>');
             ?>
         </div>
         

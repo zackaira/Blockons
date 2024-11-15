@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	// Field data collection and validation
 	const collectFieldData = (form) => {
 		const fields = [];
-		const processedGroups = new Set();
+		const processedFields = new Set();
 
 		// Get all form inputs
 		const inputs = form.querySelectorAll(
@@ -84,12 +84,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		);
 
 		inputs.forEach((input) => {
-			// Skip if this is a checkbox in a group we've already processed
-			if (input.type === 'checkbox' && input.name.includes('[]')) {
-				const groupName = input.getAttribute('name').replace('[]', '');
-				if (processedGroups.has(groupName)) {
-					return;
-				}
+			// Skip if we've already processed this field
+			if (processedFields.has(input.name)) {
+				return;
 			}
 
 			const fieldWrapper = input.closest('.form-field');
@@ -101,6 +98,28 @@ document.addEventListener('DOMContentLoaded', function () {
 					?.textContent.replace('*', '')
 					.trim() || input.name;
 
+			// Handle file inputs specifically
+			if (input.type === 'file') {
+				console.log('File input found:', input);
+				const file = input.files[0];
+				fields.push({
+					name: input.name || input.id,
+					label: label,
+					value: file
+						? {
+								name: file.name,
+								size: file.size,
+								type: file.type,
+							}
+						: null,
+					type: 'file',
+					required: input.required,
+					maxSize: input.dataset.maxSize,
+					accept: input.accept,
+				});
+				return;
+			}
+
 			// Handle different input types
 			if (input.type === 'checkbox') {
 				// Check if this is part of a checkbox group
@@ -108,8 +127,8 @@ document.addEventListener('DOMContentLoaded', function () {
 					const groupName = input
 						.getAttribute('name')
 						.replace('[]', '');
-					if (!processedGroups.has(groupName)) {
-						processedGroups.add(groupName);
+					if (!processedFields.has(groupName)) {
+						processedFields.add(groupName);
 
 						// Get all checkboxes in this group
 						const groupInputs = form.querySelectorAll(
@@ -137,21 +156,11 @@ document.addEventListener('DOMContentLoaded', function () {
 					fields.push({
 						name: input.name || input.id,
 						label: label,
-						value: input.checked,
+						value: input.checked ? 1 : 0,
 						type: 'checkbox',
 						required: input.required,
 					});
 				}
-			} else if (input.type === 'file') {
-				fields.push({
-					name: input.name || input.id,
-					label: label,
-					value: input.files[0] || null,
-					type: 'file',
-					required: input.required,
-					maxSize: input.dataset.maxSize,
-					accept: input.accept,
-				});
 			} else {
 				// Handle text, email, textarea, select, etc.
 				fields.push({
@@ -162,6 +171,9 @@ document.addEventListener('DOMContentLoaded', function () {
 					required: input.required,
 				});
 			}
+
+			// Mark this field as processed
+			processedFields.add(input.name);
 		});
 
 		return fields;
@@ -542,19 +554,38 @@ document.addEventListener('DOMContentLoaded', function () {
 				wrapper.dataset.includeMetadata === 'true',
 			);
 
-			// Add fields data
-			console.log('Adding fields to FormData:', fields);
-			formData.append('fields', JSON.stringify(fields));
+			// Process and add fields data
+			const processedFields = fields.map((field) => {
+				if (field.type === 'file') {
+					const input = form.querySelector(`[name="${field.name}"]`);
+					if (input && input.files[0]) {
+						const file = input.files[0];
+						return {
+							...field,
+							value: {
+								name: file.name,
+								size: file.size,
+								type: file.type,
+							},
+						};
+					}
+				}
+				return field;
+			});
+
+			// Add processed fields to FormData
+			formData.append('fields', JSON.stringify(processedFields));
 
 			// Handle file uploads
-			const fileFields = fields.filter(
-				(field) => field.type === 'file' && field.value,
-			);
-			fileFields.forEach((field, index) => {
+			const fileFields = fields.filter((field) => field.type === 'file');
+			fileFields.forEach((field) => {
 				const input = form.querySelector(`[name="${field.name}"]`);
 				if (input && input.files.length > 0) {
-					formData.append(`file_${index}`, input.files[0]);
-					console.log(`Added file: ${input.files[0].name}`);
+					// Append the file using the field name instead of a generic index
+					formData.append(field.name, input.files[0]);
+					console.log(
+						`Added file: ${input.files[0].name} with field name: ${field.name}`,
+					);
 				}
 			});
 

@@ -101,51 +101,69 @@ class Blockons_Security_Manager {
      */
     public function validate_request($request) {
         try {
-            // Get request parameters - first try JSON, then form data
-            $params = $request->get_json_params();
-            if (empty($params)) {
-                $params = $request->get_params();
-                
-                // If we have fields as a string (from FormData), decode it
-                if (isset($params['fields']) && is_string($params['fields'])) {
-                    $params['fields'] = json_decode($params['fields'], true);
+            $form_data = $request->get_params();
+            
+            // Check if fields is a JSON string and decode it
+            if (isset($form_data['fields']) && is_string($form_data['fields'])) {
+                $decoded_fields = json_decode($form_data['fields'], true);
+                if (json_last_error() === JSON_ERROR_NONE) {
+                    $form_data['fields'] = $decoded_fields;
+                } else {
+                    throw new Exception('Invalid fields data format');
                 }
             }
     
-            if (empty($params)) {
-                return new WP_Error(
-                    'invalid_request',
-                    __('Invalid request data', 'blockons'),
-                    array('status' => 400)
+            // Debug the decoded data
+            error_log('Decoded form data: ' . print_r($form_data, true));
+    
+            // Validate required fields
+            $required_fields = ['emailTo', 'fields'];
+            foreach ($required_fields as $field) {
+                if (!isset($form_data[$field])) {
+                    throw new Exception("Missing required field: {$field}");
+                }
+            }
+    
+            // Validate email
+            if (!is_email($form_data['emailTo'])) {
+                throw new Exception('Invalid recipient email address');
+            }
+    
+            // Convert boolean strings to actual booleans
+            if (isset($form_data['includeMetadata'])) {
+                $form_data['includeMetadata'] = filter_var(
+                    $form_data['includeMetadata'], 
+                    FILTER_VALIDATE_BOOLEAN
                 );
             }
     
-            // Check for required fields
-            $required_fields = ['emailTo', 'fields'];
-            foreach ($required_fields as $field) {
-                if (empty($params[$field])) {
-                    return new WP_Error(
-                        'missing_required_field',
-                        sprintf(__('Missing required field: %s', 'blockons'), $field),
-                        array('status' => 400)
-                    );
+            // Convert fields array values
+            if (is_array($form_data['fields'])) {
+                foreach ($form_data['fields'] as &$field) {
+                    if (isset($field['required'])) {
+                        $field['required'] = filter_var(
+                            $field['required'], 
+                            FILTER_VALIDATE_BOOLEAN
+                        );
+                    }
+                    // Handle checkbox values
+                    if ($field['type'] === 'checkbox' && isset($field['value'])) {
+                        $field['value'] = filter_var(
+                            $field['value'], 
+                            FILTER_VALIDATE_BOOLEAN
+                        ) ? 1 : 0;
+                    }
                 }
             }
     
-            // Validate email addresses
-            $email_validation = $this->validate_email_addresses($params);
-            if (is_wp_error($email_validation)) {
-                return $email_validation;
-            }
-    
-            return $params;
+            return $form_data;
     
         } catch (Exception $e) {
             error_log('Form validation error: ' . $e->getMessage());
             return new WP_Error(
                 'validation_error',
-                __('An error occurred during form validation.', 'blockons'),
-                array('status' => 500)
+                $e->getMessage(),
+                array('status' => 400)
             );
         }
     }

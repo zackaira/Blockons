@@ -300,33 +300,18 @@ class Blockons_WC_Rest_Routes {
 			}
 
 			// Handle file uploads if present
-			try {
-				if (!empty($_FILES)) {
+			if (!empty($_FILES)) {
+				try {
+					// Note: handle_file_uploads will update $form_data['fields'] with file info
 					$uploads = $this->handle_file_uploads($form_data);
-					
-					// Update form data with file URLs
-					if (!empty($uploads)) {
-						foreach ($form_data['fields'] as &$field) {
-							if ($field['type'] === 'file') {
-								foreach ($uploads as $upload) {
-									if (isset($upload['originalName']) && $upload['originalName'] === $field['originalName']) {
-										$field['value'] = $upload['url'];
-										$field['size'] = $upload['size'];
-										$field['mimeType'] = $upload['type'];
-										break;
-									}
-								}
-							}
-						}
-					}
+				} catch (Exception $e) {
+					error_log('File upload error: ' . $e->getMessage());
+					return new WP_Error(
+						'upload_error',
+						$e->getMessage(),
+						array('status' => 400)
+					);
 				}
-			} catch (Exception $e) {
-				error_log('File upload error: ' . $e->getMessage());
-				return new WP_Error(
-					'upload_error',
-					$e->getMessage(),
-					array('status' => 400)
-				);
 			}
 
 			// Check submission rate
@@ -579,7 +564,7 @@ class Blockons_WC_Rest_Routes {
 	/**
 	 * Handle file uploads
 	 */
-	private function handle_file_uploads($form_data) {
+	private function handle_file_uploads(&$form_data) {
 		try {
 			$uploads = [];
 			$upload_dir = wp_upload_dir();
@@ -669,14 +654,33 @@ class Blockons_WC_Rest_Routes {
 	
 						$file_url = $upload_dir['baseurl'] . '/blockons/form-uploads/' . date('Y/m') . '/' . $unique_filename;
 						
-						$uploads[$key] = array(
-							'url' => $file_url,
+						// Store upload info
+						$file_data = array(
+							'url' => esc_url($file_url),
 							'file' => $upload_path,
 							'type' => $mime_type,
 							'name' => $filename,
 							'size' => $file['size'],
 							'originalName' => $file['name']
 						);
+						
+						$uploads[$key] = $file_data;
+	
+						// Update the corresponding field in form_data
+						if (!empty($form_data['fields'])) {
+							foreach ($form_data['fields'] as &$field) {
+								if ($field['type'] === 'file' && $field['name'] === $key) {
+									// Update the field value with file information
+									$field['value'] = array(
+										'name' => $filename,
+										'size' => $file['size'],
+										'type' => $mime_type,
+										'url' => esc_url($file_url)
+									);
+									break;
+								}
+							}
+						}
 	
 						$processed_files[] = $key;
 						error_log('File uploaded successfully: ' . $file_url);
@@ -773,16 +777,33 @@ class Blockons_WC_Rest_Routes {
 	
 					case 'file':
 						if (!empty($field['value'])) {
-							$compiled_message .= sprintf(
-								"%s: %s\n",
-								esc_html($label),
-								esc_url($field['value'])
-							);
-							
-							if (!empty($field['size'])) {
+							// Handle file value as array
+							if (is_array($field['value'])) {
 								$compiled_message .= sprintf(
-									"File Size: %s\n",
-									size_format($field['size'])
+									"%s: %s\n",
+									esc_html($label),
+									esc_url($field['value']['name'])
+								);
+								
+								if (!empty($field['value']['size'])) {
+									$compiled_message .= sprintf(
+										"File Size: %s\n",
+										size_format($field['value']['size'])
+									);
+								}
+								
+								if (!empty($field['value']['type'])) {
+									$compiled_message .= sprintf(
+										"File Type: %s\n",
+										esc_html($field['value']['type'])
+									);
+								}
+							} else {
+								// Handle file value as string (URL)
+								$compiled_message .= sprintf(
+									"%s: %s\n",
+									esc_html($label),
+									esc_url($field['value'])
 								);
 							}
 						}

@@ -166,8 +166,6 @@
 	min-width: 1px;
 }
 /* - Checkboxes - */
-.blockons-form-checkbox .form-field {
-}
 .blockons-form-checkbox .form-field .checkbox-label {
 	display: flex;
 	gap: 5px;
@@ -183,17 +181,7 @@
 	min-width: 1px;
 	margin: 0 0 5px;
 }
-.blockons-form-checkbox .form-field .checkbox-group {
-}
-.blockons-form-checkbox .form-field .checkbox-group .checkbox-option {
-}
 /* - File Upload - */
-.blockons-form-file-upload .form-field {
-}
-.blockons-form-file-upload .form-field .form-label {
-}
-.blockons-form-file-upload .form-field .file-upload-wrapper {
-}
 .blockons-form-file-upload .form-field .file-upload-wrapper input {
 	background: none;
 }
