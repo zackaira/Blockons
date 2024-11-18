@@ -279,6 +279,8 @@ class Blockons_WC_Rest_Routes {
 	 * Handle Form Submission for Contact Form Block
 	 */
 	public function blockons_handle_contact_form_submission($request) {
+		$isPremium = (bool) blockons_fs()->can_use_premium_code__premium_only();
+
 		try {
 			// Initialize security manager
 			$security = Blockons_Security_Manager::get_instance();
@@ -344,7 +346,7 @@ class Blockons_WC_Rest_Routes {
 			}
 
 			// Process reCAPTCHA if enabled
-			if ($this->should_verify_recaptcha($options)) {
+			if ($isPremium && $this->should_verify_recaptcha($options)) {
 				$recaptcha_token = isset($form_data['recaptchaToken']) ? $form_data['recaptchaToken'] : '';
 				$recaptcha_result = $this->verify_recaptcha($recaptcha_token, $options);
 				if (is_wp_error($recaptcha_result)) {
@@ -355,7 +357,7 @@ class Blockons_WC_Rest_Routes {
 			// Check if we're in development environment
 			if ($this->is_development_environment()) {
 				// Save submission if enabled
-				if ($this->should_save_submission($options)) {
+				if ($isPremium && $this->should_save_submission($options)) {
 					$email_result = [
 						'content' => $this->prepare_email_content($form_data),
 						'headers' => $this->prepare_email_headers($form_data),
@@ -380,7 +382,7 @@ class Blockons_WC_Rest_Routes {
 			}
 
 			// Save submission if enabled
-			if ($this->should_save_submission($options)) {
+			if ($isPremium && $this->should_save_submission($options)) {
 				$this->save_form_submission($form_data, $email_result);
 			}
 
@@ -733,7 +735,7 @@ class Blockons_WC_Rest_Routes {
 	
 				switch ($type) {
 					case 'checkbox_group':
-						if (is_array($field['value'])) {
+						if (is_array($field['value']) && !empty($field['value'])) {
 							$values = array_map(function($item) {
 								return isset($item['label']) ? esc_html($item['label']) : esc_html($item['value']);
 							}, $field['value']);
@@ -741,6 +743,12 @@ class Blockons_WC_Rest_Routes {
 								"%s: %s\n",
 								esc_html($label),
 								implode(', ', $values)
+							);
+						} elseif ($field['required']) {
+							$compiled_message .= sprintf(
+								"%s: %s\n",
+								esc_html($label),
+								__('No options selected', 'blockons')
 							);
 						}
 						break;

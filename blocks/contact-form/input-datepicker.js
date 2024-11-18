@@ -88,6 +88,10 @@ registerBlockType('blockons/form-datepicker', {
 			type: 'string',
 			default: '100',
 		},
+		placeholder: {
+			type: 'string',
+			default: __('Select date...', 'blockons'),
+		},
 		columnSpacing: {
 			type: 'number',
 			default: 4,
@@ -158,6 +162,7 @@ registerBlockType('blockons/form-datepicker', {
 			columnSpacing,
 			rowSpacing,
 			showLabels,
+			placeholder,
 			labelSize,
 			labelSpacing,
 			labelColor,
@@ -268,6 +273,15 @@ registerBlockType('blockons/form-datepicker', {
 								value={description}
 								onChange={(value) =>
 									setAttributes({ description: value })
+								}
+							/>
+							<div className="blockons-divider" />
+
+							<TextControl
+								label={__('Input Placeholder Text', 'blockons')}
+								value={placeholder}
+								onChange={(value) =>
+									setAttributes({ placeholder: value })
 								}
 							/>
 							<div className="blockons-divider" />
@@ -467,7 +481,7 @@ registerBlockType('blockons/form-datepicker', {
 						}}
 						className="blockons-datepicker"
 						style={inputStyles}
-						placeholder={__('Select date...', 'blockons')}
+						placeholder={placeholder}
 						disabled={isSelected}
 					/>
 				</div>
@@ -477,6 +491,7 @@ registerBlockType('blockons/form-datepicker', {
 
 	save: ({ attributes }) => {
 		const {
+			isPremium,
 			label,
 			description,
 			required,
@@ -484,6 +499,7 @@ registerBlockType('blockons/form-datepicker', {
 			columnSpacing,
 			rowSpacing,
 			showLabels,
+			placeholder,
 			labelSize,
 			labelSpacing,
 			labelColor,
@@ -496,6 +512,8 @@ registerBlockType('blockons/form-datepicker', {
 			minDate,
 			maxDate,
 		} = attributes;
+
+		if (!isPremium) return;
 
 		const blockProps = useBlockProps.save({
 			className: getFieldClasses('blockons-form-datepicker', width),
@@ -555,6 +573,7 @@ registerBlockType('blockons/form-datepicker', {
 						data-date-format={dateFormat}
 						data-min-date={minDate}
 						data-max-date={maxDate}
+						placeholder={placeholder}
 						readOnly
 					/>
 				</div>

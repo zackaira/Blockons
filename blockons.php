@@ -74,14 +74,15 @@ if ( function_exists( 'blockons_fs' ) ) {
 	}
 
 	require_once 'classes/class-scripts.php';
-	require_once 'classes/class-rest-api.php';
 	require_once 'classes/class-admin.php';
 	require_once 'classes/class-notices.php';
 	require_once 'classes/class-frontend.php';
-
-	// require_once 'classes/class-blockons-error-handler.php';
+	require_once 'classes/class-rest-api.php';
 	require_once 'classes/class-blockons-security.php';
-	require_once 'classes/class-form-submissions.php';
+
+	if (blockons_fs()->can_use_premium_code__premium_only()) {
+		require_once 'classes/class-form-submissions.php';
+	}
 
 	$blockonsDefaults = json_decode( get_option('blockons_default_options') );
 	$blockonsOptions = json_decode( get_option('blockons_options') );

@@ -33,7 +33,7 @@ const getFieldClasses = (baseClass, required, width) => {
 		baseClass,
 		required ? 'required-field' : '',
 		'form-control',
-		`col-${width}`,
+		width ? `col-${width}` : '',
 	]
 		.filter(Boolean)
 		.join(' ');
@@ -141,7 +141,7 @@ registerBlockType('blockons/form-acceptance', {
 				'aria-label': label,
 				'aria-invalid': false,
 				'aria-describedby': errorMessageId,
-				className: getFieldClasses('form-acceptance', required, width),
+				className: getFieldClasses('form-acceptance', required),
 				disabled: isSelected,
 				onChange: (e) => setAttributes({ checked: e.target.checked }),
 			}),
@@ -333,7 +333,7 @@ registerBlockType('blockons/form-acceptance', {
 			'aria-label': label,
 			'aria-invalid': false,
 			'aria-describedby': errorMessageId,
-			className: getFieldClasses('form-acceptance', required, width),
+			className: getFieldClasses('form-acceptance', required),
 		};
 
 		const labelStyles = {
@@ -358,7 +358,7 @@ registerBlockType('blockons/form-acceptance', {
 						</div>
 						<div className="acceptance-copy">
 							<label
-								className="acceptance-label"
+								className="form-label acceptance-label"
 								htmlFor={inputId}
 								style={{
 									marginBottom: description ? '4px' : '0',

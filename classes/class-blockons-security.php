@@ -140,18 +140,54 @@ class Blockons_Security_Manager {
             // Convert fields array values
             if (is_array($form_data['fields'])) {
                 foreach ($form_data['fields'] as &$field) {
-                    if (isset($field['required'])) {
-                        $field['required'] = filter_var(
-                            $field['required'], 
-                            FILTER_VALIDATE_BOOLEAN
-                        );
+                    if (isset($field['required']) && $field['required']) {
+                        // Check standard text inputs, textareas, etc.
+                        if (empty($field['value']) && !in_array($field['type'], ['checkbox', 'checkbox_group', 'radio_group'])) {
+                            throw new Exception(sprintf(
+                                __('Required field "%s" is empty', 'blockons'),
+                                $field['label']
+                            ));
+                        }
+            
+                        // Check checkbox groups
+                        if ($field['type'] === 'checkbox_group') {
+                            if (empty($field['value']) || !is_array($field['value'])) {
+                                throw new Exception(sprintf(
+                                    __('Required field "%s" has no selections', 'blockons'),
+                                    $field['label']
+                                ));
+                            }
+                        }
+            
+                        // Check radio groups
+                        if ($field['type'] === 'radio_group') {
+                            if (empty($field['value']) || !isset($field['value']['value'])) {
+                                throw new Exception(sprintf(
+                                    __('Required field "%s" has no selection', 'blockons'),
+                                    $field['label']
+                                ));
+                            }
+                        }
+
+                        // Check acceptance field
+                        if ($field['type'] === 'checkbox') {
+                            if (empty($field['value']) || $field['value'] != 1) {
+                                throw new Exception(sprintf(
+                                    __('You must accept the %s', 'blockons'),
+                                    $field['label']
+                                ));
+                            }
+                        }
                     }
-                    // Handle checkbox values
-                    if ($field['type'] === 'checkbox' && isset($field['value'])) {
-                        $field['value'] = filter_var(
-                            $field['value'], 
-                            FILTER_VALIDATE_BOOLEAN
-                        ) ? 1 : 0;
+
+                    // Validate email fields
+                    if ($field['type'] === 'email' && !empty($field['value'])) {
+                        if (!filter_var($field['value'], FILTER_VALIDATE_EMAIL)) {
+                            throw new Exception(sprintf(
+                                __('Invalid email format for field "%s"', 'blockons'),
+                                $field['label']
+                            ));
+                        }
                     }
                 }
             }

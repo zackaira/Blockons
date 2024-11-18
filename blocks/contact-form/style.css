@@ -5,6 +5,16 @@
 .blockons-contact-form {
 	display: flex;
 }
+.blockons-cf-form p,
+.blockons-cf-form h1,
+.blockons-cf-form h2,
+.blockons-cf-form h3,
+.blockons-cf-form h4,
+.blockons-cf-form h5,
+.blockons-cf-form h6 {
+	margin: 0;
+	padding: 0;
+}
 /* -- Alignment -- */
 .blockons-contact-form.alignment-left .form-field .form-label,
 .blockons-contact-form.alignment-left .blockons-cf--footer {
@@ -152,6 +162,7 @@
 .blockons-contact-form .blockons-cf-fields .field-error {
 	color: #dc0606;
 	font-size: 0.85em;
+	margin: -2px 0 10px;
 }
 .blockons-contact-form .blockons-cf-fields .form-field .checkbox-option input,
 .blockons-contact-form .blockons-cf-fields .form-field .radio-option input {
@@ -172,4 +183,7 @@
 /* - File Upload - */
 .blockons-form-file-upload .form-field .file-upload-wrapper input {
 	background: none;
+}
+.blockons-form-file-upload .form-field .file-description {
+	font-size: 0.8em;
 }

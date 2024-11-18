@@ -303,6 +303,13 @@ registerBlockType('blockons/form-file-upload', {
 							</span>
 						)}
 					</label>
+					<div
+						id={errorMessageId}
+						className="field-error"
+						role="alert"
+						aria-live="polite"
+					/>
+
 					<div className="file-upload-wrapper">
 						<input {...commonProps} />
 						<div className="file-description">
@@ -310,12 +317,6 @@ registerBlockType('blockons/form-file-upload', {
 							{` - ${maxFileSize}MB limit`}
 						</div>
 					</div>
-					<div
-						id={errorMessageId}
-						className="field-error"
-						role="alert"
-						aria-live="polite"
-					/>
 				</div>
 			</div>
 		);
@@ -338,6 +339,8 @@ registerBlockType('blockons/form-file-upload', {
 			inputSize,
 			inputTextColor,
 		} = attributes;
+
+		if (!isPremium) return;
 
 		const blockProps = useBlockProps.save({
 			className: getFieldClasses(
@@ -403,6 +406,13 @@ registerBlockType('blockons/form-file-upload', {
 							</span>
 						)}
 					</label>
+					<div
+						id={errorMessageId}
+						className="field-error"
+						role="alert"
+						aria-live="polite"
+					/>
+
 					<div className="file-upload-wrapper">
 						<input {...commonProps} />
 						<div className="file-description">
@@ -410,12 +420,6 @@ registerBlockType('blockons/form-file-upload', {
 							{` - Max ${maxFileSize}MB per file`}
 						</div>
 					</div>
-					<div
-						id={errorMessageId}
-						className="field-error"
-						role="alert"
-						aria-live="polite"
-					/>
 				</div>
 			</div>
 		);

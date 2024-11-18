@@ -23,6 +23,9 @@ import { colorPickerPalette, isValidEmail } from '../block-global';
 
 // Constants moved to top level
 const ALLOWED_BLOCKS = [
+	'core/spacer',
+	'core/heading',
+	'core/paragraph',
 	'blockons/form-text-input',
 	'blockons/form-textarea',
 	'blockons/form-select',

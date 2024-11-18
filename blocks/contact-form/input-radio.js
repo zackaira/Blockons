@@ -425,6 +425,13 @@ registerBlockType('blockons/form-radio', {
 						)}
 					</label>
 
+					<div
+						id={errorMessageId}
+						className="field-error"
+						role="alert"
+						aria-live="polite"
+					/>
+
 					{description && (
 						<RichText
 							tagName="div"
@@ -479,19 +486,13 @@ registerBlockType('blockons/form-radio', {
 							</div>
 						))}
 					</div>
-
-					<div
-						id={errorMessageId}
-						className="field-error"
-						role="alert"
-						aria-live="polite"
-					/>
 				</div>
 			</div>
 		);
 	},
 	save: ({ attributes }) => {
 		const {
+			isPremium,
 			label,
 			description,
 			required,
@@ -509,6 +510,8 @@ registerBlockType('blockons/form-radio', {
 			optionSpacing,
 			optionBox,
 		} = attributes;
+
+		if (!isPremium) return;
 
 		const blockProps = useBlockProps.save({
 			className: getFieldClasses('blockons-form-radio', width),
@@ -556,6 +559,13 @@ registerBlockType('blockons/form-radio', {
 						)}
 					</label>
 
+					<div
+						id={errorMessageId}
+						className="field-error"
+						role="alert"
+						aria-live="polite"
+					></div>
+
 					{description && (
 						<div
 							className="form-description radio-description"
@@ -599,12 +609,6 @@ registerBlockType('blockons/form-radio', {
 							</div>
 						))}
 					</div>
-					<div
-						id={errorMessageId}
-						className="field-error"
-						role="alert"
-						aria-live="polite"
-					></div>
 				</div>
 			</div>
 		);

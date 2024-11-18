@@ -309,13 +309,13 @@ registerBlockType('blockons/form-textarea', {
 							)}
 						</label>
 					)}
-					<textarea {...commonProps} />
 					<div
 						id={errorMessageId}
 						className="field-error"
 						role="alert"
 						aria-live="polite"
 					/>
+					<textarea {...commonProps} />
 				</div>
 			</div>
 		);
@@ -418,13 +418,13 @@ registerBlockType('blockons/form-textarea', {
 							)}
 						</label>
 					)}
-					<textarea {...commonProps} />
 					<div
 						id={errorMessageId}
 						className="field-error"
 						role="alert"
 						aria-live="polite"
 					/>
+					<textarea {...commonProps} />
 				</div>
 			</div>
 		);

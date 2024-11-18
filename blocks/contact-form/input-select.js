@@ -373,6 +373,13 @@ registerBlockType('blockons/form-select', {
 							)}
 						</label>
 					)}
+					<div
+						id={errorMessageId}
+						className="field-error"
+						role="alert"
+						aria-live="polite"
+					/>
+
 					<select {...commonProps}>
 						{placeholder && (
 							<option value="" selected={!options.length}>
@@ -389,12 +396,6 @@ registerBlockType('blockons/form-select', {
 							</option>
 						))}
 					</select>
-					<div
-						id={errorMessageId}
-						className="field-error"
-						role="alert"
-						aria-live="polite"
-					/>
 				</div>
 			</div>
 		);
@@ -488,6 +489,13 @@ registerBlockType('blockons/form-select', {
 							)}
 						</label>
 					)}
+					<div
+						id={errorMessageId}
+						className="field-error"
+						role="alert"
+						aria-live="polite"
+					/>
+
 					<select {...commonProps}>
 						{placeholder && (
 							<option value="" selected={!options.length}>
@@ -504,12 +512,6 @@ registerBlockType('blockons/form-select', {
 							</option>
 						))}
 					</select>
-					<div
-						id={errorMessageId}
-						className="field-error"
-						role="alert"
-						aria-live="polite"
-					/>
 				</div>
 			</div>
 		);

@@ -415,6 +415,13 @@ registerBlockType('blockons/form-checkbox', {
 						)}
 					</label>
 
+					<div
+						id={errorMessageId}
+						className="field-error"
+						role="alert"
+						aria-live="polite"
+					/>
+
 					{description && (
 						<RichText
 							tagName="div"
@@ -469,13 +476,6 @@ registerBlockType('blockons/form-checkbox', {
 							</div>
 						))}
 					</div>
-
-					<div
-						id={errorMessageId}
-						className="field-error"
-						role="alert"
-						aria-live="polite"
-					/>
 				</div>
 			</div>
 		);
@@ -483,6 +483,7 @@ registerBlockType('blockons/form-checkbox', {
 
 	save: ({ attributes }) => {
 		const {
+			isPremium,
 			label,
 			description,
 			required,
@@ -500,6 +501,8 @@ registerBlockType('blockons/form-checkbox', {
 			optionSpacing,
 			optionBox,
 		} = attributes;
+
+		if (!isPremium) return;
 
 		const blockProps = useBlockProps.save({
 			className: getFieldClasses('blockons-form-checkbox', width),
@@ -547,6 +550,13 @@ registerBlockType('blockons/form-checkbox', {
 						)}
 					</label>
 
+					<div
+						id={errorMessageId}
+						className="field-error"
+						role="alert"
+						aria-live="polite"
+					></div>
+
 					{description && (
 						<div
 							className="form-description checkbox-description"
@@ -590,12 +600,6 @@ registerBlockType('blockons/form-checkbox', {
 							</div>
 						))}
 					</div>
-					<div
-						id={errorMessageId}
-						className="field-error"
-						role="alert"
-						aria-live="polite"
-					></div>
 				</div>
 			</div>
 		);

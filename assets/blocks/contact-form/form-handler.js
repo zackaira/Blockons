@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			dateFormat: input.dataset.dateFormat || 'Y-m-d',
 			minDate: input.dataset.minDate || undefined,
 			maxDate: input.dataset.maxDate || undefined,
+			placeholder: input.placeholder || __('Select date...', 'blockons'),
 			disableMobile: true,
+			theme: 'dark',
 		});
 	});
 
@@ -25,10 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	// Helper functions
 	const showFieldError = (element, message) => {
 		// Find the appropriate wrapper
-		const fieldWrapper =
-			element.closest('.form-field') ||
-			element.closest('.checkbox-group') ||
-			element;
+		const fieldWrapper = element.closest('.form-field') || element;
 
 		if (!fieldWrapper) return;
 
@@ -50,7 +49,19 @@ document.addEventListener('DOMContentLoaded', function () {
 			element.setAttribute('aria-invalid', 'true');
 		}
 
-		fieldWrapper.appendChild(errorDiv);
+		// Find elements
+		const labelElement = fieldWrapper.querySelector('.form-label');
+		const descriptionElement =
+			fieldWrapper.querySelector('.form-description');
+
+		// Insert after label if it exists, otherwise after description, or at start of wrapper
+		if (labelElement) {
+			labelElement.insertAdjacentElement('afterend', errorDiv);
+		} else if (descriptionElement) {
+			descriptionElement.insertAdjacentElement('afterend', errorDiv);
+		} else {
+			fieldWrapper.insertAdjacentElement('afterbegin', errorDiv);
+		}
 	};
 
 	const clearFieldError = (element) => {
@@ -112,7 +123,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			// Handle file inputs specifically
 			if (input.type === 'file') {
-				console.log('File input found:', input);
 				const file = input.files[0];
 				fields.push({
 					name: input.name || input.id,
@@ -283,6 +293,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Handle checkbox groups (already validated above)
 		if (fieldData.type === 'checkbox_group') {
+			const checkboxGroup = input
+				.closest('.form-field')
+				.querySelector('.checkbox-group');
+			const groupInputs = input
+				.closest('form')
+				.querySelectorAll(
+					`input[name="${input.getAttribute('name')}"]`,
+				);
+			const hasChecked = Array.from(groupInputs).some((cb) => cb.checked);
+
+			if (!hasChecked && fieldData.required) {
+				showFieldError(
+					input.closest('.form-field'),
+					translations.select_option,
+				);
+				return false;
+			}
 			return true;
 		}
 
@@ -348,7 +375,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			// Get the wrapper
 			const wrapper = form.closest('.blockons-cf-wrap');
 			if (!wrapper) {
-				console.error('Form wrapper not found');
 				return;
 			}
 
@@ -441,31 +467,20 @@ document.addEventListener('DOMContentLoaded', function () {
 			// Add change event listener specifically for checkboxes
 			if (input.type === 'checkbox') {
 				input.addEventListener('change', function () {
-					const checkboxGroup = this.closest(
-						'.blockons-form-checkbox',
-					);
+					const formField = this.closest('.form-field');
+					const checkboxGroup =
+						formField.querySelector('.checkbox-group');
+
 					if (checkboxGroup) {
-						const groupName = this.getAttribute('name').replace(
-							'[]',
-							'',
+						const groupInputs = formField.querySelectorAll(
+							'input[type="checkbox"]',
 						);
-						const allCheckboxes = checkboxGroup.querySelectorAll(
-							`input[name="${groupName}[]"]`,
-						);
-						const isRequired = Array.from(allCheckboxes).some(
-							(cb) => cb.required,
-						);
-						const hasChecked = Array.from(allCheckboxes).some(
+						const hasChecked = Array.from(groupInputs).some(
 							(cb) => cb.checked,
 						);
 
-						// Clear error if at least one is checked
 						if (hasChecked) {
-							const groupError =
-								checkboxGroup.querySelector('.field-error');
-							if (groupError) {
-								groupError.remove();
-							}
+							clearFieldError(formField);
 						}
 					}
 				});
@@ -474,8 +489,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	};
 
 	const validateForm = (form, inputs) => {
-		console.log('Starting form validation');
-
 		// Clear existing errors
 		form.querySelectorAll('.field-error').forEach((el) => el.remove());
 
@@ -484,7 +497,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Collect fields data
 		const fields = collectFieldData(form);
-		console.log('Collected fields:', fields);
 
 		if (!fields || fields.length === 0) {
 			console.error('No fields found in form');
@@ -501,7 +513,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				return;
 			}
 
-			console.log('Validating field:', fieldData.name);
 			if (!validateField(input, fieldData)) {
 				isValid = false;
 				if (!firstErrorField) {
@@ -522,21 +533,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	const submitForm = async (form, elements, originalBtnText) => {
 		// Check if elements object and submit button exist
-		if (!elements || !elements.submitBtn) {
-			console.error('Form elements not properly initialized', {
-				elements,
-			});
-			return;
-		}
+		if (!elements || !elements.submitBtn) return;
 
 		try {
-			// Debug form state
-			console.log('Starting form submission', {
-				form,
-				elements,
-				originalBtnText,
-			});
-
 			// Disable submit button and update text
 			elements.submitBtn.disabled = true;
 			elements.submitBtn.textContent =
@@ -552,24 +551,10 @@ document.addEventListener('DOMContentLoaded', function () {
 				throw new Error('Form wrapper not found');
 			}
 
-			// Debug wrapper data
-			console.log('Form wrapper data:', {
-				emailTo: wrapper.dataset.emailTo,
-				formName: wrapper.dataset.formName,
-				emailSubject: wrapper.dataset.emailSubject,
-				fromName: wrapper.dataset.fromName,
-				fromEmail: wrapper.dataset.fromEmail,
-				ccEmails: wrapper.dataset.ccEmails,
-				bccEmails: wrapper.dataset.bccEmails,
-				includeMetadata: wrapper.dataset.includeMetadata,
-			});
-
 			// Validate form first
-			console.log('Validating form...');
 			const { isValid, fields } = validateForm(form, elements.inputs);
 
 			if (!isValid) {
-				console.error('Form validation failed');
 				if (elements.errorMsg) {
 					elements.errorMsg.style.display = 'block';
 					elements.errorMsg.scrollIntoView({
@@ -581,14 +566,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 
 			if (!fields || fields.length === 0) {
-				console.error('No form fields collected');
 				throw new Error('No form fields found');
 			}
 
-			console.log('Form validation passed. Fields:', fields);
-
 			// Prepare form data
-			console.log('Preparing form data...');
 			const formData = new FormData();
 
 			// Add main form data
@@ -636,23 +617,10 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (input && input.files.length > 0) {
 					// Append the file using the field name instead of a generic index
 					formData.append(field.name, input.files[0]);
-					console.log(
-						`Added file: ${input.files[0].name} with field name: ${field.name}`,
-					);
 				}
 			});
 
-			// Log the final FormData
-			console.log('Final FormData entries:');
-			for (let pair of formData.entries()) {
-				console.log(pair[0], pair[1]);
-			}
-
 			// Submit the form
-			console.log(
-				'Submitting to:',
-				`${blockonsFormObj.apiUrl}blcns/v1/submit-form`,
-			);
 			const response = await fetch(
 				`${blockonsFormObj.apiUrl}blcns/v1/submit-form`,
 				{
@@ -660,24 +628,15 @@ document.addEventListener('DOMContentLoaded', function () {
 					body: formData,
 				},
 			);
-
-			console.log('Response status:', response.status);
 			const data = await response.json();
-			console.log('Response data:', data);
 
 			if (!response.ok) {
 				throw new Error(data.message || translations.error);
 			}
 
 			// Handle successful submission
-			console.log('Form submitted successfully');
 			handleSuccessfulSubmission(form, elements);
 		} catch (error) {
-			console.error('Form submission error details:', {
-				message: error.message,
-				stack: error.stack,
-				error,
-			});
 			handleSubmissionError(error, elements);
 		} finally {
 			// Always re-enable submit button and restore text

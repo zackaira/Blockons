@@ -353,13 +353,13 @@ registerBlockType('blockons/form-text-input', {
 							)}
 						</label>
 					)}
-					<input {...commonProps} />
 					<div
 						id={errorMessageId}
 						className="field-error"
 						role="alert"
 						aria-live="polite"
 					/>
+					<input {...commonProps} />
 				</div>
 			</div>
 		);
@@ -460,13 +460,13 @@ registerBlockType('blockons/form-text-input', {
 							)}
 						</label>
 					)}
-					<input {...commonProps} />
 					<div
 						id={errorMessageId}
 						className="field-error"
 						role="alert"
 						aria-live="polite"
 					/>
+					<input {...commonProps} />
 				</div>
 			</div>
 		);

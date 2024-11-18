@@ -1,3 +1,4 @@
+import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import SettingHeader from '../components/SettingHeader';
 import SettingRow from '../components/SettingRow';
@@ -9,6 +10,8 @@ const GlobalSettings = ({
 	isPremium,
 	upgradeUrl,
 }) => {
+	const [formSettingsPro, setFormSettingsPro] = useState(false);
+
 	const onSettingChange = (e) => {
 		handleSettingChange(e);
 	};
@@ -25,77 +28,120 @@ const GlobalSettings = ({
 
 			<table className="form-table" role="presentation">
 				<tbody>
-					<>
-						<SettingRow
-							title={__('Blockons Contact Forms', 'blockons')}
-							description={__(
-								'Global Settings for Blockons Contact Forms',
-								'blockons',
-							)}
-							inputType="heading"
-							// nomargin
-						/>
-						<SettingRow
-							title={__('Save Form Submissions', 'blockons')}
-							slug="contactforms_save_to_dashboard"
-							value={
-								blockonsOptions.contactforms?.save_to_dashboard
-							}
-							inputType="toggle"
-							onChange={onSettingChange}
-							note={__(
-								'This will save all form submissions to the WordPress Dashboard -> Form Submissions',
-								'blockons',
-							)}
-						/>
+					{isPremium ? (
+						<>
+							<SettingRow
+								title={__('Blockons Contact Forms', 'blockons')}
+								description={__(
+									'Global Settings for Blockons Contact Forms',
+									'blockons',
+								)}
+								inputType="heading"
+								// nomargin
+							/>
+							<SettingRow
+								title={__('Save Form Submissions', 'blockons')}
+								slug="contactforms_save_to_dashboard"
+								value={
+									blockonsOptions.contactforms
+										?.save_to_dashboard
+								}
+								inputType="toggle"
+								onChange={onSettingChange}
+								note={__(
+									'This will save all form submissions to the WordPress Dashboard -> Form Submissions',
+									'blockons',
+								)}
+							/>
 
-						<SettingRow
-							title={__('Enable reCaptcha', 'blockons')}
-							slug="contactforms_recaptcha"
-							value={blockonsOptions.contactforms?.recaptcha}
-							inputType="toggle"
-							onChange={onSettingChange}
-							note={
+							<SettingRow
+								title={__('Enable reCaptcha', 'blockons')}
+								slug="contactforms_recaptcha"
+								value={blockonsOptions.contactforms?.recaptcha}
+								inputType="toggle"
+								onChange={onSettingChange}
+								note={
+									<>
+										<a
+											href="https://www.google.com/recaptcha"
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											{__('reCAPTCHA V3', 'blockons')}
+										</a>{' '}
+										{__(
+											'is a free service by Google that protects your website forms from spam and abuse.',
+											'blockons',
+										)}
+									</>
+								}
+							/>
+							{blockonsOptions.contactforms?.recaptcha && (
 								<>
-									<a
-										href="https://www.google.com/recaptcha"
-										target="_blank"
-										rel="noopener noreferrer"
-									>
-										{__('reCAPTCHA V3', 'blockons')}
-									</a>{' '}
-									{__(
-										'is a free service by Google that protects your website forms from spam and abuse.',
+									<SettingRow
+										title={__('Site Key')}
+										slug="contactforms_recaptcha_key"
+										value={
+											blockonsOptions.contactforms
+												?.recaptcha_key
+										}
+										inputType="text"
+										onChange={onSettingChange}
+									/>
+									<SettingRow
+										title={__('Secret Key')}
+										slug="contactforms_recaptcha_secret"
+										value={
+											blockonsOptions.contactforms
+												?.recaptcha_secret
+										}
+										inputType="text"
+										onChange={onSettingChange}
+									/>
+								</>
+							)}
+						</>
+					) : (
+						<>
+							<SettingRow
+								title={__('Premium Tooltips', 'blockons')}
+								inputType="toggle"
+								slug="tooltips_pro"
+								value={tooltipsPro}
+								onChange={() => setTooltipsPro(!tooltipsPro)}
+								// documentation="https://blockons/documentation/tooltips"
+							/>
+							{tooltipsPro && (
+								<SettingRow
+									inputType="upgrade"
+									title={__('Premium Tooltips', 'blockons')}
+									description={__(
+										'Upgrade to Blockons Pro to add premium tooltips.',
 										'blockons',
 									)}
-								</>
-							}
-						/>
-						{blockonsOptions.contactforms?.recaptcha && (
-							<>
-								<SettingRow
-									title={__('Site Key')}
-									slug="contactforms_recaptcha_key"
-									value={
-										blockonsOptions.contactforms
-											?.recaptcha_key
-									}
-									inputType="text"
-									onChange={onSettingChange}
+									upgradeUrl={upgradeUrl}
+									proFeatures={[
+										__(
+											'Select between Light & Dark tooltip themes',
+											'blockons',
+										),
+										__(
+											'Add custom links into your Tooltip text',
+											'blockons',
+										),
+										__(
+											'Select from different tooltip styles',
+											'blockons',
+										),
+										__(
+											'More features coming soon',
+											'blockons',
+										),
+									]}
 								/>
-								<SettingRow
-									title={__('Secret Key')}
-									slug="contactforms_recaptcha_secret"
-									value={
-										blockonsOptions.contactforms
-											?.recaptcha_secret
-									}
-									inputType="text"
-									onChange={onSettingChange}
-								/>
-							</>
-						)}
-					</>
+							)}
+						</>
+					)}
 				</tbody>
 			</table>
 		</>

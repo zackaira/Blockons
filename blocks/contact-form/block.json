@@ -156,6 +156,7 @@
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"viewScript": "blockons-form-handler",
+	"viewScript": ["blockons-flatpickr-script", "blockons-form-handler"],
+	"viewStyle": "blockons-flatpickr-style",
 	"style": "file:./style-index.css"
 }
