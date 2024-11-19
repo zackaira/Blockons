@@ -1,24 +1,28 @@
 document.addEventListener('DOMContentLoaded', function () {
-	// Initialize all datepickers
-	const datepickers = document.querySelectorAll('.blockons-datepicker');
-	datepickers.forEach((input) => {
-		flatpickr(input, {
-			enableTime: input.dataset.enableTime === 'true',
-			dateFormat: input.dataset.dateFormat || 'Y-m-d',
-			minDate: input.dataset.minDate || undefined,
-			maxDate: input.dataset.maxDate || undefined,
-			placeholder: input.placeholder || __('Select date...', 'blockons'),
-			disableMobile: true,
-			theme: 'dark',
-		});
-	});
-
 	// Initialize reCAPTCHA if enabled
 	const recaptchaEnabled = blockonsFormObj.recaptcha || false;
 	const recaptchaSiteKey = blockonsFormObj.recaptcha_key || '';
 	const translations = blockonsFormObj.translations;
+	const isPremium = Boolean(blockonsFormObj.isPremium) || false;
 
-	if (recaptchaEnabled && recaptchaSiteKey) {
+	// Initialize all datepickers
+	const datepickers = document.querySelectorAll('.blockons-datepicker');
+	if (isPremium && datepickers.length > 0) {
+		datepickers.forEach((input) => {
+			flatpickr(input, {
+				enableTime: input.dataset.enableTime === 'true',
+				dateFormat: input.dataset.dateFormat || 'Y-m-d',
+				minDate: input.dataset.minDate || undefined,
+				maxDate: input.dataset.maxDate || undefined,
+				placeholder:
+					input.placeholder || __('Select date...', 'blockons'),
+				disableMobile: true,
+				theme: 'dark',
+			});
+		});
+	}
+
+	if (isPremium && recaptchaEnabled && recaptchaSiteKey) {
 		const script = document.createElement('script');
 		script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
 		document.head.appendChild(script);
@@ -581,8 +585,18 @@ document.addEventListener('DOMContentLoaded', function () {
 			);
 			formData.append('fromName', wrapper.dataset.fromName || '');
 			formData.append('fromEmail', wrapper.dataset.fromEmail || '');
-			formData.append('ccEmails', wrapper.dataset.ccEmails || '');
-			formData.append('bccEmails', wrapper.dataset.bccEmails || '');
+			formData.append(
+				'ccEmails',
+				isPremium && wrapper.dataset.ccEmails
+					? wrapper.dataset.ccEmails
+					: '',
+			);
+			formData.append(
+				'bccEmails',
+				isPremium && wrapper.dataset.bccEmails
+					? wrapper.dataset.bccEmails
+					: '',
+			);
 			formData.append(
 				'includeMetadata',
 				wrapper.dataset.includeMetadata === 'true',

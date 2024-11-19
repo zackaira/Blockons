@@ -19,6 +19,7 @@ import {
 	Button,
 } from '@wordpress/components';
 import BlockonsColorpicker from '../_components/BlockonsColorpicker';
+import BlockonsNote from '../../src/backend/settings/components/UI/BlockonsNote';
 import { colorPickerPalette, isValidEmail } from '../block-global';
 
 // Constants moved to top level
@@ -414,7 +415,7 @@ const Edit = (props) => {
 								</>
 							)} */}
 
-							{isPremium && (
+							{isPremium ? (
 								<>
 									<TextControl
 										label={__('CC Emails', 'blockons')}
@@ -467,6 +468,17 @@ const Edit = (props) => {
 										)}
 									<div className="blockons-divider"></div>
 								</>
+							) : (
+								<BlockonsNote
+									title={__(
+										'Add CC & BCC emails',
+										'blockons',
+									)}
+									text={__(
+										'Upgrade to Blockons Pro and gain the power to send CC and BCC emails with your form.',
+										'blockons',
+									)}
+								/>
 							)}
 
 							<TextControl

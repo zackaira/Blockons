@@ -10,7 +10,8 @@ const GlobalSettings = ({
 	isPremium,
 	upgradeUrl,
 }) => {
-	const [formSettingsPro, setFormSettingsPro] = useState(false);
+	const [formRecaptcha, setFormRecaptcha] = useState(false);
+	const [formSaveSubmissions, setFormSaveSubmissions] = useState(false);
 
 	const onSettingChange = (e) => {
 		handleSettingChange(e);
@@ -28,17 +29,17 @@ const GlobalSettings = ({
 
 			<table className="form-table" role="presentation">
 				<tbody>
+					<SettingRow
+						title={__('Blockons Contact Forms', 'blockons')}
+						description={__(
+							'Global Settings for Blockons Contact Forms',
+							'blockons',
+						)}
+						inputType="heading"
+						// nomargin
+					/>
 					{isPremium ? (
 						<>
-							<SettingRow
-								title={__('Blockons Contact Forms', 'blockons')}
-								description={__(
-									'Global Settings for Blockons Contact Forms',
-									'blockons',
-								)}
-								inputType="heading"
-								// nomargin
-							/>
 							<SettingRow
 								title={__('Save Form Submissions', 'blockons')}
 								slug="contactforms_save_to_dashboard"
@@ -104,37 +105,82 @@ const GlobalSettings = ({
 					) : (
 						<>
 							<SettingRow
-								title={__('Premium Tooltips', 'blockons')}
+								title={__('Recaptcha', 'blockons')}
 								inputType="toggle"
-								slug="tooltips_pro"
-								value={tooltipsPro}
-								onChange={() => setTooltipsPro(!tooltipsPro)}
+								slug="form_pro"
+								value={formRecaptcha}
+								onChange={() =>
+									setFormRecaptcha(!formRecaptcha)
+								}
 								// documentation="https://blockons/documentation/tooltips"
 							/>
-							{tooltipsPro && (
+							{formRecaptcha && (
 								<SettingRow
 									inputType="upgrade"
-									title={__('Premium Tooltips', 'blockons')}
+									title={__('Premium Settings', 'blockons')}
 									description={__(
-										'Upgrade to Blockons Pro to add premium tooltips.',
+										'Upgrade to Blockons Pro to add reCAPTCHA V3 to your forms.',
 										'blockons',
 									)}
 									upgradeUrl={upgradeUrl}
 									proFeatures={[
 										__(
-											'Select between Light & Dark tooltip themes',
+											'Protect your forms from spam',
 											'blockons',
 										),
 										__(
-											'Add custom links into your Tooltip text',
+											'Add reCAPTCHA to all forms',
+											'blockons',
+										),
+									]}
+									note={
+										<>
+											<a
+												href="https://www.google.com/recaptcha"
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												{__('reCAPTCHA V3', 'blockons')}
+											</a>{' '}
+											{__(
+												'is a free service by Google that protects your website forms from spam and abuse.',
+												'blockons',
+											)}
+										</>
+									}
+								/>
+							)}
+
+							<SettingRow
+								title={__('Save Form Submissions', 'blockons')}
+								inputType="toggle"
+								slug="form_save_pro"
+								value={formSaveSubmissions}
+								onChange={() =>
+									setFormSaveSubmissions(!formSaveSubmissions)
+								}
+								// documentation="https://blockons/documentation/tooltips"
+							/>
+							{formSaveSubmissions && (
+								<SettingRow
+									inputType="upgrade"
+									title={__('Premium Settings', 'blockons')}
+									description={__(
+										'Upgrade to Blockons Pro to save form submissions to your Dashboard.',
+										'blockons',
+									)}
+									upgradeUrl={upgradeUrl}
+									proFeatures={[
+										__(
+											'Never lose email submissions!',
 											'blockons',
 										),
 										__(
-											'Select from different tooltip styles',
+											'Save all submissions to the database',
 											'blockons',
 										),
 										__(
-											'More features coming soon',
+											'Mark submissions as read/unread',
 											'blockons',
 										),
 									]}

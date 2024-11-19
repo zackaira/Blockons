@@ -50,6 +50,7 @@ class Blockons_Form_Submissions {
 			add_filter('manage_edit-blockons_submission_sortable_columns', array($this, 'blockons_set_sortable_columns'));
 			add_action('pre_get_posts', array($this, 'blockons_sort_columns'));
 			add_action('save_post_blockons_submission', array($this, 'blockons_save_status_meta'), 10, 2);
+            add_action('before_delete_post', array($this, 'bllockons_submission_delete_attached_files'), 10, 1);
 		}
     }
 
@@ -205,30 +206,35 @@ class Blockons_Form_Submissions {
                                         echo nl2br(esc_html($field['value']));
                                         break;
                                         
-                                    case 'file':
-                                        if (!empty($field['value']) && is_array($field['value'])) {
-                                            $file_info = $field['value'];
-                                            $file_url = isset($file_info['url']) ? $file_info['url'] : '';
-                                            $file_name = isset($file_info['name']) ? $file_info['name'] : basename($file_url);
-                                            $file_size = isset($file_info['size']) ? $file_info['size'] : 0;
-                                            $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-                                            
-                                            // Add icon based on file type
-                                            $icon_class = $this->get_file_icon_class($file_extension);
-                                            
-                                            echo sprintf(
-                                                '<div class="form-file-attachment">
-                                                    <span class="dashicons %s"></span>
-                                                    <a href="%s" target="_blank">%s</a>
-                                                    <span class="file-meta">%s</span>
-                                                </div>',
-                                                esc_attr($icon_class),
-                                                esc_url($file_url),
-                                                esc_html($file_name),
-                                                esc_html($this->format_file_size($file_size))
-                                            );
-                                        }
-                                        break;
+                                        case 'file':
+                                            if (!empty($field['value']) && is_array($field['value'])) {
+                                                $file_info = $field['value'];
+                                                $file_url = isset($file_info['url']) ? $file_info['url'] : '';
+                                                $file_name = isset($file_info['name']) ? $file_info['name'] : basename($file_url);
+                                                $file_size = isset($file_info['size']) ? $file_info['size'] : 0;
+                                                $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+                                                
+                                                $icon_class = $this->get_file_icon_class($file_extension);
+                                                
+                                                echo sprintf(
+                                                    '<div class="form-file-attachment">
+                                                        <span class="dashicons %s"></span>
+                                                        <a href="%s" target="_blank">%s</a>
+                                                        <span class="file-meta">%s</span>
+                                                    </div>',
+                                                    esc_attr($icon_class),
+                                                    esc_url($file_url),
+                                                    esc_html($file_name),
+                                                    esc_html($this->format_file_size($file_size)),
+                                                    admin_url('admin-post.php'),
+                                                    esc_attr($post->ID),
+                                                    esc_attr($file_url),
+                                                    esc_attr($field['name']),
+                                                    wp_create_nonce('blockons_delete_file'),
+                                                    esc_js(__('Are you sure you want to delete this file? This cannot be undone!', 'blockons'))
+                                                );
+                                            }
+                                            break;
 
                                     case 'checkbox':
                                         echo $field['value'] ? __('Yes', 'blockons') : __('No', 'blockons');
@@ -337,6 +343,30 @@ class Blockons_Form_Submissions {
             ?>
         </div>
         <?php
+    }
+
+    public function bllockons_submission_delete_attached_files($post_id) {
+        if (get_post_type($post_id) !== 'blockons_submission') {
+            return;
+        }
+    
+        $form_data = get_post_meta($post_id, '_form_data', true);
+        if (!is_array($form_data)) {
+            return;
+        }
+    
+        foreach ($form_data as $field) {
+            if ($field['type'] === 'file' && !empty($field['value']) && is_array($field['value'])) {
+                $file_url = isset($field['value']['url']) ? $field['value']['url'] : '';
+                if ($file_url) {
+                    $upload_dir = wp_upload_dir();
+                    $file_path = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $file_url);
+                    if (file_exists($file_path)) {
+                        @unlink($file_path);
+                    }
+                }
+            }
+        }
     }
 
     /**
