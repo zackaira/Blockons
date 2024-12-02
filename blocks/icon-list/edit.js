@@ -1,21 +1,21 @@
-import { __ } from "@wordpress/i18n";
+import { __ } from '@wordpress/i18n';
 import {
 	RichText,
 	AlignmentToolbar,
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
-} from "@wordpress/block-editor";
+} from '@wordpress/block-editor';
 import {
 	PanelBody,
 	Dropdown,
 	SelectControl,
 	RangeControl,
 	Button,
-} from "@wordpress/components";
-import BlockonsColorpicker from "../_components/BlockonsColorpicker";
-import FontAwesomeIcon from "../_components/FontAwesomeIcon";
-import { colorPickerPalette, slugify, iconListIcons } from "../block-global";
+} from '@wordpress/components';
+import BlockonsColorpicker from '../_components/BlockonsColorpicker';
+import FontAwesomeIcon from '../_components/FontAwesomeIcon';
+import { colorPickerPalette, slugify, iconListIcons } from '../block-global';
 
 const Edit = (props) => {
 	const {
@@ -40,7 +40,8 @@ const Edit = (props) => {
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
-			alignment: newAlignment === undefined ? "none" : "align-" + newAlignment,
+			alignment:
+				newAlignment === undefined ? 'none' : 'align-' + newAlignment,
 		});
 	};
 
@@ -124,7 +125,9 @@ const Edit = (props) => {
 				return {
 					...obj,
 					itemId:
-						itemId === "" ? Math.floor(Math.random() * 700) : slugify(itemText),
+						itemId === ''
+							? Math.floor(Math.random() * 700)
+							: slugify(itemText),
 					itemText: itemText,
 				};
 			return obj;
@@ -135,10 +138,10 @@ const Edit = (props) => {
 		const newListItems = [...listItems];
 		newListItems.push({
 			itemId: newListItems.length + 1,
-			itemText: "",
+			itemText: '',
 			itemTextSize: null,
 			itemTextColor: null,
-			itemIcon: "check",
+			itemIcon: 'check',
 			itemIconSize: null,
 			itemIconColor: null,
 			itemSpacing: 5,
@@ -160,7 +163,7 @@ const Edit = (props) => {
 		icon,
 		iconSize,
 		iconColor,
-		spacing
+		spacing,
 	) => {
 		const newListItems = [...listItems];
 		newListItems.splice(index + 1, 0, {
@@ -185,7 +188,7 @@ const Edit = (props) => {
 				<li
 					className="blockons-list-item"
 					style={{
-						...(listItemsLayout === "horizontal"
+						...(listItemsLayout === 'horizontal'
 							? { marginRight: listItemSpacing }
 							: { marginBottom: listItemSpacing }),
 						fontSize: listItem.itemTextSize
@@ -209,7 +212,7 @@ const Edit = (props) => {
 					>
 						<Dropdown
 							contentClassName="blockons-editor-popup blockons-icon-selecter icon-list"
-							popoverProps={{ placement: "bottom-start" }}
+							popoverProps={{ placement: 'bottom-start' }}
 							renderToggle={({ isOpen, onToggle }) => (
 								<FontAwesomeIcon
 									icon={listItem.itemIcon}
@@ -226,7 +229,12 @@ const Edit = (props) => {
 									<FontAwesomeIcon
 										icon={icon}
 										iconSize={20}
-										onClick={() => handleItemIconChange(icon, listItem.itemId)}
+										onClick={() =>
+											handleItemIconChange(
+												icon,
+												listItem.itemId,
+											)
+										}
 									/>
 								))
 							}
@@ -234,7 +242,7 @@ const Edit = (props) => {
 					</div>
 					<RichText
 						tagName="div"
-						placeholder={__("#ListItem", "blockons")}
+						placeholder={__('#ListItem', 'blockons')}
 						value={listItem.itemText}
 						multiline={false}
 						className="blockons-list-item-text"
@@ -246,18 +254,18 @@ const Edit = (props) => {
 						<Dropdown
 							className="blockons-item-level-settings"
 							contentClassName="blockons-editor-popup"
-							popoverProps={{ placement: "bottom-end" }}
+							popoverProps={{ placement: 'bottom-end' }}
 							renderToggle={({ isOpen, onToggle }) => (
 								<Button
 									icon="art"
-									label={__("List Item Colors", "blockons")}
+									label={__('List Item Colors', 'blockons')}
 									onClick={onToggle}
 									aria-expanded={isOpen}
 								/>
 							)}
 							renderContent={() => (
 								<>
-									<p>{__("Text Size & Color", "blockons")}</p>
+									<p>{__('Text Size & Color', 'blockons')}</p>
 									<RangeControl
 										value={
 											listItem.itemTextSize
@@ -265,25 +273,31 @@ const Edit = (props) => {
 												: listItemFontSize
 										}
 										onChange={(textSize) =>
-											handleItemTextSizeChange(textSize, listItem.itemId)
+											handleItemTextSizeChange(
+												textSize,
+												listItem.itemId,
+											)
 										}
 										min={10}
 										max={64}
 									/>
 									<BlockonsColorpicker
-										label={__("Text Color", "blockons")}
+										label={__('Text Color', 'blockons')}
 										value={
 											listItem.itemTextColor
 												? listItem.itemTextColor
 												: listItemFontColor
 										}
 										onChange={(itemSize) =>
-											handleItemTextColorChange(itemSize, listItem.itemId)
+											handleItemTextColorChange(
+												itemSize,
+												listItem.itemId,
+											)
 										}
 										paletteColors={colorPickerPalette}
 									/>
 
-									<p>{__("Icon Size & Color", "blockons")}</p>
+									<p>{__('Icon Size & Color', 'blockons')}</p>
 									<RangeControl
 										value={
 											listItem.itemIconSize
@@ -291,33 +305,45 @@ const Edit = (props) => {
 												: listItemIconSize
 										}
 										onChange={(itemSize) =>
-											handleItemIconSizeChange(itemSize, listItem.itemId)
+											handleItemIconSizeChange(
+												itemSize,
+												listItem.itemId,
+											)
 										}
 										min={10}
 										max={98}
 									/>
 									<BlockonsColorpicker
-										label={__("Icon Color", "blockons")}
+										label={__('Icon Color', 'blockons')}
 										value={
 											listItem.itemIconColor
 												? listItem.itemIconColor
 												: listItemIconColor
 										}
 										onChange={(itemSize) =>
-											handleItemIconColorChange(itemSize, listItem.itemId)
+											handleItemIconColorChange(
+												itemSize,
+												listItem.itemId,
+											)
 										}
 										paletteColors={colorPickerPalette}
 									/>
 
 									<RangeControl
-										label={__("Icon & Text Spacing", "blockons")}
+										label={__(
+											'Icon & Text Spacing',
+											'blockons',
+										)}
 										value={
 											listItem.itemSpacing
 												? listItem.itemSpacing
 												: listItemIconSpacing
 										}
 										onChange={(itemSpacing) =>
-											handleItemSpacingChange(itemSpacing, listItem.itemId)
+											handleItemSpacingChange(
+												itemSpacing,
+												listItem.itemId,
+											)
 										}
 										min={0}
 										max={80}
@@ -338,7 +364,7 @@ const Edit = (props) => {
 									listItem.itemIcon,
 									listItem.itemIconSize,
 									listItem.itemIconColor,
-									listItem.itemSpacing
+									listItem.itemSpacing,
 								)
 							}
 						/>
@@ -359,59 +385,72 @@ const Edit = (props) => {
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody
-						title={__("Icon List Settings", "blockons")}
+						title={__('Icon List Settings', 'blockons')}
 						initialOpen={true}
 					>
 						<SelectControl
-							label={__("List Layout", "blockons")}
+							label={__('List Layout', 'blockons')}
 							value={listItemsLayout}
 							options={[
-								{ label: __("Vertical", "blockons"), value: "vertical" },
-								{ label: __("Horizontal", "blockons"), value: "horizontal" },
+								{
+									label: __('Vertical', 'blockons'),
+									value: 'vertical',
+								},
+								{
+									label: __('Horizontal', 'blockons'),
+									value: 'horizontal',
+								},
 							]}
 							onChange={(newValue) =>
 								setAttributes({
 									listItemsLayout:
-										newValue === undefined ? "vertical" : newValue,
+										newValue === undefined
+											? 'vertical'
+											: newValue,
 								})
 							}
-							__nextHasNoMarginBottom
 						/>
 
 						<RangeControl
-							label={__("Item Spacing", "blockons")}
+							label={__('Item Spacing', 'blockons')}
 							value={listItemSpacing}
 							onChange={(newValue) =>
-								setAttributes({ listItemSpacing: parseInt(newValue) })
+								setAttributes({
+									listItemSpacing: parseInt(newValue),
+								})
 							}
 							min={0}
 							max={100}
 						/>
 						<RangeControl
-							label={__("Icon & Text Spacing", "blockons")}
+							label={__('Icon & Text Spacing', 'blockons')}
 							value={listItemIconSpacing}
 							onChange={(newValue) =>
-								setAttributes({ listItemIconSpacing: parseInt(newValue) })
+								setAttributes({
+									listItemIconSpacing: parseInt(newValue),
+								})
 							}
 							min={0}
 							max={80}
 						/>
 					</PanelBody>
 					<PanelBody
-						title={__("Icon List Design", "blockons")}
+						title={__('Icon List Design', 'blockons')}
 						initialOpen={false}
 					>
 						<RangeControl
-							label={__("Font Size", "blockons")}
+							label={__('Font Size', 'blockons')}
 							value={listItemFontSize}
 							onChange={(newValue) =>
-								setAttributes({ listItemFontSize: parseInt(newValue) })
+								setAttributes({
+									listItemFontSize: parseInt(newValue),
+								})
 							}
 							min={10}
 							max={64}
 						/>
 						<BlockonsColorpicker
-							label={__("Font Color", "blockons")}
+							label={__('Font Color', 'blockons')}
 							value={listItemFontColor}
 							onChange={(newColor) => {
 								setAttributes({ listItemFontColor: newColor });
@@ -419,16 +458,18 @@ const Edit = (props) => {
 							paletteColors={colorPickerPalette}
 						/>
 						<RangeControl
-							label={__("Icon Size", "blockons")}
+							label={__('Icon Size', 'blockons')}
 							value={listItemIconSize}
 							onChange={(newFontSize) => {
-								setAttributes({ listItemIconSize: newFontSize });
+								setAttributes({
+									listItemIconSize: newFontSize,
+								});
 							}}
 							min={10}
 							max={98}
 						/>
 						<BlockonsColorpicker
-							label={__("Icon Color", "blockons")}
+							label={__('Icon Color', 'blockons')}
 							value={listItemIconColor}
 							onChange={(newColor) => {
 								setAttributes({ listItemIconColor: newColor });
@@ -440,7 +481,10 @@ const Edit = (props) => {
 			)}
 			{
 				<BlockControls>
-					<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
+					<AlignmentToolbar
+						value={alignment}
+						onChange={onChangeAlignment}
+					/>
 				</BlockControls>
 			}
 			<div className={`blockons-list-align`}>
@@ -448,11 +492,13 @@ const Edit = (props) => {
 				{isSelected && (
 					<div
 						className={`blockons-add-new ${
-							listItemDisplay === undefined ? "no-items" : "has-items"
+							listItemDisplay === undefined
+								? 'no-items'
+								: 'has-items'
 						}`}
 					>
 						<Button variant="secondary" onClick={handleAddItem}>
-							{__("Add List Item", "blockons")}
+							{__('Add List Item', 'blockons')}
 						</Button>
 					</div>
 				)}

@@ -195,7 +195,6 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 															newValue,
 													})
 												}
-												__nextHasNoMarginBottom
 											/>
 											<SelectControl
 												label={__(
@@ -231,7 +230,6 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 															newValue,
 													})
 												}
-												__nextHasNoMarginBottom
 											/>
 											<SelectControl
 												label={__(
@@ -255,7 +253,6 @@ const blockonsAddInspectorImgPopupControls = createHigherOrderComponent(
 															newValue,
 													})
 												}
-												__nextHasNoMarginBottom
 											/>
 
 											{isPremium && (

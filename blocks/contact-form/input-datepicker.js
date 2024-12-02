@@ -67,7 +67,8 @@ const getFormattedExample = (format) => {
 };
 
 // Helper function to combine date and time formats
-const getDateTimeFormats = (dateFormat, timeFormat) => {
+const getDateTimeFormats = (dateFormat, timeFormat, enableTime = false) => {
+	if (!enableTime) return dateFormat;
 	return `${dateFormat} - ${timeFormat}`;
 };
 
@@ -189,6 +190,10 @@ registerBlockType('blockons/form-datepicker', {
 			type: 'string',
 			default: 'Y-m-d',
 		},
+		timeFormat: {
+			type: 'string',
+			default: 'H:i',
+		},
 		minDate: {
 			type: 'string',
 			default: '',
@@ -225,6 +230,7 @@ registerBlockType('blockons/form-datepicker', {
 			inputTextColor,
 			enableTime,
 			dateFormat,
+			timeFormat,
 			minDate,
 			maxDate,
 		} = attributes;
@@ -238,20 +244,6 @@ registerBlockType('blockons/form-datepicker', {
 			[label],
 		);
 		const dateFormatOptions = useDateFormatOptions(enableTime);
-
-		useEffect(() => {
-			if (enableTime && !dateFormat.includes(':')) {
-				// Add default time format (24h) when enabling time
-				setAttributes({
-					dateFormat: getDateTimeFormats(dateFormat, 'H:i'),
-				});
-			} else if (!enableTime && dateFormat.includes(':')) {
-				// Remove time format when disabling time
-				setAttributes({
-					dateFormat: dateFormat.split(' ')[0],
-				});
-			}
-		}, [enableTime]);
 
 		// Parent block communication
 		const parentClientId = useSelect((select) => {
@@ -268,8 +260,7 @@ registerBlockType('blockons/form-datepicker', {
 			if (!parentBlock) return;
 
 			const code = label.toLowerCase().replace(/[^a-z0-9]/g, '_');
-			const existingShortcodes =
-				parentBlock.attributes.availableShortcodes || [];
+			const existingShortcodes = parentBlock.availableShortcodes || [];
 			const filteredShortcodes = existingShortcodes.filter(
 				(s) => s.fieldId !== clientId,
 			);
@@ -393,29 +384,55 @@ registerBlockType('blockons/form-datepicker', {
 							<SelectControl
 								label={__('Date Format', 'blockons')}
 								value={dateFormat}
-								options={dateFormatOptions}
+								options={BASE_DATE_FORMATS}
 								onChange={(value) =>
 									setAttributes({ dateFormat: value })
 								}
 							/>
+							{enableTime && (
+								<SelectControl
+									label={__('Time Format', 'blockons')}
+									value={timeFormat}
+									options={[
+										{
+											label: '24 Hour (14:30)',
+											value: 'H:i',
+										},
+										{
+											label: '12 Hour (02:30 PM)',
+											value: 'h:i K',
+										},
+									]}
+									onChange={(value) =>
+										setAttributes({ timeFormat: value })
+									}
+								/>
+							)}
 							<div className="date-format-example">
 								<small>
 									{__('Example:', 'blockons')}{' '}
 									<strong>
-										{getFormattedExample(dateFormat)}
+										{getFormattedExample(
+											getDateTimeFormats(
+												dateFormat,
+												timeFormat,
+												enableTime,
+											),
+										)}
 									</strong>
 								</small>
 							</div>
-							<div className="blockons-divider"></div>
+							<div className="blockons-divider" />
 
 							<div className="date-range-controls">
 								<label className="components-base-control__label">
 									{__('Minimum Date', 'blockons')}
 								</label>
 								<Flatpickr
-									value={minDate}
+									value={minDate ? new Date(minDate) : ''}
 									options={{
-										dateFormat: 'Y-m-d',
+										dateFormat: dateFormat,
+										enableTime: enableTime,
 										allowInput: false,
 										disableMobile: true,
 									}}
@@ -426,9 +443,7 @@ registerBlockType('blockons/form-datepicker', {
 									)}
 									onChange={(dates) => {
 										const selectedDate = dates[0]
-											? dates[0]
-													.toISOString()
-													.split('T')[0]
+											? dates[0].toISOString()
 											: '';
 										setAttributes({
 											minDate: selectedDate,
@@ -441,24 +456,21 @@ registerBlockType('blockons/form-datepicker', {
 										onClick={() =>
 											setAttributes({ minDate: '' })
 										}
-										style={{ marginTop: '5px' }}
 									>
 										{__('Clear Min Date', 'blockons')}
 									</button>
 								)}
+								<br />
+								<br />
 
-								<div className="blockons-divider" />
-
-								<label
-									className="components-base-control__label"
-									style={{ marginTop: '15px' }}
-								>
+								<label className="components-base-control__label">
 									{__('Maximum Date', 'blockons')}
 								</label>
 								<Flatpickr
-									value={maxDate}
+									value={maxDate ? new Date(maxDate) : ''}
 									options={{
-										dateFormat: 'Y-m-d',
+										dateFormat: dateFormat,
+										enableTime: enableTime,
 										allowInput: false,
 										disableMobile: true,
 										minDate: minDate || undefined,
@@ -470,9 +482,7 @@ registerBlockType('blockons/form-datepicker', {
 									)}
 									onChange={(dates) => {
 										const selectedDate = dates[0]
-											? dates[0]
-													.toISOString()
-													.split('T')[0]
+											? dates[0].toISOString()
 											: '';
 										setAttributes({
 											maxDate: selectedDate,
@@ -485,7 +495,6 @@ registerBlockType('blockons/form-datepicker', {
 										onClick={() =>
 											setAttributes({ maxDate: '' })
 										}
-										style={{ marginTop: '5px' }}
 									>
 										{__('Clear Max Date', 'blockons')}
 									</button>
@@ -548,7 +557,13 @@ registerBlockType('blockons/form-datepicker', {
 					<Flatpickr
 						options={{
 							enableTime: enableTime,
-							dateFormat: dateFormat,
+							dateFormat: enableTime
+								? getDateTimeFormats(
+										dateFormat,
+										timeFormat,
+										enableTime,
+									)
+								: dateFormat,
 							minDate: minDate || undefined,
 							maxDate: maxDate || undefined,
 							disableMobile: true,
@@ -587,6 +602,7 @@ registerBlockType('blockons/form-datepicker', {
 			inputTextColor,
 			enableTime,
 			dateFormat,
+			timeFormat,
 			minDate,
 			maxDate,
 		} = attributes;
@@ -657,7 +673,15 @@ registerBlockType('blockons/form-datepicker', {
 						style={inputStyles}
 						required={required}
 						data-enable-time={enableTime}
-						data-date-format={dateFormat}
+						data-date-format={
+							enableTime
+								? getDateTimeFormats(
+										dateFormat,
+										timeFormat,
+										enableTime,
+									)
+								: dateFormat
+						}
 						data-min-date={minDate}
 						data-max-date={maxDate}
 						placeholder={placeholder}

@@ -167,7 +167,6 @@ const blockonsAddAnimationInspectorControls = createHigherOrderComponent(
 														newAnimationStyle,
 												});
 											}}
-											__nextHasNoMarginBottom
 										/>
 										<SelectControl
 											label="Direction"
@@ -227,7 +226,6 @@ const blockonsAddAnimationInspectorControls = createHigherOrderComponent(
 														newAnimationDirection,
 												});
 											}}
-											__nextHasNoMarginBottom
 										/>
 										<RangeControl
 											label={__('Duration', 'blockons')}

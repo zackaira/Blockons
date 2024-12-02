@@ -1,12 +1,12 @@
-import { useState, useEffect } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
+import { useState, useEffect } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import {
 	RichText,
 	AlignmentToolbar,
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
-} from "@wordpress/block-editor";
+} from '@wordpress/block-editor';
 import {
 	PanelBody,
 	ToggleControl,
@@ -14,9 +14,9 @@ import {
 	CheckboxControl,
 	TextControl,
 	RangeControl,
-} from "@wordpress/components";
-import BlockonsColorpicker from "../_components/BlockonsColorpicker";
-import { colorPickerPalette } from "../block-global";
+} from '@wordpress/components';
+import BlockonsColorpicker from '../_components/BlockonsColorpicker';
+import { colorPickerPalette } from '../block-global';
 
 const Edit = (props) => {
 	const {
@@ -66,7 +66,7 @@ const Edit = (props) => {
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
-			alignment: newAlignment === undefined ? "left" : newAlignment,
+			alignment: newAlignment === undefined ? 'left' : newAlignment,
 		});
 	};
 	const onChangeCustomIcon = (value) => {
@@ -78,7 +78,7 @@ const Edit = (props) => {
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody
-						title={__("WC Account Icon Settings", "blockons")}
+						title={__('WC Account Icon Settings', 'blockons')}
 						initialOpen={true}
 					>
 						<TextControl
@@ -87,56 +87,77 @@ const Edit = (props) => {
 							onChange={(newValue) => {
 								setAttributes({
 									accountUrl:
-										newValue === undefined ? wcAccObj.wcAccountUrl : newValue,
+										newValue === undefined
+											? wcAccObj.wcAccountUrl
+											: newValue,
 								});
 							}}
 							help={__(
-								"Please ensure the account URL is correct, incase the original URL was changed",
-								"blockons"
+								'Please ensure the account URL is correct, incase the original URL was changed',
+								'blockons',
 							)}
 						/>
 
 						<ToggleControl
-							label={__("Add Drop Down Menu", "blockons")}
+							label={__('Add Drop Down Menu', 'blockons')}
 							help={__(
-								"Add a drop down menu on hover to display account page links.",
-								"blockons"
+								'Add a drop down menu on hover to display account page links.',
+								'blockons',
 							)}
 							checked={hasDropdown}
-							onChange={(newValue) => setAttributes({ hasDropdown: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ hasDropdown: newValue })
+							}
 						/>
 
 						{hasDropdown && (
 							<>
 								<SelectControl
-									label={__("Drop Down Position", "blockons")}
+									label={__('Drop Down Position', 'blockons')}
 									value={dropPosition}
 									options={[
 										{
-											label: __("Bottom Right", "blockons"),
-											value: "bottomright",
+											label: __(
+												'Bottom Right',
+												'blockons',
+											),
+											value: 'bottomright',
 										},
 										{
-											label: __("Bottom Left", "blockons"),
-											value: "bottomleft",
+											label: __(
+												'Bottom Left',
+												'blockons',
+											),
+											value: 'bottomleft',
 										},
-										{ label: __("Top Right", "blockons"), value: "topright" },
-										{ label: __("Top Left", "blockons"), value: "topleft" },
+										{
+											label: __('Top Right', 'blockons'),
+											value: 'topright',
+										},
+										{
+											label: __('Top Left', 'blockons'),
+											value: 'topleft',
+										},
 									]}
 									onChange={(newValue) =>
 										setAttributes({
 											dropPosition:
-												newValue === undefined ? "bottomleft" : newValue,
+												newValue === undefined
+													? 'bottomleft'
+													: newValue,
 										})
 									}
 								/>
 
 								<ToggleControl // This setting is just for displaying the drop down, value is not saved.
-									label={__("Always Show Drop Down", "blockons")}
+									label={__(
+										'Always Show Drop Down',
+										'blockons',
+									)}
 									checked={showDropDown}
 									help={__(
-										"This will always display the drop down ONLY in the editor",
-										"blockons"
+										'This will always display the drop down ONLY in the editor',
+										'blockons',
 									)}
 									onChange={() => {
 										setShowDropDown((state) => !state);
@@ -146,7 +167,9 @@ const Edit = (props) => {
 									label="Dashboard"
 									checked={showDashboard}
 									onChange={(newValue) =>
-										setAttributes({ showDashboard: newValue })
+										setAttributes({
+											showDashboard: newValue,
+										})
 									}
 								/>
 								<CheckboxControl
@@ -160,21 +183,27 @@ const Edit = (props) => {
 									label="Downloads"
 									checked={showDownloads}
 									onChange={(newValue) =>
-										setAttributes({ showDownloads: newValue })
+										setAttributes({
+											showDownloads: newValue,
+										})
 									}
 								/>
 								<CheckboxControl
 									label="Addresses"
 									checked={showAddresses}
 									onChange={(newValue) =>
-										setAttributes({ showAddresses: newValue })
+										setAttributes({
+											showAddresses: newValue,
+										})
 									}
 								/>
 								<CheckboxControl
 									label="Account Details"
 									checked={showAccountDetails}
 									onChange={(newValue) =>
-										setAttributes({ showAccountDetails: newValue })
+										setAttributes({
+											showAccountDetails: newValue,
+										})
 									}
 								/>
 								<CheckboxControl
@@ -188,44 +217,52 @@ const Edit = (props) => {
 						)}
 					</PanelBody>
 					<PanelBody
-						title={__("WC Account Icon Design", "blockons")}
+						title={__('WC Account Icon Design', 'blockons')}
 						initialOpen={false}
 					>
 						<SelectControl
-							label={__("Select an Icon", "blockons")}
+							label={__('Select an Icon', 'blockons')}
 							value={icon}
 							options={[
 								{
-									label: __("User Outline", "blockons"),
-									value: "fa-regular fa-user",
-								},
-								{ label: __("User", "blockons"), value: "fa-solid fa-user" },
-								{
-									label: __("Circle User", "blockons"),
-									value: "fa-solid fa-circle-user",
+									label: __('User Outline', 'blockons'),
+									value: 'fa-regular fa-user',
 								},
 								{
-									label: __("Person", "blockons"),
-									value: "fa-solid fa-person",
+									label: __('User', 'blockons'),
+									value: 'fa-solid fa-user',
 								},
-								{ label: __("Custom Icon", "blockons"), value: "custom" },
+								{
+									label: __('Circle User', 'blockons'),
+									value: 'fa-solid fa-circle-user',
+								},
+								{
+									label: __('Person', 'blockons'),
+									value: 'fa-solid fa-person',
+								},
+								{
+									label: __('Custom Icon', 'blockons'),
+									value: 'custom',
+								},
 							]}
 							onChange={(newIcon) =>
 								setAttributes({
-									icon: newIcon === undefined ? "fa-regular fa-user" : newIcon,
+									icon:
+										newIcon === undefined
+											? 'fa-regular fa-user'
+											: newIcon,
 								})
 							}
-							__nextHasNoMarginBottom
 						/>
-						{icon === "custom" && (
+						{icon === 'custom' && (
 							<>
 								<TextControl
-									label={__("Icon Name", "blockons")}
+									label={__('Icon Name', 'blockons')}
 									value={customIcon}
 									onChange={onChangeCustomIcon}
 									help={__(
-										"Add your own custom icon by adding the Font Awesome icon full name",
-										"blockons"
+										'Add your own custom icon by adding the Font Awesome icon full name',
+										'blockons',
 									)}
 								/>
 								<div className="helplink fixmargin">
@@ -233,29 +270,35 @@ const Edit = (props) => {
 										href="https://blockons.com/documentation/adding-a-custom-font-awesome-icon-to-the-block/"
 										target="_blank"
 									>
-										{__("Read More")}
+										{__('Read More')}
 									</a>
 								</div>
 							</>
 						)}
 
 						<RangeControl
-							label={__("Icon Size", "blockons")}
+							label={__('Icon Size', 'blockons')}
 							value={iconSize}
 							onChange={(newValue) =>
 								setAttributes({
-									iconSize: newValue === undefined ? 20 : parseInt(newValue),
+									iconSize:
+										newValue === undefined
+											? 20
+											: parseInt(newValue),
 								})
 							}
 							min={14}
 							max={80}
 						/>
 						<RangeControl
-							label={__("Icon Padding", "blockons")}
+							label={__('Icon Padding', 'blockons')}
 							value={iconPadding}
 							onChange={(newValue) =>
 								setAttributes({
-									iconPadding: newValue === undefined ? 20 : parseInt(newValue),
+									iconPadding:
+										newValue === undefined
+											? 20
+											: parseInt(newValue),
 								})
 							}
 							min={0}
@@ -263,21 +306,27 @@ const Edit = (props) => {
 						/>
 
 						<BlockonsColorpicker
-							label={__("Icon Background Color", "blockons")}
+							label={__('Icon Background Color', 'blockons')}
 							value={iconBgColor}
 							onChange={(colorValue) => {
 								setAttributes({
-									iconBgColor: colorValue === undefined ? "#FFF" : colorValue,
+									iconBgColor:
+										colorValue === undefined
+											? '#FFF'
+											: colorValue,
 								});
 							}}
 							paletteColors={colorPickerPalette}
 						/>
 						<BlockonsColorpicker
-							label={__("Icon Color", "blockons")}
+							label={__('Icon Color', 'blockons')}
 							value={iconColor}
 							onChange={(colorValue) => {
 								setAttributes({
-									iconColor: colorValue === undefined ? "#000" : colorValue,
+									iconColor:
+										colorValue === undefined
+											? '#000'
+											: colorValue,
 								});
 							}}
 							paletteColors={colorPickerPalette}
@@ -286,23 +335,33 @@ const Edit = (props) => {
 						{hasDropdown && (
 							<>
 								<BlockonsColorpicker
-									label={__("Drop Down Background Color", "blockons")}
+									label={__(
+										'Drop Down Background Color',
+										'blockons',
+									)}
 									value={dropBgColor}
 									onChange={(colorValue) => {
 										setAttributes({
 											dropBgColor:
-												colorValue === undefined ? "#FFF" : colorValue,
+												colorValue === undefined
+													? '#FFF'
+													: colorValue,
 										});
 									}}
 									paletteColors={colorPickerPalette}
 								/>
 								<BlockonsColorpicker
-									label={__("Drop Down Font Color", "blockons")}
+									label={__(
+										'Drop Down Font Color',
+										'blockons',
+									)}
 									value={dropColor}
 									onChange={(colorValue) => {
 										setAttributes({
 											dropColor:
-												colorValue === undefined ? "#747474" : colorValue,
+												colorValue === undefined
+													? '#747474'
+													: colorValue,
 										});
 									}}
 									paletteColors={colorPickerPalette}
@@ -314,13 +373,16 @@ const Edit = (props) => {
 			)}
 			{
 				<BlockControls>
-					<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
+					<AlignmentToolbar
+						value={alignment}
+						onChange={onChangeAlignment}
+					/>
 				</BlockControls>
 			}
 			<div
 				className={`blockons-wc-account-icon-block ${
-					isSelected && showDropDown ? "show" : ""
-				} ${dropPosition ? dropPosition : "bottomleft"}`}
+					isSelected && showDropDown ? 'show' : ''
+				} ${dropPosition ? dropPosition : 'bottomleft'}`}
 			>
 				<a
 					className={`blockons-wc-account-icon`}
@@ -331,7 +393,9 @@ const Edit = (props) => {
 					}}
 				>
 					<span
-						className={customIcon && icon == "custom" ? customIcon : icon}
+						className={
+							customIcon && icon == 'custom' ? customIcon : icon
+						}
 						style={{
 							color: iconColor,
 						}}
@@ -349,13 +413,16 @@ const Edit = (props) => {
 							<div className="blockons-wc-account-icon-item">
 								<RichText
 									tagName="div"
-									placeholder={__("Dashboard", "blockons")}
+									placeholder={__('Dashboard', 'blockons')}
 									value={textDashboard}
 									onChange={(newValue) =>
 										setAttributes({
 											textDashboard:
 												newValue === undefined
-													? __("Dashboard", "blockons")
+													? __(
+															'Dashboard',
+															'blockons',
+														)
 													: newValue,
 										})
 									}
@@ -366,13 +433,13 @@ const Edit = (props) => {
 							<div className="blockons-wc-account-icon-item">
 								<RichText
 									tagName="div"
-									placeholder={__("Orders", "blockons")}
+									placeholder={__('Orders', 'blockons')}
 									value={textOrders}
 									onChange={(newValue) =>
 										setAttributes({
 											textOrders:
 												newValue === undefined
-													? __("Orders", "blockons")
+													? __('Orders', 'blockons')
 													: newValue,
 										})
 									}
@@ -383,13 +450,16 @@ const Edit = (props) => {
 							<div className="blockons-wc-account-icon-item">
 								<RichText
 									tagName="div"
-									placeholder={__("Downloads", "blockons")}
+									placeholder={__('Downloads', 'blockons')}
 									value={textDownloads}
 									onChange={(newValue) =>
 										setAttributes({
 											textDownloads:
 												newValue === undefined
-													? __("Downloads", "blockons")
+													? __(
+															'Downloads',
+															'blockons',
+														)
 													: newValue,
 										})
 									}
@@ -400,13 +470,16 @@ const Edit = (props) => {
 							<div className="blockons-wc-account-icon-item">
 								<RichText
 									tagName="div"
-									placeholder={__("Addresses", "blockons")}
+									placeholder={__('Addresses', 'blockons')}
 									value={textAddresses}
 									onChange={(newValue) =>
 										setAttributes({
 											textAddresses:
 												newValue === undefined
-													? __("Addresses", "blockons")
+													? __(
+															'Addresses',
+															'blockons',
+														)
 													: newValue,
 										})
 									}
@@ -417,13 +490,19 @@ const Edit = (props) => {
 							<div className="blockons-wc-account-icon-item">
 								<RichText
 									tagName="div"
-									placeholder={__("Account Details", "blockons")}
+									placeholder={__(
+										'Account Details',
+										'blockons',
+									)}
 									value={textAccountDetails}
 									onChange={(newValue) =>
 										setAttributes({
 											textAccountDetails:
 												newValue === undefined
-													? __("Account Details", "blockons")
+													? __(
+															'Account Details',
+															'blockons',
+														)
 													: newValue,
 										})
 									}
@@ -434,13 +513,13 @@ const Edit = (props) => {
 							<div className="blockons-wc-account-icon-item">
 								<RichText
 									tagName="div"
-									placeholder={__("Logout", "blockons")}
+									placeholder={__('Logout', 'blockons')}
 									value={textLogout}
 									onChange={(newValue) =>
 										setAttributes({
 											textLogout:
 												newValue === undefined
-													? __("Logout", "blockons")
+													? __('Logout', 'blockons')
 													: newValue,
 										})
 									}

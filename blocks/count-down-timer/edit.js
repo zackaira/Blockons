@@ -1,5 +1,5 @@
-import { useState, useEffect } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
+import { useState, useEffect } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import {
 	RichText,
 	AlignmentToolbar,
@@ -7,7 +7,7 @@ import {
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
-} from "@wordpress/block-editor";
+} from '@wordpress/block-editor';
 import {
 	PanelBody,
 	Dropdown,
@@ -16,13 +16,13 @@ import {
 	TextControl,
 	RangeControl,
 	DateTimePicker,
-} from "@wordpress/components";
-import BlockonsColorpicker from "../_components/BlockonsColorpicker";
+} from '@wordpress/components';
+import BlockonsColorpicker from '../_components/BlockonsColorpicker';
 import {
 	formatDateTime,
 	colorPickerPalette,
 	minimalRichText,
-} from "../block-global";
+} from '../block-global';
 
 const Edit = (props) => {
 	const {
@@ -72,13 +72,15 @@ const Edit = (props) => {
 
 	const blockProps = useBlockProps({
 		className: `align-${align} alignment-${alignment} design-${design} ${
-			design === "two" && timerStyle !== "one" ? "style-" + timerStyle : ""
+			design === 'two' && timerStyle !== 'one'
+				? 'style-' + timerStyle
+				: ''
 		}`,
 	});
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
-			alignment: newAlignment === undefined ? "left" : newAlignment,
+			alignment: newAlignment === undefined ? 'left' : newAlignment,
 		});
 	};
 
@@ -90,14 +92,22 @@ const Edit = (props) => {
 
 	useEffect(() => {
 		if (selectedDateTime) {
-			const currentTimer = runCountDownTimer(selectedDateTime, dateTime, onCompleteText, onCompleteHide);
+			const currentTimer = runCountDownTimer(
+				selectedDateTime,
+				dateTime,
+				onCompleteText,
+				onCompleteHide,
+			);
 			setCurrentInterval(currentTimer);
 
 			const counterParent =
-				document.getElementById(selectedDateTime)?.parentElement || "";
-			if (counterParent && counterParent.classList.contains("hide-timer")) {
+				document.getElementById(selectedDateTime)?.parentElement || '';
+			if (
+				counterParent &&
+				counterParent.classList.contains('hide-timer')
+			) {
 				setTimeout(() => {
-					counterParent.classList.remove("hide-timer");
+					counterParent.classList.remove('hide-timer');
 				}, 400);
 			}
 		}
@@ -114,14 +124,14 @@ const Edit = (props) => {
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody
-						title={__("Timer Settings", "blockons")}
+						title={__('Timer Settings', 'blockons')}
 						initialOpen={true}
 					>
 						{selectedDateTime ? (
 							<Dropdown
 								className="blockons-datetime-selecter"
 								contentClassName="blockons-editor-popup"
-								popoverProps={{ placement: "bottom-end" }}
+								popoverProps={{ placement: 'bottom-end' }}
 								renderToggle={({ isOpen, onToggle }) => (
 									<TextControl
 										hideLabelFromVision={true}
@@ -138,7 +148,9 @@ const Edit = (props) => {
 												selectedDateTime:
 													newDate === undefined
 														? todayPlusOneDay
-														: new Date(newDate).getTime(),
+														: new Date(
+																newDate,
+															).getTime(),
 											})
 										}
 										is12Hour={true}
@@ -153,46 +165,65 @@ const Edit = (props) => {
 						<div className="blockons-divider"></div>
 
 						<SelectControl
-							label={__("Timer Design", "blockons")}
+							label={__('Timer Design', 'blockons')}
 							value={design}
 							options={[
-								{ label: __("Plain Text", "blockons"), value: "one" },
-								{ label: __("Block Design", "blockons"), value: "two" },
+								{
+									label: __('Plain Text', 'blockons'),
+									value: 'one',
+								},
+								{
+									label: __('Block Design', 'blockons'),
+									value: 'two',
+								},
 							]}
 							onChange={(newValue) =>
 								setAttributes({
-									design: newValue === undefined ? "one" : newValue,
+									design:
+										newValue === undefined
+											? 'one'
+											: newValue,
 								})
 							}
-							__nextHasNoMarginBottom
 							help={__(
 								"Adjust all colors, sizing and spacing in the 'Design Settings' panel further down.",
-								"blockons"
+								'blockons',
 							)}
 						/>
 						<div className="blockons-divider"></div>
 
 						<SelectControl
-							label={__("Link To URL", "blockons")}
+							label={__('Link To URL', 'blockons')}
 							value={linkType}
 							options={[
-								{ label: __("None", "blockons"), value: "none" },
-								{ label: __("Button link", "blockons"), value: "button" },
-								{ label: __("Link whole block", "blockons"), value: "full" },
+								{
+									label: __('None', 'blockons'),
+									value: 'none',
+								},
+								{
+									label: __('Button link', 'blockons'),
+									value: 'button',
+								},
+								{
+									label: __('Link whole block', 'blockons'),
+									value: 'full',
+								},
 							]}
 							onChange={(newValue) =>
 								setAttributes({
-									linkType: newValue === undefined ? "none" : newValue,
+									linkType:
+										newValue === undefined
+											? 'none'
+											: newValue,
 								})
 							}
-							__nextHasNoMarginBottom
 							help={
-								linkType === "button" || linkType === "full"
-									? "Links will only work on the website frontend."
-									: ""
+								linkType === 'button' || linkType === 'full'
+									? 'Links will only work on the website frontend.'
+									: ''
 							}
 						/>
-						{(linkType === "button" || linkType === "full") && (
+						{(linkType === 'button' || linkType === 'full') && (
 							<>
 								<TextControl
 									label="Link URL"
@@ -204,7 +235,7 @@ const Edit = (props) => {
 									}}
 								/>
 								<ToggleControl
-									label={__("Open in new window", "blockons")}
+									label={__('Open in new window', 'blockons')}
 									checked={linkTarget}
 									onChange={(newValue) => {
 										setAttributes({
@@ -212,37 +243,51 @@ const Edit = (props) => {
 										});
 									}}
 								/>
-								{linkType === "button" && (
+								{linkType === 'button' && (
 									<>
 										<BlockonsColorpicker
-											label={__("Button Background Color", "blockons")}
+											label={__(
+												'Button Background Color',
+												'blockons',
+											)}
 											value={linkButtonBgColor}
 											onChange={(colorValue) => {
 												setAttributes({
 													linkButtonBgColor:
-														colorValue === undefined ? "#000" : colorValue,
+														colorValue === undefined
+															? '#000'
+															: colorValue,
 												});
 											}}
 											paletteColors={colorPickerPalette}
 										/>
 										<BlockonsColorpicker
-											label={__("Button Text Color", "blockons")}
+											label={__(
+												'Button Text Color',
+												'blockons',
+											)}
 											value={linkButtonFontColor}
 											onChange={(colorValue) => {
 												setAttributes({
 													linkButtonFontColor:
-														colorValue === undefined ? "#FFF" : colorValue,
+														colorValue === undefined
+															? '#FFF'
+															: colorValue,
 												});
 											}}
 											paletteColors={colorPickerPalette}
 										/>
 										<RangeControl
-											label={__("Spacing", "blockons")}
+											label={__('Spacing', 'blockons')}
 											value={linkButtonSpace}
 											onChange={(newValue) =>
 												setAttributes({
 													linkButtonSpace:
-														newValue === undefined ? 8 : parseInt(newValue),
+														newValue === undefined
+															? 8
+															: parseInt(
+																	newValue,
+																),
 												})
 											}
 											min={0}
@@ -255,7 +300,7 @@ const Edit = (props) => {
 						<div className="blockons-divider"></div>
 
 						<ToggleControl
-							label={__("Add Text Before", "blockons")}
+							label={__('Add Text Before', 'blockons')}
 							checked={hasBeforeText}
 							onChange={(newValue) => {
 								setAttributes({
@@ -275,7 +320,7 @@ const Edit = (props) => {
 						)}
 
 						<ToggleControl
-							label={__("Add Text After", "blockons")}
+							label={__('Add Text After', 'blockons')}
 							checked={hasAfterText}
 							onChange={(newValue) => {
 								setAttributes({
@@ -296,21 +341,29 @@ const Edit = (props) => {
 						<div className="blockons-divider"></div>
 
 						<SelectControl
-							label={__("On timer Complete", "blockons")}
+							label={__('On timer Complete', 'blockons')}
 							value={onComplete}
 							options={[
-								{ label: __("Show Text", "blockons"), value: "one" },
-								{ label: __("Hide Element", "blockons"), value: "two" },
+								{
+									label: __('Show Text', 'blockons'),
+									value: 'one',
+								},
+								{
+									label: __('Hide Element', 'blockons'),
+									value: 'two',
+								},
 							]}
 							onChange={(newValue) =>
 								setAttributes({
-									onComplete: newValue === undefined ? "one" : newValue,
+									onComplete:
+										newValue === undefined
+											? 'one'
+											: newValue,
 								})
 							}
-							__nextHasNoMarginBottom
 						/>
 
-						{onComplete === "one" && (
+						{onComplete === 'one' && (
 							<TextControl
 								value={onCompleteText}
 								onChange={(newValue) => {
@@ -321,7 +374,7 @@ const Edit = (props) => {
 								help="This text will be shown when the timer count down is complete."
 							/>
 						)}
-						{onComplete === "two" && (
+						{onComplete === 'two' && (
 							<TextControl
 								value={onCompleteHide}
 								onChange={(newValue) => {
@@ -334,26 +387,31 @@ const Edit = (props) => {
 						)}
 					</PanelBody>
 					<PanelBody
-						title={__("Design Settings", "blockons")}
+						title={__('Design Settings', 'blockons')}
 						initialOpen={false}
 					>
 						<BlockonsColorpicker
-							label={__("Background Color", "blockons")}
+							label={__('Background Color', 'blockons')}
 							value={bgColor}
 							onChange={(colorValue) => {
 								setAttributes({
-									bgColor: colorValue === undefined ? "" : colorValue,
+									bgColor:
+										colorValue === undefined
+											? ''
+											: colorValue,
 								});
 							}}
 							paletteColors={colorPickerPalette}
 						/>
 						<RangeControl
-							label={__("Padding", "blockons")}
+							label={__('Padding', 'blockons')}
 							value={counterPadding}
 							onChange={(newValue) =>
 								setAttributes({
 									counterPadding:
-										newValue === undefined ? 0 : parseInt(newValue),
+										newValue === undefined
+											? 0
+											: parseInt(newValue),
 								})
 							}
 							min={0}
@@ -363,26 +421,30 @@ const Edit = (props) => {
 						{hasBeforeText && (
 							<>
 								<div className="blockons-divider"></div>
-								<p>{__("Before Text", "blockons")}</p>
+								<p>{__('Before Text', 'blockons')}</p>
 								<RangeControl
-									label={__("Font Size", "blockons")}
+									label={__('Font Size', 'blockons')}
 									value={beforeFontSize}
 									onChange={(newValue) =>
 										setAttributes({
 											beforeFontSize:
-												newValue === undefined ? 16 : parseInt(newValue),
+												newValue === undefined
+													? 16
+													: parseInt(newValue),
 										})
 									}
 									min={11}
 									max={82}
 								/>
 								<BlockonsColorpicker
-									label={__("Text Color", "blockons")}
+									label={__('Text Color', 'blockons')}
 									value={beforeTextColor}
 									onChange={(colorValue) => {
 										setAttributes({
 											beforeTextColor:
-												colorValue === undefined ? "#000" : colorValue,
+												colorValue === undefined
+													? '#000'
+													: colorValue,
 										});
 									}}
 									paletteColors={colorPickerPalette}
@@ -393,26 +455,30 @@ const Edit = (props) => {
 
 						{hasAfterText && (
 							<>
-								<p>{__("After Text", "blockons")}</p>
+								<p>{__('After Text', 'blockons')}</p>
 								<RangeControl
-									label={__("Font Size", "blockons")}
+									label={__('Font Size', 'blockons')}
 									value={afterFontSize}
 									onChange={(newValue) =>
 										setAttributes({
 											afterFontSize:
-												newValue === undefined ? 16 : parseInt(newValue),
+												newValue === undefined
+													? 16
+													: parseInt(newValue),
 										})
 									}
 									min={11}
 									max={82}
 								/>
 								<BlockonsColorpicker
-									label={__("Text Color", "blockons")}
+									label={__('Text Color', 'blockons')}
 									value={afterTextColor}
 									onChange={(colorValue) => {
 										setAttributes({
 											afterTextColor:
-												colorValue === undefined ? "#000" : colorValue,
+												colorValue === undefined
+													? '#000'
+													: colorValue,
 										});
 									}}
 									paletteColors={colorPickerPalette}
@@ -422,83 +488,108 @@ const Edit = (props) => {
 
 						<div className="blockons-divider"></div>
 
-						<p>{__("Timer Design", "blockons")}</p>
+						<p>{__('Timer Design', 'blockons')}</p>
 						<RangeControl
-							label={__("Text Size", "blockons")}
+							label={__('Text Size', 'blockons')}
 							value={numberTextSize}
 							onChange={(newValue) =>
 								setAttributes({
 									numberTextSize:
-										newValue === undefined ? 16 : parseInt(newValue),
+										newValue === undefined
+											? 16
+											: parseInt(newValue),
 								})
 							}
 							min={11}
 							max={82}
 						/>
 						<BlockonsColorpicker
-							label={__("Text Color", "blockons")}
+							label={__('Text Color', 'blockons')}
 							value={numberTextColor}
 							onChange={(colorValue) => {
 								setAttributes({
 									numberTextColor:
-										colorValue === undefined ? "#101015" : colorValue,
+										colorValue === undefined
+											? '#101015'
+											: colorValue,
 								});
 							}}
 							paletteColors={colorPickerPalette}
 						/>
 						<RangeControl
-							label={__("Timer Digits Size", "blockons")}
+							label={__('Timer Digits Size', 'blockons')}
 							value={numberSize}
 							onChange={(newValue) =>
 								setAttributes({
-									numberSize: newValue === undefined ? 16 : parseInt(newValue),
+									numberSize:
+										newValue === undefined
+											? 16
+											: parseInt(newValue),
 								})
 							}
 							min={11}
 							max={82}
 						/>
 						<BlockonsColorpicker
-							label={__("Timer Digits Color", "blockons")}
+							label={__('Timer Digits Color', 'blockons')}
 							value={numberColor}
 							onChange={(colorValue) => {
 								setAttributes({
 									numberColor:
-										colorValue === undefined ? "#101015" : colorValue,
+										colorValue === undefined
+											? '#101015'
+											: colorValue,
 								});
 							}}
 							paletteColors={colorPickerPalette}
 						/>
 						<div className="blockons-divider"></div>
 
-						{design === "two" && (
+						{design === 'two' && (
 							<>
 								<SelectControl
-									label={__("Style", "blockons")}
+									label={__('Style', 'blockons')}
 									value={timerStyle}
 									options={[
-										{ label: __("Plain", "blockons"), value: "one" },
-										{ label: __("Clock", "blockons"), value: "two" },
-										{ label: __("Line Divider", "blockons"), value: "three" },
+										{
+											label: __('Plain', 'blockons'),
+											value: 'one',
+										},
+										{
+											label: __('Clock', 'blockons'),
+											value: 'two',
+										},
+										{
+											label: __(
+												'Line Divider',
+												'blockons',
+											),
+											value: 'three',
+										},
 									]}
 									onChange={(newValue) =>
 										setAttributes({
-											timerStyle: newValue === undefined ? "one" : newValue,
+											timerStyle:
+												newValue === undefined
+													? 'one'
+													: newValue,
 										})
 									}
-									__nextHasNoMarginBottom
 								/>
 								<div className="blockons-divider"></div>
 							</>
 						)}
 
-						{design === "two" && (
+						{design === 'two' && (
 							<RangeControl
-								label={__("Horizontal Spacing", "blockons")}
+								label={__('Horizontal Spacing', 'blockons')}
 								value={timerHoriSpacing}
 								onChange={(newValue) =>
 									setAttributes({
 										timerHoriSpacing:
-											newValue === undefined ? 12 : parseInt(newValue),
+											newValue === undefined
+												? 12
+												: parseInt(newValue),
 									})
 								}
 								min={0}
@@ -508,15 +599,17 @@ const Edit = (props) => {
 
 						<RangeControl
 							label={
-								design === "two"
-									? __("Vertical Spacing", "blockons")
-									: __("Spacing", "blockons")
+								design === 'two'
+									? __('Vertical Spacing', 'blockons')
+									: __('Spacing', 'blockons')
 							}
 							value={timerVertSpacing}
 							onChange={(newValue) =>
 								setAttributes({
 									timerVertSpacing:
-										newValue === undefined ? 0 : parseInt(newValue),
+										newValue === undefined
+											? 0
+											: parseInt(newValue),
 								})
 							}
 							min={0}
@@ -529,15 +622,19 @@ const Edit = (props) => {
 				<BlockControls>
 					<BlockAlignmentToolbar
 						value={align}
-						controls={["left", "center", "right"]}
+						controls={['left', 'center', 'right']}
 						onChange={(newValue) => {
 							setAttributes({
-								align: newValue === undefined ? "left" : newValue,
+								align:
+									newValue === undefined ? 'left' : newValue,
 							});
 						}}
 					/>
-					{design === "two" && (
-						<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
+					{design === 'two' && (
+						<AlignmentToolbar
+							value={alignment}
+							onChange={onChangeAlignment}
+						/>
 					)}
 				</BlockControls>
 			}
@@ -548,27 +645,29 @@ const Edit = (props) => {
 					...(counterPadding ? { padding: counterPadding } : {}),
 				}}
 			>
-				{linkType === "full" && (
+				{linkType === 'full' && (
 					<a
 						href={linkTo}
 						className="blockons-timer-link"
-						{...(linkTarget ? { target: "_blank" } : {})}
+						{...(linkTarget ? { target: '_blank' } : {})}
 					></a>
 				)}
 
 				{hasBeforeText && (
 					<RichText
-						tagName={"span"}
-						placeholder={__("Special:", "blockons")}
+						tagName={'span'}
+						placeholder={__('Special:', 'blockons')}
 						keepPlaceholderOnFocus
 						value={beforeText}
 						className="blockons-countdown-before"
-						onChange={(value) => setAttributes({ beforeText: value })}
+						onChange={(value) =>
+							setAttributes({ beforeText: value })
+						}
 						allowedFormats={minimalRichText}
 						disableLineBreaks={true}
 						style={{
 							fontSize: beforeFontSize,
-							...(beforeTextColor !== "#101015"
+							...(beforeTextColor !== '#101015'
 								? { color: beforeTextColor }
 								: {}),
 						}}
@@ -581,20 +680,20 @@ const Edit = (props) => {
 						...(!hasBeforeText ? { marginLeft: 0 } : {}),
 						...(!hasAfterText ? { marginRight: 0 } : {}),
 					}}
-					{...(onComplete === "one"
-						? { "data-completeText": onCompleteText }
+					{...(onComplete === 'one'
+						? { 'data-completeText': onCompleteText }
 						: {})}
-					{...(onComplete === "two"
-						? { "data-completeHide": onCompleteHide }
+					{...(onComplete === 'two'
+						? { 'data-completeHide': onCompleteHide }
 						: {})}
 				>
 					<div
 						className="count-block days"
 						style={{
-							...(design === "two" && timerVertSpacing !== 0
+							...(design === 'two' && timerVertSpacing !== 0
 								? { margin: `${timerVertSpacing}px 0` }
 								: { margin: `0 ${timerVertSpacing}px` }),
-							...(design === "two" && timerHoriSpacing !== 12
+							...(design === 'two' && timerHoriSpacing !== 12
 								? { padding: `0 ${timerHoriSpacing}px` }
 								: {}),
 						}}
@@ -602,22 +701,30 @@ const Edit = (props) => {
 						<div
 							className="amnt days"
 							style={{
-								...(numberSize !== 16 ? { fontSize: numberSize } : {}),
-								...(numberColor !== "#101015" ? { color: numberColor } : {}),
+								...(numberSize !== 16
+									? { fontSize: numberSize }
+									: {}),
+								...(numberColor !== '#101015'
+									? { color: numberColor }
+									: {}),
 							}}
 						></div>
 						<RichText
-							tagName={"div"}
-							placeholder={__("days", "blockons")}
+							tagName={'div'}
+							placeholder={__('days', 'blockons')}
 							keepPlaceholderOnFocus
 							value={txtDays}
 							className="txt"
-							onChange={(value) => setAttributes({ txtDays: value })}
+							onChange={(value) =>
+								setAttributes({ txtDays: value })
+							}
 							allowedFormats={minimalRichText}
 							disableLineBreaks={true}
 							style={{
-								...(numberTextSize !== 16 ? { fontSize: numberTextSize } : {}),
-								...(numberTextColor !== "#101015"
+								...(numberTextSize !== 16
+									? { fontSize: numberTextSize }
+									: {}),
+								...(numberTextColor !== '#101015'
 									? { color: numberTextColor }
 									: {}),
 							}}
@@ -626,10 +733,10 @@ const Edit = (props) => {
 					<div
 						className="count-block hours"
 						style={{
-							...(design === "two" && timerVertSpacing !== 0
+							...(design === 'two' && timerVertSpacing !== 0
 								? { margin: `${timerVertSpacing}px 0` }
 								: { margin: `0 ${timerVertSpacing}px` }),
-							...(design === "two" && timerHoriSpacing !== 12
+							...(design === 'two' && timerHoriSpacing !== 12
 								? { padding: `0 ${timerHoriSpacing}px` }
 								: {}),
 						}}
@@ -637,22 +744,30 @@ const Edit = (props) => {
 						<div
 							className="amnt hours"
 							style={{
-								...(numberSize !== 16 ? { fontSize: numberSize } : {}),
-								...(numberColor !== "#101015" ? { color: numberColor } : {}),
+								...(numberSize !== 16
+									? { fontSize: numberSize }
+									: {}),
+								...(numberColor !== '#101015'
+									? { color: numberColor }
+									: {}),
 							}}
 						></div>
 						<RichText
-							tagName={"div"}
-							placeholder={__("hours", "blockons")}
+							tagName={'div'}
+							placeholder={__('hours', 'blockons')}
 							keepPlaceholderOnFocus
 							value={txtHours}
 							className="txt"
-							onChange={(value) => setAttributes({ txtHours: value })}
+							onChange={(value) =>
+								setAttributes({ txtHours: value })
+							}
 							allowedFormats={minimalRichText}
 							disableLineBreaks={true}
 							style={{
-								...(numberTextSize !== 16 ? { fontSize: numberTextSize } : {}),
-								...(numberTextColor !== "#101015"
+								...(numberTextSize !== 16
+									? { fontSize: numberTextSize }
+									: {}),
+								...(numberTextColor !== '#101015'
 									? { color: numberTextColor }
 									: {}),
 							}}
@@ -661,10 +776,10 @@ const Edit = (props) => {
 					<div
 						className="count-block minutes"
 						style={{
-							...(design === "two" && timerVertSpacing !== 0
+							...(design === 'two' && timerVertSpacing !== 0
 								? { margin: `${timerVertSpacing}px 0` }
 								: { margin: `0 ${timerVertSpacing}px` }),
-							...(design === "two" && timerHoriSpacing !== 12
+							...(design === 'two' && timerHoriSpacing !== 12
 								? { padding: `0 ${timerHoriSpacing}px` }
 								: {}),
 						}}
@@ -672,22 +787,30 @@ const Edit = (props) => {
 						<div
 							className="amnt minutes"
 							style={{
-								...(numberSize !== 16 ? { fontSize: numberSize } : {}),
-								...(numberColor !== "#101015" ? { color: numberColor } : {}),
+								...(numberSize !== 16
+									? { fontSize: numberSize }
+									: {}),
+								...(numberColor !== '#101015'
+									? { color: numberColor }
+									: {}),
 							}}
 						></div>
 						<RichText
-							tagName={"div"}
-							placeholder={__("minutes", "blockons")}
+							tagName={'div'}
+							placeholder={__('minutes', 'blockons')}
 							keepPlaceholderOnFocus
 							value={txtMinutes}
 							className="txt"
-							onChange={(value) => setAttributes({ txtMinutes: value })}
+							onChange={(value) =>
+								setAttributes({ txtMinutes: value })
+							}
 							allowedFormats={minimalRichText}
 							disableLineBreaks={true}
 							style={{
-								...(numberTextSize !== 16 ? { fontSize: numberTextSize } : {}),
-								...(numberTextColor !== "#101015"
+								...(numberTextSize !== 16
+									? { fontSize: numberTextSize }
+									: {}),
+								...(numberTextColor !== '#101015'
 									? { color: numberTextColor }
 									: {}),
 							}}
@@ -696,10 +819,10 @@ const Edit = (props) => {
 					<div
 						className="count-block seconds"
 						style={{
-							...(design === "two" && timerVertSpacing !== 0
+							...(design === 'two' && timerVertSpacing !== 0
 								? { margin: `${timerVertSpacing}px 0` }
 								: { margin: `0 ${timerVertSpacing}px` }),
-							...(design === "two" && timerHoriSpacing !== 12
+							...(design === 'two' && timerHoriSpacing !== 12
 								? { padding: `0 ${timerHoriSpacing}px` }
 								: {}),
 						}}
@@ -707,22 +830,30 @@ const Edit = (props) => {
 						<div
 							className="amnt seconds"
 							style={{
-								...(numberSize !== 16 ? { fontSize: numberSize } : {}),
-								...(numberColor !== "#101015" ? { color: numberColor } : {}),
+								...(numberSize !== 16
+									? { fontSize: numberSize }
+									: {}),
+								...(numberColor !== '#101015'
+									? { color: numberColor }
+									: {}),
 							}}
 						></div>
 						<RichText
-							tagName={"div"}
-							placeholder={__("seconds", "blockons")}
+							tagName={'div'}
+							placeholder={__('seconds', 'blockons')}
 							keepPlaceholderOnFocus
 							value={txtSeconds}
 							className="txt"
-							onChange={(value) => setAttributes({ txtSeconds: value })}
+							onChange={(value) =>
+								setAttributes({ txtSeconds: value })
+							}
 							allowedFormats={minimalRichText}
 							disableLineBreaks={true}
 							style={{
-								...(numberTextSize !== 16 ? { fontSize: numberTextSize } : {}),
-								...(numberTextColor !== "#101015"
+								...(numberTextSize !== 16
+									? { fontSize: numberTextSize }
+									: {}),
+								...(numberTextColor !== '#101015'
 									? { color: numberTextColor }
 									: {}),
 							}}
@@ -731,66 +862,72 @@ const Edit = (props) => {
 				</div>
 				{hasAfterText && (
 					<RichText
-						tagName={"span"}
-						placeholder={__("until the discount ends.", "blockons")}
+						tagName={'span'}
+						placeholder={__('until the discount ends.', 'blockons')}
 						keepPlaceholderOnFocus
 						value={afterText}
 						className="blockons-countdown-after"
-						onChange={(value) => setAttributes({ afterText: value })}
+						onChange={(value) =>
+							setAttributes({ afterText: value })
+						}
 						allowedFormats={minimalRichText}
 						disableLineBreaks={true}
 						style={{
 							fontSize: afterFontSize,
-							...(afterTextColor !== "#101015"
+							...(afterTextColor !== '#101015'
 								? { color: afterTextColor }
 								: {}),
 						}}
 					/>
 				)}
-				{linkType === "button" && (
+				{linkType === 'button' && (
 					<div
 						className="blockons-timer-button"
 						style={{
-							...(linkButtonBgColor !== "#000"
+							...(linkButtonBgColor !== '#000'
 								? { backgroundColor: linkButtonBgColor }
 								: {}),
-							...(linkButtonFontColor !== "#FFF"
+							...(linkButtonFontColor !== '#FFF'
 								? { color: linkButtonFontColor }
 								: {}),
-							...(design === "two"
+							...(design === 'two'
 								? { marginTop: linkButtonSpace }
 								: { marginLeft: linkButtonSpace }),
 						}}
 					>
 						<a
 							href={linkTo}
-							{...(linkTarget ? { target: "_blank" } : {})}
+							{...(linkTarget ? { target: '_blank' } : {})}
 							className="blockons-timer-button-link"
 						></a>
 						<RichText
-							tagName={"span"}
+							tagName={'span'}
 							placeholder={linkButtonText}
 							keepPlaceholderOnFocus
 							value={linkButtonText}
-							onChange={(value) => setAttributes({ linkButtonText: value })}
+							onChange={(value) =>
+								setAttributes({ linkButtonText: value })
+							}
 							allowedFormats={minimalRichText}
 							disableLineBreaks={true}
 						/>
 					</div>
 				)}
 
-				{onComplete === "one" && (
+				{onComplete === 'one' && (
 					<RichText
-						tagName={"div"}
+						tagName={'div'}
 						keepPlaceholderOnFocus
 						value={onCompleteText}
 						className="blockons-timer-expired"
-						onChange={(value) => setAttributes({ onCompleteText: value })}
+						onChange={(value) =>
+							setAttributes({ onCompleteText: value })
+						}
 						allowedFormats={minimalRichText}
 						disableLineBreaks={true}
 						style={{
 							fontSize: afterFontSize,
-							...(afterTextColor !== "#101015"
+							...(afterTextColor !== '#101015'
 								? { color: afterTextColor }
 								: {}),
 						}}
@@ -801,9 +938,14 @@ const Edit = (props) => {
 	);
 };
 
-function runCountDownTimer(elementId, dateTime, onCompleteText, onCompleteHide) {
+function runCountDownTimer(
+	elementId,
+	dateTime,
+	onCompleteText,
+	onCompleteHide,
+) {
 	const counterElement = document.getElementById(elementId);
-	const counterElementParent = counterElement?.parentElement || "";
+	const counterElementParent = counterElement?.parentElement || '';
 	const countDownDate = new Date(dateTime).getTime();
 
 	if (!counterElement || !counterElementParent) return;
@@ -814,54 +956,62 @@ function runCountDownTimer(elementId, dateTime, onCompleteText, onCompleteHide) 
 
 		const days = Math.floor(distance / (1000 * 60 * 60 * 24));
 		const hours = Math.floor(
-			(distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+			(distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
 		)
 			.toString()
-			.padStart(2, "0");
+			.padStart(2, '0');
 		const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
 			.toString()
-			.padStart(2, "0");
+			.padStart(2, '0');
 		const seconds = Math.floor((distance % (1000 * 60)) / 1000)
 			.toString()
-			.padStart(2, "0");
+			.padStart(2, '0');
 
 		if (days) {
 			counterElement
-				.querySelector(".count-block.days")
-				.classList.remove("blockons-hide");
-			counterElement.querySelector(".days .amnt").innerHTML = days;
+				.querySelector('.count-block.days')
+				.classList.remove('blockons-hide');
+			counterElement.querySelector('.days .amnt').innerHTML = days;
 		} else {
 			counterElement
-				.querySelector(".count-block.days")
-				.classList.add("blockons-hide");
+				.querySelector('.count-block.days')
+				.classList.add('blockons-hide');
 		}
 		if (hours) {
-			counterElement.querySelector(".hours .amnt").innerHTML = hours;
+			counterElement.querySelector('.hours .amnt').innerHTML = hours;
 		}
 		if (minutes) {
-			counterElement.querySelector(".minutes .amnt").innerHTML = minutes;
+			counterElement.querySelector('.minutes .amnt').innerHTML = minutes;
 		}
 		if (seconds) {
-			counterElement.querySelector(".seconds .amnt").innerHTML = seconds;
+			counterElement.querySelector('.seconds .amnt').innerHTML = seconds;
 		}
 
 		if (distance < 0) {
 			clearInterval(interval);
 			if (onCompleteText) {
-				counterElementParent.classList.add("blockons-expired-hide");
+				counterElementParent.classList.add('blockons-expired-hide');
 			}
 			if (onCompleteHide) {
-				counterElementParent.classList.add("blockons-countdown-hide");
+				counterElementParent.classList.add('blockons-countdown-hide');
 			}
-			if (counterElementParent.classList.contains("blockons-countdown-hide")) {
-				counterElementParent.classList.remove("blockons-countdown-hide");
+			if (
+				counterElementParent.classList.contains(
+					'blockons-countdown-hide',
+				)
+			) {
+				counterElementParent.classList.remove(
+					'blockons-countdown-hide',
+				);
 			}
 		} else {
 			if (onCompleteText) {
-				counterElementParent.classList.remove("blockons-expired-hide");
+				counterElementParent.classList.remove('blockons-expired-hide');
 			}
 			if (onCompleteHide) {
-				counterElementParent.classList.remove("blockons-countdown-hide");
+				counterElementParent.classList.remove(
+					'blockons-countdown-hide',
+				);
 			}
 		}
 	};

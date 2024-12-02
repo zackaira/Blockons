@@ -201,16 +201,15 @@
 .blockons-contact-form .blockons-cf-fields .form-field .form-label {
 	order: 1;
 }
-.blockons-contact-form .blockons-cf-fields.above .form-field .field-error {
+.blockons-contact-form .blockons-cf-fields .form-description {
 	order: 2;
+}
+.blockons-contact-form .blockons-cf-fields.above .form-field .field-error {
+	order: 3;
 	margin: -2px 0 10px;
 }
 .blockons-contact-form .blockons-cf-fields .form-field .form-control {
 	order: 5;
-}
-.blockons-contact-form .blockons-cf-fields.below .form-field .field-error {
-	order: 6;
-	margin: 5px 0 0;
 }
 .blockons-contact-form .blockons-cf-fields.below .form-field .field-error {
 	order: 6;
