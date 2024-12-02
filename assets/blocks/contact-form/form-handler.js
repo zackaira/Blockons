@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		if (!fieldWrapper) return;
 
+		// Add error state class to wrapper
+		fieldWrapper.classList.add('has-error');
+
 		// Remove any existing errors
 		const existingError = fieldWrapper.querySelector('.field-error');
 		if (existingError) {
@@ -75,6 +78,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			element;
 
 		if (!fieldWrapper) return;
+
+		// Remove error state class
+		fieldWrapper.classList.remove('has-error');
 
 		const errorDiv = fieldWrapper.querySelector('.field-error');
 		if (errorDiv) {

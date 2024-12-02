@@ -170,10 +170,10 @@ registerBlockType('blockons/form-textarea', {
 				color: inputTextColor,
 				minHeight: DEFAULT_MIN_HEIGHT,
 				resize: 'vertical',
+				borderRadius: `${inputBorderRadius}px`,
 				...(inputBorder
 					? {
 							border: `1px solid ${inputBorderColor}`,
-							borderRadius: `${inputBorderRadius}px`,
 						}
 					: {
 							border: '0',
@@ -362,10 +362,10 @@ registerBlockType('blockons/form-textarea', {
 			color: inputTextColor,
 			minHeight: DEFAULT_MIN_HEIGHT,
 			resize: 'vertical',
+			borderRadius: `${inputBorderRadius}px`,
 			...(inputBorder
 				? {
 						border: `1px solid ${inputBorderColor}`,
-						borderRadius: `${inputBorderRadius}px`,
 					}
 				: {
 						border: '0',

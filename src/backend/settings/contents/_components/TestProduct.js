@@ -1,11 +1,71 @@
 // import { useState } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
+import { __ } from '@wordpress/i18n';
+import Swal from 'sweetalert2';
+import 'animate.css';
 
 const TestProduct = ({ settings }) => {
-	// const wcActive = Boolean(blockonsObj.wcActive);
 	const quickview = settings ? settings : { enabled: false };
 
-	// if (!quickview.enabled) return null;
+	const handleQuickView = (e) => {
+		e.preventDefault();
+
+		Swal.fire({
+			html: `
+                <div class="blockons-quickview-popup flex">
+                    <div class="bqv-col left">
+                        <img 
+                            src="http://localhost/_themes/wp-content/uploads/2022/05/album-1-300x300.jpg" alt="Album" />
+                    </div>
+                    <div class="bqv-col right">
+                        <h2 class="bqv-title">Album</h2>
+                        <div class="bqv-price">
+                            <del class="">
+                                <span class="woocommerce-Price-currencySymbol">R</span>15,20
+                            </del>
+                            <ins class="">
+                                <span class="woocommerce-Price-currencySymbol">R</span>12,00
+                            </ins>
+                        </div>
+                        <div class="bqv-desc">
+                            <p>Product description goes here. You can fetch and display the actual product description.</p>
+                        </div>
+                        <button class="bqv-btn">
+                            Add to Cart
+                        </button>
+
+						<div class="bqv-quickview-goto">Go to Product Page</div>
+
+						<div class="bqv-info">
+							SKU: woo-product<br />
+							Categories: Category1, Category2<br />
+							Tags: tagFour, tagOne, tagThree, tagTwo
+						</div>
+                    </div>
+                </div>
+            `,
+			showCloseButton: true,
+			showConfirmButton: false,
+			showDenyButton: false,
+			width: 'auto',
+			position: 'center',
+			customClass: {
+				container: 'blockons-popup-container',
+				popup: 'blockons-popup-swal',
+			},
+			showClass: {
+				popup: `
+					animate__animated
+					animate__zoomIn
+					animate__faster`,
+			},
+			hideClass: {
+				popup: `
+					animate__animated
+					animate__zoomOut
+					animate__faster`,
+			},
+		});
+	};
 
 	return (
 		<div className="blockons-test-product">
@@ -15,11 +75,17 @@ const TestProduct = ({ settings }) => {
 						<span aria-hidden="true">Sale</span>
 					</div>
 					<div className="wc-block-grid__product-image">
-						{(quickview.position === "three" ||
-							quickview.position === "four") && (
+						{(quickview.position === 'three' ||
+							quickview.position === 'four') && (
 							<div className="blockons-quickview three">
-								<a className="blockons-quickview-btn" data-id="24">
-									{quickview.text ? quickview.text : __("Quick View")}
+								<a
+									className="blockons-quickview-btn"
+									data-id="24"
+									onClick={handleQuickView}
+								>
+									{quickview.text
+										? quickview.text
+										: __('Quick View')}
 								</a>
 							</div>
 						)}
@@ -33,7 +99,10 @@ const TestProduct = ({ settings }) => {
 				<div className="wc-block-grid__product-price price">
 					<del aria-hidden="true">
 						<span className="woocommerce-Price-amount amount">
-							<span className="woocommerce-Price-currencySymbol">R</span>15,20
+							<span className="woocommerce-Price-currencySymbol">
+								R
+							</span>
+							15,20
 						</span>
 					</del>
 					<span className="screen-reader-text">
@@ -41,10 +110,15 @@ const TestProduct = ({ settings }) => {
 					</span>
 					<ins aria-hidden="true">
 						<span className="woocommerce-Price-amount amount">
-							<span className="woocommerce-Price-currencySymbol">R</span>12,00
+							<span className="woocommerce-Price-currencySymbol">
+								R
+							</span>
+							12,00
 						</span>
 					</ins>
-					<span className="screen-reader-text">Current price is: R12,00.</span>
+					<span className="screen-reader-text">
+						Current price is: R12,00.
+					</span>
 				</div>
 
 				<div className="wp-block-button wc-block-grid__product-add-to-cart">
@@ -52,20 +126,21 @@ const TestProduct = ({ settings }) => {
 				</div>
 
 				{((quickview.enabled && !quickview.position) ||
-					quickview.position === "one" ||
-					quickview.position === "two") && (
+					quickview.position === 'one' ||
+					quickview.position === 'two') && (
 					<div
 						className={`blockons-quickview ${
-							quickview.position ? quickview.position : "one"
+							quickview.position ? quickview.position : 'one'
 						}`}
 					>
 						<a
 							className={`blockons-quickview-btn ${
-								quickview.position ? quickview.position : ""
+								quickview.position ? quickview.position : ''
 							}`}
 							data-id="24"
+							onClick={handleQuickView}
 						>
-							{quickview.text ? quickview.text : __("Quick View")}
+							{quickview.text ? quickview.text : __('Quick View')}
 						</a>
 					</div>
 				)}

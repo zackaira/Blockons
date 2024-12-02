@@ -122,7 +122,7 @@ class Blockons {
 				'required' => __('This field is required', 'blockons'),
 				'select_option' => __('Please select an option', 'blockons'),
 				'required_url' => __('Please enter a valid URL', 'blockons'),
-				'required_email' => __('Please enter a Email Address', 'blockons'),
+				'required_email' => __('Please enter a valid Email Address', 'blockons'),
 				'required_number' => __('Please enter a valid number', 'blockons'),
 				'subject' => __('New Contact Form Submission', 'blockons'),
 				'error' => __('An error occurred. Please try again.', 'blockons'),

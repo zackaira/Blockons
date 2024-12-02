@@ -3,7 +3,6 @@ import { __ } from '@wordpress/i18n';
 import SettingHeader from '../components/SettingHeader';
 import SettingRow from '../components/SettingRow';
 import SettingNote from '../components/UI/SettingNote';
-import TestProduct from './_components/TestProduct';
 
 const BlockExtensions = ({
 	blockonsOptions,
@@ -16,8 +15,6 @@ const BlockExtensions = ({
 	const [imgPopupsPro, setImgPopupsPro] = useState(false);
 	const [visibilityPro, setVisibilityPro] = useState(false);
 	const [animationsPro, setAnimationsPro] = useState(false);
-
-	const [quickviewPreview, setQuickviewPreview] = useState(false);
 
 	const onSettingChange = (e) => {
 		handleSettingChange(e);
@@ -646,107 +643,6 @@ const BlockExtensions = ({
 					)}
 				</tbody>
 			</table>
-
-			{/* {wcActive && (
-				<>
-					<SettingHeader
-						title={__("Blockons WooCommerce Block Extensions", "blockons")}
-						description={__(
-							"Adding or extending the functionality of your WooCommerce editor blocks",
-							"blockons"
-						)}
-						topSpace={60}
-					/>
-
-					<table className="form-table" role="presentation">
-						<tbody>
-							<SettingRow
-								title={__("Product Quick View", "blockons")}
-								description={__(
-									"Add Product Quick View popups to the WooCommerce core product blocks, letting users view all product details without leaving the page.",
-									"blockons"
-								)}
-								inputType="heading"
-							/>
-							<SettingRow
-								title={__("Enable Product Quick View", "blockons")}
-								slug="quickview_enabled"
-								value={blockonsOptions.quickview?.enabled}
-								inputType="toggle"
-								onChange={onSettingChange}
-								tooltip={__(
-									"This will add Product Quick View settings to the WooCommerce core product blocks in the Editor.",
-									"blockons"
-								)}
-								documentation="#"
-							/>
-
-							{blockonsOptions.quickview?.enabled && (
-								<>
-									<SettingRow
-										title={__("Quick View Preview", "blockons")}
-										slug="quickview_preview"
-										value={quickviewPreview}
-										inputType="toggle"
-										onChange={() => setQuickviewPreview(!quickviewPreview)}
-									/>
-
-									{isPremium ? (
-										<>
-											<SettingRow
-												title={__("Quick View Position", "blockons")}
-												slug="quickview_position"
-												value={blockonsOptions.quickview?.position}
-												inputType="select"
-												options={{
-													one: __("Default Button", "blockons"),
-													two: __("Plain Text", "blockons"),
-													three: __("Over Image", "blockons"),
-													// four: __("Over Image Icon", "blockons"),
-												}}
-												onChange={onSettingChange}
-											/>
-											<SettingRow
-												title={__("Button Text", "blockons")}
-												slug="quickview_text"
-												value={blockonsOptions.quickview?.text}
-												placeholder={__("Quick View", "blockons")}
-												inputType="text"
-												onChange={onSettingChange}
-											/>
-										</>
-									) : (
-										<SettingRow
-											inputType="upgrade"
-											title={__("Quick View for WooCommerce", "blockons")}
-											description={__(
-												"Upgrade to Blockons Pro to add quick view you your WooCommerce products.",
-												"blockons"
-											)}
-											upgradeUrl={upgradeUrl}
-											proFeatures={[
-												__(
-													"Boost Conversions & keep your shoppers engaged",
-													"blockons"
-												),
-												__(
-													"View products in a popup without leaving the shop page",
-													"blockons"
-												),
-												__("Fully Customizable Popup Design", "blockons"),
-											]}
-										/>
-									)}
-								</>
-							)}
-						</tbody>
-					</table>
-				</>
-			)}
-
-			{blockonsOptions.quickview?.enabled && quickviewPreview && (
-				<TestProduct settings={blockonsOptions?.quickview} />
-			)} */}
 		</>
 	);
 };

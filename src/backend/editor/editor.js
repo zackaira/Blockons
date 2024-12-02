@@ -7,6 +7,6 @@ import './extensions/animations.js';
 
 /* <fs_premium_only> */
 
-// import './extensions/quickview.js';
+import './extensions/quickview.js';
 
 /* </fs_premium_only> */

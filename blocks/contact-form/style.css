@@ -2,7 +2,8 @@
  * Note that these styles are loaded *before* editor styles, so that
  * editor-specific styles using the same selectors will take precedence.
  */
-.blockons-contact-form {
+.blockons-contact-form,
+.blockons-cf--button {
 	display: flex;
 }
 .blockons-cf-form p,
@@ -29,13 +30,16 @@
 	text-align: right;
 }
 /* -- Align -- */
-.blockons-contact-form.left-align {
+.blockons-contact-form.left-align,
+.blockons-contact-form.left-align .blockons-cf--button {
 	justify-content: flex-start;
 }
-.blockons-contact-form.center-align {
+.blockons-contact-form.center-align,
+.blockons-contact-form.center-align .blockons-cf--button {
 	justify-content: center;
 }
-.blockons-contact-form.right-align {
+.blockons-contact-form.right-align,
+.blockons-contact-form.right-align .blockons-cf--button {
 	justify-content: flex-end;
 }
 
@@ -50,11 +54,14 @@
 }
 .blockons-contact-form .blockons-cf-fields .form-field {
 	margin-bottom: 12px;
+	display: flex;
+	flex-direction: column;
 }
 .blockons-contact-form .blockons-cf-fields .form-field label p {
 	margin: 0;
 	padding: 0;
 }
+
 /* - Cols - */
 .blockons-contact-form .blockons-cf-fields .col-100 {
 	width: 100%;
@@ -115,6 +122,8 @@
 	font-size: 15px;
 	border-radius: 4px;
 	color: #555;
+	box-sizing: border-box;
+	font-family: inherit;
 }
 
 .blockons-contact-form .blockons-cf--footer {
@@ -186,4 +195,51 @@
 }
 .blockons-form-file-upload .form-field .file-description {
 	font-size: 0.8em;
+}
+
+/* - Errors - */
+.blockons-contact-form .blockons-cf-fields .form-field .form-label {
+	order: 1;
+}
+.blockons-contact-form .blockons-cf-fields.above .form-field .field-error {
+	order: 2;
+	margin: -2px 0 10px;
+}
+.blockons-contact-form .blockons-cf-fields .form-field .form-control {
+	order: 5;
+}
+.blockons-contact-form .blockons-cf-fields.below .form-field .field-error {
+	order: 6;
+	margin: 5px 0 0;
+}
+.blockons-contact-form .blockons-cf-fields.below .form-field .field-error {
+	order: 6;
+	margin: 5px 0 0;
+}
+.blockons-contact-form .blockons-cf-fields.border .form-field .field-error {
+	display: none !important;
+}
+.blockons-contact-form
+	.blockons-cf-fields.border
+	.form-field.has-error
+	input.form-input,
+.blockons-contact-form
+	.blockons-cf-fields.border
+	.form-field.has-error
+	textarea.form-textarea,
+.blockons-contact-form
+	.blockons-cf-fields.border
+	.form-field.has-error
+	select.form-select,
+.blockons-contact-form
+	.blockons-cf-fields.border
+	.form-field.has-error
+	input.blockons-datepicker {
+	border: 1px solid #dc0606 !important;
+}
+.blockons-contact-form
+	.blockons-cf-fields.border
+	.form-field.has-error
+	.acceptance-label-txt {
+	border-bottom: 1px solid #dc0606;
 }

@@ -1,9 +1,11 @@
-import { RichText, useBlockProps } from "@wordpress/block-editor";
+import { RichText, useBlockProps } from '@wordpress/block-editor';
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
 		className: `align-${attributes.alignment} ${
-			attributes.searchDisplay === "default" ? "default-search" : "icon-search"
+			attributes.searchDisplay === 'default'
+				? 'default-search'
+				: 'icon-search'
 		}`,
 		id: attributes.searchId,
 	});
@@ -24,45 +26,48 @@ const Save = ({ attributes }) => {
 				searchProDesc: attributes.searchProDesc,
 				searchProPrice: attributes.searchProPrice,
 				searchProHasPreview: attributes.searchProHasPreview,
-		  }
+			}
 		: { searchPro: attributes.searchPro };
+
+	const formProps = {
+		role: 'search',
+		method: 'get',
+		className: `blockons-search-inner ${attributes.hasPlaceholder ? 'hasph' : 'noph'}`,
+		...(attributes.baseUrl ? { action: attributes.baseUrl } : {}),
+		onSubmit:
+			"var l=window.location.pathname.match(/^\\/[^\\/]+/);this.action=l?window.location.pathname:'/';",
+	};
 
 	return (
 		<div {...blockProps}>
 			<div
 				className={`blockons-search-block  ${attributes.searchDisplay} ${
-					attributes.searchDisplay === "dropdown" && attributes.searchAlign
+					attributes.searchDisplay === 'dropdown' &&
+					attributes.searchAlign
 						? attributes.searchAlign
-						: ""
-				} ${attributes.searchDisplay === "default" ? "nopad" : ""} ${
-					attributes.hasBtn ? "hasBtn" : "noBtn"
+						: ''
+				} ${attributes.searchDisplay === 'default' ? 'nopad' : ''} ${
+					attributes.hasBtn ? 'hasBtn' : 'noBtn'
 				}`}
 				style={{
-					...(attributes.searchDisplay === "dropdown" ||
-					attributes.searchDisplay === "popup"
+					...(attributes.searchDisplay === 'dropdown' ||
+					attributes.searchDisplay === 'popup'
 						? {
 								backgroundColor: attributes.iconBgColor,
 								padding: attributes.iconPadding,
 								fontSize: attributes.iconSize,
-						  }
-						: ""),
+							}
+						: ''),
 				}}
 			>
-				{attributes.searchDisplay === "default" && (
+				{attributes.searchDisplay === 'default' && (
 					<div
 						className="blockons-search-default"
 						style={{
 							width: attributes.searchWidthDefault,
 						}}
 					>
-						<form
-							role="search"
-							method="get"
-							className={`blockons-search-inner ${
-								attributes.hasPlaceholder ? "hasph" : "noph"
-							}`}
-							{...(attributes.baseUrl ? { action: attributes.baseUrl } : {})}
-						>
+						<form {...formProps}>
 							<input
 								type="text"
 								name="s"
@@ -73,8 +78,10 @@ const Save = ({ attributes }) => {
 								required
 								autoComplete="off"
 								style={{
-									backgroundColor: attributes.searchInputBgColor,
-									borderColor: attributes.searchInputBorderColor,
+									backgroundColor:
+										attributes.searchInputBgColor,
+									borderColor:
+										attributes.searchInputBorderColor,
 									color: attributes.searchInputColor,
 								}}
 							/>
@@ -83,11 +90,14 @@ const Save = ({ attributes }) => {
 									type="submit"
 									className="blockons-search-button"
 									style={{
-										backgroundColor: attributes.searchBtnBgColor,
+										backgroundColor:
+											attributes.searchBtnBgColor,
 										color: attributes.searchBtnColor,
 									}}
 								>
-									<RichText.Content value={attributes.textButton} />
+									<RichText.Content
+										value={attributes.textButton}
+									/>
 								</button>
 							)}
 						</form>
@@ -101,8 +111,8 @@ const Save = ({ attributes }) => {
 					</div>
 				)}
 
-				{(attributes.searchDisplay === "dropdown" ||
-					attributes.searchDisplay === "popup") && (
+				{(attributes.searchDisplay === 'dropdown' ||
+					attributes.searchDisplay === 'popup') && (
 					<span
 						className="fa-solid fa-magnifying-glass"
 						style={{
@@ -111,27 +121,23 @@ const Save = ({ attributes }) => {
 					></span>
 				)}
 
-				{attributes.searchDisplay === "dropdown" && (
+				{attributes.searchDisplay === 'dropdown' && (
 					<div
 						className="blockons-search-dropdown"
 						style={{
-							width: attributes.searchWidthDropdown + "px",
-							...(attributes.searchAlign === "bottomcenter" ||
-							attributes.searchAlign === "topcenter"
+							width: attributes.searchWidthDropdown + 'px',
+							...(attributes.searchAlign === 'bottomcenter' ||
+							attributes.searchAlign === 'topcenter'
 								? {
-										marginLeft: "-" + attributes.searchWidthDropdown / 2 + "px",
-								  }
-								: ""),
+										marginLeft:
+											'-' +
+											attributes.searchWidthDropdown / 2 +
+											'px',
+									}
+								: ''),
 						}}
 					>
-						<form
-							role="search"
-							method="get"
-							className={`blockons-search-inner ${
-								attributes.hasPlaceholder ? "hasph" : "noph"
-							}`}
-							{...(attributes.baseUrl ? { action: attributes.baseUrl } : {})}
-						>
+						<form {...formProps}>
 							<input
 								type="text"
 								name="s"
@@ -142,8 +148,10 @@ const Save = ({ attributes }) => {
 								required
 								autoComplete="off"
 								style={{
-									backgroundColor: attributes.searchInputBgColor,
-									borderColor: attributes.searchInputBorderColor,
+									backgroundColor:
+										attributes.searchInputBgColor,
+									borderColor:
+										attributes.searchInputBorderColor,
 									color: attributes.searchInputColor,
 								}}
 							/>
@@ -152,11 +160,14 @@ const Save = ({ attributes }) => {
 									type="submit"
 									className="blockons-search-button"
 									style={{
-										backgroundColor: attributes.searchBtnBgColor,
+										backgroundColor:
+											attributes.searchBtnBgColor,
 										color: attributes.searchBtnColor,
 									}}
 								>
-									<RichText.Content value={attributes.textButton} />
+									<RichText.Content
+										value={attributes.textButton}
+									/>
 								</button>
 							)}
 						</form>
@@ -171,14 +182,14 @@ const Save = ({ attributes }) => {
 				)}
 			</div>
 
-			{attributes.searchDisplay === "popup" && (
+			{attributes.searchDisplay === 'popup' && (
 				<>
 					<div className="blockons-search-popup-overlay"></div>
 					<div className="blockons-search-popup-wrapper">
 						<div
 							className="blockons-search-popup"
 							style={{
-								width: attributes.searchWidthPopup + "px",
+								width: attributes.searchWidthPopup + 'px',
 								backgroundColor: attributes.searchBgColor,
 							}}
 						>
@@ -187,22 +198,29 @@ const Save = ({ attributes }) => {
 								role="search"
 								method="get"
 								className={`blockons-search-inner ${
-									attributes.hasPlaceholder ? "hasph" : "noph"
+									attributes.hasPlaceholder ? 'hasph' : 'noph'
 								}`}
-								{...(attributes.baseUrl ? { action: attributes.baseUrl } : {})}
+								{...(attributes.baseUrl
+									? { action: attributes.baseUrl }
+									: {})}
 							>
 								<input
 									type="text"
 									name="s"
 									className="blockons-search-input"
 									{...(attributes.hasPlaceholder
-										? { placeholder: attributes.searchValue }
+										? {
+												placeholder:
+													attributes.searchValue,
+											}
 										: {})}
 									required
 									autoComplete="off"
 									style={{
-										backgroundColor: attributes.searchInputBgColor,
-										borderColor: attributes.searchInputBorderColor,
+										backgroundColor:
+											attributes.searchInputBgColor,
+										borderColor:
+											attributes.searchInputBorderColor,
 										color: attributes.searchInputColor,
 									}}
 								/>
@@ -211,11 +229,14 @@ const Save = ({ attributes }) => {
 										type="submit"
 										className="blockons-search-button"
 										style={{
-											backgroundColor: attributes.searchBtnBgColor,
+											backgroundColor:
+												attributes.searchBtnBgColor,
 											color: attributes.searchBtnColor,
 										}}
 									>
-										<RichText.Content value={attributes.textButton} />
+										<RichText.Content
+											value={attributes.textButton}
+										/>
 									</button>
 								)}
 							</form>
@@ -223,7 +244,9 @@ const Save = ({ attributes }) => {
 								<div
 									className="blockons-search-results-wrap"
 									id={attributes.searchProId}
-									data-settings={JSON.stringify(searchProOptions)}
+									data-settings={JSON.stringify(
+										searchProOptions,
+									)}
 								></div>
 							)}
 						</div>

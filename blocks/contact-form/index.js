@@ -24,11 +24,13 @@ import './input-file-upload';
 import './input-datepicker';
 
 const { name } = json;
+import { formsIcon as svg } from '../svgIcons';
 
 /**
  * Register the Block
  */
 registerBlockType(name, {
+	icon: svg,
 	edit: Edit,
 	save,
 });

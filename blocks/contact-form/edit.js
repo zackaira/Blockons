@@ -14,6 +14,7 @@ import {
 	TextControl,
 	ToggleControl,
 	RangeControl,
+	SelectControl,
 	Placeholder,
 	__experimentalUnitControl as UnitControl,
 	Button,
@@ -180,6 +181,8 @@ const Edit = (props) => {
 			inputBorderRadius,
 			buttonColor,
 			buttonFontColor,
+			buttonSpacing,
+			errorPosition,
 			availableShortcodes,
 		},
 		clientId,
@@ -598,20 +601,21 @@ const Edit = (props) => {
 								updateInnerBlocksStyles({ showLabels: value });
 							}}
 						/>
+
+						<RangeControl
+							label={__('Text Size', 'blockons')}
+							value={labelSize}
+							onChange={(value) => {
+								setAttributes({ labelSize: value });
+								updateInnerBlocksStyles({
+									labelSize: value,
+								});
+							}}
+							min={10}
+							max={54}
+						/>
 						{showLabels && (
 							<>
-								<RangeControl
-									label={__('Label Size', 'blockons')}
-									value={labelSize}
-									onChange={(value) => {
-										setAttributes({ labelSize: value });
-										updateInnerBlocksStyles({
-											labelSize: value,
-										});
-									}}
-									min={10}
-									max={54}
-								/>
 								<RangeControl
 									label={__('Label Spacing', 'blockons')}
 									value={labelSpacing}
@@ -770,6 +774,39 @@ const Edit = (props) => {
 							}
 							paletteColors={colorPickerPalette}
 						/>
+
+						<RangeControl
+							label={__('Button Spacing', 'blockons')}
+							value={buttonSpacing}
+							onChange={(value) =>
+								setAttributes({ buttonSpacing: value })
+							}
+							min={0}
+							max={100}
+						/>
+						<div className="blockons-divider"></div>
+
+						<SelectControl
+							label={__('Input Error Position', 'blockons')}
+							value={errorPosition}
+							options={[
+								{
+									label: 'Display Error Below Input',
+									value: 'below',
+								},
+								{
+									label: 'Display Error Above Input',
+									value: 'above',
+								},
+								{
+									label: 'Display Red Border on Input',
+									value: 'border',
+								},
+							]}
+							onChange={(value) =>
+								setAttributes({ errorPosition: value })
+							}
+						/>
 					</PanelBody>
 				)}
 
@@ -811,7 +848,9 @@ const Edit = (props) => {
 						/>
 					</div>
 
-					<div className="blockons-cf-fields">
+					<div
+						className={`blockons-cf-fields ${!showLabels ? 'nolabels' : ''} ${errorPosition}`}
+					>
 						<InnerBlocks
 							allowedBlocks={ALLOWED_BLOCKS}
 							template={DEFAULT_EMAIL_TEMPLATE}
@@ -830,6 +869,9 @@ const Edit = (props) => {
 								style={{
 									backgroundColor: buttonColor,
 									color: buttonFontColor,
+									borderRadius: inputBorderRadius,
+									marginTop: buttonSpacing,
+									fontSize: labelSize,
 								}}
 							>
 								{submitButtonText ||

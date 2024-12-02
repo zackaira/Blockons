@@ -7,7 +7,7 @@
 }
 
 .blockons-settings {
-	max-width: 920px;
+	max-width: 980px;
 	position: relative;
 }
 .blockons-loader-wrap {
@@ -1037,93 +1037,7 @@ input.toggle-switch-checkbox::before,
 	padding: 0;
 }
 
-.propromo-list {
-	margin: 32px 0 0 7px;
-}
-.propromo-list h5 {
-	font-size: 16px;
-	margin: 0 0 10px;
-	padding: 0;
-}
-.propromo-list ul {
-	margin: 0;
-	padding: 0;
-}
-.propromo-list ul li {
-	list-style-type: disc;
-	margin: 0 0 10px 12px;
-	padding: 0;
-}
-
 /* <fs_premium_only> */
-
-/* -- Multi Checkbox Inputs -- */
-/* .blockons-multioption {
-	display: inline-block;
-	background-color: rgba(0, 0, 0, 0.02);
-	border-radius: 5px;
-	box-shadow: 0 0 0 1px rgb(0 0 0 / 8%), 0 0 4px rgb(0 0 0 / 4%);
-	margin: 5px 10px 4px 0;
-	padding: 4px 10px 4px 6px;
-}
-.blockons-multioption input {
-	margin: -2px 4px 0 0;
-} */
-/* -- Date Time Picker -- */
-/* .blockons-settings .rdtPicker {
-	max-width: 320px;
-}
-.blockons-settings .rdtPicker th,
-.blockons-settings .rdtPicker td {
-	padding: 5px;
-	vertical-align: middle;
-} */
-/* -- Media Upload -- */
-/* .blockonsImagePreview {
-	box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
-	position: relative;
-	max-width: 240px;
-}
-.blockonsImagePreview img {
-	display: block;
-	max-width: 100%;
-	height: auto;
-}
-.button.blockonsPreviewClose {
-	background-color: rgb(255 255 255) !important;
-	border: 1px solid #ccc;
-	border-radius: 30px;
-	box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
-	color: #ccc;
-	position: absolute;
-	right: 4px;
-	top: 4px;
-	padding: 0;
-	width: 30px;
-	height: 30px;
-	line-height: 1.2;
-}
-.button.blockonsPreviewClose::before {
-	font-family: "Dashicons";
-	content: "\f335";
-	font-size: 20px;
-}
-.button.blockonsPreviewClose:hover {
-	border: 1px solid #b3b3b3;
-	color: #959595;
-}
-.blockons-row .blockonsMediaUploadBtn {
-	color: inherit;
-	padding: 4px 20px;
-	border-color: #bbb;
-	transition: all 0.3s;
-}
-
-.blockons-settings .button:hover {
-	background: #e8e8e9;
-	border-color: #878787;
-	color: #303030;
-} */
 
 /* -- Test Product -- */
 .blockons-test-product {
@@ -1213,6 +1127,52 @@ input.toggle-switch-checkbox::before,
 }
 .blockons-test-product .blockons-quickview.one .wp-block-button {
 	margin-bottom: 12px;
+}
+/* -- Test Popup -- */
+.blockons-quickview-popup {
+	display: flex;
+	align-items: flex-start;
+	gap: 20px;
+	max-width: 720px;
+	padding: 24px;
+}
+.blockons-quickview-popup .bqv-col.left {
+	flex: 1;
+}
+.blockons-quickview-popup .bqv-col.left img {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+.blockons-quickview-popup .bqv-col.right {
+	flex: 1;
+	text-align: left;
+}
+.blockons-quickview-popup .bqv-title {
+	font-size: 32px;
+	margin: 8px 0 10px;
+	padding: 0;
+}
+.blockons-quickview-popup .bqv-price {
+	font-size: 15px;
+	font-weight: 700;
+	margin: 0 0 12px;
+	display: flex;
+	gap: 8px;
+}
+.blockons-quickview-popup .bqv-desc p {
+	font-size: 14px;
+}
+.blockons-quickview-popup .bqv-btn {
+}
+.blockons-quickview-popup .bqv-quickview-goto {
+	margin: 20px 0 0;
+}
+.blockons-quickview-popup .bqv-info {
+	font-size: 13px;
+	margin: 20px 0 0;
+	line-height: 1.5;
 }
 
 /* </fs_premium_only> */

@@ -28,28 +28,31 @@ const WIDTH_OPTIONS = [
 
 const RICHTEXT_ALLOWED_FORMATS = ['core/bold', 'core/italic', 'core/link'];
 
-const DATE_FORMAT_OPTIONS = [
-	// Basic Formats
+// Base date formats without time
+const BASE_DATE_FORMATS = [
 	{ label: 'YYYY-MM-DD (2024-07-28)', value: 'Y-m-d' },
 	{ label: 'MM/DD/YYYY (07-28-2024)', value: 'm/d/Y' },
 	{ label: 'DD-MM-YYYY (28-07-2024)', value: 'd-m-Y' },
 	{ label: 'YYYY.MM.DD (2024.07.28)', value: 'Y.m.d' },
 	{ label: 'MM.DD.YYYY (07.28.2024)', value: 'm.d.Y' },
 	{ label: 'DD.MM.YYYY (28.07.2024)', value: 'd.m.Y' },
-
 	{ label: 'MMMM DD, YYYY (November 15, 2024)', value: 'F j, Y' },
 	{ label: 'DD MMMM YYYY (15 November 2024)', value: 'j F Y' },
 	{ label: 'YYYY MMMM DD (2024 November 15)', value: 'Y F j' },
-
 	{ label: 'MMM DD, YYYY (Nov 15, 2024)', value: 'M j, Y' },
 	{ label: 'DD MMM YYYY (15 Nov 2024)', value: 'j M Y' },
 	{ label: 'YYYY MMM DD (2024 Nov 15)', value: 'Y M j' },
-
 	{
 		label: 'Day, MMMM DD, YYYY (Friday, November 15, 2024)',
 		value: 'l, F j, Y',
 	},
 	{ label: 'Day, MMM DD, YYYY (Fri, Nov 15, 2024)', value: 'D, M j, Y' },
+];
+
+// Time format suffixes
+const TIME_FORMATS = [
+	{ label: '24h (14:30)', value: 'H:i' },
+	{ label: '12h (02:30 PM)', value: 'h:i K' },
 ];
 
 // Utility functions
@@ -61,6 +64,36 @@ const getFormattedExample = (format) => {
 	// Create a flatpickr instance just for formatting
 	const fp = flatpickr.parseDate(new Date(), format);
 	return flatpickr.formatDate(fp, format);
+};
+
+// Helper function to combine date and time formats
+const getDateTimeFormats = (dateFormat, timeFormat) => {
+	return `${dateFormat} - ${timeFormat}`;
+};
+
+// Custom hook to get dynamic format options
+const useDateFormatOptions = (enableTime) => {
+	return useMemo(() => {
+		if (!enableTime) {
+			return BASE_DATE_FORMATS;
+		}
+
+		// Generate combined formats for each date and time combination
+		const dateTimeFormats = [];
+		BASE_DATE_FORMATS.forEach((dateFormat) => {
+			TIME_FORMATS.forEach((timeFormat) => {
+				dateTimeFormats.push({
+					label: `${dateFormat.label.replace(')', '')} ${timeFormat.label})`,
+					value: getDateTimeFormats(
+						dateFormat.value,
+						timeFormat.value,
+					),
+				});
+			});
+		});
+
+		return dateTimeFormats;
+	}, [enableTime]);
 };
 
 registerBlockType('blockons/form-datepicker', {
@@ -132,6 +165,22 @@ registerBlockType('blockons/form-datepicker', {
 			type: 'string',
 			default: '#333',
 		},
+		inputBgColor: {
+			type: 'string',
+			default: '#f9f9f9',
+		},
+		inputBorder: {
+			type: 'boolean',
+			default: true,
+		},
+		inputBorderColor: {
+			type: 'string',
+			default: '#dbdbdb',
+		},
+		inputBorderRadius: {
+			type: 'number',
+			default: 4,
+		},
 		enableTime: {
 			type: 'boolean',
 			default: false,
@@ -169,6 +218,10 @@ registerBlockType('blockons/form-datepicker', {
 			inputSize,
 			inputPadHoriz,
 			inputPadVert,
+			inputBgColor,
+			inputBorder,
+			inputBorderColor,
+			inputBorderRadius,
 			inputTextColor,
 			enableTime,
 			dateFormat,
@@ -184,6 +237,21 @@ registerBlockType('blockons/form-datepicker', {
 			() => `date-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
 			[label],
 		);
+		const dateFormatOptions = useDateFormatOptions(enableTime);
+
+		useEffect(() => {
+			if (enableTime && !dateFormat.includes(':')) {
+				// Add default time format (24h) when enabling time
+				setAttributes({
+					dateFormat: getDateTimeFormats(dateFormat, 'H:i'),
+				});
+			} else if (!enableTime && dateFormat.includes(':')) {
+				// Remove time format when disabling time
+				setAttributes({
+					dateFormat: dateFormat.split(' ')[0],
+				});
+			}
+		}, [enableTime]);
 
 		// Parent block communication
 		const parentClientId = useSelect((select) => {
@@ -238,8 +306,26 @@ registerBlockType('blockons/form-datepicker', {
 				fontSize: `${inputSize}px`,
 				color: inputTextColor,
 				padding: `${inputPadVert}px ${inputPadHoriz}px`,
+				backgroundColor: inputBgColor,
+				borderRadius: `${inputBorderRadius}px`,
+				...(inputBorder
+					? {
+							border: `1px solid ${inputBorderColor}`,
+						}
+					: {
+							border: '0',
+						}),
 			}),
-			[inputSize, inputTextColor, inputPadVert, inputPadHoriz],
+			[
+				inputSize,
+				inputTextColor,
+				inputPadVert,
+				inputPadHoriz,
+				inputBorder,
+				inputBgColor,
+				inputBorderRadius,
+				inputBorderColor,
+			],
 		);
 
 		if (!isPremium) {
@@ -295,10 +381,19 @@ registerBlockType('blockons/form-datepicker', {
 							/>
 							<div className="blockons-divider" />
 
+							<ToggleControl
+								label={__('Enable Time Selection', 'blockons')}
+								checked={enableTime}
+								onChange={(value) =>
+									setAttributes({ enableTime: value })
+								}
+							/>
+							<div className="blockons-divider" />
+
 							<SelectControl
 								label={__('Date Format', 'blockons')}
 								value={dateFormat}
-								options={DATE_FORMAT_OPTIONS}
+								options={dateFormatOptions}
 								onChange={(value) =>
 									setAttributes({ dateFormat: value })
 								}
@@ -395,29 +490,8 @@ registerBlockType('blockons/form-datepicker', {
 										{__('Clear Max Date', 'blockons')}
 									</button>
 								)}
-
-								<div
-									className="date-range-help"
-									style={{ marginTop: '10px', opacity: 0.7 }}
-								>
-									<small>
-										{__(
-											'Or use "today" in Min Date to set dynamic minimum date',
-											'blockons',
-										)}
-									</small>
-								</div>
 							</div>
 							<div className="blockons-divider"></div>
-
-							<ToggleControl
-								label={__('Enable Time Selection', 'blockons')}
-								checked={enableTime}
-								onChange={(value) =>
-									setAttributes({ enableTime: value })
-								}
-							/>
-							<div className="blockons-divider" />
 
 							<SelectControl
 								label={__('Width', 'blockons')}
@@ -479,7 +553,7 @@ registerBlockType('blockons/form-datepicker', {
 							maxDate: maxDate || undefined,
 							disableMobile: true,
 						}}
-						className="blockons-datepicker"
+						className="blockons-datepicker form-control"
 						style={inputStyles}
 						placeholder={placeholder}
 						disabled={isSelected}
@@ -506,6 +580,10 @@ registerBlockType('blockons/form-datepicker', {
 			inputSize,
 			inputPadHoriz,
 			inputPadVert,
+			inputBgColor,
+			inputBorder,
+			inputBorderColor,
+			inputBorderRadius,
 			inputTextColor,
 			enableTime,
 			dateFormat,
@@ -532,6 +610,15 @@ registerBlockType('blockons/form-datepicker', {
 			fontSize: `${inputSize}px`,
 			color: inputTextColor,
 			padding: `${inputPadVert}px ${inputPadHoriz}px`,
+			backgroundColor: inputBgColor,
+			borderRadius: `${inputBorderRadius}px`,
+			...(inputBorder
+				? {
+						border: `1px solid ${inputBorderColor}`,
+					}
+				: {
+						border: '0',
+					}),
 		};
 
 		return (
@@ -566,7 +653,7 @@ registerBlockType('blockons/form-datepicker', {
 						type="text"
 						id={fieldId}
 						name={fieldId}
-						className="blockons-datepicker"
+						className="blockons-datepicker form-control"
 						style={inputStyles}
 						required={required}
 						data-enable-time={enableTime}

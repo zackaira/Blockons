@@ -223,6 +223,12 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 == Changelog ==
 
+= 1.2.02 =
+* Styling tweaks/fixes
+* 
+* Updated the language .pot file
+* PREMIUM: 
+
 = 1.2.01 =
 * Styling tweaks/fixes
 * Code Refactoring & Editor improvments

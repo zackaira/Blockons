@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "blockons/contact-form",
-	"title": "Email Forms",
+	"title": "Contact Form",
 	"category": "blockons-category",
 	"textdomain": "blockons",
 	"keywords": ["contact", "forms", "email", "blockons"],
@@ -135,6 +135,14 @@
 		"buttonFontColor": {
 			"type": "string",
 			"default": "#FFF"
+		},
+		"buttonSpacing": {
+			"type": "number",
+			"default": 12
+		},
+		"errorPosition": {
+			"type": "string",
+			"default": "below"
 		},
 		"availableShortcodes": {
 			"type": "array",

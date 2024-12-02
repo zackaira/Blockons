@@ -16,11 +16,16 @@ const Save = ({ attributes }) => {
 		ccEmails,
 		bccEmails,
 		includeMetadata,
+		showLabels,
+		labelSize,
 		submitButtonText,
 		successMessage,
 		errorMessage,
+		inputBorderRadius,
 		buttonColor,
 		buttonFontColor,
+		buttonSpacing,
+		errorPosition,
 		availableShortcodes,
 	} = attributes;
 
@@ -70,7 +75,9 @@ const Save = ({ attributes }) => {
 						/>
 					</div>
 
-					<div className="blockons-cf-fields">
+					<div
+						className={`blockons-cf-fields ${!showLabels ? 'nolabels' : ''} ${errorPosition}`}
+					>
 						<InnerBlocks.Content />
 
 						<div
@@ -85,6 +92,9 @@ const Save = ({ attributes }) => {
 								style={{
 									backgroundColor: buttonColor,
 									color: buttonFontColor,
+									borderRadius: inputBorderRadius,
+									marginTop: buttonSpacing,
+									fontSize: labelSize,
 								}}
 							>
 								{submitButtonText ||

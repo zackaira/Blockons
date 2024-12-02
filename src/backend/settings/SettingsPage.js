@@ -482,25 +482,6 @@ const SettingsPage = () => {
 					isAdmin={isAdmin}
 				/>
 			)}
-
-			<div className="propromo-list">
-				<h5>{__('Recently Added', 'blockons')}</h5>
-				<ul>
-					<li>{__('Table of Contents block', 'blockons')}</li>
-					<li>
-						{__('SiteBy credit for backlinks (PRO)', 'blockons')}
-					</li>
-					<li>{__('WooCommerce Side Cart (PRO)', 'blockons')}</li>
-				</ul>
-			</div>
-			<div className="propromo-list">
-				<h5>{__('Coming Next', 'blockons')}</h5>
-				<ul>
-					<li>{__('More blocks...', 'blockons')}</li>
-					<li>{__('WooCommerce Product Quick View', 'blockons')}</li>
-					<li>{__('Better Icons & More Options', 'blockons')}</li>
-				</ul>
-			</div>
 		</div>
 	);
 };

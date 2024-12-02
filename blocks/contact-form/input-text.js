@@ -184,10 +184,10 @@ registerBlockType('blockons/form-text-input', {
 				padding: `${inputPadVert}px ${inputPadHoriz}px`,
 				backgroundColor: inputBgColor,
 				color: inputTextColor,
+				borderRadius: `${inputBorderRadius}px`,
 				...(inputBorder
 					? {
 							border: `1px solid ${inputBorderColor}`,
-							borderRadius: `${inputBorderRadius}px`,
 						}
 					: {
 							border: '0',
@@ -404,10 +404,10 @@ registerBlockType('blockons/form-text-input', {
 			padding: `${inputPadVert}px ${inputPadHoriz}px`,
 			backgroundColor: inputBgColor,
 			color: inputTextColor,
+			borderRadius: `${inputBorderRadius}px`,
 			...(inputBorder
 				? {
 						border: `1px solid ${inputBorderColor}`,
-						borderRadius: `${inputBorderRadius}px`,
 					}
 				: {
 						border: '0',

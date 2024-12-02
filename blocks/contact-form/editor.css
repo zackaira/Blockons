@@ -71,7 +71,11 @@
 .blockons-contact-form
 	.blockons-cf-fields
 	.form-field
-	textarea.form-textarea::placeholder {
+	textarea.form-textarea::placeholder,
+.blockons-contact-form
+	.blockons-cf-fields
+	.form-field
+	input.blockons-datepicker::placeholder {
 	color: inherit;
 }
 

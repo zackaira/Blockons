@@ -20,11 +20,13 @@ class Blockons_Admin {
 
 		add_filter('admin_body_class', array($this, 'blockons_admin_body_classes'));
 
-		// Add Quickview to WooCommerce Blocks
-		// add_filter('woocommerce_blocks_product_grid_item_html', array( $this, 'blockons_add_quickview' ), 10, 3);
-		// Add AJAX actions for add to cart
-		// add_action('wp_ajax_blockons_get_product_data', array($this, 'blockons_get_product_data_ajax'));
-    	// add_action('wp_ajax_nopriv_blockons_get_product_data', array($this, 'blockons_get_product_data_ajax'));
+		if (blockons_fs()->can_use_premium_code__premium_only()) {
+			// Add Quickview to WooCommerce Blocks
+			add_filter('woocommerce_blocks_product_grid_item_html', array( $this, 'blockons_add_quickview_grid_blocks' ), 10, 3);
+			// Add AJAX actions for add to cart
+			add_action('wp_ajax_blockons_get_product_data', array($this, 'blockons_get_product_data_ajax'));
+			add_action('wp_ajax_nopriv_blockons_get_product_data', array($this, 'blockons_get_product_data_ajax'));
+		}
 	}
 
 	/**
@@ -164,7 +166,7 @@ class Blockons_Admin {
 		return $admin_classes;
 	}
 
-	public function blockons_add_quickview( $html, $data, $product ) {
+	public function blockons_add_quickview_grid_blocks( $html, $data, $product ) {
 		$blockonsSavedOptions = get_option('blockons_options');
 		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
 		$quickview = isset($blockonsOptions->quickview) ? $blockonsOptions->quickview : '';
@@ -200,16 +202,35 @@ class Blockons_Admin {
 				throw new Exception('WooCommerce is not active');
 			}
 	
-			if (!isset($_POST['product_id']) || empty($_POST['product_id'])) {
-				throw new Exception('Product ID is required');
+			if ((!isset($_POST['product_id']) || empty($_POST['product_id'])) && 
+				(!isset($_POST['product_slug']) || empty($_POST['product_slug']))) {
+				throw new Exception('Product ID or slug is required');
 			}
 	
-			$product_id = absint($_POST['product_id']);
-			$product = wc_get_product($product_id);
+			$product = null;
+			
+			// Try to get product by ID first
+			if (isset($_POST['product_id']) && !empty($_POST['product_id'])) {
+				$product_id = absint($_POST['product_id']);
+				$product = wc_get_product($product_id);
+			} 
+			// If no ID or product not found, try by slug
+			if (!$product && isset($_POST['product_slug']) && !empty($_POST['product_slug'])) {
+				$slug = sanitize_text_field($_POST['product_slug']);
+				
+				// Get post by slug
+				$post = get_page_by_path($slug, OBJECT, 'product');
+				if ($post) {
+					$product = wc_get_product($post);
+				}
+			}
 	
 			if (!$product) {
 				throw new Exception('Product not found');
 			}
+	
+			// Get the actual product ID now that we have the product
+			$product_id = $product->get_id();
 	
 			// Set up global product variable
 			global $post;
