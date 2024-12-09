@@ -5,7 +5,7 @@ Tags: gutenberg, editor blocks, woocommerce, page builder, gutenberg blocks
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.6
-Stable tag: 1.2.01
+Stable tag: 1.2.02
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,9 @@ The Dynamic Content Selector block enhances user interaction by allowing visitor
 
 &#9989; **Content Toggler** block
 The content toggler block helps organize your website by allowing you to hide and reveal large sections of content. Visitors can click on the toggler to view more details like text, images, or videos. This keeps your page neat and prevents clutter, making it great for detailed sections that you want available but not immediately visible. [See Example](https://blockons.com/documentation/content-toggler-block/)
+
+&#9989; **Contact Form** block
+A contact form block lets visitors easily send you messages through your website. Rather than showing your email address, visitors can fill out a contact form that delivers their message straight to your inbox. You can customize what information you collect in the contact form - making it perfect for contact pages, support requests, or gathering any information from your website visitors.  [See Example](https://blockons.com/documentation/contact-form-block-for-wordpress/)
 
 &#9989; **Accordion(s)** block
 Show your content in a clickable accordion-style block, which is great for presenting a lot of information in an expandable area. This is especially useful for sections like Frequently Asked Questions (FAQs), where visitors can choose and click to see the specific content they're interested in. [See Example](https://blockons.com/documentation/accordion-block/)
@@ -225,9 +228,11 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.2.02 =
 * Styling tweaks/fixes
-* 
+* Updated loading translations order
+* Fix Search block results to work with translations extension
 * Updated the language .pot file
-* PREMIUM: 
+* NEW: Added new Contact Form block
+* PREMIUM: More Advanced fields for Contact Form block
 
 = 1.2.01 =
 * Styling tweaks/fixes

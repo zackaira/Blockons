@@ -47,8 +47,7 @@ class Blockons {
 		// Load Editor JS & CSS.
 		add_action( 'enqueue_block_editor_assets', array( $this, 'blockons_block_editor_scripts' ), 10, 1 );
 
-		$this->blockons_load_plugin_textdomain();
-		add_action( 'init', array( $this, 'blockons_load_localisation' ), 0 );
+		add_action( 'init', array( $this, 'blockons_load_localisation' ), 10 );
 	} // End __construct ()
 
 	/**
@@ -135,7 +134,6 @@ class Blockons {
 		wp_register_script('blockons-progress-bars', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/progress-bars.js'), array('blockons-waypoint', 'blockons-waypoint-inview' ), BLOCKONS_PLUGIN_VERSION, true);
 
 		// Sliders
-		
 		wp_register_script('blockons-swiper-js', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 		wp_register_script('blockons-slider', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.js'), array('blockons-swiper-js'), BLOCKONS_PLUGIN_VERSION, true);
 		wp_register_script('blockons-slider-video', esc_url(BLOCKONS_PLUGIN_URL . 'dist/swiper-video.min.js'), array('blockons-swiper-js'), BLOCKONS_PLUGIN_VERSION, true);
@@ -329,21 +327,6 @@ class Blockons {
 	} // End blockons_load_localisation ()
 
 	/**
-	 * Load plugin textdomain
-	 *
-	 * @access  public
-	 * @return  void
-	 * @since   1.0.0
-	 */
-	public function blockons_load_plugin_textdomain() {
-		$domain = 'blockons';
-		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
-
-		load_textdomain($domain, BLOCKONS_PLUGIN_DIR . 'lang/' . $domain . '-' . $locale . '.mo');
-		load_plugin_textdomain($domain, false, BLOCKONS_PLUGIN_DIR . 'lang/');
-	} // End blockons_load_plugin_textdomain ()
-
-	/**
 	 * Main Blockons Instance
 	 * Ensures only one instance of Blockons is loaded or can be loaded.
 	 */
@@ -436,7 +419,7 @@ class Blockons {
 				"position" => "right",
 				"icon" => "fa-link",
 				"cicon" => "fa-leaf",
-				"text" => __("Site built by (blockons[*https://blockons.com/])", "blockons"),
+				"text" => "Site built by (blockons[*https://blockons.com/])",
 				"size" => 30,
 				"iconbgcolor" => "#FFF",
 				"iconcolor" => "#444",
@@ -446,7 +429,7 @@ class Blockons {
 			"quickview" => array(
 				"enabled" => false,
 				"style" => "one",
-				"text" => __("Quick View", "blockons")
+				"text" => "Quick View"
 			),
 			"sidecart" => array(
 				"enabled" => false,
@@ -458,8 +441,8 @@ class Blockons {
 				"icon_color" => "#333",
 				"icon_padding" => 60,
 				"has_amount" => true,
-				"header_title" => __("Your Shopping Cart", "blockons"),
-				"header_text" => __("Spend $100 to get FREE shipping!", "blockons"),
+				"header_title" => "Your Shopping Cart",
+				"header_text" => "Spend $100 to get FREE shipping!",
 				"bgcolor" => "#FFF",
 				"color" => "#000",
 				"overlay_color" => "#000",

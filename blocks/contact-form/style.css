@@ -31,15 +31,15 @@
 }
 /* -- Align -- */
 .blockons-contact-form.left-align,
-.blockons-contact-form.left-align .blockons-cf--button {
+.blockons-contact-form.alignment-left .blockons-cf--button {
 	justify-content: flex-start;
 }
 .blockons-contact-form.center-align,
-.blockons-contact-form.center-align .blockons-cf--button {
+.blockons-contact-form.alignment-center .blockons-cf--button {
 	justify-content: center;
 }
 .blockons-contact-form.right-align,
-.blockons-contact-form.right-align .blockons-cf--button {
+.blockons-contact-form.alignment-right .blockons-cf--button {
 	justify-content: flex-end;
 }
 
