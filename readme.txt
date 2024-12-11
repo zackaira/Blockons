@@ -5,7 +5,7 @@ Tags: gutenberg, editor blocks, woocommerce, page builder, gutenberg blocks
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.6
-Stable tag: 1.2.02
+Stable tag: 1.2.04
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -226,7 +226,7 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 == Changelog ==
 
-= 1.2.02 =
+= 1.2.04 =
 * Styling tweaks/fixes
 * Updated loading translations order
 * Fix Search block results to work with translations extension

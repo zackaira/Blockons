@@ -17,7 +17,7 @@
 			"default": false
 		},
 		"formWidth": {
-			"type": "number",
+			"type": "string",
 			"default": "400px"
 		},
 		"alignment": {
