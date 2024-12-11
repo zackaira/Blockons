@@ -10,12 +10,13 @@ const { registerBlockType } = wp.blocks;
 import {
 	PanelBody,
 	TextControl,
+	TextareaControl,
 	ToggleControl,
 	SelectControl,
 	RangeControl,
 	Button,
 } from '@wordpress/components';
-import { slugify } from '../block-global';
+import { slugify, RICHTEXT_MINIMAL_FORMATS } from '../block-global';
 
 // Constants
 const WIDTH_OPTIONS = [
@@ -26,8 +27,6 @@ const WIDTH_OPTIONS = [
 	{ label: '25%', value: '25' },
 	{ label: '20%', value: '20' },
 ];
-
-const RICHTEXT_ALLOWED_FORMATS = ['core/bold', 'core/italic', 'core/link'];
 
 // Utility functions
 const getFieldClasses = (baseClass, width) => {
@@ -268,7 +267,7 @@ registerBlockType('blockons/form-checkbox', {
 									setAttributes({ label: value })
 								}
 							/>
-							<TextControl
+							<TextareaControl
 								label={__('Description', 'blockons')}
 								value={description}
 								onChange={(value) =>
@@ -382,6 +381,48 @@ registerBlockType('blockons/form-checkbox', {
 								</Button>
 							</div>
 						</PanelBody>
+
+						<PanelBody
+							title={__('Design Settings', 'blockons')}
+							initialOpen={false}
+						>
+							{/* <RangeControl
+								label={__('Label Size', 'blockons')}
+								value={attributes.labelSize}
+								onChange={(value) =>
+									setAttributes({ labelSize: value })
+								}
+								min={10}
+								max={54}
+							/>
+							<BlockonsColorpicker
+								label={__('Label Color', 'blockons')}
+								value={attributes.labelColor}
+								onChange={(value) =>
+									setAttributes({ labelColor: value })
+								}
+								paletteColors={colorPickerPalette}
+							/>
+							<div className="blockons-divider" />
+
+							<RangeControl
+								label={__('Input Size', 'blockons')}
+								value={attributes.inputSize}
+								onChange={(value) =>
+									setAttributes({ inputSize: value })
+								}
+								min={10}
+								max={54}
+							/>
+							<BlockonsColorpicker
+								label={__('Input Text Color', 'blockons')}
+								value={attributes.inputTextColor}
+								onChange={(value) =>
+									setAttributes({ inputTextColor: value })
+								}
+								paletteColors={colorPickerPalette}
+							/> */}
+						</PanelBody>
 					</InspectorControls>
 				)}
 
@@ -406,7 +447,7 @@ registerBlockType('blockons/form-checkbox', {
 							onChange={(value) =>
 								setAttributes({ label: value })
 							}
-							allowedFormats={RICHTEXT_ALLOWED_FORMATS}
+							allowedFormats={RICHTEXT_MINIMAL_FORMATS}
 						/>
 						{required && (
 							<span className="required" aria-hidden="true">
@@ -434,12 +475,12 @@ registerBlockType('blockons/form-checkbox', {
 							onChange={(value) =>
 								setAttributes({ description: value })
 							}
-							allowedFormats={RICHTEXT_ALLOWED_FORMATS}
+							allowedFormats={RICHTEXT_MINIMAL_FORMATS}
 						/>
 					)}
 
 					<div
-						className="checkbox-group"
+						className="form-control checkbox-group"
 						style={checkboxGroupStyles}
 						role="group"
 						aria-labelledby={groupId}
@@ -569,7 +610,7 @@ registerBlockType('blockons/form-checkbox', {
 					)}
 
 					<div
-						className="checkbox-group"
+						className="form-control checkbox-group"
 						style={checkboxGroupStyles}
 						role="group"
 						aria-labelledby={groupId}

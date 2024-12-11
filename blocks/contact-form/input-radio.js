@@ -10,12 +10,13 @@ const { registerBlockType } = wp.blocks;
 import {
 	PanelBody,
 	TextControl,
+	TextareaControl,
 	ToggleControl,
 	SelectControl,
 	RangeControl,
 	Button,
 } from '@wordpress/components';
-import { slugify } from '../block-global';
+import { slugify, RICHTEXT_MINIMAL_FORMATS } from '../block-global';
 
 // Constants
 const WIDTH_OPTIONS = [
@@ -26,8 +27,6 @@ const WIDTH_OPTIONS = [
 	{ label: '25%', value: '25' },
 	{ label: '20%', value: '20' },
 ];
-
-const RICHTEXT_ALLOWED_FORMATS = ['core/bold', 'core/italic', 'core/link'];
 
 // Utility functions
 const getFieldClasses = (baseClass, width) => {
@@ -274,7 +273,7 @@ registerBlockType('blockons/form-radio', {
 									setAttributes({ label: value })
 								}
 							/>
-							<TextControl
+							<TextareaControl
 								label={__('Description', 'blockons')}
 								value={description}
 								onChange={(value) =>
@@ -416,7 +415,7 @@ registerBlockType('blockons/form-radio', {
 							onChange={(value) =>
 								setAttributes({ label: value })
 							}
-							allowedFormats={RICHTEXT_ALLOWED_FORMATS}
+							allowedFormats={RICHTEXT_MINIMAL_FORMATS}
 						/>
 						{required && (
 							<span className="required" aria-hidden="true">
@@ -444,12 +443,12 @@ registerBlockType('blockons/form-radio', {
 							onChange={(value) =>
 								setAttributes({ description: value })
 							}
-							allowedFormats={RICHTEXT_ALLOWED_FORMATS}
+							allowedFormats={RICHTEXT_MINIMAL_FORMATS}
 						/>
 					)}
 
 					<div
-						className="radio-group"
+						className="form-control radio-group"
 						style={radioGroupStyles}
 						role="radiogroup"
 						aria-labelledby={groupId}
@@ -578,7 +577,7 @@ registerBlockType('blockons/form-radio', {
 					)}
 
 					<div
-						className="radio-group"
+						className="form-control radio-group"
 						style={radioGroupStyles}
 						role="radiogroup"
 						aria-labelledby={groupId}

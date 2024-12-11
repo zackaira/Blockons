@@ -1,4 +1,8 @@
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import {
+	RichText,
+	useBlockProps,
+	InspectorControls,
+} from '@wordpress/block-editor';
 import { useEffect, useMemo } from '@wordpress/element';
 import { useSelect, dispatch, select } from '@wordpress/data';
 const { __ } = wp.i18n;
@@ -6,11 +10,12 @@ const { registerBlockType } = wp.blocks;
 import {
 	PanelBody,
 	TextControl,
+	TextareaControl,
 	ToggleControl,
 	SelectControl,
 	Button,
 } from '@wordpress/components';
-import { slugify } from '../block-global';
+import { slugify, RICHTEXT_MINIMAL_FORMATS } from '../block-global';
 
 const WIDTH_OPTIONS = [
 	{ label: '100%', value: '100' },
@@ -50,6 +55,10 @@ registerBlockType('blockons/form-select', {
 		placeholder: {
 			type: 'string',
 			default: __('Select an option', 'blockons'),
+		},
+		description: {
+			type: 'string',
+			default: '',
 		},
 		required: {
 			type: 'boolean',
@@ -127,6 +136,7 @@ registerBlockType('blockons/form-select', {
 		const {
 			label,
 			placeholder,
+			description,
 			required,
 			options,
 			width,
@@ -185,7 +195,7 @@ registerBlockType('blockons/form-select', {
 				color: labelColor,
 				fontSize: `${labelSize}px`,
 				marginBottom: `${labelSpacing}px`,
-				display: showLabels ? 'block' : 'none',
+				display: showLabels ? 'flex' : 'none',
 			}),
 			[labelColor, labelSize, labelSpacing, showLabels],
 		);
@@ -290,6 +300,15 @@ registerBlockType('blockons/form-select', {
 							/>
 							<div className="blockons-divider" />
 
+							<TextareaControl
+								label={__('Description', 'blockons')}
+								value={description}
+								onChange={(value) =>
+									setAttributes({ description: value })
+								}
+							/>
+							<div className="blockons-divider" />
+
 							<ToggleControl
 								label={__('Required', 'blockons')}
 								checked={required}
@@ -365,7 +384,16 @@ registerBlockType('blockons/form-select', {
 							htmlFor={selectId}
 							style={labelStyles}
 						>
-							{label}
+							<RichText
+								tagName="p"
+								placeholder={__('Label', 'blockons')}
+								value={label}
+								multiline={false}
+								onChange={(value) =>
+									setAttributes({ label: value })
+								}
+								allowedFormats={RICHTEXT_MINIMAL_FORMATS}
+							/>
 							{required && (
 								<span className="required" aria-hidden="true">
 									*
@@ -373,6 +401,20 @@ registerBlockType('blockons/form-select', {
 							)}
 						</label>
 					)}
+
+					{description && (
+						<RichText
+							tagName="div"
+							placeholder={__('Field Description', 'blockons')}
+							value={description}
+							onChange={(value) =>
+								setAttributes({ description: value })
+							}
+							className="form-description"
+							allowedFormats={RICHTEXT_MINIMAL_FORMATS}
+						/>
+					)}
+
 					<div
 						id={errorMessageId}
 						className="field-error"
@@ -405,6 +447,7 @@ registerBlockType('blockons/form-select', {
 		const {
 			label,
 			placeholder,
+			description,
 			required,
 			options,
 			width,
@@ -450,7 +493,7 @@ registerBlockType('blockons/form-select', {
 			color: labelColor,
 			fontSize: `${labelSize}px`,
 			marginBottom: `${labelSpacing}px`,
-			display: showLabels ? 'block' : 'none',
+			display: showLabels ? 'flex' : 'none',
 		};
 
 		const commonProps = {
@@ -481,7 +524,7 @@ registerBlockType('blockons/form-select', {
 							htmlFor={selectId}
 							style={labelStyles}
 						>
-							{label}
+							<RichText.Content value={label} />
 							{required && (
 								<span className="required" aria-hidden="true">
 									*
@@ -489,6 +532,15 @@ registerBlockType('blockons/form-select', {
 							)}
 						</label>
 					)}
+
+					{description && (
+						<RichText.Content
+							tagName="div"
+							value={description}
+							className="form-description"
+						/>
+					)}
+
 					<div
 						id={errorMessageId}
 						className="field-error"

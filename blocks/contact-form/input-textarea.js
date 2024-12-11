@@ -1,13 +1,19 @@
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import {
+	RichText,
+	useBlockProps,
+	InspectorControls,
+} from '@wordpress/block-editor';
 import { useMemo } from '@wordpress/element';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 import {
 	PanelBody,
 	TextControl,
+	TextareaControl,
 	ToggleControl,
 	SelectControl,
 } from '@wordpress/components';
+import { RICHTEXT_MINIMAL_FORMATS } from '../block-global';
 
 // Constants
 const WIDTH_OPTIONS = [
@@ -50,6 +56,10 @@ registerBlockType('blockons/form-textarea', {
 		label: {
 			type: 'string',
 			default: __('Textarea Label', 'blockons'),
+		},
+		description: {
+			type: 'string',
+			default: '',
 		},
 		placeholder: {
 			type: 'string',
@@ -131,6 +141,7 @@ registerBlockType('blockons/form-textarea', {
 		const {
 			label,
 			placeholder,
+			description,
 			required,
 			rows,
 			width,
@@ -196,7 +207,7 @@ registerBlockType('blockons/form-textarea', {
 				color: labelColor,
 				fontSize: `${labelSize}px`,
 				marginBottom: `${labelSpacing}px`,
-				display: showLabels ? 'block' : 'none',
+				display: showLabels ? 'flex' : 'none',
 			}),
 			[labelColor, labelSize, labelSpacing, showLabels],
 		);
@@ -261,6 +272,15 @@ registerBlockType('blockons/form-textarea', {
 							/>
 							<div className="blockons-divider" />
 
+							<TextareaControl
+								label={__('Description', 'blockons')}
+								value={description}
+								onChange={(value) =>
+									setAttributes({ description: value })
+								}
+							/>
+							<div className="blockons-divider" />
+
 							<TextControl
 								type="number"
 								label={__('Rows', 'blockons')}
@@ -301,7 +321,16 @@ registerBlockType('blockons/form-textarea', {
 							htmlFor={inputId}
 							style={labelStyles}
 						>
-							{label}
+							<RichText
+								tagName="p"
+								placeholder={__('Label', 'blockons')}
+								value={label}
+								multiline={false}
+								onChange={(value) =>
+									setAttributes({ label: value })
+								}
+								allowedFormats={RICHTEXT_MINIMAL_FORMATS}
+							/>
 							{required && (
 								<span className="required" aria-hidden="true">
 									*
@@ -309,6 +338,20 @@ registerBlockType('blockons/form-textarea', {
 							)}
 						</label>
 					)}
+
+					{description && (
+						<RichText
+							tagName="div"
+							placeholder={__('Field Description', 'blockons')}
+							value={description}
+							onChange={(value) =>
+								setAttributes({ description: value })
+							}
+							className="form-description"
+							allowedFormats={RICHTEXT_MINIMAL_FORMATS}
+						/>
+					)}
+
 					<div
 						id={errorMessageId}
 						className="field-error"
@@ -325,6 +368,7 @@ registerBlockType('blockons/form-textarea', {
 		const {
 			label,
 			placeholder,
+			description,
 			required,
 			rows,
 			width,
@@ -376,7 +420,7 @@ registerBlockType('blockons/form-textarea', {
 			color: labelColor,
 			fontSize: `${labelSize}px`,
 			marginBottom: `${labelSpacing}px`,
-			display: showLabels ? 'block' : 'none',
+			display: showLabels ? 'flex' : 'none',
 		};
 
 		const commonProps = {
@@ -410,7 +454,7 @@ registerBlockType('blockons/form-textarea', {
 							htmlFor={inputId}
 							style={labelStyles}
 						>
-							{label}
+							<RichText.Content value={label} />
 							{required && (
 								<span className="required" aria-hidden="true">
 									*
@@ -418,6 +462,15 @@ registerBlockType('blockons/form-textarea', {
 							)}
 						</label>
 					)}
+
+					{description && (
+						<RichText.Content
+							tagName="div"
+							value={description}
+							className="form-description"
+						/>
+					)}
+
 					<div
 						id={errorMessageId}
 						className="field-error"

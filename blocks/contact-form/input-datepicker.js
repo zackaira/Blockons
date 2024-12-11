@@ -10,11 +10,13 @@ const { registerBlockType } = wp.blocks;
 import {
 	PanelBody,
 	TextControl,
+	TextareaControl,
 	ToggleControl,
 	SelectControl,
 } from '@wordpress/components';
 import Flatpickr from 'react-flatpickr';
 import 'flatpickr/dist/themes/light.css';
+import { RICHTEXT_MINIMAL_FORMATS } from '../block-global';
 
 // Constants
 const WIDTH_OPTIONS = [
@@ -25,8 +27,6 @@ const WIDTH_OPTIONS = [
 	{ label: '25%', value: '25' },
 	{ label: '20%', value: '20' },
 ];
-
-const RICHTEXT_ALLOWED_FORMATS = ['core/bold', 'core/italic', 'core/link'];
 
 // Base date formats without time
 const BASE_DATE_FORMATS = [
@@ -345,7 +345,7 @@ registerBlockType('blockons/form-datepicker', {
 									setAttributes({ label: value })
 								}
 							/>
-							<TextControl
+							<TextareaControl
 								label={__('Description', 'blockons')}
 								value={description}
 								onChange={(value) =>
@@ -532,7 +532,7 @@ registerBlockType('blockons/form-datepicker', {
 							onChange={(value) =>
 								setAttributes({ label: value })
 							}
-							allowedFormats={RICHTEXT_ALLOWED_FORMATS}
+							allowedFormats={RICHTEXT_MINIMAL_FORMATS}
 						/>
 						{required && (
 							<span className="required" aria-hidden="true">
@@ -550,7 +550,7 @@ registerBlockType('blockons/form-datepicker', {
 								setAttributes({ description: value })
 							}
 							className="form-description date-description"
-							allowedFormats={RICHTEXT_ALLOWED_FORMATS}
+							allowedFormats={RICHTEXT_MINIMAL_FORMATS}
 						/>
 					)}
 

@@ -226,3 +226,8 @@ export const minimalRichText = [
 	'core/superscript',
 	'core/strikethrough',
 ];
+export const RICHTEXT_MINIMAL_FORMATS = [
+	'core/bold',
+	'core/italic',
+	'core/link',
+];

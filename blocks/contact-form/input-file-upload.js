@@ -1,14 +1,20 @@
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import {
+	RichText,
+	useBlockProps,
+	InspectorControls,
+} from '@wordpress/block-editor';
 import { useMemo } from '@wordpress/element';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 import {
 	PanelBody,
 	TextControl,
+	TextareaControl,
 	ToggleControl,
 	SelectControl,
 	RangeControl,
 } from '@wordpress/components';
+import { RICHTEXT_MINIMAL_FORMATS } from '../block-global';
 
 // Constants
 const WIDTH_OPTIONS = [
@@ -76,6 +82,10 @@ registerBlockType('blockons/form-file-upload', {
 			type: 'string',
 			default: __('Upload File', 'blockons'),
 		},
+		description: {
+			type: 'string',
+			default: '',
+		},
 		required: {
 			type: 'boolean',
 			default: false,
@@ -132,6 +142,7 @@ registerBlockType('blockons/form-file-upload', {
 		const {
 			isPremium,
 			label,
+			description,
 			required,
 			maxFileSize,
 			fileTypeOption,
@@ -232,6 +243,15 @@ registerBlockType('blockons/form-file-upload', {
 							/>
 							<div className="blockons-divider" />
 
+							<TextareaControl
+								label={__('Description', 'blockons')}
+								value={description}
+								onChange={(value) =>
+									setAttributes({ description: value })
+								}
+							/>
+							<div className="blockons-divider" />
+
 							<ToggleControl
 								label={__('Required', 'blockons')}
 								checked={required}
@@ -296,13 +316,36 @@ registerBlockType('blockons/form-file-upload', {
 						htmlFor={inputId}
 						style={labelStyles}
 					>
-						{label}
+						<RichText
+							tagName="p"
+							placeholder={__('Label', 'blockons')}
+							value={label}
+							multiline={false}
+							onChange={(value) =>
+								setAttributes({ label: value })
+							}
+							allowedFormats={RICHTEXT_MINIMAL_FORMATS}
+						/>
 						{required && (
 							<span className="required" aria-hidden="true">
 								*
 							</span>
 						)}
 					</label>
+
+					{description && (
+						<RichText
+							tagName="div"
+							placeholder={__('Field Description', 'blockons')}
+							value={description}
+							onChange={(value) =>
+								setAttributes({ description: value })
+							}
+							className="form-description"
+							allowedFormats={RICHTEXT_MINIMAL_FORMATS}
+						/>
+					)}
+
 					<div
 						id={errorMessageId}
 						className="field-error"
@@ -310,7 +353,7 @@ registerBlockType('blockons/form-file-upload', {
 						aria-live="polite"
 					/>
 
-					<div className="file-upload-wrapper">
+					<div className="form-control file-upload-wrapper">
 						<input {...commonProps} />
 						<div className="file-description">
 							{selectedFileType.description}
@@ -326,6 +369,7 @@ registerBlockType('blockons/form-file-upload', {
 		const {
 			isPremium,
 			label,
+			description,
 			required,
 			maxFileSize,
 			fileTypeOption,
@@ -399,13 +443,22 @@ registerBlockType('blockons/form-file-upload', {
 						htmlFor={inputId}
 						style={labelStyles}
 					>
-						{label}
+						<RichText.Content value={label} />
 						{required && (
 							<span className="required" aria-hidden="true">
 								*
 							</span>
 						)}
 					</label>
+
+					{description && (
+						<RichText.Content
+							tagName="div"
+							value={description}
+							className="form-description"
+						/>
+					)}
+
 					<div
 						id={errorMessageId}
 						className="field-error"
@@ -413,7 +466,7 @@ registerBlockType('blockons/form-file-upload', {
 						aria-live="polite"
 					/>
 
-					<div className="file-upload-wrapper">
+					<div className="form-control file-upload-wrapper">
 						<input {...commonProps} />
 						<div className="file-description">
 							{selectedFileType.description}

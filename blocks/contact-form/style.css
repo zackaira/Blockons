@@ -181,7 +181,7 @@
 /* - Acceptance - */
 .blockons-form-acceptance .acceptance-wrap {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	gap: 8px;
 }
 .blockons-form-acceptance .acceptance-input {

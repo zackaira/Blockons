@@ -13,6 +13,7 @@ import {
 	SelectControl,
 	TextareaControl,
 } from '@wordpress/components';
+import { RICHTEXT_MINIMAL_FORMATS } from '../block-global';
 
 // Constants
 const WIDTH_OPTIONS = [
@@ -25,7 +26,6 @@ const WIDTH_OPTIONS = [
 ];
 
 const DEFAULT_SPACING = 4;
-const RICHTEXT_ALLOWED_FORMATS = ['core/bold', 'core/italic', 'core/link'];
 
 // Utility functions
 const getFieldClasses = (baseClass, required, width) => {
@@ -184,7 +184,7 @@ registerBlockType('blockons/form-acceptance', {
 									setAttributes({ label: value })
 								}
 							/>
-							<TextControl
+							<TextareaControl
 								label={__('Description', 'blockons')}
 								help={__(
 									'Additional information displayed below the acceptance text',
@@ -258,7 +258,7 @@ registerBlockType('blockons/form-acceptance', {
 										setAttributes({ label: value })
 									}
 									style={labelStyles}
-									allowedFormats={RICHTEXT_ALLOWED_FORMATS}
+									allowedFormats={RICHTEXT_MINIMAL_FORMATS}
 								/>
 
 								{required && (
@@ -283,7 +283,7 @@ registerBlockType('blockons/form-acceptance', {
 									onChange={(value) =>
 										setAttributes({ description: value })
 									}
-									allowedFormats={RICHTEXT_ALLOWED_FORMATS}
+									allowedFormats={RICHTEXT_MINIMAL_FORMATS}
 								/>
 							)}
 						</div>

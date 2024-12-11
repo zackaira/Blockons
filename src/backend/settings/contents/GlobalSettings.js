@@ -105,6 +105,42 @@ const GlobalSettings = ({
 					) : (
 						<>
 							<SettingRow
+								title={__('Save Form Submissions', 'blockons')}
+								inputType="toggle"
+								slug="form_save_pro"
+								value={formSaveSubmissions}
+								onChange={() =>
+									setFormSaveSubmissions(!formSaveSubmissions)
+								}
+								// documentation="https://blockons/documentation/tooltips"
+							/>
+							{formSaveSubmissions && (
+								<SettingRow
+									inputType="upgrade"
+									title={__('Premium Settings', 'blockons')}
+									description={__(
+										'Upgrade to Blockons Pro to save form submissions to your Dashboard.',
+										'blockons',
+									)}
+									upgradeUrl={upgradeUrl}
+									proFeatures={[
+										__(
+											'Never lose email submissions!',
+											'blockons',
+										),
+										__(
+											'Save all submissions to the database',
+											'blockons',
+										),
+										__(
+											'Mark submissions as read/unread',
+											'blockons',
+										),
+									]}
+								/>
+							)}
+
+							<SettingRow
 								title={__('Recaptcha', 'blockons')}
 								inputType="toggle"
 								slug="form_pro"
@@ -148,42 +184,6 @@ const GlobalSettings = ({
 											)}
 										</>
 									}
-								/>
-							)}
-
-							<SettingRow
-								title={__('Save Form Submissions', 'blockons')}
-								inputType="toggle"
-								slug="form_save_pro"
-								value={formSaveSubmissions}
-								onChange={() =>
-									setFormSaveSubmissions(!formSaveSubmissions)
-								}
-								// documentation="https://blockons/documentation/tooltips"
-							/>
-							{formSaveSubmissions && (
-								<SettingRow
-									inputType="upgrade"
-									title={__('Premium Settings', 'blockons')}
-									description={__(
-										'Upgrade to Blockons Pro to save form submissions to your Dashboard.',
-										'blockons',
-									)}
-									upgradeUrl={upgradeUrl}
-									proFeatures={[
-										__(
-											'Never lose email submissions!',
-											'blockons',
-										),
-										__(
-											'Save all submissions to the database',
-											'blockons',
-										),
-										__(
-											'Mark submissions as read/unread',
-											'blockons',
-										),
-									]}
 								/>
 							)}
 						</>
