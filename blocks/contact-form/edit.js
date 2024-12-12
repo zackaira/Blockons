@@ -167,10 +167,10 @@ const Edit = (props) => {
 			errorMessage,
 			columnSpacing,
 			rowSpacing,
+			textSize,
 			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputPadHoriz,
 			inputPadVert,
@@ -218,9 +218,9 @@ const Edit = (props) => {
 			columnSpacing: columnSpacing,
 			rowSpacing: rowSpacing,
 			showLabels: showLabels,
-			labelSize: labelSize,
-			labelSpacing: labelSpacing,
-			labelColor: labelColor,
+			textSize: textSize,
+			textSpacing: textSpacing,
+			textColor: textColor,
 			inputSize: inputSize,
 			inputPadHoriz: inputPadHoriz,
 			inputPadVert: inputPadVert,
@@ -396,28 +396,6 @@ const Edit = (props) => {
 							/>
 							<div className="blockons-divider"></div>
 
-							{/* {fromName && fromEmail && (
-								<>
-									<ToggleControl
-										label={__(
-											'Newsletter Signup',
-											'blockons',
-										)}
-										checked={newsletterSignup}
-										onChange={(value) =>
-											setAttributes({
-												newsletterSignup: value,
-											})
-										}
-										help={__(
-											'Add ',
-											'blockons',
-										)}
-									/>
-									<div className="blockons-divider"></div>
-								</>
-							)} */}
-
 							{isPremium ? (
 								<>
 									<TextControl
@@ -517,25 +495,6 @@ const Edit = (props) => {
 					)}
 				</PanelBody>
 
-				{/* {newsletterSignup && (
-					<PanelBody
-						title={__('Newsletter Signup', 'blockons')}
-						initialOpen={false}
-					>
-						<SelectControl
-							label={__('Signup To', 'blockons')}
-							value={emailTo}
-							options={[
-								{ label: 'MailerLite', value: 'mailerlite' },
-								{ label: 'Mailchimp', value: 'mailchimp' },
-							]}
-							onChange={(value) =>
-								setAttributes({ emailTo: value })
-							}
-						/>
-					</PanelBody>
-				)} */}
-
 				{emailTo && validateEmails(emailTo, 'emailTo') && (
 					<PanelBody
 						title={__('Form Design Settings', 'blockons')}
@@ -593,6 +552,43 @@ const Edit = (props) => {
 						/>
 						<div className="blockons-divider"></div>
 
+						<RangeControl
+							label={__('Text Size', 'blockons')}
+							value={textSize}
+							onChange={(value) => {
+								setAttributes({ textSize: value });
+								updateInnerBlocksStyles({
+									textSize: value,
+								});
+							}}
+							min={10}
+							max={54}
+						/>
+						<RangeControl
+							label={__('Text Spacing', 'blockons')}
+							value={textSpacing}
+							onChange={(value) => {
+								setAttributes({ textSpacing: value });
+								updateInnerBlocksStyles({
+									textSpacing: value,
+								});
+							}}
+							min={0}
+							max={100}
+						/>
+						<BlockonsColorpicker
+							label={__('Text Color', 'blockons')}
+							value={textColor}
+							onChange={(newValue) => {
+								setAttributes({ textColor: newValue });
+								updateInnerBlocksStyles({
+									textColor: newValue,
+								});
+							}}
+							paletteColors={colorPickerPalette}
+						/>
+						<div className="blockons-divider"></div>
+
 						<ToggleControl
 							label={__('Show Labels', 'blockons')}
 							checked={showLabels}
@@ -601,46 +597,6 @@ const Edit = (props) => {
 								updateInnerBlocksStyles({ showLabels: value });
 							}}
 						/>
-
-						<RangeControl
-							label={__('Text Size', 'blockons')}
-							value={labelSize}
-							onChange={(value) => {
-								setAttributes({ labelSize: value });
-								updateInnerBlocksStyles({
-									labelSize: value,
-								});
-							}}
-							min={10}
-							max={54}
-						/>
-						{showLabels && (
-							<>
-								<RangeControl
-									label={__('Label Spacing', 'blockons')}
-									value={labelSpacing}
-									onChange={(value) => {
-										setAttributes({ labelSpacing: value });
-										updateInnerBlocksStyles({
-											labelSpacing: value,
-										});
-									}}
-									min={0}
-									max={100}
-								/>
-								<BlockonsColorpicker
-									label={__('Label Color', 'blockons')}
-									value={labelColor}
-									onChange={(newValue) => {
-										setAttributes({ labelColor: newValue });
-										updateInnerBlocksStyles({
-											labelColor: newValue,
-										});
-									}}
-									paletteColors={colorPickerPalette}
-								/>
-							</>
-						)}
 						<div className="blockons-divider"></div>
 
 						<RangeControl
@@ -871,7 +827,7 @@ const Edit = (props) => {
 									color: buttonFontColor,
 									borderRadius: inputBorderRadius,
 									marginTop: buttonSpacing,
-									fontSize: labelSize,
+									fontSize: textSize,
 								}}
 							>
 								{submitButtonText ||

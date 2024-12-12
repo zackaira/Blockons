@@ -86,21 +86,21 @@ registerBlockType('blockons/form-radio', {
 			type: 'number',
 			default: 12,
 		},
-		showLabels: {
-			type: 'boolean',
-			default: true,
-		},
-		labelSize: {
+		textSize: {
 			type: 'number',
 			default: 15,
 		},
-		labelSpacing: {
+		textSpacing: {
 			type: 'number',
 			default: 5,
 		},
-		labelColor: {
+		textColor: {
 			type: 'string',
 			default: '#333',
+		},
+		showLabels: {
+			type: 'boolean',
+			default: true,
 		},
 		inputSize: {
 			type: 'number',
@@ -112,11 +112,11 @@ registerBlockType('blockons/form-radio', {
 		},
 		optionSpacing: {
 			type: 'number',
-			default: 8,
+			default: 5,
 		},
 		optionBox: {
 			type: 'boolean',
-			default: true,
+			default: false,
 		},
 	},
 
@@ -134,9 +134,9 @@ registerBlockType('blockons/form-radio', {
 			columnSpacing,
 			rowSpacing,
 			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputTextColor,
 			optionSpacing,
@@ -151,23 +151,28 @@ registerBlockType('blockons/form-radio', {
 		const errorMessageId = `${groupId}-error`;
 
 		// Memoized styles
+		const fieldStyles = useMemo(
+			() => ({
+				color: textColor,
+				fontSize: `${textSize}px`,
+				gap: `${textSpacing}px`,
+				marginBottom: `${rowSpacing}px`,
+				padding: `0 ${columnSpacing}px`,
+			}),
+			[textColor, textSize, textSpacing, columnSpacing, rowSpacing],
+		);
+
 		const labelStyles = useMemo(
 			() => ({
-				color: labelColor,
-				fontSize: `${labelSize}px`,
-				marginBottom: `${labelSpacing}px`,
 				display: showLabels ? 'flex' : 'none',
 			}),
-			[labelColor, labelSize, labelSpacing, showLabels],
+			[showLabels],
 		);
 
 		const radioGroupStyles = useMemo(
 			() => ({
-				display: inline ? 'flex' : 'block',
-				flexWrap: inline ? 'wrap' : undefined,
-				gap: inline
-					? `${optionSpacing}px ${optionSpacing * 2}px`
-					: undefined,
+				flexDirection: inline ? 'row' : 'column',
+				gap: `${optionSpacing}px`,
 				fontSize: `${inputSize}px`,
 				color: inputTextColor,
 			}),
@@ -321,13 +326,13 @@ registerBlockType('blockons/form-radio', {
 								min={0}
 								max={60}
 							/>
-							<ToggleControl
+							{/* <ToggleControl
 								label={__('Option Box', 'blockons')}
 								checked={optionBox}
 								onChange={(value) =>
 									setAttributes({ optionBox: value })
 								}
-							/>
+							/> */}
 							<div className="blockons-divider" />
 
 							<div className="blockons-cf-options">
@@ -394,14 +399,7 @@ registerBlockType('blockons/form-radio', {
 					</InspectorControls>
 				)}
 
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-						position: 'relative',
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					<label
 						className="form-label radio-label"
 						style={labelStyles}
@@ -458,11 +456,6 @@ registerBlockType('blockons/form-radio', {
 							<div
 								key={index}
 								className={`radio-option ${optionBox ? 'box' : ''}`}
-								style={
-									inline
-										? { marginLeft: `${optionSpacing}px` }
-										: { marginBottom: `${optionSpacing}px` }
-								}
 							>
 								<input
 									type="radio"
@@ -500,10 +493,10 @@ registerBlockType('blockons/form-radio', {
 			width,
 			columnSpacing,
 			rowSpacing,
+			textSize,
 			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputTextColor,
 			optionSpacing,
@@ -519,33 +512,28 @@ registerBlockType('blockons/form-radio', {
 		const groupId = generateGroupId(label);
 		const errorMessageId = `${groupId}-error`;
 
+		const fieldStyles = {
+			color: textColor,
+			fontSize: `${textSize}px`,
+			gap: `${textSpacing}px`,
+			marginBottom: `${rowSpacing}px`,
+			padding: `0 ${columnSpacing}px`,
+		};
+
 		const labelStyles = {
-			color: labelColor,
-			fontSize: `${labelSize}px`,
-			marginBottom: `${labelSpacing}px`,
 			display: showLabels ? 'flex' : 'none',
 		};
 
 		const radioGroupStyles = {
-			display: inline ? 'flex' : 'block',
-			flexWrap: inline ? 'wrap' : undefined,
-			gap: inline
-				? `${optionSpacing}px ${optionSpacing * 2}px`
-				: undefined,
+			flexDirection: inline ? 'row' : 'column',
+			gap: `${optionSpacing}px`,
 			fontSize: `${inputSize}px`,
 			color: inputTextColor,
 		};
 
 		return (
 			<div {...blockProps}>
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-						position: 'relative',
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					<label
 						className="form-label radio-label"
 						style={labelStyles}
@@ -569,7 +557,7 @@ registerBlockType('blockons/form-radio', {
 						<div
 							className="form-description radio-description"
 							style={{
-								marginBottom: `${labelSpacing}px`,
+								marginBottom: `${textSpacing}px`,
 							}}
 						>
 							<RichText.Content value={description} />
@@ -587,11 +575,6 @@ registerBlockType('blockons/form-radio', {
 							<div
 								key={index}
 								className={`radio-option ${optionBox ? 'box' : ''}`}
-								style={
-									inline
-										? { marginLeft: `${optionSpacing}px` }
-										: { marginBottom: `${optionSpacing}px` }
-								}
 							>
 								<input
 									type="radio"

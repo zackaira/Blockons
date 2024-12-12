@@ -134,21 +134,21 @@ registerBlockType('blockons/form-datepicker', {
 			type: 'number',
 			default: 12,
 		},
-		showLabels: {
-			type: 'boolean',
-			default: true,
-		},
-		labelSize: {
+		textSize: {
 			type: 'number',
 			default: 15,
 		},
-		labelSpacing: {
+		textSpacing: {
 			type: 'number',
 			default: 5,
 		},
-		labelColor: {
+		textColor: {
 			type: 'string',
 			default: '#333',
+		},
+		showLabels: {
+			type: 'boolean',
+			default: true,
 		},
 		inputSize: {
 			type: 'number',
@@ -217,9 +217,9 @@ registerBlockType('blockons/form-datepicker', {
 			rowSpacing,
 			showLabels,
 			placeholder,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputPadHoriz,
 			inputPadVert,
@@ -282,14 +282,22 @@ registerBlockType('blockons/form-datepicker', {
 		}, [label, parentClientId]);
 
 		// Memoized styles
+		const fieldStyles = useMemo(
+			() => ({
+				color: textColor,
+				fontSize: `${textSize}px`,
+				gap: `${textSpacing}px`,
+				marginBottom: `${rowSpacing}px`,
+				padding: `0 ${columnSpacing}px`,
+			}),
+			[textColor, textSize, textSpacing, rowSpacing, columnSpacing],
+		);
+
 		const labelStyles = useMemo(
 			() => ({
-				color: labelColor,
-				fontSize: `${labelSize}px`,
-				marginBottom: `${labelSpacing}px`,
 				display: showLabels ? 'flex' : 'none',
 			}),
-			[labelColor, labelSize, labelSpacing, showLabels],
+			[showLabels],
 		);
 
 		const inputStyles = useMemo(
@@ -514,13 +522,7 @@ registerBlockType('blockons/form-datepicker', {
 					</InspectorControls>
 				)}
 
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					<label
 						className="form-label radio-label"
 						style={labelStyles}
@@ -554,25 +556,27 @@ registerBlockType('blockons/form-datepicker', {
 						/>
 					)}
 
-					<Flatpickr
-						options={{
-							enableTime: enableTime,
-							dateFormat: enableTime
-								? getDateTimeFormats(
-										dateFormat,
-										timeFormat,
-										enableTime,
-									)
-								: dateFormat,
-							minDate: minDate || undefined,
-							maxDate: maxDate || undefined,
-							disableMobile: true,
-						}}
-						className="blockons-datepicker form-control"
-						style={inputStyles}
-						placeholder={placeholder}
-						disabled={isSelected}
-					/>
+					<div className="form-control">
+						<Flatpickr
+							options={{
+								enableTime: enableTime,
+								dateFormat: enableTime
+									? getDateTimeFormats(
+											dateFormat,
+											timeFormat,
+											enableTime,
+										)
+									: dateFormat,
+								minDate: minDate || undefined,
+								maxDate: maxDate || undefined,
+								disableMobile: true,
+							}}
+							className="blockons-datepicker"
+							style={inputStyles}
+							placeholder={placeholder}
+							disabled={isSelected}
+						/>
+					</div>
 				</div>
 			</div>
 		);
@@ -589,9 +593,9 @@ registerBlockType('blockons/form-datepicker', {
 			rowSpacing,
 			showLabels,
 			placeholder,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputPadHoriz,
 			inputPadVert,
@@ -615,10 +619,15 @@ registerBlockType('blockons/form-datepicker', {
 
 		const fieldId = `date-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
 
+		const fieldStyles = {
+			color: textColor,
+			fontSize: `${textSize}px`,
+			gap: `${textSpacing}px`,
+			marginBottom: `${rowSpacing}px`,
+			padding: `0 ${columnSpacing}px`,
+		};
+
 		const labelStyles = {
-			color: labelColor,
-			fontSize: `${labelSize}px`,
-			marginBottom: `${labelSpacing}px`,
 			display: showLabels ? 'flex' : 'none',
 		};
 
@@ -639,13 +648,7 @@ registerBlockType('blockons/form-datepicker', {
 
 		return (
 			<div {...blockProps}>
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					<label
 						className="form-label date-label"
 						htmlFor={fieldId}
@@ -665,28 +668,30 @@ registerBlockType('blockons/form-datepicker', {
 						</div>
 					)}
 
-					<input
-						type="text"
-						id={fieldId}
-						name={fieldId}
-						className="blockons-datepicker form-control"
-						style={inputStyles}
-						required={required}
-						data-enable-time={enableTime}
-						data-date-format={
-							enableTime
-								? getDateTimeFormats(
-										dateFormat,
-										timeFormat,
-										enableTime,
-									)
-								: dateFormat
-						}
-						data-min-date={minDate}
-						data-max-date={maxDate}
-						placeholder={placeholder}
-						readOnly
-					/>
+					<div className="form-control">
+						<input
+							type="text"
+							id={fieldId}
+							name={fieldId}
+							className="blockons-datepicker"
+							style={inputStyles}
+							required={required}
+							data-enable-time={enableTime}
+							data-date-format={
+								enableTime
+									? getDateTimeFormats(
+											dateFormat,
+											timeFormat,
+											enableTime,
+										)
+									: dateFormat
+							}
+							data-min-date={minDate}
+							data-max-date={maxDate}
+							placeholder={placeholder}
+							readOnly
+						/>
+					</div>
 				</div>
 			</div>
 		);

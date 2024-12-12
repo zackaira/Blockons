@@ -110,21 +110,21 @@ registerBlockType('blockons/form-file-upload', {
 			type: 'number',
 			default: 12,
 		},
-		showLabels: {
-			type: 'boolean',
-			default: true,
-		},
-		labelSize: {
+		textSize: {
 			type: 'number',
 			default: 15,
 		},
-		labelSpacing: {
+		textSpacing: {
 			type: 'number',
 			default: 5,
 		},
-		labelColor: {
+		textColor: {
 			type: 'string',
 			default: '#333',
+		},
+		showLabels: {
+			type: 'boolean',
+			default: true,
 		},
 		inputSize: {
 			type: 'number',
@@ -150,9 +150,9 @@ registerBlockType('blockons/form-file-upload', {
 			columnSpacing,
 			rowSpacing,
 			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputTextColor,
 		} = attributes;
@@ -168,14 +168,22 @@ registerBlockType('blockons/form-file-upload', {
 		const inputId = useMemo(() => generateFileId(label), [label]);
 		const errorMessageId = `${inputId}-error`;
 
+		const fieldStyles = useMemo(
+			() => ({
+				color: textColor,
+				fontSize: `${textSize}px`,
+				gap: `${textSpacing}px`,
+				marginBottom: `${rowSpacing}px`,
+				padding: `0 ${columnSpacing}px`,
+			}),
+			[textColor, textSize, textSpacing, columnSpacing, rowSpacing],
+		);
+
 		const labelStyles = useMemo(
 			() => ({
-				color: labelColor,
-				fontSize: `${labelSize}px`,
-				marginBottom: `${labelSpacing}px`,
 				display: showLabels ? 'flex' : 'none',
 			}),
-			[labelColor, labelSize, labelSpacing, showLabels],
+			[showLabels],
 		);
 
 		const selectedFileType = useMemo(
@@ -303,14 +311,7 @@ registerBlockType('blockons/form-file-upload', {
 					</InspectorControls>
 				)}
 
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-						position: 'relative',
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					<label
 						className="form-label"
 						htmlFor={inputId}
@@ -377,9 +378,9 @@ registerBlockType('blockons/form-file-upload', {
 			columnSpacing,
 			rowSpacing,
 			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputTextColor,
 		} = attributes;
@@ -394,17 +395,20 @@ registerBlockType('blockons/form-file-upload', {
 			),
 		});
 
-		console.log('FILE UPLOAD Save.js: ', isPremium);
-
 		const inputId = generateFileId(label);
 		const errorMessageId = `${inputId}-error`;
 		const selectedFileType =
 			FILE_TYPES[fileTypeOption] || FILE_TYPES.documents;
 
+		const fieldStyles = {
+			color: textColor,
+			fontSize: `${textSize}px`,
+			gap: `${textSpacing}px`,
+			marginBottom: `${rowSpacing}px`,
+			padding: `0 ${columnSpacing}px`,
+		};
+
 		const labelStyles = {
-			color: labelColor,
-			fontSize: `${labelSize}px`,
-			marginBottom: `${labelSpacing}px`,
 			display: showLabels ? 'flex' : 'none',
 		};
 
@@ -430,14 +434,7 @@ registerBlockType('blockons/form-file-upload', {
 
 		return (
 			<div {...blockProps}>
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-						position: 'relative',
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					<label
 						className="form-label"
 						htmlFor={inputId}

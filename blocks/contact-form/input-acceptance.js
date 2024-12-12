@@ -8,12 +8,13 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 import {
 	PanelBody,
-	TextControl,
+	RangeControl,
 	ToggleControl,
 	SelectControl,
 	TextareaControl,
 } from '@wordpress/components';
-import { RICHTEXT_MINIMAL_FORMATS } from '../block-global';
+import BlockonsColorpicker from '../_components/BlockonsColorpicker';
+import { colorPickerPalette, RICHTEXT_MINIMAL_FORMATS } from '../block-global';
 
 // Constants
 const WIDTH_OPTIONS = [
@@ -24,8 +25,6 @@ const WIDTH_OPTIONS = [
 	{ label: '25%', value: '25' },
 	{ label: '20%', value: '20' },
 ];
-
-const DEFAULT_SPACING = 4;
 
 // Utility functions
 const getFieldClasses = (baseClass, required, width) => {
@@ -78,27 +77,43 @@ registerBlockType('blockons/form-acceptance', {
 			type: 'number',
 			default: 12,
 		},
-		showLabels: {
-			type: 'boolean',
-			default: true,
-		},
-		labelSize: {
+		textSize: {
 			type: 'number',
 			default: 15,
 		},
-		labelSpacing: {
+		textSpacing: {
 			type: 'number',
 			default: 5,
 		},
-		labelColor: {
+		textColor: {
 			type: 'string',
 			default: '#333',
+		},
+		showLabels: {
+			type: 'boolean',
+			default: true,
 		},
 		inputSize: {
 			type: 'number',
 			default: 15,
 		},
 		inputTextColor: {
+			type: 'string',
+			default: '#333',
+		},
+		useCustomText: {
+			type: 'boolean',
+			default: false,
+		},
+		customTextSize: {
+			type: 'number',
+			default: 15,
+		},
+		customTextSpacing: {
+			type: 'number',
+			default: 5,
+		},
+		customTextColor: {
 			type: 'string',
 			default: '#333',
 		},
@@ -115,8 +130,13 @@ registerBlockType('blockons/form-acceptance', {
 			width,
 			columnSpacing,
 			rowSpacing,
-			labelSize,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
+			useCustomText,
+			customTextSize,
+			customTextSpacing,
+			customTextColor,
 		} = attributes;
 
 		const blockProps = useBlockProps({
@@ -156,13 +176,29 @@ registerBlockType('blockons/form-acceptance', {
 			],
 		);
 
-		const labelStyles = useMemo(
+		const textStyles = useMemo(
 			() => ({
-				marginBottom: description ? `${DEFAULT_SPACING}px` : '0',
-				fontSize: `${labelSize}px`,
-				color: labelColor,
+				color: useCustomText ? customTextColor : textColor,
+				fontSize: `${useCustomText ? customTextSize : textSize}px`,
+				gap: `${useCustomText ? customTextSpacing : textSpacing}px`,
 			}),
-			[description, labelSize, labelColor],
+			[
+				useCustomText,
+				customTextColor,
+				customTextSize,
+				customTextSpacing,
+				textSize,
+				textColor,
+				textSpacing,
+			],
+		);
+
+		const fieldStyles = useMemo(
+			() => ({
+				marginBottom: `${rowSpacing}px`,
+				padding: `0 ${columnSpacing}px`,
+			}),
+			[columnSpacing, rowSpacing],
 		);
 
 		return (
@@ -222,28 +258,75 @@ registerBlockType('blockons/form-acceptance', {
 								}
 							/>
 						</PanelBody>
+
+						<PanelBody
+							title={__('Design Settings', 'blockons')}
+							initialOpen={false}
+						>
+							<ToggleControl
+								label={__(
+									'Use Custom Text Settings',
+									'blockons',
+								)}
+								checked={useCustomText}
+								onChange={(value) =>
+									setAttributes({ useCustomText: value })
+								}
+								help={__(
+									'Override text settings inherited from form settings',
+									'blockons',
+								)}
+							/>
+
+							{useCustomText && (
+								<>
+									<RangeControl
+										label={__('Text Size', 'blockons')}
+										value={customTextSize}
+										onChange={(value) =>
+											setAttributes({
+												customTextSize: value,
+											})
+										}
+										min={10}
+										max={54}
+									/>
+									<RangeControl
+										label={__('Text Spacing', 'blockons')}
+										value={customTextSpacing}
+										onChange={(value) =>
+											setAttributes({
+												customTextSpacing: value,
+											})
+										}
+										min={0}
+										max={100}
+									/>
+									<BlockonsColorpicker
+										label={__('Text Color', 'blockons')}
+										value={customTextColor}
+										onChange={(value) =>
+											setAttributes({
+												customTextColor: value,
+											})
+										}
+										paletteColors={colorPickerPalette}
+									/>
+								</>
+							)}
+						</PanelBody>
 					</InspectorControls>
 				)}
 
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-						position: 'relative',
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					<div className="acceptance-wrap">
 						<div className="acceptance-input">
 							<input {...commonProps} />
 						</div>
-						<div className="acceptance-copy">
+						<div className="acceptance-copy" style={textStyles}>
 							<label
 								className="form-label acceptance-label"
 								htmlFor={inputId}
-								style={{
-									marginBottom: description ? '4px' : '0',
-								}}
 							>
 								<RichText
 									tagName="p"
@@ -257,7 +340,6 @@ registerBlockType('blockons/form-acceptance', {
 									onChange={(value) =>
 										setAttributes({ label: value })
 									}
-									style={labelStyles}
 									allowedFormats={RICHTEXT_MINIMAL_FORMATS}
 								/>
 
@@ -308,8 +390,13 @@ registerBlockType('blockons/form-acceptance', {
 			width,
 			columnSpacing,
 			rowSpacing,
-			labelSize,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
+			useCustomText,
+			customTextColor,
+			customTextSize,
+			customTextSpacing,
 		} = attributes;
 
 		const blockProps = useBlockProps.save({
@@ -336,27 +423,25 @@ registerBlockType('blockons/form-acceptance', {
 			className: getFieldClasses('form-acceptance', required),
 		};
 
-		const labelStyles = {
-			marginBottom: description ? `${DEFAULT_SPACING}px` : '0',
-			fontSize: `${labelSize}px`,
-			color: labelColor,
+		const textStyles = {
+			color: useCustomText ? customTextColor : textColor,
+			fontSize: `${useCustomText ? customTextSize : textSize}px`,
+			gap: `${useCustomText ? customTextSpacing : textSpacing}px`,
+		};
+
+		const fieldStyles = {
+			marginBottom: `${rowSpacing}px`,
+			padding: `0 ${columnSpacing}px`,
 		};
 
 		return (
 			<div {...blockProps}>
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-						position: 'relative',
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					<div className="acceptance-wrap">
 						<div className="acceptance-input">
 							<input {...commonProps} />
 						</div>
-						<div className="acceptance-copy">
+						<div className="acceptance-copy" style={textStyles}>
 							<label
 								className="form-label acceptance-label"
 								htmlFor={inputId}
@@ -368,7 +453,6 @@ registerBlockType('blockons/form-acceptance', {
 									tagName="p"
 									value={label}
 									className="acceptance-label-txt"
-									style={labelStyles}
 								/>
 								{required && (
 									<span
@@ -379,6 +463,7 @@ registerBlockType('blockons/form-acceptance', {
 									</span>
 								)}
 							</label>
+
 							{description && (
 								<RichText.Content
 									tagName="div"

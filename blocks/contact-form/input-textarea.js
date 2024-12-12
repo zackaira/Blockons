@@ -85,21 +85,21 @@ registerBlockType('blockons/form-textarea', {
 			type: 'number',
 			default: 12,
 		},
-		showLabels: {
-			type: 'boolean',
-			default: true,
-		},
-		labelSize: {
+		textSize: {
 			type: 'number',
 			default: 15,
 		},
-		labelSpacing: {
+		textSpacing: {
 			type: 'number',
 			default: 5,
 		},
-		labelColor: {
+		textColor: {
 			type: 'string',
 			default: '#333',
+		},
+		showLabels: {
+			type: 'boolean',
+			default: true,
 		},
 		inputSize: {
 			type: 'number',
@@ -148,9 +148,9 @@ registerBlockType('blockons/form-textarea', {
 			columnSpacing,
 			rowSpacing,
 			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputPadHoriz,
 			inputPadVert,
@@ -172,6 +172,17 @@ registerBlockType('blockons/form-textarea', {
 
 		const inputId = useMemo(() => generateTextareaId(label), [label]);
 		const errorMessageId = `${inputId}-error`;
+
+		const fieldStyles = useMemo(
+			() => ({
+				color: textColor,
+				fontSize: `${textSize}px`,
+				gap: `${textSpacing}px`,
+				marginBottom: `${rowSpacing}px`,
+				padding: `0 ${columnSpacing}px`,
+			}),
+			[textColor, textSize, textSpacing, rowSpacing, columnSpacing],
+		);
 
 		const inputStyles = useMemo(
 			() => ({
@@ -204,12 +215,9 @@ registerBlockType('blockons/form-textarea', {
 
 		const labelStyles = useMemo(
 			() => ({
-				color: labelColor,
-				fontSize: `${labelSize}px`,
-				marginBottom: `${labelSpacing}px`,
 				display: showLabels ? 'flex' : 'none',
 			}),
-			[labelColor, labelSize, labelSpacing, showLabels],
+			[showLabels],
 		);
 
 		const commonProps = useMemo(
@@ -241,12 +249,6 @@ registerBlockType('blockons/form-textarea', {
 				isSelected,
 			],
 		);
-
-		const fieldWrapperStyles = {
-			marginBottom: `${rowSpacing}px`,
-			padding: `0 ${columnSpacing}px`,
-			position: 'relative',
-		};
 
 		return (
 			<div {...blockProps}>
@@ -314,7 +316,7 @@ registerBlockType('blockons/form-textarea', {
 					</InspectorControls>
 				)}
 
-				<div className="form-field" style={fieldWrapperStyles}>
+				<div className="form-field" style={fieldStyles}>
 					{label && (
 						<label
 							className="form-label"
@@ -358,7 +360,10 @@ registerBlockType('blockons/form-textarea', {
 						role="alert"
 						aria-live="polite"
 					/>
-					<textarea {...commonProps} />
+
+					<div className="form-control">
+						<textarea {...commonProps} />
+					</div>
 				</div>
 			</div>
 		);
@@ -375,9 +380,9 @@ registerBlockType('blockons/form-textarea', {
 			columnSpacing,
 			rowSpacing,
 			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputPadHoriz,
 			inputPadVert,
@@ -399,6 +404,14 @@ registerBlockType('blockons/form-textarea', {
 		const inputId = generateTextareaId(label);
 		const errorMessageId = `${inputId}-error`;
 
+		const fieldStyles = {
+			color: textColor,
+			fontSize: `${textSize}px`,
+			gap: `${textSpacing}px`,
+			marginBottom: `${rowSpacing}px`,
+			padding: `0 ${columnSpacing}px`,
+		};
+
 		const inputStyles = {
 			fontSize: `${inputSize}px`,
 			padding: `${inputPadVert}px ${inputPadHoriz}px`,
@@ -417,9 +430,6 @@ registerBlockType('blockons/form-textarea', {
 		};
 
 		const labelStyles = {
-			color: labelColor,
-			fontSize: `${labelSize}px`,
-			marginBottom: `${labelSpacing}px`,
 			display: showLabels ? 'flex' : 'none',
 		};
 
@@ -439,15 +449,9 @@ registerBlockType('blockons/form-textarea', {
 			spellCheck: 'true',
 		};
 
-		const fieldWrapperStyles = {
-			marginBottom: `${rowSpacing}px`,
-			padding: `0 ${columnSpacing}px`,
-			position: 'relative',
-		};
-
 		return (
 			<div {...blockProps}>
-				<div className="form-field" style={fieldWrapperStyles}>
+				<div className="form-field" style={fieldStyles}>
 					{label && (
 						<label
 							className="form-label"
@@ -477,7 +481,10 @@ registerBlockType('blockons/form-textarea', {
 						role="alert"
 						aria-live="polite"
 					/>
-					<textarea {...commonProps} />
+
+					<div className="form-control">
+						<textarea {...commonProps} />
+					</div>
 				</div>
 			</div>
 		);

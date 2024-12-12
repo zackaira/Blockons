@@ -101,21 +101,21 @@ registerBlockType('blockons/form-text-input', {
 			type: 'number',
 			default: 12,
 		},
-		showLabels: {
-			type: 'boolean',
-			default: true,
-		},
-		labelSize: {
+		textSize: {
 			type: 'number',
 			default: 15,
 		},
-		labelSpacing: {
+		textSpacing: {
 			type: 'number',
 			default: 5,
 		},
-		labelColor: {
+		textColor: {
 			type: 'string',
 			default: '#333',
+		},
+		showLabels: {
+			type: 'boolean',
+			default: true,
 		},
 		inputSize: {
 			type: 'number',
@@ -164,9 +164,9 @@ registerBlockType('blockons/form-text-input', {
 			columnSpacing,
 			rowSpacing,
 			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputPadHoriz,
 			inputPadVert,
@@ -216,14 +216,22 @@ registerBlockType('blockons/form-text-input', {
 			],
 		);
 
+		const fieldStyles = useMemo(
+			() => ({
+				color: textColor,
+				fontSize: `${textSize}px`,
+				gap: `${textSpacing}px`,
+				marginBottom: `${rowSpacing}px`,
+				padding: `0 ${columnSpacing}px`,
+			}),
+			[textColor, textSize, textSpacing, columnSpacing, rowSpacing],
+		);
+
 		const labelStyles = useMemo(
 			() => ({
-				color: labelColor,
-				fontSize: `${labelSize}px`,
-				marginBottom: `${labelSpacing}px`,
 				display: showLabels ? 'flex' : 'none',
 			}),
-			[labelColor, labelSize, labelSpacing, showLabels],
+			[showLabels],
 		);
 
 		const commonProps = useMemo(
@@ -351,14 +359,7 @@ registerBlockType('blockons/form-text-input', {
 					</InspectorControls>
 				)}
 
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-						position: 'relative',
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					{label && (
 						<label
 							className="form-label"
@@ -402,7 +403,10 @@ registerBlockType('blockons/form-text-input', {
 						role="alert"
 						aria-live="polite"
 					/>
-					<input {...commonProps} />
+
+					<div className="form-control">
+						<input {...commonProps} />
+					</div>
 				</div>
 			</div>
 		);
@@ -419,9 +423,9 @@ registerBlockType('blockons/form-text-input', {
 			columnSpacing,
 			rowSpacing,
 			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputPadHoriz,
 			inputPadVert,
@@ -458,10 +462,15 @@ registerBlockType('blockons/form-text-input', {
 					}),
 		};
 
+		const fieldStyles = {
+			color: textColor,
+			fontSize: `${textSize}px`,
+			gap: `${textSpacing}px`,
+			marginBottom: `${rowSpacing}px`,
+			padding: `0 ${columnSpacing}px`,
+		};
+
 		const labelStyles = {
-			color: labelColor,
-			fontSize: `${labelSize}px`,
-			marginBottom: `${labelSpacing}px`,
 			display: showLabels ? 'flex' : 'none',
 		};
 
@@ -482,14 +491,7 @@ registerBlockType('blockons/form-text-input', {
 
 		return (
 			<div {...blockProps}>
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-						position: 'relative',
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					{label && (
 						<label
 							className="form-label"
@@ -519,7 +521,10 @@ registerBlockType('blockons/form-text-input', {
 						role="alert"
 						aria-live="polite"
 					/>
-					<input {...commonProps} />
+
+					<div className="form-control">
+						<input {...commonProps} />
+					</div>
 				</div>
 			</div>
 		);

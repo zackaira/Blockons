@@ -409,9 +409,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				return;
 			}
 
-			// Store original button text
-			const originalBtnText = elements.submitBtn.textContent;
-
 			// Setup input event listeners
 			setupInputListeners(elements.inputs);
 
@@ -445,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					}
 
 					// Submit form
-					await submitForm(form, elements, originalBtnText);
+					await submitForm(form, elements);
 				} catch (error) {
 					console.error('Form processing error:', error);
 					handleSubmissionError(error, elements);
@@ -541,15 +538,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		return { isValid, fields };
 	};
 
-	const submitForm = async (form, elements, originalBtnText) => {
+	const submitForm = async (form, elements) => {
 		// Check if elements object and submit button exist
 		if (!elements || !elements.submitBtn) return;
 
 		try {
 			// Disable submit button and update text
 			elements.submitBtn.disabled = true;
-			elements.submitBtn.textContent =
-				translations.sending || 'Sending...';
+			elements.submitBtn.classList.add('submitting');
 
 			// Clear previous messages
 			if (elements.successMsg) elements.successMsg.style.display = 'none';
@@ -662,7 +658,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			// Always re-enable submit button and restore text
 			if (elements && elements.submitBtn) {
 				elements.submitBtn.disabled = false;
-				elements.submitBtn.textContent = originalBtnText || '';
+				elements.submitBtn.classList.remove('submitting');
 			}
 		}
 	};

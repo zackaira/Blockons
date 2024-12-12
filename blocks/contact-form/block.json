@@ -80,21 +80,21 @@
 			"type": "number",
 			"default": 12
 		},
-		"showLabels": {
-			"type": "boolean",
-			"default": true
-		},
-		"labelSize": {
+		"textSize": {
 			"type": "number",
 			"default": 15
 		},
-		"labelSpacing": {
+		"textSpacing": {
 			"type": "number",
-			"default": 5
+			"default": 4
 		},
-		"labelColor": {
+		"textColor": {
 			"type": "string",
 			"default": "#333"
+		},
+		"showLabels": {
+			"type": "boolean",
+			"default": true
 		},
 		"inputSize": {
 			"type": "number",

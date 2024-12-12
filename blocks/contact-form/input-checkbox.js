@@ -86,21 +86,21 @@ registerBlockType('blockons/form-checkbox', {
 			type: 'number',
 			default: 12,
 		},
-		showLabels: {
-			type: 'boolean',
-			default: true,
-		},
-		labelSize: {
+		textSize: {
 			type: 'number',
 			default: 15,
 		},
-		labelSpacing: {
+		textSpacing: {
 			type: 'number',
 			default: 5,
 		},
-		labelColor: {
+		textColor: {
 			type: 'string',
 			default: '#333',
+		},
+		showLabels: {
+			type: 'boolean',
+			default: true,
 		},
 		inputSize: {
 			type: 'number',
@@ -112,11 +112,11 @@ registerBlockType('blockons/form-checkbox', {
 		},
 		optionSpacing: {
 			type: 'number',
-			default: 8,
+			default: 5,
 		},
 		optionBox: {
 			type: 'boolean',
-			default: true,
+			default: false,
 		},
 	},
 
@@ -134,9 +134,9 @@ registerBlockType('blockons/form-checkbox', {
 			columnSpacing,
 			rowSpacing,
 			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputTextColor,
 			optionSpacing,
@@ -151,23 +151,27 @@ registerBlockType('blockons/form-checkbox', {
 		const errorMessageId = `${groupId}-error`;
 
 		// Memoized styles
+		const fieldStyles = useMemo(
+			() => ({
+				color: textColor,
+				fontSize: `${textSize}px`,
+				gap: `${textSpacing}px`,
+				marginBottom: `${rowSpacing}px`,
+				padding: `0 ${columnSpacing}px`,
+			}),
+			[textColor, textSize, textSpacing, columnSpacing, rowSpacing],
+		);
+
 		const labelStyles = useMemo(
 			() => ({
-				color: labelColor,
-				fontSize: `${labelSize}px`,
-				marginBottom: `${labelSpacing}px`,
 				display: showLabels ? 'flex' : 'none',
 			}),
-			[labelColor, labelSize, labelSpacing, showLabels],
+			[showLabels],
 		);
 
 		const checkboxGroupStyles = useMemo(
 			() => ({
-				display: inline ? 'flex' : 'block',
-				flexWrap: inline ? 'wrap' : undefined,
-				gap: inline
-					? `${optionSpacing}px ${optionSpacing * 2}px`
-					: undefined,
+				gap: `${optionSpacing}px`,
 				fontSize: `${inputSize}px`,
 				color: inputTextColor,
 			}),
@@ -294,13 +298,13 @@ registerBlockType('blockons/form-checkbox', {
 									setAttributes({ inline: value })
 								}
 							/>
-							<ToggleControl
+							{/* <ToggleControl
 								label={__('Option Box', 'blockons')}
 								checked={optionBox}
 								onChange={(value) =>
 									setAttributes({ optionBox: value })
 								}
-							/>
+							/> */}
 							<div className="blockons-divider" />
 
 							<SelectControl
@@ -381,59 +385,10 @@ registerBlockType('blockons/form-checkbox', {
 								</Button>
 							</div>
 						</PanelBody>
-
-						<PanelBody
-							title={__('Design Settings', 'blockons')}
-							initialOpen={false}
-						>
-							{/* <RangeControl
-								label={__('Label Size', 'blockons')}
-								value={attributes.labelSize}
-								onChange={(value) =>
-									setAttributes({ labelSize: value })
-								}
-								min={10}
-								max={54}
-							/>
-							<BlockonsColorpicker
-								label={__('Label Color', 'blockons')}
-								value={attributes.labelColor}
-								onChange={(value) =>
-									setAttributes({ labelColor: value })
-								}
-								paletteColors={colorPickerPalette}
-							/>
-							<div className="blockons-divider" />
-
-							<RangeControl
-								label={__('Input Size', 'blockons')}
-								value={attributes.inputSize}
-								onChange={(value) =>
-									setAttributes({ inputSize: value })
-								}
-								min={10}
-								max={54}
-							/>
-							<BlockonsColorpicker
-								label={__('Input Text Color', 'blockons')}
-								value={attributes.inputTextColor}
-								onChange={(value) =>
-									setAttributes({ inputTextColor: value })
-								}
-								paletteColors={colorPickerPalette}
-							/> */}
-						</PanelBody>
 					</InspectorControls>
 				)}
 
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-						position: 'relative',
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					<label
 						className="form-label checkbox-label"
 						style={labelStyles}
@@ -490,11 +445,6 @@ registerBlockType('blockons/form-checkbox', {
 							<div
 								key={index}
 								className={`checkbox-option ${optionBox ? 'box' : ''}`}
-								style={
-									inline
-										? { marginLeft: `${optionSpacing}px` }
-										: { marginBottom: `${optionSpacing}px` }
-								}
 							>
 								<input
 									type="checkbox"
@@ -533,10 +483,10 @@ registerBlockType('blockons/form-checkbox', {
 			width,
 			columnSpacing,
 			rowSpacing,
+			textSize,
 			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputTextColor,
 			optionSpacing,
@@ -552,33 +502,27 @@ registerBlockType('blockons/form-checkbox', {
 		const groupId = generateGroupId(label);
 		const errorMessageId = `${groupId}-error`;
 
+		const fieldStyles = {
+			color: textColor,
+			fontSize: `${textSize}px`,
+			gap: `${textSpacing}px`,
+			marginBottom: `${rowSpacing}px`,
+			padding: `0 ${columnSpacing}px`,
+		};
+
 		const labelStyles = {
-			color: labelColor,
-			fontSize: `${labelSize}px`,
-			marginBottom: `${labelSpacing}px`,
 			display: showLabels ? 'flex' : 'none',
 		};
 
 		const checkboxGroupStyles = {
-			display: inline ? 'flex' : 'block',
-			flexWrap: inline ? 'wrap' : undefined,
-			gap: inline
-				? `${optionSpacing}px ${optionSpacing * 2}px`
-				: undefined,
+			gap: `${optionSpacing}px`,
 			fontSize: `${inputSize}px`,
 			color: inputTextColor,
 		};
 
 		return (
 			<div {...blockProps}>
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-						position: 'relative',
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					<label
 						className="form-label checkbox-label"
 						style={labelStyles}
@@ -602,7 +546,7 @@ registerBlockType('blockons/form-checkbox', {
 						<div
 							className="form-description checkbox-description"
 							style={{
-								marginBottom: `${labelSpacing}px`,
+								marginBottom: `${textSpacing}px`,
 							}}
 						>
 							<RichText.Content value={description} />
@@ -620,11 +564,6 @@ registerBlockType('blockons/form-checkbox', {
 							<div
 								key={index}
 								className={`checkbox-option ${optionBox ? 'box' : ''}`}
-								style={
-									inline
-										? { marginLeft: `${optionSpacing}px` }
-										: { marginBottom: `${optionSpacing}px` }
-								}
 							>
 								<input
 									type="checkbox"

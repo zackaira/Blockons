@@ -80,21 +80,21 @@ registerBlockType('blockons/form-select', {
 			type: 'number',
 			default: 12,
 		},
-		showLabels: {
-			type: 'boolean',
-			default: true,
-		},
-		labelSize: {
+		textSize: {
 			type: 'number',
 			default: 15,
 		},
-		labelSpacing: {
+		textSpacing: {
 			type: 'number',
 			default: 5,
 		},
-		labelColor: {
+		textColor: {
 			type: 'string',
 			default: '#333',
+		},
+		showLabels: {
+			type: 'boolean',
+			default: true,
 		},
 		inputSize: {
 			type: 'number',
@@ -143,9 +143,9 @@ registerBlockType('blockons/form-select', {
 			columnSpacing,
 			rowSpacing,
 			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputPadHoriz,
 			inputPadVert,
@@ -190,14 +190,22 @@ registerBlockType('blockons/form-select', {
 			],
 		);
 
+		const fieldStyles = useMemo(
+			() => ({
+				color: textColor,
+				fontSize: `${textSize}px`,
+				gap: `${textSpacing}px`,
+				marginBottom: `${rowSpacing}px`,
+				padding: `0 ${columnSpacing}px`,
+			}),
+			[textColor, textSize, textSpacing, rowSpacing, columnSpacing],
+		);
+
 		const labelStyles = useMemo(
 			() => ({
-				color: labelColor,
-				fontSize: `${labelSize}px`,
-				marginBottom: `${labelSpacing}px`,
 				display: showLabels ? 'flex' : 'none',
 			}),
-			[labelColor, labelSize, labelSpacing, showLabels],
+			[showLabels],
 		);
 
 		const addOption = () => {
@@ -370,14 +378,7 @@ registerBlockType('blockons/form-select', {
 					</InspectorControls>
 				)}
 
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-						position: 'relative',
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					{label && (
 						<label
 							className="form-label"
@@ -422,22 +423,24 @@ registerBlockType('blockons/form-select', {
 						aria-live="polite"
 					/>
 
-					<select {...commonProps}>
-						{placeholder && (
-							<option value="" selected={!options.length}>
-								{placeholder}
-							</option>
-						)}
-						{options.map((option, index) => (
-							<option
-								key={index}
-								value={option.value}
-								disabled={!option.value}
-							>
-								{option.label}
-							</option>
-						))}
-					</select>
+					<div className="form-control">
+						<select {...commonProps}>
+							{placeholder && (
+								<option value="" selected={!options.length}>
+									{placeholder}
+								</option>
+							)}
+							{options.map((option, index) => (
+								<option
+									key={index}
+									value={option.value}
+									disabled={!option.value}
+								>
+									{option.label}
+								</option>
+							))}
+						</select>
+					</div>
 				</div>
 			</div>
 		);
@@ -454,9 +457,9 @@ registerBlockType('blockons/form-select', {
 			columnSpacing,
 			rowSpacing,
 			showLabels,
-			labelSize,
-			labelSpacing,
-			labelColor,
+			textSize,
+			textSpacing,
+			textColor,
 			inputSize,
 			inputPadHoriz,
 			inputPadVert,
@@ -489,10 +492,15 @@ registerBlockType('blockons/form-select', {
 					}),
 		};
 
+		const fieldStyles = {
+			color: textColor,
+			fontSize: `${textSize}px`,
+			gap: `${textSpacing}px`,
+			marginBottom: `${rowSpacing}px`,
+			padding: `0 ${columnSpacing}px`,
+		};
+
 		const labelStyles = {
-			color: labelColor,
-			fontSize: `${labelSize}px`,
-			marginBottom: `${labelSpacing}px`,
 			display: showLabels ? 'flex' : 'none',
 		};
 
@@ -510,14 +518,7 @@ registerBlockType('blockons/form-select', {
 
 		return (
 			<div {...blockProps}>
-				<div
-					className="form-field"
-					style={{
-						marginBottom: `${rowSpacing}px`,
-						padding: `0 ${columnSpacing}px`,
-						position: 'relative',
-					}}
-				>
+				<div className="form-field" style={fieldStyles}>
 					{label && (
 						<label
 							className="form-label"
@@ -548,22 +549,24 @@ registerBlockType('blockons/form-select', {
 						aria-live="polite"
 					/>
 
-					<select {...commonProps}>
-						{placeholder && (
-							<option value="" selected={!options.length}>
-								{placeholder}
-							</option>
-						)}
-						{options.map((option, index) => (
-							<option
-								key={index}
-								value={option.value}
-								disabled={!option.value}
-							>
-								{option.label}
-							</option>
-						))}
-					</select>
+					<div className="form-control">
+						<select {...commonProps}>
+							{placeholder && (
+								<option value="" selected={!options.length}>
+									{placeholder}
+								</option>
+							)}
+							{options.map((option, index) => (
+								<option
+									key={index}
+									value={option.value}
+									disabled={!option.value}
+								>
+									{option.label}
+								</option>
+							))}
+						</select>
+					</div>
 				</div>
 			</div>
 		);
