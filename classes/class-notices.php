@@ -96,10 +96,10 @@ class Blockons_Notices {
 		$settings = array();
 
 		$settings['new_blocks_added'] = array(
-			'id'    => 'newblocks_009', // Increment this when adding new blocks
+			'id'    => 'newblocks_010', // Increment this when adding new blocks
 			'type'  => 'info', // info | error | warning | success
-			'title' => __( 'New \'Contact Form\' & \'Table of Contents\' blocks added', 'blockons' ),
-			'text'  => __( 'Please go to the Blockons settings to enable it in the editor if you want to use it. Blockons Pro price will increase with the next update as we\'re adding in a contact form block.', 'blockons' ),
+			'title' => __( 'New \'Contact Form\' & \'Table of Contents\' blocks added. Plus new Pro Features!', 'blockons' ),
+			'text'  => __( 'Please go to the Blockons settings to enable it in the editor if you want to use it.', 'blockons' ),
 			'link'  => admin_url( 'options-general.php?page=blockons-settings' ), // admin_url( 'options-general.php?page=blockons-settings' ),
 			'link_text' => __( 'Go to Blockons Settings', 'blockons' ),
 			'inline' => true, // To display the link & text inline

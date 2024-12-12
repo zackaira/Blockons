@@ -213,6 +213,14 @@ const SettingsPage = () => {
 					/>
 				)}
 
+			{!isPremium && !blockonsOptions.disablepropromo && (
+				<ProPromo
+					blockonsOptions={blockonsOptions}
+					clickClose={handleChange}
+					upgradeUrl={upgradeUrl}
+				/>
+			)}
+
 			<div className="blockons-settings-content">
 				<form
 					id="blockons-settings-form"
@@ -439,14 +447,6 @@ const SettingsPage = () => {
 					</div>
 				</form>
 			</div>
-
-			{!isPremium && !blockonsOptions.disablepropromo && (
-				<ProPromo
-					blockonsOptions={blockonsOptions}
-					clickClose={handleChange}
-					upgradeUrl={upgradeUrl}
-				/>
-			)}
 
 			{showPageLoaderPreview && (
 				<PageLoader

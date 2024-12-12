@@ -171,6 +171,7 @@ registerBlockType('blockons/form-checkbox', {
 
 		const checkboxGroupStyles = useMemo(
 			() => ({
+				flexDirection: inline ? 'row' : 'column',
 				gap: `${optionSpacing}px`,
 				fontSize: `${inputSize}px`,
 				color: inputTextColor,
@@ -515,6 +516,7 @@ registerBlockType('blockons/form-checkbox', {
 		};
 
 		const checkboxGroupStyles = {
+			flexDirection: inline ? 'row' : 'column',
 			gap: `${optionSpacing}px`,
 			fontSize: `${inputSize}px`,
 			color: inputTextColor,

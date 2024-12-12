@@ -6,7 +6,7 @@ const ProPromo = ({ blockonsOptions, clickClose, upgradeUrl }) => {
 		<div className="blockons-propromo">
 			<div>
 				{__(
-					'Pricing will go up soon with more advanced features. Purchase Blockons Pro now and enjoy this price forever!',
+					'Purchase Blockons Pro now and get ALL features for only $29!',
 					'blockons',
 				)}
 			</div>
@@ -16,7 +16,7 @@ const ProPromo = ({ blockonsOptions, clickClose, upgradeUrl }) => {
 					target="_blank"
 					className="propromo-see"
 				>
-					{__("See What's on Offer", 'blockons')}
+					{__("See What's Included", 'blockons')}
 				</a>
 				<a href={upgradeUrl} className="propromo-upgrade">
 					{__('Upgrade Now', 'blockons')}
