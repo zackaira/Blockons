@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Blockons plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Blockons 1.2.01\n"
+"Project-Id-Version: Blockons 1.2.04\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/blockons\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-10-30T11:42:56+00:00\n"
+"POT-Creation-Date: 2024-12-12T12:33:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: blockons\n"
@@ -50,42 +50,43 @@ msgid_plural "%d items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: classes/class-admin.php:39
-#: classes/class-admin.php:40
-#: src/backend/settings/SettingsPage.js:181
+#: classes/class-admin.php:41
+#: classes/class-admin.php:42
+#: src/backend/settings/SettingsPage.js:182
 msgid "Blockons Settings"
 msgstr ""
 
-#: classes/class-admin.php:51
+#: classes/class-admin.php:53
+#: src/backend/settings/contents/GlobalSettings.js:23
+#: src/backend/settings/SettingsPage.js:291
 msgid "Settings"
 msgstr ""
 
-#: classes/class-admin.php:63
+#: classes/class-admin.php:65
 msgid "View Blockons documentation"
 msgstr ""
 
-#: classes/class-admin.php:63
+#: classes/class-admin.php:65
 #: src/backend/settings/components/SettingRow.js:68
 #: src/backend/settings/contents/InfoTab.js:72
-#: src/backend/settings/SettingsPage.js:194
+#: src/backend/settings/SettingsPage.js:195
 msgid "Documentation"
 msgstr ""
 
-#: classes/class-admin.php:64
+#: classes/class-admin.php:66
 msgid "Go to Blockons FAQ's"
 msgstr ""
 
-#: classes/class-admin.php:64
+#: classes/class-admin.php:66
 #: src/backend/settings/contents/InfoTab.js:79
 msgid "FAQ's"
 msgstr ""
 
-#: classes/class-admin.php:99
+#: classes/class-admin.php:101
 msgid "Blockons Blocks"
 msgstr ""
 
-#: classes/class-admin.php:175
-#: classes/class-scripts.php:423
+#: classes/class-admin.php:177
 msgid "Quick View"
 msgstr ""
 
@@ -140,6 +141,171 @@ msgctxt "Block pattern description"
 msgid "A Two Footer."
 msgstr ""
 
+#: classes/class-blockons-security.php:147
+msgid "Required field \"%s\" is empty"
+msgstr ""
+
+#: classes/class-blockons-security.php:156
+msgid "Required field \"%s\" has no selections"
+msgstr ""
+
+#: classes/class-blockons-security.php:166
+msgid "Required field \"%s\" has no selection"
+msgstr ""
+
+#: classes/class-blockons-security.php:176
+msgid "You must accept the %s"
+msgstr ""
+
+#: classes/class-blockons-security.php:187
+msgid "Invalid email format for field \"%s\""
+msgstr ""
+
+#: classes/class-blockons-security.php:221
+msgid "Too many email addresses for %s. Maximum allowed: %d"
+msgstr ""
+
+#: classes/class-blockons-security.php:234
+msgid "Invalid email address: %s"
+msgstr ""
+
+#: classes/class-form-submissions.php:38
+msgid "Unread"
+msgstr ""
+
+#: classes/class-form-submissions.php:39
+msgid "Read"
+msgstr ""
+
+#: classes/class-form-submissions.php:40
+msgid "Replied"
+msgstr ""
+
+#: classes/class-form-submissions.php:41
+msgid "Spam"
+msgstr ""
+
+#: classes/class-form-submissions.php:69
+msgctxt "Post type general name"
+msgid "Form Submissions"
+msgstr ""
+
+#: classes/class-form-submissions.php:70
+msgctxt "Post type singular name"
+msgid "Form Submission"
+msgstr ""
+
+#: classes/class-form-submissions.php:71
+msgctxt "Admin Menu text"
+msgid "Submissions"
+msgstr ""
+
+#: classes/class-form-submissions.php:72
+msgctxt "Add New on Toolbar"
+msgid "Form Submission"
+msgstr ""
+
+#: classes/class-form-submissions.php:73
+msgid "View Submissions"
+msgstr ""
+
+#: classes/class-form-submissions.php:74
+msgid "All Submissions"
+msgstr ""
+
+#: classes/class-form-submissions.php:75
+msgid "Search Submissions"
+msgstr ""
+
+#: classes/class-form-submissions.php:76
+msgid "No submissions found."
+msgstr ""
+
+#: classes/class-form-submissions.php:77
+msgid "No submissions found in Trash."
+msgstr ""
+
+#: classes/class-form-submissions.php:108
+msgid "Form Submission Details"
+msgstr ""
+
+#: classes/class-form-submissions.php:117
+msgid "Submission Status"
+msgstr ""
+
+#: classes/class-form-submissions.php:234
+msgid "Are you sure you want to delete this file? This cannot be undone!"
+msgstr ""
+
+#: classes/class-form-submissions.php:240
+#: classes/class-rest-api.php:794
+#: src/backend/settings/components/GiveFeedback.js:35
+msgid "Yes"
+msgstr ""
+
+#: classes/class-form-submissions.php:240
+#: classes/class-rest-api.php:794
+#: src/backend/settings/components/GiveFeedback.js:36
+msgid "No"
+msgstr ""
+
+#: classes/class-form-submissions.php:296
+msgid "Form Details"
+msgstr ""
+
+#: classes/class-form-submissions.php:299
+msgid "Form Name:"
+msgstr ""
+
+#: classes/class-form-submissions.php:303
+msgid "Form Subject:"
+msgstr ""
+
+#: classes/class-form-submissions.php:307
+msgid "Sent To:"
+msgstr ""
+
+#: classes/class-form-submissions.php:313
+msgid "CC'd To:"
+msgstr ""
+
+#: classes/class-form-submissions.php:320
+msgid "BCC'd To:"
+msgstr ""
+
+#: classes/class-form-submissions.php:325
+msgid "Page URL:"
+msgstr ""
+
+#: classes/class-form-submissions.php:329
+msgid "IP Address:"
+msgstr ""
+
+#: classes/class-form-submissions.php:333
+msgid "Submission Date:"
+msgstr ""
+
+#: classes/class-form-submissions.php:418
+#: blocks/slider/edit.js:882
+msgid "Title"
+msgstr ""
+
+#: classes/class-form-submissions.php:419
+msgid "Form"
+msgstr ""
+
+#: classes/class-form-submissions.php:420
+msgid "Sent To"
+msgstr ""
+
+#: classes/class-form-submissions.php:421
+msgid "Date"
+msgstr ""
+
+#: classes/class-form-submissions.php:422
+msgid "Status"
+msgstr ""
+
 #: classes/class-notices.php:26
 msgid "Heads up!"
 msgstr ""
@@ -149,7 +315,7 @@ msgid "The next update includes big changes with Image Popups, you will need to 
 msgstr ""
 
 #: classes/class-notices.php:101
-msgid "New 'Table of Contents' block added"
+msgid "New 'Contact Form' & 'Table of Contents' blocks added. Plus new Pro Features!"
 msgstr ""
 
 #: classes/class-notices.php:102
@@ -160,28 +326,111 @@ msgstr ""
 msgid "Go to Blockons Settings"
 msgstr ""
 
-#: classes/class-notices.php:111
-msgid "Please Note! Blockons Plugin Update!"
+#: classes/class-rest-api.php:315
+msgid "Too many submissions. Please try again later."
 msgstr ""
 
-#: classes/class-notices.php:112
-msgid "<b>If you've just installed Blockons, please ignore this message.</b> - Updates & Improvements have been made to Blockons Popup Images the Image blocks. Please check over these blocks to ensure they are working as expected. Apologies if any inconvenience caused."
+#: classes/class-rest-api.php:325
+#: classes/class-rest-api.php:391
+msgid "Form submitted successfully"
 msgstr ""
 
-#: classes/class-notices.php:114
-msgid "Read more on this"
+#: classes/class-rest-api.php:337
+msgid "No valid recipient email addresses provided"
 msgstr ""
 
-#: classes/class-scripts.php:413
-msgid "Site built by (blockons[*https://blockons.com/])"
+#: classes/class-rest-api.php:372
+msgid "Form submitted successfully (Development Mode)"
 msgstr ""
 
-#: classes/class-scripts.php:435
-msgid "Your Shopping Cart"
+#: classes/class-rest-api.php:422
+#: classes/class-rest-api.php:448
+msgid "reCAPTCHA verification failed"
 msgstr ""
 
-#: classes/class-scripts.php:436
-msgid "Spend $100 to get FREE shipping!"
+#: classes/class-rest-api.php:438
+msgid "Failed to verify reCAPTCHA"
+msgstr ""
+
+#: classes/class-rest-api.php:567
+msgid "Failed to create upload directory"
+msgstr ""
+
+#: classes/class-rest-api.php:588
+msgid "File size exceeds limit of %s"
+msgstr ""
+
+#: classes/class-rest-api.php:619
+msgid "Invalid file type"
+msgstr ""
+
+#: classes/class-rest-api.php:664
+msgid "Failed to move uploaded file"
+msgstr ""
+
+#: classes/class-rest-api.php:751
+msgid "No options selected"
+msgstr ""
+
+#: classes/class-rest-api.php:932
+msgid "New Form Submission"
+msgstr ""
+
+#: classes/class-rest-api.php:964
+msgid "Form Submission"
+msgstr ""
+
+#: classes/class-rest-api.php:995
+msgid "Submission Details:"
+msgstr ""
+
+#: classes/class-rest-api.php:996
+msgid "Date: %s"
+msgstr ""
+
+#: classes/class-rest-api.php:998
+msgid "Page URL: %s"
+msgstr ""
+
+#: classes/class-rest-api.php:999
+msgid "N/A"
+msgstr ""
+
+#: classes/class-rest-api.php:1002
+msgid "IP Address: %s"
+msgstr ""
+
+#: classes/class-scripts.php:121
+msgid "This field is required"
+msgstr ""
+
+#: classes/class-scripts.php:122
+msgid "Please select an option"
+msgstr ""
+
+#: classes/class-scripts.php:123
+msgid "Please enter a valid URL"
+msgstr ""
+
+#: classes/class-scripts.php:124
+msgid "Please enter a valid Email Address"
+msgstr ""
+
+#: classes/class-scripts.php:125
+msgid "Please enter a valid number"
+msgstr ""
+
+#: classes/class-scripts.php:126
+msgid "New Contact Form Submission"
+msgstr ""
+
+#: classes/class-scripts.php:127
+msgid "An error occurred. Please try again."
+msgstr ""
+
+#: assets/blocks/contact-form/form-handler.js:18
+#: blocks/contact-form/input-datepicker.js:127
+msgid "Select date..."
 msgstr ""
 
 #: assets/blocks/search/pro/components/Pagination.js:18
@@ -230,8 +479,8 @@ msgid "Accordion Design"
 msgstr ""
 
 #: blocks/accordions/edit.js:37
-#: blocks/count-down-timer/edit.js:479
-#: blocks/marketing-button/edit.js:146
+#: blocks/count-down-timer/edit.js:555
+#: blocks/marketing-button/edit.js:154
 msgid "Plain"
 msgstr ""
 
@@ -308,32 +557,32 @@ msgstr ""
 
 #: blocks/accordions/single-accordion.js:195
 #: blocks/content-toggler/edit.js:158
-#: blocks/count-down-timer/edit.js:368
-#: blocks/count-down-timer/edit.js:398
-#: blocks/icon-list/edit.js:405
+#: blocks/count-down-timer/edit.js:426
+#: blocks/count-down-timer/edit.js:460
+#: blocks/icon-list/edit.js:442
 #: blocks/image-carousel/edit.js:431
-#: blocks/image-gallery/edit.js:577
+#: blocks/image-gallery/edit.js:784
 #: blocks/line-heading/edit.js:136
 msgid "Font Size"
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:205
-#: blocks/icon-list/edit.js:414
+#: blocks/icon-list/edit.js:453
 #: blocks/image-carousel/edit.js:423
 #: blocks/slider/edit.js:659
 #: blocks/testimonials/edit.js:611
 #: src/backend/editor/extensions/tooltips.js:239
 #: src/backend/settings/contents/SiteAddons.js:153
-#: src/backend/settings/contents/WooAddons.js:175
-#: src/backend/settings/contents/WooAddons.js:215
+#: src/backend/settings/contents/WooAddons.js:270
+#: src/backend/settings/contents/WooAddons.js:336
 msgid "Font Color"
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:212
-#: blocks/icon-list/edit.js:422
-#: blocks/marketing-button/edit.js:255
+#: blocks/icon-list/edit.js:461
+#: blocks/marketing-button/edit.js:299
 #: blocks/search/edit.js:262
-#: blocks/wc-account-icon/edit.js:243
+#: blocks/wc-account-icon/edit.js:280
 #: blocks/wc-mini-cart/edit.js:270
 #: src/backend/settings/contents/SiteAddons.js:356
 #: src/backend/settings/contents/SiteAddons.js:558
@@ -341,18 +590,18 @@ msgid "Icon Size"
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:222
-#: blocks/icon-list/edit.js:300
-#: blocks/icon-list/edit.js:431
-#: blocks/image-gallery/edit.js:646
-#: blocks/marketing-button/edit.js:345
+#: blocks/icon-list/edit.js:317
+#: blocks/icon-list/edit.js:472
+#: blocks/image-gallery/edit.js:902
+#: blocks/marketing-button/edit.js:407
 #: blocks/search/edit.js:298
-#: blocks/wc-account-icon/edit.js:276
+#: blocks/wc-account-icon/edit.js:322
 #: blocks/wc-mini-cart/edit.js:314
-#: src/backend/editor/extensions/imagepopups.js:237
-#: src/backend/settings/contents/BlockExtensions.js:281
+#: src/backend/editor/extensions/imagepopups.js:235
+#: src/backend/settings/contents/BlockExtensions.js:278
 #: src/backend/settings/contents/SiteAddons.js:415
 #: src/backend/settings/contents/SiteAddons.js:578
-#: src/backend/settings/contents/WooAddons.js:125
+#: src/backend/settings/contents/WooAddons.js:174
 msgid "Icon Color"
 msgstr ""
 
@@ -366,9 +615,9 @@ msgstr ""
 
 #: blocks/accordions/single-accordion.js:247
 #: blocks/content-toggler/edit.js:144
-#: blocks/count-down-timer/edit.js:341
+#: blocks/count-down-timer/edit.js:394
 #: blocks/image-carousel/edit.js:401
-#: blocks/marketing-button/edit.js:321
+#: blocks/marketing-button/edit.js:378
 #: blocks/progress-bars/edit.js:227
 #: blocks/slider/edit.js:1176
 #: blocks/table-of-contents/edit.js:473
@@ -378,14 +627,611 @@ msgstr ""
 #: src/backend/settings/contents/SiteAddons.js:221
 #: src/backend/settings/contents/SiteAddons.js:406
 #: src/backend/settings/contents/SiteAddons.js:587
-#: src/backend/settings/contents/WooAddons.js:117
-#: src/backend/settings/contents/WooAddons.js:167
-#: src/backend/settings/contents/WooAddons.js:207
+#: src/backend/settings/contents/WooAddons.js:157
+#: src/backend/settings/contents/WooAddons.js:253
+#: src/backend/settings/contents/WooAddons.js:322
 msgid "Background Color"
 msgstr ""
 
 #: blocks/accordions/single-accordion.js:266
 msgid "Accordion Label"
+msgstr ""
+
+#: blocks/contact-form/edit.js:80
+#: blocks/contact-form/edit.js:90
+msgid "Click to copy shortcode:"
+msgstr ""
+
+#: blocks/contact-form/edit.js:87
+msgid "Copied to Clipboard!"
+msgstr ""
+
+#: blocks/contact-form/edit.js:100
+msgid "Form Field Shortcodes"
+msgstr ""
+
+#: blocks/contact-form/edit.js:146
+msgid "Invalid email address"
+msgstr ""
+
+#: blocks/contact-form/edit.js:331
+msgid "Form Settings"
+msgstr ""
+
+#: blocks/contact-form/edit.js:335
+msgid "Email To"
+msgstr ""
+
+#: blocks/contact-form/edit.js:359
+msgid "Form Name"
+msgstr ""
+
+#: blocks/contact-form/edit.js:367
+msgid "Email Subject"
+msgstr ""
+
+#: blocks/contact-form/edit.js:376
+msgid "From Name"
+msgstr ""
+
+#: blocks/contact-form/edit.js:381
+msgid "Add the NAME shortcode here"
+msgstr ""
+
+#: blocks/contact-form/edit.js:387
+msgid "From Email"
+msgstr ""
+
+#: blocks/contact-form/edit.js:392
+msgid "Add the EMAIL shortcode here"
+msgstr ""
+
+#: blocks/contact-form/edit.js:402
+msgid "CC Emails"
+msgstr ""
+
+#: blocks/contact-form/edit.js:427
+msgid "BCC Emails"
+msgstr ""
+
+#: blocks/contact-form/edit.js:454
+msgid "Add CC & BCC emails"
+msgstr ""
+
+#: blocks/contact-form/edit.js:458
+msgid "Upgrade to Blockons Pro and gain the power to send CC and BCC emails with your form."
+msgstr ""
+
+#: blocks/contact-form/edit.js:466
+msgid "Form Success Message"
+msgstr ""
+
+#: blocks/contact-form/edit.js:473
+msgid "Form Error Message"
+msgstr ""
+
+#: blocks/contact-form/edit.js:482
+msgid "Include Metadata"
+msgstr ""
+
+#: blocks/contact-form/edit.js:483
+msgid "Include date, time and page URL in the email"
+msgstr ""
+
+#: blocks/contact-form/edit.js:500
+msgid "Form Design Settings"
+msgstr ""
+
+#: blocks/contact-form/edit.js:504
+msgid "Form Width"
+msgstr ""
+
+#: blocks/contact-form/edit.js:526
+msgid "Form Column Spacing"
+msgstr ""
+
+#: blocks/contact-form/edit.js:536
+msgid "Adjust the space between form fields IF you edit field widths"
+msgstr ""
+
+#: blocks/contact-form/edit.js:542
+msgid "Form Row Spacing"
+msgstr ""
+
+#: blocks/contact-form/edit.js:556
+#: blocks/contact-form/input-acceptance.js:284
+#: blocks/count-down-timer/edit.js:493
+msgid "Text Size"
+msgstr ""
+
+#: blocks/contact-form/edit.js:568
+#: blocks/contact-form/input-acceptance.js:295
+msgid "Text Spacing"
+msgstr ""
+
+#: blocks/contact-form/edit.js:580
+#: blocks/contact-form/input-acceptance.js:306
+#: blocks/content-toggler/edit.js:169
+#: blocks/count-down-timer/edit.js:440
+#: blocks/count-down-timer/edit.js:474
+#: blocks/count-down-timer/edit.js:507
+#: blocks/icon-list/edit.js:285
+#: blocks/marketing-button/edit.js:433
+#: blocks/progress-bars/edit.js:364
+#: blocks/wc-mini-cart/edit.js:304
+msgid "Text Color"
+msgstr ""
+
+#: blocks/contact-form/edit.js:593
+msgid "Show Labels"
+msgstr ""
+
+#: blocks/contact-form/edit.js:603
+msgid "Input Font Size"
+msgstr ""
+
+#: blocks/contact-form/edit.js:613
+msgid "Input Padding Vertical"
+msgstr ""
+
+#: blocks/contact-form/edit.js:625
+msgid "Input Padding Horizontal"
+msgstr ""
+
+#: blocks/contact-form/edit.js:639
+#: blocks/search/edit.js:329
+msgid "Input Background Color"
+msgstr ""
+
+#: blocks/contact-form/edit.js:650
+#: blocks/search/edit.js:351
+msgid "Input Font Color"
+msgstr ""
+
+#: blocks/contact-form/edit.js:663
+msgid "Input Border"
+msgstr ""
+
+#: blocks/contact-form/edit.js:673
+#: blocks/search/edit.js:340
+msgid "Input Border Color"
+msgstr ""
+
+#: blocks/contact-form/edit.js:686
+msgid "Input Border Radius"
+msgstr ""
+
+#: blocks/contact-form/edit.js:707
+msgid "Submit Button Text"
+msgstr ""
+
+#: blocks/contact-form/edit.js:718
+msgid "Submit Button Color"
+msgstr ""
+
+#: blocks/contact-form/edit.js:726
+msgid "Submit Button Font Color"
+msgstr ""
+
+#: blocks/contact-form/edit.js:735
+msgid "Button Spacing"
+msgstr ""
+
+#: blocks/contact-form/edit.js:746
+msgid "Input Error Position"
+msgstr ""
+
+#: blocks/contact-form/edit.js:834
+#: blocks/contact-form/save.js:101
+msgid "Send Message"
+msgstr ""
+
+#: blocks/contact-form/edit.js:844
+#: blocks/contact-form/save.js:110
+msgid "Thank you for your message. We'll get back to you soon!"
+msgstr ""
+
+#: blocks/contact-form/edit.js:851
+#: blocks/contact-form/save.js:117
+msgid "There was an error sending your message. Please try again."
+msgstr ""
+
+#: blocks/contact-form/edit.js:863
+msgid "Blockons Form"
+msgstr ""
+
+#: blocks/contact-form/edit.js:864
+msgid "Enter the Send To email to further configure this form."
+msgstr ""
+
+#: blocks/contact-form/edit.js:880
+msgid "Configure Email"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:48
+msgid "Form Acceptance"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:54
+msgid "I accept the terms and conditions"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:209
+msgid "Acceptance Settings"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:213
+#: blocks/contact-form/input-acceptance.js:333
+msgid "Acceptance Text"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:214
+msgid "The text that appears next to the checkbox"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:224
+#: blocks/contact-form/input-checkbox.js:276
+#: blocks/contact-form/input-datepicker.js:357
+#: blocks/contact-form/input-file-upload.js:255
+#: blocks/contact-form/input-radio.js:282
+#: blocks/contact-form/input-select.js:312
+#: blocks/contact-form/input-text.js:333
+#: blocks/contact-form/input-textarea.js:278
+#: blocks/slider/edit.js:925
+msgid "Description"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:225
+msgid "Additional information displayed below the acceptance text"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:237
+#: blocks/contact-form/input-checkbox.js:285
+#: blocks/contact-form/input-datepicker.js:375
+#: blocks/contact-form/input-file-upload.js:264
+#: blocks/contact-form/input-radio.js:291
+#: blocks/contact-form/input-select.js:321
+#: blocks/contact-form/input-text.js:342
+#: blocks/contact-form/input-textarea.js:299
+msgid "Required"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:244
+#: blocks/contact-form/input-checkbox.js:353
+msgid "Checked by Default"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:253
+#: blocks/contact-form/input-checkbox.js:312
+#: blocks/contact-form/input-datepicker.js:514
+#: blocks/contact-form/input-file-upload.js:303
+#: blocks/contact-form/input-radio.js:311
+#: blocks/contact-form/input-select.js:330
+#: blocks/contact-form/input-text.js:351
+#: blocks/contact-form/input-textarea.js:308
+msgid "Width"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:263
+#: blocks/content-toggler/edit.js:122
+#: blocks/count-down-timer/edit.js:390
+msgid "Design Settings"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:267
+msgid "Use Custom Text Settings"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:275
+msgid "Override text settings inherited from form settings"
+msgstr ""
+
+#: blocks/contact-form/input-acceptance.js:358
+msgid "Acceptance Description"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:49
+msgid "Form Checkbox Group"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:59
+msgid "Checkbox Group"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:252
+#: blocks/contact-form/input-datepicker.js:333
+#: blocks/contact-form/input-file-upload.js:229
+#: blocks/contact-form/input-radio.js:258
+msgid "This is a Premium Block feature"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:254
+#: blocks/contact-form/input-datepicker.js:335
+#: blocks/contact-form/input-file-upload.js:231
+#: blocks/contact-form/input-radio.js:260
+msgid "Upgrade"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:265
+msgid "Checkbox Group Settings"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:269
+#: blocks/contact-form/input-radio.js:275
+msgid "Group Label"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:286
+msgid "At least one option must be selected"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:296
+#: blocks/contact-form/input-radio.js:302
+msgid "Display Inline"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:322
+#: blocks/contact-form/input-radio.js:321
+msgid "Option Spacing"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:339
+#: blocks/contact-form/input-radio.js:345
+#: blocks/contact-form/input-select.js:346
+msgid "Option Label"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:370
+#: blocks/contact-form/input-radio.js:379
+#: blocks/contact-form/input-select.js:359
+msgid "Remove option"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:385
+#: blocks/contact-form/input-radio.js:395
+#: blocks/contact-form/input-select.js:374
+msgid "Add Option"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:399
+msgid "Checkbox Group Label"
+msgstr ""
+
+#: blocks/contact-form/input-checkbox.js:425
+msgid "Checkbox Group Description"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:101
+msgid "Form Date Picker"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:111
+msgid "Select Date"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:346
+msgid "Date Picker Settings"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:350
+#: blocks/contact-form/input-file-upload.js:246
+#: blocks/contact-form/input-file-upload.js:322
+#: blocks/contact-form/input-select.js:296
+#: blocks/contact-form/input-select.js:390
+#: blocks/contact-form/input-text.js:317
+#: blocks/contact-form/input-text.js:371
+#: blocks/contact-form/input-textarea.js:262
+#: blocks/contact-form/input-textarea.js:328
+msgid "Label"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:366
+msgid "Input Placeholder Text"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:384
+msgid "Enable Time Selection"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:393
+msgid "Date Format"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:402
+msgid "Time Format"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:421
+msgid "Example:"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:437
+msgid "Minimum Date"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:448
+msgid "Select minimum date..."
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:468
+msgid "Clear Min Date"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:475
+msgid "Maximum Date"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:487
+msgid "Select maximum date..."
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:507
+msgid "Clear Max Date"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:532
+msgid "Date Picker Label"
+msgstr ""
+
+#: blocks/contact-form/input-datepicker.js:549
+#: blocks/contact-form/input-file-upload.js:340
+#: blocks/contact-form/input-select.js:409
+#: blocks/contact-form/input-text.js:390
+#: blocks/contact-form/input-textarea.js:347
+msgid "Field Description"
+msgstr ""
+
+#: blocks/contact-form/input-file-upload.js:31
+msgid "Documents"
+msgstr ""
+
+#: blocks/contact-form/input-file-upload.js:33
+msgid "Accepted formats: PDF, DOC, TXT"
+msgstr ""
+
+#: blocks/contact-form/input-file-upload.js:36
+msgid "Images"
+msgstr ""
+
+#: blocks/contact-form/input-file-upload.js:38
+msgid "Accepted formats: JPG, PNG, GIF"
+msgstr ""
+
+#: blocks/contact-form/input-file-upload.js:41
+msgid "Media"
+msgstr ""
+
+#: blocks/contact-form/input-file-upload.js:43
+msgid "Accepted formats: Images, MP4, MP3, WAV"
+msgstr ""
+
+#: blocks/contact-form/input-file-upload.js:73
+msgid "Form File Upload"
+msgstr ""
+
+#: blocks/contact-form/input-file-upload.js:83
+msgid "Upload File"
+msgstr ""
+
+#: blocks/contact-form/input-file-upload.js:242
+msgid "File Upload Settings"
+msgstr ""
+
+#: blocks/contact-form/input-file-upload.js:273
+msgid "Accepted File Types"
+msgstr ""
+
+#: blocks/contact-form/input-file-upload.js:288
+msgid "Maximum File Size (MB)"
+msgstr ""
+
+#: blocks/contact-form/input-file-upload.js:295
+msgid "Please ensure server configurations allow uploads to this limit. Recommended maximum size is 2MB."
+msgstr ""
+
+#: blocks/contact-form/input-radio.js:49
+msgid "Form Radio Group"
+msgstr ""
+
+#: blocks/contact-form/input-radio.js:59
+msgid "Radio Group"
+msgstr ""
+
+#: blocks/contact-form/input-radio.js:271
+msgid "Radio Group Settings"
+msgstr ""
+
+#: blocks/contact-form/input-radio.js:292
+msgid "One option must be selected"
+msgstr ""
+
+#: blocks/contact-form/input-radio.js:359
+msgid "Selected by Default"
+msgstr ""
+
+#: blocks/contact-form/input-radio.js:409
+msgid "Radio Group Label"
+msgstr ""
+
+#: blocks/contact-form/input-radio.js:435
+msgid "Radio Group Description"
+msgstr ""
+
+#: blocks/contact-form/input-select.js:47
+msgid "Form Select"
+msgstr ""
+
+#: blocks/contact-form/input-select.js:53
+msgid "Select Label"
+msgstr ""
+
+#: blocks/contact-form/input-select.js:57
+msgid "Select an option"
+msgstr ""
+
+#: blocks/contact-form/input-select.js:292
+msgid "Select Settings"
+msgstr ""
+
+#: blocks/contact-form/input-select.js:303
+#: blocks/contact-form/input-text.js:324
+#: blocks/contact-form/input-textarea.js:269
+msgid "Placeholder"
+msgstr ""
+
+#: blocks/contact-form/input-text.js:21
+#: src/backend/settings/contents/SiteAddons.js:113
+#: src/backend/settings/contents/SiteAddons.js:533
+msgid "Text"
+msgstr ""
+
+#: blocks/contact-form/input-text.js:22
+msgid "Email"
+msgstr ""
+
+#: blocks/contact-form/input-text.js:23
+msgid "Number"
+msgstr ""
+
+#: blocks/contact-form/input-text.js:24
+msgid "URL"
+msgstr ""
+
+#: blocks/contact-form/input-text.js:68
+msgid "Form Text Input"
+msgstr ""
+
+#: blocks/contact-form/input-text.js:74
+msgid "Input Label"
+msgstr ""
+
+#: blocks/contact-form/input-text.js:78
+#: blocks/contact-form/input-textarea.js:66
+msgid "Placeholder text"
+msgstr ""
+
+#: blocks/contact-form/input-text.js:303
+msgid "Input Settings"
+msgstr ""
+
+#: blocks/contact-form/input-text.js:307
+msgid "Input Type"
+msgstr ""
+
+#: blocks/contact-form/input-textarea.js:52
+msgid "Form Textarea"
+msgstr ""
+
+#: blocks/contact-form/input-textarea.js:58
+msgid "Textarea Label"
+msgstr ""
+
+#: blocks/contact-form/input-textarea.js:258
+msgid "Textarea Settings"
+msgstr ""
+
+#: blocks/contact-form/input-textarea.js:288
+msgid "Rows"
 msgstr ""
 
 #: blocks/content-selector/content.js:7
@@ -532,17 +1378,12 @@ msgstr ""
 msgid "Toggle Open Text"
 msgstr ""
 
-#: blocks/content-toggler/edit.js:122
-#: blocks/count-down-timer/edit.js:337
-msgid "Design Settings"
-msgstr ""
-
 #: blocks/content-toggler/edit.js:126
 msgid "Toggle Text Style"
 msgstr ""
 
 #: blocks/content-toggler/edit.js:129
-#: blocks/count-down-timer/edit.js:159
+#: blocks/count-down-timer/edit.js:172
 msgid "Plain Text"
 msgstr ""
 
@@ -552,17 +1393,6 @@ msgstr ""
 
 #: blocks/content-toggler/edit.js:131
 msgid "Banner"
-msgstr ""
-
-#: blocks/content-toggler/edit.js:169
-#: blocks/count-down-timer/edit.js:380
-#: blocks/count-down-timer/edit.js:410
-#: blocks/count-down-timer/edit.js:439
-#: blocks/icon-list/edit.js:274
-#: blocks/marketing-button/edit.js:365
-#: blocks/progress-bars/edit.js:364
-#: blocks/wc-mini-cart/edit.js:304
-msgid "Text Color"
 msgstr ""
 
 #: blocks/content-toggler/edit.js:182
@@ -577,206 +1407,202 @@ msgstr ""
 msgid "Show more +"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:117
+#: blocks/count-down-timer/edit.js:127
 msgid "Timer Settings"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:156
-#: blocks/count-down-timer/edit.js:425
+#: blocks/count-down-timer/edit.js:168
+#: blocks/count-down-timer/edit.js:491
 msgid "Timer Design"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:160
+#: blocks/count-down-timer/edit.js:176
 msgid "Block Design"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:168
+#: blocks/count-down-timer/edit.js:188
 msgid "Adjust all colors, sizing and spacing in the 'Design Settings' panel further down."
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:176
+#: blocks/count-down-timer/edit.js:196
 msgid "Link To URL"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:179
+#: blocks/count-down-timer/edit.js:200
 #: blocks/image-carousel/edit.js:375
-#: blocks/image-gallery/edit.js:365
-#: blocks/image-gallery/edit.js:384
-#: blocks/image-gallery/edit.js:492
+#: blocks/image-gallery/edit.js:432
+#: blocks/image-gallery/edit.js:469
+#: blocks/image-gallery/edit.js:637
 #: blocks/slider/edit.js:600
 #: blocks/wc-mini-cart/edit.js:178
 msgid "None"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:180
+#: blocks/count-down-timer/edit.js:204
 msgid "Button link"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:181
+#: blocks/count-down-timer/edit.js:208
 msgid "Link whole block"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:207
-#: blocks/marketing-button/edit.js:131
+#: blocks/count-down-timer/edit.js:238
+#: blocks/marketing-button/edit.js:135
 #: blocks/slider/edit.js:632
 #: blocks/slider/edit.js:687
 msgid "Open in new window"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:218
+#: blocks/count-down-timer/edit.js:249
 #: blocks/search/edit.js:383
 msgid "Button Background Color"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:229
+#: blocks/count-down-timer/edit.js:265
 msgid "Button Text Color"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:240
-#: blocks/count-down-timer/edit.js:513
+#: blocks/count-down-timer/edit.js:281
+#: blocks/count-down-timer/edit.js:604
 #: blocks/table-of-contents/edit.js:462
 msgid "Spacing"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:258
+#: blocks/count-down-timer/edit.js:303
 msgid "Add Text Before"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:278
+#: blocks/count-down-timer/edit.js:323
 msgid "Add Text After"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:299
+#: blocks/count-down-timer/edit.js:344
 msgid "On timer Complete"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:302
+#: blocks/count-down-timer/edit.js:348
 msgid "Show Text"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:303
+#: blocks/count-down-timer/edit.js:352
 msgid "Hide Element"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:351
+#: blocks/count-down-timer/edit.js:407
 msgid "Padding"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:366
+#: blocks/count-down-timer/edit.js:424
 msgid "Before Text"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:396
+#: blocks/count-down-timer/edit.js:458
 msgid "After Text"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:427
-msgid "Text Size"
-msgstr ""
-
-#: blocks/count-down-timer/edit.js:450
+#: blocks/count-down-timer/edit.js:520
 msgid "Timer Digits Size"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:461
+#: blocks/count-down-timer/edit.js:534
 msgid "Timer Digits Color"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:476
-#: src/backend/settings/contents/BlockExtensions.js:494
+#: blocks/count-down-timer/edit.js:551
+#: src/backend/settings/contents/BlockExtensions.js:491
 msgid "Style"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:480
+#: blocks/count-down-timer/edit.js:559
 msgid "Clock"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:481
+#: blocks/count-down-timer/edit.js:563
 msgid "Line Divider"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:496
+#: blocks/count-down-timer/edit.js:585
 msgid "Horizontal Spacing"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:512
+#: blocks/count-down-timer/edit.js:603
 msgid "Vertical Spacing"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:562
+#: blocks/count-down-timer/edit.js:659
 msgid "Special:"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:611
+#: blocks/count-down-timer/edit.js:714
 msgid "days"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:646
+#: blocks/count-down-timer/edit.js:757
 msgid "hours"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:681
+#: blocks/count-down-timer/edit.js:800
 msgid "minutes"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:716
+#: blocks/count-down-timer/edit.js:843
 msgid "seconds"
 msgstr ""
 
-#: blocks/count-down-timer/edit.js:735
+#: blocks/count-down-timer/edit.js:866
 msgid "until the discount ends."
 msgstr ""
 
-#: blocks/icon-list/edit.js:237
+#: blocks/icon-list/edit.js:245
 msgid "#ListItem"
 msgstr ""
 
-#: blocks/icon-list/edit.js:253
+#: blocks/icon-list/edit.js:261
 #: blocks/progress-bars/edit.js:203
 msgid "List Item Colors"
 msgstr ""
 
-#: blocks/icon-list/edit.js:260
+#: blocks/icon-list/edit.js:268
 msgid "Text Size & Color"
 msgstr ""
 
-#: blocks/icon-list/edit.js:286
+#: blocks/icon-list/edit.js:300
 msgid "Icon Size & Color"
 msgstr ""
 
-#: blocks/icon-list/edit.js:313
-#: blocks/icon-list/edit.js:391
+#: blocks/icon-list/edit.js:333
+#: blocks/icon-list/edit.js:426
 msgid "Icon & Text Spacing"
 msgstr ""
 
-#: blocks/icon-list/edit.js:362
+#: blocks/icon-list/edit.js:388
 msgid "Icon List Settings"
 msgstr ""
 
-#: blocks/icon-list/edit.js:366
+#: blocks/icon-list/edit.js:392
 msgid "List Layout"
 msgstr ""
 
-#: blocks/icon-list/edit.js:369
+#: blocks/icon-list/edit.js:396
 #: blocks/image-comparison/edit.js:103
 msgid "Vertical"
 msgstr ""
 
-#: blocks/icon-list/edit.js:370
+#: blocks/icon-list/edit.js:400
 #: blocks/image-comparison/edit.js:102
 msgid "Horizontal"
 msgstr ""
 
-#: blocks/icon-list/edit.js:382
+#: blocks/icon-list/edit.js:415
 #: blocks/progress-bars/edit.js:300
 msgid "Item Spacing"
 msgstr ""
 
-#: blocks/icon-list/edit.js:401
+#: blocks/icon-list/edit.js:438
 msgid "Icon List Design"
 msgstr ""
 
-#: blocks/icon-list/edit.js:455
+#: blocks/icon-list/edit.js:501
 msgid "Add List Item"
 msgstr ""
 
@@ -839,42 +1665,42 @@ msgid "Space Between Slides"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:313
-#: blocks/image-gallery/edit.js:356
+#: blocks/image-gallery/edit.js:422
 msgid "Image Settings"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:317
-#: blocks/image-gallery/edit.js:296
+#: blocks/image-gallery/edit.js:334
 #: blocks/slider/edit.js:1097
 msgid "Image Proportions"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:320
-#: blocks/image-gallery/edit.js:300
+#: blocks/image-gallery/edit.js:341
 #: blocks/slider/edit.js:1100
 msgid "Actual Image"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:321
-#: blocks/image-gallery/edit.js:303
+#: blocks/image-gallery/edit.js:348
 #: blocks/slider/edit.js:1101
 msgid "Square"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:323
-#: blocks/image-gallery/edit.js:305
+#: blocks/image-gallery/edit.js:355
 #: blocks/slider/edit.js:1103
 msgid "3:2 Rectangle"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:327
-#: blocks/image-gallery/edit.js:309
+#: blocks/image-gallery/edit.js:362
 #: blocks/slider/edit.js:1107
 msgid "4:3 Rectangle"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:331
-#: blocks/image-gallery/edit.js:313
+#: blocks/image-gallery/edit.js:369
 #: blocks/slider/edit.js:1111
 msgid "16:9 Panoramic"
 msgstr ""
@@ -911,8 +1737,8 @@ msgid "Caption Position"
 msgstr ""
 
 #: blocks/image-carousel/edit.js:376
-#: blocks/image-gallery/edit.js:379
-#: blocks/image-gallery/edit.js:398
+#: blocks/image-gallery/edit.js:460
+#: blocks/image-gallery/edit.js:497
 msgid "Below Image"
 msgstr ""
 
@@ -1057,210 +1883,210 @@ msgstr ""
 msgid "Add A Second Image"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:238
+#: blocks/image-gallery/edit.js:256
 msgid "Gallery Settings"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:266
+#: blocks/image-gallery/edit.js:287
 msgid "Gallery Layout"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:269
+#: blocks/image-gallery/edit.js:291
 msgid "Grid Layout"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:271
+#: blocks/image-gallery/edit.js:298
 msgid "Masonry Layout"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:275
+#: blocks/image-gallery/edit.js:305
 msgid "Featured Grid Layout"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:331
+#: blocks/image-gallery/edit.js:393
 msgid "Columns"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:341
+#: blocks/image-gallery/edit.js:405
 msgid "Grid Spacing"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:360
+#: blocks/image-gallery/edit.js:426
 msgid "Image Caption"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:367
+#: blocks/image-gallery/edit.js:439
 msgid "Over Image Plain Text"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:371
+#: blocks/image-gallery/edit.js:446
 msgid "Over Image Bottom"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:375
+#: blocks/image-gallery/edit.js:453
 msgid "Over Image Centered"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:386
+#: blocks/image-gallery/edit.js:476
 msgid "Plain text on Image"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:390
+#: blocks/image-gallery/edit.js:483
 msgid "Bottom Banner"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:394
+#: blocks/image-gallery/edit.js:490
 msgid "Centered Banner"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:402
+#: blocks/image-gallery/edit.js:504
 msgid "Flip Card (Up)"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:406
+#: blocks/image-gallery/edit.js:511
 msgid "Flip Card (Side)"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:418
+#: blocks/image-gallery/edit.js:530
 msgid "Cards will only 'flip' if the image has a caption"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:431
+#: blocks/image-gallery/edit.js:543
 msgid "Show Caption on Hover"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:439
+#: blocks/image-gallery/edit.js:556
 msgid "Caption Animation"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:445
-#: blocks/image-gallery/edit.js:463
+#: blocks/image-gallery/edit.js:565
+#: blocks/image-gallery/edit.js:595
 msgid "Fade In"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:449
-#: blocks/image-gallery/edit.js:467
+#: blocks/image-gallery/edit.js:572
+#: blocks/image-gallery/edit.js:602
 msgid "Zoom In"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:453
-#: blocks/image-gallery/edit.js:471
+#: blocks/image-gallery/edit.js:579
+#: blocks/image-gallery/edit.js:609
 msgid "Zoom Out"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:457
+#: blocks/image-gallery/edit.js:586
 msgid "Slide In"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:489
+#: blocks/image-gallery/edit.js:633
 msgid "Image Hover Effect"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:494
+#: blocks/image-gallery/edit.js:641
 msgid "Color to Greyscale"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:498
+#: blocks/image-gallery/edit.js:648
 msgid "Greyscale to Color"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:501
+#: blocks/image-gallery/edit.js:655
 msgid "Grow"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:502
+#: blocks/image-gallery/edit.js:659
 msgid "Shrink"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:504
+#: blocks/image-gallery/edit.js:663
 msgid "Normal to Blurry"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:508
+#: blocks/image-gallery/edit.js:670
 msgid "Blurry to Normal"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:511
+#: blocks/image-gallery/edit.js:677
 msgid "Zoom"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:512
+#: blocks/image-gallery/edit.js:681
 msgid "Zoom Long"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:513
+#: blocks/image-gallery/edit.js:685
 msgid "Light Border"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:515
+#: blocks/image-gallery/edit.js:692
 msgid "Slightly Raized"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:528
+#: blocks/image-gallery/edit.js:711
 msgid "Image Background Color"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:547
+#: blocks/image-gallery/edit.js:735
 msgid "Caption Background Color"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:555
+#: blocks/image-gallery/edit.js:751
 #: blocks/slider/edit.js:797
 #: blocks/slider/edit.js:841
 #: blocks/slider/edit.js:1151
 #: blocks/slider/edit.js:1187
-#: src/backend/settings/contents/WooAddons.js:232
+#: src/backend/settings/contents/WooAddons.js:365
 msgid "Opacity"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:569
+#: blocks/image-gallery/edit.js:771
 msgid "Caption Font Color"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:591
+#: blocks/image-gallery/edit.js:801
 #: src/backend/editor/extensions/imagepopups.js:91
 msgid "Image Lightbox Settings"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:597
+#: blocks/image-gallery/edit.js:810
 msgid "Enable Lightbox"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:602
+#: blocks/image-gallery/edit.js:820
 msgid "Please check the website frontend to view the image popup"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:611
+#: blocks/image-gallery/edit.js:829
 #: src/backend/editor/extensions/imagepopups.js:164
-#: src/backend/settings/contents/BlockExtensions.js:243
+#: src/backend/settings/contents/BlockExtensions.js:240
 #: src/backend/settings/contents/SiteAddons.js:503
 msgid "Icon"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:629
-#: blocks/marketing-button/edit.js:239
-#: src/backend/editor/extensions/imagepopups.js:201
-#: src/backend/settings/contents/BlockExtensions.js:261
+#: blocks/image-gallery/edit.js:867
+#: blocks/marketing-button/edit.js:257
+#: src/backend/editor/extensions/imagepopups.js:200
+#: src/backend/settings/contents/BlockExtensions.js:258
 msgid "Icon Position"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:664
+#: blocks/image-gallery/edit.js:929
 msgid "Get Blockons Gallery Lightbox"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:665
+#: blocks/image-gallery/edit.js:933
 msgid "Upgrade to Pro to enable the lightbox feature with customization options."
 msgstr ""
 
-#: blocks/image-gallery/edit.js:670
+#: blocks/image-gallery/edit.js:938
 msgid "Click image to open a Lightbox"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:671
+#: blocks/image-gallery/edit.js:942
 msgid "Customize icon, and icon color and position"
 msgstr ""
 
-#: blocks/image-gallery/edit.js:675
+#: blocks/image-gallery/edit.js:946
 msgid "Customize Lightbox color & other settings"
 msgstr ""
 
@@ -1320,104 +2146,104 @@ msgstr ""
 msgid "Heading Title"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:118
+#: blocks/marketing-button/edit.js:122
 #: _starter-blocks/_new-block/edit.js:46
 msgid "Marketing Button Settings"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:142
+#: blocks/marketing-button/edit.js:146
 #: src/backend/settings/contents/SiteAddons.js:510
 msgid "Design"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:145
+#: blocks/marketing-button/edit.js:150
 msgid "Bordered"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:157
+#: blocks/marketing-button/edit.js:169
 msgid "Min Width"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:168
+#: blocks/marketing-button/edit.js:183
 msgid "Min Height"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:180
+#: blocks/marketing-button/edit.js:198
 msgid "Show Sub Text"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:190
+#: blocks/marketing-button/edit.js:208
 msgid "Add an Icon"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:197
+#: blocks/marketing-button/edit.js:215
 msgid "Change the icon by clicking on the Icon within the editor"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:205
+#: blocks/marketing-button/edit.js:223
 msgid "Add a custom Icon"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:223
+#: blocks/marketing-button/edit.js:241
 #: blocks/wc-mini-cart/edit.js:153
 msgid "Add your own custom icon by adding the Font Awesome icon name"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:242
+#: blocks/marketing-button/edit.js:261
 msgid "Before Title"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:243
+#: blocks/marketing-button/edit.js:268
 msgid "After Title"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:244
+#: blocks/marketing-button/edit.js:275
 msgid "Button Left"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:245
+#: blocks/marketing-button/edit.js:282
 msgid "Button Right"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:267
+#: blocks/marketing-button/edit.js:313
 msgid "Icon Spacing"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:282
+#: blocks/marketing-button/edit.js:330
 #: _starter-blocks/_new-block/edit.js:52
 msgid "Marketing Button Design"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:286
+#: blocks/marketing-button/edit.js:334
 msgid "Button Roundness"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:298
+#: blocks/marketing-button/edit.js:349
 #: blocks/table-of-contents/edit.js:388
 msgid "Vertical Padding"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:309
+#: blocks/marketing-button/edit.js:363
 #: blocks/table-of-contents/edit.js:379
 msgid "Horizontal Padding"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:332
+#: blocks/marketing-button/edit.js:392
 #: blocks/table-of-contents/edit.js:367
 #: blocks/video-slider/edit.js:550
 msgid "Border Color"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:355
+#: blocks/marketing-button/edit.js:420
 #: blocks/table-of-contents/edit.js:401
 msgid "Title Color"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:415
+#: blocks/marketing-button/edit.js:494
 msgid "Button Title"
 msgstr ""
 
-#: blocks/marketing-button/edit.js:430
+#: blocks/marketing-button/edit.js:516
 msgid "Some extra text"
 msgstr ""
 
@@ -1504,13 +2330,13 @@ msgid "Align Drop Down Search"
 msgstr ""
 
 #: blocks/search/edit.js:228
-#: blocks/wc-account-icon/edit.js:116
+#: blocks/wc-account-icon/edit.js:120
 #: blocks/wc-mini-cart/edit.js:209
 msgid "Bottom Right"
 msgstr ""
 
 #: blocks/search/edit.js:232
-#: blocks/wc-account-icon/edit.js:120
+#: blocks/wc-account-icon/edit.js:127
 #: blocks/wc-mini-cart/edit.js:201
 msgid "Bottom Left"
 msgstr ""
@@ -1522,13 +2348,13 @@ msgid "Bottom Center"
 msgstr ""
 
 #: blocks/search/edit.js:239
-#: blocks/wc-account-icon/edit.js:123
+#: blocks/wc-account-icon/edit.js:134
 #: blocks/wc-mini-cart/edit.js:217
 msgid "Top Right"
 msgstr ""
 
 #: blocks/search/edit.js:240
-#: blocks/wc-account-icon/edit.js:124
+#: blocks/wc-account-icon/edit.js:138
 #: blocks/wc-mini-cart/edit.js:212
 msgid "Top Left"
 msgstr ""
@@ -1542,14 +2368,14 @@ msgstr ""
 #: blocks/search/edit.js:242
 #: blocks/slider/edit.js:743
 #: src/backend/settings/contents/SiteAddons.js:304
-#: src/backend/settings/contents/WooAddons.js:79
+#: src/backend/settings/contents/WooAddons.js:88
 msgid "Left"
 msgstr ""
 
 #: blocks/search/edit.js:243
 #: blocks/slider/edit.js:745
 #: src/backend/settings/contents/SiteAddons.js:303
-#: src/backend/settings/contents/WooAddons.js:78
+#: src/backend/settings/contents/WooAddons.js:87
 msgid "Right"
 msgstr ""
 
@@ -1558,30 +2384,18 @@ msgid "Search Design"
 msgstr ""
 
 #: blocks/search/edit.js:273
-#: blocks/wc-account-icon/edit.js:254
+#: blocks/wc-account-icon/edit.js:294
 msgid "Icon Padding"
 msgstr ""
 
 #: blocks/search/edit.js:286
-#: blocks/wc-account-icon/edit.js:266
+#: blocks/wc-account-icon/edit.js:309
 #: src/backend/settings/contents/SiteAddons.js:570
 msgid "Icon Background Color"
 msgstr ""
 
 #: blocks/search/edit.js:314
 msgid "Search Background Color"
-msgstr ""
-
-#: blocks/search/edit.js:329
-msgid "Input Background Color"
-msgstr ""
-
-#: blocks/search/edit.js:340
-msgid "Input Border Color"
-msgstr ""
-
-#: blocks/search/edit.js:351
-msgid "Input Font Color"
 msgstr ""
 
 #: blocks/search/edit.js:364
@@ -1759,7 +2573,7 @@ msgstr ""
 #: blocks/slider/edit.js:816
 #: blocks/slider/edit.js:860
 #: blocks/slider/edit.js:1140
-#: src/backend/settings/contents/WooAddons.js:224
+#: src/backend/settings/contents/WooAddons.js:351
 msgid "Overlay Color"
 msgstr ""
 
@@ -1767,19 +2581,11 @@ msgstr ""
 msgid "Textbox Background"
 msgstr ""
 
-#: blocks/slider/edit.js:882
-msgid "Title"
-msgstr ""
-
 #: blocks/slider/edit.js:885
 #: blocks/slider/edit.js:928
 #: src/backend/settings/contents/SiteAddons.js:547
-#: src/backend/settings/contents/WooAddons.js:145
+#: src/backend/settings/contents/WooAddons.js:212
 msgid "Size"
-msgstr ""
-
-#: blocks/slider/edit.js:925
-msgid "Description"
 msgstr ""
 
 #: blocks/slider/edit.js:970
@@ -2077,7 +2883,7 @@ msgstr ""
 #: src/backend/settings/contents/SiteAddons.js:190
 #: src/backend/settings/contents/SiteAddons.js:298
 #: src/backend/settings/contents/SiteAddons.js:488
-#: src/backend/settings/contents/WooAddons.js:73
+#: src/backend/settings/contents/WooAddons.js:79
 msgid "Position"
 msgstr ""
 
@@ -2175,107 +2981,107 @@ msgstr ""
 msgid "WC Account Icon Settings"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:93
+#: blocks/wc-account-icon/edit.js:95
 msgid "Please ensure the account URL is correct, incase the original URL was changed"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:100
+#: blocks/wc-account-icon/edit.js:102
 msgid "Add Drop Down Menu"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:101
+#: blocks/wc-account-icon/edit.js:103
 msgid "Add a drop down menu on hover to display account page links."
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:112
+#: blocks/wc-account-icon/edit.js:116
 msgid "Drop Down Position"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:135
+#: blocks/wc-account-icon/edit.js:153
 msgid "Always Show Drop Down"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:137
+#: blocks/wc-account-icon/edit.js:158
 msgid "This will always display the drop down ONLY in the editor"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:191
+#: blocks/wc-account-icon/edit.js:220
 msgid "WC Account Icon Design"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:195
+#: blocks/wc-account-icon/edit.js:224
 #: blocks/wc-mini-cart/edit.js:109
 msgid "Select an Icon"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:199
+#: blocks/wc-account-icon/edit.js:228
 msgid "User Outline"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:202
+#: blocks/wc-account-icon/edit.js:232
 msgid "User"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:204
+#: blocks/wc-account-icon/edit.js:236
 msgid "Circle User"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:208
+#: blocks/wc-account-icon/edit.js:240
 msgid "Person"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:211
+#: blocks/wc-account-icon/edit.js:244
 #: blocks/wc-mini-cart/edit.js:137
 #: src/backend/settings/contents/SiteAddons.js:516
 #: src/backend/settings/contents/SiteAddons.js:522
 msgid "Custom Icon"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:223
+#: blocks/wc-account-icon/edit.js:260
 msgid "Icon Name"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:226
+#: blocks/wc-account-icon/edit.js:263
 msgid "Add your own custom icon by adding the Font Awesome icon full name"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:289
+#: blocks/wc-account-icon/edit.js:338
 #: blocks/wc-mini-cart/edit.js:328
 msgid "Drop Down Background Color"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:300
+#: blocks/wc-account-icon/edit.js:354
 #: blocks/wc-mini-cart/edit.js:339
 msgid "Drop Down Font Color"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:352
-#: blocks/wc-account-icon/edit.js:358
+#: blocks/wc-account-icon/edit.js:416
+#: blocks/wc-account-icon/edit.js:422
 msgid "Dashboard"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:369
-#: blocks/wc-account-icon/edit.js:375
+#: blocks/wc-account-icon/edit.js:436
+#: blocks/wc-account-icon/edit.js:442
 msgid "Orders"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:386
-#: blocks/wc-account-icon/edit.js:392
+#: blocks/wc-account-icon/edit.js:453
+#: blocks/wc-account-icon/edit.js:459
 msgid "Downloads"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:403
-#: blocks/wc-account-icon/edit.js:409
+#: blocks/wc-account-icon/edit.js:473
+#: blocks/wc-account-icon/edit.js:479
 msgid "Addresses"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:420
-#: blocks/wc-account-icon/edit.js:426
+#: blocks/wc-account-icon/edit.js:493
+#: blocks/wc-account-icon/edit.js:502
 msgid "Account Details"
 msgstr ""
 
-#: blocks/wc-account-icon/edit.js:437
-#: blocks/wc-account-icon/edit.js:443
+#: blocks/wc-account-icon/edit.js:516
+#: blocks/wc-account-icon/edit.js:522
 msgid "Logout"
 msgstr ""
 
@@ -2390,17 +3196,17 @@ msgid "Remove Items Count"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:113
-#: src/backend/settings/contents/WooAddons.js:101
+#: src/backend/settings/contents/WooAddons.js:128
 msgid "Shopping Cart"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:117
-#: src/backend/settings/contents/WooAddons.js:102
+#: src/backend/settings/contents/WooAddons.js:133
 msgid "Cart Arrow Down"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:121
-#: src/backend/settings/contents/WooAddons.js:106
+#: src/backend/settings/contents/WooAddons.js:138
 msgid "Shopping Basket"
 msgstr ""
 
@@ -2409,12 +3215,12 @@ msgid "Shopping Bag"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:129
-#: src/backend/settings/contents/WooAddons.js:110
+#: src/backend/settings/contents/WooAddons.js:142
 msgid "Shopping Suitcase"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:133
-#: src/backend/settings/contents/WooAddons.js:111
+#: src/backend/settings/contents/WooAddons.js:146
 msgid "Bucket"
 msgstr ""
 
@@ -2431,8 +3237,8 @@ msgid "Drop Down Cart"
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:181
-#: src/backend/settings/contents/WooAddons.js:36
-#: src/backend/settings/contents/WooAddons.js:248
+#: src/backend/settings/contents/WooAddons.js:40
+#: src/backend/settings/contents/WooAddons.js:387
 msgid "WooCommerce Side Cart"
 msgstr ""
 
@@ -2465,7 +3271,7 @@ msgid "Side Cart (Pro feature) is added in the main settings area. Click to enab
 msgstr ""
 
 #: blocks/wc-mini-cart/edit.js:259
-#: src/backend/settings/contents/WooAddons.js:45
+#: src/backend/settings/contents/WooAddons.js:49
 msgid "Enable Side Cart"
 msgstr ""
 
@@ -2514,7 +3320,7 @@ msgid "Run Update"
 msgstr ""
 
 #: src/backend/editor/extensions/animations.js:108
-#: src/backend/settings/contents/BlockExtensions.js:466
+#: src/backend/settings/contents/BlockExtensions.js:463
 msgid "Block Animations"
 msgstr ""
 
@@ -2527,53 +3333,53 @@ msgid "Add scroll animations for layout blocks in your WordPress editor. For mor
 msgstr ""
 
 #: src/backend/editor/extensions/animations.js:126
-#: src/backend/settings/contents/BlockExtensions.js:477
-#: src/backend/settings/contents/BlockExtensions.js:597
+#: src/backend/settings/contents/BlockExtensions.js:474
+#: src/backend/settings/contents/BlockExtensions.js:594
 msgid "Enable Block Animations"
 msgstr ""
 
-#: src/backend/editor/extensions/animations.js:233
-#: src/backend/settings/contents/BlockExtensions.js:527
+#: src/backend/editor/extensions/animations.js:231
+#: src/backend/settings/contents/BlockExtensions.js:524
 msgid "Duration"
 msgstr ""
 
-#: src/backend/editor/extensions/animations.js:248
+#: src/backend/editor/extensions/animations.js:246
 msgid "How long the animation takes - 1000 = 1 second"
 msgstr ""
 
-#: src/backend/editor/extensions/animations.js:254
-#: src/backend/settings/contents/BlockExtensions.js:541
+#: src/backend/editor/extensions/animations.js:252
+#: src/backend/settings/contents/BlockExtensions.js:538
 msgid "Delay"
 msgstr ""
 
-#: src/backend/editor/extensions/animations.js:267
+#: src/backend/editor/extensions/animations.js:265
 msgid "The milliseconds before the animation starts - 1000 = 1 second"
 msgstr ""
 
-#: src/backend/editor/extensions/animations.js:273
-#: src/backend/settings/contents/BlockExtensions.js:555
+#: src/backend/editor/extensions/animations.js:271
+#: src/backend/settings/contents/BlockExtensions.js:552
 msgid "Offset"
 msgstr ""
 
-#: src/backend/editor/extensions/animations.js:288
+#: src/backend/editor/extensions/animations.js:286
 msgid "The offset in pixels from the bottom of the window"
 msgstr ""
 
-#: src/backend/editor/extensions/animations.js:295
-#: src/backend/settings/contents/BlockExtensions.js:569
+#: src/backend/editor/extensions/animations.js:293
+#: src/backend/settings/contents/BlockExtensions.js:566
 msgid "Animate Once"
 msgstr ""
 
-#: src/backend/editor/extensions/animations.js:305
+#: src/backend/editor/extensions/animations.js:303
 msgid "Whether animation should happen only once - while scrolling down"
 msgstr ""
 
-#: src/backend/editor/extensions/animations.js:312
-#: src/backend/settings/contents/BlockExtensions.js:579
+#: src/backend/editor/extensions/animations.js:310
+#: src/backend/settings/contents/BlockExtensions.js:576
 msgid "Mirror Animations"
 msgstr ""
 
-#: src/backend/editor/extensions/animations.js:322
+#: src/backend/editor/extensions/animations.js:320
 msgid "Whether elements should animate out while scrolling past them"
 msgstr ""
 
@@ -2602,7 +3408,7 @@ msgid "Disable selected images from the global lightbox in Blockons Premium"
 msgstr ""
 
 #: src/backend/editor/extensions/imagepopups.js:145
-#: src/backend/settings/contents/BlockExtensions.js:203
+#: src/backend/settings/contents/BlockExtensions.js:200
 msgid "Enable Image Lightbox"
 msgstr ""
 
@@ -2610,19 +3416,19 @@ msgstr ""
 msgid "This block popup extension will only work on the frontend"
 msgstr ""
 
-#: src/backend/editor/extensions/imagepopups.js:265
+#: src/backend/editor/extensions/imagepopups.js:262
 msgid "Gallery ID"
 msgstr ""
 
-#: src/backend/editor/extensions/imagepopups.js:278
+#: src/backend/editor/extensions/imagepopups.js:275
 msgid "Enter a unique ID for the gallery. All images with the same ID will be grouped together."
 msgstr ""
 
-#: src/backend/editor/extensions/imagepopups.js:289
+#: src/backend/editor/extensions/imagepopups.js:286
 msgid "Using Image Popups"
 msgstr ""
 
-#: src/backend/editor/extensions/imagepopups.js:293
+#: src/backend/editor/extensions/imagepopups.js:290
 msgid "Enable this option to show the image in a popup when clicked."
 msgstr ""
 
@@ -2676,12 +3482,12 @@ msgid "Tooltip Popup Theme"
 msgstr ""
 
 #: src/backend/editor/extensions/tooltips.js:296
-#: src/backend/settings/contents/BlockExtensions.js:115
+#: src/backend/settings/contents/BlockExtensions.js:112
 msgid "Popup Color"
 msgstr ""
 
 #: src/backend/editor/extensions/tooltips.js:327
-#: src/backend/settings/contents/BlockExtensions.js:123
+#: src/backend/settings/contents/BlockExtensions.js:120
 msgid "Popup Font Color"
 msgstr ""
 
@@ -2710,7 +3516,7 @@ msgid "Remove Tooltip"
 msgstr ""
 
 #: src/backend/editor/extensions/visibility.js:90
-#: src/backend/settings/contents/BlockExtensions.js:371
+#: src/backend/settings/contents/BlockExtensions.js:368
 msgid "Block Visibility"
 msgstr ""
 
@@ -2747,75 +3553,80 @@ msgid "Let your viewers select which content they want to read."
 msgstr ""
 
 #: src/backend/helpers.js:55
-#: src/backend/helpers.js:133
+#: src/backend/helpers.js:63
+#: src/backend/helpers.js:141
 msgid "NEW"
 msgstr ""
 
 #: src/backend/helpers.js:58
-msgid "Show / Hide sections of long content with a toggle button"
+msgid "Add a neat contact form block to your WordPress pages."
 msgstr ""
 
 #: src/backend/helpers.js:66
+msgid "Show / Hide sections of long content with a toggle button"
+msgstr ""
+
+#: src/backend/helpers.js:74
 msgid "Visually, more attractive list items with icons"
 msgstr ""
 
-#: src/backend/helpers.js:71
+#: src/backend/helpers.js:79
 msgid "Use a neat action slider to compare 2 images"
 msgstr ""
 
-#: src/backend/helpers.js:76
+#: src/backend/helpers.js:84
 msgid "A more advanced gallery with 3 beautiful layouts"
 msgstr ""
 
-#: src/backend/helpers.js:84
+#: src/backend/helpers.js:92
 msgid "Display multiple images in a neat carousel"
 msgstr ""
 
-#: src/backend/helpers.js:89
+#: src/backend/helpers.js:97
 msgid "More advanced and customizable line headings"
 msgstr ""
 
-#: src/backend/helpers.js:94
+#: src/backend/helpers.js:102
 msgid "An attractive, more trendy customizable call-to-action"
 msgstr ""
 
-#: src/backend/helpers.js:102
+#: src/backend/helpers.js:110
 msgid "Show progress with beautiful, animated bars"
 msgstr ""
 
-#: src/backend/helpers.js:107
+#: src/backend/helpers.js:115
 msgid "A slider to display custom content or WC products"
 msgstr ""
 
-#: src/backend/helpers.js:115
+#: src/backend/helpers.js:123
 msgid "A search bar/icon with drop down or popup search"
 msgstr ""
 
-#: src/backend/helpers.js:123
+#: src/backend/helpers.js:131
 msgid "Display your site information in tabbed content"
 msgstr ""
 
-#: src/backend/helpers.js:128
+#: src/backend/helpers.js:136
 msgid "Display a Table of Contents with clickable headings"
 msgstr ""
 
-#: src/backend/helpers.js:136
+#: src/backend/helpers.js:144
 msgid "Display client testimonials in a slider or carousel"
 msgstr ""
 
-#: src/backend/helpers.js:144
+#: src/backend/helpers.js:152
 msgid "Display multiple videos in a neat video slider"
 msgstr ""
 
-#: src/backend/helpers.js:149
+#: src/backend/helpers.js:157
 msgid "A simple icon linking to a users WC Account"
 msgstr ""
 
-#: src/backend/helpers.js:154
+#: src/backend/helpers.js:162
 msgid "Display a WC featured product with multple layouts"
 msgstr ""
 
-#: src/backend/helpers.js:162
+#: src/backend/helpers.js:170
 msgid "A simple WC cart icon with a full cart drop down"
 msgstr ""
 
@@ -2825,14 +3636,6 @@ msgstr ""
 
 #: src/backend/settings/components/GiveFeedback.js:34
 msgid "Are you enjoying using the Blockons plugin?"
-msgstr ""
-
-#: src/backend/settings/components/GiveFeedback.js:35
-msgid "Yes"
-msgstr ""
-
-#: src/backend/settings/components/GiveFeedback.js:36
-msgid "No"
 msgstr ""
 
 #: src/backend/settings/components/GiveFeedback.js:47
@@ -2864,11 +3667,11 @@ msgid "Upgrade to Pro"
 msgstr ""
 
 #: src/backend/settings/components/UI/ProPromo.js:8
-msgid "Pricing will go up soon with more advanced features. Purchase Blockons Pro now and enjoy this price forever!"
+msgid "Purchase Blockons Pro now and get ALL features for only $29!"
 msgstr ""
 
 #: src/backend/settings/components/UI/ProPromo.js:19
-msgid "See What's on Offer"
+msgid "See What's Included"
 msgstr ""
 
 #: src/backend/settings/components/UI/ProPromo.js:22
@@ -2876,199 +3679,199 @@ msgid "Upgrade Now"
 msgstr ""
 
 #: src/backend/settings/components/UI/Upgrade.js:13
-#: src/backend/settings/SettingsPage.js:201
+#: src/backend/settings/SettingsPage.js:202
 msgid "Upgrade to Blockons Pro"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:29
+#: src/backend/settings/contents/BlockExtensions.js:26
 msgid "Blockons Block Extensions"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:30
+#: src/backend/settings/contents/BlockExtensions.js:27
 msgid "Adding or extending the functionality of your website editor blocks"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:39
+#: src/backend/settings/contents/BlockExtensions.js:36
 msgid "Content Tooltips"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:40
+#: src/backend/settings/contents/BlockExtensions.js:37
 msgid "Add content tooltips to core paragraph and heading blocks anywhere within in the editor."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:47
+#: src/backend/settings/contents/BlockExtensions.js:44
 msgid "Enable Tooltips"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:52
+#: src/backend/settings/contents/BlockExtensions.js:49
 msgid "Enhance your website with informative tooltips! Tooltips act like regular links, but when users hover over the link text, a simple popup appears with more information or help."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:64
+#: src/backend/settings/contents/BlockExtensions.js:61
 msgid "Tooltips Link Style"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:80
+#: src/backend/settings/contents/BlockExtensions.js:77
 msgid "Tooltips Popup Theme"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:95
+#: src/backend/settings/contents/BlockExtensions.js:92
 msgid "Tooltip Color"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:103
+#: src/backend/settings/contents/BlockExtensions.js:100
 msgid "Tooltip Font Color"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:139
+#: src/backend/settings/contents/BlockExtensions.js:136
 msgid "Tooltips are now enabled. Create content tooltips within core Heading and Paragraph blocks."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:145
-#: src/backend/settings/contents/BlockExtensions.js:160
+#: src/backend/settings/contents/BlockExtensions.js:142
+#: src/backend/settings/contents/BlockExtensions.js:157
 msgid "Premium Tooltips"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:164
+#: src/backend/settings/contents/BlockExtensions.js:161
 msgid "Upgrade to Blockons Pro to add premium tooltips."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:170
+#: src/backend/settings/contents/BlockExtensions.js:167
 msgid "Select between Light & Dark tooltip themes"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:174
+#: src/backend/settings/contents/BlockExtensions.js:171
 msgid "Add custom links into your Tooltip text"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:178
+#: src/backend/settings/contents/BlockExtensions.js:175
 msgid "Select from different tooltip styles"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:182
+#: src/backend/settings/contents/BlockExtensions.js:179
 msgid "More features coming soon"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:195
+#: src/backend/settings/contents/BlockExtensions.js:192
 msgid "Image Lightbox"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:196
+#: src/backend/settings/contents/BlockExtensions.js:193
 msgid "Add image popups to your website images and galleries."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:208
+#: src/backend/settings/contents/BlockExtensions.js:205
 msgid "Add image lightboxes to your website images for an engaging user experience. Image lightbox popups allow users to view enlarged versions of images with a simple click."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:216
+#: src/backend/settings/contents/BlockExtensions.js:213
 msgid "Image Lightbox is now enabled. Create image popups within core Image and Gallery blocks."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:226
+#: src/backend/settings/contents/BlockExtensions.js:223
 msgid "Enable on ALL images"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:231
+#: src/backend/settings/contents/BlockExtensions.js:228
 msgid "This will add a lightbox to ALL images within the content area. Excluding header & footer images."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:301
+#: src/backend/settings/contents/BlockExtensions.js:298
 msgid "Lightbox Color Theme"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:321
-#: src/backend/settings/contents/BlockExtensions.js:336
+#: src/backend/settings/contents/BlockExtensions.js:318
+#: src/backend/settings/contents/BlockExtensions.js:333
 msgid "Premium Image Lightbox"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:340
+#: src/backend/settings/contents/BlockExtensions.js:337
 msgid "Upgrade to Blockons Pro to add premium Image Lightboxes."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:346
+#: src/backend/settings/contents/BlockExtensions.js:343
 msgid "Customize lightbox styles to suit your website."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:350
+#: src/backend/settings/contents/BlockExtensions.js:347
 msgid "Select between light & dark lightbox & icon themes."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:354
+#: src/backend/settings/contents/BlockExtensions.js:351
 msgid "Edit icon design, colors & position"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:358
+#: src/backend/settings/contents/BlockExtensions.js:355
 msgid "Enable Lightbox popups for Advanced Image Gallery block"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:372
+#: src/backend/settings/contents/BlockExtensions.js:369
 msgid "Add Blockons Visibility settings to certain blocks and select to show or hide the editor blocks per device - Desktop, Tablet & Mobile. Blocks Visibility is available on layout blocks such as Group, Columns, and Cover blocks."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:382
-#: src/backend/settings/contents/BlockExtensions.js:428
+#: src/backend/settings/contents/BlockExtensions.js:379
+#: src/backend/settings/contents/BlockExtensions.js:425
 msgid "Enable Block Visibility"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:390
+#: src/backend/settings/contents/BlockExtensions.js:387
 msgid "Add image visibility settings to your core layout blocks. This add on the features to show or hide certain elements depending on the user device screen size."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:443
+#: src/backend/settings/contents/BlockExtensions.js:440
 msgid "Add Block Visibility"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:447
+#: src/backend/settings/contents/BlockExtensions.js:444
 msgid "Upgrade to Blockons Pro to add premium block visibility to editor layout blocks."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:453
+#: src/backend/settings/contents/BlockExtensions.js:450
 msgid "Show / Hide Blocks per screen size"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:457
+#: src/backend/settings/contents/BlockExtensions.js:454
 msgid "Set Tablet Breakpoint"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:458
+#: src/backend/settings/contents/BlockExtensions.js:455
 msgid "Set Mobile Breakpoint"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:467
+#: src/backend/settings/contents/BlockExtensions.js:464
 msgid "Add Scroll Animations to certain blocks so they animate into screen when scrolling on the page. Block Animations are available on layout blocks and certain elements such as Group blocks, Columns, and Heading blocks."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:485
-#: src/backend/settings/contents/BlockExtensions.js:607
+#: src/backend/settings/contents/BlockExtensions.js:482
+#: src/backend/settings/contents/BlockExtensions.js:604
 msgid "Add neat scroll in and/or out animations to core layout blocks. This boosts the visual appeal of your website and makes it more engaging for users."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:511
+#: src/backend/settings/contents/BlockExtensions.js:508
 msgid "Direction"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:616
+#: src/backend/settings/contents/BlockExtensions.js:613
 msgid "Add Block Animations"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:620
+#: src/backend/settings/contents/BlockExtensions.js:617
 msgid "Upgrade to Blockons Pro to add premium block animations to editor layout blocks."
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:626
+#: src/backend/settings/contents/BlockExtensions.js:623
 msgid "Add Scroll Animations to Layout Blocks"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:630
+#: src/backend/settings/contents/BlockExtensions.js:627
 msgid "Edit block animation style"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:634
+#: src/backend/settings/contents/BlockExtensions.js:631
 msgid "Set animation Direction, Duration & Delay & Offset"
 msgstr ""
 
-#: src/backend/settings/contents/BlockExtensions.js:638
+#: src/backend/settings/contents/BlockExtensions.js:635
 msgid "Select if animations play once off or mirror animations in and out of screen"
 msgstr ""
 
@@ -3086,6 +3889,78 @@ msgstr ""
 
 #: src/backend/settings/contents/EditorBlocks.js:65
 msgid "Get in touch and let us know which blocks you need for your site."
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:24
+msgid "This section is for Global Settings used in the Blockons Plugin"
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:33
+msgid "Blockons Contact Forms"
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:34
+msgid "Global Settings for Blockons Contact Forms"
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:44
+#: src/backend/settings/contents/GlobalSettings.js:108
+msgid "Save Form Submissions"
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:52
+msgid "This will save all form submissions to the WordPress Dashboard -> Form Submissions"
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:59
+msgid "Enable reCaptcha"
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:71
+#: src/backend/settings/contents/GlobalSettings.js:179
+msgid "reCAPTCHA V3"
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:73
+#: src/backend/settings/contents/GlobalSettings.js:181
+msgid "is a free service by Google that protects your website forms from spam and abuse."
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:120
+#: src/backend/settings/contents/GlobalSettings.js:156
+msgid "Premium Settings"
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:121
+msgid "Upgrade to Blockons Pro to save form submissions to your Dashboard."
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:127
+msgid "Never lose email submissions!"
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:131
+msgid "Save all submissions to the database"
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:135
+msgid "Mark submissions as read/unread"
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:144
+msgid "Recaptcha"
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:157
+msgid "Upgrade to Blockons Pro to add reCAPTCHA V3 to your forms."
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:163
+msgid "Protect your forms from spam"
+msgstr ""
+
+#: src/backend/settings/contents/GlobalSettings.js:167
+msgid "Add reCAPTCHA to all forms"
 msgstr ""
 
 #: src/backend/settings/contents/InfoTab.js:12
@@ -3203,11 +4078,6 @@ msgstr ""
 msgid "Add Loading Text"
 msgstr ""
 
-#: src/backend/settings/contents/SiteAddons.js:113
-#: src/backend/settings/contents/SiteAddons.js:533
-msgid "Text"
-msgstr ""
-
 #: src/backend/settings/contents/SiteAddons.js:116
 msgid "Loading Website..."
 msgstr ""
@@ -3303,12 +4173,12 @@ msgid "Edit Button"
 msgstr ""
 
 #: src/backend/settings/contents/SiteAddons.js:311
-#: src/backend/settings/contents/WooAddons.js:96
+#: src/backend/settings/contents/WooAddons.js:117
 msgid "Select Icon"
 msgstr ""
 
 #: src/backend/settings/contents/SiteAddons.js:328
-#: src/backend/settings/contents/WooAddons.js:134
+#: src/backend/settings/contents/WooAddons.js:192
 msgid "Width / Height"
 msgstr ""
 
@@ -3409,138 +4279,106 @@ msgid "to add a link, use: (blockons[*https://blockons.com/])"
 msgstr ""
 
 #: src/backend/settings/contents/SiteAddons.js:611
-#: src/backend/settings/contents/WooAddons.js:293
+#: src/backend/settings/contents/WooAddons.js:537
 msgid "More Add-Ons Coming Soon..."
 msgstr ""
 
 #: src/backend/settings/contents/SiteAddons.js:614
-#: src/backend/settings/contents/WooAddons.js:296
+#: src/backend/settings/contents/WooAddons.js:540
 msgid "Get in touch and let us know which add-ons you need for your site."
 msgstr ""
 
-#: src/backend/settings/contents/WooAddons.js:25
-#: src/backend/settings/SettingsPage.js:269
+#: src/backend/settings/contents/WooAddons.js:29
+#: src/backend/settings/SettingsPage.js:278
 msgid "WooCommerce Addons"
 msgstr ""
 
-#: src/backend/settings/contents/WooAddons.js:26
+#: src/backend/settings/contents/WooAddons.js:30
 msgid "Add extra, useful features to your WooCommerce online store"
 msgstr ""
 
-#: src/backend/settings/contents/WooAddons.js:37
+#: src/backend/settings/contents/WooAddons.js:41
 msgid "Add a slide-out cart to your WooCommerce Mini Cart blocks"
 msgstr ""
 
-#: src/backend/settings/contents/WooAddons.js:52
+#: src/backend/settings/contents/WooAddons.js:56
 msgid "Add the CSS class \"blockons-opencart\" to any element(s) to trigger the Side Cart open or close, or use the WC Mini Cart block with the Side Cart option."
 msgstr ""
 
-#: src/backend/settings/contents/WooAddons.js:63
+#: src/backend/settings/contents/WooAddons.js:67
 msgid "Preview Side Cart"
 msgstr ""
 
-#: src/backend/settings/contents/WooAddons.js:84
+#: src/backend/settings/contents/WooAddons.js:94
 msgid "Edit Side Cart Icon"
 msgstr ""
 
-#: src/backend/settings/contents/WooAddons.js:86
+#: src/backend/settings/contents/WooAddons.js:100
 msgid "Enable Icon"
 msgstr ""
 
-#: src/backend/settings/contents/WooAddons.js:158
+#: src/backend/settings/contents/WooAddons.js:234
 msgid "Show Cart Amount"
 msgstr ""
 
-#: src/backend/settings/contents/WooAddons.js:188
+#: src/backend/settings/contents/WooAddons.js:293
 msgid "Edit Side Cart"
 msgstr ""
 
-#: src/backend/settings/contents/WooAddons.js:249
+#: src/backend/settings/contents/WooAddons.js:391
 msgid "Upgrade to Blockons Pro to add WooCommerce Side Cart to your store."
 msgstr ""
 
-#: src/backend/settings/contents/WooAddons.js:255
+#: src/backend/settings/contents/WooAddons.js:397
 msgid "Neat Slide in Cart with real-time updates."
 msgstr ""
 
-#: src/backend/settings/contents/WooAddons.js:259
+#: src/backend/settings/contents/WooAddons.js:401
 msgid "Fully Customizable Icon & Side Cart."
 msgstr ""
 
-#: src/backend/settings/contents/WooAddons.js:260
+#: src/backend/settings/contents/WooAddons.js:405
 msgid "Boost conversions with WooCommerce Side Cart."
 msgstr ""
 
-#: src/backend/settings/SettingsPage.js:127
+#: src/backend/settings/SettingsPage.js:128
 msgid "Are you sure you want to delete all settings?"
 msgstr ""
 
-#: src/backend/settings/SettingsPage.js:180
+#: src/backend/settings/SettingsPage.js:181
 msgid "Blockons Pro Settings"
 msgstr ""
 
-#: src/backend/settings/SettingsPage.js:188
+#: src/backend/settings/SettingsPage.js:189
 msgid "My Account"
 msgstr ""
 
-#: src/backend/settings/SettingsPage.js:230
+#: src/backend/settings/SettingsPage.js:239
 msgid "Blocks"
 msgstr ""
 
-#: src/backend/settings/SettingsPage.js:243
+#: src/backend/settings/SettingsPage.js:252
 msgid "Block Extensions"
 msgstr ""
 
-#: src/backend/settings/SettingsPage.js:254
+#: src/backend/settings/SettingsPage.js:263
 msgid "Site Addons"
 msgstr ""
 
-#: src/backend/settings/SettingsPage.js:282
-msgid "Welcome"
+#: src/backend/settings/SettingsPage.js:302
+msgid "Info"
 msgstr ""
 
-#: src/backend/settings/SettingsPage.js:390
+#: src/backend/settings/SettingsPage.js:423
 msgid "Save Settings"
 msgstr ""
 
-#: src/backend/settings/SettingsPage.js:399
+#: src/backend/settings/SettingsPage.js:432
 msgid "Reset Settings"
 msgstr ""
 
-#: src/backend/settings/SettingsPage.js:404
+#: src/backend/settings/SettingsPage.js:437
 msgid "Confirm... Reset All Settings!"
-msgstr ""
-
-#: src/backend/settings/SettingsPage.js:462
-msgid "Recently Added"
-msgstr ""
-
-#: src/backend/settings/SettingsPage.js:464
-msgid "Table of Contents block"
-msgstr ""
-
-#: src/backend/settings/SettingsPage.js:466
-msgid "SiteBy credit for backlinks (PRO)"
-msgstr ""
-
-#: src/backend/settings/SettingsPage.js:468
-msgid "WooCommerce Side Cart (PRO)"
-msgstr ""
-
-#: src/backend/settings/SettingsPage.js:472
-msgid "Coming Next"
-msgstr ""
-
-#: src/backend/settings/SettingsPage.js:474
-msgid "More blocks..."
-msgstr ""
-
-#: src/backend/settings/SettingsPage.js:475
-msgid "WooCommerce Product Quick View"
-msgstr ""
-
-#: src/backend/settings/SettingsPage.js:476
-msgid "Better Icons & More Options"
 msgstr ""
 
 #: _starter-blocks/layout-container/edit.js:32
@@ -3581,6 +4419,7 @@ msgid "collapsible"
 msgstr ""
 
 #: blocks/accordions/block.json
+#: blocks/contact-form/block.json
 #: blocks/content-selector/block.json
 #: blocks/content-toggler/block.json
 #: blocks/count-down-timer/block.json
@@ -3601,6 +4440,31 @@ msgstr ""
 #: blocks/wc-mini-cart/block.json
 msgctxt "block keyword"
 msgid "blockons"
+msgstr ""
+
+#: blocks/contact-form/block.json
+msgctxt "block title"
+msgid "Contact Form"
+msgstr ""
+
+#: blocks/contact-form/block.json
+msgctxt "block keyword"
+msgid "contact"
+msgstr ""
+
+#: blocks/contact-form/block.json
+msgctxt "block keyword"
+msgid "forms"
+msgstr ""
+
+#: blocks/contact-form/block.json
+msgctxt "block keyword"
+msgid "email"
+msgstr ""
+
+#: blocks/contact-form/block.json
+msgctxt "block description"
+msgid "Add a customizable form to your website"
 msgstr ""
 
 #: blocks/content-selector/block.json

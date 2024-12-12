@@ -228,6 +228,7 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.2.04 =
 * Styling tweaks/fixes
+* Update Freemius SDK
 * Updated loading translations order
 * Fix Search block results to work with translations extension
 * Updated the language .pot file
