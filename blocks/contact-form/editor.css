@@ -81,6 +81,7 @@
 
 .blockons-cf-option-row {
 	position: relative;
+	margin: 0 0 30px;
 }
 .blockons-cf-option-row .blockons-cf-remove-option {
 	position: absolute;
