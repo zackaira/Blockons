@@ -15,16 +15,14 @@ class Blockons_Notices {
 		add_action( 'admin_init', array($this, 'blockons_dismiss_notice' ), 0);
 		add_action( 'admin_notices', array($this, 'blockons_add_update_notice' ));
 
-		add_action( 'in_plugin_update_message-blockons/blockons.php', array($this, 'blockons_plugin_changes_update_notice'), 10, 2 );
+		// add_action( 'in_plugin_update_message-blockons/blockons.php', array($this, 'blockons_plugin_changes_update_notice'), 10, 2 );
 	} // End __construct ()
 
 	/**
 	 * Pre-Update Notice
 	 */
 	public function blockons_plugin_changes_update_notice($plugin_data, $response) { ?>
-		<div>
-			<strong><?php esc_html_e("Heads up!", "blockons") ?></strong> <?php esc_html_e("The next update includes big changes with Image Popups, you will need to reconfigure Image Popups if you've used them!", "blockons") ?>
-		</div><?php
+		<p><strong><?php esc_html_e("Heads up!", "blockons") ?></strong> <?php esc_html_e("The next update includes big changes with Image Popups, you will need to reconfigure Image Popups if you've used them!", "blockons") ?></p><?php
 	}
 
 	/**
