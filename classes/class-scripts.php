@@ -101,6 +101,7 @@ class Blockons {
 			'adminUrl' => esc_url(admin_url()),
 			'wcActive' => Blockons_Admin::blockons_is_plugin_active('woocommerce.php'),
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
+			'siteUrl' => esc_url(get_home_url('/')),
 		));
 
 		// Contact Form Block JS
@@ -134,6 +135,7 @@ class Blockons {
 		wp_register_script('blockons-progress-bars', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/progress-bars.js'), array('blockons-waypoint', 'blockons-waypoint-inview' ), BLOCKONS_PLUGIN_VERSION, true);
 
 		// Sliders
+		wp_register_style('blockons-swiper-css', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
 		wp_register_script('blockons-swiper-js', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 		wp_register_script('blockons-slider', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.js'), array('blockons-swiper-js'), BLOCKONS_PLUGIN_VERSION, true);
 		wp_register_script('blockons-slider-video', esc_url(BLOCKONS_PLUGIN_URL . 'dist/swiper-video.min.js'), array('blockons-swiper-js'), BLOCKONS_PLUGIN_VERSION, true);
@@ -307,6 +309,7 @@ class Blockons {
 			'isPremium' => $isPro,
 			'blockonsOptions' => $blockonsOptions,
 			'adminUrl' => esc_url(admin_url()),
+			'homeUrl' => esc_url(home_url()),
 			'apiUrl' => esc_url( get_rest_url() ),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),

@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: gutenberg, editor blocks, woocommerce, page builder, gutenberg blocks
 Requires at least: 5.0
 Requires PHP: 5.6
-Tested up to: 6.6
-Stable tag: 1.2.04
+Tested up to: 6.7
+Stable tag: 1.2.05
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -225,6 +225,11 @@ Please [contact us](https://blockons.com/go/contact/) so we can post a fix and g
 This could be from the theme you're using, or another plugin. Again, please [contact us](https://blockons.com/go/contact/) so we can post a fix or give you custom CSS to fix it.
 
 == Changelog ==
+
+= 1.2.05 =
+* Styling tweaks/fixes
+* Fix slider(s) depencency bug
+* Version compatibility for WP 6.7 & WC 9.5
 
 = 1.2.04 =
 * Styling tweaks/fixes

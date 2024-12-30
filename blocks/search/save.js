@@ -9,6 +9,7 @@ const Save = ({ attributes }) => {
 		}`,
 		id: attributes.searchId,
 	});
+	const siteUrl = searchObj.siteUrl;
 
 	const searchProOptions = attributes.isPremium
 		? {
@@ -34,9 +35,10 @@ const Save = ({ attributes }) => {
 		method: 'get',
 		className: `blockons-search-inner ${attributes.hasPlaceholder ? 'hasph' : 'noph'}`,
 		...(attributes.baseUrl ? { action: attributes.baseUrl } : {}),
-		onSubmit:
-			"var l=window.location.pathname.match(/^\\/[^\\/]+/);this.action=l?window.location.pathname:'/';",
+		...(siteUrl ? { 'data-siteurl': siteUrl } : {}),
 	};
+
+	console.log('BaseUrl', siteUrl, attributes.baseUrl);
 
 	return (
 		<div {...blockProps}>
@@ -194,16 +196,8 @@ const Save = ({ attributes }) => {
 							}}
 						>
 							<div className="blockons-close fas fa-x"></div>
-							<form
-								role="search"
-								method="get"
-								className={`blockons-search-inner ${
-									attributes.hasPlaceholder ? 'hasph' : 'noph'
-								}`}
-								{...(attributes.baseUrl
-									? { action: attributes.baseUrl }
-									: {})}
-							>
+
+							<form {...formProps}>
 								<input
 									type="text"
 									name="s"
