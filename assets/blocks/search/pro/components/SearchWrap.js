@@ -1,27 +1,55 @@
-import { useState, useEffect } from "@wordpress/element";
-import axios from "axios";
-import Loader from "../../../../../src/backend/Loader";
-import { __ } from "@wordpress/i18n";
-import ResultsBlock from "./ResultsBlock";
+import { useState, useEffect, useCallback } from '@wordpress/element';
+import axios from 'axios';
+import Loader from '../../../../../src/backend/Loader';
+import { __ } from '@wordpress/i18n';
+import ResultsBlock from './ResultsBlock';
 
 const SearchWrap = ({ searchId, searchSettings }) => {
 	const restUrl = searchObj.apiUrl;
-	const set = searchSettings ? searchSettings : "";
-	const searchInput = document.querySelector(
-		`#${searchId} .blockons-search-input`
-	);
-	// const [searchOn, setSearchOn] = useState(false);
-	const [searchQuery, setSearchQuery] = useState("");
+	const set = searchSettings || {};
+	const [searchInput, setSearchInput] = useState(null);
+	const [searchQuery, setSearchQuery] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
 	const [searchCats, setSearchCats] = useState([]);
 	const [searchTags, setSearchTags] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [postTypeTaxonomies, setPostTypeTaxonomies] = useState([]);
-	const [currentQuery, setCurrentQuery] = useState("");
+	const [currentQuery, setCurrentQuery] = useState('');
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(0);
-	let timeout = false;
 
+	// Initialize searchInput
+	useEffect(() => {
+		// Look for input in both normal and popup contexts
+		const input = document.querySelector(
+			`#${searchId} input.blockons-search-input`,
+		);
+
+		if (input) {
+			setSearchInput(input);
+
+			// Add focus handler for popup
+			const searchBlock = input.closest('.wp-block-blockons-search');
+			if (searchBlock && searchBlock.classList.contains('popup')) {
+				input.addEventListener('focus', () => {
+					const searchPopup = input.closest('.blockons-search-popup');
+					if (searchPopup) {
+						searchPopup.classList.add('search-on');
+					}
+				});
+			}
+		}
+	}, [searchId]);
+
+	const clearSearchResults = useCallback(() => {
+		setSearchResults([]);
+		setSearchCats([]);
+		setSearchTags([]);
+		setCurrentPage(1);
+		setTotalPages(0);
+	}, []);
+
+	// Handle input events
 	useEffect(() => {
 		if (!searchInput) return;
 
@@ -29,156 +57,144 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 			setSearchQuery(searchInput.value);
 		};
 
-		searchInput.addEventListener("keyup", handleKeyUp);
+		searchInput.addEventListener('keyup', handleKeyUp);
 		return () => {
-			searchInput.removeEventListener("keyup", handleKeyUp);
+			searchInput.removeEventListener('keyup', handleKeyUp);
 		};
 	}, [searchInput]);
 
+	// Handle click outside
 	useEffect(() => {
-		const searchParent = searchInput?.closest(".blockons-search-default");
+		if (!searchInput) return;
 
+		const searchParent = searchInput.closest(
+			'.blockons-search-default, .blockons-search-dropdown, .blockons-search-popup',
+		);
 		if (!searchParent) return;
 
 		function handleClick(e) {
 			if (searchParent.contains(e.target)) {
-				searchParent.classList.add("searchon");
+				searchParent.classList.add('searchon');
 			} else {
-				searchParent.classList.remove("searchon");
+				searchParent.classList.remove('searchon');
 			}
 		}
 
-		document.addEventListener("click", handleClick);
+		document.addEventListener('click', handleClick);
 		return () => {
-			document.removeEventListener("click", handleClick);
+			document.removeEventListener('click', handleClick);
 		};
-	}, []);
+	}, [searchInput]);
 
-	useEffect(() => {
-		fetchAndSetTaxonomiesForCPT(set.searchProTypes);
-		blockonsPostTypeSearch(searchQuery, currentQuery, timeout);
-	}, [searchQuery]);
+	// Fetch taxonomies
+	const fetchAndSetTaxonomies = useCallback(
+		async (cpt) => {
+			if (!cpt) return;
 
-	const fetchAndSetTaxonomiesForCPT = async (cpt) => {
-		if (!cpt) return;
+			try {
+				const response = await axios.get(`${restUrl}wp/v2/taxonomies`);
+				const taxonomies = response.data;
 
-		try {
-			const response = await axios.get(`${restUrl}wp/v2/taxonomies`);
-			const taxonomies = response.data;
+				if (!taxonomies || !Object.values(taxonomies).length) {
+					throw new Error('No taxonomies found.');
+				}
 
-			if (!taxonomies || !Object.values(taxonomies).length) {
-				throw new Error("No taxonomies found.");
+				const matchingTaxonomies = Object.values(taxonomies)
+					.filter((taxonomy) => taxonomy.types.includes(cpt))
+					.map((taxonomy) => taxonomy.slug);
+
+				setPostTypeTaxonomies(matchingTaxonomies);
+			} catch (error) {
+				console.error(
+					'Error fetching taxonomies for CPT:',
+					error.message,
+				);
+			}
+		},
+		[restUrl],
+	);
+
+	// Handle search
+	const handleSearch = useCallback(
+		async (query) => {
+			if (query.length < 3) {
+				clearSearchResults();
+				return;
 			}
 
-			const matchingTaxonomies = Object.values(taxonomies)
-				.filter((taxonomy) => taxonomy.types.includes(cpt))
-				.map((taxonomy) => taxonomy.slug);
-
-			setPostTypeTaxonomies(matchingTaxonomies);
-		} catch (error) {
-			console.error("Error fetching taxonomies for CPT:", error.message);
-		}
-	};
-
-	function blockonsPostTypeSearch(query, currentQuery, timeout) {
-		setSearchQuery(query.trim());
-
-		if (searchQuery.length >= 3) {
 			setIsLoading(true);
-			if (timeout) clearTimeout(timeout);
 
-			if (searchQuery !== currentQuery) {
-				timeout = setTimeout(() => {
-					clearSearchResults();
+			try {
+				const endpoints = [
+					`${restUrl}wp/v2/search?search=${query}&subtype=${set.searchProTypes}&per_page=${set.searchProAmnt}&page=1`,
+				];
 
-					let endpoints = [
-						restUrl +
-							`wp/v2/search?search=${searchQuery}&subtype=${set.searchProTypes}&per_page=${set.searchProAmnt}&page=1`,
-					];
-					if (
-						set.searchProCats &&
-						set.searchProTags &&
-						set.searchProTypes !== "page"
-					) {
-						postTypeTaxonomies.forEach((taxonomy) => {
-							endpoints.push(
-								restUrl +
-									`wp/v2/search?search=${searchQuery}&type=term&subtype=${taxonomy}&per_page=${set.searchProCatsAmnt}&page=1`
-							);
-						});
-					}
+				if (
+					set.searchProCats &&
+					set.searchProTags &&
+					set.searchProTypes !== 'page'
+				) {
+					postTypeTaxonomies.forEach((taxonomy) => {
+						endpoints.push(
+							`${restUrl}wp/v2/search?search=${query}&type=term&subtype=${taxonomy}&per_page=${set.searchProCatsAmnt}&page=1`,
+						);
+					});
+				}
 
-					axios
-						.all(endpoints.map((endpoint) => axios.get(endpoint)))
-						.then(
-							axios.spread((mainResponse, catsResponse, tagsResponse) => {
-								setCurrentQuery(searchQuery);
+				const responses = await axios.all(
+					endpoints.map((endpoint) => axios.get(endpoint)),
+				);
+				const [mainResponse, ...taxonomyResponses] = responses;
 
-								if (mainResponse) {
-									setSearchResults(mainResponse.data);
-									setTotalPages(mainResponse.headers["x-wp-totalpages"]);
-								}
-								if (
-									set.searchProCats &&
-									catsResponse?.data &&
-									catsResponse?.data.length > 0
-								) {
-									setSearchCats(catsResponse.data);
-								}
-								if (
-									set.searchProTags &&
-									tagsResponse?.data &&
-									tagsResponse?.data.length > 0
-								) {
-									setSearchTags(tagsResponse.data);
-								}
-							})
-						)
-						.catch((err) => {
-							clearSearchResults();
-							console.log("There was a problem or request was cancelled.", err);
-						})
-						.finally(() => {
-							setIsLoading(false);
-							clearTimeout(timeout);
-							timeout = false;
-						});
-				}, 800);
+				setSearchResults(mainResponse.data);
+				setTotalPages(mainResponse.headers['x-wp-totalpages']);
+				setCurrentQuery(query);
+
+				if (set.searchProCats && taxonomyResponses[0]?.data?.length) {
+					setSearchCats(taxonomyResponses[0].data);
+				}
+				if (set.searchProTags && taxonomyResponses[1]?.data?.length) {
+					setSearchTags(taxonomyResponses[1].data);
+				}
+			} catch (error) {
+				console.error('Search error:', error);
+				clearSearchResults();
+			} finally {
+				setIsLoading(false);
 			}
-		} else {
-			clearSearchResults();
-			setIsLoading(false);
-			clearTimeout(timeout);
-			timeout = false;
+		},
+		[restUrl, set, postTypeTaxonomies, clearSearchResults],
+	);
+
+	// Debounced search effect
+	useEffect(() => {
+		if (searchQuery?.length >= 3) {
+			setIsLoading(true);
+			const timeoutId = setTimeout(() => {
+				handleSearch(searchQuery);
+			}, 800);
+
+			return () => {
+				clearTimeout(timeoutId);
+				setIsLoading(false); // Clear loading on cleanup
+			};
 		}
-	}
+	}, [searchQuery, handleSearch]);
 
-	function handlePaginationPageChange(newPage) {
-		setCurrentPage(newPage);
-	}
-
-	function clearSearchResults() {
-		setSearchResults([]);
-		setSearchCats([]);
-		setSearchTags([]);
-		setCurrentPage(1);
-		setTotalPages(0);
-	}
-
-	if (isLoading)
-		return (
-			<div className="blockons-search-results-block loading">
-				<Loader />
-			</div>
-		);
-
-	// console.log("Results: ", searchResults);
+	// Initial setup
+	useEffect(() => {
+		fetchAndSetTaxonomies(set.searchProTypes);
+	}, [set.searchProTypes, fetchAndSetTaxonomies]);
 
 	return (
-		<React.Fragment>
-			{searchQuery?.length >= 3 && searchResults && (
-				<div className="blockons-search-results-block">
-					{searchResults?.length > 0 && (
+		<>
+			{searchQuery?.length >= 3 && (
+				<div
+					className={`blockons-search-results-block ${isLoading ? 'loading' : ''}`}
+				>
+					{isLoading && <Loader />}
+
+					{!isLoading && searchResults?.length > 0 && (
 						<ResultsBlock
 							searchCats={searchCats}
 							searchTags={searchTags}
@@ -188,20 +204,20 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 							searchQuery={searchQuery}
 							currentPage={currentPage}
 							totalPages={totalPages}
-							onPaginationPageChange={handlePaginationPageChange}
+							onPaginationPageChange={setCurrentPage}
 						/>
 					)}
 
-					{searchResults?.length === 0 &&
-						searchCats?.length === 0 &&
-						searchTags?.length === 0 && (
-							<div className="blockons-search-results-block no-results">
-								{__("No Results", "blockons")}
+					{!isLoading &&
+						searchResults?.length === 0 &&
+						searchQuery && (
+							<div className="no-results">
+								{__('No Results', 'blockons')}
 							</div>
 						)}
 				</div>
 			)}
-		</React.Fragment>
+		</>
 	);
 };
 

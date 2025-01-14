@@ -21,6 +21,10 @@
 	font-size: 0 !important;
 }
 
+body.post-type-page.block-editor-page .blockons-search-popup-wrap {
+	right: 280px;
+}
+
 /* -- Premium Block -- */
 #blockons-search-results-wrap {
 	background-color: #fff;

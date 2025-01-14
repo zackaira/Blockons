@@ -1,4 +1,4 @@
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import {
 	RichText,
@@ -27,7 +27,6 @@ const Edit = (props) => {
 		attributes: {
 			alignment,
 			searchId,
-			baseUrl,
 			searchWidthDefault,
 			searchWidthDropdown,
 			searchWidthPopup,
@@ -66,16 +65,17 @@ const Edit = (props) => {
 		setAttributes,
 	} = props;
 	const site_url = blockonsEditorObj.apiUrl;
-	const homeUrl = blockonsEditorObj.homeUrl;
 	const [showSearch, setShowSearch] = useState(false);
-	const isPro = Boolean(searchObj.isPremium);
-	const wcActive = Boolean(searchObj.wcActive);
+	const isPro = Boolean(blockonsEditorObj.isPremium);
+	const wcActive = Boolean(blockonsEditorObj.wcActive);
+	const searchBlockRef = useRef(null);
 
 	const blockProps = useBlockProps({
 		className: `align-${alignment} ${
 			isSelected && showSearch ? 'blockons-show' : ''
 		} ${searchDisplay === 'default' ? 'default-search' : 'icon-search'}`,
 		id: searchId,
+		ref: searchBlockRef,
 	});
 
 	const searchProOptions = isPremium
@@ -100,12 +100,6 @@ const Edit = (props) => {
 	useEffect(() => {
 		setAttributes({ isPremium: isPro }); // SETS PREMIUM
 
-		if (!baseUrl && homeUrl) {
-			const languageCode = window?.ICL_LANGUAGE_CODE || '';
-			setAttributes({
-				baseUrl: homeUrl + (languageCode ? `${languageCode}/` : ''),
-			});
-		}
 		if (!searchId) {
 			setAttributes({
 				searchId: 'id' + uuidv4(),
@@ -117,6 +111,18 @@ const Edit = (props) => {
 			});
 		}
 	}, []);
+
+	useEffect(() => {
+		if (searchDisplay === 'popup' && searchBlockRef.current) {
+			const searchBlock = searchBlockRef.current;
+
+			if (showSearch) {
+				searchBlock.classList.add('blockons-search-popup-open');
+			} else {
+				searchBlock.classList.remove('blockons-search-popup-open');
+			}
+		}
+	}, [showSearch, searchDisplay]);
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
@@ -184,7 +190,11 @@ const Edit = (props) => {
 									})
 								}
 								units={[
-									{ value: 'px', label: 'px', default: 300 },
+									{
+										value: 'px',
+										label: 'px',
+										default: 300,
+									},
 									{ value: '%', label: '%', default: 50 },
 								]}
 								isResetValueOnUnitChange
@@ -228,8 +238,8 @@ const Edit = (props) => {
 										'This will always display the search ONLY in the editor',
 										'blockons',
 									)}
-									onChange={() => {
-										setShowSearch((state) => !state);
+									onChange={(newValue) => {
+										setShowSearch(newValue);
 									}}
 								/>
 							</>
@@ -499,7 +509,9 @@ const Edit = (props) => {
 									)}
 									checked={searchPro}
 									onChange={(newValue) => {
-										setAttributes({ searchPro: newValue });
+										setAttributes({
+											searchPro: newValue,
+										});
 									}}
 								/>
 
@@ -777,7 +789,7 @@ const Edit = (props) => {
 									),
 								]}
 								docLink="https://blockons.com/documentation/search-bar-or-search-icon-block/#searchpro"
-								upgradeLink={searchObj.upgradeUrl}
+								upgradeLink={blockonsEditorObj.upgradeUrl}
 							/>
 						)}
 					</PanelBody>
@@ -946,7 +958,7 @@ const Edit = (props) => {
 			</div>
 
 			{searchDisplay === 'popup' && (
-				<>
+				<div className="blockons-search-popup-wrap">
 					<div
 						className="blockons-search-popup-overlay"
 						onClick={closePopup}
@@ -1021,7 +1033,7 @@ const Edit = (props) => {
 							)}
 						</div>
 					</div>
-				</>
+				</div>
 			)}
 		</div>
 	);

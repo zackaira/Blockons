@@ -101,7 +101,7 @@ class Blockons {
 			'adminUrl' => esc_url(admin_url()),
 			'wcActive' => Blockons_Admin::blockons_is_plugin_active('woocommerce.php'),
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
-			'siteUrl' => esc_url(get_home_url('/')),
+			'homeUrl' => esc_url(home_url('/')),
 		));
 
 		// Contact Form Block JS
@@ -309,7 +309,7 @@ class Blockons {
 			'isPremium' => $isPro,
 			'blockonsOptions' => $blockonsOptions,
 			'adminUrl' => esc_url(admin_url()),
-			'homeUrl' => esc_url(home_url()),
+			'homeUrl' => esc_url(home_url('/')),
 			'apiUrl' => esc_url( get_rest_url() ),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),

@@ -124,8 +124,9 @@
 .blockons-search-block .blockons-search-dropdown {
 	position: absolute;
 	z-index: 98;
+	visibility: hidden;
 	opacity: 0;
-	transition: all 0.1s ease-in-out 0s;
+	transition: all 0.1s ease-in-out 0.1s;
 }
 .blockons-search-dropdown .blockons-search-inner {
 	width: 100%;
@@ -191,37 +192,43 @@
 }
 
 /* -- Popup Style -- */
-.blockons-search-block.popup {
+.blockons-search-block .fa-magnifying-glass {
 	cursor: pointer;
+}
+.blockons-search-popup-wrap {
+	position: fixed;
+	top: 120%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out 0.05s;
+}
+.wp-block-blockons-search.blockons-search-popup-open
+	.blockons-search-popup-wrap {
+	top: 0;
+	visibility: visible;
+	opacity: 1;
 }
 .blockons-search-popup-overlay {
 	background-color: rgb(0 0 0 / 35%);
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	z-index: 99;
-	visibility: hidden;
-	opacity: 0;
-	transition: all 0.2s ease-in-out 0s;
+	z-index: 21;
 }
 .blockons-search-popup-wrapper {
-	position: fixed;
-	visibility: hidden;
+	position: relative;
 	margin: 0;
 	padding: 30px;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 101;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	opacity: 0;
-	transition: all 0.2s ease-in-out 0s;
-	pointer-events: none;
+	z-index: 31;
 }
 .blockons-search-popup {
 	background-color: #fff;
@@ -232,7 +239,6 @@
 	width: 100%;
 	max-width: 94%;
 	min-width: 280px;
-	pointer-events: auto;
 }
 .blockons-close {
 	position: absolute;
@@ -253,11 +259,6 @@
 	box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
 	border-radius: 3px;
 	overflow: hidden;
-}
-.wp-block-blockons-search.blockons-show .blockons-search-popup-overlay,
-.wp-block-blockons-search.blockons-show .blockons-search-popup-wrapper {
-	visibility: visible;
-	opacity: 1;
 }
 
 /* -- Alignment -- */
@@ -482,4 +483,15 @@
 }
 .blockons-search-preview .blockons-spreview-btns a:hover {
 	background-color: #000;
+}
+
+@media only screen and (max-width: 762px) {
+	.blockons-search-popup-wrapper {
+		width: 100%;
+	}
+	.blockons-search-popup {
+		width: 100% !important;
+		max-width: 100%;
+		box-sizing: border-box;
+	}
 }

@@ -9,7 +9,8 @@ const Save = ({ attributes }) => {
 		}`,
 		id: attributes.searchId,
 	});
-	const siteUrl = searchObj.siteUrl;
+	const homeUrl = searchObj.homeUrl;
+	console.log(searchObj.homeUrl);
 
 	const searchProOptions = attributes.isPremium
 		? {
@@ -34,11 +35,8 @@ const Save = ({ attributes }) => {
 		role: 'search',
 		method: 'get',
 		className: `blockons-search-inner ${attributes.hasPlaceholder ? 'hasph' : 'noph'}`,
-		...(attributes.baseUrl ? { action: attributes.baseUrl } : {}),
-		...(siteUrl ? { 'data-siteurl': siteUrl } : {}),
+		action: window.searchObj.homeUrl,
 	};
-
-	console.log('BaseUrl', siteUrl, attributes.baseUrl);
 
 	return (
 		<div {...blockProps}>

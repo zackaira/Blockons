@@ -16,10 +16,6 @@
 			"type": "string",
 			"default": ""
 		},
-		"baseUrl": {
-			"type": "string",
-			"default": ""
-		},
 		"searchWidthDefault": {
 			"type": "string",
 			"default": 300
@@ -159,6 +155,6 @@
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"script": "blockons-search",
+	"viewScript": "blockons-search",
 	"style": ["file:./style-index.css", "blockons-fontawesome"]
 }
