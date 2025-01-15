@@ -211,7 +211,7 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 					{!isLoading &&
 						searchResults?.length === 0 &&
 						searchQuery && (
-							<div className="no-results">
+							<div className="blockons-search-results-block no-results">
 								{__('No Results', 'blockons')}
 							</div>
 						)}

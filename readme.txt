@@ -228,7 +228,10 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.2.06 =
 * Styling tweaks/fixes
-* Minor tweaks to Search block form attributes
+* Fix Search block to work with translations plugins
+* 
+* 
+* Updated the language .pot file
 
 = 1.2.05 =
 * Styling tweaks/fixes
@@ -239,7 +242,7 @@ This could be from the theme you're using, or another plugin. Again, please [con
 * Styling tweaks/fixes
 * Update Freemius SDK
 * Updated loading translations order
-* Fix Search block results to work with translations extension
+* Fix Search block to work with translations
 * Updated the language .pot file
 * NEW: Added new Contact Form block
 * PREMIUM: More Advanced fields for Contact Form block
