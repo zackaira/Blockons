@@ -229,8 +229,8 @@ This could be from the theme you're using, or another plugin. Again, please [con
 = 1.2.06 =
 * Styling tweaks/fixes
 * Fix Search block to work with translations plugins
-* 
-* 
+* Fix Testimonials <br/> not rendering
+* Update Freemius SDK
 * Updated the language .pot file
 
 = 1.2.05 =

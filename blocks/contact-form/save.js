@@ -71,7 +71,10 @@ const Save = ({ attributes }) => {
 							type="text"
 							name="asite"
 							tabIndex="-1"
-							autoComplete="off"
+							autoComplete="new-password"
+							aria-hidden="true"
+							defaultValue=""
+							data-form-type="do-not-fill"
 						/>
 					</div>
 

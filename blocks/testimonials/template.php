@@ -8,6 +8,18 @@
  *
  * @package blockons
  */
+$allowed_tags = array(
+	'br'     => array(),
+	'strong' => array(),
+	'em'     => array(),
+	'a'      => array(
+		'href'   => array(),
+		'title'  => array(),
+		'target' => array(),
+		'rel'    => array(),
+	),
+);
+
 $custom_classes = 'align-' . $attributes['alignment'] . ' layout-' . $attributes['testLayout'] . ' style-' . $attributes['testStyle'];
 
 $sliderOptions = array(
@@ -62,7 +74,7 @@ $sliderOptions = array(
 								<?php endif; ?>
 
 								<div class="blockons-slide-text-txt">
-									<?php echo esc_html($slide['title']); ?>
+									<?php echo wp_kses( $slide['title'], $allowed_tags ); ?>
 								</div>
 
 								<?php if (isset($attributes['showQuotes']) && $attributes['showQuotes'] == true) : ?>

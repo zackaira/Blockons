@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				e.preventDefault();
 
 				// Check honeypot
-				if (elements.honeypot?.value) {
+				if (elements.honeypot?.value.trim() !== '') {
 					console.log('Honeypot triggered');
 					return;
 				}
@@ -430,6 +430,11 @@ document.addEventListener('DOMContentLoaded', function () {
 						form,
 						elements.inputs,
 					);
+					console.log('Form validation result:', {
+						isValid,
+						fieldsCount: fields.length,
+					});
+
 					if (!isValid) {
 						if (elements.errorMsg) {
 							elements.errorMsg.style.display = 'block';

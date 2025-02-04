@@ -1,5 +1,5 @@
-import { useState, useEffect } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
+import { useState, useEffect } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import {
 	RichText,
 	AlignmentToolbar,
@@ -7,7 +7,7 @@ import {
 	InspectorControls,
 	useBlockProps,
 	MediaUpload,
-} from "@wordpress/block-editor";
+} from '@wordpress/block-editor';
 import {
 	PanelBody,
 	Dropdown,
@@ -16,14 +16,14 @@ import {
 	SelectControl,
 	RangeControl,
 	Button,
-} from "@wordpress/components";
-import { v4 as uuidv4 } from "uuid";
-import BlockonsColorpicker from "../_components/BlockonsColorpicker";
-import FontAwesomeIcon from "../_components/FontAwesomeIcon";
-import { slugify, sliderArrowIcons } from "../block-global";
-import { colorPickerPalette } from "../block-global";
-import { Navigation, Pagination, EffectFade, EffectCoverflow } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+} from '@wordpress/components';
+import { v4 as uuidv4 } from 'uuid';
+import BlockonsColorpicker from '../_components/BlockonsColorpicker';
+import FontAwesomeIcon from '../_components/FontAwesomeIcon';
+import { slugify, sliderArrowIcons } from '../block-global';
+import { colorPickerPalette } from '../block-global';
+import { Navigation, Pagination, EffectFade, EffectCoverflow } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const Edit = (props) => {
 	const {
@@ -80,18 +80,20 @@ const Edit = (props) => {
 		modules: [Navigation, Pagination, EffectFade, EffectCoverflow],
 		autoHeight: true,
 		effect: transition,
-		slidesPerView: transition === "slide" ? perView : 1,
+		slidesPerView: transition === 'slide' ? perView : 1,
 		spaceBetween: spaceBetween,
-		loop: mode === "loop" ? true : false,
-		rewind: mode === "rewind" ? true : false,
+		loop: mode === 'loop' ? true : false,
+		rewind: mode === 'rewind' ? true : false,
 		simulateTouch: false,
 		navigation: navigation,
 		pagination: pagination
 			? {
-					type: paginationStyle === "fraction" ? "fraction" : "bullets",
-					dynamicBullets: paginationStyle === "dynamicBullets" ? true : false,
+					type:
+						paginationStyle === 'fraction' ? 'fraction' : 'bullets',
+					dynamicBullets:
+						paginationStyle === 'dynamicBullets' ? true : false,
 					clickable: true,
-			  }
+				}
 			: false,
 	};
 
@@ -99,7 +101,7 @@ const Edit = (props) => {
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
-			alignment: newAlignment === undefined ? "left" : newAlignment,
+			alignment: newAlignment === undefined ? 'left' : newAlignment,
 		});
 	};
 
@@ -107,10 +109,9 @@ const Edit = (props) => {
 		const newSlides = [...sliderSlides];
 		newSlides.push({
 			id: newSlides.length + 1,
-			title:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.",
-			author: "Joe Soap",
-			authorPos: "Owner at Macabee",
+			title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et augue placerat sem condimentum porta quis in quam. Cras dignissim felis gravida volutpat finibus.',
+			author: 'Joe Soap',
+			authorPos: 'Owner at Macabee',
 			authorImg: {},
 			rating: 5,
 		});
@@ -142,7 +143,10 @@ const Edit = (props) => {
 			if (obj.id === id)
 				return {
 					...obj,
-					id: id === "" ? Math.floor(Math.random() * 800) : slugify(author),
+					id:
+						id === ''
+							? Math.floor(Math.random() * 800)
+							: slugify(author),
 					author: author,
 				};
 			return obj;
@@ -219,7 +223,9 @@ const Edit = (props) => {
 			<div
 				className="blockons-slide-text"
 				style={{
-					...(testStyle === "two" ? { backgroundColor: bgColor } : ""),
+					...(testStyle === 'two'
+						? { backgroundColor: bgColor }
+						: ''),
 					color: fontColor,
 				}}
 			>
@@ -227,38 +233,48 @@ const Edit = (props) => {
 					<div className="blockons-star-ratings">
 						<span
 							className={`fa-solid fa-star blockons-star ${
-								slideItem.rating >= 1 ? "checked" : ""
+								slideItem.rating >= 1 ? 'checked' : ''
 							}`}
-							onClick={() => handleItemRatingChange(1, slideItem.id)}
+							onClick={() =>
+								handleItemRatingChange(1, slideItem.id)
+							}
 						></span>
 						<span
 							className={`fa-solid fa-star blockons-star ${
-								slideItem.rating >= 2 ? "checked" : ""
+								slideItem.rating >= 2 ? 'checked' : ''
 							}`}
-							onClick={() => handleItemRatingChange(2, slideItem.id)}
+							onClick={() =>
+								handleItemRatingChange(2, slideItem.id)
+							}
 						></span>
 						<span
 							className={`fa-solid fa-star blockons-star ${
-								slideItem.rating >= 3 ? "checked" : ""
+								slideItem.rating >= 3 ? 'checked' : ''
 							}`}
-							onClick={() => handleItemRatingChange(3, slideItem.id)}
+							onClick={() =>
+								handleItemRatingChange(3, slideItem.id)
+							}
 						></span>
 						<span
 							className={`fa-solid fa-star blockons-star ${
-								slideItem.rating >= 4 ? "checked" : ""
+								slideItem.rating >= 4 ? 'checked' : ''
 							}`}
-							onClick={() => handleItemRatingChange(4, slideItem.id)}
+							onClick={() =>
+								handleItemRatingChange(4, slideItem.id)
+							}
 						></span>
 						<span
 							className={`fa-solid fa-star blockons-star ${
-								slideItem.rating >= 5 ? "checked" : ""
+								slideItem.rating >= 5 ? 'checked' : ''
 							}`}
-							onClick={() => handleItemRatingChange(5, slideItem.id)}
+							onClick={() =>
+								handleItemRatingChange(5, slideItem.id)
+							}
 						></span>
 					</div>
 				)}
 
-				{testStyle === "two" && (
+				{testStyle === 'two' && (
 					<span
 						className="corner"
 						style={{
@@ -279,11 +295,14 @@ const Edit = (props) => {
 				)}
 				<RichText
 					tagName="div"
-					placeholder={__("Testimonial Text", "blockons")}
+					placeholder={__('Testimonial Text', 'blockons')}
 					value={slideItem.title}
 					multiline={false}
 					className="blockons-slide-text-txt"
-					onChange={(newText) => handleItemTextChange(newText, slideItem.id)}
+					onChange={(newText) =>
+						handleItemTextChange(newText, slideItem.id)
+					}
+					allowedFormats={['core/bold', 'core/italic', 'core/link']}
 				/>
 				{showQuotes && (
 					<FontAwesomeIcon
@@ -301,40 +320,53 @@ const Edit = (props) => {
 					<div
 						className={`blockons-slide-author-img ${
 							slideItem.authorImg && slideItem.authorImg.url
-								? "hasimg"
-								: "noimg"
+								? 'hasimg'
+								: 'noimg'
 						}`}
 						style={{
 							...(slideItem.authorImg && slideItem.authorImg.url
-								? { backgroundImage: `url(${slideItem.authorImg.url})` }
-								: ""),
+								? {
+										backgroundImage: `url(${slideItem.authorImg.url})`,
+									}
+								: ''),
 						}}
 					>
 						<MediaUpload
 							className="components-icon-button components-toolbar__control"
-							allowedTypes={["image"]}
+							allowedTypes={['image']}
 							value={slideItem.authorImg}
-							onSelect={(media) => handleMediaSelect(media, slideItem.id)}
+							onSelect={(media) =>
+								handleMediaSelect(media, slideItem.id)
+							}
 							render={({ open }) => {
 								return (
 									<>
-										{slideItem.authorImg && slideItem.authorImg.url && (
-											<Button
-												className="blockons-upload-remove"
-												onClick={() => handleMediaRemove(slideItem.id)}
-											>
-												X
-											</Button>
-										)}
-										{slideItem.authorImg && !slideItem.authorImg.url && (
-											<Button className="blockons-upload-button" onClick={open}>
-												<FontAwesomeIcon
-													icon="user"
-													iconSize={18}
-													color={"inherit"}
-												/>
-											</Button>
-										)}
+										{slideItem.authorImg &&
+											slideItem.authorImg.url && (
+												<Button
+													className="blockons-upload-remove"
+													onClick={() =>
+														handleMediaRemove(
+															slideItem.id,
+														)
+													}
+												>
+													X
+												</Button>
+											)}
+										{slideItem.authorImg &&
+											!slideItem.authorImg.url && (
+												<Button
+													className="blockons-upload-button"
+													onClick={open}
+												>
+													<FontAwesomeIcon
+														icon="user"
+														iconSize={18}
+														color={'inherit'}
+													/>
+												</Button>
+											)}
 									</>
 								);
 							}}
@@ -344,7 +376,7 @@ const Edit = (props) => {
 				<div className="blockons-slide-author-txt">
 					<RichText
 						tagName="div"
-						placeholder={__("Author", "blockons")}
+						placeholder={__('Author', 'blockons')}
 						value={slideItem.author}
 						multiline={false}
 						className="blockons-slide-author-txt-auth"
@@ -358,12 +390,15 @@ const Edit = (props) => {
 					{showPosition && (
 						<RichText
 							tagName="div"
-							placeholder={__("Position", "blockons")}
+							placeholder={__('Position', 'blockons')}
 							value={slideItem.authorPos}
 							multiline={false}
 							className="blockons-slide-author-txt-pos"
 							onChange={(newAuthorPos) =>
-								handleItemAuthorPosChange(newAuthorPos, slideItem.id)
+								handleItemAuthorPosChange(
+									newAuthorPos,
+									slideItem.id,
+								)
 							}
 							style={{
 								color: posColor,
@@ -401,16 +436,16 @@ const Edit = (props) => {
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody
-						title={__("Slider Settings", "blockons")}
+						title={__('Slider Settings', 'blockons')}
 						initialOpen={true}
 					>
 						<SelectControl
 							label="Transition Type"
 							value={transition}
 							options={[
-								{ label: "Slide", value: "slide" },
-								{ label: "Fade", value: "fade" },
-								{ label: "Coverflow", value: "coverflow" },
+								{ label: 'Slide', value: 'slide' },
+								{ label: 'Fade', value: 'fade' },
+								{ label: 'Coverflow', value: 'coverflow' },
 							]}
 							onChange={(newValue) => {
 								newValue === reloads.transition
@@ -421,18 +456,25 @@ const Edit = (props) => {
 							}}
 						/>
 						<div className="blockons-divider"></div>
-						{transition !== "fade" && (
+						{transition !== 'fade' && (
 							<>
 								<RangeControl
-									label={__("Slides Per View", "blockons")}
+									label={__('Slides Per View', 'blockons')}
 									value={perView}
 									onChange={(newValue) =>
 										setAttributes({
-											perView: newValue === undefined ? 1 : parseInt(newValue),
+											perView:
+												newValue === undefined
+													? 1
+													: parseInt(newValue),
 										})
 									}
 									min={1}
-									max={sliderSlides.length < 4 ? sliderSlides.length : 4}
+									max={
+										sliderSlides.length < 4
+											? sliderSlides.length
+											: 4
+									}
 								/>
 								<div className="blockons-divider"></div>
 							</>
@@ -441,9 +483,9 @@ const Edit = (props) => {
 							label="Slider Mode"
 							value={mode}
 							options={[
-								{ label: "Default", value: "default" },
-								{ label: "Rewind", value: "rewind" },
-								{ label: "Infinite Loop", value: "loop" },
+								{ label: 'Default', value: 'default' },
+								{ label: 'Rewind', value: 'rewind' },
+								{ label: 'Infinite Loop', value: 'loop' },
 							]}
 							onChange={(newValue) => {
 								newValue === reloads.mode
@@ -454,44 +496,64 @@ const Edit = (props) => {
 							}}
 						/>
 						<div className="blockons-divider"></div>
-						
+
 						<ToggleControl
-							label={__("Auto Play", "blockons")}
+							label={__('Auto Play', 'blockons')}
 							checked={autoplay}
 							onChange={(newValue) =>
 								setAttributes({ autoplay: newValue })
 							}
-							help={autoplay ? __("Auto Play will ONLY work on the site frontend", "blockons") : ""}
+							help={
+								autoplay
+									? __(
+											'Auto Play will ONLY work on the site frontend',
+											'blockons',
+										)
+									: ''
+							}
 						/>
 						{autoplay && (
 							<>
 								<TextControl
-									label={__("Time Delay", "blockons")}
+									label={__('Time Delay', 'blockons')}
 									type="number"
 									value={autoplayDelay}
-									onChange={(newValue) => 
-										setAttributes({ autoplayDelay: newValue })
+									onChange={(newValue) =>
+										setAttributes({
+											autoplayDelay: newValue,
+										})
 									}
-									help={__("1000 = 1 second", "blockons")}
+									help={__('1000 = 1 second', 'blockons')}
 								/>
 								<ToggleControl
-									label={__("Disable on Interaction", "blockons")}
+									label={__(
+										'Disable on Interaction',
+										'blockons',
+									)}
 									checked={autoplayDisable}
 									onChange={(newValue) =>
-										setAttributes({ autoplayDisable: newValue })
+										setAttributes({
+											autoplayDisable: newValue,
+										})
 									}
-									help={__("Disable the Auto Play When the slider is interacted with", "blockons")}
+									help={__(
+										'Disable the Auto Play When the slider is interacted with',
+										'blockons',
+									)}
 								/>
 							</>
 						)}
-						
+
 						<div className="blockons-divider"></div>
 						<RangeControl
-							label={__("Space Between Slides", "blockons")}
+							label={__('Space Between Slides', 'blockons')}
 							value={spaceBetween}
 							onChange={(newValue) =>
 								setAttributes({
-									spaceBetween: newValue === undefined ? 0 : parseInt(newValue),
+									spaceBetween:
+										newValue === undefined
+											? 0
+											: parseInt(newValue),
 								})
 							}
 							min={0}
@@ -500,86 +562,105 @@ const Edit = (props) => {
 						/>
 					</PanelBody>
 					<PanelBody
-						title={__("Testimonials Design", "blockons")}
+						title={__('Testimonials Design', 'blockons')}
 						initialOpen={false}
 					>
 						<SelectControl
 							label="Style"
 							value={testStyle}
 							options={[
-								{ label: "Plain", value: "one" },
-								{ label: "Bubble", value: "two" },
+								{ label: 'Plain', value: 'one' },
+								{ label: 'Bubble', value: 'two' },
 							]}
-							onChange={(newValue) => setAttributes({ testStyle: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ testStyle: newValue })
+							}
 						/>
 						<SelectControl
 							label="Layout"
 							value={testLayout}
 							options={[
-								{ label: "Default Layout", value: "one" },
-								{ label: "Side Layout", value: "two" },
-								{ label: "Author Top Layout", value: "three" },
+								{ label: 'Default Layout', value: 'one' },
+								{ label: 'Side Layout', value: 'two' },
+								{ label: 'Author Top Layout', value: 'three' },
 							]}
-							onChange={(newValue) => setAttributes({ testLayout: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ testLayout: newValue })
+							}
 						/>
 						<div className="blockons-divider"></div>
 
 						<ToggleControl
-							label={__("Show Star Rating", "blockons")}
+							label={__('Show Star Rating', 'blockons')}
 							checked={showStars}
-							onChange={(newValue) => setAttributes({ showStars: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ showStars: newValue })
+							}
 							help={__(
-								"Edit star ratings by clicking on the stars",
-								"blockons"
+								'Edit star ratings by clicking on the stars',
+								'blockons',
 							)}
 						/>
 						<ToggleControl
-							label={__("Show Author Position", "blockons")}
+							label={__('Show Author Position', 'blockons')}
 							checked={showPosition}
-							onChange={(newValue) => setAttributes({ showPosition: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ showPosition: newValue })
+							}
 						/>
 						<ToggleControl
-							label={__("Show Author Image / Icon", "blockons")}
+							label={__('Show Author Image / Icon', 'blockons')}
 							checked={showIcon}
-							onChange={(newValue) => setAttributes({ showIcon: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ showIcon: newValue })
+							}
 						/>
 						<ToggleControl
-							label={__("Show Quotes", "blockons")}
+							label={__('Show Quotes', 'blockons')}
 							checked={showQuotes}
-							onChange={(newValue) => setAttributes({ showQuotes: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ showQuotes: newValue })
+							}
 						/>
 
 						{showQuotes && (
 							<>
 								<RangeControl
-									label={__("Quotes Size", "blockons")}
+									label={__('Quotes Size', 'blockons')}
 									value={quoteSize}
 									onChange={(newValue) =>
 										setAttributes({
 											quoteSize:
-												newValue === undefined ? 24 : parseInt(newValue),
+												newValue === undefined
+													? 24
+													: parseInt(newValue),
 										})
 									}
 									min={18}
 									max={54}
 								/>
 								<BlockonsColorpicker
-									label={__("Quotes Color", "blockons")}
+									label={__('Quotes Color', 'blockons')}
 									value={quotesColor}
 									onChange={(colorValue) => {
 										setAttributes({
 											quotesColor:
-												colorValue === undefined ? "#000" : colorValue,
+												colorValue === undefined
+													? '#000'
+													: colorValue,
 										});
 									}}
 									paletteColors={colorPickerPalette}
 								/>
 								<RangeControl
-									label={__("Quotes Opacity", "blockons")}
+									label={__('Quotes Opacity', 'blockons')}
 									value={quotesOpacity}
 									onChange={(newValue) =>
 										setAttributes({
-											quotesOpacity: newValue === undefined ? 0.4 : newValue,
+											quotesOpacity:
+												newValue === undefined
+													? 0.4
+													: newValue,
 										})
 									}
 									min={0}
@@ -590,15 +671,17 @@ const Edit = (props) => {
 							</>
 						)}
 
-						{testStyle === "two" && (
+						{testStyle === 'two' && (
 							<>
 								<BlockonsColorpicker
-									label={__("Background Color", "blockons")}
+									label={__('Background Color', 'blockons')}
 									value={bgColor}
 									onChange={(colorValue) => {
 										setAttributes({
 											bgColor:
-												colorValue === undefined ? "#f0f0f0" : colorValue,
+												colorValue === undefined
+													? '#f0f0f0'
+													: colorValue,
 										});
 									}}
 									paletteColors={colorPickerPalette}
@@ -608,11 +691,14 @@ const Edit = (props) => {
 						)}
 
 						<BlockonsColorpicker
-							label={__("Font Color", "blockons")}
+							label={__('Font Color', 'blockons')}
 							value={fontColor}
 							onChange={(colorValue) => {
 								setAttributes({
-									fontColor: colorValue === undefined ? "#4f4f4f" : colorValue,
+									fontColor:
+										colorValue === undefined
+											? '#4f4f4f'
+											: colorValue,
 								});
 							}}
 							paletteColors={colorPickerPalette}
@@ -620,22 +706,28 @@ const Edit = (props) => {
 						<div className="blockons-divider"></div>
 
 						<BlockonsColorpicker
-							label={__("Author Name Color", "blockons")}
+							label={__('Author Name Color', 'blockons')}
 							value={nameColor}
 							onChange={(colorValue) => {
 								setAttributes({
-									nameColor: colorValue === undefined ? "#4f4f4f" : colorValue,
+									nameColor:
+										colorValue === undefined
+											? '#4f4f4f'
+											: colorValue,
 								});
 							}}
 							paletteColors={colorPickerPalette}
 						/>
 						{showPosition && (
 							<BlockonsColorpicker
-								label={__("Author Position Color", "blockons")}
+								label={__('Author Position Color', 'blockons')}
 								value={posColor}
 								onChange={(colorValue) => {
 									setAttributes({
-										posColor: colorValue === undefined ? "#4f4f4f" : colorValue,
+										posColor:
+											colorValue === undefined
+												? '#4f4f4f'
+												: colorValue,
 									});
 								}}
 								paletteColors={colorPickerPalette}
@@ -643,13 +735,15 @@ const Edit = (props) => {
 						)}
 					</PanelBody>
 					<PanelBody
-						title={__("Slider Controls", "blockons")}
+						title={__('Slider Controls', 'blockons')}
 						initialOpen={false}
 					>
 						<ToggleControl
-							label={__("Show Navigation", "blockons")}
+							label={__('Show Navigation', 'blockons')}
 							checked={navigation}
-							onChange={(newValue) => setAttributes({ navigation: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ navigation: newValue })
+							}
 						/>
 
 						{navigation && (
@@ -658,24 +752,28 @@ const Edit = (props) => {
 									label="Style"
 									value={navigationStyle}
 									options={[
-										{ label: "Default", value: "default" },
-										{ label: "Round", value: "round" },
-										{ label: "Rounded", value: "rounded" },
-										{ label: "Square", value: "square" },
+										{ label: 'Default', value: 'default' },
+										{ label: 'Round', value: 'round' },
+										{ label: 'Rounded', value: 'rounded' },
+										{ label: 'Square', value: 'square' },
 									]}
 									onChange={(newValue) =>
-										setAttributes({ navigationStyle: newValue })
+										setAttributes({
+											navigationStyle: newValue,
+										})
 									}
 								/>
 								<SelectControl
 									label="Color"
 									value={navigationColor}
 									options={[
-										{ label: "Dark", value: "dark" },
-										{ label: "Light", value: "light" },
+										{ label: 'Dark', value: 'dark' },
+										{ label: 'Light', value: 'light' },
 									]}
 									onChange={(newValue) =>
-										setAttributes({ navigationColor: newValue })
+										setAttributes({
+											navigationColor: newValue,
+										})
 									}
 								/>
 
@@ -683,8 +781,13 @@ const Edit = (props) => {
 									<Dropdown
 										className="blockons-icon-selector"
 										contentClassName="blockons-editor-popup icon-selector"
-										popoverProps={{ placement: "bottom-end" }}
-										renderToggle={({ isOpen, onToggle }) => (
+										popoverProps={{
+											placement: 'bottom-end',
+										}}
+										renderToggle={({
+											isOpen,
+											onToggle,
+										}) => (
 											<FontAwesomeIcon
 												icon={navigationArrow}
 												iconSize={24}
@@ -692,18 +795,28 @@ const Edit = (props) => {
 											/>
 										)}
 										renderContent={() =>
-											Object.keys(sliderArrowIcons).map((icon) => (
-												<FontAwesomeIcon
-													icon={icon}
-													iconSize={20}
-													onClick={() =>
-														setAttributes({ navigationArrow: icon })
-													}
-												/>
-											))
+											Object.keys(sliderArrowIcons).map(
+												(icon) => (
+													<FontAwesomeIcon
+														icon={icon}
+														iconSize={20}
+														onClick={() =>
+															setAttributes({
+																navigationArrow:
+																	icon,
+															})
+														}
+													/>
+												),
+											)
 										}
 									/>
-									<p>{__("Select Slider Arrow Icons", "blockons")}</p>
+									<p>
+										{__(
+											'Select Slider Arrow Icons',
+											'blockons',
+										)}
+									</p>
 								</div>
 							</>
 						)}
@@ -711,41 +824,53 @@ const Edit = (props) => {
 						<div className="blockons-divider"></div>
 
 						<ToggleControl
-							label={__("Show Pagination", "blockons")}
+							label={__('Show Pagination', 'blockons')}
 							checked={pagination}
-							onChange={(newValue) => setAttributes({ pagination: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ pagination: newValue })
+							}
 						/>
 						{pagination && (
 							<>
 								<SelectControl
-									label={__("Pagination Type", "blockons")}
+									label={__('Pagination Type', 'blockons')}
 									value={paginationStyle}
 									options={[
-										{ label: "Bullets", value: "bullets" },
-										{ label: "Dynamic Bullets", value: "dynamicBullets" },
-										{ label: "Numbers", value: "numbers" },
-										{ label: "Fraction", value: "fraction" },
+										{ label: 'Bullets', value: 'bullets' },
+										{
+											label: 'Dynamic Bullets',
+											value: 'dynamicBullets',
+										},
+										{ label: 'Numbers', value: 'numbers' },
+										{
+											label: 'Fraction',
+											value: 'fraction',
+										},
 									]}
 									onChange={(newValue) =>
 										setAttributes({
 											paginationStyle:
-												newValue === undefined ? "bullets" : newValue,
+												newValue === undefined
+													? 'bullets'
+													: newValue,
 										})
 									}
 									help={__(
-										"Turn the Pagination off and on again to see this change",
-										"blockons"
+										'Turn the Pagination off and on again to see this change',
+										'blockons',
 									)}
 								/>
 								<SelectControl
 									label="Color"
 									value={paginationColor}
 									options={[
-										{ label: "Dark", value: "dark" },
-										{ label: "Light", value: "light" },
+										{ label: 'Dark', value: 'dark' },
+										{ label: 'Light', value: 'light' },
 									]}
 									onChange={(newValue) =>
-										setAttributes({ paginationColor: newValue })
+										setAttributes({
+											paginationColor: newValue,
+										})
 									}
 								/>
 							</>
@@ -755,7 +880,10 @@ const Edit = (props) => {
 							<>
 								<div className="blockons-divider"></div>
 								<ToggleControl
-									label={__("Show Controls on Hover", "blockons")}
+									label={__(
+										'Show Controls on Hover',
+										'blockons',
+									)}
 									checked={showOnHover}
 									onChange={(newValue) =>
 										setAttributes({ showOnHover: newValue })
@@ -768,21 +896,27 @@ const Edit = (props) => {
 			)}
 			{
 				<BlockControls>
-					<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
+					<AlignmentToolbar
+						value={alignment}
+						onChange={onChangeAlignment}
+					/>
 				</BlockControls>
 			}
 			<div
 				className={`blockons-slider slider ${
-					showOnHover ? "controlsOnHover" : ""
+					showOnHover ? 'controlsOnHover' : ''
 				} navigation-${navigationStyle} navigation-${navigationColor} pagination-${paginationStyle} pagination-${paginationColor} ${
-					navigationArrow === "ban" ? "default-icon" : "custom-icon"
+					navigationArrow === 'ban' ? 'default-icon' : 'custom-icon'
 				} arrows-${navigationArrow}`}
 				id={uniqueId}
 			>
 				{needsReload && (
 					<div className="blockons-slider-reload">
 						<div className="blockons-slider-reload-inner">
-							{__("Please Save or Update and reload the page", "blockons")}
+							{__(
+								'Please Save or Update and reload the page',
+								'blockons',
+							)}
 						</div>
 					</div>
 				)}

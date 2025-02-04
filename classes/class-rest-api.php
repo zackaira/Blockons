@@ -293,6 +293,10 @@ class Blockons_WC_Rest_Routes {
 				return $form_data;
 			}
 
+			// Apply filters only when handling form submission
+			add_filter('wp_mail_from', [$this, 'blockons_custom_wp_mail_from']);
+			add_filter('wp_mail_from_name', [$this, 'blockons_custom_wp_mail_from_name']);	
+
 			// Handle file uploads if present
 			if (!empty($_FILES)) {
 				try {
@@ -386,6 +390,10 @@ class Blockons_WC_Rest_Routes {
 				$this->save_form_submission($form_data, $email_result);
 			}
 
+			// Remove filters immediately after sending the email
+			remove_filter('wp_mail_from', [$this, 'blockons_custom_wp_mail_from']);
+			remove_filter('wp_mail_from_name', [$this, 'blockons_custom_wp_mail_from_name']);	
+
 			return new WP_REST_Response([
 				'success' => true,
 				'message' => __('Form submitted successfully', 'blockons')
@@ -401,6 +409,23 @@ class Blockons_WC_Rest_Routes {
 			);
 		}
 	}
+
+	/**
+ * Custom WP Mail "From" Email
+ */
+public function blockons_custom_wp_mail_from($email) {
+    $admin_email = get_bloginfo('admin_email');
+    $site_domain = parse_url(get_site_url(), PHP_URL_HOST);
+    
+    return is_email($admin_email) ? $admin_email : 'noreply@' . $site_domain;
+}
+
+/**
+ * Custom WP Mail "From" Name
+ */
+public function blockons_custom_wp_mail_from_name($name) {
+    return get_bloginfo('name');
+}
 
 	/**
 	 * Check if reCAPTCHA verification should be performed
@@ -487,8 +512,10 @@ class Blockons_WC_Rest_Routes {
 	
 			if (!$mail_sent) {
 				$error = error_get_last();
+				$error_message = ($error && isset($error['message'])) ? $error['message'] : 'Unknown error';
+			
 				error_log('Mail send failed. PHP error: ' . print_r($error, true));
-				throw new Exception('Failed to send email: ' . ($error['message'] ?? 'Unknown error'));
+				throw new Exception('Failed to send email: ' . $error_message);
 			}
 	
 			return [
@@ -844,31 +871,24 @@ class Blockons_WC_Rest_Routes {
 		try {
 			$headers = array();
 			
-			// Add content type
+			// Set content type
 			$headers[] = 'Content-Type: text/plain; charset=UTF-8';
-			
-			// Setup From header
+        
+			// Get site domain and admin email
 			$site_domain = parse_url(get_site_url(), PHP_URL_HOST);
-			$from_name = !empty($form_data['fromName']) 
-				? $this->process_shortcodes($form_data['fromName'], $form_data)
-				: get_bloginfo('name');
-			
-			$from_email = !empty($form_data['fromEmail'])
-				? $this->process_shortcodes($form_data['fromEmail'], $form_data)
-				: 'wordpress@' . $site_domain;
+			$admin_email = get_bloginfo('admin_email');
 	
-			// Clean and validate from name
-			$from_name = wp_strip_all_tags(trim($from_name));
-			if (empty($from_name)) {
-				$from_name = get_bloginfo('name');
+			// Ensure a valid email is used for "From"
+			if (!is_email($admin_email)) {
+				$admin_email = 'noreply@' . $site_domain; // Fallback email
 			}
 	
-			// Validate from email
-			$from_email = is_email($from_email) ? $from_email : 'wordpress@' . $site_domain;
+			// Set "From" name and email
+			$from_name = get_bloginfo('name');
+			$from_email = $admin_email; // Force it to use the site admin email
 	
-			// Build From header
 			$headers[] = 'From: ' . $from_name . ' <' . $from_email . '>';
-	
+
 			// Set Reply-To
 			$reply_to = $this->get_reply_to_email($form_data);
 			if ($reply_to && is_email($reply_to)) {
