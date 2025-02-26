@@ -20,6 +20,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import BlockonsColorpicker from '../_components/BlockonsColorpicker';
 import { colorPickerPalette } from '../block-global';
 import BlockonsNote from '../../src/backend/settings/components/UI/BlockonsNote';
+import { map } from 'lodash';
 
 const DEFAULT_LAT = -33.9249; // CT
 const DEFAULT_LNG = 18.4241;
@@ -46,6 +47,7 @@ const Edit = (props) => {
 	const apiUrl = blockonsEditorObj.apiUrl;
 	const isPro = Boolean(blockonsEditorObj.isPremium);
 
+	const [isLoading, setIsLoading] = useState(true);
 	const [enableMap, setEnableMap] = useState(false);
 	const [mapboxToken, setMapboxToken] = useState(null);
 	const [searchQuery, setSearchQuery] = useState('');
@@ -79,6 +81,8 @@ const Edit = (props) => {
 				}
 			} catch (err) {
 				console.error('Error fetching Mapbox API key:', err);
+			} finally {
+				setIsLoading(false);
 			}
 		}
 		fetchToken();
@@ -406,19 +410,6 @@ const Edit = (props) => {
 			mapLongitude: tempLng,
 		});
 	};
-
-	if (mapboxToken === 0) {
-		return (
-			<div>
-				<a href="" target="_blank">
-					{__(
-						'Please enter a Mapbox API key in the plugin settings.',
-						'blockons',
-					)}
-				</a>
-			</div>
-		);
-	}
 
 	const markersToDisplay = isPremium ? markers : markers.slice(0, 1);
 
@@ -820,15 +811,28 @@ const Edit = (props) => {
 							)}
 						</>
 					) : (
-						<Button
-							variant="primary"
-							onClick={() => setEnableMap(true)}
-							disabled={!mapboxToken}
-						>
-							{mapboxToken
-								? __('Click to Use Map', 'blockons')
-								: __('Loading...', 'blockons')}
-						</Button>
+						<>
+							{isLoading ? (
+								<div>{__('Loading...', 'blockons')}</div>
+							) : mapboxToken ? (
+								<Button
+									variant="primary"
+									onClick={() => setEnableMap(true)}
+									disabled={!mapboxToken}
+								>
+									{mapboxToken
+										? __('Click to Use Map', 'blockons')
+										: __('Loading...', 'blockons')}
+								</Button>
+							) : (
+								<div>
+									{__(
+										'Please add a valid Mapbox API key',
+										'blockons',
+									)}
+								</div>
+							)}
+						</>
 					)}
 				</PanelBody>
 			</InspectorControls>
@@ -937,18 +941,33 @@ const Edit = (props) => {
 						)}
 					</>
 				)}
-
+				{console.log('MapboxToken: ', mapboxToken)}
 				{!enableMap && (
 					<div className={`blockons-mapbox-disable`}>
-						<Button
-							variant="primary"
-							onClick={() => setEnableMap(true)}
-							disabled={!mapboxToken}
-						>
-							{mapboxToken
-								? __('Click to Use Map', 'blockons')
-								: __('Loading...', 'blockons')}
-						</Button>
+						{isLoading ? (
+							<div className="blockons-btnlike">
+								{__('Loading...', 'blockons')}
+							</div>
+						) : mapboxToken ? (
+							<Button
+								variant="primary"
+								onClick={() => setEnableMap(true)}
+								disabled={true}
+							>
+								{__('Click to Use Map', 'blockons')}
+							</Button>
+						) : (
+							<a
+								href="#"
+								target="_blank"
+								className="blockons-btnlike"
+							>
+								{__(
+									'Please add a valid Mapbox API key',
+									'blockons',
+								)}
+							</a>
+						)}
 					</div>
 				)}
 			</div>
