@@ -58,6 +58,16 @@ class Blockons_WC_Rest_Routes {
 			'permission_callback' => [$this, 'blockons_get_settings_permission'],
 		));
 
+		// Get API Key(s)
+		register_rest_route('blcns/v1', '/get-api-key/', array(
+			'methods' => 'GET',
+			'callback' => [$this, 'blockons_get_api_key'],
+			'permission_callback' => function (WP_REST_Request $request) {
+				$nonce = $request->get_header('X-WP-Nonce'); // Get nonce from headers
+				return current_user_can('manage_options') && wp_verify_nonce($nonce, 'wp_rest');
+			},
+		));
+
 		// Contact Form Block - Form Submission Endpoint
 		register_rest_route('blcns/v1', '/submit-form', array(
             'methods' => 'POST',
@@ -175,6 +185,13 @@ class Blockons_WC_Rest_Routes {
 	}
 
 	/**
+	 * Set save permissions for admin users
+	 */
+	public function blockons_admin_permission() {
+		return current_user_can('manage_options') ? true : false;
+	}
+
+	/**
 	 * Delete the plugin settings
 	 */
 	public function blockons_delete_settings() {
@@ -276,27 +293,75 @@ class Blockons_WC_Rest_Routes {
 	}
 
 	/**
+	 * Get Client API Keys - Only Admins
+	 */
+	function blockons_get_api_key(WP_REST_Request $request) {
+		$key_type = $request->get_param('key_type');
+		$blockonsOptions = get_option('blockons_options', []);
+	
+		// Ensure options are an array
+		if (is_string($blockonsOptions)) {
+			$blockonsOptions = json_decode($blockonsOptions, true);
+		}
+	
+		// Define available keys
+		$available_keys = [
+			'maps' => $blockonsOptions['mapbox']['key'] ?? '',
+			'recaptcha' => isset($blockonsOptions['contactforms']['recaptcha_key']) ? $blockonsOptions['contactforms']['recaptcha_key'] : '',
+			'recaptcha_secret' => isset($blockonsOptions['contactforms']['recaptcha_secret']) ? $blockonsOptions['contactforms']['recaptcha_secret'] : ''
+		];
+	
+		// Log extracted key
+		if (!empty($available_keys[$key_type])) {
+			return new WP_REST_Response(['api_key' => $available_keys[$key_type]], 200);
+		} else {
+			return new WP_REST_Response(['error' => 'Invalid API key type'], 400);
+		}
+	}	
+
+	/**
 	 * Handle Form Submission for Contact Form Block
 	 */
 	public function blockons_handle_contact_form_submission($request) {
 		$isPremium = (bool) blockons_fs()->can_use_premium_code__premium_only();
-
+	
 		try {
 			// Initialize security manager
 			$security = Blockons_Security_Manager::get_instance();
 			// Get client IP address
 			$ip_address = $this->get_client_ip();
-
+	
 			// Validate request data
 			$form_data = $security->validate_request($request);
 			if (is_wp_error($form_data)) {
 				return $form_data;
 			}
-
+	
+			$options = get_option('blockons_options');
+			if (is_string($options)) {
+				$options = json_decode($options, true);
+			}
+	
+			// Verify reCAPTCHA if required
+			if ($isPremium && $this->should_verify_recaptcha($options)) {
+				if (empty($form_data['recaptchaToken'])) {
+					return new WP_Error(
+						'recaptcha_missing',
+						__('reCAPTCHA token is missing', 'blockons'),
+						array('status' => 400)
+					);
+				}
+	
+				$recaptcha_result = $this->verify_recaptcha($form_data['recaptchaToken'], $options);
+				if (is_wp_error($recaptcha_result)) {
+					return $recaptcha_result;
+				}
+			}
+	
 			// Apply filters only when handling form submission
 			add_filter('wp_mail_from', [$this, 'blockons_custom_wp_mail_from']);
-			add_filter('wp_mail_from_name', [$this, 'blockons_custom_wp_mail_from_name']);	
-
+			add_filter('wp_mail_from_name', [$this, 'blockons_custom_wp_mail_from_name']);    
+	
 			// Handle file uploads if present
 			if (!empty($_FILES)) {
 				try {
@@ -311,7 +376,7 @@ class Blockons_WC_Rest_Routes {
 					);
 				}
 			}
-
+	
 			// Check submission rate
 			if (!$security->check_submission_rate($ip_address, $form_data['formId'] ?? 'default')) {
 				return new WP_Error(
@@ -320,7 +385,7 @@ class Blockons_WC_Rest_Routes {
 					array('status' => 429)
 				);
 			}
-
+	
 			// Check honeypot
 			foreach ($form_data['fields'] as $field) {
 				if (isset($field['name']) && $field['name'] === 'asite' && !empty($field['value'])) {
@@ -330,11 +395,11 @@ class Blockons_WC_Rest_Routes {
 					], 200);
 				}
 			}
-
+	
 			// Validate recipient emails
 			$to_emails = array_map('trim', explode(',', $form_data['emailTo']));
 			$valid_emails = array_filter($to_emails, 'is_email');
-
+	
 			if (empty($valid_emails)) {
 				return new WP_Error(
 					'invalid_email',
@@ -342,22 +407,7 @@ class Blockons_WC_Rest_Routes {
 					array('status' => 400)
 				);
 			}
-
-			// Get form options
-			$options = get_option('blockons_options');
-			if (is_string($options)) {
-				$options = json_decode($options, true);
-			}
-
-			// Process reCAPTCHA if enabled
-			if ($isPremium && $this->should_verify_recaptcha($options)) {
-				$recaptcha_token = isset($form_data['recaptchaToken']) ? $form_data['recaptchaToken'] : '';
-				$recaptcha_result = $this->verify_recaptcha($recaptcha_token, $options);
-				if (is_wp_error($recaptcha_result)) {
-					return $recaptcha_result;
-				}
-			}
-
+	
 			// Check if we're in development environment
 			if ($this->is_development_environment()) {
 				// Save submission if enabled
@@ -370,35 +420,35 @@ class Blockons_WC_Rest_Routes {
 					];
 					$this->save_form_submission($form_data, $email_result);
 				}
-
+	
 				return new WP_REST_Response([
 					'success' => true,
 					'message' => __('Form submitted successfully (Development Mode)', 'blockons'),
 					'dev_mode' => true
 				], 200);
 			}
-
+	
 			// Process submission for production
 			$email_result = $this->process_form_submission($form_data, $valid_emails);
 			if (is_wp_error($email_result)) {
 				error_log('Email error: ' . $email_result->get_error_message());
 				throw new Exception($email_result->get_error_message());
 			}
-
+	
 			// Save submission if enabled
 			if ($isPremium && $this->should_save_submission($options)) {
 				$this->save_form_submission($form_data, $email_result);
 			}
-
+	
 			// Remove filters immediately after sending the email
 			remove_filter('wp_mail_from', [$this, 'blockons_custom_wp_mail_from']);
-			remove_filter('wp_mail_from_name', [$this, 'blockons_custom_wp_mail_from_name']);	
-
+			remove_filter('wp_mail_from_name', [$this, 'blockons_custom_wp_mail_from_name']);    
+	
 			return new WP_REST_Response([
 				'success' => true,
 				'message' => __('Form submitted successfully', 'blockons')
 			], 200);
-
+	
 		} catch (Exception $e) {
 			error_log('Form submission error: ' . $e->getMessage());
 			error_log('Error trace: ' . $e->getTraceAsString());
@@ -411,21 +461,21 @@ class Blockons_WC_Rest_Routes {
 	}
 
 	/**
- * Custom WP Mail "From" Email
- */
-public function blockons_custom_wp_mail_from($email) {
-    $admin_email = get_bloginfo('admin_email');
-    $site_domain = parse_url(get_site_url(), PHP_URL_HOST);
-    
-    return is_email($admin_email) ? $admin_email : 'noreply@' . $site_domain;
-}
+	 * Custom WP Mail "From" Email
+	 */
+	public function blockons_custom_wp_mail_from($email) {
+		$admin_email = get_bloginfo('admin_email');
+		$site_domain = parse_url(get_site_url(), PHP_URL_HOST);
+		
+		return is_email($admin_email) ? $admin_email : 'noreply@' . $site_domain;
+	}
 
-/**
- * Custom WP Mail "From" Name
- */
-public function blockons_custom_wp_mail_from_name($name) {
-    return get_bloginfo('name');
-}
+	/**
+	 * Custom WP Mail "From" Name
+	 */
+	public function blockons_custom_wp_mail_from_name($name) {
+		return get_bloginfo('name');
+	}
 
 	/**
 	 * Check if reCAPTCHA verification should be performed
@@ -466,7 +516,7 @@ public function blockons_custom_wp_mail_from_name($name) {
 		}
 	
 		$body = json_decode(wp_remote_retrieve_body($response), true);
-		
+	
 		if (!$body['success'] || ($body['score'] ?? 0) < 0.5) {
 			return new WP_Error(
 				'recaptcha_failed',
@@ -476,7 +526,7 @@ public function blockons_custom_wp_mail_from_name($name) {
 		}
 	
 		return true;
-	}
+	}	
 
 	/**
 	 * Process form submission and send email
@@ -838,13 +888,13 @@ public function blockons_custom_wp_mail_from_name($name) {
 						}
 						break;
 						
-					case 'textarea':
-						$compiled_message .= sprintf(
-							"%s:\n%s\n",
-							esc_html($label),
-							nl2br(esc_html($field['value']))
-						);
-						break;
+						case 'textarea':
+							$compiled_message .= sprintf(
+								"%s:\n%s\n\n",
+								esc_html($label),
+								html_entity_decode(str_replace('<br />', "\n", $field['value']), ENT_QUOTES, 'UTF-8')
+							);
+							break;
 	
 					default:
 						$compiled_message .= sprintf(
@@ -887,12 +937,14 @@ public function blockons_custom_wp_mail_from_name($name) {
 			$from_name = get_bloginfo('name');
 			$from_email = $admin_email; // Force it to use the site admin email
 	
-			$headers[] = 'From: ' . $from_name . ' <' . $from_email . '>';
+			$headers[] = "From: $from_name <$from_email>";
+			// Add Return-Path to prevent "via" issues
+			$headers[] = "Return-Path: <$from_email>";
 
 			// Set Reply-To
 			$reply_to = $this->get_reply_to_email($form_data);
 			if ($reply_to && is_email($reply_to)) {
-				$headers[] = sprintf('Reply-To: %s', $reply_to);
+				$headers[] = "Reply-To: $reply_to";
 			}
 	
 			// Add CC if present and valid

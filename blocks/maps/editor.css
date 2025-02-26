@@ -1,0 +1,47 @@
+.blockons-mapbox-markers {
+	display: flex;
+	margin: 0 0 5px;
+}
+.blockons-marker-infoblock {
+	display: block;
+}
+.blockons-mapbox-markers .blockons-mapbox-markers-dropdown {
+	flex: 1;
+}
+.blockons-mapbox-markers-editor .components-popover__content {
+	width: 247px;
+}
+.components-popover.components-dropdown__content.blockons-editor-popup.blockons-colorpicker-popup {
+	z-index: 9999999;
+}
+.blockons-mapbox-marker-item {
+	border: 1px solid #e0e0e0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0;
+	margin: 0 0 4px;
+}
+.blockons-mapbox-marker-item:last-child {
+	margin: 0;
+}
+.blockons-mapbox-marker-item h5 {
+	flex: 1;
+	cursor: pointer;
+	font-size: 14px;
+	margin: 0;
+	padding: 0 0 0 8px;
+	max-width: 170px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.blockons-marker-setsplit {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 10px;
+}
+.blockons-marker-setsplit .blockons-editor-note {
+}

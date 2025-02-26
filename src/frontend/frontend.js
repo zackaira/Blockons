@@ -1,11 +1,11 @@
 // import { createRoot } from "@wordpress/element";
-import PageLoader from "./site-addons/pageloader/PageLoader";
-import BackToTop from "./site-addons/backtotop/BackToTop";
-import ScrollIndicator from "./site-addons/scrollindicator/ScrollIndicator";
-import SiteBy from "./site-addons/siteby/SiteBy";
-import "./frontend.css";
+import PageLoader from './site-addons/pageloader/PageLoader';
+import BackToTop from './site-addons/backtotop/BackToTop';
+import ScrollIndicator from './site-addons/scrollindicator/ScrollIndicator';
+import SiteBy from './site-addons/siteby/SiteBy';
+import './frontend.css';
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
 	const isPremium = Boolean(blockonsFrontendObj.isPremium);
 	const blockonsOptions = blockonsFrontendObj.blockonsOptions;
 
@@ -13,14 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
 	 * Site Addons
 	 */
 	// Website Page Loader
-	const blockonsPageLoader = document.getElementById("blockons-pageloader");
+	const blockonsPageLoader = document.getElementById('blockons-pageloader');
 	if (blockonsPageLoader) {
 		ReactDOM.render(
 			<PageLoader
 				pageLoaderOptions={blockonsOptions?.pageloader}
 				isPro={isPremium}
 			/>,
-			blockonsPageLoader
+			blockonsPageLoader,
 		);
 		// if (blockonsPageLoader) {
 		// 	createRoot(blockonsPageLoader).render(
@@ -31,26 +31,26 @@ document.addEventListener("DOMContentLoaded", () => {
 		// 	);
 
 		setTimeout(() => {
-			document.body.classList.remove("blockons-page-loading");
+			document.body.classList.remove('blockons-page-loading');
 
 			setTimeout(() => {
-				document.getElementById("blockons-pageloader").remove();
+				document.getElementById('blockons-pageloader').remove();
 			}, 400);
 		}, 200);
 	}
 
 	// Back To Top Button
-	const blockonsBttb = document.getElementById("blockons-bttb");
+	const blockonsBttb = document.getElementById('blockons-bttb');
 	if (typeof blockonsBttb !== undefined && blockonsBttb !== null) {
 		ReactDOM.render(
 			<BackToTop bttOptions={blockonsOptions?.bttb} isPro={isPremium} />,
-			blockonsBttb
+			blockonsBttb,
 		);
 	}
 
 	// Page Scroll Indicator
 	const blockonsScrollInd = document.getElementById(
-		"blockons-scroll-indicator"
+		'blockons-scroll-indicator',
 	);
 	if (typeof blockonsScrollInd !== undefined && blockonsScrollInd !== null) {
 		ReactDOM.render(
@@ -58,16 +58,19 @@ document.addEventListener("DOMContentLoaded", () => {
 				scrollInOptions={blockonsOptions?.scrollindicator}
 				isPro={isPremium}
 			/>,
-			blockonsScrollInd
+			blockonsScrollInd,
 		);
 	}
 
 	// Site By
-	const blockonsSiteBy = document.getElementById("blockons-siteby");
+	const blockonsSiteBy = document.getElementById('blockons-siteby');
 	if (typeof blockonsSiteBy !== undefined && blockonsSiteBy !== null) {
 		ReactDOM.render(
-			<SiteBy sitebyOptions={blockonsOptions?.siteby} isPro={isPremium} />,
-			blockonsSiteBy
+			<SiteBy
+				sitebyOptions={blockonsOptions?.siteby}
+				isPro={isPremium}
+			/>,
+			blockonsSiteBy,
 		);
 	}
 
@@ -76,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	 */
 	// Blockons Tooltips
 	if (blockonsOptions?.tooltips?.enabled) {
-		import("./extensions/tooltips.js").then((Tooltips) => {
+		import('./extensions/tooltips.js').then((Tooltips) => {
 			Tooltips.initializeTooltips(blockonsOptions?.tooltips);
 		});
 	}

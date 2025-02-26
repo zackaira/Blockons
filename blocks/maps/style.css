@@ -1,0 +1,225 @@
+/**
+ * Note that these styles are loaded *before* editor styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+.blockons-mapbox .mapboxgl-ctrl-attrib-inner {
+	display: none;
+}
+
+.blockons-mapbox-disable {
+	position: absolute;
+	z-index: 8;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: #ffffff63;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.blockons-mapbox {
+	width: 100%;
+	border: 1px solid #ddd;
+	min-height: 120px;
+	position: relative;
+	overflow: hidden;
+}
+.blockons-mapbox.loading .blockons-map-container,
+.blockons-mapbox.loading .blockons-map-marker-info,
+.blockons-mapbox.loading .blockons-map-controls {
+	visibility: hidden;
+	opacity: 0;
+}
+.blockons-mapbox.loading::before {
+	background-color: #fff;
+	display: block;
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100px;
+	height: 100px;
+}
+.blockons-mapbox.loading::after {
+	content: '';
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	border: 2px solid #808080;
+	border-top-color: transparent;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+	margin-right: 8px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -9px 0 0 -8px;
+}
+
+.blockons-mapbox.nomap {
+	background-color: #f9f9f9;
+	background-image: url(../../assets/images/map-img.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.blockons-mapbox-disable button.components-button {
+	background-color: #fff !important;
+	box-shadow: 0 1px 6px rgb(0 0 0 / 16%);
+	color: #606060;
+	position: relative;
+	z-index: 10;
+	display: flex;
+	justify-content: center;
+	border-radius: 22px;
+	padding: 18px 32px 20px;
+}
+.blockons-mapbox-disable button.components-button:disabled {
+	color: #606060;
+}
+.blockons-mapbox-disable button.components-button:hover {
+	color: #000 !important;
+}
+
+.blockons-map-marker {
+	font-size: 26px;
+	text-shadow: 0 1px 4px rgb(0 0 0 / 14%);
+}
+.blockons-map-marker.selected {
+	font-size: 33px;
+	position: relative;
+	top: -5px;
+}
+.blockons-mapbox.marker-style-one .blockons-map-marker {
+	background-color: transparent !important;
+}
+.blockons-mapbox.marker-style-two .blockons-map-marker {
+	background-color: #fff;
+	box-shadow: 0 1px 8px rgb(0 0 0 / 18%);
+	border-radius: 50px;
+	width: 36px;
+	height: 36px;
+	top: 0;
+	text-shadow: none;
+	text-align: center;
+	padding: 5px 0 0;
+	box-sizing: border-box;
+}
+.blockons-mapbox.marker-style-two .blockons-map-marker.selected {
+	width: 42px;
+	height: 42px;
+	padding: 4px 0 0;
+	position: relative;
+	top: -4px;
+}
+.blockons-map-popup {
+	width: 210px;
+}
+.blockons-map-popup h6 {
+	margin: 0 0 8px;
+	padding: 0;
+	text-align: center;
+	font-size: 15px;
+}
+.blockons-map-popup p {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+
+/* -- Alignment -- */
+.align-center {
+	justify-content: center;
+}
+.align-right {
+	justify-content: flex-end;
+}
+
+.blockons-map-controls {
+	position: absolute;
+	z-index: 4;
+	top: 10px;
+	right: 10px;
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+}
+.blockons-map-controls .blockons-map-icon {
+	color: #888 !important;
+}
+.blockons-map-controls .blockons-map-icon:hover {
+	color: #000;
+}
+
+.blockons-map-marker-info {
+	position: absolute;
+	z-index: 4;
+	top: 10px;
+	left: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 8px;
+}
+.blockons-map-icons {
+	display: flex;
+	gap: 8px;
+}
+.blockons-map-icon {
+	background-color: #fff;
+	box-shadow: 0 1px 8px rgb(0 0 0 / 14%);
+	border-radius: 3px;
+	width: 25px;
+	height: 25px;
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+.blockons-map-icon.selected {
+	color: #fff;
+}
+.blockons-map-icon span {
+	color: inherit;
+}
+.blockons-marker-infoblock {
+	display: none;
+	background-color: #fff;
+	box-shadow: 0 1px 8px rgb(0 0 0 / 14%);
+	border-radius: 3px;
+	padding: 10px;
+	width: 200px;
+	position: relative;
+}
+.blockons-marker-infoblock.off {
+	display: none !important;
+}
+.blockons-marker-close-infoblock.fas {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2px;
+	font-size: 13px;
+	color: #888;
+	cursor: pointer;
+}
+.blockons-marker-close-infoblock.fas:hover {
+	color: #000;
+}
+.blockons-marker-infoblock h6 {
+	margin: 0 0 8px;
+	padding: 0;
+	font-size: 15px;
+}
+.blockons-marker-infoblock p {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}

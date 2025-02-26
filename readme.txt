@@ -226,6 +226,15 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 == Changelog ==
 
+= 1.2.07 =
+* Fix missing Translations
+* Fixed Contact Form block validating URL input
+* Changed all block editor icons to standard WP color
+* 
+* PREMIUM: Fixed Contact Form to work with multiple forms with ReCaptcha
+* PREMIUM: Added notification displaying unread saved Form Submissions
+* Updated the language .pot file
+
 = 1.2.06 =
 * Styling tweaks/fixes
 * Fix Search block to work with translations plugins

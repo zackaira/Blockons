@@ -1,0 +1,69 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/maps",
+	"title": "Mapbox Maps",
+	"textdomain": "blockons",
+	"icon": "heart",
+	"category": "blockons-category",
+	"keywords": ["maps", "mapbox", "location", "google", "blockons"],
+	"attributes": {
+		"mapLatitude": {
+			"type": "number",
+			"default": ""
+		},
+		"mapLongitude": {
+			"type": "number",
+			"default": ""
+		},
+		"zoom": {
+			"type": "number",
+			"default": 14
+		},
+		"height": {
+			"type": "number",
+			"default": 400
+		},
+		"markers": {
+			"type": "array",
+			"default": []
+		},
+		"selectedMarker": {
+			"type": "number",
+			"default": null
+		},
+		"showMarkerInfo": {
+			"type": "boolean",
+			"default": true
+		},
+		"showMarkerIcons": {
+			"type": "boolean",
+			"default": true
+		},
+		"showControls": {
+			"type": "boolean",
+			"default": true
+		},
+		"markerStyle": {
+			"type": "string",
+			"default": "one"
+		},
+		"markersColor": {
+			"type": "string",
+			"default": "#b30a57"
+		},
+		"markersBgColor": {
+			"type": "string",
+			"default": "#FFFFFF"
+		},
+		"isPremium": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"viewScript": ["blockons-mapbox-js", "blockons-mapbox-gl"],
+	"viewStyle": ["blockons-mapbox-gl-css"],
+	"style": ["file:./style-index.css", "blockons-fontawesome"]
+}

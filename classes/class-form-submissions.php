@@ -51,6 +51,8 @@ class Blockons_Form_Submissions {
 			add_action('pre_get_posts', array($this, 'blockons_sort_columns'));
 			add_action('save_post_blockons_submission', array($this, 'blockons_save_status_meta'), 10, 2);
             add_action('before_delete_post', array($this, 'bllockons_submission_delete_attached_files'), 10, 1);
+            // Add notification bubble for unread submissions
+            add_action('admin_menu', array($this, 'blockons_add_submission_menu_notification'));
 		}
     }
 
@@ -481,6 +483,48 @@ class Blockons_Form_Submissions {
                 $query->set('orderby', 'meta_value');
                 break;
         }
+    }
+
+    /**
+     * Add a red notification bubble if there are unread submissions.
+     */
+    public function blockons_add_submission_menu_notification() {
+        global $menu;
+
+        // Get the count of unread submissions
+        $unread_count = $this->get_unread_submissions_count();
+
+        // Find the "Submissions" menu item
+        foreach ($menu as $key => $item) {
+            if ($item[2] === 'edit.php?post_type=blockons_submission') {
+                // Append a red notification bubble
+                if ($unread_count > 0) {
+                    $menu[$key][0] .= sprintf(
+                        ' <span class="blockons-submission-notif count-%d">%d</span>',
+                        $unread_count,
+                        $unread_count
+                    );
+                }
+                break;
+            }
+        }
+    }
+
+    /**
+     * Get the count of unread submissions.
+     */
+    private function get_unread_submissions_count() {
+        $args = array(
+            'post_type'      => 'blockons_submission',
+            'post_status'    => 'publish',
+            'meta_key'       => '_submission_status',
+            'meta_value'     => 'unread',
+            'fields'         => 'ids',
+            'posts_per_page' => -1,
+        );
+
+        $unread_posts = get_posts($args);
+        return count($unread_posts);
     }
 }
 

@@ -54,6 +54,11 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: __('NEW', 'blockons'),
 	},
+	maps: {
+		desc: __('Add live Mapbox Maps to your website pages.', 'blockons'),
+		pluginSpecific: false,
+		isNew: __('NEW', 'blockons'),
+	},
 	contact_form: {
 		desc: __(
 			'Add a neat contact form block to your WordPress pages.',

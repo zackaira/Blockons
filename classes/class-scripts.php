@@ -108,16 +108,14 @@ class Blockons {
 		if (blockons_fs()->can_use_premium_code__premium_only()) {
 			wp_register_style('blockons-flatpickr-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/contact-form/flatpickr/flatpickr.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
 			wp_register_script('blockons-flatpickr-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/contact-form/flatpickr/flatpickr.min.js'), array(), BLOCKONS_PLUGIN_VERSION);
-			wp_register_script('blockons-form-handler', esc_url(BLOCKONS_PLUGIN_URL . 'dist/form-handler.min.js'), array('wp-api', 'blockons-flatpickr-script'), BLOCKONS_PLUGIN_VERSION, true);
+			wp_register_script('blockons-form-handler', esc_url(BLOCKONS_PLUGIN_URL . 'dist/form-handler.min.js'), array('wp-api', 'wp-api-fetch', 'blockons-flatpickr-script'), BLOCKONS_PLUGIN_VERSION, true);
 		} else {
-			wp_register_script('blockons-form-handler', esc_url(BLOCKONS_PLUGIN_URL . 'dist/form-handler.min.js'), array('wp-api'), BLOCKONS_PLUGIN_VERSION, true);
+			wp_register_script('blockons-form-handler', esc_url(BLOCKONS_PLUGIN_URL . 'dist/form-handler.min.js'), array('wp-api', 'wp-api-fetch'), BLOCKONS_PLUGIN_VERSION, true);
 		}
 		wp_localize_script('blockons-form-handler', 'blockonsFormObj', array(
 			'apiUrl' => esc_url(get_rest_url()),
 			'nonce' => wp_create_nonce('wp_rest'),
 			'isPremium' => $isPro,
-			'recaptcha' => isset($blockonsOptions->contactforms->recaptcha) ? (bool)$blockonsOptions->contactforms->recaptcha : false,
-    		'recaptcha_key' => isset($blockonsOptions->contactforms->recaptcha_key) ? sanitize_text_field($blockonsOptions->contactforms->recaptcha_key) : null,
 			'translations' => array(
 				'required' => __('This field is required', 'blockons'),
 				'select_option' => __('Please select an option', 'blockons'),
@@ -141,6 +139,15 @@ class Blockons {
 		wp_register_script('blockons-slider-video', esc_url(BLOCKONS_PLUGIN_URL . 'dist/swiper-video.min.js'), array('blockons-swiper-js'), BLOCKONS_PLUGIN_VERSION, true);
 
 		wp_register_script('blockons-img-comparison', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/image-comparison.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
+
+		wp_register_style('blockons-mapbox-gl-css', esc_url('https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css'), array(), BLOCKONS_PLUGIN_VERSION);
+		wp_register_script('blockons-mapbox-gl', esc_url('https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
+		wp_register_script('blockons-mapbox-js', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/maps/maps.js'), array('blockons-mapbox-gl'), BLOCKONS_PLUGIN_VERSION, true);
+		wp_localize_script('blockons-mapbox-js', 'blockonsMapObj', array(
+			'apiUrl' => esc_url(get_rest_url()),
+			'nonce' => wp_create_nonce('wp_rest'),
+			'isPremium' => $isPro,
+		));
 
 		// Sweetalert Popup
 		wp_register_style('blockons-animate-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/popups/animate.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
@@ -186,6 +193,15 @@ class Blockons {
 		$blockonsSavedOptions = get_option('blockons_options');
 		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
 		$isPro = (boolean)blockons_fs()->can_use_premium_code__premium_only();
+
+		// Ensure mapbox exists and replace the key
+		if (isset($blockonsOptions->mapbox) && is_object($blockonsOptions->mapbox)) {
+			$blockonsOptions->mapbox->key = "HIDDEN"; // Replace API key
+		}
+		if (isset($blockonsOptions->contactforms) && is_object($blockonsOptions->contactforms)) {
+			$blockonsOptions->contactforms->recaptcha_key = "HIDDEN"; // Replace API key
+			$blockonsOptions->contactforms->recaptcha_secret = "HIDDEN"; // Replace API secret
+		}
 
 		// Frontend CSS
 		wp_enqueue_style('blockons-frontend-style');
@@ -300,6 +316,11 @@ class Blockons {
 		$blockonsSavedOptions = get_option('blockons_options');
 		$blockonsOptions = $blockonsSavedOptions ? json_decode($blockonsSavedOptions) : '';
 		$isPro = (boolean)blockons_fs()->can_use_premium_code__premium_only();
+
+		// Ensure mapbox exists and replace the key
+		if (isset($blockonsOptions->mapbox) && is_object($blockonsOptions->mapbox)) {
+			$blockonsOptions->mapbox->key = "HIDDEN"; // Replace API key
+		}
 		
 		wp_register_style('blockons-admin-editor-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/editor' . $suffix . '.css'), array('blockons-fontawesome', 'dashicons'), BLOCKONS_PLUGIN_VERSION);
 		wp_enqueue_style('blockons-admin-editor-style');
@@ -308,6 +329,7 @@ class Blockons {
 		wp_localize_script('blockons-admin-editor-script', 'blockonsEditorObj', array(
 			'isPremium' => $isPro,
 			'blockonsOptions' => $blockonsOptions,
+			'nonce' => wp_create_nonce('wp_rest'),
 			'adminUrl' => esc_url(admin_url()),
 			'homeUrl' => esc_url(home_url('/')),
 			'apiUrl' => esc_url( get_rest_url() ),
@@ -326,7 +348,7 @@ class Blockons {
 	 * @since   1.0.0
 	 */
 	public function blockons_load_localisation() {
-		load_plugin_textdomain('blockons', false, BLOCKONS_PLUGIN_DIR . 'languages/');
+		load_plugin_textdomain('blockons', false, BLOCKONS_PLUGIN_DIR . 'lang/');
 	} // End blockons_load_localisation ()
 
 	/**
@@ -344,6 +366,7 @@ class Blockons {
 	public static function blockonsDefaults() {
 		$initialSettings = array(
 			"blocks" => array( // For adding a new block, update this AND ../src/backend/helpers.js AND class-notices.php newblocks number
+				"maps" => true, // 22
 				"contact_form" => true, // 21
 				"table_of_contents" => true, // 20
 				"content_selector" => true, // 19

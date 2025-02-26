@@ -1,9 +1,35 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
 	// Initialize reCAPTCHA if enabled
+	const apiUrl = blockonsFormObj.apiUrl || '';
 	const recaptchaEnabled = blockonsFormObj.recaptcha || false;
-	const recaptchaSiteKey = blockonsFormObj.recaptcha_key || '';
 	const translations = blockonsFormObj.translations;
 	const isPremium = Boolean(blockonsFormObj.isPremium) || false;
+
+	// Fetch reCAPTCHA key from REST API
+	let recaptchaSiteKey = '';
+
+	if (recaptchaEnabled) {
+		try {
+			const response = await fetch(
+				`${apiUrl}blcns/v1/get-api-key?key_type=recaptcha`,
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						'X-WP-Nonce': blockonsFormObj.nonce,
+					},
+				},
+			);
+			const data = await response.json();
+
+			if (data.api_key) {
+				recaptchaSiteKey = data.api_key;
+			} else {
+				console.error('Failed to fetch reCAPTCHA key.');
+			}
+		} catch (error) {
+			console.error('Error fetching reCAPTCHA key:', error);
+		}
+	}
 
 	// Initialize all datepickers
 	const datepickers = document.querySelectorAll('.blockons-datepicker');
@@ -27,6 +53,31 @@ document.addEventListener('DOMContentLoaded', function () {
 		script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
 		document.head.appendChild(script);
 	}
+
+	const loadReCaptcha = () => {
+		return new Promise((resolve, reject) => {
+			if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {
+				resolve();
+			} else if (
+				!document.querySelector('script[src*="recaptcha/api.js"]')
+			) {
+				const script = document.createElement('script');
+				script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
+				script.onload = () => {
+					if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {
+						resolve();
+					} else {
+						reject(new Error('reCAPTCHA failed to initialize'));
+					}
+				};
+				script.onerror = () =>
+					reject(new Error('reCAPTCHA script failed to load'));
+				document.head.appendChild(script);
+			} else {
+				reject(new Error('reCAPTCHA script already loading'));
+			}
+		});
+	};
 
 	// Helper functions
 	const showFieldError = (element, message) => {
@@ -100,8 +151,30 @@ document.addEventListener('DOMContentLoaded', function () {
 	const isValidUrl = (url) => {
 		try {
 			const parsed = new URL(url);
-			return parsed.protocol === 'http:' || parsed.protocol === 'https:';
-		} catch {
+
+			// Ensure the protocol is HTTP or HTTPS
+			if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+				return false;
+			}
+
+			// Ensure there's at least one dot in the hostname (to avoid "https://haha")
+			if (
+				!parsed.hostname.includes('.') ||
+				parsed.hostname.startsWith('.') ||
+				parsed.hostname.endsWith('.')
+			) {
+				return false;
+			}
+
+			// Ensure domain is at least two characters long after the last dot (e.g., .com, .org, .net)
+			const domainParts = parsed.hostname.split('.');
+			const tld = domainParts[domainParts.length - 1];
+			if (tld.length < 2) {
+				return false;
+			}
+
+			return true;
+		} catch (e) {
 			return false;
 		}
 	};
@@ -382,13 +455,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		const forms = document.querySelectorAll('.blockons-cf-form');
 
 		forms.forEach((form) => {
-			// Get the wrapper
 			const wrapper = form.closest('.blockons-cf-wrap');
-			if (!wrapper) {
-				return;
-			}
+			if (!wrapper) return;
 
-			// Initialize elements object
 			const elements = {
 				submitBtn: form.querySelector('.blockons-cf-submit-btn'),
 				successMsg: form.querySelector('.blockons-cf-msg-success'),
@@ -399,7 +468,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				),
 			};
 
-			// Verify required elements exist
 			if (
 				!elements.submitBtn ||
 				!elements.successMsg ||
@@ -409,48 +477,64 @@ document.addEventListener('DOMContentLoaded', function () {
 				return;
 			}
 
-			// Setup input event listeners
 			setupInputListeners(elements.inputs);
 
-			// Handle form submission
 			form.addEventListener('submit', (e) => e.preventDefault());
 
 			elements.submitBtn.addEventListener('click', async (e) => {
 				e.preventDefault();
 
-				// Check honeypot
 				if (elements.honeypot?.value.trim() !== '') {
 					console.log('Honeypot triggered');
 					return;
 				}
 
-				try {
-					// Validate form
-					const { isValid, fields } = validateForm(
-						form,
-						elements.inputs,
-					);
-					console.log('Form validation result:', {
-						isValid,
-						fieldsCount: fields.length,
-					});
+				if (recaptchaEnabled && recaptchaSiteKey) {
+					try {
+						await loadReCaptcha(); // Load reCAPTCHA script if not loaded
 
-					if (!isValid) {
-						if (elements.errorMsg) {
-							elements.errorMsg.style.display = 'block';
-							elements.errorMsg.scrollIntoView({
-								behavior: 'smooth',
-								block: 'center',
-							});
-						}
-						return;
+						grecaptcha.ready(() => {
+							grecaptcha
+								.execute(recaptchaSiteKey, { action: 'submit' })
+								.then((token) => {
+									if (!token) {
+										console.error(
+											'reCAPTCHA token generation failed.',
+										);
+										handleSubmissionError(
+											{
+												message:
+													translations.recaptcha_error,
+											},
+											elements,
+										);
+										return;
+									}
+
+									let recaptchaInput = form.querySelector(
+										'input[name="recaptchaToken"]',
+									);
+									if (!recaptchaInput) {
+										recaptchaInput =
+											document.createElement('input');
+										recaptchaInput.type = 'hidden';
+										recaptchaInput.name = 'recaptchaToken';
+										form.appendChild(recaptchaInput);
+									}
+									recaptchaInput.value = token;
+
+									submitForm(form, elements);
+								});
+						});
+					} catch (error) {
+						console.error('reCAPTCHA failed to load:', error);
+						handleSubmissionError(
+							{ message: translations.recaptcha_error },
+							elements,
+						);
 					}
-
-					// Submit form
-					await submitForm(form, elements);
-				} catch (error) {
-					console.error('Form processing error:', error);
-					handleSubmissionError(error, elements);
+				} else {
+					submitForm(form, elements);
 				}
 			});
 		});
@@ -544,27 +628,19 @@ document.addEventListener('DOMContentLoaded', function () {
 	};
 
 	const submitForm = async (form, elements) => {
-		// Check if elements object and submit button exist
 		if (!elements || !elements.submitBtn) return;
 
 		try {
-			// Disable submit button and update text
 			elements.submitBtn.disabled = true;
 			elements.submitBtn.classList.add('submitting');
 
-			// Clear previous messages
 			if (elements.successMsg) elements.successMsg.style.display = 'none';
 			if (elements.errorMsg) elements.errorMsg.style.display = 'none';
 
-			// Get form wrapper
 			const wrapper = form.closest('.blockons-cf-wrap');
-			if (!wrapper) {
-				throw new Error('Form wrapper not found');
-			}
+			if (!wrapper) throw new Error('Form wrapper not found');
 
-			// Validate form first
 			const { isValid, fields } = validateForm(form, elements.inputs);
-
 			if (!isValid) {
 				if (elements.errorMsg) {
 					elements.errorMsg.style.display = 'block';
@@ -576,14 +652,10 @@ document.addEventListener('DOMContentLoaded', function () {
 				throw new Error('Form validation failed');
 			}
 
-			if (!fields || fields.length === 0) {
+			if (!fields || fields.length === 0)
 				throw new Error('No form fields found');
-			}
 
-			// Prepare form data
 			const formData = new FormData();
-
-			// Add main form data
 			formData.append('emailTo', wrapper.dataset.emailTo || '');
 			formData.append('formName', wrapper.dataset.formId || '');
 			formData.append(
@@ -609,7 +681,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				wrapper.dataset.includeMetadata === 'true',
 			);
 
-			// Process and add fields data
 			const processedFields = fields.map((field) => {
 				if (field.type === 'file') {
 					const input = form.querySelector(`[name="${field.name}"]`);
@@ -628,20 +699,26 @@ document.addEventListener('DOMContentLoaded', function () {
 				return field;
 			});
 
-			// Add processed fields to FormData
 			formData.append('fields', JSON.stringify(processedFields));
 
-			// Handle file uploads
 			const fileFields = fields.filter((field) => field.type === 'file');
 			fileFields.forEach((field) => {
 				const input = form.querySelector(`[name="${field.name}"]`);
 				if (input && input.files.length > 0) {
-					// Append the file using the field name instead of a generic index
 					formData.append(field.name, input.files[0]);
 				}
 			});
 
-			// Submit the form
+			// Ensure reCAPTCHA token is included
+			const recaptchaInput = form.querySelector(
+				'input[name="recaptchaToken"]',
+			);
+			if (recaptchaInput && recaptchaInput.value) {
+				formData.append('recaptchaToken', recaptchaInput.value);
+			} else if (recaptchaEnabled) {
+				throw new Error('reCAPTCHA token missing');
+			}
+
 			const response = await fetch(
 				`${blockonsFormObj.apiUrl}blcns/v1/submit-form`,
 				{
@@ -651,16 +728,13 @@ document.addEventListener('DOMContentLoaded', function () {
 			);
 			const data = await response.json();
 
-			if (!response.ok) {
+			if (!response.ok)
 				throw new Error(data.message || translations.error);
-			}
 
-			// Handle successful submission
 			handleSuccessfulSubmission(form, elements);
 		} catch (error) {
 			handleSubmissionError(error, elements);
 		} finally {
-			// Always re-enable submit button and restore text
 			if (elements && elements.submitBtn) {
 				elements.submitBtn.disabled = false;
 				elements.submitBtn.classList.remove('submitting');

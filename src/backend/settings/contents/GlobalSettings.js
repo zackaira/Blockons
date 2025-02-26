@@ -30,6 +30,48 @@ const GlobalSettings = ({
 			<table className="form-table" role="presentation">
 				<tbody>
 					<SettingRow
+						title={__('Mapbox Embed API', 'blockons')}
+						description={__(
+							'Mapbox Embed API is a free service by Mapbox that allows embedding interactive maps on your website',
+							'blockons',
+						)}
+						inputType="heading"
+						// nomargin
+					/>
+					<SettingRow
+						title={__('Enable Mapbox Maps', 'blockons')}
+						slug="mapbox_api"
+						value={blockonsOptions.mapbox?.api}
+						inputType="toggle"
+						onChange={onSettingChange}
+						note={
+							<>
+								{__(
+									'Enter your API key here to start using Mapbox Maps on your website',
+									'blockons',
+								)}
+								{'. '}
+								<a
+									href="https://developers.google.com/maps/documentation/embed/get-api-key"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{__('Get a Mapbox API Key', 'blockons')}.
+								</a>
+							</>
+						}
+					/>
+					{blockonsOptions.mapbox?.api && (
+						<SettingRow
+							title={__('API Key')}
+							slug="mapbox_key"
+							value={blockonsOptions.mapbox?.key}
+							inputType="text"
+							onChange={onSettingChange}
+						/>
+					)}
+
+					<SettingRow
 						title={__('Blockons Contact Forms', 'blockons')}
 						description={__(
 							'Global Settings for Blockons Contact Forms',

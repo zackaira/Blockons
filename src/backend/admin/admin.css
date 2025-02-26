@@ -44,6 +44,21 @@ body.wp-admin.blockons-free.plugins-php
 	margin-right: 5px;
 }
 /* ---- Admin Form Submission Page Styling ---- */
+span.blockons-submission-notif {
+	background: #d63638;
+	box-shadow: 0 1px 4px rgb(0 0 0 / 22%);
+	border-radius: 50%;
+	color: #fff;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 11px;
+	width: 18px;
+	height: 18px;
+	position: relative;
+	top: -1px;
+	left: 3px;
+}
 body.post-type-blockons_submission.post-php #post-body .postbox-header {
 	pointer-events: none;
 }
