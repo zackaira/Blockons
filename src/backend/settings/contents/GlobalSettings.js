@@ -32,7 +32,7 @@ const GlobalSettings = ({
 					<SettingRow
 						title={__('Mapbox Embed API', 'blockons')}
 						description={__(
-							'Mapbox Embed API is a free service by Mapbox that allows embedding interactive maps on your website',
+							'Mapbox Embed API is a free service by Mapbox that allows embedding interactive maps on your website.',
 							'blockons',
 						)}
 						inputType="heading"
@@ -52,7 +52,7 @@ const GlobalSettings = ({
 								)}
 								{'. '}
 								<a
-									href="https://developers.google.com/maps/documentation/embed/get-api-key"
+									href="https://docs.mapbox.com/help/getting-started/access-tokens/"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
@@ -68,6 +68,21 @@ const GlobalSettings = ({
 							value={blockonsOptions.mapbox?.key}
 							inputType="text"
 							onChange={onSettingChange}
+							note={
+								<>
+									{__(
+										'Why do we use Mapbox instead of Google Maps?',
+										'blockons',
+									)}{' '}
+									<a
+										href="https://blockons.com/add-a-maps-block-to-wordpress-with-ease/#whymapbox"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										{__('Read More Here', 'blockons')}.
+									</a>
+								</>
+							}
 						/>
 					)}
 

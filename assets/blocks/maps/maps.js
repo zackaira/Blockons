@@ -202,7 +202,7 @@ function initMap(mapElement) {
 	}
 
 	// Initialize icons and marker classes on load
-	// updateIcons();
+	updateIcons();
 
 	// If a marker is preselected, ensure its info block is shown correctly.
 	if (selectedMarkerIndex !== null) {

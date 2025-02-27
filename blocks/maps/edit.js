@@ -20,7 +20,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import BlockonsColorpicker from '../_components/BlockonsColorpicker';
 import { colorPickerPalette } from '../block-global';
 import BlockonsNote from '../../src/backend/settings/components/UI/BlockonsNote';
-import { map } from 'lodash';
 
 const DEFAULT_LAT = -33.9249; // CT
 const DEFAULT_LNG = 18.4241;
@@ -45,12 +44,14 @@ const Edit = (props) => {
 		setAttributes,
 	} = props;
 	const apiUrl = blockonsEditorObj.apiUrl;
+	const settingsUrl = `${blockonsEditorObj.adminUrl}options-general.php?page=blockons-settings&tab=settings`;
 	const isPro = Boolean(blockonsEditorObj.isPremium);
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [enableMap, setEnableMap] = useState(false);
 	const [mapboxToken, setMapboxToken] = useState(null);
 	const [searchQuery, setSearchQuery] = useState('');
+	const [tempZoom, setTempZoom] = useState(zoom);
 	const [tempLat, setTempLat] = useState(mapLatitude);
 	const [tempLng, setTempLng] = useState(mapLongitude);
 	const mapContainerRef = useRef(null);
@@ -77,7 +78,7 @@ const Edit = (props) => {
 					setMapboxToken(data.api_key);
 				} else {
 					setMapboxToken(0);
-					console.error('No API key returned from endpoint.');
+					// console.error('No API key returned from endpoint.');
 				}
 			} catch (err) {
 				console.error('Error fetching Mapbox API key:', err);
@@ -138,7 +139,7 @@ const Edit = (props) => {
 
 				mapRef.current.on('zoomend', () => {
 					const newZoom = mapRef.current.getZoom();
-					setAttributes({ zoom: parseFloat(newZoom.toFixed(1)) });
+					setTempZoom(parseFloat(newZoom.toFixed(2)));
 				});
 			}
 		}
@@ -394,7 +395,7 @@ const Edit = (props) => {
 
 		mapRef.current.flyTo({
 			center: [mapLongitude, mapLatitude],
-			// zoom: zoom,
+			zoom: zoom,
 			speed: 1.2,
 			curve: 1.5,
 			essential: true,
@@ -402,12 +403,14 @@ const Edit = (props) => {
 
 		setTempLat(mapLatitude);
 		setTempLng(mapLongitude);
+		setTempZoom(zoom);
 	};
 
 	const saveMapPosition = () => {
 		setAttributes({
 			mapLatitude: tempLat,
 			mapLongitude: tempLng,
+			zoom: parseFloat(tempZoom),
 		});
 	};
 
@@ -589,12 +592,21 @@ const Edit = (props) => {
 												</h5>
 												<ToolbarButton
 													icon={
-														<span className="dashicons dashicons-edit"></span>
+														<span
+															className={`dashicons ${isPremium ? 'dashicons-edit' : 'dashicons-visibility'}`}
+														></span>
 													}
-													title={__(
-														'Edit',
-														'blockons',
-													)}
+													title={
+														isPremium
+															? __(
+																	'Edit',
+																	'blockons',
+																)
+															: __(
+																	'View',
+																	'blockons',
+																)
+													}
 													onClick={() => {
 														selectMarker(index);
 														mapRef.current.panTo([
@@ -639,60 +651,80 @@ const Edit = (props) => {
 														disabled
 													/>
 												</div>
-												<div className="blockons-divider"></div>
 
-												<TextControl
-													label={__(
-														'Icon (FontAwesome Class)',
-														'blockons',
-													)}
-													value={marker.icon}
-													onChange={(value) =>
-														updateMarkerDetails(
-															index,
-															'icon',
-															value,
-														)
-													}
-												/>
+												{isPremium && (
+													<>
+														<div className="blockons-divider"></div>
+														<TextControl
+															label={__(
+																'Icon (FontAwesome Class)',
+																'blockons',
+															)}
+															value={marker.icon}
+															onChange={(value) =>
+																updateMarkerDetails(
+																	index,
+																	'icon',
+																	value,
+																)
+															}
+															help={
+																<a
+																	href="https://fontawesome.com/search?ic=free"
+																	target="_blank"
+																>
+																	{__(
+																		'Use any Free Font Awesome Icon',
+																		'blockons',
+																	)}
+																</a>
+															}
+														/>
 
-												<BlockonsColorpicker
-													label={__(
-														'Icon Color',
-														'blockons',
-													)}
-													value={marker.iconColor}
-													onChange={(value) =>
-														updateMarkerDetails(
-															index,
-															'iconColor',
-															value,
-														)
-													}
-													paletteColors={
-														colorPickerPalette
-													}
-												/>
-												{markerStyle === 'two' && (
-													<BlockonsColorpicker
-														label={__(
-															'Marker Background Color',
-															'blockons',
+														<BlockonsColorpicker
+															label={__(
+																'Icon Color',
+																'blockons',
+															)}
+															value={
+																marker.iconColor
+															}
+															onChange={(value) =>
+																updateMarkerDetails(
+																	index,
+																	'iconColor',
+																	value,
+																)
+															}
+															paletteColors={
+																colorPickerPalette
+															}
+														/>
+														{markerStyle ===
+															'two' && (
+															<BlockonsColorpicker
+																label={__(
+																	'Marker Background Color',
+																	'blockons',
+																)}
+																value={
+																	marker.iconBgColor
+																}
+																onChange={(
+																	value,
+																) =>
+																	updateMarkerDetails(
+																		index,
+																		'iconBgColor',
+																		value,
+																	)
+																}
+																paletteColors={
+																	colorPickerPalette
+																}
+															/>
 														)}
-														value={
-															marker.iconBgColor
-														}
-														onChange={(value) =>
-															updateMarkerDetails(
-																index,
-																'iconBgColor',
-																value,
-															)
-														}
-														paletteColors={
-															colorPickerPalette
-														}
-													/>
+													</>
 												)}
 											</>
 										)}
@@ -719,17 +751,10 @@ const Edit = (props) => {
 
 							<RangeControl
 								label={__('Zoom Level', 'blockons')}
-								value={zoom}
-								onChange={(value) => {
-									setAttributes({ zoom: parseFloat(value) });
-									if (mapRef.current) {
-										mapRef.current.setZoom(
-											parseFloat(value),
-										);
-									}
-								}}
-								min={4}
-								max={18}
+								value={tempZoom}
+								onChange={(value) =>
+									setTempZoom(value.toFixed(2))
+								}
 							/>
 							<div className="blockons-divider"></div>
 
@@ -818,7 +843,6 @@ const Edit = (props) => {
 								<Button
 									variant="primary"
 									onClick={() => setEnableMap(true)}
-									disabled={!mapboxToken}
 								>
 									{mapboxToken
 										? __('Click to Use Map', 'blockons')
@@ -921,6 +945,9 @@ const Edit = (props) => {
 												'Place Description & Details...',
 												'blockons',
 											)}
+											{...(!isPremium
+												? { allowedFormats: [] }
+												: {})}
 										/>
 									</div>
 								)}
@@ -941,7 +968,7 @@ const Edit = (props) => {
 						)}
 					</>
 				)}
-				{console.log('MapboxToken: ', mapboxToken)}
+
 				{!enableMap && (
 					<div className={`blockons-mapbox-disable`}>
 						{isLoading ? (
@@ -952,13 +979,12 @@ const Edit = (props) => {
 							<Button
 								variant="primary"
 								onClick={() => setEnableMap(true)}
-								disabled={true}
 							>
 								{__('Click to Use Map', 'blockons')}
 							</Button>
 						) : (
 							<a
-								href="#"
+								href={settingsUrl}
 								target="_blank"
 								className="blockons-btnlike"
 							>

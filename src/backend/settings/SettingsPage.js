@@ -50,7 +50,7 @@ const SettingsPage = () => {
 		window.history.replaceState(null, '', '?' + params.toString());
 	};
 
-	console.log('blockonsOptions', blockonsOptions);
+	// console.log('blockonsOptions', blockonsOptions);
 
 	// setState dynamically for each setting
 	const handleChange = ({
@@ -80,8 +80,6 @@ const SettingsPage = () => {
 					}),
 		});
 	};
-
-	// console.log(blockonsOptions);
 
 	useEffect(() => {
 		blockonsGroupSettings();
