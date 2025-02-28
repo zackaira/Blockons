@@ -144,6 +144,7 @@ class Blockons_Security_Manager {
                         // Check standard text inputs, textareas, etc.
                         if (empty($field['value']) && !in_array($field['type'], ['checkbox', 'checkbox_group', 'radio_group'])) {
                             throw new Exception(sprintf(
+                                /* translators: %s: the label of the required field */
                                 __('Required field "%s" is empty', 'blockons'),
                                 $field['label']
                             ));
@@ -153,6 +154,7 @@ class Blockons_Security_Manager {
                         if ($field['type'] === 'checkbox_group') {
                             if (empty($field['value']) || !is_array($field['value'])) {
                                 throw new Exception(sprintf(
+                                    /* translators: %s: the label of the required field */
                                     __('Required field "%s" has no selections', 'blockons'),
                                     $field['label']
                                 ));
@@ -163,6 +165,7 @@ class Blockons_Security_Manager {
                         if ($field['type'] === 'radio_group') {
                             if (empty($field['value']) || !isset($field['value']['value'])) {
                                 throw new Exception(sprintf(
+                                    /* translators: %s: the label of the required field */
                                     __('Required field "%s" has no selection', 'blockons'),
                                     $field['label']
                                 ));
@@ -173,6 +176,7 @@ class Blockons_Security_Manager {
                         if ($field['type'] === 'checkbox') {
                             if (empty($field['value']) || $field['value'] != 1) {
                                 throw new Exception(sprintf(
+                                    /* translators: %s: the label of the required field */
                                     __('You must accept the %s', 'blockons'),
                                     $field['label']
                                 ));
@@ -184,6 +188,7 @@ class Blockons_Security_Manager {
                     if ($field['type'] === 'email' && !empty($field['value'])) {
                         if (!filter_var($field['value'], FILTER_VALIDATE_EMAIL)) {
                             throw new Exception(sprintf(
+                                /* translators: %s: the label of the email field */
                                 __('Invalid email format for field "%s"', 'blockons'),
                                 $field['label']
                             ));
@@ -218,7 +223,8 @@ class Blockons_Security_Manager {
                     return new WP_Error(
                         'too_many_emails',
                         sprintf(
-                            __('Too many email addresses for %s. Maximum allowed: %d', 'blockons'),
+                            /* translators: 1: the field label, 2: the maximum allowed number of email addresses */
+                            __('Too many email addresses for %1$s. Maximum allowed: %2$d', 'blockons'),
                             $field,
                             $this->limits[$field]
                         ),
@@ -231,6 +237,7 @@ class Blockons_Security_Manager {
                     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                         return new WP_Error(
                             'invalid_email',
+                            /* translators: %s: the invalid email address */
                             sprintf(__('Invalid email address: %s', 'blockons'), $email),
                             array('status' => 400)
                         );

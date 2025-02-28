@@ -662,6 +662,7 @@ class Blockons_WC_Rest_Routes {
 	
 					if ($file['size'] > $max_size) {
 						throw new Exception(sprintf(
+							/* translators: %s: the maximum file size allowed (e.g., "2 MB") */
 							__('File size exceeds limit of %s', 'blockons'),
 							size_format($max_size)
 						));
@@ -1065,12 +1066,15 @@ class Blockons_WC_Rest_Routes {
 	 */
 	private function get_metadata_content() {
 		$metadata = "\n\n" . __('Submission Details:', 'blockons') . "\n";
+		/* translators: %s: a date string */
 		$metadata .= sprintf(__('Date: %s', 'blockons'), current_time('mysql')) . "\n";
 		$metadata .= sprintf(
+			/* translators: %s: the URL of the page */
 			__('Page URL: %s', 'blockons'),
 			isset($_SERVER['HTTP_REFERER']) ? esc_url($_SERVER['HTTP_REFERER']) : __('N/A', 'blockons')
 		) . "\n";
 		$metadata .= sprintf(
+			/* translators: %s: the IP address of the user */
 			__('IP Address: %s', 'blockons'),
 			$this->get_client_ip()
 		) . "\n";
