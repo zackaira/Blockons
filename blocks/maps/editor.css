@@ -43,5 +43,12 @@
 	justify-content: space-between;
 	gap: 10px;
 }
-.blockons-marker-setsplit .blockons-editor-note {
+.blockons-mapbox-note-small .blockons-editor-note h4 {
+	margin: 14px 0 0;
+	text-align: center;
+}
+.blockons-mapbox-note-small .blockons-editor-note .bl-note-txt {
+	font-size: 12px;
+	margin: 3px 0 0;
+	text-align: center;
 }

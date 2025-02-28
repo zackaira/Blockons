@@ -570,6 +570,7 @@ a.blockons-upgrade::before {
 }
 .blockonsInfoTab .blockons-video,
 .blockonsInfoTab .blockons-info,
+.blockonsInfoTab .blockons-help,
 .center {
 	text-align: center;
 }

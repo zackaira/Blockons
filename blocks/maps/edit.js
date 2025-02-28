@@ -525,36 +525,6 @@ const Edit = (props) => {
 							</div>
 							<div className="blockons-divider"></div>
 
-							{!isPremium && markers.length > 0 && (
-								<BlockonsNote
-									title={__(
-										'Add Multiple Map Icons',
-										'blockons',
-									)}
-									text={__(
-										'Upgrade to Blockons Pro and add as many icons to the map as you need.',
-										'blockons',
-									)}
-									proFeatures={[
-										__('Multiple Map Icons', 'blockons'),
-										__(
-											'Switch from icon to icon viewing different information',
-											'blockons',
-										),
-										__(
-											'Color each marker separately',
-											'blockons',
-										),
-										__(
-											'Extra Zoom control to view all markers',
-											'blockons',
-										),
-									]}
-									docLink="https://blockons.com/documentation/maps-block/#maps-pro"
-									upgradeLink={blockonsEditorObj.upgradeUrl}
-								/>
-							)}
-
 							{markersToDisplay.map((marker, index) => (
 								<div
 									key={index}
@@ -731,8 +701,22 @@ const Edit = (props) => {
 									/>
 								</div>
 							))}
-							{markers.length > 0 && (
+							{isPremium && markers.length > 0 && (
 								<div className="blockons-divider"></div>
+							)}
+							{!isPremium && markers.length > 0 && (
+								<div className="blockons-mapbox-note-small">
+									<BlockonsNote
+										title={__(
+											'Add More Markers with Blockons Pro',
+											'blockons',
+										)}
+										text={__(
+											'Plus other customization settings.',
+											'blockons',
+										)}
+									/>
+								</div>
 							)}
 
 							<RangeControl
@@ -832,6 +816,39 @@ const Edit = (props) => {
 										})
 									}
 									paletteColors={colorPickerPalette}
+								/>
+							)}
+
+							{!isPremium && (
+								<BlockonsNote
+									title={__('Blockons Pro Maps', 'blockons')}
+									text={__(
+										'Upgrade to Blockons Pro and unlock more features for your maps.',
+										'blockons',
+									)}
+									proFeatures={[
+										__(
+											'Add multiple markers to the map',
+											'blockons',
+										),
+										__(
+											'Select from many marker icons',
+											'blockons',
+										),
+										__(
+											'Color and style markers separately',
+											'blockons',
+										),
+
+										__(
+											'Add links to Mapbox Map Info box',
+											'blockons',
+										),
+									]}
+									docLink="https://blockons.com/pro/#maps-pro"
+									docText={__('View More', 'blockons')}
+									upgradeLink={blockonsEditorObj.upgradeUrl}
+									noline
 								/>
 							)}
 						</>

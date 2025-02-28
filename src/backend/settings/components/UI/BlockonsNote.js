@@ -1,4 +1,4 @@
-import { __ } from "@wordpress/i18n";
+import { __ } from '@wordpress/i18n';
 
 const BlockonsNote = ({
 	imageUrl,
@@ -12,7 +12,7 @@ const BlockonsNote = ({
 	noline,
 }) => {
 	return (
-		<div className={`blockons-editor-note ${noline ? "noline" : ""}`}>
+		<div className={`blockons-editor-note ${noline ? 'noline' : ''}`}>
 			{imageUrl && (
 				<div className="bl-note-img">
 					<img src={imageUrl} alt={title} />
@@ -33,8 +33,14 @@ const BlockonsNote = ({
 			{(docLink || upgradeLink) && (
 				<div className="bl-note-links">
 					{docLink && (
-						<a href={docLink} className="bl-note-link" target="_blank">
-							{docText ? docText : __("Read Documentation", "blockons")}
+						<a
+							href={docLink}
+							className="bl-note-link"
+							target="_blank"
+						>
+							{docText
+								? docText
+								: __('Read Documentation', 'blockons')}
 						</a>
 					)}
 					{upgradeLink && (
@@ -43,7 +49,9 @@ const BlockonsNote = ({
 							className="bl-note-link upgrade"
 							target="_blank"
 						>
-							{upgradeText ? upgradeText : __("Upgrade to Pro", "blockons")}
+							{upgradeText
+								? upgradeText
+								: __('Upgrade to Pro', 'blockons')}
 						</a>
 					)}
 				</div>
