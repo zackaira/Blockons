@@ -5,7 +5,7 @@ Tags: gutenberg, editor blocks, woocommerce, page builder, gutenberg blocks
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.7
-Stable tag: 1.2.06
+Stable tag: 1.2.07
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -230,7 +230,7 @@ This could be from the theme you're using, or another plugin. Again, please [con
 * Fix missing Translations
 * Fixed Contact Form block validating URL input
 * Changed all block editor icons to standard WP color
-* 
+* NEW: Added new Mapbox Maps block
 * PREMIUM: Fixed Contact Form to work with multiple forms with ReCaptcha
 * PREMIUM: Added notification displaying unread saved Form Submissions
 * Updated the language .pot file

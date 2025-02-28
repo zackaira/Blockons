@@ -94,9 +94,9 @@ class Blockons_Notices {
 		$settings = array();
 
 		$settings['new_blocks_added'] = array(
-			'id'    => 'newblocks_010', // Increment this when adding new blocks
+			'id'    => 'newblocks_011', // Increment this when adding new blocks
 			'type'  => 'info', // info | error | warning | success
-			'title' => __( 'New \'Contact Form\' & \'Table of Contents\' blocks added. Plus new Pro Features!', 'blockons' ),
+			'title' => __( 'New \'Mapbox Maps\' & \'Contact Form\' blocks added. Plus new Pro Features!', 'blockons' ),
 			'text'  => __( 'Please go to the Blockons settings to enable it in the editor if you want to use it.', 'blockons' ),
 			'link'  => admin_url( 'options-general.php?page=blockons-settings' ), // admin_url( 'options-general.php?page=blockons-settings' ),
 			'link_text' => __( 'Go to Blockons Settings', 'blockons' ),
