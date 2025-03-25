@@ -260,7 +260,7 @@ class Blockons_Security_Manager {
                 $sanitized['fields'] = $this->sanitize_form_fields($value);
             } else if (in_array($key, ['emailTo', 'ccEmails', 'bccEmails'])) {
                 // Special handling for email fields
-                $sanitized[$key] = $this->sanitize_email_list($value);
+                $sanitized[$key] = $this->sanitize_email_list($value, $key);
             } else if (is_array($value)) {
                 $sanitized[$key] = array_map('sanitize_text_field', $value);
             } else {
@@ -350,12 +350,13 @@ class Blockons_Security_Manager {
     /**
      * Sanitize email list
      */
-    private function sanitize_email_list($emails) {
+    private function sanitize_email_list($emails, $field_key) {
         if (empty($emails)) return '';
         
         $email_list = array_map('trim', explode(',', $emails));
         $email_list = array_filter($email_list);
-        $email_list = array_slice($email_list, 0, $this->limits[$key] ?? 1);
+        $limit = isset($this->limits[$field_key]) ? $this->limits[$field_key] : count($email_list);
+        $email_list = array_slice($email_list, 0, $limit);
         
         return implode(',', array_map('sanitize_email', $email_list));
     }

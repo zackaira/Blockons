@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function () {
 	// Initialize reCAPTCHA if enabled
 	const apiUrl = blockonsFormObj.apiUrl || '';
-	const recaptchaEnabled = blockonsFormObj.recaptcha || false;
+	const recaptchaEnabled = blockonsFormObj.recaptchaEnabled || false;
 	const translations = blockonsFormObj.translations;
 	const isPremium = Boolean(blockonsFormObj.isPremium) || false;
 
@@ -31,6 +31,46 @@ document.addEventListener('DOMContentLoaded', async function () {
 		}
 	}
 
+	const loadReCaptcha = () => {
+		return new Promise((resolve, reject) => {
+			if (typeof grecaptcha !== 'undefined') {
+				// reCAPTCHA is already loaded
+				resolve();
+			} else {
+				// Check if the script is already added (but not loaded yet)
+				const existingScript = document.querySelector(
+					'script[src*="recaptcha/api.js"]',
+				);
+				if (existingScript) {
+					existingScript.addEventListener('load', () => {
+						resolve();
+					});
+					existingScript.addEventListener('error', () => {
+						reject(new Error('reCAPTCHA script failed to load'));
+					});
+				} else {
+					// Append the script
+					const script = document.createElement('script');
+					script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
+					script.onload = () => resolve();
+					script.onerror = () =>
+						reject(new Error('reCAPTCHA script failed to load'));
+					document.head.appendChild(script);
+				}
+			}
+		});
+	};
+
+	if (recaptchaEnabled && recaptchaSiteKey) {
+		loadReCaptcha()
+			.then(() => {
+				console.log('reCAPTCHA loaded on page load');
+			})
+			.catch((error) => {
+				console.error('reCAPTCHA failed to load on page load:', error);
+			});
+	}
+
 	// Initialize all datepickers
 	const datepickers = document.querySelectorAll('.blockons-datepicker');
 	if (isPremium && datepickers.length > 0) {
@@ -47,37 +87,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 			});
 		});
 	}
-
-	if (isPremium && recaptchaEnabled && recaptchaSiteKey) {
-		const script = document.createElement('script');
-		script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
-		document.head.appendChild(script);
-	}
-
-	const loadReCaptcha = () => {
-		return new Promise((resolve, reject) => {
-			if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {
-				resolve();
-			} else if (
-				!document.querySelector('script[src*="recaptcha/api.js"]')
-			) {
-				const script = document.createElement('script');
-				script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
-				script.onload = () => {
-					if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {
-						resolve();
-					} else {
-						reject(new Error('reCAPTCHA failed to initialize'));
-					}
-				};
-				script.onerror = () =>
-					reject(new Error('reCAPTCHA script failed to load'));
-				document.head.appendChild(script);
-			} else {
-				reject(new Error('reCAPTCHA script already loading'));
-			}
-		});
-	};
 
 	// Helper functions
 	const showFieldError = (element, message) => {

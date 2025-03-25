@@ -115,6 +115,7 @@ class Blockons {
 		wp_localize_script('blockons-form-handler', 'blockonsFormObj', array(
 			'apiUrl' => esc_url(get_rest_url()),
 			'nonce' => wp_create_nonce('wp_rest'),
+			'recaptchaEnabled' => isset($blockonsOptions->contactforms->recaptcha) ? $blockonsOptions->contactforms->recaptcha : false,
 			'isPremium' => $isPro,
 			'translations' => array(
 				'required' => __('This field is required', 'blockons'),

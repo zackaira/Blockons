@@ -537,16 +537,10 @@ class Blockons_WC_Rest_Routes {
 			$email_content = $this->prepare_email_content($form_data);
 			$headers = $this->prepare_email_headers($form_data);
 			$subject = $this->get_email_subject($form_data);
+			$emailRecipients = implode(', ', $valid_emails);
 	
 			// Check if we're in a development environment
 			if ($this->is_development_environment()) {
-				// error_log('Development environment detected - skipping actual email sending');
-				// error_log('Email would have been sent with:');
-				// error_log('To: ' . implode(', ', $valid_emails));
-				// error_log('Subject: ' . $subject);
-				// error_log('Content: ' . $email_content);
-				// error_log('Headers: ' . print_r($headers, true));
-	
 				// Return success for development environment
 				return [
 					'content' => $email_content,
@@ -556,14 +550,13 @@ class Blockons_WC_Rest_Routes {
 					'dev_mode' => true
 				];
 			}
-	
-			// Production email sending code...
-			$mail_sent = wp_mail($valid_emails[0], $subject, $email_content, $headers);
-	
+
+			// Send email
+			$mail_sent = wp_mail($emailRecipients, $subject, $email_content, $headers);
+
 			if (!$mail_sent) {
 				$error = error_get_last();
 				$error_message = ($error && isset($error['message'])) ? $error['message'] : 'Unknown error';
-			
 				error_log('Mail send failed. PHP error: ' . print_r($error, true));
 				throw new Exception('Failed to send email: ' . $error_message);
 			}

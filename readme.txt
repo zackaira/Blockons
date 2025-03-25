@@ -1,11 +1,11 @@
 === Blockons - Gutenberg blocks for WordPress and WooCommerce websites ===
 Contributors: Kaira
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PFZGBM92T8XSE&source=url
-Tags: gutenberg, editor blocks, woocommerce, page builder, gutenberg blocks
+Tags: gutenberg, editor blocks, woocommerce blocks, page builder, ultimate blocks
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.7
-Stable tag: 1.2.07
+Stable tag: 1.2.08
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,9 @@ The Slider block transforms your page with a neat, easy-to-use slider where you 
 
 &#9989; **Icon List** block
 Improve your website by using customizable icon list items. Adding your own icons to lists not only makes them more visually appealing but also more attractive to your audience. [See Example](https://blockons.com/documentation/icon-list-block/)
+
+&#9989; **Mapbox Maps** block
+The Mapbox Maps block seamlessly integrates interactive maps into your site, enabling visitors to explore locations and find your places with ease. Ideal for store locators, event venues, or travel routes, this block offers customizable map features for a more engaging user experience. [See Example](https://blockons.com/documentation/maps-block/)
 
 &#9989; **Tabs** block
 The Tabs block organizes your content into a clean, streamlined format, making it easy for visitors to navigate through different sections without leaving the page. Perfect for FAQs, product descriptions, or service details, this block allows users to switch between tabs with just a click. [See Example](https://blockons.com/documentation/tabs-block/)
@@ -225,6 +228,13 @@ Please [contact us](https://blockons.com/go/contact/) so we can post a fix and g
 This could be from the theme you're using, or another plugin. Again, please [contact us](https://blockons.com/go/contact/) so we can post a fix or give you custom CSS to fix it.
 
 == Changelog ==
+
+= 1.2.08 =
+* Styling tweaks/fixes
+* 
+* 
+* PREMIUM: Fixed ReCaptcha bug not loading badge
+* Updated the language .pot file
 
 = 1.2.07 =
 * Fix missing Translations
