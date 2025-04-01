@@ -163,6 +163,13 @@ This means it doesn't include outdated, deprecated approaches used in the early 
 You can disable blocks if you're not using them... Blockons only includes the code for the blocks used!
 
 
+= Related Products by Kaira =
+
+[StoreCustomizer](https://wordpress.org/plugins/woocustomizer/): Customize your WooCommerce store pages with ease. 
+
+[Linkt](https://wordpress.org/plugins/linkt/): Affiliate and Custom link tracking and management.
+
+
 = Translations =
 
 We're always needing new translations, so please [contact us here](https://blockons.com/go/contact/) if you are willing to help translate Blockons into a language that we don't have.

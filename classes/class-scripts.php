@@ -180,10 +180,6 @@ class Blockons {
 			'isAdmin' => (boolean)is_admin(),
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
 		));
-
-		if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], 'fontawesome/webfonts/') !== false) {
-            header('Access-Control-Allow-Origin: *');
-        }
 	} // End blockons_register_scripts ()
 
 	/**
