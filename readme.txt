@@ -238,8 +238,7 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.2.08 =
 * Styling tweaks/fixes
-* 
-* 
+* Admin updates & code refactoring
 * PREMIUM: Fixed ReCaptcha bug not loading badge
 * Updated the language .pot file
 
