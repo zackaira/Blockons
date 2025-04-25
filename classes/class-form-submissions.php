@@ -33,13 +33,6 @@ class Blockons_Form_Submissions {
 		$this->enabled = isset($options['contactforms']['save_to_dashboard']) 
 			? (bool)$options['contactforms']['save_to_dashboard'] 
 			: false;
-	
-        $this->statuses = array(
-            'unread' => __('Unread', 'blockons'),
-            'read' => __('Read', 'blockons'),
-            'replied' => __('Replied', 'blockons'),
-            'spam' => __('Spam', 'blockons')
-        );
 
 		// Only add hooks if enabled
 		if ($this->enabled) {
@@ -61,6 +54,19 @@ class Blockons_Form_Submissions {
      */
     public function is_enabled() {
         return $this->enabled;
+    }
+
+    /** 
+     * Lazily build our statuses array
+     * Runs only when called—after load_plugin_textdomain()
+     */
+    protected function get_statuses() {
+        return array(
+            'unread' => __( 'Unread', 'blockons' ),
+            'read' => __( 'Read', 'blockons' ),
+            'replied' => __( 'Replied', 'blockons' ),
+            'spam' => __( 'Spam', 'blockons' ),
+        );
     }
 
     /**
@@ -133,9 +139,11 @@ class Blockons_Form_Submissions {
         if (empty($current_status)) {
             $current_status = 'unread';
         }
+
+        $statuses = $this->get_statuses();
         ?>
         <select name="submission_status" id="submission_status" style="width: 100%;">
-            <?php foreach ($this->statuses as $value => $label) : ?>
+            <?php foreach ($statuses as $value => $label) : ?>
                 <option value="<?php echo esc_attr($value); ?>" <?php selected($current_status, $value); ?>>
                     <?php echo esc_html($label); ?>
                 </option>
@@ -162,10 +170,12 @@ class Blockons_Form_Submissions {
             return;
         }
 
+        $statuses = $this->get_statuses();
+
         // Save status
         if (isset($_POST['submission_status'])) {
             $status = sanitize_text_field($_POST['submission_status']);
-            if (array_key_exists($status, $this->statuses)) {
+            if (array_key_exists($status, $statuses)) {
                 update_post_meta($post_id, '_submission_status', $status);
             }
         }
@@ -443,7 +453,9 @@ class Blockons_Form_Submissions {
                 break;
             case 'status':
                 $status = get_post_meta($post_id, '_submission_status', true);
-                $status_label = isset($this->statuses[$status]) ? $this->statuses[$status] : $this->statuses['unread'];
+                $statuses = $this->get_statuses();
+
+                $status_label = isset($statuses[$status]) ? $statuses[$status] : $statuses['unread'];
                 echo esc_html($status_label);
                 break;
         }
@@ -528,5 +540,4 @@ class Blockons_Form_Submissions {
     }
 }
 
-// Initialize the class
 new Blockons_Form_Submissions();

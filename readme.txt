@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: gutenberg, editor blocks, woocommerce blocks, page builder, ultimate blocks
 Requires at least: 5.0
 Requires PHP: 5.6
-Tested up to: 6.7
-Stable tag: 1.2.08
+Tested up to: 6.8
+Stable tag: 1.2.09
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -235,6 +235,14 @@ Please [contact us](https://blockons.com/go/contact/) so we can post a fix and g
 This could be from the theme you're using, or another plugin. Again, please [contact us](https://blockons.com/go/contact/) so we can post a fix or give you custom CSS to fix it.
 
 == Changelog ==
+
+= 1.2.09 =
+* Styling tweaks/fixes
+* Code refactoring
+* Version compatibility for WP 6.8 & WC 9.8
+* 
+* Fix php notice for localization loading too early
+* Updated the language .pot file
 
 = 1.2.08 =
 * Styling tweaks/fixes

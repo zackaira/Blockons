@@ -7,9 +7,9 @@
  * Author: Kaira
  * Author URI: https://kairaweb.com/
  * Requires at least: 5.0
- * Tested up to: 6.7
+ * Tested up to: 6.8
  * WC requires at least: 3.2
- * WC tested up to: 9.7
+ * WC tested up to: 9.8
  * Text Domain: blockons
  * Domain Path: /lang/
  * 
@@ -83,31 +83,6 @@ if ( function_exists( 'blockons_fs' ) ) {
 	if (blockons_fs()->can_use_premium_code__premium_only()) {
 		require_once 'classes/class-form-submissions.php';
 	}
-
-	$blockonsDefaults = json_decode( get_option('blockons_default_options') );
-	$blockonsOptions = json_decode( get_option('blockons_options') );
-	$blockonsBlocks = $blockonsOptions ? (array)$blockonsOptions->blocks : (array)$blockonsDefaults->blocks;
-
-	/**
-	 * Loop through settings and included enabled blocks files
-	 */
-	if ($blockonsBlocks) :
-		// Loop out by name and if is enabled / boolean
-		foreach ($blockonsBlocks as $blockName => $exists) {
-			$prefix = substr($blockName, 0, 3);
-
-			if ($prefix != 'wc_' && $exists) {
-				if ( file_exists(BLOCKONS_PLUGIN_DIR . 'build/' . str_replace("_", "-", $blockName) . '/index.php') ) {
-					require BLOCKONS_PLUGIN_DIR . 'build/' . str_replace("_", "-", $blockName) . '/index.php';
-				}
-			}
-			if ($prefix == 'wc_' && Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) && $exists) {
-				if ( file_exists(BLOCKONS_PLUGIN_DIR . 'build/' . str_replace("_", "-", $blockName) . '/index.php') ) {
-					require BLOCKONS_PLUGIN_DIR . 'build/' . str_replace("_", "-", $blockName) . '/index.php';
-				}
-			}
-		}
-	endif;
 
 	// Declare Compatibility for HPOS
 	add_action( 'before_woocommerce_init', function() {

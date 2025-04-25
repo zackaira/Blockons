@@ -12,6 +12,7 @@ class Blockons_Admin {
 	 * Constructor function.
 	 */
 	public function __construct() {
+		add_action('init', array($this, 'blockons_load_editor_blocks'), 5);
 		add_action('admin_menu', array( $this, 'blockons_create_admin_menu' ), 10, 1);
 		add_filter('plugin_action_links_blockons/blockons.php', array($this, 'blockons_add_plugins_settings_link'));
 		add_filter('plugin_row_meta', array($this, 'blockons_add_plugins_row_link'), 10, 2);
@@ -27,6 +28,36 @@ class Blockons_Admin {
 			add_action('wp_ajax_blockons_get_product_data', array($this, 'blockons_get_product_data_ajax'));
 			add_action('wp_ajax_nopriv_blockons_get_product_data', array($this, 'blockons_get_product_data_ajax'));
 		}
+	}
+
+	/**
+	 * Load blocks based on the options set.
+	 */
+	public function blockons_load_editor_blocks() {
+		$blockonsDefaults = json_decode( get_option('blockons_default_options') );
+		$blockonsOptions = json_decode( get_option('blockons_options') );
+		$blockonsBlocks = $blockonsOptions ? (array)$blockonsOptions->blocks : (array)$blockonsDefaults->blocks;
+
+		/**
+		 * Loop through settings and included enabled blocks files
+		 */
+		if ($blockonsBlocks) :
+			// Loop out by name and if is enabled / boolean
+			foreach ($blockonsBlocks as $blockName => $exists) {
+				$prefix = substr($blockName, 0, 3);
+
+				if ($prefix != 'wc_' && $exists) {
+					if ( file_exists(BLOCKONS_PLUGIN_DIR . 'build/' . str_replace("_", "-", $blockName) . '/index.php') ) {
+						require BLOCKONS_PLUGIN_DIR . 'build/' . str_replace("_", "-", $blockName) . '/index.php';
+					}
+				}
+				if ($prefix == 'wc_' && Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) && $exists) {
+					if ( file_exists(BLOCKONS_PLUGIN_DIR . 'build/' . str_replace("_", "-", $blockName) . '/index.php') ) {
+						require BLOCKONS_PLUGIN_DIR . 'build/' . str_replace("_", "-", $blockName) . '/index.php';
+					}
+				}
+			}
+		endif;
 	}
 
 	/**

@@ -62,10 +62,7 @@ class Blockons_WC_Rest_Routes {
 		register_rest_route('blcns/v1', '/get-api-key/', array(
 			'methods' => 'GET',
 			'callback' => [$this, 'blockons_get_api_key'],
-			'permission_callback' => function (WP_REST_Request $request) {
-				$nonce = $request->get_header('X-WP-Nonce'); // Get nonce from headers
-				return current_user_can('manage_options') && wp_verify_nonce($nonce, 'wp_rest');
-			},
+			'permission_callback' => '__return_true',
 		));
 
 		// Contact Form Block - Form Submission Endpoint

@@ -34,6 +34,7 @@ class Blockons {
 
 		// Register Scripts for plugin.
 		add_action( 'init', array( $this, 'blockons_register_scripts' ), 10 );
+		add_action( 'init', array(  $this, 'blockons_load_localisation' ), 0 );
 
 		// Update/fix defaults on plugins_loaded hook
 		add_action( 'plugins_loaded', array( $this, 'blockons_update_plugin_defaults' ) );
@@ -46,8 +47,6 @@ class Blockons {
 
 		// Load Editor JS & CSS.
 		add_action( 'enqueue_block_editor_assets', array( $this, 'blockons_block_editor_scripts' ), 10, 1 );
-
-		add_action( 'init', array( $this, 'blockons_load_localisation' ), 10 );
 	} // End __construct ()
 
 	/**
@@ -134,7 +133,7 @@ class Blockons {
 		wp_register_script('blockons-progress-bars', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/progress-bars/progress-bars.js'), array('blockons-waypoint', 'blockons-waypoint-inview' ), BLOCKONS_PLUGIN_VERSION, true);
 
 		// Sliders
-		wp_register_style('blockons-swiper-css', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
+		wp_register_style('blockons-swiper-css', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.min.css'), array('dashicons'), BLOCKONS_PLUGIN_VERSION);
 		wp_register_script('blockons-swiper-js', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.min.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 		wp_register_script('blockons-slider', esc_url(BLOCKONS_PLUGIN_URL . 'assets/slider/swiper.js'), array('blockons-swiper-js'), BLOCKONS_PLUGIN_VERSION, true);
 		wp_register_script('blockons-slider-video', esc_url(BLOCKONS_PLUGIN_URL . 'dist/swiper-video.min.js'), array('blockons-swiper-js'), BLOCKONS_PLUGIN_VERSION, true);
