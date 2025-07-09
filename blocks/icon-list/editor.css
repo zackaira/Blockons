@@ -28,6 +28,9 @@
 .wp-block-blockons-icon-list.items-horizontal .blockons-item-btns {
 	top: auto;
 	bottom: 100%;
+	z-index: 99;
+	background-color: rgb(255 255 255 / 92%);
+	box-shadow: 0 0 0 1px rgb(0 0 0 / 50%);
 }
 .blockons-list-wrap li.blockons-list-item:hover .blockons-item-btns {
 	opacity: 1;

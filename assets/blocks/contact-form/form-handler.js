@@ -1,74 +1,115 @@
 document.addEventListener('DOMContentLoaded', async function () {
 	// Initialize reCAPTCHA if enabled
 	const apiUrl = blockonsFormObj.apiUrl || '';
+	const siteUrl = blockonsFormObj.siteUrl || '';
 	const recaptchaEnabled = blockonsFormObj.recaptchaEnabled || false;
 	const translations = blockonsFormObj.translations;
 	const isPremium = Boolean(blockonsFormObj.isPremium) || false;
 
-	// Fetch reCAPTCHA key from REST API
+	// Fetch reCAPTCHA key and initialize it immediately
 	let recaptchaSiteKey = '';
+	let recaptchaInitialized = false;
 
-	if (recaptchaEnabled) {
-		try {
-			const response = await fetch(
-				`${apiUrl}blcns/v1/get-api-key?key_type=recaptcha`,
-				{
-					headers: {
-						'Content-Type': 'application/json',
-						'X-WP-Nonce': blockonsFormObj.nonce,
-					},
-				},
-			);
-			const data = await response.json();
-
-			if (data.api_key) {
-				recaptchaSiteKey = data.api_key;
-			} else {
-				console.error('Failed to fetch reCAPTCHA key.');
-			}
-		} catch (error) {
-			console.error('Error fetching reCAPTCHA key:', error);
-		}
-	}
-
-	const loadReCaptcha = () => {
+	const loadReCaptchaScript = (siteKey) => {
 		return new Promise((resolve, reject) => {
-			if (typeof grecaptcha !== 'undefined') {
-				// reCAPTCHA is already loaded
-				resolve();
-			} else {
-				// Check if the script is already added (but not loaded yet)
-				const existingScript = document.querySelector(
-					'script[src*="recaptcha/api.js"]',
-				);
-				if (existingScript) {
-					existingScript.addEventListener('load', () => {
-						resolve();
-					});
-					existingScript.addEventListener('error', () => {
-						reject(new Error('reCAPTCHA script failed to load'));
-					});
-				} else {
-					// Append the script
-					const script = document.createElement('script');
-					script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
-					script.onload = () => resolve();
-					script.onerror = () =>
-						reject(new Error('reCAPTCHA script failed to load'));
-					document.head.appendChild(script);
-				}
+			// If reCAPTCHA is already loaded, resolve immediately
+			if (window.grecaptcha && window.grecaptcha.ready) {
+				window.grecaptcha.ready(() => resolve(window.grecaptcha));
+				return;
 			}
+
+			// Create callback function
+			window.onRecaptchaLoad = () => {
+				if (!window.grecaptcha) {
+					reject(new Error('grecaptcha not available after load'));
+					return;
+				}
+				window.grecaptcha.ready(() => {
+					resolve(window.grecaptcha);
+				});
+			};
+
+			// Check if script already exists
+			if (document.querySelector('script[src*="recaptcha/api.js"]')) {
+				return;
+			}
+
+			// Add the script
+			const script = document.createElement('script');
+			script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}&onload=onRecaptchaLoad`;
+			script.async = true;
+			script.defer = true;
+
+			script.onerror = (error) => {
+				reject(new Error('Failed to load reCAPTCHA script'));
+			};
+
+			document.head.appendChild(script);
 		});
 	};
 
-	if (recaptchaEnabled && recaptchaSiteKey) {
-		loadReCaptcha()
-			.then(() => {
-				console.log('reCAPTCHA loaded on page load');
-			})
-			.catch((error) => {
-				console.error('reCAPTCHA failed to load on page load:', error);
+	const initializeReCaptcha = async () => {
+		if (!recaptchaEnabled) {
+			debug('reCAPTCHA not enabled');
+			return;
+		}
+
+		try {
+			const headers = new Headers({
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+				'X-WP-Nonce': blockonsFormObj.nonce,
 			});
+
+			const response = await fetch(
+				`${apiUrl}blcns/v1/get-api-key?key_type=recaptcha`,
+				{
+					method: 'GET',
+					headers: headers,
+					credentials: 'include',
+					mode: 'cors',
+				},
+			);
+
+			if (!response.ok) {
+				const errorText = await response.text();
+				debug('API Error:', {
+					status: response.status,
+					statusText: response.statusText,
+					error: errorText,
+				});
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+
+			const data = await response.json();
+
+			if (!data.api_key) {
+				debug('No API key in response:', data);
+				throw new Error('No reCAPTCHA key found in response');
+			}
+
+			recaptchaSiteKey = data.api_key;
+
+			try {
+				const grecaptcha = await loadReCaptchaScript(recaptchaSiteKey);
+				recaptchaInitialized = true;
+				return grecaptcha;
+			} catch (loadError) {
+				throw loadError;
+			}
+		} catch (error) {
+			debug('Error in reCAPTCHA initialization:', error);
+			throw error;
+		}
+	};
+
+	// Initialize reCAPTCHA immediately if enabled
+	if (recaptchaEnabled) {
+		try {
+			await initializeReCaptcha();
+		} catch (error) {
+			debug('Initial reCAPTCHA initialization failed:', error);
+		}
 	}
 
 	// Initialize all datepickers
@@ -500,43 +541,44 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 				if (recaptchaEnabled && recaptchaSiteKey) {
 					try {
-						await loadReCaptcha(); // Load reCAPTCHA script if not loaded
+						const grecaptcha = await initializeReCaptcha();
 
-						grecaptcha.ready(() => {
-							grecaptcha
-								.execute(recaptchaSiteKey, { action: 'submit' })
-								.then((token) => {
-									if (!token) {
-										console.error(
-											'reCAPTCHA token generation failed.',
-										);
-										handleSubmissionError(
-											{
-												message:
-													translations.recaptcha_error,
-											},
-											elements,
-										);
-										return;
-									}
+						if (!grecaptcha) {
+							throw new Error('reCAPTCHA not initialized');
+						}
 
-									let recaptchaInput = form.querySelector(
-										'input[name="recaptchaToken"]',
-									);
-									if (!recaptchaInput) {
-										recaptchaInput =
-											document.createElement('input');
-										recaptchaInput.type = 'hidden';
-										recaptchaInput.name = 'recaptchaToken';
-										form.appendChild(recaptchaInput);
-									}
-									recaptchaInput.value = token;
+						// Execute reCAPTCHA and get token with unique action per form
+						const formId =
+							form.getAttribute('data-form-id') || 'contact_form';
+						const token = await grecaptcha.execute(
+							recaptchaSiteKey,
+							{
+								action: `submit_${formId}`,
+							},
+						);
 
-									submitForm(form, elements);
-								});
-						});
+						if (!token) {
+							throw new Error(
+								'reCAPTCHA token generation failed.',
+							);
+						}
+
+						// Add token to form
+						let recaptchaInput = form.querySelector(
+							'input[name="recaptchaToken"]',
+						);
+						if (!recaptchaInput) {
+							recaptchaInput = document.createElement('input');
+							recaptchaInput.type = 'hidden';
+							recaptchaInput.name = 'recaptchaToken';
+							form.appendChild(recaptchaInput);
+						}
+						recaptchaInput.value = token;
+
+						// Submit form
+						submitForm(form, elements);
 					} catch (error) {
-						console.error('reCAPTCHA failed to load:', error);
+						console.error('reCAPTCHA error:', error);
 						handleSubmissionError(
 							{ message: translations.recaptcha_error },
 							elements,
@@ -689,6 +731,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 				'includeMetadata',
 				wrapper.dataset.includeMetadata === 'true',
 			);
+
+			// For [page_title] shortcode
+			const pageTitle = document.title;
+			formData.append('pageTitle', pageTitle);
 
 			const processedFields = fields.map((field) => {
 				if (field.type === 'file') {

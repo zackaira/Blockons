@@ -179,6 +179,24 @@ const Edit = (props) => {
 		setAttributes({ listItems: newListItems });
 	};
 
+	const handleMoveItemUp = (index) => {
+		if (index === 0) return; // Can't move up if first item
+		const newListItems = [...listItems];
+		const temp = newListItems[index];
+		newListItems[index] = newListItems[index - 1];
+		newListItems[index - 1] = temp;
+		setAttributes({ listItems: newListItems });
+	};
+
+	const handleMoveItemDown = (index) => {
+		if (index === listItems.length - 1) return; // Can't move down if last item
+		const newListItems = [...listItems];
+		const temp = newListItems[index];
+		newListItems[index] = newListItems[index + 1];
+		newListItems[index + 1] = temp;
+		setAttributes({ listItems: newListItems });
+	};
+
 	// Icon List Items
 	let listItemDisplay;
 
@@ -251,6 +269,36 @@ const Edit = (props) => {
 						}
 					/>
 					<div className="blockons-item-btns">
+						<Button
+							className="blockons-move-item-up"
+							icon={
+								listItemsLayout === 'horizontal'
+									? 'arrow-left-alt2'
+									: 'arrow-up-alt2'
+							}
+							label={
+								listItemsLayout === 'horizontal'
+									? 'Move Item Left'
+									: 'Move Item Up'
+							}
+							onClick={() => handleMoveItemUp(index)}
+							disabled={index === 0}
+						/>
+						<Button
+							className="blockons-move-item-down"
+							icon={
+								listItemsLayout === 'horizontal'
+									? 'arrow-right-alt2'
+									: 'arrow-down-alt2'
+							}
+							label={
+								listItemsLayout === 'horizontal'
+									? 'Move Item Right'
+									: 'Move Item Down'
+							}
+							onClick={() => handleMoveItemDown(index)}
+							disabled={index === listItems.length - 1}
+						/>
 						<Dropdown
 							className="blockons-item-level-settings"
 							contentClassName="blockons-editor-popup"

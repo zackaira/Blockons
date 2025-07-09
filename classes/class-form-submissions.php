@@ -157,8 +157,8 @@ class Blockons_Form_Submissions {
      */
     public function blockons_save_status_meta($post_id, $post) {
         // Security checks
-        if (!isset($_POST['submission_status_nonce']) || 
-            !wp_verify_nonce($_POST['submission_status_nonce'], 'save_submission_status')) {
+        if ( ! isset( $_POST['submission_status_nonce'] ) ||
+             ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['submission_status_nonce'] ) ), 'save_submission_status' ) ) {
             return;
         }
 
@@ -174,7 +174,7 @@ class Blockons_Form_Submissions {
 
         // Save status
         if (isset($_POST['submission_status'])) {
-            $status = sanitize_text_field($_POST['submission_status']);
+            $status = sanitize_text_field( wp_unslash( $_POST['submission_status'] ) );
             if (array_key_exists($status, $statuses)) {
                 update_post_meta($post_id, '_submission_status', $status);
             }
@@ -374,7 +374,7 @@ class Blockons_Form_Submissions {
                     $upload_dir = wp_upload_dir();
                     $file_path = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $file_url);
                     if (file_exists($file_path)) {
-                        @unlink($file_path);
+                        wp_delete_file( $file_path );
                     }
                 }
             }

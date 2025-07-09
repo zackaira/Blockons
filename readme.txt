@@ -239,10 +239,14 @@ This could be from the theme you're using, or another plugin. Again, please [con
 = 1.2.09 =
 * Styling tweaks/fixes
 * Code refactoring
-* Version compatibility for WP 6.8 & WC 9.8
-* 
+* Version compatibility for WP 6.8 & WC 9.9
+* Added missin translations
+* Added missing escape functions
+* Added setting to reorder Icon List block items
 * Fix php notice for localization loading too early
+* Update Freemius SDK
 * Updated the language .pot file
+* PRO: Fixed reCAPTCHA working for multiple forms on page
 
 = 1.2.08 =
 * Styling tweaks/fixes

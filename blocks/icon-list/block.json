@@ -2,11 +2,11 @@
 	"$schema": "https://json.schemastore.org/block.json",
 	"apiVersion": 2,
 	"name": "blockons/icon-list",
-	"title": "Icon List",
+	"title": "List Icons",
 	"textdomain": "blockons",
 	"icon": "editor-ul",
 	"category": "blockons-category",
-	"keywords": ["icons", "lists", "items", "blockons"],
+	"keywords": ["icon", "list", "list items", "blockons"],
 	"attributes": {
 		"alignment": {
 			"type": "string",

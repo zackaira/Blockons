@@ -278,6 +278,7 @@ const Edit = (props) => {
 				type: 'system',
 			},
 			{ code: 'page_url', label: 'Page URL', type: 'system' },
+			{ code: 'page_title', label: 'Page Title', type: 'system' },
 		];
 
 		innerBlocksClientIds.forEach((blockId) => {

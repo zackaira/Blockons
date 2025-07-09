@@ -111,10 +111,16 @@ class Blockons {
 		} else {
 			wp_register_script('blockons-form-handler', esc_url(BLOCKONS_PLUGIN_URL . 'dist/form-handler.min.js'), array('wp-api', 'wp-api-fetch'), BLOCKONS_PLUGIN_VERSION, true);
 		}
+
+		error_log('Blockons: Registering form handler script');
+		error_log('Blockons: REST URL: ' . get_rest_url());
+		error_log('Blockons: Site URL: ' . get_site_url());
+
 		wp_localize_script('blockons-form-handler', 'blockonsFormObj', array(
 			'apiUrl' => esc_url(get_rest_url()),
+			'siteUrl' => esc_url(get_site_url()),
 			'nonce' => wp_create_nonce('wp_rest'),
-			'recaptchaEnabled' => isset($blockonsOptions->contactforms->recaptcha) ? $blockonsOptions->contactforms->recaptcha : false,
+			'recaptchaEnabled' => $this->get_recaptcha_enabled_state(),
 			'isPremium' => $isPro,
 			'translations' => array(
 				'required' => __('This field is required', 'blockons'),
@@ -124,6 +130,7 @@ class Blockons {
 				'required_number' => __('Please enter a valid number', 'blockons'),
 				'subject' => __('New Contact Form Submission', 'blockons'),
 				'error' => __('An error occurred. Please try again.', 'blockons'),
+				'recaptcha_error' => __('reCAPTCHA verification failed. Please try again.', 'blockons'),
 			),
 		));
 
@@ -201,6 +208,15 @@ class Blockons {
 
 		// Frontend CSS
 		wp_enqueue_style('blockons-frontend-style');
+		
+		// Contact Form Block JS
+		if (has_block('blockons/contact-form')) {
+			if (blockons_fs()->can_use_premium_code__premium_only()) {
+				wp_enqueue_style('blockons-flatpickr-style');
+				wp_enqueue_script('blockons-flatpickr-script');
+			}
+			wp_enqueue_script('blockons-form-handler');
+		}
 		
 		// Frontend JS
 		wp_enqueue_script('blockons-frontend-script');
@@ -517,5 +533,25 @@ class Blockons {
 	 */
 	private function _log_version_number() { //phpcs:ignore
 		update_option('blockons_plugin_version', BLOCKONS_PLUGIN_VERSION);
+	}
+
+	private function get_recaptcha_enabled_state() {
+		$options = get_option('blockons_options');
+		if (is_string($options)) {
+			$options = json_decode($options, true);
+		}
+		
+		// Check if contactforms array exists
+		if (!isset($options['contactforms']) || !is_array($options['contactforms'])) {
+			return false;
+		}
+
+		// Check all required reCAPTCHA settings
+		return isset($options['contactforms']['recaptcha']) && 
+			   $options['contactforms']['recaptcha'] === true && 
+			   isset($options['contactforms']['recaptcha_key']) && 
+			   !empty($options['contactforms']['recaptcha_key']) && 
+			   isset($options['contactforms']['recaptcha_secret']) && 
+			   !empty($options['contactforms']['recaptcha_secret']);
 	}
 }

@@ -61,7 +61,7 @@ class Blockons_Notices {
 
 								<?php if (isset($notice['link']) && isset($notice['link_text'])) : ?>
 									<a href="<?php echo esc_url($notice['link']); ?>" target="_blank" class="blockons-notice-btn">
-										<?php esc_html_e($notice['link_text']); ?>
+										<?php echo esc_html($notice['link_text']); ?>
 									</a>
 								<?php endif; ?>
 							</div>

@@ -59,10 +59,17 @@ class Blockons_WC_Rest_Routes {
 		));
 
 		// Get API Key(s)
-		register_rest_route('blcns/v1', '/get-api-key/', array(
+		register_rest_route('blcns/v1', '/get-api-key', array(
 			'methods' => 'GET',
 			'callback' => [$this, 'blockons_get_api_key'],
 			'permission_callback' => '__return_true',
+			'args' => array(
+				'key_type' => array(
+					'required' => true,
+					'type' => 'string',
+					'sanitize_callback' => 'sanitize_text_field',
+				),
+			),
 		));
 
 		// Contact Form Block - Form Submission Endpoint
@@ -251,7 +258,7 @@ class Blockons_WC_Rest_Routes {
 		$post = get_post($post_id);
 	
 		if (!$post) {
-			return new WP_Error('invalid_post_id', __('Invalid post ID.', 'text-domain'), array('status' => 404));
+			return new WP_Error('invalid_post_id', __('Invalid post ID.', 'blockons'), array('status' => 404));
 		}
 	
 		$post_thumbnail_id = get_post_thumbnail_id($post_id);
@@ -290,29 +297,53 @@ class Blockons_WC_Rest_Routes {
 	}
 
 	/**
-	 * Get Client API Keys - Only Admins
+	 * Get Client API Keys
 	 */
 	function blockons_get_api_key(WP_REST_Request $request) {
-		$key_type = $request->get_param('key_type');
-		$blockonsOptions = get_option('blockons_options', []);
-	
-		// Ensure options are an array
-		if (is_string($blockonsOptions)) {
-			$blockonsOptions = json_decode($blockonsOptions, true);
-		}
-	
-		// Define available keys
-		$available_keys = [
-			'maps' => $blockonsOptions['mapbox']['key'] ?? '',
-			'recaptcha' => isset($blockonsOptions['contactforms']['recaptcha_key']) ? $blockonsOptions['contactforms']['recaptcha_key'] : '',
-			'recaptcha_secret' => isset($blockonsOptions['contactforms']['recaptcha_secret']) ? $blockonsOptions['contactforms']['recaptcha_secret'] : ''
-		];
-	
-		// Log extracted key
-		if (!empty($available_keys[$key_type])) {
-			return new WP_REST_Response(['api_key' => $available_keys[$key_type]], 200);
-		} else {
-			return new WP_REST_Response(['error' => 'Invalid API key type'], 400);
+		try {
+			$key_type = $request->get_param('key_type');
+			if (!$key_type) {
+				return new WP_REST_Response(['error' => 'Key type is required'], 400);
+			}
+
+			$options = get_option('blockons_options');
+			if (is_string($options)) {
+				$options = json_decode($options, true);
+			}
+			
+			// Check if reCAPTCHA is properly configured
+			if ($key_type === 'recaptcha') {
+				$recaptcha_enabled = isset($options['contactforms']['recaptcha']) && $options['contactforms']['recaptcha'];
+				$has_key = isset($options['contactforms']['recaptcha_key']) && !empty($options['contactforms']['recaptcha_key']);
+				
+				if (!$recaptcha_enabled || !$has_key) {
+					return new WP_REST_Response([
+						'error' => 'reCAPTCHA is not properly configured',
+						'details' => [
+							'enabled' => $recaptcha_enabled,
+							'has_key' => $has_key,
+							'config_status' => [
+								'has_contactforms' => isset($options['contactforms']),
+								'has_recaptcha_setting' => isset($options['contactforms']['recaptcha']),
+								'recaptcha_value' => $options['contactforms']['recaptcha'] ?? null,
+							]
+						]
+					], 400);
+				}
+
+				return new WP_REST_Response([
+					'api_key' => $options['contactforms']['recaptcha_key'],
+					'success' => true
+				], 200);
+			}
+
+			return new WP_REST_Response(['error' => 'Invalid key type'], 400);
+
+		} catch (Exception $e) {
+			return new WP_REST_Response([
+				'error' => 'Internal server error',
+				'message' => $e->getMessage()
+			], 500);
 		}
 	}	
 
@@ -333,6 +364,9 @@ class Blockons_WC_Rest_Routes {
 			if (is_wp_error($form_data)) {
 				return $form_data;
 			}
+
+			// Inject the page title from JS
+			$form_data['pageTitle'] = sanitize_text_field( $request->get_param('pageTitle', '') );
 	
 			$options = get_option('blockons_options');
 			if (is_string($options)) {
@@ -1085,7 +1119,8 @@ class Blockons_WC_Rest_Routes {
 				'form_name' => $form_data['formName'] ?? '',
 				'submission_date' => $current_datetime->format('F j, Y'),
 				'submission_time' => $current_datetime->format('g:i a'),
-				'page_url' => $_SERVER['HTTP_REFERER'] ?? ''
+				'page_url' => $_SERVER['HTTP_REFERER'] ?? '',
+				'page_title' => $form_data['pageTitle'] ?? '',
 			];
 	
 			// Process form fields for shortcode values

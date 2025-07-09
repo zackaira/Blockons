@@ -67,13 +67,13 @@ $sliderOptions = array(
 											
 											<?php if (isset($attributes['showTitle']) && $attributes['showTitle'] == true) : ?>
 												<h4 class="slider-title" style="<?php echo isset($slide['style']['titleSize']) && $slide['style']['titleSize'] != "" ? 'font-size:' . esc_attr($slide['style']['titleSize']) . 'px; ' : 'font-size:' . esc_attr($attributes['defaultTitleSize']) . 'px; '; ?> <?php echo isset($slide['style']['titleColor']) && $slide['style']['titleColor'] != "" ? 'color:' . esc_attr($slide['style']['titleColor']) . '; ' : 'color:' . esc_attr($attributes['defaultTitleColor']) . '; '; ?>">
-													<?php esc_html_e($slide['title']); ?>
+													<?php echo esc_html($slide['title']); ?>
 												</h4>
 											<?php endif; ?>
 											
 											<?php if (isset($attributes['showDesc']) && $attributes['showDesc'] == true) : ?>
 												<p class="slider-desc" style="<?php echo isset($slide['style']['descSize']) && $slide['style']['descSize'] != "" ? 'font-size:' . esc_attr($slide['style']['descSize']) . 'px; ' : 'font-size:' . esc_attr($attributes['defaultDescSize']) . 'px; '; ?> <?php echo isset($slide['style']['descColor']) && $slide['style']['descColor'] != "" ? 'color:' . esc_attr($slide['style']['descColor']) . '; ' : 'color:' . esc_attr($attributes['defaultDescColor']) . '; '; ?>">
-													<?php esc_html_e($slide['subtitle']); ?>
+													<?php echo esc_html($slide['subtitle']); ?>
 												</p>
 											<?php endif; ?>
 											
@@ -86,7 +86,7 @@ $sliderOptions = array(
 															
 															<?php if (isset($button['link']) && isset($button['link']['url']) && $button['link']['url'] !== "") : ?>
 																<a href="<?php echo esc_url($button['link']['url']); ?>" class="slider-btn" <?php echo isset($button['link']) && isset($button['link']['opensInNewTab']) && $button['link']['opensInNewTab'] == true ? esc_attr('target="_blank"') : ''; ?> style="<?php echo isset($button['color']) ? 'background-color: ' . esc_attr($button['color']) . '; ' : ''; ?> <?php echo isset($button['fcolor']) ? 'color: ' . esc_attr($button['fcolor']) . '; ' : ''; ?>">
-																	<?php esc_html_e($button['text']); ?>
+																	<?php echo esc_html($button['text']); ?>
 																</a>
 															<?php endif; ?>
 
