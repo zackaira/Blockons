@@ -1,39 +1,69 @@
 document.addEventListener('DOMContentLoaded', async () => {
-	// Replace with your actual apiUrl and ensure blockonsMapObj.nonce is available
-	const apiUrl = blockonsMapObj.apiUrl;
-	let token;
-	try {
-		const response = await fetch(
-			`${apiUrl}blcns/v1/get-api-key?key_type=maps`,
-			{
-				headers: {
-					'Content-Type': 'application/json',
-					'X-WP-Nonce': blockonsMapObj.nonce,
-				},
-			},
-		);
-		const data = await response.json();
-		token = data.api_key;
-	} catch (err) {
-		console.error('Error fetching Mapbox API key:', err);
-	}
+    // Get API URL and ensure blockonsMapObj is available
+    const apiUrl = blockonsMapObj.apiUrl;
+    let mapboxToken = null;
 
-	mapboxgl.accessToken = token;
+    try {
+        const response = await fetch(
+            `${apiUrl}blcns/v1/get-api-key?key_type=maps`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-WP-Nonce': blockonsMapObj.nonce,
+                },
+            },
+        );
 
-	// If no token was returned, display a message.
-	if (!token) {
-		document.querySelectorAll('.blockons-mapbox').forEach((mapElement) => {
-			mapElement.classList.remove('loading');
-			mapElement.innerHTML =
-				'<p>A valid Mapbox API key is required to display the map.</p>';
-		});
-		return;
-	}
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to fetch Mapbox API key');
+        }
 
-	// Set the valid API key and initialize maps.
-	const maps = document.querySelectorAll('.blockons-mapbox');
-	if (!maps.length) return;
-	maps.forEach(initMap);
+        const data = await response.json();
+        
+        if (!data.success || !data.api_key) {
+            throw new Error('No valid API key returned');
+        }
+
+        mapboxToken = data.api_key;
+		console.log('data', data);
+		console.log('mapboxToken', mapboxToken);
+        mapboxgl.accessToken = mapboxToken;
+
+    } catch (err) {
+        console.error('Error fetching Mapbox API key:', err);
+
+        // Display error message in all map containers
+        document.querySelectorAll('.blockons-mapbox').forEach((mapElement) => {
+            mapElement.classList.remove('loading');
+            const settingsUrl = blockonsMapObj.settingsUrl || '';
+            mapElement.innerHTML = `
+                <div class="blockons-mapbox-error">
+                    <p>A valid Mapbox API key is required to display the map.</p>
+                </div>
+            `;
+        });
+        return;
+    }
+
+    // If no token was returned, display a message
+    if (!mapboxToken) {
+        document.querySelectorAll('.blockons-mapbox').forEach((mapElement) => {
+            mapElement.classList.remove('loading');
+            const settingsUrl = blockonsMapObj.settingsUrl || '';
+            mapElement.innerHTML = `
+                <div class="blockons-mapbox-error">
+                    <p>A valid Mapbox API key is required to display the map.</p>
+                </div>
+            `;
+        });
+        return;
+    }
+
+    // Initialize maps if token is valid
+    const maps = document.querySelectorAll('.blockons-mapbox');
+    if (!maps.length) return;
+    maps.forEach(initMap);
 });
 
 function initMap(mapElement) {

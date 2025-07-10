@@ -52,6 +52,7 @@
 	> .block-editor-inner-blocks
 	.block-editor-block-list__block {
 	width: 100%;
+	margin: 0;
 }
 /* - Cols - */
 .blockons-contact-form .blockons-cf-fields .block-list-appender.wp-block {

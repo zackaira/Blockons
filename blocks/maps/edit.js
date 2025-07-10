@@ -74,14 +74,22 @@ const Edit = (props) => {
 					},
 				);
 				const data = await response.json();
-				if (data.api_key) {
+
+				if (!response.ok) {
+					console.error('API key fetch failed:', data.error || 'Unknown error');
+					setMapboxToken(0);
+					return;
+				}
+
+				if (data.success && data.api_key) {
 					setMapboxToken(data.api_key);
 				} else {
+					console.error('No valid API key returned');
 					setMapboxToken(0);
-					// console.error('No API key returned from endpoint.');
 				}
 			} catch (err) {
 				console.error('Error fetching Mapbox API key:', err);
+				setMapboxToken(0);
 			} finally {
 				setIsLoading(false);
 			}

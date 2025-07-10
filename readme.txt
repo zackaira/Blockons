@@ -5,7 +5,7 @@ Tags: gutenberg, editor blocks, woocommerce blocks, page builder, ultimate block
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.8
-Stable tag: 1.2.09
+Stable tag: 1.2.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -165,7 +165,9 @@ You can disable blocks if you're not using them... Blockons only includes the co
 
 = Related Products by Kaira =
 
-[StoreCustomizer](https://wordpress.org/plugins/woocustomizer/): Customize your WooCommerce store pages with ease. 
+[StoreCustomizer](https://wordpress.org/plugins/woocustomizer/): Customize your WooCommerce store pages with ease.
+
+[Theme Site Kit](https://wordpress.org/plugins/theme-site-kit/): An all-in-one toolkit for essential WordPress site features.
 
 [Linkt](https://wordpress.org/plugins/linkt/): Affiliate and Custom link tracking and management.
 
@@ -235,6 +237,12 @@ Please [contact us](https://blockons.com/go/contact/) so we can post a fix and g
 This could be from the theme you're using, or another plugin. Again, please [contact us](https://blockons.com/go/contact/) so we can post a fix or give you custom CSS to fix it.
 
 == Changelog ==
+
+= 1.2.10 =
+* Styling tweaks/fixes
+* Maps api key changes to be more secure
+* Fixed Adv Image Gallery Featured layout bug
+* PRO: Tweaked Maps multiple marker feature
 
 = 1.2.09 =
 * Styling tweaks/fixes

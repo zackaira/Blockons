@@ -337,6 +337,25 @@ class Blockons_WC_Rest_Routes {
 				], 200);
 			}
 
+			// Check if maps API key is properly configured
+			if ($key_type === 'maps') {
+				$has_key = isset($options['mapbox']['key']) && !empty($options['mapbox']['key']);
+				
+				if (!$has_key) {
+					return new WP_REST_Response([
+						'error' => 'Maps API key is not properly configured',
+						'details' => [
+							'has_key' => $has_key,
+						]
+					], 400);
+				}
+
+				return new WP_REST_Response([
+					'api_key' => $options['mapbox']['key'],
+					'success' => true
+				], 200);
+			}
+
 			return new WP_REST_Response(['error' => 'Invalid key type'], 400);
 
 		} catch (Exception $e) {

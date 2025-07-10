@@ -146,7 +146,7 @@ const Edit = (props) => {
 					...(layout === 'featured'
 						? {
 								// backgroundImage: `url(${imageItem.imageUrl})`,
-								'--n': nValue - 1,
+								'--n': `${nValue - 1}`,
 							}
 						: {}),
 					...(imageBgColor !== '#f0f0f0'
@@ -220,8 +220,9 @@ const Edit = (props) => {
 									fontSize: captionFontSize,
 								}}
 							>
-								{(imageCaption === 'bottom' ||
-									imageCaption === 'over') && (
+								{(imageCaption === "bottom" ||
+									imageCaption === "over" ||
+									imageCaption === "below") && (
 									<div
 										className="caption-bg"
 										style={{

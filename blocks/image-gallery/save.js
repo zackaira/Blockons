@@ -35,7 +35,7 @@ const Save = ({ attributes }) => {
 					...(attributes.layout === "featured"
 						? {
 								// backgroundImage: `url(${imageItem.imageUrl})`,
-								"--n": nValue - 1,
+								"--n": `${nValue - 1}`,
 						  }
 						: {}),
 					...(attributes.imageBgColor !== "#f0f0f0"
