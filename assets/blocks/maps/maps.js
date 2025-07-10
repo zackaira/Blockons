@@ -26,8 +26,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         mapboxToken = data.api_key;
-		console.log('data', data);
-		console.log('mapboxToken', mapboxToken);
         mapboxgl.accessToken = mapboxToken;
 
     } catch (err) {
