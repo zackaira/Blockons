@@ -61,7 +61,7 @@ class Blockons {
 		$blockonsDefaults = get_option('blockons_default_options');
 
 		// Font Awesome Free
-		wp_register_style('blockons-fontawesome', esc_url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'), array(), '6.5.1');
+		wp_register_style('blockons-fontawesome', esc_url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css'), array(), '7.0.0');
 
 		// Frontend
 		wp_register_style('blockons-frontend-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
@@ -111,10 +111,6 @@ class Blockons {
 		} else {
 			wp_register_script('blockons-form-handler', esc_url(BLOCKONS_PLUGIN_URL . 'dist/form-handler.min.js'), array('wp-api', 'wp-api-fetch'), BLOCKONS_PLUGIN_VERSION, true);
 		}
-
-		error_log('Blockons: Registering form handler script');
-		error_log('Blockons: REST URL: ' . get_rest_url());
-		error_log('Blockons: Site URL: ' . get_site_url());
 
 		wp_localize_script('blockons-form-handler', 'blockonsFormObj', array(
 			'apiUrl' => esc_url(get_rest_url()),
@@ -344,10 +340,11 @@ class Blockons {
 			'nonce' => wp_create_nonce('wp_rest'),
 			'adminUrl' => esc_url(admin_url()),
 			'homeUrl' => esc_url(home_url('/')),
-			'apiUrl' => esc_url( get_rest_url() ),
+			'apiUrl' => esc_url(get_rest_url()),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
 			'wcActive' => Blockons_Admin::blockons_is_plugin_active('woocommerce.php'),
+			'isTskActive' => Blockons_Admin::blockons_is_plugin_active('theme-site-kit.php'),
 		));
 		wp_enqueue_script('blockons-admin-editor-script');
 	} // End blockons_block_editor_scripts ()
@@ -378,6 +375,7 @@ class Blockons {
 	public static function blockonsDefaults() {
 		$initialSettings = array(
 			"blocks" => array( // For adding a new block, update this AND ../src/backend/helpers.js AND class-notices.php newblocks number
+				"icon_selector" => true, // 23
 				"maps" => true, // 22
 				"contact_form" => true, // 21
 				"table_of_contents" => true, // 20

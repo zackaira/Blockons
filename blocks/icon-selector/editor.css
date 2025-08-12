@@ -1,0 +1,167 @@
+.fa-picker-sidebar {
+	padding: 5px 0;
+}
+
+.fa-picker-categories {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 0 5px;
+}
+
+.fa-picker-categories .components-button {
+	background: #e0e0e0;
+	margin: 0;
+	padding: 0 4px;
+	font-size: 11px;
+	color: #1e1e1e;
+	text-decoration: none;
+}
+
+.fa-picker-categories .components-button:not(.is-primary) {
+	background: none;
+}
+
+.components-font-size-picker
+	.components-number-control.components-unit-control {
+	margin: 0;
+}
+
+.fa-picker-sidebar .fa-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 8px;
+	margin-top: 16px;
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+.fa-picker-sidebar .fa-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 12px;
+	background: #f0f0f0;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	min-height: 48px;
+}
+
+.fa-picker-sidebar .fa-btn:hover {
+	background: #e0e0e0;
+}
+
+.fa-picker-sidebar .fa-btn.is-selected {
+	background: #007cba;
+	color: white;
+	border-color: #006ba1;
+}
+
+.fa-picker-sidebar .fa-btn i {
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.fa-picker-sidebar .fa-picker-hint {
+	color: #757575;
+	font-style: italic;
+	margin: 16px 0 0;
+	font-size: 12px;
+	line-height: 1.4;
+	text-align: center;
+}
+
+/* Custom Icon */
+.blockons-custom-icon {
+	margin-bottom: 10px;
+	text-align: center;
+}
+.blockons-sidebar-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.blockons-custom-icon .blockons-sidebar-icon svg {
+	width: 180px !important;
+	height: 180px !important;
+}
+
+.blockons-custom-icon .blockons-sidebar-img {
+	width: 180px !important;
+	height: auto !important;
+}
+
+.blockons-sidebar-btns {
+	display: flex;
+	justify-content: space-between;
+	margin: 10px 0;
+}
+
+/* Upload Buttons */
+.blockons-upload-icon-button {
+	width: 100%;
+	aspect-ratio: 1/1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px dashed #999;
+	border-radius: 4px;
+}
+.components-button.blockons-upload-button-icon {
+	border: 1px dashed #999;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	justify-content: center;
+	font-size: 60%;
+}
+
+/* Style for the block icon */
+.kwtsk-icon {
+	font-size: 32px;
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.fa-picker-status {
+	padding: 8px 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 1px solid #e0e0e0;
+	border-top: 1px solid #e0e0e0;
+	margin: 0 0 6px;
+}
+
+.fa-picker-status p {
+	margin: 0;
+	color: #555;
+	font-size: 12px;
+}
+
+.fa-picker-status .components-spinner {
+	margin: 0;
+}
+
+.blockons-svg-support {
+	display: inline-flex;
+	align-items: flex-start;
+	color: #008a20;
+	margin: 12px 0 0;
+}
+
+.blockons-svg-support .dashicons {
+	font-size: 19px;
+	width: 20px;
+	height: 20px;
+	margin-right: 4px;
+}

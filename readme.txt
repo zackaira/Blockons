@@ -238,6 +238,12 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 == Changelog ==
 
+= 1.2.11 =
+* Styling tweaks/fixes
+* 
+* Fixed WC Mini Cart not working in custom template part
+* 
+
 = 1.2.10 =
 * Styling tweaks/fixes
 * Maps api key changes to be more secure

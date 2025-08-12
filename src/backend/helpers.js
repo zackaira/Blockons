@@ -46,6 +46,14 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: false,
 	},
+	icon_selector: {
+		desc: __(
+			'Add beautiful Font Awesome icons to your website.',
+			'blockons',
+		),
+		pluginSpecific: false,
+		isNew: __('NEW', 'blockons'),
+	},
 	content_selector: {
 		desc: __(
 			'Let your viewers select which content they want to read.',
@@ -57,7 +65,7 @@ export const blockListSettings = {
 	maps: {
 		desc: __('Add live Mapbox Maps to your website pages.', 'blockons'),
 		pluginSpecific: false,
-		isNew: __('NEW', 'blockons'),
+		isNew: false,
 	},
 	contact_form: {
 		desc: __(

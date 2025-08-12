@@ -31,6 +31,11 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"dependencies": {
+		"@fortawesome/fontawesome-free": "^7.0.0",
+		"@fortawesome/fontawesome-svg-core": "^7.0.0",
+		"@fortawesome/free-brands-svg-icons": "^7.0.0",
+		"@fortawesome/free-regular-svg-icons": "^7.0.0",
+		"@fortawesome/free-solid-svg-icons": "^7.0.0",
 		"@vimeo/player": "^2.18.0",
 		"animate.css": "^4.1.1",
 		"aos": "^3.0.0-beta.6",

@@ -1,0 +1,79 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/icon-selector",
+	"title": "Icon Block",
+	"textdomain": "blockons",
+	"icon": "star-filled",
+	"category": "blockons-category",
+	"keywords": ["icon", "selector", "blockons"],
+	"supports": {
+		"color": {
+			"background": true,
+			"gradients": true,
+			"text": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"shadow": true
+	},
+	"attributes": {
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"iconLibrary": {
+			"type": "string",
+			"default": "fontawesome"
+		},
+		"icon": {
+			"type": "string",
+			"default": "leaf"
+		},
+		"customIconUrl": {
+			"type": "string"
+		},
+		"iconSize": {
+			"type": "number",
+			"default": 88
+		},
+		"prefix": {
+			"type": "string",
+			"default": "fas"
+		},
+		"searchTerm": {
+			"type": "string",
+			"default": ""
+		},
+		"url": {
+			"type": "string"
+		},
+		"linkTarget": {
+			"type": "string"
+		},
+		"rel": {
+			"type": "string"
+		},
+		"iconBorder": {
+			"type": "boolean",
+			"default": false
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 2
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 0
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": ["file:./style-index.css", "blockons-fontawesome"]
+}

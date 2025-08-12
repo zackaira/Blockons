@@ -1,0 +1,45 @@
+
+.blockons-icon-selector {
+	display: flex;
+	justify-content: flex-start;
+}
+
+/* -- Alignment -- */
+.blockons-icon-selector.align-center {
+	justify-content: center;
+}
+
+.blockons-icon-selector.align-right {
+	justify-content: flex-end;
+}
+
+/* -- Icon -- */
+.blockons-icon-selector .blockons-icon i,
+.blockons-icon-selector .blockons-icon img {
+	font-size: inherit;
+	display: flex;
+	height: fit-content;
+	width: fit-content;
+}
+
+.blockons-icon-selector .blockons-icon img.kwtsk-icon {
+	width: 1em;
+	height: 1em;
+	object-fit: contain;
+}
+
+/* -- Icon Link -- */
+.blockons-icon-selector .blockons-icon-link {
+	text-decoration: none;
+	color: inherit;
+	display: flex;
+}
+
+/* -- Icon Style -- */
+.blockons-icon-selector.icon-style-two {
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.blockons-icon-selector.icon-style-three {
+	border: 1px solid #000;
+}

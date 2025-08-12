@@ -31,7 +31,7 @@ add_action( 'init', 'blockons_wc_mini_cart_register_block' );
 // 	return $styles;
 // });
 function blockons_add_footer_wc_minicart() {
-	if (has_block('blockons/wc-mini-cart')) {
+	if ( class_exists( 'woocommerce' ) ) {
 		$allowed_html = array(
 			'div' => array('class' => array(), 'id' => array(), 'style' => array()),
 			'a' => array('class' => array(), 'href' => array()),

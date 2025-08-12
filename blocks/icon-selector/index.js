@@ -12,7 +12,6 @@ import save from "./save";
 
 import "./editor.css";
 import "./style.css";
-import "./layout-block.js";
 
 const { name } = json;
 

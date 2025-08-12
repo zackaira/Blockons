@@ -113,9 +113,6 @@ class Blockons_Security_Manager {
                 }
             }
     
-            // Debug the decoded data
-            error_log('Decoded form data: ' . print_r($form_data, true));
-    
             // Validate required fields
             $required_fields = ['emailTo', 'fields'];
             foreach ($required_fields as $field) {
