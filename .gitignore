@@ -11,3 +11,5 @@ index.js.map
 *.log
 /yarn.lock
 .vscode
+
+package-lock.json
