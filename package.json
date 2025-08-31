@@ -28,7 +28,8 @@
 	"scripts": {
 		"start": "wp-scripts start --mode=development --webpack-copy-php --webpack-src-dir=blocks",
 		"build": "wp-scripts build --mode=production --webpack-copy-php --webpack-src-dir=blocks && gulp bundle",
-		"packages-update": "wp-scripts packages-update"
+		"packages-update": "wp-scripts packages-update",
+		"make-pot": "wp i18n make-pot . lang/blockons.pot --slug=blockons --exclude=node_modules,dist,vendor,.git,tests,build"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^7.0.0",

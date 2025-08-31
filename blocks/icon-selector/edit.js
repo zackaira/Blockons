@@ -217,6 +217,7 @@ const Edit = ({ attributes, setAttributes, isSelected }) => {
 		borderRadius,
 	} = attributes;
 
+	const adminUrl = blockonsEditorObj?.adminUrl;
 	const isTskActive = blockonsEditorObj?.isTskActive || false;
 	const allowedMimeTypes = [
 		'image/jpeg',
@@ -439,6 +440,21 @@ const Edit = ({ attributes, setAttributes, isSelected }) => {
 							</MediaUploadCheck>
 							<p className="components-base-control__help">
 								{allowedFileTypes}
+
+								{!isTskActive && (
+									<Button
+										variant="secondary"
+										onClick={() =>
+											window.open(`${adminUrl}/plugin-install.php?s=%2522theme%2520site%2520kit%2522&tab=search&type=term`, '_blank')
+										}
+									>
+										{__(
+											'Get Theme Site Kit',
+											'blockons',
+										)}
+									</Button>
+								)}
+
 								{isTskActive && (
 									<span className="blockons-svg-support">
 										{' '}
@@ -611,7 +627,7 @@ const Edit = ({ attributes, setAttributes, isSelected }) => {
 
 			<div
 				{...useBlockProps({
-					className: `blockons-icon`,
+					className: `blockons-icon-wrap`,
 					style: {
 						...(iconLibrary === 'fontawesome' &&
 							icon && {
@@ -657,7 +673,7 @@ const Edit = ({ attributes, setAttributes, isSelected }) => {
 						{customIconUrl ? (
 							customIconUrl.endsWith('.svg') && svgContent ? (
 								<div
-									className="blockons-icon"
+									className="blockons-icon-svg"
 									style={{
 										width: '100%',
 										height: '100%',
@@ -675,7 +691,7 @@ const Edit = ({ attributes, setAttributes, isSelected }) => {
 								<img
 									src={customIconUrl}
 									alt={__('Custom icon', 'blockons')}
-									className="blockons-icon"
+									className="blockons-icon-img"
 									style={{
 										width: '80%',
 										height: '80%',

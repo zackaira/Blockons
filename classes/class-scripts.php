@@ -258,19 +258,19 @@ class Blockons {
 					'wc_ajax_url' => WC_AJAX::get_endpoint('%%endpoint%%'),
 				));
 			}
+		}
 
-			/*
-			 * WOOCOMMERCE ADDONS
-			 */
-			// WC Side Cart
-			if ( Blockons_Admin::blockons_is_plugin_active('woocommerce.php') ) {
-				if (isset($blockonsOptions->sidecart->enabled) && $blockonsOptions->sidecart->enabled == true) {
-					wp_register_style('blockons-sidecart-pro', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/cart-pro.min.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
-					wp_enqueue_style('blockons-sidecart-pro');
-
-					wp_enqueue_script('blockons-wc-mini-cart');
-				}
+		/*
+		* WOOCOMMERCE ADDONS
+		*/
+		// WC Side Cart
+		if ( Blockons_Admin::blockons_is_plugin_active('woocommerce.php') ) {
+			if ($isPro && isset($blockonsOptions->sidecart->enabled) && $blockonsOptions->sidecart->enabled == true) {
+				wp_register_style('blockons-sidecart-pro', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/cart-pro.min.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
+				wp_enqueue_style('blockons-sidecart-pro');
 			}
+
+			wp_enqueue_script('blockons-wc-mini-cart');
 		}
 	} // End blockons_frontend_scripts ()
 

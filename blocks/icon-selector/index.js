@@ -8,7 +8,7 @@ import { registerBlockType } from "@wordpress/blocks";
  */
 import json from "./block.json";
 import Edit from "./edit";
-import save from "./save";
+// import save from "./save";
 
 import "./editor.css";
 import "./style.css";
@@ -20,5 +20,7 @@ const { name } = json;
  */
 registerBlockType(name, {
 	edit: Edit,
-	save,
+	/**
+	 * No save: defaults to: save: () => null
+	 */
 });

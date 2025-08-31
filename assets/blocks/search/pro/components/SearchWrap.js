@@ -114,6 +114,29 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 		[restUrl],
 	);
 
+	// Filter function to exclude private and draft posts
+	const filterPublicPosts = useCallback(async (posts) => {
+		if (!posts || posts.length === 0) return posts;
+
+		const filteredPosts = [];
+
+		for (const post of posts) {
+			try {
+				// Get the full post data to check status
+				const response = await axios.get(`${restUrl}blcns/v1/post/${post.id}`);
+				// If the request succeeds, the post is publicly available
+				// (our REST API function already filters out private/draft posts)
+				filteredPosts.push(post);
+			} catch (error) {
+				// If request fails (403 forbidden), it means the post is private/draft
+				// so we skip it
+				console.log(`Skipping post ${post.id} - not publicly available`);
+			}
+		}
+
+		return filteredPosts;
+	}, [restUrl]);
+
 	// Handle search
 	const handleSearch = useCallback(
 		async (query) => {
@@ -146,7 +169,10 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 				);
 				const [mainResponse, ...taxonomyResponses] = responses;
 
-				setSearchResults(mainResponse.data);
+				// Filter out private and draft posts
+				const filteredResults = await filterPublicPosts(mainResponse.data);
+
+				setSearchResults(filteredResults);
 				setTotalPages(mainResponse.headers['x-wp-totalpages']);
 				setCurrentQuery(query);
 
@@ -163,7 +189,7 @@ const SearchWrap = ({ searchId, searchSettings }) => {
 				setIsLoading(false);
 			}
 		},
-		[restUrl, set, postTypeTaxonomies, clearSearchResults],
+		[restUrl, set, postTypeTaxonomies, clearSearchResults, filterPublicPosts],
 	);
 
 	// Debounced search effect

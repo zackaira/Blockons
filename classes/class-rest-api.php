@@ -261,6 +261,11 @@ class Blockons_WC_Rest_Routes {
 			return new WP_Error('invalid_post_id', __('Invalid post ID.', 'blockons'), array('status' => 404));
 		}
 	
+		// Check if post is private or draft - don't return details for these
+		if (in_array($post->post_status, array('private', 'draft'))) {
+			return new WP_Error('post_not_available', __('Post is not publicly available.', 'blockons'), array('status' => 403));
+		}
+	
 		$post_thumbnail_id = get_post_thumbnail_id($post_id);
 		$post_image = wp_get_attachment_url($post_thumbnail_id);
 	

@@ -242,6 +242,7 @@ This could be from the theme you're using, or another plugin. Again, please [con
 * Styling tweaks/fixes
 * 
 * Fixed WC Mini Cart not working in custom template part
+* PRO: Fixed Instant Search results to exclude draft & private posts
 * 
 
 = 1.2.10 =
