@@ -96,6 +96,8 @@ const Edit = (props) => {
 								'Please ensure the account URL is correct, incase the original URL was changed',
 								'blockons',
 							)}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<ToggleControl
@@ -108,6 +110,7 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({ hasDropdown: newValue })
 							}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						{hasDropdown && (
@@ -147,6 +150,8 @@ const Edit = (props) => {
 													: newValue,
 										})
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 
 								<ToggleControl // This setting is just for displaying the drop down, value is not saved.
@@ -162,6 +167,7 @@ const Edit = (props) => {
 									onChange={() => {
 										setShowDropDown((state) => !state);
 									}}
+									__nextHasNoMarginBottom={true}
 								/>
 								<CheckboxControl
 									label="Dashboard"
@@ -253,6 +259,8 @@ const Edit = (props) => {
 											: newIcon,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						{icon === 'custom' && (
 							<>
@@ -264,6 +272,8 @@ const Edit = (props) => {
 										'Add your own custom icon by adding the Font Awesome icon full name',
 										'blockons',
 									)}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="helplink fixmargin">
 									<a
@@ -289,6 +299,8 @@ const Edit = (props) => {
 							}
 							min={14}
 							max={80}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<RangeControl
 							label={__('Icon Padding', 'blockons')}
@@ -303,6 +315,8 @@ const Edit = (props) => {
 							}
 							min={0}
 							max={80}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<BlockonsColorpicker

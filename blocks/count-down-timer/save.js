@@ -53,10 +53,10 @@ const Save = ({ attributes }) => {
 						...(!attributes.hasAfterText ? { marginRight: 0 } : {}),
 					}}
 					{...(attributes.onComplete === "one"
-						? { "data-completeText": attributes.onCompleteText }
+						? { "data-completetext": attributes.onCompleteText }
 						: {})}
 					{...(attributes.onComplete === "two"
-						? { "data-completeHide": attributes.onCompleteHide }
+						? { "data-completehide": attributes.onCompleteHide }
 						: {})}
 				>
 					<div

@@ -4,6 +4,7 @@ import { registerBlockType } from "@wordpress/blocks";
 import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
 
 registerBlockType("blockons/ds-content", {
+	apiVersion: 2,
 	title: __("Content", "blockons"),
 	icon: "welcome-add-page",
 	parent: ["blockons/content-selector"],

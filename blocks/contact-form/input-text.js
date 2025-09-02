@@ -65,6 +65,7 @@ const generateInputId = (label) => {
 };
 
 registerBlockType('blockons/form-text-input', {
+	apiVersion: 2,
 	title: __('Form Text Input', 'blockons'),
 	icon: 'text',
 	parent: ['blockons/contact-form'],
@@ -310,6 +311,8 @@ registerBlockType('blockons/form-text-input', {
 								onChange={(value) =>
 									setAttributes({ inputType: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -319,6 +322,8 @@ registerBlockType('blockons/form-text-input', {
 								onChange={(value) =>
 									setAttributes({ label: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<TextControl
 								label={__('Placeholder', 'blockons')}
@@ -326,6 +331,8 @@ registerBlockType('blockons/form-text-input', {
 								onChange={(value) =>
 									setAttributes({ placeholder: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -335,6 +342,7 @@ registerBlockType('blockons/form-text-input', {
 								onChange={(value) =>
 									setAttributes({ description: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -344,6 +352,7 @@ registerBlockType('blockons/form-text-input', {
 								onChange={(value) =>
 									setAttributes({ required: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -354,6 +363,8 @@ registerBlockType('blockons/form-text-input', {
 								onChange={(value) =>
 									setAttributes({ width: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						</PanelBody>
 					</InspectorControls>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "@wordpress/element";
+import { useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
 	RichText,
@@ -12,10 +12,7 @@ import {
 	PanelBody,
 	ToggleControl,
 	SelectControl,
-	CheckboxControl,
 	TextControl,
-	RangeControl,
-	ColorPalette,
 	Button,
 	__experimentalUnitControl as UnitControl,
 } from "@wordpress/components";
@@ -92,6 +89,7 @@ const Edit = (props) => {
 								{ value: "px", label: "px", default: 600 },
 							]}
 							isResetValueOnUnitChange
+							__next40pxDefaultSize={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -108,6 +106,8 @@ const Edit = (props) => {
 										newValue === undefined ? "horizontal" : newValue,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -115,6 +115,7 @@ const Edit = (props) => {
 							label={__("Automatic Slide on Hover", "blockons")}
 							checked={automatic}
 							onChange={(newValue) => setAttributes({ automatic: newValue })}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -122,6 +123,7 @@ const Edit = (props) => {
 							label={__("Add Image Labels", "blockons")}
 							checked={imageLabels}
 							onChange={(newValue) => setAttributes({ imageLabels: newValue })}
+							__nextHasNoMarginBottom={true}
 						/>
 						{imageLabels && (
 							<>
@@ -129,11 +131,15 @@ const Edit = (props) => {
 									label={__("Before Label", "blockons")}
 									value={before}
 									onChange={(newValue) => setAttributes({ before: newValue })}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<TextControl
 									label={__("After Label", "blockons")}
 									value={after}
 									onChange={(newValue) => setAttributes({ after: newValue })}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="blockons-divider"></div>
 								<BlockonsColorpicker
@@ -162,6 +168,8 @@ const Edit = (props) => {
 									handle: newValue === undefined ? "one" : newValue,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<BlockonsColorpicker
 							label={__("Handle Color", "blockons")}
@@ -256,7 +264,6 @@ const Edit = (props) => {
 								<RichText
 									tagName="div"
 									placeholder={__("Before", "blockons")}
-									keepPlaceholderOnFocus
 									value={before}
 									className="blockons-ic-title before"
 									onChange={(value) => setAttributes({ before: value })}
@@ -273,7 +280,6 @@ const Edit = (props) => {
 								<RichText
 									tagName="div"
 									placeholder={__("After", "blockons")}
-									keepPlaceholderOnFocus
 									value={after}
 									className="blockons-ic-title after"
 									onChange={(value) => setAttributes({ after: value })}
@@ -294,7 +300,7 @@ const Edit = (props) => {
 						{handle === "three" && (
 							<svg
 								slot="handle"
-								class="large-arrow-handle"
+								className="large-arrow-handle"
 								xmlns="http://www.w3.org/2000/svg"
 								width="100"
 								viewBox="-8 -3 16 6"
@@ -302,9 +308,9 @@ const Edit = (props) => {
 								<path
 									stroke={handleColor}
 									d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2"
-									stroke-width="1"
+									strokeWidth="1"
 									fill={handleColor}
-									vector-effect="non-scaling-stroke"
+									vectorEffect="non-scaling-stroke"
 								></path>
 							</svg>
 						)}

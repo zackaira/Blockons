@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			const counterElement = document.getElementById(countDownBlock.id);
 			const counterElementParent = counterElement.parentElement;
 			const countDownDate = new Date(parseInt(countDownBlock.id)).getTime();
-			const onCompleteText = counterElement.getAttribute("data-completeText");
-			const onCompleteHide = counterElement.getAttribute("data-completeHide");
+			const onCompleteText = counterElement.getAttribute("data-completetext");
+			const onCompleteHide = counterElement.getAttribute("data-completehide");
 
 			const updateCountdown = () => {
 				const now = new Date().getTime();

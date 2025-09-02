@@ -219,7 +219,10 @@ const Edit = (props) => {
 	};
 
 	const slides = sliderSlides.map((slideItem, index) => (
-		<div className="swiper-slide-inner">
+		<div
+			key={index}
+			className="swiper-slide-inner"
+		>
 			<div
 				className="blockons-slide-text"
 				style={{
@@ -454,6 +457,8 @@ const Edit = (props) => {
 
 								setAttributes({ transition: newValue });
 							}}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 						{transition !== 'fade' && (
@@ -475,6 +480,8 @@ const Edit = (props) => {
 											? sliderSlides.length
 											: 4
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="blockons-divider"></div>
 							</>
@@ -494,6 +501,8 @@ const Edit = (props) => {
 
 								setAttributes({ mode: newValue });
 							}}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -511,6 +520,8 @@ const Edit = (props) => {
 										)
 									: ''
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						{autoplay && (
 							<>
@@ -524,6 +535,8 @@ const Edit = (props) => {
 										})
 									}
 									help={__('1000 = 1 second', 'blockons')}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<ToggleControl
 									label={__(
@@ -540,6 +553,7 @@ const Edit = (props) => {
 										'Disable the Auto Play When the slider is interacted with',
 										'blockons',
 									)}
+									__nextHasNoMarginBottom={true}
 								/>
 							</>
 						)}
@@ -559,6 +573,8 @@ const Edit = (props) => {
 							min={0}
 							max={200}
 							step={10}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 					</PanelBody>
 					<PanelBody
@@ -575,6 +591,8 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({ testStyle: newValue })
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<SelectControl
 							label="Layout"
@@ -587,6 +605,8 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({ testLayout: newValue })
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -600,6 +620,7 @@ const Edit = (props) => {
 								'Edit star ratings by clicking on the stars',
 								'blockons',
 							)}
+							__nextHasNoMarginBottom={true}
 						/>
 						<ToggleControl
 							label={__('Show Author Position', 'blockons')}
@@ -607,6 +628,7 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({ showPosition: newValue })
 							}
+							__nextHasNoMarginBottom={true}
 						/>
 						<ToggleControl
 							label={__('Show Author Image / Icon', 'blockons')}
@@ -614,6 +636,7 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({ showIcon: newValue })
 							}
+							__nextHasNoMarginBottom={true}
 						/>
 						<ToggleControl
 							label={__('Show Quotes', 'blockons')}
@@ -621,6 +644,7 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({ showQuotes: newValue })
 							}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						{showQuotes && (
@@ -638,6 +662,8 @@ const Edit = (props) => {
 									}
 									min={18}
 									max={54}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<BlockonsColorpicker
 									label={__('Quotes Color', 'blockons')}
@@ -666,6 +692,8 @@ const Edit = (props) => {
 									min={0}
 									max={1}
 									step={0.1}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="blockons-divider"></div>
 							</>
@@ -744,6 +772,7 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({ navigation: newValue })
 							}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						{navigation && (
@@ -762,6 +791,8 @@ const Edit = (props) => {
 											navigationStyle: newValue,
 										})
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<SelectControl
 									label="Color"
@@ -775,6 +806,8 @@ const Edit = (props) => {
 											navigationColor: newValue,
 										})
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 
 								<div className="blockons-icon-select">
@@ -796,8 +829,9 @@ const Edit = (props) => {
 										)}
 										renderContent={() =>
 											Object.keys(sliderArrowIcons).map(
-												(icon) => (
+												(icon, index) => (
 													<FontAwesomeIcon
+														key={index}
 														icon={icon}
 														iconSize={20}
 														onClick={() =>
@@ -829,6 +863,7 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({ pagination: newValue })
 							}
+							__nextHasNoMarginBottom={true}
 						/>
 						{pagination && (
 							<>
@@ -859,6 +894,8 @@ const Edit = (props) => {
 										'Turn the Pagination off and on again to see this change',
 										'blockons',
 									)}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<SelectControl
 									label="Color"
@@ -872,6 +909,8 @@ const Edit = (props) => {
 											paginationColor: newValue,
 										})
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 							</>
 						)}
@@ -888,6 +927,7 @@ const Edit = (props) => {
 									onChange={(newValue) =>
 										setAttributes({ showOnHover: newValue })
 									}
+									__nextHasNoMarginBottom={true}
 								/>
 							</>
 						)}
@@ -922,7 +962,7 @@ const Edit = (props) => {
 				)}
 				<Swiper {...sliderOptions}>
 					{slides.map((slideContent, index) => (
-						<SwiperSlide>{slideContent}</SwiperSlide>
+						<SwiperSlide key={index}>{slideContent}</SwiperSlide>
 					))}
 				</Swiper>
 			</div>

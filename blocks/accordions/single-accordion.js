@@ -23,6 +23,7 @@ import {
 
 // Registering Child Innerblock for the Accordionbed Content block
 registerBlockType("blockons/accordion", {
+	apiVersion: 2,
 	title: __("Accordion", "blockons"),
 	icon: "welcome-add-page",
 	parent: ["blockons/accordions"],
@@ -145,6 +146,7 @@ registerBlockType("blockons/accordion", {
 								onChange={(newValue) => {
 									setAttributes({ hideFrontend: newValue });
 								}}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider"></div>
 
@@ -157,6 +159,8 @@ registerBlockType("blockons/accordion", {
 										labelTag: newValue === undefined ? "h4" : newValue,
 									})
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 
 							<ToggleControl
@@ -169,6 +173,7 @@ registerBlockType("blockons/accordion", {
 								onChange={(newValue) => {
 									setAttributes({ stayOpen: newValue });
 								}}
+								__nextHasNoMarginBottom={true}
 							/>
 						</PanelBody>
 						<PanelBody
@@ -181,6 +186,8 @@ registerBlockType("blockons/accordion", {
 								onChange={(newalue) => setAttributes({ itemSpacing: newalue })}
 								min={0}
 								max={100}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 
 							<h4>{__("Accordion Labels", "blockons")}</h4>
@@ -200,6 +207,8 @@ registerBlockType("blockons/accordion", {
 								}
 								min={11}
 								max={44}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<BlockonsColorpicker
 								label={__("Font Color", "blockons")}
@@ -217,6 +226,8 @@ registerBlockType("blockons/accordion", {
 								}
 								min={11}
 								max={44}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<BlockonsColorpicker
 								label={__("Icon Color", "blockons")}
@@ -238,6 +249,8 @@ registerBlockType("blockons/accordion", {
 										}
 										min={0}
 										max={200}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 								</>
 							)}

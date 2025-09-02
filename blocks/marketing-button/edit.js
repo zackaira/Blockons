@@ -101,8 +101,9 @@ const Edit = (props) => {
 						/>
 					)}
 					renderContent={() =>
-						Object.keys(marketingButtonIcons).map((icon) => (
+						Object.keys(marketingButtonIcons).map((icon, index) => (
 							<FontAwesomeIcon
+								key={index}
 								icon={icon}
 								iconSize={20}
 								onClick={() => onChangeIcon(icon)}
@@ -130,6 +131,8 @@ const Edit = (props) => {
 									linkTo: newValue,
 								});
 							}}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<ToggleControl
 							label={__('Open in new window', 'blockons')}
@@ -139,6 +142,7 @@ const Edit = (props) => {
 									linkTarget: newValue,
 								});
 							}}
+							__nextHasNoMarginBottom={true}
 						/>
 						<br />
 
@@ -163,6 +167,8 @@ const Edit = (props) => {
 											: newValue,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<RangeControl
@@ -178,6 +184,8 @@ const Edit = (props) => {
 							}
 							min={200}
 							max={1000}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<RangeControl
 							label={__('Min Height', 'blockons')}
@@ -192,6 +200,8 @@ const Edit = (props) => {
 							}
 							min={50}
 							max={500}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<ToggleControl
@@ -202,6 +212,7 @@ const Edit = (props) => {
 									showSubText: newValue,
 								});
 							}}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<ToggleControl
@@ -216,6 +227,7 @@ const Edit = (props) => {
 								'Change the icon by clicking on the Icon within the editor',
 								'blockons',
 							)}
+							__nextHasNoMarginBottom={true}
 						/>
 						{hasIcon && (
 							<>
@@ -227,6 +239,7 @@ const Edit = (props) => {
 											customIcon: newValue,
 										});
 									}}
+									__nextHasNoMarginBottom={true}
 								/>
 								{customIcon && (
 									<>
@@ -242,6 +255,8 @@ const Edit = (props) => {
 												'Add your own custom icon by adding the Font Awesome icon name',
 												'blockons',
 											)}
+											__next40pxDefaultSize={true}
+											__nextHasNoMarginBottom={true}
 										/>
 										<div className="helplink fixmargin">
 											<a
@@ -294,6 +309,8 @@ const Edit = (props) => {
 													: newValue,
 										})
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<RangeControl
 									label={__('Icon Size', 'blockons')}
@@ -308,6 +325,8 @@ const Edit = (props) => {
 									}
 									min={10}
 									max={62}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<RangeControl
 									label={__('Icon Spacing', 'blockons')}
@@ -322,6 +341,8 @@ const Edit = (props) => {
 									}
 									min={0}
 									max={200}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 							</>
 						)}
@@ -343,6 +364,8 @@ const Edit = (props) => {
 							}
 							min={0}
 							max={200}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<RangeControl
@@ -358,6 +381,8 @@ const Edit = (props) => {
 							}
 							min={0}
 							max={240}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<RangeControl
 							label={__('Horizontal Padding', 'blockons')}
@@ -372,6 +397,8 @@ const Edit = (props) => {
 							}
 							min={0}
 							max={240}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<BlockonsColorpicker
@@ -492,7 +519,6 @@ const Edit = (props) => {
 							<RichText
 								tagName={'div'}
 								placeholder={__('Button Title', 'blockons')}
-								keepPlaceholderOnFocus
 								value={title}
 								className="blockons-marketing-button-title"
 								onChange={(value) =>
@@ -517,7 +543,6 @@ const Edit = (props) => {
 										'Some extra text',
 										'blockons',
 									)}
-									keepPlaceholderOnFocus
 									value={subText}
 									className="blockons-marketing-button-text"
 									onChange={(value) =>

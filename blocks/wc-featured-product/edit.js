@@ -128,6 +128,8 @@ const Edit = (props) => {
 											: newValue,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						{layout === 'one' && (
 							<ToggleControl
@@ -136,6 +138,7 @@ const Edit = (props) => {
 								onChange={(newValue) =>
 									setAttributes({ layoutSwitch: newValue })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 
@@ -148,6 +151,7 @@ const Edit = (props) => {
 										layoutTwoOverlay: newValue,
 									})
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 
@@ -164,6 +168,8 @@ const Edit = (props) => {
 							}
 							min={0}
 							max={120}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						{layout === 'one' && (
 							<RangeControl
@@ -179,6 +185,8 @@ const Edit = (props) => {
 								}
 								min={0}
 								max={120}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 
@@ -188,6 +196,7 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({ showDesc: newValue })
 							}
+							__nextHasNoMarginBottom={true}
 						/>
 						<ToggleControl
 							label={__('Show Price', 'blockons')}
@@ -195,6 +204,7 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({ showPrice: newValue })
 							}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<ToggleControl
@@ -203,6 +213,7 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({ showButton: newValue })
 							}
+							__nextHasNoMarginBottom={true}
 						/>
 						{/* {showButton && (
 							<>
@@ -218,6 +229,8 @@ const Edit = (props) => {
 											buttonType: newValue === undefined ? "link" : newValue,
 										})
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								{buttonType === "link" && (
 									<ToggleControl
@@ -226,6 +239,7 @@ const Edit = (props) => {
 										onChange={(newValue) =>
 											setAttributes({ buttonTarget: newValue })
 										}
+										__nextHasNoMarginBottom={true}
 									/>
 								)}
 							</>
@@ -248,6 +262,8 @@ const Edit = (props) => {
 								min={0}
 								max={1}
 								step={0.01}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 
@@ -292,6 +308,8 @@ const Edit = (props) => {
 							min={12}
 							max={68}
 							allowReset
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<BlockonsColorpicker
 							label={__('Product Title Color', 'blockons')}
@@ -323,6 +341,8 @@ const Edit = (props) => {
 									min={12}
 									max={44}
 									allowReset
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<BlockonsColorpicker
 									label={__('Price Color', 'blockons')}
@@ -370,6 +390,8 @@ const Edit = (props) => {
 								}
 								min={20}
 								max={80}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 						<RangeControl
@@ -386,6 +408,8 @@ const Edit = (props) => {
 							min={100}
 							max={1000}
 							allowReset
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 					</PanelBody>
 				</InspectorControls>

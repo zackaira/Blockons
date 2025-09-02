@@ -98,6 +98,7 @@ const useDateFormatOptions = (enableTime) => {
 };
 
 registerBlockType('blockons/form-datepicker', {
+	apiVersion: 2,
 	title: __('Form Date Picker', 'blockons'),
 	icon: 'calendar-alt',
 	parent: ['blockons/contact-form'],
@@ -352,6 +353,8 @@ registerBlockType('blockons/form-datepicker', {
 								onChange={(value) =>
 									setAttributes({ label: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<TextareaControl
 								label={__('Description', 'blockons')}
@@ -359,6 +362,7 @@ registerBlockType('blockons/form-datepicker', {
 								onChange={(value) =>
 									setAttributes({ description: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -368,6 +372,8 @@ registerBlockType('blockons/form-datepicker', {
 								onChange={(value) =>
 									setAttributes({ placeholder: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -377,6 +383,7 @@ registerBlockType('blockons/form-datepicker', {
 								onChange={(value) =>
 									setAttributes({ required: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -386,6 +393,7 @@ registerBlockType('blockons/form-datepicker', {
 								onChange={(value) =>
 									setAttributes({ enableTime: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -396,6 +404,8 @@ registerBlockType('blockons/form-datepicker', {
 								onChange={(value) =>
 									setAttributes({ dateFormat: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							{enableTime && (
 								<SelectControl
@@ -414,6 +424,8 @@ registerBlockType('blockons/form-datepicker', {
 									onChange={(value) =>
 										setAttributes({ timeFormat: value })
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 							)}
 							<div className="date-format-example">
@@ -517,6 +529,8 @@ registerBlockType('blockons/form-datepicker', {
 								onChange={(value) =>
 									setAttributes({ width: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						</PanelBody>
 					</InspectorControls>

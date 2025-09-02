@@ -133,6 +133,7 @@ const Edit = (props) => {
 
 		return (
 			<div
+				key={index}
 				className={`blockons-gallery-item ${layout} ${canFlip}`}
 				style={{
 					...(layout === 'masonry'
@@ -189,7 +190,7 @@ const Edit = (props) => {
 								: {})}
 						>
 							{imageItem.imageUrl && (
-								<div class="aspect-img">
+								<div className="aspect-img">
 									<img
 										src={imageItem.imageUrl}
 										alt={imageItem.alt}
@@ -326,6 +327,8 @@ const Edit = (props) => {
 												imageCaption: 'none',
 											});
 									}}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 
 								{layout !== 'featured' && (
@@ -382,6 +385,8 @@ const Edit = (props) => {
 															: newValue,
 												})
 											}
+											__next40pxDefaultSize={true}
+											__nextHasNoMarginBottom={true}
 										/>
 									</>
 								)}
@@ -400,6 +405,8 @@ const Edit = (props) => {
 										}
 										min={2}
 										max={10}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 								)}
 								<RangeControl
@@ -412,6 +419,8 @@ const Edit = (props) => {
 									}
 									min={0}
 									max={60}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 							</>
 						)}
@@ -534,6 +543,8 @@ const Edit = (props) => {
 												)
 											: ''
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 
 								{(imageCaption === 'plain' ||
@@ -551,6 +562,7 @@ const Edit = (props) => {
 													captionOnHover: newValue,
 												})
 											}
+											__nextHasNoMarginBottom={true}
 										/>
 										{captionOnHover && (
 											<SelectControl
@@ -624,6 +636,8 @@ const Edit = (props) => {
 																: newValue,
 													})
 												}
+												__next40pxDefaultSize={true}
+												__nextHasNoMarginBottom={true}
 											/>
 										)}
 									</>
@@ -705,6 +719,8 @@ const Edit = (props) => {
 													: newValue,
 										})
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="blockons-divider"></div>
 
@@ -763,6 +779,8 @@ const Edit = (props) => {
 													min={0}
 													max={1}
 													step={0.01}
+													__next40pxDefaultSize={true}
+													__nextHasNoMarginBottom={true}
 												/>
 												<div className="blockons-divider"></div>
 											</>
@@ -793,6 +811,8 @@ const Edit = (props) => {
 											min={10}
 											max={24}
 											step={1}
+											__next40pxDefaultSize={true}
+											__nextHasNoMarginBottom={true}
 										/>
 									</>
 								)}
@@ -822,6 +842,7 @@ const Edit = (props) => {
 												'Please check the website frontend to view the image popup',
 												'blockons',
 											)}
+											__nextHasNoMarginBottom={true}
 										/>
 										{popupEnable && (
 											<>
@@ -863,6 +884,8 @@ const Edit = (props) => {
 															popupIcon: newValue,
 														})
 													}
+													__next40pxDefaultSize={true}
+													__nextHasNoMarginBottom={true}
 												/>
 												<SelectControl
 													label={__(
@@ -898,6 +921,8 @@ const Edit = (props) => {
 																newValue,
 														})
 													}
+													__next40pxDefaultSize={true}
+													__nextHasNoMarginBottom={true}
 												/>
 												<SelectControl
 													label={__(
@@ -921,6 +946,8 @@ const Edit = (props) => {
 																newValue,
 														})
 													}
+													__next40pxDefaultSize={true}
+													__nextHasNoMarginBottom={true}
 												/>
 											</>
 										)}
@@ -981,7 +1008,7 @@ const Edit = (props) => {
 									margin: `0 -${Math.floor(gridGap / 2)}px`,
 								}
 							: {
-									'grid-gap': gridGap,
+									'gridGap': gridGap,
 								}
 					}
 				>

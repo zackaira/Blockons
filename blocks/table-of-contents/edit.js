@@ -256,6 +256,7 @@ const Edit = (props) => {
 									)
 								: ''
 						}
+						__nextHasNoMarginBottom={true}
 					/>
 					<div className="blockons-divider"></div>
 
@@ -270,6 +271,7 @@ const Edit = (props) => {
 							{ value: 'px', label: 'px', default: 300 },
 						]}
 						isResetValueOnUnitChange
+						__next40pxDefaultSize={true}
 					/>
 					<div className="blockons-divider"></div>
 
@@ -279,6 +281,7 @@ const Edit = (props) => {
 						onChange={(newValue) =>
 							setAttributes({ showTitle: newValue })
 						}
+						__nextHasNoMarginBottom={true}
 					/>
 					<ToggleControl
 						label={__('Show Top Description', 'blockons')}
@@ -286,6 +289,7 @@ const Edit = (props) => {
 						onChange={(newValue) =>
 							setAttributes({ showDescTop: newValue })
 						}
+						__nextHasNoMarginBottom={true}
 					/>
 					<ToggleControl
 						label={__('Show Bottom Description', 'blockons')}
@@ -293,6 +297,7 @@ const Edit = (props) => {
 						onChange={(newValue) =>
 							setAttributes({ showDescBottom: newValue })
 						}
+						__nextHasNoMarginBottom={true}
 					/>
 					<div className="blockons-divider"></div>
 
@@ -306,6 +311,7 @@ const Edit = (props) => {
 									[`include${heading}`]: newValue,
 								})
 							}
+							__nextHasNoMarginBottom={true}
 						/>
 					))}
 					<div className="blockons-divider"></div>
@@ -316,6 +322,7 @@ const Edit = (props) => {
 						onChange={(newValue) =>
 							setAttributes({ showBlurbs: newValue })
 						}
+						__nextHasNoMarginBottom={true}
 					/>
 				</PanelBody>
 				<PanelBody
@@ -342,6 +349,8 @@ const Edit = (props) => {
 						onChange={(newValue) =>
 							setAttributes({ border: newValue })
 						}
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
 					/>
 					{border !== 'three' && (
 						<>
@@ -353,6 +362,8 @@ const Edit = (props) => {
 								}
 								min={0}
 								max={10}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<RangeControl
 								label={__('Border Radius', 'blockons')}
@@ -362,6 +373,8 @@ const Edit = (props) => {
 								}
 								min={0}
 								max={50}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<BlockonsColorpicker
 								label={__('Border Color', 'blockons')}
@@ -383,6 +396,8 @@ const Edit = (props) => {
 						}
 						min={0}
 						max={80}
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
 					/>
 					<RangeControl
 						label={__('Vertical Padding', 'blockons')}
@@ -392,6 +407,8 @@ const Edit = (props) => {
 						}
 						min={0}
 						max={80}
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
 					/>
 					<div className="blockons-divider"></div>
 
@@ -413,6 +430,8 @@ const Edit = (props) => {
 								}
 								min={10}
 								max={48}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider"></div>
 						</>
@@ -424,6 +443,7 @@ const Edit = (props) => {
 						onChange={(newValue) =>
 							setAttributes({ showNumbers: newValue })
 						}
+						__nextHasNoMarginBottom={true}
 					/>
 					{showNumbers && (
 						<>
@@ -435,6 +455,8 @@ const Edit = (props) => {
 								}
 								min={10}
 								max={84}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<RangeControl
 								label={__('Number Spacing', 'blockons')}
@@ -444,6 +466,8 @@ const Edit = (props) => {
 								}
 								min={0}
 								max={100}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						</>
 					)}
@@ -457,6 +481,8 @@ const Edit = (props) => {
 						}
 						min={0}
 						max={50}
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
 					/>
 					<RangeControl
 						label={__('Spacing', 'blockons')}
@@ -466,6 +492,8 @@ const Edit = (props) => {
 						}
 						min={0}
 						max={50}
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
 					/>
 					<div className="blockons-divider"></div>
 
@@ -503,6 +531,8 @@ const Edit = (props) => {
 						}
 						min={10}
 						max={48}
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
 					/>
 
 					{(showDescTop || showDescBottom) && (
@@ -523,6 +553,8 @@ const Edit = (props) => {
 								}
 								min={10}
 								max={48}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						</>
 					)}
@@ -545,6 +577,8 @@ const Edit = (props) => {
 								}
 								min={10}
 								max={48}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						</>
 					)}
@@ -560,6 +594,7 @@ const Edit = (props) => {
 							onChange={(newValue) =>
 								setAttributes({ addAnchors: newValue })
 							}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<p>

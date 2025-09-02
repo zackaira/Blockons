@@ -65,6 +65,8 @@ const Edit = (props) => {
 									hTag: newValue === undefined ? "h3" : newValue,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<SelectControl
@@ -79,6 +81,8 @@ const Edit = (props) => {
 									headWidthSet: newValue === undefined ? "outer" : newValue,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						{headWidthSet === "outer" && (
 							<UnitControl
@@ -94,6 +98,7 @@ const Edit = (props) => {
 									{ value: "px", label: "px", default: 600 },
 								]}
 								isResetValueOnUnitChange
+								__next40pxDefaultSize={true}
 							/>
 						)}
 						{headWidthSet === "line" && (
@@ -109,6 +114,8 @@ const Edit = (props) => {
 									"This will set the pixel width of the heading lines",
 									"blockons"
 								)}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 
@@ -126,6 +133,8 @@ const Edit = (props) => {
 									headVertAlign: newValue === undefined ? "solid" : newValue,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 					</PanelBody>
 					<PanelBody
@@ -143,6 +152,8 @@ const Edit = (props) => {
 								"Clear this setting to take on the heading sizes set by the theme or page builders.",
 								"blockons"
 							)}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<SelectControl
 							label={__("Line Style", "blockons")}
@@ -157,6 +168,8 @@ const Edit = (props) => {
 									lineStyle: value === undefined ? "solid" : value,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<RangeControl
 							label={__("Line Thickness", "blockons")}
@@ -164,6 +177,8 @@ const Edit = (props) => {
 							onChange={(value) => setAttributes({ lineWidth: value })}
 							min={1}
 							max={40}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<BlockonsColorpicker
@@ -219,7 +234,6 @@ const Edit = (props) => {
 				<RichText
 					tagName={hTag}
 					placeholder={__("Heading Title", "blockons")}
-					keepPlaceholderOnFocus
 					value={headingTitle}
 					className="blockons-lheading-text"
 					onChange={(value) => setAttributes({ headingTitle: value })}

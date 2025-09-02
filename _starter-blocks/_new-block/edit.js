@@ -66,7 +66,6 @@ const Edit = (props) => {
 					<RichText
 						tagName={"h4"}
 						placeholder={title}
-						keepPlaceholderOnFocus
 						value={title}
 						className="blockons-marketing-button-title"
 						onChange={(value) => setAttributes({ title: value })}
@@ -74,7 +73,6 @@ const Edit = (props) => {
 					<RichText
 						tagName={"p"}
 						placeholder={subText}
-						keepPlaceholderOnFocus
 						value={subText}
 						className="blockons-marketing-button-text"
 						onChange={(value) => setAttributes({ subText: value })}

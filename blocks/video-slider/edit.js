@@ -201,7 +201,10 @@ const Edit = (props) => {
 	};
 
 	const slides = sliderSlides.map((slideItem, index) => (
-		<div className="swiper-slide-inner blockons-videos">
+		<div
+			key={index}
+			className="swiper-slide-inner blockons-videos"
+		>
 			<div className="swiper-slide-video aspect-ratio ratio-32rectangle">
 				{slideItem.videoType === "youtube" && slideItem.videoId && (
 					<iframe
@@ -279,6 +282,8 @@ const Edit = (props) => {
 								onChange={(newType) =>
 									handleItemVideoType(newType, slideItem.id)
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							{(slideItem.videoType === "youtube" ||
 								slideItem.videoType === "vimeo") && (
@@ -310,6 +315,8 @@ const Edit = (props) => {
 										onChange={(newId) =>
 											handleItemVideoUrl(newId, slideItem.id)
 										}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 								</>
 							)}
@@ -473,6 +480,8 @@ const Edit = (props) => {
 
 								setAttributes({ transition: newValue });
 							}}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<SelectControl
@@ -490,6 +499,8 @@ const Edit = (props) => {
 
 								setAttributes({ mode: newValue });
 							}}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 					</PanelBody>
 					<PanelBody title={__("Video Design", "blockons")} initialOpen={false}>
@@ -502,6 +513,8 @@ const Edit = (props) => {
 								{ label: "Bordered", value: "three" },
 							]}
 							onChange={(newValue) => setAttributes({ sliderStyle: newValue })}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -519,6 +532,8 @@ const Edit = (props) => {
 									sliderRoundNess: newValue === undefined ? "square" : newValue,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						{sliderStyle === "three" && (
 							<>
@@ -533,6 +548,8 @@ const Edit = (props) => {
 									}
 									min={2}
 									max={80}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<RangeControl
 									label={__("Outer Border Radius", "blockons")}
@@ -545,6 +562,8 @@ const Edit = (props) => {
 									}
 									min={0}
 									max={100}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<BlockonsColorpicker
 									label={__("Border Color", "blockons")}
@@ -568,6 +587,7 @@ const Edit = (props) => {
 							label={__("Show Navigation", "blockons")}
 							checked={navigation}
 							onChange={(newValue) => setAttributes({ navigation: newValue })}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						{navigation && (
@@ -584,6 +604,8 @@ const Edit = (props) => {
 									onChange={(newValue) =>
 										setAttributes({ navigationStyle: newValue })
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<SelectControl
 									label="Color"
@@ -595,6 +617,8 @@ const Edit = (props) => {
 									onChange={(newValue) =>
 										setAttributes({ navigationColor: newValue })
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 
 								<div className="blockons-icon-select">
@@ -610,8 +634,9 @@ const Edit = (props) => {
 											/>
 										)}
 										renderContent={() =>
-											Object.keys(sliderArrowIcons).map((icon) => (
+											Object.keys(sliderArrowIcons).map((icon, index) => (
 												<FontAwesomeIcon
+													key={index}
 													icon={icon}
 													iconSize={20}
 													onClick={() =>
@@ -632,6 +657,7 @@ const Edit = (props) => {
 							label={__("Show Pagination", "blockons")}
 							checked={pagination}
 							onChange={(newValue) => setAttributes({ pagination: newValue })}
+							__nextHasNoMarginBottom={true}
 						/>
 						{pagination && (
 							<>
@@ -654,6 +680,8 @@ const Edit = (props) => {
 										"Turn the Pagination off and on again to see this change",
 										"blockons"
 									)}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<SelectControl
 									label="Color"
@@ -665,6 +693,8 @@ const Edit = (props) => {
 									onChange={(newValue) =>
 										setAttributes({ paginationColor: newValue })
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 							</>
 						)}
@@ -678,6 +708,7 @@ const Edit = (props) => {
 									onChange={(newValue) =>
 										setAttributes({ showOnHover: newValue })
 									}
+									__nextHasNoMarginBottom={true}
 								/>
 							</>
 						)}
@@ -718,8 +749,8 @@ const Edit = (props) => {
 					onSwiper={() => blockonsSlideVideoAction()}
 					onSlideChange={() => blockonsSlideVideoAction()}
 				>
-					{slides.map((slideContent) => (
-						<SwiperSlide>{slideContent}</SwiperSlide>
+					{slides.map((slideContent, index) => (
+						<SwiperSlide key={index}>{slideContent}</SwiperSlide>
 					))}
 				</Swiper>
 			</div>

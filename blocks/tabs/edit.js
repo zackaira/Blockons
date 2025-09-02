@@ -219,6 +219,8 @@ const Edit = (props) => {
 											: newValue,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -228,6 +230,7 @@ const Edit = (props) => {
 							onChange={(newValue) => {
 								setAttributes({ tabsSideLayout: newValue });
 							}}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						{!tabsSideLayout && innerBlocks.length > 1 && (
@@ -244,6 +247,7 @@ const Edit = (props) => {
 											tabsJustified: newValue,
 										});
 									}}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="blockons-divider"></div>
 							</>
@@ -264,6 +268,8 @@ const Edit = (props) => {
 									}
 									min={0}
 									max={500}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="blockons-divider"></div>
 							</>
@@ -283,6 +289,8 @@ const Edit = (props) => {
 									}
 									min={0}
 									max={300}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="blockons-divider"></div>
 							</>
@@ -300,6 +308,8 @@ const Edit = (props) => {
 							}
 							min={10}
 							max={800}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 					</PanelBody>
 					<PanelBody
@@ -319,6 +329,8 @@ const Edit = (props) => {
 							}
 							min={2}
 							max={50}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						{!tabsJustified && (
 							<>
@@ -338,6 +350,8 @@ const Edit = (props) => {
 									}
 									min={2}
 									max={50}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="blockons-divider"></div>
 							</>
@@ -362,6 +376,8 @@ const Edit = (props) => {
 										}
 										min={0}
 										max={50}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 									<div className="blockons-divider"></div>
 								</>
@@ -380,6 +396,8 @@ const Edit = (props) => {
 							}
 							min={1}
 							max={300}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<RangeControl
 							label={__('Content Horizontal Padding', 'blockons')}
@@ -394,6 +412,8 @@ const Edit = (props) => {
 							}
 							min={1}
 							max={300}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 

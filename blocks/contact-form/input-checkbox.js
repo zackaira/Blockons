@@ -46,6 +46,7 @@ const createDefaultOption = (index) => ({
 });
 
 registerBlockType('blockons/form-checkbox', {
+	apiVersion: 2,
 	title: __('Form Checkbox Group', 'blockons'),
 	icon: 'button',
 	parent: ['blockons/contact-form'],
@@ -271,6 +272,8 @@ registerBlockType('blockons/form-checkbox', {
 								onChange={(value) =>
 									setAttributes({ label: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<TextareaControl
 								label={__('Description', 'blockons')}
@@ -278,6 +281,7 @@ registerBlockType('blockons/form-checkbox', {
 								onChange={(value) =>
 									setAttributes({ description: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -291,6 +295,7 @@ registerBlockType('blockons/form-checkbox', {
 								onChange={(value) =>
 									setAttributes({ required: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<ToggleControl
 								label={__('Display Inline', 'blockons')}
@@ -298,6 +303,7 @@ registerBlockType('blockons/form-checkbox', {
 								onChange={(value) =>
 									setAttributes({ inline: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							{/* <ToggleControl
 								label={__('Option Box', 'blockons')}
@@ -305,6 +311,7 @@ registerBlockType('blockons/form-checkbox', {
 								onChange={(value) =>
 									setAttributes({ optionBox: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/> */}
 							<div className="blockons-divider" />
 
@@ -315,6 +322,8 @@ registerBlockType('blockons/form-checkbox', {
 								onChange={(value) =>
 									setAttributes({ width: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -326,6 +335,8 @@ registerBlockType('blockons/form-checkbox', {
 								}
 								min={0}
 								max={60}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -348,6 +359,8 @@ registerBlockType('blockons/form-checkbox', {
 													value,
 												)
 											}
+											__next40pxDefaultSize={true}
+											__nextHasNoMarginBottom={true}
 										/>
 										<ToggleControl
 											label={__(
@@ -362,6 +375,7 @@ registerBlockType('blockons/form-checkbox', {
 													value,
 												)
 											}
+											__nextHasNoMarginBottom={true}
 										/>
 										<Button
 											isDestructive

@@ -9,6 +9,7 @@ const Save = ({ attributes }) => {
 	const listItemElements = attributes.listItems.map((listItem, index) => {
 		return (
 			<li
+				key={index}
 				className={`blockons-progressbar-item`}
 				style={{
 					marginBottom: attributes.pbItemSpacing + "px",

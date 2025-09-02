@@ -204,6 +204,7 @@ const Edit = (props) => {
 		listItemDisplay = listItems.map((listItem, index) => {
 			return (
 				<li
+					key={index}
 					className="blockons-list-item"
 					style={{
 						...(listItemsLayout === 'horizontal'
@@ -328,6 +329,8 @@ const Edit = (props) => {
 										}
 										min={10}
 										max={64}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 									<BlockonsColorpicker
 										label={__('Text Color', 'blockons')}
@@ -360,6 +363,8 @@ const Edit = (props) => {
 										}
 										min={10}
 										max={98}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 									<BlockonsColorpicker
 										label={__('Icon Color', 'blockons')}
@@ -395,6 +400,8 @@ const Edit = (props) => {
 										}
 										min={0}
 										max={80}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 								</>
 							)}
@@ -457,6 +464,8 @@ const Edit = (props) => {
 											: newValue,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<RangeControl
@@ -469,6 +478,8 @@ const Edit = (props) => {
 							}
 							min={0}
 							max={100}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<RangeControl
 							label={__('Icon & Text Spacing', 'blockons')}
@@ -480,6 +491,8 @@ const Edit = (props) => {
 							}
 							min={0}
 							max={80}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 					</PanelBody>
 					<PanelBody
@@ -496,6 +509,8 @@ const Edit = (props) => {
 							}
 							min={10}
 							max={64}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<BlockonsColorpicker
 							label={__('Font Color', 'blockons')}
@@ -515,6 +530,8 @@ const Edit = (props) => {
 							}}
 							min={10}
 							max={98}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<BlockonsColorpicker
 							label={__('Icon Color', 'blockons')}

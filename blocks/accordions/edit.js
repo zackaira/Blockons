@@ -44,6 +44,8 @@ const Edit = (props) => {
 									accordionDesign: newValue === undefined ? "one" : newValue,
 								});
 							}}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<ToggleControl
@@ -52,6 +54,7 @@ const Edit = (props) => {
 							onChange={(newValue) => {
 								setAttributes({ iconFirst: newValue });
 							}}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<ToggleControl
@@ -60,6 +63,7 @@ const Edit = (props) => {
 							onChange={(newValue) => {
 								setAttributes({ centeredLabel: newValue });
 							}}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<ToggleControl
@@ -72,6 +76,7 @@ const Edit = (props) => {
 							onChange={(newValue) => {
 								setAttributes({ closeAll: newValue });
 							}}
+							__nextHasNoMarginBottom={true}
 						/>
 					</PanelBody>
 				</InspectorControls>

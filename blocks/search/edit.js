@@ -178,6 +178,8 @@ const Edit = (props) => {
 											: newDisplay,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						{searchDisplay === 'default' && (
@@ -198,6 +200,7 @@ const Edit = (props) => {
 									{ value: '%', label: '%', default: 50 },
 								]}
 								isResetValueOnUnitChange
+								__next40pxDefaultSize={true}
 							/>
 						)}
 
@@ -211,6 +214,8 @@ const Edit = (props) => {
 									})
 								}
 								type="number"
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 
@@ -224,6 +229,8 @@ const Edit = (props) => {
 									})
 								}
 								type="number"
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 
@@ -241,6 +248,7 @@ const Edit = (props) => {
 									onChange={(newValue) => {
 										setShowSearch(newValue);
 									}}
+									__nextHasNoMarginBottom={true}
 								/>
 							</>
 						)}
@@ -305,6 +313,8 @@ const Edit = (props) => {
 													: newValue,
 										})
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 							</>
 						)}
@@ -329,6 +339,8 @@ const Edit = (props) => {
 									}
 									min={14}
 									max={50}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<RangeControl
 									label={__('Icon Padding', 'blockons')}
@@ -343,6 +355,8 @@ const Edit = (props) => {
 									}
 									min={0}
 									max={50}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="blockons-divider"></div>
 
@@ -449,6 +463,7 @@ const Edit = (props) => {
 							onChange={(newValue) => {
 								setAttributes({ hasPlaceholder: newValue });
 							}}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<div className="blockons-divider"></div>
@@ -458,6 +473,7 @@ const Edit = (props) => {
 							onChange={(newValue) => {
 								setAttributes({ hasBtn: newValue });
 							}}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						{hasBtn && (
@@ -513,6 +529,7 @@ const Edit = (props) => {
 											searchPro: newValue,
 										});
 									}}
+									__nextHasNoMarginBottom={true}
 								/>
 
 								{searchPro && (
@@ -545,6 +562,8 @@ const Edit = (props) => {
 													})
 												}
 												type="number"
+												__next40pxDefaultSize={true}
+												__nextHasNoMarginBottom={true}
 											/>
 										)}
 
@@ -566,6 +585,7 @@ const Edit = (props) => {
 																	newValue,
 															});
 														}}
+														__nextHasNoMarginBottom={true}
 													/>
 													{searchProCats && (
 														<>
@@ -587,6 +607,8 @@ const Edit = (props) => {
 																		},
 																	)
 																}
+																__next40pxDefaultSize={true}
+																__nextHasNoMarginBottom={true}
 															/>
 															<TextControl
 																label={__(
@@ -609,6 +631,8 @@ const Edit = (props) => {
 																	)
 																}
 																type="number"
+																__next40pxDefaultSize={true}
+																__nextHasNoMarginBottom={true}
 															/>
 															<div className="blockons-divider"></div>
 														</>
@@ -628,6 +652,7 @@ const Edit = (props) => {
 																	newValue,
 															});
 														}}
+														__nextHasNoMarginBottom={true}
 													/>
 													{searchProTags && (
 														<>
@@ -649,6 +674,8 @@ const Edit = (props) => {
 																		},
 																	)
 																}
+																__next40pxDefaultSize={true}
+																__nextHasNoMarginBottom={true}
 															/>
 															<TextControl
 																label={__(
@@ -671,6 +698,8 @@ const Edit = (props) => {
 																	)
 																}
 																type="number"
+																__next40pxDefaultSize={true}
+																__nextHasNoMarginBottom={true}
 															/>
 														</>
 													)}
@@ -690,6 +719,7 @@ const Edit = (props) => {
 																	newValue,
 															});
 														}}
+														__nextHasNoMarginBottom={true}
 													/>
 													<ToggleControl
 														label={
@@ -713,6 +743,7 @@ const Edit = (props) => {
 																	newValue,
 															});
 														}}
+														__nextHasNoMarginBottom={true}
 													/>
 													{searchProTypes ===
 														'product' && (
@@ -732,6 +763,7 @@ const Edit = (props) => {
 																		newValue,
 																});
 															}}
+															__nextHasNoMarginBottom={true}
 														/>
 													)}
 
@@ -752,6 +784,7 @@ const Edit = (props) => {
 																	newValue,
 															});
 														}}
+														__nextHasNoMarginBottom={true}
 													/>
 												</>
 											)}

@@ -5,16 +5,16 @@ export const accordionIcon = {
 			id="Layer_1"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 38 32"
-			enable-background="new 0 0 38 32"
+			enableBackground="new 0 0 38 32"
 			fill="#222222"
 			stroke="#222222"
-			stroke-width="0.40"
+			strokeWidth="0.40"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<g>
@@ -53,7 +53,7 @@ export const countDownTimerIcon = {
 		<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
 			<path
 				fill="#222222"
-				fill-rule="evenodd"
+				fillRule="evenodd"
 				d="M572.329319,159.423805 L572.328547,159.424577 L568.225353,153.482367 C567.903341,153.016033 568.023632,152.908729 568.482182,153.225538 L574.341491,157.273698 C574.435816,157.332998 574.525044,157.403724 574.607193,157.485872 C575.195753,158.074433 575.198003,159.02643 574.612216,159.612216 C574.02643,160.198003 573.074433,160.195753 572.485872,159.607193 C572.428023,159.549343 572.375838,159.487983 572.329319,159.423805 Z M567,159 C567,162.865993 570.134007,166 574,166 C577.865993,166 581,162.865993 581,159 C581,155.473528 578.392294,152.556119 575,152.070889 L575,153.496087 C575,153.774391 574.768066,154 574.5,154 C574.223858,154 574,153.784247 574,153.504611 L574,152.752306 L574,151 C578.418278,151 582,154.581722 582,159 C582,163.418278 578.418278,167 574,167 C569.581722,167 566,163.418278 566,159 L567,159 Z"
 				transform="translate(-566 -151)"
 			/>
@@ -70,14 +70,14 @@ export const mapsIcon = {
 			width="100px"
 			height="100px"
 			viewBox="0 0 32 32"
-			enable-background="new 0 0 32 32"
+			enableBackground="new 0 0 32 32"
 			fill="#222222"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<g>
@@ -105,18 +105,18 @@ export const tableContentsIcon = {
 			width="100px"
 			height="100px"
 			viewBox="0 0 1024 1024"
-			class="icon"
+			className="icon"
 			version="1.1"
 			xmlns="http://www.w3.org/2000/svg"
 			fill="#222222"
 			stroke="#222222"
-			stroke-width="0.01024"
+			strokeWidth="0.01024"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<path
@@ -157,44 +157,44 @@ export const ContentSelectorIcon = {
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<path
 					d="M1.99219 19H4.99219M7.99219 19H4.99219M4.99219 19V16M4.99219 19V22"
 					stroke="#222222"
-					stroke-width="1.5"
-					stroke-linecap="round"
-					stroke-linejoin="round"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+					strokeLinejoin="round"
 					fill="none"
 				></path>
 				<path
 					d="M7 2L16.5 2L21 6.5V19"
 					stroke="#222222"
-					stroke-width="1.5"
-					stroke-linecap="round"
-					stroke-linejoin="round"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+					strokeLinejoin="round"
 					fill="none"
 				></path>
 				<path
 					d="M11 22H16.5C17.3284 22 18 21.3284 18 20.5V8.74853C18 8.5894 17.9368 8.43679 17.8243 8.32426L14.6757 5.17574C14.5632 5.06321 14.4106 5 14.2515 5H4.5C3.67157 5 3 5.67157 3 6.5V13"
 					stroke="#222222"
-					stroke-width="1.5"
-					stroke-linecap="round"
-					stroke-linejoin="round"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+					strokeLinejoin="round"
 					fill="none"
 				></path>
 				<path
 					d="M14 8.4V5.35355C14 5.15829 14.1583 5 14.3536 5C14.4473 5 14.5372 5.03725 14.6036 5.10355L17.8964 8.39645C17.9628 8.46275 18 8.55268 18 8.64645C18 8.84171 17.8417 9 17.6464 9H14.6C14.2686 9 14 8.73137 14 8.4Z"
 					fill="#222222"
 					stroke="#222222"
-					stroke-width="1.5"
-					stroke-linecap="round"
-					stroke-linejoin="round"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+					strokeLinejoin="round"
 				></path>
 			</g>
 		</svg>
@@ -211,13 +211,13 @@ export const tabsIcon = {
 			xmlns="http://www.w3.org/2000/svg"
 			fill="#222222"
 			stroke="#222222"
-			stroke-width="0.00016"
+			strokeWidth="0.00016"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<path
@@ -232,26 +232,26 @@ export const tabsIcon = {
 export const contentTogglerIcon = {
 	src: (
 		<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<g id="style=stroke">
 					<g id="email">
 						<path
 							id="vector (Stroke)"
-							fill-rule="evenodd"
-							clip-rule="evenodd"
+							fillRule="evenodd"
+							clipRule="evenodd"
 							d="M3.88534 5.2371C3.20538 5.86848 2.75 6.89295 2.75 8.5V15.5C2.75 17.107 3.20538 18.1315 3.88534 18.7629C4.57535 19.4036 5.61497 19.75 7 19.75H17C18.385 19.75 19.4246 19.4036 20.1147 18.7629C20.7946 18.1315 21.25 17.107 21.25 15.5V8.5C21.25 6.89295 20.7946 5.86848 20.1147 5.2371C19.4246 4.59637 18.385 4.25 17 4.25H7C5.61497 4.25 4.57535 4.59637 3.88534 5.2371ZM2.86466 4.1379C3.92465 3.15363 5.38503 2.75 7 2.75H17C18.615 2.75 20.0754 3.15363 21.1353 4.1379C22.2054 5.13152 22.75 6.60705 22.75 8.5V15.5C22.75 17.393 22.2054 18.8685 21.1353 19.8621C20.0754 20.8464 18.615 21.25 17 21.25H7C5.38503 21.25 3.92465 20.8464 2.86466 19.8621C1.79462 18.8685 1.25 17.393 1.25 15.5V8.5C1.25 6.60705 1.79462 5.13152 2.86466 4.1379Z"
 							fill="#222222"
 						></path>
 						<path
 							id="vector (Stroke)_2"
-							fill-rule="evenodd"
-							clip-rule="evenodd"
+							fillRule="evenodd"
+							clipRule="evenodd"
 							d="M19.3633 7.31026C19.6166 7.63802 19.5562 8.10904 19.2285 8.3623L13.6814 12.6486C12.691 13.4138 11.3089 13.4138 10.3185 12.6486L4.77144 8.3623C4.44367 8.10904 4.38328 7.63802 4.63655 7.31026C4.88982 6.98249 5.36083 6.9221 5.6886 7.17537L11.2356 11.4616C11.6858 11.8095 12.3141 11.8095 12.7642 11.4616L18.3113 7.17537C18.6391 6.9221 19.1101 6.98249 19.3633 7.31026Z"
 							fill="#222222"
 						></path>
@@ -267,15 +267,15 @@ export const iconListIcon = {
 		<svg
 			version="1.1"
 			viewBox="0 0 1024 1024"
-			class="icon"
+			className="icon"
 			xmlns="http://www.w3.org/2000/svg"
 			fill="#000000"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<path
@@ -298,16 +298,16 @@ export const imageCarouselIcon = {
 			id="Layer_1"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 44 32"
-			enable-background="new 0 0 44 32"
+			enableBackground="new 0 0 44 32"
 			fill="#222222"
 			stroke="#222222"
-			stroke-width="0.42"
+			strokeWidth="0.42"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<g>
@@ -344,16 +344,16 @@ export const imageComparisonIcon = {
 			xmlns="http://www.w3.org/2000/svg"
 			fill="#222222"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<path
 					fill="#222222"
-					fill-rule="evenodd"
+					fillRule="evenodd"
 					d="M474.188327,259.775909 L480.842912,259.775909 L477.549999,256.482996 L474.375904,259.65709 C474.321124,259.71187 474.256777,259.751373 474.188327,259.775909 Z M474,258.618781 L474,247.775909 L486,247.775909 L486,254.968826 L483.657827,252.626653 C483.470927,252.439753 483.148791,252.4342 482.953529,252.629462 C482.940375,252.642616 482.928101,252.656403 482.916711,252.670736 C482.913161,252.674075 482.909651,252.677479 482.906183,252.680947 L479.034173,256.552957 L477.918719,255.437503 C477.808988,255.327771 477.655516,255.279359 477.507786,255.29536 C477.387162,255.302309 477.267535,255.351246 477.17513,255.44365 L474,258.618781 Z M482.257125,259.775909 L486,259.775909 L486,256.377007 L485.996984,256.380023 L483.309152,253.692192 L479.74128,257.260064 L482.257125,259.775909 Z M487,259.406871 L487.960593,259.541874 C488.51207,259.619379 489.020377,259.235606 489.097766,258.684953 L490.765938,246.815293 C490.843443,246.263816 490.459671,245.75551 489.909017,245.678121 L478.039358,244.009949 C477.487881,243.932444 476.979574,244.316216 476.902185,244.86687 L476.633887,246.775909 L474.006845,246.775909 C473.449949,246.775909 473,247.226689 473,247.782754 L473,259.769063 C473,260.32596 473.45078,260.775909 474.006845,260.775909 L485.993155,260.775909 C486.550051,260.775909 487,260.325128 487,259.769063 L487,259.406871 Z M487,258.397037 L488.10657,258.552556 L489.776647,246.669339 L477.89343,244.999262 L477.643739,246.775909 L485.993155,246.775909 C486.54922,246.775909 487,247.225857 487,247.782754 L487,258.397037 Z"
 					transform="translate(-473 -244)"
 				></path>
@@ -369,14 +369,14 @@ export const imageGalleryIcon = {
 			id="Layer_1"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 33 32"
-			enable-background="new 0 0 33 32"
+			enableBackground="new 0 0 33 32"
 			fill="#222222"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<g>
@@ -405,16 +405,16 @@ export const imageGalleryIcon = {
 export const lineHeadingIcon = {
 	src: (
 		<svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
+					fillRule="evenodd"
+					clipRule="evenodd"
 					d="M8.75432 2.0502C8.50579 2.0502 8.30432 2.25167 8.30432 2.5002C8.30432 2.74873 8.50579 2.9502 8.75432 2.9502H9.94997V7.05004H5.04997V2.9502H6.25432C6.50285 2.9502 6.70432 2.74873 6.70432 2.5002C6.70432 2.25167 6.50285 2.0502 6.25432 2.0502H2.75432C2.50579 2.0502 2.30432 2.25167 2.30432 2.5002C2.30432 2.74873 2.50579 2.9502 2.75432 2.9502H3.94997V12.0502H2.75432C2.50579 12.0502 2.30432 12.2517 2.30432 12.5002C2.30432 12.7487 2.50579 12.9502 2.75432 12.9502H6.25432C6.50285 12.9502 6.70432 12.7487 6.70432 12.5002C6.70432 12.2517 6.50285 12.0502 6.25432 12.0502H5.04997V7.95004H9.94997V12.0502H8.75432C8.50579 12.0502 8.30432 12.2517 8.30432 12.5002C8.30432 12.7487 8.50579 12.9502 8.75432 12.9502H12.2543C12.5028 12.9502 12.7043 12.7487 12.7043 12.5002C12.7043 12.2517 12.5028 12.0502 12.2543 12.0502H11.05V2.9502H12.2543C12.5028 2.9502 12.7043 2.74873 12.7043 2.5002C12.7043 2.25167 12.5028 2.0502 12.2543 2.0502H8.75432Z"
 					fill="#222222"
 				></path>
@@ -432,18 +432,18 @@ export const formsIcon = {
 			xmlns="http://www.w3.org/2000/svg"
 			fill="#222222"
 			stroke="#222222"
-			stroke-width="0.24000000000000005"
+			strokeWidth="0.24000000000000005"
 			transform="matrix(-1, 0, 0, -1, 0, 0)"
 		>
 			<g
 				id="SVGRepo_bgCarrier"
-				stroke-width="0"
+				strokeWidth="0"
 				transform="translate(0,0), scale(1)"
 			></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<path d="M22 6H2a1.001 1.001 0 0 0-1 1v3a1.001 1.001 0 0 0 1 1h20a1.001 1.001 0 0 0 1-1V7a1.001 1.001 0 0 0-1-1zm0 4H2V7h20v3h.001M22 17H2a1.001 1.001 0 0 0-1 1v3a1.001 1.001 0 0 0 1 1h20a1.001 1.001 0 0 0 1-1v-3a1.001 1.001 0 0 0-1-1zm0 4H2v-3h20v3h.001M10 14v1H2v-1zM2 3h8v1H2z"></path>
@@ -461,11 +461,11 @@ export const marketingButtonIcon = {
 			xmlns="http://www.w3.org/2000/svg"
 			fill="#222222"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<path
@@ -480,11 +480,11 @@ export const marketingButtonIcon = {
 export const progressBarsIcon = {
 	src: (
 		<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<g fill="#222222">
@@ -498,11 +498,11 @@ export const progressBarsIcon = {
 export const searchIcon = {
 	src: (
 		<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<path
@@ -525,16 +525,16 @@ export const sliderIcon = {
 			id="Layer_1"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 44 32"
-			enable-background="new 0 0 44 32"
+			enableBackground="new 0 0 44 32"
 			fill="#222222"
 			stroke="#222222"
-			stroke-width="0.42"
+			strokeWidth="0.42"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<g>
@@ -587,16 +587,16 @@ export const testimonialsIcon = {
 			id="Layer_1"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 35 32"
-			enable-background="new 0 0 35 32"
+			enableBackground="new 0 0 35 32"
 			fill="#222222"
 			stroke="#222222"
-			stroke-width="0.42"
+			strokeWidth="0.42"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<g>
@@ -628,16 +628,16 @@ export const videoSliderIcon = {
 			version="1.1"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 46 32"
-			enable-background="new 0 0 46 32"
+			enableBackground="new 0 0 46 32"
 			fill="#222222"
 			stroke="#222222"
-			stroke-width="0.48"
+			strokeWidth="0.48"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<g>
@@ -667,16 +667,16 @@ export const wcAccountIcon = {
 	src: (
 		<svg
 			viewBox="0 0 32 32"
-			enable-background="new 0 0 32 32"
+			enableBackground="new 0 0 32 32"
 			version="1.1"
 			xmlns="http://www.w3.org/2000/svg"
 			fill="#222222"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<g id="profile_x2C__person">
@@ -746,20 +746,20 @@ export const wcFeaturedProductIcon = {
 			xmlns="http://www.w3.org/2000/svg"
 			fill="#000000"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<title>horn_line</title>
 				<g
 					id="页面-1"
 					stroke="none"
-					stroke-width="1"
+					strokeWidth="1"
 					fill="none"
-					fill-rule="evenodd"
+					fillRule="evenodd"
 				>
 					<g
 						id="Media"
@@ -772,7 +772,7 @@ export const wcFeaturedProductIcon = {
 							<path
 								d="M24,0 L24,24 L0,24 L0,0 L24,0 Z M12.5934901,23.257841 L12.5819402,23.2595131 L12.5108777,23.2950439 L12.4918791,23.2987469 L12.4918791,23.2987469 L12.4767152,23.2950439 L12.4056548,23.2595131 C12.3958229,23.2563662 12.3870493,23.2590235 12.3821421,23.2649074 L12.3780323,23.275831 L12.360941,23.7031097 L12.3658947,23.7234994 L12.3769048,23.7357139 L12.4804777,23.8096931 L12.4953491,23.8136134 L12.4953491,23.8136134 L12.5071152,23.8096931 L12.6106902,23.7357139 L12.6232938,23.7196733 L12.6232938,23.7196733 L12.6266527,23.7031097 L12.609561,23.275831 C12.6075724,23.2657013 12.6010112,23.2592993 12.5934901,23.257841 L12.5934901,23.257841 Z M12.8583906,23.1452862 L12.8445485,23.1473072 L12.6598443,23.2396597 L12.6498822,23.2499052 L12.6498822,23.2499052 L12.6471943,23.2611114 L12.6650943,23.6906389 L12.6699349,23.7034178 L12.6699349,23.7034178 L12.678386,23.7104931 L12.8793402,23.8032389 C12.8914285,23.8068999 12.9022333,23.8029875 12.9078286,23.7952264 L12.9118235,23.7811639 L12.8776777,23.1665331 C12.8752882,23.1545897 12.8674102,23.1470016 12.8583906,23.1452862 L12.8583906,23.1452862 Z M12.1430473,23.1473072 C12.1332178,23.1423925 12.1221763,23.1452606 12.1156365,23.1525954 L12.1099173,23.1665331 L12.0757714,23.7811639 C12.0751323,23.7926639 12.0828099,23.8018602 12.0926481,23.8045676 L12.108256,23.8032389 L12.3092106,23.7104931 L12.3186497,23.7024347 L12.3186497,23.7024347 L12.3225043,23.6906389 L12.340401,23.2611114 L12.337245,23.2485176 L12.337245,23.2485176 L12.3277531,23.2396597 L12.1430473,23.1473072 Z"
 								id="MingCute"
-								fill-rule="nonzero"
+								fillRule="nonzero"
 							></path>
 							<path
 								d="M21,3.42569 C21,2.48922 19.9951,1.86321 19.1486,2.32773 C18.0119,2.95158 14.6462,4.76973 12.6307,5.57069 C10.2859,6.50249 8.26651,6.85245 5.9533,6.95974 C4.34937,7.03413 3,8.32857 3,9.99999 L3,14 C3,15.6714 4.34937,16.9659 5.9533,17.0402 C6.22676,17.0529 6.49612,17.069 6.76239,17.089 L6.01942,20.8039 C5.91111,21.3454 6.26232,21.8723 6.80388,21.9806 C7.34544,22.0889 7.87227,21.7377 7.98058,21.1961 L8.75415,17.3283 C10.0174,17.5434 11.2692,17.8883 12.6307,18.4293 C14.6462,19.2303 18.0119,21.0484 19.1486,21.6723 C19.995,22.1368 21,21.5108 21,20.5743 L21,3.42569 Z M9,15.3416 C10.4181,15.5767 11.8333,15.9603 13.3693,16.5707 C15.0217,17.2274 17.4558,18.4899 19,19.3169 L19,4.68311 C17.4558,5.51005 15.0217,6.77263 13.3693,7.4293 C11.8333,8.03971 10.4181,8.42331 9,8.65843 L9,15.3416 Z M7,8.89857 C6.68528,8.92326 6.36769,8.94267 6.04595,8.95759 C5.44311,8.98555 5,9.46227 5,9.99999 L5,14 C5,14.5377 5.44311,15.0144 6.04596,15.0424 C6.36769,15.0573 6.68528,15.0767 7,15.1014 L7,8.89857 Z"
@@ -793,14 +793,14 @@ export const wcMiniCartIcon = {
 			version="1.1"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 36 32"
-			enable-background="new 0 0 36 32"
+			enableBackground="new 0 0 36 32"
 			fill="#222222"
 		>
-			<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+			<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 			<g
 				id="SVGRepo_tracerCarrier"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			></g>
 			<g id="SVGRepo_iconCarrier">
 				<g>

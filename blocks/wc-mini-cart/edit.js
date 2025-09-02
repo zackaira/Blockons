@@ -85,6 +85,8 @@ const Edit = (props) => {
 								"If not set, this defaults to the WooCommerce cart page",
 								"blockons"
 							)}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -92,16 +94,19 @@ const Edit = (props) => {
 							label={__("Switch Layout", "blockons")}
 							checked={layoutSwitch}
 							onChange={(newValue) => setAttributes({ layoutSwitch: newValue })}
+							__nextHasNoMarginBottom={true}
 						/>
 						<ToggleControl
 							label={__("Remove Cart Amount", "blockons")}
 							checked={noAmount}
 							onChange={(newValue) => setAttributes({ noAmount: newValue })}
+							__nextHasNoMarginBottom={true}
 						/>
 						<ToggleControl
 							label={__("Remove Items Count", "blockons")}
 							checked={noItems}
 							onChange={(newValue) => setAttributes({ noItems: newValue })}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -143,6 +148,8 @@ const Edit = (props) => {
 									icon: newIcon === undefined ? "cart-shopping" : newIcon,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						{icon === "custom" && (
 							<>
@@ -154,6 +161,8 @@ const Edit = (props) => {
 										"Add your own custom icon by adding the Font Awesome icon name",
 										"blockons"
 									)}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="helplink fixmargin">
 									<a
@@ -188,6 +197,8 @@ const Edit = (props) => {
 									cartType: newValue === undefined ? "none" : newValue,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						{cartType === "dropdown" && (
@@ -232,6 +243,8 @@ const Edit = (props) => {
 												newPosition === undefined ? "bottom-left" : newPosition,
 										})
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 							</>
 						)}
@@ -276,6 +289,8 @@ const Edit = (props) => {
 							}
 							min={14}
 							max={50}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<RangeControl
 							label={__("Cart Padding", "blockons")}
@@ -287,6 +302,8 @@ const Edit = (props) => {
 							}
 							min={0}
 							max={50}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -357,6 +374,8 @@ const Edit = (props) => {
 											dropBtns: newValue === undefined ? "dark" : newValue,
 										})
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 							</>
 						)}

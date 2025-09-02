@@ -134,6 +134,8 @@ const IconPicker = React.memo(
 					value={searchTerm}
 					onChange={onSearchChange}
 					autoComplete="off"
+					__next40pxDefaultSize={true}
+					__nextHasNoMarginBottom={true}
 				/>
 				<div className="fa-picker-categories">
 					{Object.entries(ICON_CATEGORIES).map(([key, category]) => (
@@ -342,6 +344,8 @@ const Edit = ({ attributes, setAttributes, isSelected }) => {
 								}),
 							});
 						}}
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
 					/>
 
 					<div className="blockons-divider"></div>
@@ -516,6 +520,8 @@ const Edit = ({ attributes, setAttributes, isSelected }) => {
 							}
 							min={0}
 							max={200}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<div className="blockons-divider"></div>
@@ -526,6 +532,7 @@ const Edit = ({ attributes, setAttributes, isSelected }) => {
 							onChange={(val) =>
 								setAttributes({ iconBorder: val })
 							}
+							__nextHasNoMarginBottom={true}
 						/>
 						{iconBorder && (
 							<>
@@ -539,6 +546,8 @@ const Edit = ({ attributes, setAttributes, isSelected }) => {
 									}
 									min={1}
 									max={20}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<BlockonsColorPicker
 									label={__('Border Color', 'blockons')}

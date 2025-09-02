@@ -45,6 +45,7 @@ const generateAcceptanceId = (label) => {
 };
 
 registerBlockType('blockons/form-acceptance', {
+	apiVersion: 2,
 	title: __('Form Acceptance', 'blockons'),
 	icon: 'saved',
 	parent: ['blockons/contact-form'],
@@ -219,6 +220,7 @@ registerBlockType('blockons/form-acceptance', {
 								onChange={(value) =>
 									setAttributes({ label: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<TextareaControl
 								label={__('Description', 'blockons')}
@@ -230,6 +232,7 @@ registerBlockType('blockons/form-acceptance', {
 								onChange={(value) =>
 									setAttributes({ description: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -239,6 +242,7 @@ registerBlockType('blockons/form-acceptance', {
 								onChange={(value) =>
 									setAttributes({ required: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<ToggleControl
 								label={__('Checked by Default', 'blockons')}
@@ -246,6 +250,7 @@ registerBlockType('blockons/form-acceptance', {
 								onChange={(value) =>
 									setAttributes({ checked: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -256,6 +261,8 @@ registerBlockType('blockons/form-acceptance', {
 								onChange={(value) =>
 									setAttributes({ width: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						</PanelBody>
 
@@ -276,6 +283,7 @@ registerBlockType('blockons/form-acceptance', {
 									'Override text settings inherited from form settings',
 									'blockons',
 								)}
+								__nextHasNoMarginBottom={true}
 							/>
 
 							{useCustomText && (
@@ -290,6 +298,8 @@ registerBlockType('blockons/form-acceptance', {
 										}
 										min={10}
 										max={54}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 									<RangeControl
 										label={__('Text Spacing', 'blockons')}
@@ -301,6 +311,8 @@ registerBlockType('blockons/form-acceptance', {
 										}
 										min={0}
 										max={100}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 									<BlockonsColorpicker
 										label={__('Text Color', 'blockons')}

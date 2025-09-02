@@ -74,7 +74,7 @@ const Save = ({ attributes }) => {
 						{attributes.handle === "three" && (
 							<svg
 								slot="handle"
-								class="large-arrow-handle"
+								className="large-arrow-handle"
 								xmlns="http://www.w3.org/2000/svg"
 								width="100"
 								viewBox="-8 -3 16 6"
@@ -82,9 +82,9 @@ const Save = ({ attributes }) => {
 								<path
 									stroke={attributes.handleColor}
 									d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2"
-									stroke-width="1"
+									strokeWidth="1"
 									fill={attributes.handleColor}
-									vector-effect="non-scaling-stroke"
+									vectorEffect="non-scaling-stroke"
 								></path>
 							</svg>
 						)}

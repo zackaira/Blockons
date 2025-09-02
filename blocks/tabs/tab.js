@@ -5,6 +5,7 @@ import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
 import { TextControl } from "@wordpress/components";
 
 registerBlockType("blockons/tab", {
+	apiVersion: 2,
 	title: __("Tab", "blockons"),
 	icon: "welcome-add-page",
 	parent: ["blockons/tabs"],
@@ -40,6 +41,8 @@ registerBlockType("blockons/tab", {
 					onChange={(newLabel) => setAttributes({ tabLabel: newLabel })}
 					placeholder={__("Tab Label", "blockons")}
 					className="blockons-inner-tab-label"
+					__next40pxDefaultSize={true}
+					__nextHasNoMarginBottom={true}
 				/>
 				<InnerBlocks template={TEMPLATE} templateLock={false} />
 			</div>

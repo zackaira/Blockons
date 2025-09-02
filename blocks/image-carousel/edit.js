@@ -121,14 +121,17 @@ const Edit = (props) => {
 	};
 
 	const slides = sliderSlides.map((slideItem, index) => (
-		<div className="swiper-slide-inner">
+		<div
+			key={index}
+			className="swiper-slide-inner"
+		>
 			<div
 				className={`blockons-slider-img ${
 					forceFullWidth || imageProportion !== "actual" ? "imgfull" : ""
 				} ${imageProportion !== "actual" ? `aspect-ratio ratio-${imageProportion}` : !slideItem.imageUrl ? `aspect-ratio ratio-169panoramic` : ""} ${!slideItem.imageUrl ? `noimg` : ""}`}
 			>
 
-				{slideItem.imageUrl ? <div class="aspect-img"><img src={slideItem.imageUrl} alt={slideItem.alt} /></div> : ""}
+				{slideItem.imageUrl ? <div className="aspect-img"><img src={slideItem.imageUrl} alt={slideItem.alt} /></div> : ""}
 			</div>
 
 			{captionPosition !== "none" && slideItem.imageCaption && (
@@ -224,6 +227,8 @@ const Edit = (props) => {
 
 										setAttributes({ transition: newValue });
 									}}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								{transition !== "fade" && (
 									<RangeControl
@@ -237,6 +242,8 @@ const Edit = (props) => {
 										}
 										min={1}
 										max={sliderSlides.length < 4 ? sliderSlides.length : 4}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 								)}
 
@@ -255,6 +262,8 @@ const Edit = (props) => {
 
 										setAttributes({ mode: newValue });
 									}}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 
 								<ToggleControl
@@ -264,6 +273,7 @@ const Edit = (props) => {
 										setAttributes({ autoplay: newValue })
 									}
 									help={autoplay ? __("Auto Play will ONLY work on the site frontend", "blockons") : ""}
+									__nextHasNoMarginBottom={true}
 								/>
 								{autoplay && (
 									<>
@@ -275,6 +285,8 @@ const Edit = (props) => {
 												setAttributes({ autoplayDelay: newValue })
 											}
 											help={__("1000 = 1 second", "blockons")}
+											__next40pxDefaultSize={true}
+											__nextHasNoMarginBottom={true}
 										/>
 										<ToggleControl
 											label={__("Disable on Interaction", "blockons")}
@@ -283,6 +295,7 @@ const Edit = (props) => {
 												setAttributes({ autoplayDisable: newValue })
 											}
 											help={__("Disable the Auto Play When the slider is interacted with", "blockons")}
+											__nextHasNoMarginBottom={true}
 										/>
 									</>
 								)}
@@ -301,6 +314,8 @@ const Edit = (props) => {
 										min={0}
 										max={200}
 										step={1}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 								)}
 							</>
@@ -338,6 +353,8 @@ const Edit = (props) => {
 												newValue === undefined ? "actual" : newValue,
 										})
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								{imageProportion === "actual" && (
 									<ToggleControl
@@ -346,6 +363,7 @@ const Edit = (props) => {
 										onChange={(newValue) =>
 											setAttributes({ forceFullWidth: newValue })
 										}
+										__nextHasNoMarginBottom={true}
 									/>
 								)}
 								<div className="blockons-divider"></div>
@@ -365,6 +383,8 @@ const Edit = (props) => {
 												newValue === undefined ? "square" : newValue,
 										});
 									}}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="blockons-divider"></div>
 
@@ -382,6 +402,8 @@ const Edit = (props) => {
 												newValue === undefined ? "none" : newValue,
 										});
 									}}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								{captionPosition === "over" && (
 									<ToggleControl
@@ -390,6 +412,7 @@ const Edit = (props) => {
 										onChange={(newValue) =>
 											setAttributes({ captionOnHover: newValue })
 										}
+										__nextHasNoMarginBottom={true}
 									/>
 								)}
 
@@ -415,6 +438,8 @@ const Edit = (props) => {
 												min={0}
 												max={1}
 												step={0.01}
+												__next40pxDefaultSize={true}
+												__nextHasNoMarginBottom={true}
 											/>
 										)}
 										<div className="blockons-divider"></div>
@@ -435,6 +460,8 @@ const Edit = (props) => {
 											}
 											min={10}
 											max={32}
+											__next40pxDefaultSize={true}
+											__nextHasNoMarginBottom={true}
 										/>
 									</>
 								)}
@@ -449,6 +476,7 @@ const Edit = (props) => {
 									onChange={(newValue) =>
 										setAttributes({ navigation: newValue })
 									}
+									__nextHasNoMarginBottom={true}
 								/>
 
 								{navigation && (
@@ -465,6 +493,8 @@ const Edit = (props) => {
 											onChange={(newValue) =>
 												setAttributes({ navigationStyle: newValue })
 											}
+											__next40pxDefaultSize={true}
+											__nextHasNoMarginBottom={true}
 										/>
 										<SelectControl
 											label="Color"
@@ -476,6 +506,8 @@ const Edit = (props) => {
 											onChange={(newValue) =>
 												setAttributes({ navigationColor: newValue })
 											}
+											__next40pxDefaultSize={true}
+											__nextHasNoMarginBottom={true}
 										/>
 
 										<div className="blockons-icon-select">
@@ -490,8 +522,9 @@ const Edit = (props) => {
 													/>
 												)}
 												renderContent={() =>
-													Object.keys(sliderArrowIcons).map((icon) => (
+													Object.keys(sliderArrowIcons).map((icon, index) => (
 														<FontAwesomeIcon
+															key={index}
 															icon={icon}
 															iconSize={20}
 															onClick={() =>
@@ -514,6 +547,7 @@ const Edit = (props) => {
 									onChange={(newValue) =>
 										setAttributes({ pagination: newValue })
 									}
+									__nextHasNoMarginBottom={true}
 								/>
 								{pagination && (
 									<>
@@ -536,6 +570,8 @@ const Edit = (props) => {
 												"Turn the Pagination off and on again to see this change",
 												"blockons"
 											)}
+											__next40pxDefaultSize={true}
+											__nextHasNoMarginBottom={true}
 										/>
 										<SelectControl
 											label="Color"
@@ -547,6 +583,8 @@ const Edit = (props) => {
 											onChange={(newValue) =>
 												setAttributes({ paginationColor: newValue })
 											}
+											__next40pxDefaultSize={true}
+											__nextHasNoMarginBottom={true}
 										/>
 									</>
 								)}
@@ -560,6 +598,7 @@ const Edit = (props) => {
 											onChange={(newValue) =>
 												setAttributes({ showOnHover: newValue })
 											}
+											__nextHasNoMarginBottom={true}
 										/>
 									</>
 								)}
@@ -598,7 +637,7 @@ const Edit = (props) => {
 				{slides.length > 0 ? (
 					<Swiper {...sliderOptions}>
 						{slides.map((slideContent, index) => (
-							<SwiperSlide>{slideContent}</SwiperSlide>
+							<SwiperSlide key={index}>{slideContent}</SwiperSlide>
 						))}
 					</Swiper>
 				) : (

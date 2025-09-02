@@ -49,6 +49,7 @@ const generateTextareaId = (label) => {
 };
 
 registerBlockType('blockons/form-textarea', {
+	apiVersion: 2,
 	title: __('Form Textarea', 'blockons'),
 	icon: 'text',
 	parent: ['blockons/contact-form'],
@@ -264,6 +265,8 @@ registerBlockType('blockons/form-textarea', {
 								onChange={(value) =>
 									setAttributes({ label: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<TextControl
 								label={__('Placeholder', 'blockons')}
@@ -271,6 +274,8 @@ registerBlockType('blockons/form-textarea', {
 								onChange={(value) =>
 									setAttributes({ placeholder: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -280,6 +285,7 @@ registerBlockType('blockons/form-textarea', {
 								onChange={(value) =>
 									setAttributes({ description: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -292,6 +298,8 @@ registerBlockType('blockons/form-textarea', {
 								}
 								min={MIN_ROWS}
 								max={MAX_ROWS}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -301,6 +309,7 @@ registerBlockType('blockons/form-textarea', {
 								onChange={(value) =>
 									setAttributes({ required: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -311,6 +320,8 @@ registerBlockType('blockons/form-textarea', {
 								onChange={(value) =>
 									setAttributes({ width: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						</PanelBody>
 					</InspectorControls>

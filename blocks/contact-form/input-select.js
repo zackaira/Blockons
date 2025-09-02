@@ -44,6 +44,7 @@ const generateSelectId = (label) => {
 };
 
 registerBlockType('blockons/form-select', {
+	apiVersion: 2,
 	title: __('Form Select', 'blockons'),
 	icon: 'menu',
 	parent: ['blockons/contact-form'],
@@ -298,6 +299,8 @@ registerBlockType('blockons/form-select', {
 								onChange={(value) =>
 									setAttributes({ label: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<TextControl
 								label={__('Placeholder', 'blockons')}
@@ -305,6 +308,8 @@ registerBlockType('blockons/form-select', {
 								onChange={(value) =>
 									setAttributes({ placeholder: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -314,6 +319,7 @@ registerBlockType('blockons/form-select', {
 								onChange={(value) =>
 									setAttributes({ description: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -323,6 +329,7 @@ registerBlockType('blockons/form-select', {
 								onChange={(value) =>
 									setAttributes({ required: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -333,6 +340,8 @@ registerBlockType('blockons/form-select', {
 								onChange={(value) =>
 									setAttributes({ width: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -351,6 +360,8 @@ registerBlockType('blockons/form-select', {
 											onChange={(value) =>
 												updateOption(index, value)
 											}
+											__next40pxDefaultSize={true}
+											__nextHasNoMarginBottom={true}
 										/>
 										<Button
 											isDestructive

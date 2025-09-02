@@ -142,6 +142,7 @@ const Edit = (props) => {
 		listItemDisplay = listItems.map((listItem, index) => {
 			return (
 				<li
+					key={index}
 					className={`blockons-progressbar-item`}
 					style={{
 						marginBottom: pbItemSpacing + "px",
@@ -214,6 +215,8 @@ const Edit = (props) => {
 										onChange={(newWidth) =>
 											handleItemWidthChange(newWidth, listItem.pbId)
 										}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 									<BlockonsColorpicker
 										label={__("Progress Bar Color", "blockons")}
@@ -276,12 +279,15 @@ const Edit = (props) => {
 							min={1}
 							max={100}
 							onChange={(value) => setAttributes({ pbMaxWidth: value })}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						<ToggleControl
 							label={__("Display Labels", "blockons")}
 							checked={pbShowLabel}
 							onChange={(value) => setAttributes({ pbShowLabel: value })}
+							__nextHasNoMarginBottom={true}
 						/>
 						{pbShowLabel && (
 							<RangeControl
@@ -293,6 +299,8 @@ const Edit = (props) => {
 								min={11}
 								max={48}
 								clearable
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 
@@ -303,6 +311,8 @@ const Edit = (props) => {
 							min={0}
 							max={100}
 							clearable
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						{"six" !== pbDesign && (
 							<RangeControl
@@ -312,6 +322,8 @@ const Edit = (props) => {
 								min={4}
 								max={140}
 								clearable
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 						{"six" !== pbDesign && (
@@ -319,6 +331,7 @@ const Edit = (props) => {
 								label={__("Display Percentage", "blockons")}
 								checked={pbShowPercent}
 								onChange={(value) => setAttributes({ pbShowPercent: value })}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 					</PanelBody>
@@ -338,6 +351,8 @@ const Edit = (props) => {
 								{ label: "Thin Line", value: "six" },
 							]}
 							onChange={(value) => setAttributes({ pbDesign: value })}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<BlockonsColorpicker
 							label={__("Bar Color", "blockons")}

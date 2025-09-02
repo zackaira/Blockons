@@ -158,12 +158,15 @@ const Edit = (props) => {
 							label={__("Empty First Option", "blockons")}
 							checked={emptyFirstOption}
 							onChange={(value) => setAttributes({ emptyFirstOption: value })}
+							__nextHasNoMarginBottom={true}
 						/>
 						{emptyFirstOption && (
 							<TextControl
 								label={__("Empty First Option Text", "blockons")}
 								value={emptyFirstText}
 								onChange={(value) => setAttributes({ emptyFirstText: value })}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 						<div className="blockons-divider"></div>
@@ -182,6 +185,8 @@ const Edit = (props) => {
 												contentLabel: value,
 											})
 										}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 									<div className="blockons-content-selector-extras">
 										<div className="blockons-cs-select">
@@ -203,6 +208,8 @@ const Edit = (props) => {
 														type: value,
 													})
 												}
+												__next40pxDefaultSize={true}
+												__nextHasNoMarginBottom={true}
 											/>
 										</div>
 										{option.attributes.type === "redirect" && (
@@ -230,6 +237,8 @@ const Edit = (props) => {
 																		redirectUrl: value,
 																	})
 																}
+																__next40pxDefaultSize={true}
+																__nextHasNoMarginBottom={true}
 															/>
 
 															{option.attributes.redirectUrl && (
@@ -246,6 +255,8 @@ const Edit = (props) => {
 																				preText: value,
 																			})
 																		}
+																		__next40pxDefaultSize={true}
+																		__nextHasNoMarginBottom={true}
 																	/>
 																	<div className="blockons-divider"></div>
 
@@ -262,6 +273,8 @@ const Edit = (props) => {
 																			"Add 0 to remove the countdown",
 																			"blockons"
 																		)}
+																		__next40pxDefaultSize={true}
+																		__nextHasNoMarginBottom={true}
 																	/>
 																</>
 															)}
@@ -319,6 +332,7 @@ const Edit = (props) => {
 								"Show all content sections in the editor, for easier building for each option.",
 								"blockons"
 							)}
+							__nextHasNoMarginBottom={true}
 						/>
 					</PanelBody>
 					<PanelBody title={__("Dynamic Content Design Settings", "blockons")}>
@@ -331,6 +345,7 @@ const Edit = (props) => {
 								{ value: "%", label: "%", default: 50 },
 							]}
 							isResetValueOnUnitChange
+							__next40pxDefaultSize={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -340,6 +355,8 @@ const Edit = (props) => {
 							onChange={(value) => setAttributes({ selectVertPadding: value })}
 							min={0}
 							max={50}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<RangeControl
 							label={__("Select Horizontal Padding", "blockons")}
@@ -347,6 +364,8 @@ const Edit = (props) => {
 							onChange={(value) => setAttributes({ selectHorizPadding: value })}
 							min={5}
 							max={50}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -368,6 +387,7 @@ const Edit = (props) => {
 							label={__("Select Border", "blockons")}
 							checked={selectBorder}
 							onChange={(value) => setAttributes({ selectBorder: value })}
+							__nextHasNoMarginBottom={true}
 						/>
 						{selectBorder && (
 							<BlockonsColorpicker
@@ -386,6 +406,8 @@ const Edit = (props) => {
 							onChange={(value) => setAttributes({ selectBorderRadius: value })}
 							min={0}
 							max={100}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 					</PanelBody>
 				</InspectorControls>

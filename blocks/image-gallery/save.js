@@ -20,6 +20,7 @@ const Save = ({ attributes }) => {
 
 		return (
 			<div
+				key={index}
 				className={`blockons-gallery-item ${attributes.layout} ${canFlip}`}
 				style={{
 					...(attributes.layout === "masonry"
@@ -72,7 +73,7 @@ const Save = ({ attributes }) => {
 								"data-imgcaption": imageItem.imageCaption
 							} : {})}
 						>
-							{imageItem.imageUrl && <div class="aspect-img"><img src={imageItem.imageUrl} alt={imageItem.alt} /></div>}
+							{imageItem.imageUrl && <div className="aspect-img"><img src={imageItem.imageUrl} alt={imageItem.alt} /></div>}
 						</div>
 					)}
 
@@ -139,7 +140,7 @@ const Save = ({ attributes }) => {
 								margin: `0 -${Math.floor(attributes.gridGap / 2)}px`,
 						  }
 						: {
-								"grid-gap": attributes.gridGap,
+								"gridGap": attributes.gridGap,
 						  }
 				}
 				{...(attributes.popupEnable

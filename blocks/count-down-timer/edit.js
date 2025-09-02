@@ -138,6 +138,8 @@ const Edit = (props) => {
 										value={formatDateTime(selectedDateTime)}
 										readOnly={true}
 										onClick={onToggle}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 								)}
 								renderContent={() => (
@@ -189,6 +191,8 @@ const Edit = (props) => {
 								"Adjust all colors, sizing and spacing in the 'Design Settings' panel further down.",
 								'blockons',
 							)}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -222,6 +226,8 @@ const Edit = (props) => {
 									? 'Links will only work on the website frontend.'
 									: ''
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						{(linkType === 'button' || linkType === 'full') && (
 							<>
@@ -233,6 +239,8 @@ const Edit = (props) => {
 											linkTo: newValue,
 										});
 									}}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<ToggleControl
 									label={__('Open in new window', 'blockons')}
@@ -242,6 +250,7 @@ const Edit = (props) => {
 											linkTarget: newValue,
 										});
 									}}
+									__nextHasNoMarginBottom={true}
 								/>
 								{linkType === 'button' && (
 									<>
@@ -292,6 +301,8 @@ const Edit = (props) => {
 											}
 											min={0}
 											max={200}
+											__next40pxDefaultSize={true}
+											__nextHasNoMarginBottom={true}
 										/>
 									</>
 								)}
@@ -307,6 +318,7 @@ const Edit = (props) => {
 									hasBeforeText: newValue,
 								});
 							}}
+							__nextHasNoMarginBottom={true}
 						/>
 						{hasBeforeText && (
 							<TextControl
@@ -316,6 +328,8 @@ const Edit = (props) => {
 										beforeText: newValue,
 									});
 								}}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 
@@ -327,6 +341,7 @@ const Edit = (props) => {
 									hasAfterText: newValue,
 								});
 							}}
+							__nextHasNoMarginBottom={true}
 						/>
 						{hasAfterText && (
 							<TextControl
@@ -336,6 +351,8 @@ const Edit = (props) => {
 										afterText: newValue,
 									});
 								}}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 						<div className="blockons-divider"></div>
@@ -361,6 +378,8 @@ const Edit = (props) => {
 											: newValue,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						{onComplete === 'one' && (
@@ -372,6 +391,8 @@ const Edit = (props) => {
 									});
 								}}
 								help="This text will be shown when the timer count down is complete."
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 						{onComplete === 'two' && (
@@ -383,6 +404,8 @@ const Edit = (props) => {
 									});
 								}}
 								help="Add the class or id of the element you want to hide when the timer count down is complete.\nclass: .class-name, id: #id-name"
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 					</PanelBody>
@@ -416,6 +439,8 @@ const Edit = (props) => {
 							}
 							min={0}
 							max={250}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 
 						{hasBeforeText && (
@@ -435,6 +460,8 @@ const Edit = (props) => {
 									}
 									min={11}
 									max={82}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<BlockonsColorpicker
 									label={__('Text Color', 'blockons')}
@@ -469,6 +496,8 @@ const Edit = (props) => {
 									}
 									min={11}
 									max={82}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<BlockonsColorpicker
 									label={__('Text Color', 'blockons')}
@@ -502,6 +531,8 @@ const Edit = (props) => {
 							}
 							min={11}
 							max={82}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<BlockonsColorpicker
 							label={__('Text Color', 'blockons')}
@@ -529,6 +560,8 @@ const Edit = (props) => {
 							}
 							min={11}
 							max={82}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<BlockonsColorpicker
 							label={__('Timer Digits Color', 'blockons')}
@@ -575,6 +608,8 @@ const Edit = (props) => {
 													: newValue,
 										})
 									}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="blockons-divider"></div>
 							</>
@@ -594,6 +629,8 @@ const Edit = (props) => {
 								}
 								min={0}
 								max={120}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						)}
 
@@ -614,6 +651,8 @@ const Edit = (props) => {
 							}
 							min={0}
 							max={120}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 					</PanelBody>
 				</InspectorControls>
@@ -657,7 +696,6 @@ const Edit = (props) => {
 					<RichText
 						tagName={'span'}
 						placeholder={__('Special:', 'blockons')}
-						keepPlaceholderOnFocus
 						value={beforeText}
 						className="blockons-countdown-before"
 						onChange={(value) =>
@@ -681,10 +719,10 @@ const Edit = (props) => {
 						...(!hasAfterText ? { marginRight: 0 } : {}),
 					}}
 					{...(onComplete === 'one'
-						? { 'data-completeText': onCompleteText }
+						? { 'data-completetext': onCompleteText }
 						: {})}
 					{...(onComplete === 'two'
-						? { 'data-completeHide': onCompleteHide }
+						? { 'data-completehide': onCompleteHide }
 						: {})}
 				>
 					<div
@@ -712,7 +750,6 @@ const Edit = (props) => {
 						<RichText
 							tagName={'div'}
 							placeholder={__('days', 'blockons')}
-							keepPlaceholderOnFocus
 							value={txtDays}
 							className="txt"
 							onChange={(value) =>
@@ -755,7 +792,6 @@ const Edit = (props) => {
 						<RichText
 							tagName={'div'}
 							placeholder={__('hours', 'blockons')}
-							keepPlaceholderOnFocus
 							value={txtHours}
 							className="txt"
 							onChange={(value) =>
@@ -798,7 +834,6 @@ const Edit = (props) => {
 						<RichText
 							tagName={'div'}
 							placeholder={__('minutes', 'blockons')}
-							keepPlaceholderOnFocus
 							value={txtMinutes}
 							className="txt"
 							onChange={(value) =>
@@ -841,7 +876,6 @@ const Edit = (props) => {
 						<RichText
 							tagName={'div'}
 							placeholder={__('seconds', 'blockons')}
-							keepPlaceholderOnFocus
 							value={txtSeconds}
 							className="txt"
 							onChange={(value) =>
@@ -864,7 +898,6 @@ const Edit = (props) => {
 					<RichText
 						tagName={'span'}
 						placeholder={__('until the discount ends.', 'blockons')}
-						keepPlaceholderOnFocus
 						value={afterText}
 						className="blockons-countdown-after"
 						onChange={(value) =>
@@ -903,7 +936,6 @@ const Edit = (props) => {
 						<RichText
 							tagName={'span'}
 							placeholder={linkButtonText}
-							keepPlaceholderOnFocus
 							value={linkButtonText}
 							onChange={(value) =>
 								setAttributes({ linkButtonText: value })
@@ -917,7 +949,6 @@ const Edit = (props) => {
 				{onComplete === 'one' && (
 					<RichText
 						tagName={'div'}
-						keepPlaceholderOnFocus
 						value={onCompleteText}
 						className="blockons-timer-expired"
 						onChange={(value) =>

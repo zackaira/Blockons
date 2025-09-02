@@ -70,6 +70,7 @@ const bytesToMB = (bytes) => bytes / (1024 * 1024);
 const mbToBytes = (mb) => mb * 1024 * 1024;
 
 registerBlockType('blockons/form-file-upload', {
+	apiVersion: 2,
 	title: __('Form File Upload', 'blockons'),
 	icon: 'upload',
 	parent: ['blockons/contact-form'],
@@ -248,6 +249,8 @@ registerBlockType('blockons/form-file-upload', {
 								onChange={(value) =>
 									setAttributes({ label: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -257,6 +260,7 @@ registerBlockType('blockons/form-file-upload', {
 								onChange={(value) =>
 									setAttributes({ description: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -266,6 +270,7 @@ registerBlockType('blockons/form-file-upload', {
 								onChange={(value) =>
 									setAttributes({ required: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -281,6 +286,8 @@ registerBlockType('blockons/form-file-upload', {
 								onChange={(value) =>
 									setAttributes({ fileTypeOption: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -296,6 +303,8 @@ registerBlockType('blockons/form-file-upload', {
 									'Please ensure server configurations allow uploads to this limit. Recommended maximum size is 2MB.',
 									'blockons',
 								)}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -306,6 +315,8 @@ registerBlockType('blockons/form-file-upload', {
 								onChange={(value) =>
 									setAttributes({ width: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 						</PanelBody>
 					</InspectorControls>

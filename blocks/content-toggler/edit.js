@@ -56,6 +56,7 @@ const Edit = (props) => {
 								"This is to display and edit the closed version while the block is still selected.",
 								"blockons"
 							)}
+							__nextHasNoMarginBottom={true}
 						/>
 						{forceClosed && (
 							<>
@@ -70,6 +71,8 @@ const Edit = (props) => {
 									}
 									min={20}
 									max={500}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<div className="blockons-divider"></div>
 
@@ -80,6 +83,7 @@ const Edit = (props) => {
 										onChange={(newValue) =>
 											setAttributes({ toggleWithin: newValue })
 										}
+										__nextHasNoMarginBottom={true}
 									/>
 								)}
 								<RangeControl
@@ -93,6 +97,8 @@ const Edit = (props) => {
 									}
 									min={0}
 									max={closedHeight}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 							</>
 						)}
@@ -107,6 +113,8 @@ const Edit = (props) => {
 									toggleTextClosed: newValue,
 								});
 							}}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<TextControl
 							label={__("Toggle Open Text", "blockons")}
@@ -116,6 +124,8 @@ const Edit = (props) => {
 									toggleTextOpen: newValue,
 								});
 							}}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 					</PanelBody>
 					<PanelBody
@@ -135,6 +145,8 @@ const Edit = (props) => {
 									btnStyle: newValue === undefined ? "one" : newValue,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -164,6 +176,8 @@ const Edit = (props) => {
 							}
 							min={11}
 							max={38}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<BlockonsColorpicker
 							label={__("Text Color", "blockons")}

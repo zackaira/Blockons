@@ -35,6 +35,8 @@ const GetPostsSelect = (props) => {
 				]}
 				onChange={onChange}
 				disabled={loadingProducts}
+				__next40pxDefaultSize={true}
+				__nextHasNoMarginBottom={true}
 			/>
 		</div>
 	);

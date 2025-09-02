@@ -46,6 +46,7 @@ const createDefaultOption = (index) => ({
 });
 
 registerBlockType('blockons/form-radio', {
+	apiVersion: 2,
 	title: __('Form Radio Group', 'blockons'),
 	icon: 'marker',
 	parent: ['blockons/contact-form'],
@@ -277,6 +278,8 @@ registerBlockType('blockons/form-radio', {
 								onChange={(value) =>
 									setAttributes({ label: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<TextareaControl
 								label={__('Description', 'blockons')}
@@ -284,6 +287,7 @@ registerBlockType('blockons/form-radio', {
 								onChange={(value) =>
 									setAttributes({ description: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -297,6 +301,7 @@ registerBlockType('blockons/form-radio', {
 								onChange={(value) =>
 									setAttributes({ required: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<ToggleControl
 								label={__('Display Inline', 'blockons')}
@@ -304,6 +309,7 @@ registerBlockType('blockons/form-radio', {
 								onChange={(value) =>
 									setAttributes({ inline: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -314,6 +320,8 @@ registerBlockType('blockons/form-radio', {
 								onChange={(value) =>
 									setAttributes({ width: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider" />
 
@@ -325,6 +333,8 @@ registerBlockType('blockons/form-radio', {
 								}
 								min={0}
 								max={60}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							{/* <ToggleControl
 								label={__('Option Box', 'blockons')}
@@ -332,6 +342,7 @@ registerBlockType('blockons/form-radio', {
 								onChange={(value) =>
 									setAttributes({ optionBox: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/> */}
 							<div className="blockons-divider" />
 
@@ -354,6 +365,8 @@ registerBlockType('blockons/form-radio', {
 													value,
 												)
 											}
+											__next40pxDefaultSize={true}
+											__nextHasNoMarginBottom={true}
 										/>
 										<ToggleControl
 											label={__(
@@ -368,6 +381,7 @@ registerBlockType('blockons/form-radio', {
 													value,
 												)
 											}
+											__nextHasNoMarginBottom={true}
 										/>
 										{options.length > 1 && (
 											<Button

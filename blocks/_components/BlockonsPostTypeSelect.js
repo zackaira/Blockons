@@ -42,6 +42,8 @@ const BlockonsPostTypeSelect = (props) => {
 			]}
 			onChange={onChange}
 			disabled={loadingPostTypes}
+			__next40pxDefaultSize={true}
+			__nextHasNoMarginBottom={true}
 		/>
 	);
 };

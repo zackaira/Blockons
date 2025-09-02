@@ -341,6 +341,8 @@ const Edit = (props) => {
 						value={emailTo}
 						className={`blockons-cf-emailto ${validateEmails(emailTo, 'emailTo') ? '' : 'has-error'}`}
 						onChange={(value) => setAttributes({ emailTo: value })}
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
 					/>
 					{emailTo && !validateEmails(emailTo, 'emailTo') && (
 						<div className="components-form-field-help-text error-message">
@@ -362,6 +364,8 @@ const Edit = (props) => {
 								onChange={(value) =>
 									setAttributes({ formName: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 
 							<TextControl
@@ -370,6 +374,8 @@ const Edit = (props) => {
 								onChange={(value) =>
 									setAttributes({ emailSubject: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider"></div>
 
@@ -383,6 +389,8 @@ const Edit = (props) => {
 									'Add the NAME shortcode here',
 									'blockons',
 								)}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<TextControl
 								label={__('From Email', 'blockons')}
@@ -394,6 +402,8 @@ const Edit = (props) => {
 									'Add the EMAIL shortcode here',
 									'blockons',
 								)}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider"></div>
 
@@ -410,6 +420,8 @@ const Edit = (props) => {
 										onChange={(value) =>
 											setAttributes({ ccEmails: value })
 										}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 									{ccEmails &&
 										!validateEmails(
@@ -435,6 +447,8 @@ const Edit = (props) => {
 										onChange={(value) =>
 											setAttributes({ bccEmails: value })
 										}
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
 									/>
 									{bccEmails &&
 										!validateEmails(
@@ -469,6 +483,8 @@ const Edit = (props) => {
 								onChange={(value) =>
 									setAttributes({ successMessage: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<TextControl
 								label={__('Form Error Message', 'blockons')}
@@ -476,6 +492,8 @@ const Edit = (props) => {
 								onChange={(value) =>
 									setAttributes({ errorMessage: value })
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider"></div>
 
@@ -491,6 +509,7 @@ const Edit = (props) => {
 										includeMetadata: value,
 									})
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 						</>
 					)}
@@ -520,6 +539,7 @@ const Edit = (props) => {
 								},
 							]}
 							isResetValueOnUnitChange
+							__next40pxDefaultSize={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -538,6 +558,8 @@ const Edit = (props) => {
 								'Adjust the space between form fields IF you edit field widths',
 								'blockons',
 							)}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<RangeControl
 							label={__('Form Row Spacing', 'blockons')}
@@ -550,6 +572,8 @@ const Edit = (props) => {
 							}}
 							min={0}
 							max={100}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -564,6 +588,8 @@ const Edit = (props) => {
 							}}
 							min={10}
 							max={54}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<RangeControl
 							label={__('Text Spacing', 'blockons')}
@@ -576,6 +602,8 @@ const Edit = (props) => {
 							}}
 							min={0}
 							max={100}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<BlockonsColorpicker
 							label={__('Text Color', 'blockons')}
@@ -597,6 +625,7 @@ const Edit = (props) => {
 								setAttributes({ showLabels: value });
 								updateInnerBlocksStyles({ showLabels: value });
 							}}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -609,6 +638,8 @@ const Edit = (props) => {
 							}}
 							min={10}
 							max={54}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<RangeControl
 							label={__('Input Padding Vertical', 'blockons')}
@@ -621,6 +652,8 @@ const Edit = (props) => {
 							}}
 							min={2}
 							max={100}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<RangeControl
 							label={__('Input Padding Horizontal', 'blockons')}
@@ -633,6 +666,8 @@ const Edit = (props) => {
 							}}
 							min={2}
 							max={100}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -667,6 +702,7 @@ const Edit = (props) => {
 								setAttributes({ inputBorder: value });
 								updateInnerBlocksStyles({ inputBorder: value });
 							}}
+							__nextHasNoMarginBottom={true}
 						/>
 						{inputBorder && (
 							<>
@@ -699,6 +735,8 @@ const Edit = (props) => {
 									}}
 									min={0}
 									max={100}
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 							</>
 						)}
@@ -712,6 +750,8 @@ const Edit = (props) => {
 									submitButtonText: value,
 								})
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -740,6 +780,8 @@ const Edit = (props) => {
 							}
 							min={0}
 							max={100}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
@@ -763,6 +805,8 @@ const Edit = (props) => {
 							onChange={(value) =>
 								setAttributes({ errorPosition: value })
 							}
+							__next40pxDefaultSize={true}
+							__nextHasNoMarginBottom={true}
 						/>
 					</PanelBody>
 				)}
@@ -777,6 +821,7 @@ const Edit = (props) => {
 						onChange={(value) =>
 							setAttributes({ useRecaptcha: value })
 						}
+						__nextHasNoMarginBottom={true}
 					/>
 				</PanelBody> */}
 			</InspectorControls>

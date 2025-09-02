@@ -438,11 +438,15 @@ const Edit = (props) => {
 									label={__('Latitude', 'blockons')}
 									value={tempLat}
 									disabled
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 								<TextControl
 									label={__('Longitude', 'blockons')}
 									value={tempLng}
 									disabled
+									__next40pxDefaultSize={true}
+									__nextHasNoMarginBottom={true}
 								/>
 							</div>
 							<div className="blockons-marker-setsplit">
@@ -500,6 +504,8 @@ const Edit = (props) => {
 										findLocation();
 									}
 								}}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 
 							<div className="blockons-marker-setsplit">
@@ -619,6 +625,8 @@ const Edit = (props) => {
 														)}
 														value={marker.latitude}
 														disabled
+														__next40pxDefaultSize={true}
+														__nextHasNoMarginBottom={true}
 													/>
 													<TextControl
 														label={__(
@@ -627,6 +635,8 @@ const Edit = (props) => {
 														)}
 														value={marker.longitude}
 														disabled
+														__next40pxDefaultSize={true}
+														__nextHasNoMarginBottom={true}
 													/>
 												</div>
 
@@ -657,6 +667,8 @@ const Edit = (props) => {
 																	)}
 																</a>
 															}
+															__next40pxDefaultSize={true}
+															__nextHasNoMarginBottom={true}
 														/>
 
 														<BlockonsColorpicker
@@ -738,6 +750,8 @@ const Edit = (props) => {
 								}
 								min={100}
 								max={800}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider"></div>
 
@@ -747,6 +761,8 @@ const Edit = (props) => {
 								onChange={(value) =>
 									setTempZoom(value.toFixed(2))
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider"></div>
 
@@ -756,6 +772,7 @@ const Edit = (props) => {
 								onChange={(value) =>
 									setAttributes({ showMarkerInfo: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider"></div>
 
@@ -765,6 +782,7 @@ const Edit = (props) => {
 								onChange={(value) =>
 									setAttributes({ showMarkerIcons: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<ToggleControl
 								label={__('Show Map Controls', 'blockons')}
@@ -772,6 +790,7 @@ const Edit = (props) => {
 								onChange={(value) =>
 									setAttributes({ showControls: value })
 								}
+								__nextHasNoMarginBottom={true}
 							/>
 							<div className="blockons-divider"></div>
 
@@ -793,6 +812,8 @@ const Edit = (props) => {
 										markerStyle: value,
 									})
 								}
+								__next40pxDefaultSize={true}
+								__nextHasNoMarginBottom={true}
 							/>
 
 							<BlockonsColorpicker
