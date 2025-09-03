@@ -15,6 +15,7 @@
 }
 .wp-block-blockons-tabs.top-layout .blockons-tab {
 	padding: 8px 16px;
+	white-space: nowrap;
 }
 .wp-block-blockons-tabs .blockons-tab.align-center {
 	text-align: center;
@@ -29,6 +30,7 @@
 	position: relative;
 	z-index: 4;
 	cursor: pointer;
+	box-sizing: border-box;
 }
 .blockons-tabs.full .blockons-tab {
 	flex: 1;
@@ -141,14 +143,26 @@
 	background-color: var(--content-other-color);
 }
 
-@media only screen and (max-width: 768px) {
-	.wp-block.wp-block-blockons-tabs .blockons-tabs {
+@media only screen and (max-width: 692px) {
+	.wp-block-blockons-tabs .blockons-tabs,
+	.wp-block-blockons-tabs.side-layout {
 		flex-direction: column;
 	}
-	.wp-block.wp-block-blockons-tabs .blockons-tabs .blockons-tab {
+	.wp-block-blockons-tabs .blockons-tabs .blockons-tab {
 		width: 100%;
 		margin: 0 0 -1px 0;
 	}
-	.wp-block.wp-block-blockons-tabs .blockons-tabs-innerblocks {
+	.wp-block-blockons-tabs .blockons-tabs-innerblocks {
+		margin-left: 2px;
+	}
+
+	.wp-block-blockons-tabs.side-layout .blockons-tabs {
+		box-shadow: none !important;
+		width: 100% !important;
+	}
+	
+	.wp-block-blockons-tabs.side-layout .blockons-tabs-innerblocks {
+		width: 100%;
+        margin: 0;
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Blockons
- * Version: 1.2.10
+ * Version: 1.2.11
  * Plugin URI: https://blockons.com/
  * Description: Enhanced WordPress editor blocks for Gutenberg, including core Block Extensions and Site Addons for your WordPress site and WooCommerce online store
  * Author: Kaira
@@ -20,7 +20,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( !defined( 'BLOCKONS_PLUGIN_VERSION' ) ) {
-	define('BLOCKONS_PLUGIN_VERSION', '1.2.10');
+	define('BLOCKONS_PLUGIN_VERSION', '1.2.11');
 }
 if ( !defined( 'BLOCKONS_PLUGIN_URL' ) ) {
 	define('BLOCKONS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -39,7 +39,7 @@ if ( function_exists( 'blockons_fs' ) ) {
 	
 			if ( ! isset( $blockons_fs ) ) {
 				// Include Freemius SDK.
-				require_once dirname(__FILE__) . '/freemius/start.php';
+				require_once dirname(__FILE__) . '/vendor/freemius/start.php';
 	
 				$blockons_fs = fs_dynamic_init( array(
 					'id'                  => '10882',

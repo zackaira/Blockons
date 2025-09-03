@@ -5,7 +5,7 @@ Tags: gutenberg, editor blocks, woocommerce blocks, page builder, ultimate block
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.8
-Stable tag: 1.2.10
+Stable tag: 1.2.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -240,10 +240,11 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.2.11 =
 * Styling tweaks/fixes
-* 
+* Improved Tabs responsiveness on mobile
+* Code improvements and minor refactoring
 * Fixed WC Mini Cart not working in custom template part
+* NEW: Added new Icon Selector block
 * PRO: Fixed Instant Search results to exclude draft & private posts
-* 
 
 = 1.2.10 =
 * Styling tweaks/fixes
