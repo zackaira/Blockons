@@ -161,6 +161,7 @@ const IconPicker = React.memo(
 					) : (
 						<p>
 							{sprintf(
+								/* translators: %d: number of icons being displayed */
 								__('Showing %d icons', 'blockons'),
 								filtered.length,
 							)}
@@ -309,6 +310,7 @@ const Edit = ({ attributes, setAttributes, isSelected }) => {
 		if (!media.type || !allowedMimeTypes.includes(media.mime)) {
 			alert(
 				sprintf(
+					/* translators: %s: list of allowed file types */
 					__('Invalid file type. %s', 'blockons'),
 					allowedFileTypes,
 				),
