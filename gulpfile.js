@@ -21,7 +21,7 @@ function bundle() {
 			'!.prettierrc',
 			'!prettier.config.js',
 			'!.gitignore',
-		])
+		], { encoding: false })
 		.pipe(zip('blockons.zip'))
 		.pipe(gulp.dest('bundled'));
 }

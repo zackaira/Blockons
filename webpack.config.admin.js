@@ -36,21 +36,6 @@ const config = {
 		// path: path.resolve(process.cwd(), "dist"),
 		path: path.resolve(__dirname, 'dist'),
 	},
-	externals: {
-		'@wordpress/element': 'wp.element',
-		'@wordpress/components': 'wp.components',
-		'@wordpress/data': 'wp.data',
-		'@wordpress/i18n': 'wp.i18n',
-		'@wordpress/plugins': 'wp.plugins',
-		'@wordpress/edit-post': 'wp.editPost',
-		'@wordpress/api-fetch': 'wp.apiFetch',
-		'@wordpress/block-editor': 'wp.blockEditor',
-		'@wordpress/hooks': 'wp.hooks',
-		'@wordpress/compose': 'wp.compose',
-		react: 'React',
-		'react-dom': 'ReactDOM',
-		lodash: 'lodash',
-	},
 	optimization: {
 		minimize: true,
 		minimizer: [
@@ -111,7 +96,29 @@ const config = {
 					},
 				],
 			},
+			{
+				test: /\.(png|jpg|jpeg|gif|svg)$/i,
+				type: 'asset/resource',
+				generator: {
+					filename: '[hash][ext][query]'
+				}
+			},
 		],
+	},
+	externals: {
+		'@wordpress/element': 'wp.element',
+		'@wordpress/components': 'wp.components',
+		'@wordpress/data': 'wp.data',
+		'@wordpress/i18n': 'wp.i18n',
+		'@wordpress/plugins': 'wp.plugins',
+		'@wordpress/edit-post': 'wp.editPost',
+		'@wordpress/api-fetch': 'wp.apiFetch',
+		'@wordpress/block-editor': 'wp.blockEditor',
+		'@wordpress/hooks': 'wp.hooks',
+		'@wordpress/compose': 'wp.compose',
+		react: 'React',
+		'react-dom': 'ReactDOM',
+		lodash: 'lodash',
 	},
 };
 
