@@ -13,8 +13,7 @@ const TestProduct = ({ settings }) => {
 			html: `
                 <div class="blockons-quickview-popup flex">
                     <div class="bqv-col left">
-                        <img 
-                            src="http://localhost/_themes/wp-content/uploads/2022/05/album-1-300x300.jpg" alt="Album" />
+                        <img  src="http://localhost/_themes/wp-content/uploads/2022/05/album-1-300x300.jpg" alt="Album" />
                     </div>
                     <div class="bqv-col right">
                         <h2 class="bqv-title">Album</h2>

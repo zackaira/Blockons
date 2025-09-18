@@ -13,7 +13,9 @@ const Edit = (props) => {
 		isSelected,
 		attributes: { accordionDesign, iconFirst, closeAll, centeredLabel },
 		setAttributes,
+		clientId,
 	} = props;
+
 
 	// Block Props
 	const blockProps = useBlockProps({
@@ -70,7 +72,7 @@ const Edit = (props) => {
 							label={__("Only 1 Accordion open at a time", "blockons")}
 							checked={closeAll}
 							help={__(
-								"Close all other accordions when one is clicked open. This will only work on the front-end and not in the editor.",
+								"Close all other accordions when one is clicked open. This works in both the editor and on the front-end.",
 								"blockons"
 							)}
 							onChange={(newValue) => {

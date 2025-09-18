@@ -66,11 +66,13 @@
 	padding: 0;
 }
 .block-editor-block-list__block .accordion-content {
-	/* display: none !important; */
-	max-height: initial !important;
+	/* In editor, show content when selected */
+	max-height: 0;
+	overflow: hidden;
 }
 .wp-block-blockons-accordion .accordion-content {
-	display: none;
+	max-height: 0;
+	overflow: hidden;
 }
 .wp-block-blockons-accordions
 	.block-editor-block-list__block.is-selected
@@ -81,7 +83,8 @@
 	> .wp-block-blockons-accordion
 	> .accordion-content,
 .wp-block-blockons-accordion.selected > .accordion-content {
-	display: block;
+	max-height: none !important;
+	overflow: visible;
 }
 /* -- Appender Button -- */
 .wp-block-blockons-accordions.wp-block
@@ -164,4 +167,14 @@
 /* -- SINGLE ACCORDION Styling -- */
 .wp-block-blockons-accordion:hover {
 	box-shadow: inset 0 0 0 1px #e0e0e0;
+}
+
+/* Ensure accordion blocks are selectable */
+.wp-block-blockons-accordion {
+	cursor: pointer;
+	position: relative;
+}
+
+.wp-block-blockons-accordion .accordion-label {
+	pointer-events: auto;
 }

@@ -346,6 +346,13 @@ body.blockons-tooltips .blockons-inline-tooltip.active .blockons-tooltip {
 body.blockons-tooltips .tooltip-icon {
 	margin: 0 0 0 4px;
 }
+
+/* -- Quick View - PRO -- */
+body.blockons-pro.blockons-quickview
+	.wc-block-store-notices
+	.woocommerce-notices-wrapper {
+	display: none !important;
+}
 /* -- Theme One -- */
 body.blockons-tooltips .blockons-tooltip.one {
 	background-color: #424242;

@@ -1,3 +1,6 @@
 module.exports = {
-	importModuleDynamicallyCallback: (specifier) => import(specifier),
-  };
+  semi: true,
+  singleQuote: true,
+  tabWidth: 4,
+  trailingComma: 'all',
+};

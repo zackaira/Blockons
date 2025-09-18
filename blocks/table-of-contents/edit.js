@@ -72,6 +72,7 @@ const Edit = (props) => {
 
 	const [extractedHeadings, setExtractedHeadings] = useState([]);
 	const [blurbs, setBlurbs] = useState({});
+	const [headingVisibility, setHeadingVisibility] = useState({});
 	const [lastParsedContent, setLastParsedContent] = useState('');
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -122,19 +123,36 @@ const Edit = (props) => {
 			const headingElements =
 				htmlDocument.querySelectorAll(selectorString);
 
-			return Array.from(headingElements).map((heading) => {
-				const headingText = heading.textContent.trim();
-				return {
-					content: headingText,
-					level: heading.tagName.toLowerCase(),
-					padding:
-						(includedLevels[heading.tagName.toLowerCase()] - 1) *
-						paddingIn,
-					anchor: encodeURIComponent(
-						headingText.toLowerCase().replace(/\s+/g, '-'),
-					),
-				};
-			});
+			// Define block types to exclude headings from
+			const excludedBlockTypes = [
+				'wp-block-woocommerce-accordion-group',
+				'wp-block-blockons-accordions'
+			];
+
+			return Array.from(headingElements)
+				.filter((heading) => {
+					// Check if heading is within any excluded block type
+					for (const blockType of excludedBlockTypes) {
+						const excludedBlock = heading.closest(`.${blockType}`);
+						if (excludedBlock) {
+							return false; // Exclude this heading
+						}
+					}
+					return true; // Include this heading
+				})
+				.map((heading) => {
+					const headingText = heading.textContent.trim();
+					return {
+						content: headingText,
+						level: heading.tagName.toLowerCase(),
+						padding:
+							(includedLevels[heading.tagName.toLowerCase()] - 1) *
+							paddingIn,
+						anchor: encodeURIComponent(
+							headingText.toLowerCase().replace(/\s+/g, '-'),
+						),
+					};
+				});
 		},
 		[includeHeadings, includedLevels, paddingIn],
 	);
@@ -159,8 +177,9 @@ const Edit = (props) => {
 		return extractedHeadings.map((heading, index) => ({
 			...heading,
 			blurb: blurbs[index] || '',
+			visible: headingVisibility[index] !== false, // Default to visible
 		}));
-	}, [extractedHeadings, blurbs]);
+	}, [extractedHeadings, blurbs, headingVisibility]);
 
 	useEffect(() => {
 		if (JSON.stringify(headingsWithBlurbs) !== JSON.stringify(headings)) {
@@ -169,12 +188,15 @@ const Edit = (props) => {
 	}, [headingsWithBlurbs, setAttributes]);
 
 	useEffect(() => {
-		// Initialize blurbs state from headings attribute
+		// Initialize blurbs and visibility state from headings attribute
 		const initialBlurbs = {};
+		const initialVisibility = {};
 		headings.forEach((heading, index) => {
 			initialBlurbs[index] = heading.blurb || '';
+			initialVisibility[index] = heading.visible !== false; // Default to visible
 		});
 		setBlurbs(initialBlurbs);
+		setHeadingVisibility(initialVisibility);
 	}, [headings]);
 
 	useEffect(() => {
@@ -221,6 +243,13 @@ const Edit = (props) => {
 		setBlurbs((prevBlurbs) => ({
 			...prevBlurbs,
 			[index]: newBlurb,
+		}));
+	}, []);
+
+	const toggleHeadingVisibility = useCallback((index) => {
+		setHeadingVisibility((prevVisibility) => ({
+			...prevVisibility,
+			[index]: !prevVisibility[index],
 		}));
 	}, []);
 
@@ -705,6 +734,7 @@ const Edit = (props) => {
 								style={{
 									paddingLeft: `${heading.padding}px`,
 									marginBottom: `${spacing}px`,
+									opacity: heading.visible === false ? 0.5 : 1,
 								}}
 							>
 								{showNumbers && (
@@ -731,50 +761,64 @@ const Edit = (props) => {
 										</span>
 									</div>
 								)}
-								<div className="blockons-toc-item">
-									<a
-										href={`#${heading.anchor}`}
-										className="blockons-toc-link"
-										data-target={heading.anchor}
-										style={{
-											...(headSize !== 16
-												? { fontSize: `${headSize}px` }
-												: {}),
-											color: headColor,
-										}}
-									>
-										{heading.content}
-									</a>
-									{showBlurbs && (
-										<RichText
-											tagName="p"
-											value={blurbs[index] || ''}
-											className="blockons-toc-blurb"
-											onChange={(newBlurb) =>
-												updateHeadingBlurb(
-													index,
-													newBlurb,
-												)
-											}
-											allowedFormats={[
-												'core/bold',
-												'core/italic',
-											]}
-											placeholder={__(
-												'Enter a short description',
-												'blockons',
-											)}
+								<div className="blockons-toc-item" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+									<div style={{ flex: 1 }}>
+										<a
+											href={`#${heading.anchor}`}
+											className="blockons-toc-link"
+											data-target={heading.anchor}
 											style={{
-												...(blurbSize !== 13
-													? {
-															fontSize: `${blurbSize}px`,
-														}
+												...(headSize !== 16
+													? { fontSize: `${headSize}px` }
 													: {}),
-												color: blurbColor,
+												color: headColor,
+												textDecoration: heading.visible === false ? 'line-through' : 'none',
 											}}
-										/>
-									)}
+										>
+											{heading.content}
+										</a>
+										{showBlurbs && (
+											<RichText
+												tagName="p"
+												value={blurbs[index] || ''}
+												className="blockons-toc-blurb"
+												onChange={(newBlurb) =>
+													updateHeadingBlurb(
+														index,
+														newBlurb,
+													)
+												}
+												allowedFormats={[
+													'core/bold',
+													'core/italic',
+												]}
+												placeholder={__(
+													'Enter a short description',
+													'blockons',
+												)}
+												style={{
+													...(blurbSize !== 13
+														? {
+																fontSize: `${blurbSize}px`,
+															}
+														: {}),
+													color: blurbColor,
+												}}
+											/>
+										)}
+									</div>
 								</div>
+
+								<button
+									className="blockons-toc-visibility-toggle"
+									onClick={() => toggleHeadingVisibility(index)}
+									style={{
+										color: heading.visible === false ? '#ccc' : '#000',
+									}}
+									title={heading.visible === false ? 'Show heading' : 'Hide heading'}
+								>
+									<span className={`fa-solid ${heading.visible === false ? 'fa-eye' : 'fa-eye-slash'}`}></span>
+								</button>
 							</li>
 						))}
 					</ul>

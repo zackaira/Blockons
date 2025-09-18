@@ -5,7 +5,23 @@
  *
  * FREE
  */
-document.addEventListener('DOMContentLoaded', function () {
+
+// Flag to prevent multiple initializations
+let blockonsCartInitialized = false;
+
+function initializeBlockonsCart(forceReinit = false) {
+	// Prevent multiple initializations unless forced
+	if (blockonsCartInitialized && !forceReinit) {
+		return;
+	}
+
+	// If forcing re-initialization, reset the flag first to allow cleanup
+	if (forceReinit) {
+		blockonsCartInitialized = false;
+	}
+
+	blockonsCartInitialized = true;
+
 	// Configuration object for selectors
 	const selectors = {
 		cartIcon: '.blockons-wc-mini-cart-block-icon',
@@ -38,6 +54,12 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (!cartIcons.length) return;
 
 		cartIcons.forEach((icon, index) => {
+			// Remove existing cart amount clones to prevent duplicates
+			const existingAmount = icon.querySelector('.blockons-cart-amnt');
+			if (existingAmount) {
+				existingAmount.remove();
+			}
+
 			cloneAndAppend(selectors.cartAmount, icon);
 		});
 	}
@@ -54,6 +76,13 @@ document.addEventListener('DOMContentLoaded', function () {
 				'.blockons-wc-mini-cart-inner',
 			);
 			if (innerContainer) {
+				// Remove existing mini cart clones to prevent duplicates
+				const existingMiniCart =
+					innerContainer.querySelector('.blockons-mini-crt');
+				if (existingMiniCart) {
+					existingMiniCart.remove();
+				}
+
 				cloneAndAppend(selectors.miniCart, innerContainer);
 			}
 		});
@@ -66,4 +95,17 @@ document.addEventListener('DOMContentLoaded', function () {
 	} catch (error) {
 		console.error('Failed to initialize cart components:', error);
 	}
-});
+}
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', initializeBlockonsCart);
+
+// Also initialize immediately if DOM is already loaded
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', initializeBlockonsCart);
+} else {
+	initializeBlockonsCart();
+}
+
+// Expose function globally for other scripts to use
+window.initializeBlockonsCart = initializeBlockonsCart;

@@ -1,4 +1,4 @@
-// import { createRoot } from "@wordpress/element";
+import { createRoot } from '@wordpress/element';
 import PageLoader from './site-addons/pageloader/PageLoader';
 import BackToTop from './site-addons/backtotop/BackToTop';
 import ScrollIndicator from './site-addons/scrollindicator/ScrollIndicator';
@@ -15,20 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Website Page Loader
 	const blockonsPageLoader = document.getElementById('blockons-pageloader');
 	if (blockonsPageLoader) {
-		ReactDOM.render(
+		const root = createRoot(blockonsPageLoader);
+		root.render(
 			<PageLoader
 				pageLoaderOptions={blockonsOptions?.pageloader}
 				isPro={isPremium}
 			/>,
-			blockonsPageLoader,
 		);
-		// if (blockonsPageLoader) {
-		// 	createRoot(blockonsPageLoader).render(
-		// 		<PageLoader
-		// 			pageLoaderOptions={blockonsOptions?.pageloader}
-		// 			isPro={isPremium}
-		// 		/>
-		// 	);
 
 		setTimeout(() => {
 			document.body.classList.remove('blockons-page-loading');
@@ -42,9 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Back To Top Button
 	const blockonsBttb = document.getElementById('blockons-bttb');
 	if (typeof blockonsBttb !== undefined && blockonsBttb !== null) {
-		ReactDOM.render(
+		const root = createRoot(blockonsBttb);
+		root.render(
 			<BackToTop bttOptions={blockonsOptions?.bttb} isPro={isPremium} />,
-			blockonsBttb,
 		);
 	}
 
@@ -53,24 +46,24 @@ document.addEventListener('DOMContentLoaded', () => {
 		'blockons-scroll-indicator',
 	);
 	if (typeof blockonsScrollInd !== undefined && blockonsScrollInd !== null) {
-		ReactDOM.render(
+		const root = createRoot(blockonsScrollInd);
+		root.render(
 			<ScrollIndicator
 				scrollInOptions={blockonsOptions?.scrollindicator}
 				isPro={isPremium}
 			/>,
-			blockonsScrollInd,
 		);
 	}
 
 	// Site By
 	const blockonsSiteBy = document.getElementById('blockons-siteby');
 	if (typeof blockonsSiteBy !== undefined && blockonsSiteBy !== null) {
-		ReactDOM.render(
+		const root = createRoot(blockonsSiteBy);
+		root.render(
 			<SiteBy
 				sitebyOptions={blockonsOptions?.siteby}
 				isPro={isPremium}
 			/>,
-			blockonsSiteBy,
 		);
 	}
 

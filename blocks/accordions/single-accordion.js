@@ -81,7 +81,7 @@ registerBlockType("blockons/accordion", {
 			default: "#FFF",
 		},
 	},
-	usesContext: ["blockons/iconFirst"],
+	usesContext: ["blockons/iconFirst", "blockons/closeAll"],
 	/**
 	 *
 	 * Edit function for Child Accordion Block
@@ -110,6 +110,9 @@ registerBlockType("blockons/accordion", {
 			context,
 		} = props;
 
+		// Determine if accordion content should be visible
+		const isContentVisible = stayOpen || isSelected;
+
 		const onChangeAccordionLabel = (newAccordionLabel) => {
 			setAttributes({ accordionLabel: newAccordionLabel });
 		};
@@ -117,19 +120,23 @@ registerBlockType("blockons/accordion", {
 			setAttributes({ accordionIcon: newAccordionIcon });
 		};
 
+
 		const DEFAULT = [["core/paragraph", {}]];
 
+		// Block Props for proper WordPress block functionality
+		const blockProps = useBlockProps({
+			className: `${isContentVisible ? "selected" : ""} ${
+				accordionIcon === "plus" ||
+				accordionIcon === "eye" ||
+				accordionIcon === "circle-plus"
+					? "change " + accordionIcon
+					: "rotate"
+			} ${hideFrontend ? "hidden-frontend" : ""}`,
+			style: { marginBottom: itemSpacing }
+		});
+
 		return (
-			<div
-				className={`${className} ${isSelected || stayOpen ? "selected" : ""} ${
-					accordionIcon === "plus" ||
-					accordionIcon === "eye" ||
-					accordionIcon === "circle-plus"
-						? "change " + accordionIcon
-						: "rotate"
-				} ${hideFrontend ? "hidden-frontend" : ""}`}
-				style={{ marginBottom: itemSpacing }}
-			>
+			<div {...blockProps}>
 				{isSelected && (
 					<InspectorControls>
 						<PanelBody
@@ -304,6 +311,7 @@ registerBlockType("blockons/accordion", {
 							renderContent={() =>
 								Object.keys(accordionArrowIcons).map((icon) => (
 									<FontAwesomeIcon
+										key={icon}
 										icon={icon}
 										iconSize={20}
 										onClick={() => onChangeAccordionIcon(icon)}
@@ -331,7 +339,7 @@ registerBlockType("blockons/accordion", {
 	 */
 	save: ({ attributes }) => {
 		const blockProps = useBlockProps.save({
-			className: `accordion-panel ${attributes.stayOpen ? "active" : ""} ${
+			className: `accordion-panel wp-block-blockons-accordion ${attributes.stayOpen ? "active" : ""} ${
 				attributes.accordionIcon === "plus" ||
 				attributes.accordionIcon === "eye" ||
 				attributes.accordionIcon === "circle-plus"

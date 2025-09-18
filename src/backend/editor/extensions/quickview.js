@@ -7,6 +7,7 @@ const { createHigherOrderComponent } = wp.compose;
 import BlockonsNote from '../../settings/components/UI/BlockonsNote';
 
 const wcAllowedProducts = [
+	'woocommerce/product-collection',
 	'woocommerce/handpicked-products',
 	'woocommerce/product-best-sellers',
 	'woocommerce/product-category',

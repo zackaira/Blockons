@@ -90,9 +90,9 @@ const Save = ({ attributes }) => {
                 </div>
                 <div className="blockons-toc-content">
                     <ul className="blockons-toc-ul">
-                        {headings.map((heading, index) => (
+                        {headings.filter(heading => heading.visible !== false).map((heading, visibleIndex) => (
                             <li
-                                key={`heading-${index}`}
+                                key={`heading-${visibleIndex}`}
                                 className="blockons-toc-li"
                                 style={{
                                     paddingLeft: `${heading.padding}px`,
@@ -106,7 +106,7 @@ const Save = ({ attributes }) => {
                                         color: numberColor
                                     }}>
                                         <span>
-                                            {(index + 1).toString().padStart(2, '0')}
+                                            {(visibleIndex + 1).toString().padStart(2, '0')}
                                         </span>
                                     </div>
                                 )}

@@ -1,3 +1,33 @@
+.nomargin {
+	margin: 0 !important;
+}
+.blockons-set-full {
+	grid-column: 1 / -1;
+}
+.blockons-settings-tip {
+	margin-top: 8px;
+	padding: 12px;
+	background: #f0f6fc;
+	border: 1px solid #c3dcf4;
+	border-radius: 4px;
+	font-size: 12px;
+	color: #0073aa;
+}
+.blockons-settings-tip.no-upgrade-url p {
+	margin-bottom: 0;
+}
+.blockons-settings-tip a {
+	display: inline-block;
+	margin: 0;
+	padding: 4px 8px;
+	background-color: #007cba;
+	border-radius: 3px;
+	color: #fff;
+	text-decoration: none;
+}
+.blockons-settings-tip a:hover {
+	background-color: #006ba1;
+}
 /**
  * Inserter PRO Tag
  */
@@ -337,6 +367,24 @@ body.blockons-imgpopup.popup-light
 body.blockons-imgpopup.popup-dark
 	.swal2-container.blockons-popup-container.swal2-backdrop-show {
 	background: rgb(0 0 0 / 40%);
+}
+/**
+ * Blockons NEW Native Color Picker Component
+ */
+.blockons-native-colorpicker .components-button.blockons-btn-colorpicker {
+	box-shadow: inset 0 0 0 1px #ddd;
+	margin: 10px 0 -1px;
+	padding: 10px 14px;
+	width: 100%;
+	gap: 10px;
+	text-decoration: none;
+	color: inherit;
+}
+.blockons-native-colorpicker .components-button.blockons-btn-colorpicker:hover {
+	color: var(
+		--wp-components-color-accent,
+		var(--wp-admin-theme-color, #3858e9)
+	);
 }
 /**
  * Blockons Color Picker Component

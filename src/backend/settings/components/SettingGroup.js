@@ -1,9 +1,9 @@
-const SettingGroup = ({ label, children }) => {
+const SettingGroup = ({ label, children, groupClass = '' }) => {
 	return (
 		<tr className="blockons-row blockons-group-row">
 			<th>{label}</th>
 			<td>
-				<div className="blockons-group">
+				<div className={`blockons-group ${groupClass}`}>
 					<a className="blockons-group-btn">
 						<span className="dashicons dashicons-edit"></span>
 					</a>

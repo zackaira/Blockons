@@ -872,6 +872,15 @@ input.toggle-switch-checkbox::before,
 	font-size: 12px;
 	padding-right: 12px;
 }
+.blockons-group.blockons-qv-set-group .blockons-group-container {
+	width: 260px;
+}
+.blockons-group.blockons-qv-set-group
+	.blockons-group-container
+	.blockons-row
+	th {
+	width: 180px;
+}
 .blockons-group-container table.form-table td .blockons-row-col-right {
 	display: none !important;
 }

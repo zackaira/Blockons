@@ -66,7 +66,7 @@ class Blockons {
 		// Frontend
 		wp_register_style('blockons-frontend-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
 		wp_register_script('blockons-frontend-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/frontend' . $suffix . '.js'), array('wp-element', 'wp-i18n'), BLOCKONS_PLUGIN_VERSION, true);
-		
+
 		if ( Blockons_Admin::blockons_is_plugin_active('woocommerce.php') ) {
 			// WC Account Icon Block JS
 			wp_register_script('blockons-wc-account-icon', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-account-icon/account.js'), array(), BLOCKONS_PLUGIN_VERSION);
@@ -75,7 +75,7 @@ class Blockons {
 			));
 
 			// WC Cart Icon Block JS
-			if (blockons_fs()->can_use_premium_code__premium_only()) {
+			if ($isPro) {
 				wp_register_script('blockons-wc-mini-cart', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/cart-pro.min.js'), array('wp-element'), BLOCKONS_PLUGIN_VERSION);
 			} else {
 				wp_register_script('blockons-wc-mini-cart', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/wc-mini-cart/cart.js'), array('wp-element'), BLOCKONS_PLUGIN_VERSION);
@@ -89,7 +89,7 @@ class Blockons {
 		}
 		
 		// Search JS - FREE & PREMIUM
-		if (blockons_fs()->can_use_premium_code__premium_only()) {
+		if ($isPro) {
 			wp_register_script('blockons-search', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/search-pro.min.js'), array('wp-element', 'wp-i18n'), BLOCKONS_PLUGIN_VERSION);
 		} else {
 			wp_register_script('blockons-search', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/search/search.js'), array('wp-element', 'wp-i18n'), BLOCKONS_PLUGIN_VERSION);
@@ -104,7 +104,7 @@ class Blockons {
 		));
 
 		// Contact Form Block JS
-		if (blockons_fs()->can_use_premium_code__premium_only()) {
+		if ($isPro) {
 			wp_register_style('blockons-flatpickr-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/contact-form/flatpickr/flatpickr.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
 			wp_register_script('blockons-flatpickr-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/contact-form/flatpickr/flatpickr.min.js'), array(), BLOCKONS_PLUGIN_VERSION);
 			wp_register_script('blockons-form-handler', esc_url(BLOCKONS_PLUGIN_URL . 'dist/form-handler.min.js'), array('wp-api', 'wp-api-fetch', 'blockons-flatpickr-script'), BLOCKONS_PLUGIN_VERSION, true);
@@ -161,12 +161,21 @@ class Blockons {
 		wp_register_script('blockons-image-gallery', esc_url(BLOCKONS_PLUGIN_URL . 'dist/imagegallery.min.js'), array('wp-element', 'blockons-sweetalert-script'), BLOCKONS_PLUGIN_VERSION, true);
 
 		// Pro Addons
-		if (blockons_fs()->can_use_premium_code__premium_only()) {
+		if ($isPro) {
+			// AOS Animations
 			wp_register_style('blockons-aos-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/aos/aos.css'), array(), BLOCKONS_PLUGIN_VERSION);
 			wp_register_script('blockons-aos-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/aos/aos.js'), array(), BLOCKONS_PLUGIN_VERSION, true);
 
-			wp_register_style('blockons-quickview-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/quickview.min.css'), array('blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
-			wp_register_script('blockons-quickview', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/quickview.min.js'), array('jquery', 'wc-add-to-cart-variation', 'wc-add-to-cart', 'wc-cart-fragments'), BLOCKONS_PLUGIN_VERSION, true);
+			// Advanced Button Modal
+			wp_register_style('blockons-modal-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/modal.min.css'), array('blockons-sweetalert-style', 'blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
+			wp_register_script('blockons-modal-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/modal.min.js'), array('wp-element', 'blockons-sweetalert-script'), BLOCKONS_PLUGIN_VERSION, true);
+
+			// Advanced Button ViewContent
+			wp_register_script('blockons-viewcontent-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/viewcontent.min.js'), array('wp-element'), BLOCKONS_PLUGIN_VERSION, true);
+
+			// Advanced Button Quickview
+			wp_register_style('blockons-quickview-style', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/quickview.min.css'), array('blockons-sweetalert-style', 'blockons-fontawesome'), BLOCKONS_PLUGIN_VERSION);
+			wp_register_script('blockons-quickview-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/pro/quickview.min.js'), array('wp-element'), BLOCKONS_PLUGIN_VERSION, true);
 		}
 
 		// Settings JS
@@ -207,7 +216,7 @@ class Blockons {
 		
 		// Contact Form Block JS
 		if (has_block('blockons/contact-form')) {
-			if (blockons_fs()->can_use_premium_code__premium_only()) {
+			if ($isPro) {
 				wp_enqueue_style('blockons-flatpickr-style');
 				wp_enqueue_script('blockons-flatpickr-script');
 			}
@@ -246,11 +255,25 @@ class Blockons {
 				wp_add_inline_script('blockons-aos-script', 'AOS.init();');
 			}
 
+			// Advanced Button - Modal
+			wp_enqueue_style('blockons-modal-style');
+			wp_enqueue_script('blockons-modal-script');
+
+			// Advanced Button - ViewContent
+			wp_enqueue_script('blockons-viewcontent-script');
+
 			// Block Extension - Product Quick View
 			if (isset($blockonsOptions->quickview->enabled) && $blockonsOptions->quickview->enabled == true) {
 				wp_enqueue_style('blockons-quickview-style');
-				wp_enqueue_script('blockons-quickview');
-				wp_localize_script('blockons-quickview', 'blockonsQuickviewObj', array(
+				wp_enqueue_script('blockons-quickview-script');
+				
+				// Enqueue WooCommerce variation script for quickview functionality
+				if (class_exists('WooCommerce')) {
+					wp_enqueue_script('wc-add-to-cart-variation');
+					wp_enqueue_script('wc-single-product');
+				}
+				
+				wp_localize_script('blockons-quickview-script', 'blockonsQuickviewObj', array(
 					'apiUrl' => esc_url(get_rest_url()),
 					'quickviewOptions' => $blockonsOptions->quickview,
 					'ajaxurl' => admin_url('admin-ajax.php'),
@@ -375,6 +398,7 @@ class Blockons {
 	public static function blockonsDefaults() {
 		$initialSettings = array(
 			"blocks" => array( // For adding a new block, update this AND ../src/backend/helpers.js AND class-notices.php newblocks number
+				"advanced_button" => true, // 24
 				"icon_selector" => true, // 23
 				"maps" => true, // 22
 				"contact_form" => true, // 21
@@ -464,8 +488,11 @@ class Blockons {
 			),
 			"quickview" => array(
 				"enabled" => false,
-				"style" => "one",
-				"text" => "Quick View"
+				"price" => false,
+				"add_to_cart" => false,
+				"button_to_page" => false,
+				"sku" => false,
+				"categories_tags" => false,
 			),
 			"sidecart" => array(
 				"enabled" => false,

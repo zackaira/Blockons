@@ -285,7 +285,7 @@ const Edit = (props) => {
 				value: [],
 			},
 			image: {},
-			productSlide: {},
+			productSlide: "",
 			style: {
 				position: "",
 				alignment: "",
@@ -379,7 +379,7 @@ const Edit = (props) => {
 							id: "",
 							url: res.data.featured_media,
 						},
-						productSlide: selectedProduct,
+						productSlide: selectedProduct.toString(),
 						style: {
 							position: "",
 							alignment: "",

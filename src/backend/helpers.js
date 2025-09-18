@@ -38,6 +38,14 @@ export const blockListSettings = {
 		pluginSpecific: false,
 		isNew: false,
 	},
+	advanced_button: {
+		desc: __(
+			'An advanced button block with advanced features',
+			'blockons',
+		),
+		pluginSpecific: false,
+		isNew: __('NEW', 'blockons'),
+	},
 	count_down_timer: {
 		desc: __(
 			'Add a count down block for specials, sales, events, etc',
@@ -60,7 +68,7 @@ export const blockListSettings = {
 			'blockons',
 		),
 		pluginSpecific: false,
-		isNew: __('NEW', 'blockons'),
+		isNew: false
 	},
 	maps: {
 		desc: __('Add live Mapbox Maps to your website pages.', 'blockons'),
@@ -73,7 +81,7 @@ export const blockListSettings = {
 			'blockons',
 		),
 		pluginSpecific: false,
-		isNew: __('NEW', 'blockons'),
+		isNew: false
 	},
 	content_toggler: {
 		desc: __(
@@ -151,7 +159,7 @@ export const blockListSettings = {
 			'blockons',
 		),
 		pluginSpecific: false,
-		isNew: __('NEW', 'blockons'),
+		isNew: false,
 	},
 	testimonials: {
 		desc: __(

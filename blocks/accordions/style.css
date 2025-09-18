@@ -36,6 +36,11 @@
 	max-height: 0;
 	overflow: hidden;
 }
+/* Fallback for accordion-panel class */
+.accordion-panel > .accordion-content {
+	max-height: 0;
+	overflow: hidden;
+}
 .wp-block-blockons-accordion .accordion-content-inner {
 	padding: 12px;
 }
@@ -144,6 +149,13 @@
 	.accordion-label-title {
 	order: 2;
 	flex: 1;
+}
+.wp-block-blockons-accordions.icon-start.centered
+	> .accordions-wrap
+	.wp-block-blockons-accordion
+	> .accordion-label
+	.accordion-label-title {
+	flex: none;
 }
 .wp-block-blockons-accordions.icon-start
 	> .accordions-wrap

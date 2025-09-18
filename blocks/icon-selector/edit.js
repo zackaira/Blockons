@@ -1,3 +1,4 @@
+import { useState, useMemo, useEffect, useRef } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import {
 	InspectorControls,
@@ -20,7 +21,6 @@ import {
 	ToolbarGroup,
 	Button,
 } from '@wordpress/components';
-import { useState, useMemo, useEffect, useRef } from '@wordpress/element';
 import BlockonsColorPicker from '../_components/BlockonsColorpicker';
 import { getIconList, ICON_CATEGORIES, sortIcons } from './icons';
 

@@ -1,0 +1,68 @@
+.blockons-adv-btn-link-popover.hide-url-input .block-editor-link-control {
+	display: none !important;
+}
+.blockons-adv-btn-link-popover.hide-url-input .components-popover__content {
+	width: 210px;
+}
+
+.blockons-modal-innerblocks {
+	margin: 15px auto 0;
+}
+.blockons-modal-inner {
+	border: 2px dashed #ccc;
+	box-sizing: border-box;
+}
+
+/* Hide modal in editor when modalShow is false */
+.blockons-modal-hidden {
+	display: none !important;
+}
+
+/* ViewContent editor styles */
+.blockons-viewcontent-show {
+	display: block;
+}
+
+.blockons-viewcontent {
+	margin: 15px auto 0;
+}
+
+.blockons-viewcontent-inner {
+	border: 2px dashed #ccc;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0;
+	margin: 0 auto;
+	position: relative;
+}
+
+.blockons-viewcontent-hidden {
+	display: none !important;
+}
+
+.blockons-has-pattern {
+	text-align: center;
+}
+.blockons-no-pattern {
+	text-align: center;
+}
+
+/* Editor-specific styling */
+.blockons-adv-btn-wrapper {
+	position: relative;
+	display: inline-block;
+}
+
+.blockons-editor-badge {
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	background: #007cba;
+	color: white;
+	padding: 2px 6px;
+	font-size: 10px;
+	border-radius: 3px;
+	font-weight: bold;
+	pointer-events: none;
+	z-index: 1;
+}

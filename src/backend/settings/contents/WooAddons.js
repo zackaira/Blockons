@@ -412,7 +412,7 @@ const WooAddons = ({
 							</>
 						)}
 
-						{/* <SettingRow
+						<SettingRow
 							title={__('Product Quick View', 'blockons')}
 							description={__(
 								'Add Product Quick View popups to the WooCommerce core product blocks, letting users view all product details without leaving the page.',
@@ -427,70 +427,97 @@ const WooAddons = ({
 							inputType="toggle"
 							onChange={onSettingChange}
 							tooltip={__(
-								'This will add Product Quick View settings to the WooCommerce core product blocks in the Editor.',
+								'This will add Product Quick View settings to the Advanced Button block which can be placed within the WooCommerce product collections in the Editor.',
 								'blockons',
 							)}
 							documentation="#"
+							note={
+								blockonsOptions.quickview?.enabled
+									? __(
+											'You can now add the Advanced Button block to your WooCommerce product collection blocks in the Editor, and then select the Product Quick View option. For more help click the documentation link.',
+											'blockons',
+										)
+									: ''
+							}
 						/>
 
 						{blockonsOptions.quickview?.enabled && (
 							<>
-								<SettingRow
-									title={__('Quick View Preview', 'blockons')}
-									slug="quickview_preview"
-									value={quickviewPreview}
-									inputType="toggle"
-									onChange={() =>
-										setQuickviewPreview(!quickviewPreview)
-									}
-								/>
-
 								{isPremium ? (
 									<>
-										<SettingRow
-											title={__(
-												'Quick View Position',
+										<SettingGroup
+											label={__(
+												'Edit Product Quick View Popup',
 												'blockons',
 											)}
-											slug="quickview_position"
-											value={
-												blockonsOptions.quickview
-													?.position
-											}
-											inputType="select"
-											options={{
-												one: __(
-													'Default Button',
+											groupClass="blockons-qv-set-group"
+										>
+											<SettingRow
+												title={__(
+													'Hide Price',
 													'blockons',
-												),
-												two: __(
-													'Plain Text',
+												)}
+												slug="quickview_price"
+												value={
+													blockonsOptions.quickview
+														?.price
+												}
+												inputType="toggle"
+												onChange={onSettingChange}
+											/>
+											<SettingRow
+												title={__(
+													'Hide Add to Cart Form',
 													'blockons',
-												),
-												three: __(
-													'Over Image',
+												)}
+												slug="quickview_add_to_cart"
+												value={
+													blockonsOptions.quickview
+														?.add_to_cart
+												}
+												inputType="toggle"
+												onChange={onSettingChange}
+											/>
+											<SettingRow
+												title={__(
+													'Hide Button to Product Page',
 													'blockons',
-												),
-												// four: __("Over Image Icon", "blockons"),
-											}}
-											onChange={onSettingChange}
-										/>
-										<SettingRow
-											title={__(
-												'Button Text',
-												'blockons',
-											)}
-											slug="quickview_text"
-											value={
-												blockonsOptions.quickview?.text
-											}
-											placeholder={__(
-												'Quick View',
-												'blockons',
-											)}
-											inputType="text"
-											onChange={onSettingChange}
-										/>
+												)}
+												slug="quickview_button_to_page"
+												value={
+													blockonsOptions.quickview
+														?.button_to_page
+												}
+												inputType="toggle"
+												onChange={onSettingChange}
+											/>
+											<SettingRow
+												title={__(
+													'Hide SKU',
+													'blockons',
+												)}
+												slug="quickview_sku"
+												value={
+													blockonsOptions.quickview
+														?.sku
+												}
+												inputType="toggle"
+												onChange={onSettingChange}
+											/>
+											<SettingRow
+												title={__(
+													'Hide Categories & Tags',
+													'blockons',
+												)}
+												slug="quickview_categories_tags"
+												value={
+													blockonsOptions.quickview
+														?.categories_tags
+												}
+												inputType="toggle"
+												onChange={onSettingChange}
+											/>
+										</SettingGroup>
 									</>
 								) : (
 									<SettingRow
@@ -528,7 +555,7 @@ const WooAddons = ({
 								<TestProduct
 									settings={blockonsOptions?.quickview}
 								/>
-							)} */}
+							)}
 					</>
 				</tbody>
 			</table>

@@ -5,6 +5,10 @@
 class Blockons_WC_Rest_Routes {
 	public function __construct() {
 		add_action('rest_api_init', [$this, 'blockons_create_rest_routes']);
+		
+		// AJAX handlers for quickview functionality
+		add_action('wp_ajax_blockons_clear_cart_notices', [$this, 'blockons_clear_cart_notices']);
+		add_action('wp_ajax_nopriv_blockons_clear_cart_notices', [$this, 'blockons_clear_cart_notices']);
 	}
 
 	/*
@@ -55,6 +59,11 @@ class Blockons_WC_Rest_Routes {
 		register_rest_route('blcns/v1', '/post-types', array(
 			'methods' => 'GET',
 			'callback' => [$this, 'blockons_get_all_post_types'],
+			'permission_callback' => [$this, 'blockons_get_settings_permission'],
+		));
+		register_rest_route('blcns/v1', '/block-patterns', array(
+			'methods' => 'GET',
+			'callback' => [$this, 'blockons_get_modal_block_patterns'],
 			'permission_callback' => [$this, 'blockons_get_settings_permission'],
 		));
 
@@ -114,16 +123,60 @@ class Blockons_WC_Rest_Routes {
                 return new WP_REST_Response( [ 'message' => 'Product not found.' ], 404 );
             }
 
+            // Get gallery images
+            $gallery_images = [];
+            $image_ids = array_merge( [$product->get_image_id()], $product->get_gallery_image_ids() );
+            
+            foreach ( $image_ids as $image_id ) {
+                if ( $image_id ) {
+                    $gallery_images[] = [
+                        'full' => wp_get_attachment_image_url( $image_id, 'full' ),
+                        'thumbnail' => wp_get_attachment_image_url( $image_id, 'thumbnail' ),
+                        'alt' => get_post_meta( $image_id, '_wp_attachment_image_alt', true ) ?: $product->get_name()
+                    ];
+                }
+            }
+
+            // Get product categories
+            $categories = [];
+            $category_terms = get_the_terms( $product_id, 'product_cat' );
+            if ( $category_terms && ! is_wp_error( $category_terms ) ) {
+                foreach ( $category_terms as $term ) {
+                    $categories[] = [
+                        'id' => $term->term_id,
+                        'name' => $term->name,
+                        'slug' => $term->slug
+                    ];
+                }
+            }
+
+            // Get product tags
+            $tags = [];
+            $tag_terms = get_the_terms( $product_id, 'product_tag' );
+            if ( $tag_terms && ! is_wp_error( $tag_terms ) ) {
+                foreach ( $tag_terms as $term ) {
+                    $tags[] = [
+                        'id' => $term->term_id,
+                        'name' => $term->name,
+                        'slug' => $term->slug
+                    ];
+                }
+            }
+
             // Prepare the product data for the REST response.
             $response = [
                 'id'           => $product->get_id(),
+                'type'         => $product->get_type(),
                 'title'        => $product->get_name(),
                 'short_desc'   => $product->get_short_description(),
                 'description'  => $product->get_description(),
                 'price'        => $product->get_price_html(),
                 'sku'          => $product->get_sku(),
                 'image'        => wp_get_attachment_image_url( $product->get_image_id(), 'full' ),
+                'gallery_images' => $gallery_images,
                 'permalink'    => $product->get_permalink(),
+                'categories'   => $categories,
+                'tags'         => $tags,
                 'add_to_cart_form' => $this->get_add_to_cart_form($product),
             ];
 
@@ -1224,6 +1277,47 @@ class Blockons_WC_Rest_Routes {
 	}
 
 	/**
+	 * Get Block Patterns for debugging
+	 */
+	function blockons_get_modal_block_patterns() {
+		$modal_patterns = [];
+		
+		// Get patterns from database (created in Site Editor)
+		$db_patterns = get_posts([
+			'post_type' => 'wp_block',
+			'post_status' => 'publish',
+			'numberposts' => -1
+		]);
+		
+		foreach ($db_patterns as $pattern_post) {
+			// Get pattern categories from taxonomy (wp_pattern_category)
+			$pattern_categories = wp_get_object_terms($pattern_post->ID, 'wp_pattern_category', ['fields' => 'slugs']);
+			if (is_wp_error($pattern_categories)) {
+				$pattern_categories = [];
+			}
+			
+			// If no taxonomy terms, check meta (fallback)
+			if (empty($pattern_categories)) {
+				$meta_categories = get_post_meta($pattern_post->ID, 'wp_pattern_category', true);
+				$pattern_categories = is_array($meta_categories) ? $meta_categories : ($meta_categories ? [$meta_categories] : []);
+			}
+			
+			// Add to modal patterns if it has the right category
+			if (in_array('blockons-popup-modals', $pattern_categories)) {
+				$modal_patterns[] = [
+					'name' => 'wp-block-' . $pattern_post->ID,
+					'title' => $pattern_post->post_title,
+					'categories' => $pattern_categories,
+					'content' => $pattern_post->post_content,
+					'id' => $pattern_post->ID
+				];
+			}
+		}
+		
+		return rest_ensure_response($modal_patterns);
+	}
+
+	/**
 	 * Check if running in development environment
 	 */
 	private function is_development_environment() {
@@ -1232,6 +1326,31 @@ class Blockons_WC_Rest_Routes {
 			in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']) ||
 			(defined('WP_DEBUG') && WP_DEBUG === true)
 		);
+	}
+
+	/**
+	 * AJAX handler to clear WooCommerce cart notices
+	 * Prevents duplicate "added to cart" messages after quickview additions
+	 */
+	public function blockons_clear_cart_notices() {
+		// Verify nonce if provided (optional for this functionality)
+		if (isset($_POST['nonce']) && !empty($_POST['nonce'])) {
+			if (!wp_verify_nonce($_POST['nonce'], 'blockons_quickview_nonce')) {
+				wp_die('Security check failed');
+			}
+		}
+
+		// Clear WooCommerce notices
+		if (function_exists('wc_clear_notices')) {
+			wc_clear_notices();
+		}
+
+		// Also clear any notices stored in session
+		if (WC()->session) {
+			WC()->session->set('wc_notices', null);
+		}
+
+		wp_send_json_success('Cart notices cleared');
 	}
 }
 new Blockons_WC_Rest_Routes();

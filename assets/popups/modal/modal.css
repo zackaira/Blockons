@@ -1,0 +1,64 @@
+/* Advanced Button Modal Styles */
+
+/* Hidden modal content that will be shown in SweetAlert */
+.blockons-modal {
+	display: none;
+}
+
+/* Custom styling for modal when opened */
+body.blockons-modal-open {
+	overflow: hidden;
+}
+
+/* SweetAlert Modal Customization for Advanced Button */
+.swal2-popup.blockons-modal-swal {
+	border-radius: 8px;
+	max-width: 90vw;
+	max-height: 90vh;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.swal2-popup.blockons-modal-swal .swal2-html-container {
+	padding: 20px;
+	overflow-y: auto;
+	max-height: 80vh;
+	line-height: 1.6;
+	text-align: inherit;
+}
+
+/* Ensure modal content is properly styled */
+.blockons-modal-popup .swal2-html-container * {
+	max-width: 100%;
+}
+
+/* Style the close button */
+.swal2-popup.blockons-modal-swal .swal2-close {
+	color: #666;
+	background: rgba(255, 255, 255, 0.9);
+	border-radius: 50%;
+	width: 32px;
+	height: 32px;
+	font-size: 18px;
+	font-weight: bold;
+	transition: all 0.2s ease;
+}
+
+.swal2-popup.blockons-modal-swal .swal2-close:hover {
+	background: rgba(255, 255, 255, 1);
+	color: #333;
+	transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.swal2-popup.blockons-modal-swal {
+		max-width: 95vw;
+		max-height: 95vh;
+		margin: 0 auto;
+	}
+
+	.swal2-popup.blockons-modal-swal .swal2-html-container {
+		padding: 15px;
+		max-height: 85vh;
+	}
+}

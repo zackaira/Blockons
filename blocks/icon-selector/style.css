@@ -1,7 +1,11 @@
-
 .blockons-icon-selector {
 	display: flex;
 	justify-content: flex-start;
+}
+
+.blockons-icon-selector a {
+	text-decoration: none;
+	color: inherit;
 }
 
 /* -- Alignment -- */

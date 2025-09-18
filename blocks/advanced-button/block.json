@@ -1,0 +1,109 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "blockons/advanced-button",
+	"title": "Advanced Button",
+	"textdomain": "blockons",
+	"icon": "button",
+	"category": "blockons-category",
+	"keywords": ["button", "link", "cta", "advanced", "blockons"],
+	"attributes": {
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"buttonAction": {
+			"type": "string",
+			"default": "link"
+		},
+		"buttonAnimation": {
+			"type": "string",
+			"default": "none"
+		},
+		"text": {
+			"type": "string",
+			"default": "Click Me"
+		},
+		"buttonUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"rel": {
+			"type": "string",
+			"default": ""
+		},
+		"linkTarget": {
+			"type": "string",
+			"default": ""
+		},
+		"productId": {
+			"type": "number",
+			"default": ""
+		},
+		"modalType": {
+			"type": "string",
+			"default": "innerblocks"
+		},
+		"modalShow": {
+			"type": "boolean",
+			"default": true
+		},
+		"modalId": {
+			"type": "string",
+			"default": ""
+		},
+		"modalWidth": {
+			"type": "string",
+			"default": "780px"
+		},
+		"viewContentId": {
+			"type": "string",
+			"default": ""
+		},
+		"viewContentShow": {
+			"type": "boolean",
+			"default": true
+		},
+		"selectedPattern": {
+			"type": "string",
+			"default": ""
+		},
+		"textHoverColor": {
+			"type": "string",
+			"default": "#FFF"
+		},
+		"BackgroundHoverColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 4
+		},
+		"isPremium": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"supports": {
+		"alignWide": false,
+		"color": {
+			"background": true,
+			"text": true,
+			"gradients": true
+		},
+		"typography": {
+			"fontSize": true
+		},
+		"shadow": true,
+		"spacing": {
+			"padding": true,
+			"margin": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"viewScript": ["blockons-modal-script", "blockons-viewcontent-script"],
+	"viewStyle": ["blockons-modal-style"],
+	"style": ["file:./style-index.css", "blockons-fontawesome"]
+}

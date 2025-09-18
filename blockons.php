@@ -13,7 +13,7 @@
  * Text Domain: blockons
  * Domain Path: /lang/
  * 
- * @fs_premium_only /dist/pro/, /assets/blocks/search/pro/, /assets/blocks/contact-form/flatpickr, /assets/blocks/wc-mini-cart/pro/, /assets/aos/, /assets/slider/swiper-video.js, /assets/popups/quickview/, 
+ * @fs_premium_only /dist/pro/, /assets/blocks/search/pro/, /assets/blocks/contact-form/flatpickr, /assets/blocks/wc-mini-cart/pro/, /assets/aos/, /assets/slider/swiper-video.js, /assets/popups/modal/, /assets/popups/quickview/, /assets/popups/viewcontent/
  *
  * @package blockons
  */
@@ -79,6 +79,7 @@ if ( function_exists( 'blockons_fs' ) ) {
 	require_once 'classes/class-frontend.php';
 	require_once 'classes/class-rest-api.php';
 	require_once 'classes/class-blockons-security.php';
+	require_once 'classes/class-modal-patterns.php';
 
 	if (blockons_fs()->can_use_premium_code__premium_only()) {
 		require_once 'classes/class-form-submissions.php';

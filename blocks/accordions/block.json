@@ -29,7 +29,8 @@
 		}
 	},
 	"providesContext": {
-		"blockons/iconFirst": "iconFirst"
+		"blockons/iconFirst": "iconFirst",
+		"blockons/closeAll": "closeAll"
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

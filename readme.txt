@@ -240,6 +240,14 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 = 1.2.11 =
 * Styling tweaks/fixes
+* 
+* Fixed Accordions bug with new editor updates
+* Fixed Accordion Icon First & Centered working together
+* Excluded Accordion H tags from Table of Contents
+* Added setting to exclude selected headings from Table of Contents
+
+= 1.2.11 =
+* Styling tweaks/fixes
 * Improved Tabs responsiveness on mobile
 * Code improvements and minor refactoring
 * Fixed WC Mini Cart not working in custom template part

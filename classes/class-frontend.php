@@ -76,6 +76,7 @@ class Blockons_Frontend {
 		// Global Lightbox
 		if (isset($blockonsOptions->imagepopups->enabled) && $blockonsOptions->imagepopups->enabled == true) {
 			$classes[] = sanitize_html_class('blockons-popups');
+
 			if (isset($blockonsOptions->imagepopups->enable_all) && $blockonsOptions->imagepopups->enable_all == true) {
 				$classes[] = sanitize_html_class('global');
 				$classes[] = sanitize_html_class('blcks-' . ($blockonsOptions->imagepopups->icon ?? 'one'));
@@ -84,6 +85,13 @@ class Blockons_Frontend {
 			}
 			if (isset($blockonsOptions->imagepopups->popuptheme)) {
 				$classes[] = sanitize_html_class('popup-' . ($blockonsOptions->imagepopups->popuptheme ?? 'dark'));
+			}
+		}
+
+		// Tooltips
+		if ( blockons_fs()->can_use_premium_code__premium_only() ) {
+			if (isset($blockonsOptions->quickview->enabled) && $blockonsOptions->quickview->enabled == true) {
+				$classes[] = sanitize_html_class('blockons-quickview');
 			}
 		}
 

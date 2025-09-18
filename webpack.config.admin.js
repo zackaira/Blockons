@@ -23,13 +23,17 @@ const config = {
 		'cart-pro.min': './assets/blocks/wc-mini-cart/pro/cart.js',
 		'search-pro.min': './assets/blocks/search/pro/search.js',
 		'quickview.min': './assets/popups/quickview/quickview.js',
+		'modal.min': './assets/popups/modal/modal.js',
+		'viewcontent.min': './assets/popups/viewcontent/viewcontent.js',
 	},
 	output: {
 		// filename: "[name].js", // Uses the name of the file
 		filename: (pathData) => {
 			return pathData.chunk.name === 'search-pro.min' ||
 				pathData.chunk.name === 'cart-pro.min' ||
-				pathData.chunk.name === 'quickview.min'
+				pathData.chunk.name === 'quickview.min' ||
+				pathData.chunk.name === 'modal.min' ||
+				pathData.chunk.name === 'viewcontent.min'
 				? 'pro/[name].js'
 				: '[name].js';
 		},
@@ -55,7 +59,8 @@ const config = {
 			// filename: "[name].css",
 			filename: (pathData) => {
 				return pathData.chunk.name === 'cart-pro.min' ||
-					pathData.chunk.name === 'quickview.min'
+					pathData.chunk.name === 'quickview.min' ||
+					pathData.chunk.name === 'modal.min'
 					? 'pro/[name].css'
 					: '[name].css';
 			},
@@ -100,8 +105,8 @@ const config = {
 				test: /\.(png|jpg|jpeg|gif|svg)$/i,
 				type: 'asset/resource',
 				generator: {
-					filename: '[hash][ext][query]'
-				}
+					filename: '[hash][ext][query]',
+				},
 			},
 		],
 	},
