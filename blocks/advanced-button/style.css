@@ -6,6 +6,7 @@
 }
 
 .blockons-adv-button {
+	display: inline-block;
 	background-color: #32373c;
 	border-width: 0;
 	color: #fff;
@@ -163,7 +164,7 @@
 }
 .blockons-adv-button.animate-eight:hover {
 	transform: scale(1.08) translateY(-3px);
-	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.65);
 }
 
 /* nine - Pulse Glow */
@@ -192,35 +193,4 @@
 .blockons-adv-button.animate-ten:hover {
 	transform: rotate(5deg) scale(1.1);
 	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* eleven - Wobble */
-.blockons-adv-button.animate-eleven {
-	transition: transform 0.3s ease;
-}
-.blockons-adv-button.animate-eleven:hover {
-	animation: wobble 0.8s ease-in-out;
-}
-@keyframes wobble {
-	0% {
-		transform: rotate(0deg);
-	}
-	15% {
-		transform: rotate(-5deg);
-	}
-	30% {
-		transform: rotate(4deg);
-	}
-	45% {
-		transform: rotate(-3deg);
-	}
-	60% {
-		transform: rotate(2deg);
-	}
-	75% {
-		transform: rotate(-1deg);
-	}
-	100% {
-		transform: rotate(0deg);
-	}
 }

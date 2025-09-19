@@ -263,6 +263,7 @@
 }
 .quickview-popup .quickview-product .quantity input.input-text.qty {
 	min-height: 50px;
+	min-width: 80px;
 }
 .quickview-popup .quantity.buttons_added .minus,
 .quickview-popup .quantity.buttons_added .plus {

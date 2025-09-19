@@ -70,6 +70,10 @@ export const BUTTON_ANIMATION_OPTIONS = [
 		value: 'two',
 	},
 	{
+		label: __('Grow Shadow', 'blockons'),
+		value: 'eight',
+	},
+	{
 		label: __('Bounce', 'blockons'),
 		value: 'three',
 	},
@@ -82,19 +86,11 @@ export const BUTTON_ANIMATION_OPTIONS = [
 		value: 'seven',
 	},
 	{
-		label: __('Grow Shadow', 'blockons'),
-		value: 'eight',
-	},
-	{
-		label: __('Pulse Glow', 'blockons'),
-		value: 'nine',
-	},
-	{
 		label: __('Rotate & Scale', 'blockons'),
 		value: 'ten',
 	},
 	{
-		label: __('Wobble', 'blockons'),
-		value: 'eleven',
+		label: __('Pulse Glow', 'blockons'),
+		value: 'nine',
 	},
 ];
