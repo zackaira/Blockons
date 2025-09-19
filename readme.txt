@@ -5,7 +5,7 @@ Tags: gutenberg, editor blocks, woocommerce blocks, page builder, ultimate block
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.8
-Stable tag: 1.2.11
+Stable tag: 1.2.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -238,13 +238,17 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 == Changelog ==
 
-= 1.2.11 =
+= 1.2.12 =
 * Styling tweaks/fixes
 * 
 * Fixed Accordions bug with new editor updates
 * Fixed Accordion Icon First & Centered working together
 * Excluded Accordion H tags from Table of Contents
 * Added setting to exclude selected headings from Table of Contents
+* NEW: Added NEW Advance Button Block
+* PRO: NEW: Added Modal Popups for Adv button block
+* PRO: NEW: Added Adv Button block click to View Content
+* PRO: NEW: Added Adv Button block - WooCommerce Product Quick View
 
 = 1.2.11 =
 * Styling tweaks/fixes

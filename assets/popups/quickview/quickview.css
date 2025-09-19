@@ -61,9 +61,18 @@
 	font-weight: 700;
 	margin: 20px 0;
 }
+.quickview-popup .product-price ins {
+	text-decoration: none;
+	font-size: 1.1em;
+	color: var(--wp--preset--color--brand);
+}
 .quickview-popup .product-desc {
 	margin: 0 0 20px;
 	line-height: 1.35;
+}
+.quickview-popup .woocommerce .stock {
+	font-size: 0.82em;
+	font-weight: 500;
 }
 
 /* -- Product Quick View - Loading State -- */

@@ -29,7 +29,7 @@ const Save = ({ attributes }) => {
 							? 'blockons-opencart'
 							: ''
 					}`}
-					aria-label={__('Cart', 'blockons')}
+					aria-label="Cart"
 					style={{
 						fontSize: attributes.iconSize,
 						padding: attributes.iconPadding,

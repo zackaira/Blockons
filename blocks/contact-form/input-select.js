@@ -210,8 +210,13 @@ registerBlockType('blockons/form-select', {
 		);
 
 		const addOption = () => {
+			const nextOptionNumber = options.length + 1;
+			const newLabel = `Option ${nextOptionNumber}`;
 			setAttributes({
-				options: [...options, { value: '', label: '' }],
+				options: [
+					...options,
+					{ value: slugify(newLabel), label: newLabel },
+				],
 			});
 		};
 
@@ -435,11 +440,12 @@ registerBlockType('blockons/form-select', {
 					/>
 
 					<div className="form-control">
-						<select {...commonProps}>
+						<select
+							{...commonProps}
+							defaultValue={!options.length ? '' : undefined}
+						>
 							{placeholder && (
-								<option value="" selected={!options.length}>
-									{placeholder}
-								</option>
+								<option value="">{placeholder}</option>
 							)}
 							{options.map((option, index) => (
 								<option
@@ -561,11 +567,12 @@ registerBlockType('blockons/form-select', {
 					/>
 
 					<div className="form-control">
-						<select {...commonProps}>
+						<select
+							{...commonProps}
+							defaultValue={!options.length ? '' : undefined}
+						>
 							{placeholder && (
-								<option value="" selected={!options.length}>
-									{placeholder}
-								</option>
+								<option value="">{placeholder}</option>
 							)}
 							{options.map((option, index) => (
 								<option
