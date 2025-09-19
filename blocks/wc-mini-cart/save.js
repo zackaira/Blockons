@@ -1,4 +1,4 @@
-import { useBlockProps } from "@wordpress/block-editor";
+import { useBlockProps } from '@wordpress/block-editor';
 
 const Save = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
@@ -12,21 +12,24 @@ const Save = ({ attributes }) => {
 		<div {...blockProps}>
 			<div
 				className={`blockons-wc-mini-cart-block ${
-					attributes.noItems ? "noitems" : ""
-				} ${attributes.noAmount ? "noamount" : ""} ${
-					attributes.layoutSwitch ? "switch" : ""
+					attributes.noItems ? 'noitems' : ''
+				} ${attributes.noAmount ? 'noamount' : ''} ${
+					attributes.layoutSwitch ? 'switch' : ''
 				} ${attributes.dropPosition}`}
 				style={{
 					backgroundColor: attributes.iconBgColor,
 				}}
 			>
 				<a
-					{...(attributes.cartType === "sidecart"
+					{...(attributes.cartType === 'sidecart'
 						? {}
 						: { href: cartPageLink })}
 					className={`blockons-wc-mini-cart-block-icon blockons-opencart ${
-						attributes.cartType === "sidecart" ? "blockons-opencart" : ""
+						attributes.cartType === 'sidecart'
+							? 'blockons-opencart'
+							: ''
 					}`}
+					aria-label={__('Cart', 'blockons')}
 					style={{
 						fontSize: attributes.iconSize,
 						padding: attributes.iconPadding,
@@ -35,7 +38,7 @@ const Save = ({ attributes }) => {
 				>
 					<span
 						className={`icon fa-solid fa-${
-							attributes.customIcon && attributes.icon == "custom"
+							attributes.customIcon && attributes.icon == 'custom'
 								? attributes.customIcon
 								: attributes.icon
 						}`}
@@ -44,7 +47,7 @@ const Save = ({ attributes }) => {
 						}}
 					></span>
 				</a>
-				{attributes.cartType === "dropdown" && (
+				{attributes.cartType === 'dropdown' && (
 					<div
 						className={`blockons-wc-mini-cart-dropdown btns-${attributes.dropBtns}`}
 						style={{

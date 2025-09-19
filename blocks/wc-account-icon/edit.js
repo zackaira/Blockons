@@ -400,6 +400,7 @@ const Edit = (props) => {
 			>
 				<a
 					className={`blockons-wc-account-icon`}
+					aria-label={__('My Account', 'blockons')}
 					style={{
 						backgroundColor: iconBgColor,
 						fontSize: iconSize,

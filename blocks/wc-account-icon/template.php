@@ -12,7 +12,7 @@ $custom_classes = 'align-' . $attributes['alignment'];
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes(['class' => $custom_classes]) ); ?>>
 	<div class="blockons-wc-account-icon-block <?php echo isset($attributes['dropPosition']) ? sanitize_html_class($attributes['dropPosition']) : 'bottomleft'; ?>">
-		<a href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>" class="blockons-wc-account-icon" style="<?php echo isset($attributes['iconBgColor']) ? 'background-color: ' . esc_attr($attributes['iconBgColor']) . ';' : ''; ?> <?php echo isset($attributes['iconSize']) ? 'font-size: ' . esc_attr($attributes['iconSize']) . 'px;' : ''; ?> <?php echo isset($attributes['iconPadding']) ? 'padding: ' . esc_attr($attributes['iconPadding']) . 'px;' : ''; ?>">
+		<a href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>" aria-label="<?php echo esc_attr(__('My Account', 'blockons')); ?>" class="blockons-wc-account-icon" style="<?php echo isset($attributes['iconBgColor']) ? 'background-color: ' . esc_attr($attributes['iconBgColor']) . ';' : ''; ?> <?php echo isset($attributes['iconSize']) ? 'font-size: ' . esc_attr($attributes['iconSize']) . 'px;' : ''; ?> <?php echo isset($attributes['iconPadding']) ? 'padding: ' . esc_attr($attributes['iconPadding']) . 'px;' : ''; ?>">
 			<span class="<?php echo $attributes['customIcon'] && $attributes['icon'] == "custom" ? esc_attr($attributes['customIcon']) : esc_attr($attributes['icon']); ?>" style="<?php echo isset($attributes['iconColor']) ? 'color: ' . esc_attr($attributes['iconColor']) : ''; ?>;"
 			></span>
 		</a>
