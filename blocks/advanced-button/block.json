@@ -80,6 +80,18 @@
 			"type": "number",
 			"default": 4
 		},
+		"hasborder": {
+			"type": "boolean",
+			"default": false
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 2
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "#000"
+		},
 		"isPremium": {
 			"type": "boolean",
 			"default": false

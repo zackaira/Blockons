@@ -33,6 +33,8 @@ class Blockons_Notices {
 		global $current_user;
         $user_id = $current_user->ID;
 		$blockons_page = isset( $_GET['page'] ) ? $pagenow . '?page=' . sanitize_text_field($_GET['page']) . '&' : sanitize_text_field($pagenow) . '?';
+		
+		$isPro = (boolean)blockons_fs()->can_use_premium_code__premium_only();
 
 		$notices = $this->blockons_notices();
 
@@ -65,7 +67,7 @@ class Blockons_Notices {
 									</a>
 								<?php endif; ?>
 
-								<?php if (isset($notice['link_pro']) && isset($notice['link_pro_text'])) : ?>
+								<?php if (!$isPro && isset($notice['link_pro']) && isset($notice['link_pro_text'])) : ?>
 									|<a href="<?php echo esc_url($notice['link_pro']); ?>" target="_blank" class="blockons-notice-btn two">
 										<?php echo esc_html($notice['link_pro_text']); ?>
 									</a>

@@ -52,6 +52,9 @@ function Edit(props) {
 		textHoverColor,
 		BackgroundHoverColor,
 		borderRadius,
+		hasborder,
+		borderWidth,
+		borderColor,
 		isPremium,
 	} = attributes;
 	const isPro = Boolean(blockonsEditorObj.isPremium) || false;
@@ -130,9 +133,18 @@ function Edit(props) {
 			...(BackgroundHoverColor && {
 				'--blockons-btn-hover-bg-color': BackgroundHoverColor,
 			}),
-			...(borderRadius && {
-				borderRadius: `${borderRadius}px`,
-			}),
+			...(hasborder &&
+				borderRadius && {
+					borderRadius: `${borderRadius}px`,
+				}),
+			...(hasborder &&
+				borderWidth && {
+					borderWidth: `${borderWidth}px`,
+				}),
+			...(hasborder &&
+				borderColor && {
+					borderColor: borderColor,
+				}),
 		},
 		...(buttonAction === 'quickview'
 			? {
@@ -431,27 +443,40 @@ function Edit(props) {
 								{buttonAction === 'quickview' &&
 									!isInWooCommerceCollection && (
 										<>
-											<div className="blockons-divider"></div>
+											{isPremium &&
+												!isInWooCommerceCollection && (
+													<>
+														<div className="blockons-divider"></div>
 
-											{!isInWooCommerceCollection && (
-												<GetPostsSelect
-													label={__(
-														'Select Post',
-														'blockons',
-													)}
-													value={productId}
-													onChange={(newValue) =>
-														setAttributes({
-															productId:
-																parseInt(
-																	newValue,
-																),
-														})
-													}
-													siteurl={apiUrl}
-												/>
-											)}
+														<GetPostsSelect
+															label={__(
+																'Select Post',
+																'blockons',
+															)}
+															value={productId}
+															onChange={(
+																newValue,
+															) =>
+																setAttributes({
+																	productId:
+																		parseInt(
+																			newValue,
+																		),
+																})
+															}
+															siteurl={apiUrl}
+														/>
+													</>
+												)}
 
+											<UpgradeTip
+												text={__(
+													'This feature is only available in Blockons Pro.',
+													'blockons',
+												)}
+												upgradeUrl={upgradeUrl}
+												newTab
+											/>
 											<UpgradeTip
 												text={__(
 													'Also Place this button inside a WooCommerce product collection blocks to enable the Product Quick View option.',
@@ -709,6 +734,42 @@ function Edit(props) {
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
 							/>
+
+							<ToggleControl
+								label={__('Add Border', 'blockons')}
+								checked={hasborder}
+								onChange={(val) =>
+									setAttributes({ hasborder: val })
+								}
+								__nextHasNoMarginBottom={true}
+							/>
+
+							{hasborder && (
+								<>
+									<RangeControl
+										label={__('Border Width', 'blockons')}
+										value={borderWidth}
+										onChange={(val) =>
+											setAttributes({ borderWidth: val })
+										}
+										min={1}
+										max={20}
+										className="blockons-set-full"
+										__next40pxDefaultSize={true}
+										__nextHasNoMarginBottom={true}
+									/>
+									<ColorSelector
+										label={__('Border Color', 'blockons')}
+										value={borderColor}
+										onChange={(colorValue) => {
+											setAttributes({
+												borderColor: colorValue,
+											});
+										}}
+										nomargin
+									/>
+								</>
+							)}
 						</InspectorControls>
 
 						<BlockControls>

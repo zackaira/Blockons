@@ -14,6 +14,18 @@ function save({ attributes }) {
 			...(attributes.borderRadius && {
 				borderRadius: `${attributes.borderRadius}px`,
 			}),
+			...(attributes.hasborder &&
+				attributes.borderRadius && {
+					borderRadius: `${attributes.borderRadius}px`,
+				}),
+			...(attributes.hasborder &&
+				attributes.borderWidth && {
+					borderWidth: `${attributes.borderWidth}px`,
+				}),
+			...(attributes.hasborder &&
+				attributes.borderColor && {
+					borderColor: attributes.borderColor,
+				}),
 		},
 		...(attributes.buttonAction === 'quickview'
 			? {
