@@ -39,9 +39,9 @@ You can add a search bar anywhere on your website, which allows visitors to easi
 This search feature provides a standard search bar design, with options to display only the icon, and to reveal the search bar through a hover-over effect or within a sleek popup lightbox. [See Example](https://blockons.com/documentation/search-bar-or-search-icon-block/)
 
 &#9989; **Advanced Button** block
-Take your buttons beyond the basics. The Advanced Button block lets you create stylish buttons with custom hover states and built-in animations to grab attention.
+Take your buttons beyond the basics. The Advanced Button block lets you create stylish buttons and customize them exactly as you want, with custom hover states too and built-in hover animations to better grab your visitors attention.
 
-Upgrade to PRO and unlock powerful features like Click-to-View extra content, modal popups, and WooCommerce Product Quick View, giving you even more ways to engage your visitors and drive conversions.
+Upgrade to PRO and unlock extra powerful button features like Click-to-View extra content, creating custom Modal Popups, and also get WooCommerce Product Quick View... Giving you even more ways to engage your visitors and drive conversions.
 
 &#9989; **Line Heading** block
 The line heading block is a tool that lets you create a title with decorative lines, making it more visually appealing. It also includes advanced options to customize how the title looks. [See Example](https://blockons.com/documentation/line-heading-block/)
@@ -49,7 +49,7 @@ The line heading block is a tool that lets you create a title with decorative li
 &#9989; **Advanced Slider** block
 The Slider block transforms your page with a neat, easy-to-use slider where you can spotlight your favorite images & text, or display top-selling WooCommerce products. Slide through your visuals with just a click or a simple swipe, bringing your content to life. [See Example](https://blockons.com/documentation/advanced-slider-block/)
 
-&#9989; **Icon ** block
+&#9989; **Icon** block
 Easily add icons anywhere on your site with the Icon block. Choose from a library of 2089 free Font Awesome icons to use, or upload your own custom SVG icons for a fully personalized look. Perfect for highlighting features, services, or adding visual flair to your content — all with complete flexibility and style.
 
 &#9989; **Icon List** block

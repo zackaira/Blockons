@@ -368,6 +368,7 @@ class Blockons {
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
 			'wcActive' => Blockons_Admin::blockons_is_plugin_active('woocommerce.php'),
 			'isTskActive' => Blockons_Admin::blockons_is_plugin_active('theme-site-kit.php'),
+			'isQVActive' => isset($blockonsOptions->quickview->enabled) && $blockonsOptions->quickview->enabled == true,
 		));
 		wp_enqueue_script('blockons-admin-editor-script');
 	} // End blockons_block_editor_scripts ()

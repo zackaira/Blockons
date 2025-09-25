@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 
-const UpgradeTip = ({ text, upgradeUrl, newTab = true }) => {
+const UpgradeTip = ({ text, upgradeUrl, btnText, newTab = true }) => {
 	return (
 		<div
 			className={`blockons-settings-tip${upgradeUrl ? '' : ' no-upgrade-url'}`}
@@ -8,7 +8,7 @@ const UpgradeTip = ({ text, upgradeUrl, newTab = true }) => {
 			<p>{text}</p>
 			{upgradeUrl && (
 				<a href={upgradeUrl} {...(newTab ? { target: '_blank' } : {})}>
-					{__('Upgrade Now', 'blockons')}
+					{btnText ? btnText : __('Upgrade Now', 'blockons')}
 				</a>
 			)}
 		</div>

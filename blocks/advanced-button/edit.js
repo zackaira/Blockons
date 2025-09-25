@@ -59,8 +59,10 @@ function Edit(props) {
 	} = attributes;
 	const isPro = Boolean(blockonsEditorObj.isPremium) || false;
 	const wcActive = Boolean(blockonsEditorObj.wcActive) || false;
+	const isQVActive = Boolean(blockonsEditorObj.isQVActive) || false;
 	const upgradeUrl = blockonsEditorObj.upgradeUrl || '';
 	const apiUrl = blockonsEditorObj.apiUrl || '';
+	const adminUrl = blockonsEditorObj.adminUrl || '';
 	const [isEditingURL, setIsEditingURL] = useState(false);
 	const linkButtonRef = useRef();
 
@@ -441,42 +443,61 @@ function Edit(props) {
 								/>
 
 								{buttonAction === 'quickview' &&
-									!isInWooCommerceCollection && (
+									!isQVActive && (
 										<>
-											{isPremium &&
-												!isInWooCommerceCollection && (
-													<>
-														<div className="blockons-divider"></div>
-
-														<GetPostsSelect
-															label={__(
-																'Select Post',
-																'blockons',
-															)}
-															value={productId}
-															onChange={(
-																newValue,
-															) =>
-																setAttributes({
-																	productId:
-																		parseInt(
-																			newValue,
-																		),
-																})
-															}
-															siteurl={apiUrl}
-														/>
-													</>
-												)}
-
+											<div className="blockons-divider"></div>
 											<UpgradeTip
 												text={__(
-													'This feature is only available in Blockons Pro.',
+													'Enable Product Quick View in the Blockons settings to use this feature.',
 													'blockons',
 												)}
-												upgradeUrl={upgradeUrl}
+												btnText={__(
+													'Go to Settings',
+													'blockons',
+												)}
+												upgradeUrl={`${adminUrl}options-general.php?page=blockons-settings&tab=wc-addons`}
 												newTab
 											/>
+										</>
+									)}
+
+								{buttonAction === 'quickview' &&
+									!isInWooCommerceCollection && (
+										<>
+											{(isPremium ||
+												!isInWooCommerceCollection) && (
+												<>
+													<div className="blockons-divider"></div>
+
+													<GetPostsSelect
+														label={__(
+															'Select Post',
+															'blockons',
+														)}
+														value={productId}
+														onChange={(newValue) =>
+															setAttributes({
+																productId:
+																	parseInt(
+																		newValue,
+																	),
+															})
+														}
+														siteurl={apiUrl}
+													/>
+												</>
+											)}
+
+											{!isPremium && (
+												<UpgradeTip
+													text={__(
+														'This feature is only available in Blockons Pro.',
+														'blockons',
+													)}
+													upgradeUrl={upgradeUrl}
+													newTab
+												/>
+											)}
 											<UpgradeTip
 												text={__(
 													'Also Place this button inside a WooCommerce product collection blocks to enable the Product Quick View option.',
