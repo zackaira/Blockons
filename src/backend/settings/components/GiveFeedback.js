@@ -34,7 +34,7 @@ const GiveFeedback = ({ blockonsOptions, clickClose }) => {
 				{__('Are you enjoying using the Blockons plugin?', 'blockons')}
 				<a onClick={handleYesClick}>{__('Yes', 'blockons')}</a>
 				<a onClick={handleNoClick}>{__('No', 'blockons')}</a>
-				<div className="blockons-feedback-dismiss">
+				<div className="blockons-feedback-dismiss dashicons dashicons-no">
 					<InputToggleSwitch
 						title="X"
 						slug="global_disablerating"

@@ -278,7 +278,9 @@ const SettingsPage = () => {
 								</li>
 							)}
 
-							<li className="settings">
+							<li
+								className={`settings ${isPremium ? '' : 'pro'}`}
+							>
 								<a
 									id="blockonstab-settings"
 									className={`blockons-tab ${
@@ -297,7 +299,9 @@ const SettingsPage = () => {
 									}`}
 									onClick={() => changeTab('info')}
 								>
-									{__('Info', 'blockons')}
+									{isPremium
+										? __('Info', 'blockons')
+										: __('Go Pro', 'blockons')}
 								</a>
 							</li>
 						</ul>
@@ -406,8 +410,9 @@ const SettingsPage = () => {
 									}`}
 								>
 									<InfoTab
-									// isPro={isPremium}
-									// upgrade={upgradeUrl}
+										isPro={isPremium}
+										upgrade={upgradeUrl}
+										pluginUrl={pluginUrl}
 									/>
 								</div>
 							</div>

@@ -257,6 +257,9 @@ a.blockons-upgrade::before {
 .blockons-tabs li.settings {
 	right: 63px;
 }
+.blockons-tabs li.settings.pro {
+	right: 81px;
+}
 .blockons-tabs li.info .blockons-tab {
 	background-color: #5a93f8;
 	border: 1px solid #7a8896;
@@ -299,7 +302,6 @@ a.blockons-upgrade::before {
 }
 #blockons-content-info {
 	margin-bottom: -125px;
-	padding-bottom: 25px;
 	background-color: #fff;
 	position: relative;
 }
@@ -582,6 +584,49 @@ a.blockons-upgrade::before {
 .blockons-note-row .blockons-note {
 	font-size: 13px;
 }
+/* ---- Go Pro ---- */
+.blockons-upgrade-header {
+	max-width: 620px;
+	text-align: center;
+	margin: 10px auto;
+}
+.blockons-upgrade-section {
+	display: flex;
+	align-items: center;
+	gap: 50px;
+	padding: 40px 0;
+}
+.blockons-upgrade-header a.blockons-button,
+.blockons-upgrade-section a.blockons-button {
+	background-color: #f45b06 !important;
+	color: #fff !important;
+}
+.blockons-upgrade-header a.blockons-button:hover,
+.blockons-upgrade-section a.blockons-button:hover {
+	background-color: #d84e04 !important;
+}
+.blockons-upgrade-section-left {
+	flex: 1;
+}
+.blockons-upgrade-section-right {
+	flex: 1;
+}
+.blockons-upgrade-section span {
+	color: #f45b06;
+	font-size: 13px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.blockons-upgrade-section h3 {
+	font-size: 24px;
+	margin: 10px 0 25px;
+	padding: 0;
+}
+.blockons-upgrade-section img {
+	box-shadow: 0 1px 6px rgb(0 0 0 / 48%);
+	border-radius: 5px;
+	max-width: 450px;
+}
 /* ---- Give Feedback ---- */
 .blockons-feedback {
 	display: flex;
@@ -660,26 +705,18 @@ a.propromo-upgrade:hover {
 .blockons-feedback-dismiss {
 	display: inline-block;
 	margin: 0 0 -4px 18px;
+	position: relative;
+	color: #828587;
 }
 .blockons-feedback-dismiss label {
 	width: 20px;
 	height: 20px;
-	position: relative;
-	font-size: 12px;
-	color: #828587;
-}
-.blockons-feedback-dismiss label:hover {
-	color: red;
-}
-.blockons-feedback-dismiss label::before {
-	display: block;
-	font-family: 'Font Awesome 6 Free';
-	font-weight: 900;
-	content: '\f00d';
 	position: absolute;
-	top: 2px;
-	left: 6px;
-	pointer-events: none;
+	left: 0;
+	top: 0;
+}
+.blockons-feedback-dismiss:hover {
+	color: red;
 }
 .blockons-feedback-dismiss input.toggle-switch-checkbox {
 	opacity: 1;

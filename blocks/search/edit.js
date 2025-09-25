@@ -585,7 +585,9 @@ const Edit = (props) => {
 																	newValue,
 															});
 														}}
-														__nextHasNoMarginBottom={true}
+														__nextHasNoMarginBottom={
+															true
+														}
 													/>
 													{searchProCats && (
 														<>
@@ -607,8 +609,12 @@ const Edit = (props) => {
 																		},
 																	)
 																}
-																__next40pxDefaultSize={true}
-																__nextHasNoMarginBottom={true}
+																__next40pxDefaultSize={
+																	true
+																}
+																__nextHasNoMarginBottom={
+																	true
+																}
 															/>
 															<TextControl
 																label={__(
@@ -631,8 +637,12 @@ const Edit = (props) => {
 																	)
 																}
 																type="number"
-																__next40pxDefaultSize={true}
-																__nextHasNoMarginBottom={true}
+																__next40pxDefaultSize={
+																	true
+																}
+																__nextHasNoMarginBottom={
+																	true
+																}
 															/>
 															<div className="blockons-divider"></div>
 														</>
@@ -652,7 +662,9 @@ const Edit = (props) => {
 																	newValue,
 															});
 														}}
-														__nextHasNoMarginBottom={true}
+														__nextHasNoMarginBottom={
+															true
+														}
 													/>
 													{searchProTags && (
 														<>
@@ -674,8 +686,12 @@ const Edit = (props) => {
 																		},
 																	)
 																}
-																__next40pxDefaultSize={true}
-																__nextHasNoMarginBottom={true}
+																__next40pxDefaultSize={
+																	true
+																}
+																__nextHasNoMarginBottom={
+																	true
+																}
 															/>
 															<TextControl
 																label={__(
@@ -698,8 +714,12 @@ const Edit = (props) => {
 																	)
 																}
 																type="number"
-																__next40pxDefaultSize={true}
-																__nextHasNoMarginBottom={true}
+																__next40pxDefaultSize={
+																	true
+																}
+																__nextHasNoMarginBottom={
+																	true
+																}
 															/>
 														</>
 													)}
@@ -719,7 +739,9 @@ const Edit = (props) => {
 																	newValue,
 															});
 														}}
-														__nextHasNoMarginBottom={true}
+														__nextHasNoMarginBottom={
+															true
+														}
 													/>
 													<ToggleControl
 														label={
@@ -743,7 +765,9 @@ const Edit = (props) => {
 																	newValue,
 															});
 														}}
-														__nextHasNoMarginBottom={true}
+														__nextHasNoMarginBottom={
+															true
+														}
 													/>
 													{searchProTypes ===
 														'product' && (
@@ -763,7 +787,9 @@ const Edit = (props) => {
 																		newValue,
 																});
 															}}
-															__nextHasNoMarginBottom={true}
+															__nextHasNoMarginBottom={
+																true
+															}
 														/>
 													)}
 
@@ -784,7 +810,9 @@ const Edit = (props) => {
 																	newValue,
 															});
 														}}
-														__nextHasNoMarginBottom={true}
+														__nextHasNoMarginBottom={
+															true
+														}
 													/>
 												</>
 											)}

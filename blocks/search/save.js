@@ -9,8 +9,6 @@ const Save = ({ attributes }) => {
 		}`,
 		id: attributes.searchId,
 	});
-	const homeUrl = searchObj.homeUrl;
-	console.log(searchObj.homeUrl);
 
 	const searchProOptions = attributes.isPremium
 		? {
@@ -35,7 +33,7 @@ const Save = ({ attributes }) => {
 		role: 'search',
 		method: 'get',
 		className: `blockons-search-inner ${attributes.hasPlaceholder ? 'hasph' : 'noph'}`,
-		action: window.searchObj.homeUrl,
+		// action: searchObj.homeUrl,
 	};
 
 	return (

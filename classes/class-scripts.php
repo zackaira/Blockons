@@ -94,13 +94,13 @@ class Blockons {
 		} else {
 			wp_register_script('blockons-search', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/search/search.js'), array('wp-element', 'wp-i18n'), BLOCKONS_PLUGIN_VERSION);
 		}
+		
 		wp_localize_script('blockons-search', 'searchObj', array(
 			'isPremium' => $isPro,
 			'apiUrl' => esc_url(get_rest_url()),
 			'adminUrl' => esc_url(admin_url()),
 			'wcActive' => Blockons_Admin::blockons_is_plugin_active('woocommerce.php'),
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),
-			'homeUrl' => esc_url(home_url('/')),
 		));
 
 		// Contact Form Block JS
@@ -357,12 +357,12 @@ class Blockons {
 		wp_enqueue_style('blockons-admin-editor-style');
 
 		wp_register_script('blockons-admin-editor-script', esc_url(BLOCKONS_PLUGIN_URL . 'dist/editor' . $suffix . '.js'), array('wp-edit-post', 'wp-rich-text', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components', 'wp-data', 'lodash'), BLOCKONS_PLUGIN_VERSION, true);
+		
 		wp_localize_script('blockons-admin-editor-script', 'blockonsEditorObj', array(
 			'isPremium' => $isPro,
 			'blockonsOptions' => $blockonsOptions,
 			'nonce' => wp_create_nonce('wp_rest'),
 			'adminUrl' => esc_url(admin_url()),
-			'homeUrl' => esc_url(home_url('/')),
 			'apiUrl' => esc_url(get_rest_url()),
 			'pluginUrl' => esc_url(BLOCKONS_PLUGIN_URL),
 			'upgradeUrl' => esc_url($blockons_fs->get_upgrade_url()),

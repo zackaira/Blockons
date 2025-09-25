@@ -64,6 +64,12 @@ class Blockons_Notices {
 										<?php echo esc_html($notice['link_text']); ?>
 									</a>
 								<?php endif; ?>
+
+								<?php if (isset($notice['link_pro']) && isset($notice['link_pro_text'])) : ?>
+									|<a href="<?php echo esc_url($notice['link_pro']); ?>" target="_blank" class="blockons-notice-btn two">
+										<?php echo esc_html($notice['link_pro_text']); ?>
+									</a>
+								<?php endif; ?>
 							</div>
 						</div><?php
 					endif;
@@ -94,12 +100,14 @@ class Blockons_Notices {
 		$settings = array();
 
 		$settings['new_blocks_added'] = array(
-			'id'    => 'newblocks_011', // Increment this when adding new blocks
+			'id'    => 'newblocks_012', // Increment this when adding new blocks
 			'type'  => 'info', // info | error | warning | success
-			'title' => __( 'New \'Mapbox Maps\' & \'Contact Form\' blocks added. Plus new Pro Features!', 'blockons' ),
+			'title' => __( 'New \'Icon Selector\' & \'Advanced Button\' blocks added. Plus new Advanced Premium Features!', 'blockons' ),
 			'text'  => __( 'Please go to the Blockons settings to enable it in the editor if you want to use it.', 'blockons' ),
 			'link'  => admin_url( 'options-general.php?page=blockons-settings' ), // admin_url( 'options-general.php?page=blockons-settings' ),
 			'link_text' => __( 'Go to Blockons Settings', 'blockons' ),
+			'link_pro'  => admin_url( 'options-general.php?page=blockons-settings&tab=info' ),
+			'link_pro_text' => __( 'View what\'s Included in Blockons Pro', 'blockons' ),
 			'inline' => true, // To display the link & text inline
 		);
 

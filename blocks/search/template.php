@@ -3,7 +3,36 @@
 $alignment        = isset( $attributes['alignment'] ) ? esc_attr( $attributes['alignment'] ) : 'left';
 $search_display   = isset( $attributes['searchDisplay'] ) ? esc_attr( $attributes['searchDisplay'] ) : 'default';
 $search_id        = isset( $attributes['searchId'] ) ? esc_attr( $attributes['searchId'] ) : '';
-$home_url         = home_url('/');
+// Get multilingual-friendly home URL
+$home_url = home_url('/');
+
+// Override for specific translation plugins that need special handling
+if (function_exists('pll_current_language')) {
+    // Polylang: manually construct URL to avoid /home/ issue
+    $current_lang = pll_current_language();
+    $default_lang = function_exists('pll_default_language') ? pll_default_language() : '';
+    
+    if ($current_lang && $current_lang !== $default_lang) {
+        // Only add language prefix if it's not the default language
+        $base_url = rtrim(home_url(), '/');
+        $home_url = $base_url . '/' . $current_lang . '/';
+    }
+    // For default language, keep the original home_url without language prefix
+} elseif (function_exists('icl_get_home_url')) {
+    // WPML: use their function
+    $home_url = icl_get_home_url();
+} elseif (class_exists('TRP_Translate_Press')) {
+    // TranslatePress: use their URL manager
+    global $TRP_LANGUAGE;
+    if (!empty($TRP_LANGUAGE)) {
+        $trp = TRP_Translate_Press::get_trp_instance();
+        $url_manager = $trp->get_component('url_manager');
+        $home_url = $url_manager->get_url_for_language($TRP_LANGUAGE);
+    }
+}
+// Apply searchform_url filter as final step (some plugins may still use this)
+$home_url = apply_filters('searchform_url', esc_url($home_url));
+
 $is_premium       = ! empty( $attributes['isPremium'] );
 $has_placeholder  = ! empty( $attributes['hasPlaceholder'] );
 $search_value     = isset( $attributes['searchValue'] ) ? esc_attr( $attributes['searchValue'] ) : '';

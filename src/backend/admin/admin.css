@@ -43,6 +43,9 @@ body.wp-admin.blockons-free.plugins-php
 	vertical-align: baseline;
 	margin-right: 5px;
 }
+.blockons-notice.inline a.blockons-notice-btn.two {
+	margin: 5px 0 0 10px;
+}
 /* ---- Admin Form Submission Page Styling ---- */
 span.blockons-submission-notif {
 	background: #d63638;
