@@ -252,7 +252,6 @@ This could be from the theme you're using, or another plugin. Again, please [con
 * Update Freemius SDK
 * Updated the language .pot file
 
-
 = 1.2.14 =
 * Styling tweaks/fixes
 * Fixed Accordions bug with new editor updates

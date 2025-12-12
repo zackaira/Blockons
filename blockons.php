@@ -9,7 +9,7 @@
  * Requires at least: 5.0
  * Tested up to: 6.9
  * WC requires at least: 3.2
- * WC tested up to: 10.3
+ * WC tested up to: 10.4 
  * Text Domain: blockons
  * Domain Path: /lang/
  * 
