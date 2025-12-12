@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/block.json",
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "blockons/contact-form",
 	"title": "Contact Form",
 	"category": "blockons-category",

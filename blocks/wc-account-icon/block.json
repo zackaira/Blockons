@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/block.json",
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "blockons/wc-account-icon",
 	"title": "WooCommerce Account Icon",
 	"textdomain": "blockons",

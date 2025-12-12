@@ -70,7 +70,7 @@ const bytesToMB = (bytes) => bytes / (1024 * 1024);
 const mbToBytes = (mb) => mb * 1024 * 1024;
 
 registerBlockType('blockons/form-file-upload', {
-	apiVersion: 2,
+	apiVersion: 3,
 	title: __('Form File Upload', 'blockons'),
 	icon: 'upload',
 	parent: ['blockons/contact-form'],

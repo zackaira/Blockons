@@ -50,7 +50,7 @@ function blockons_add_footer_wc_minicart() {
 		echo wp_kses($html3 ,$allowed_html);
 	}
 	
-	// the_widget( 'WC_Widget_Cart', array( 'title' => ''), array( 'before_widget' => '<div class="blockons-hidden" style="width: 0; height: 0; overflow: hidden;"><div class="blockons-mini-crt">', 'after_widget' => '</div></div>' ) );
+	the_widget( 'WC_Widget_Cart', array( 'title' => ''), array( 'before_widget' => '<div class="blockons-hidden" style="width: 0; height: 0; overflow: hidden;"><div class="blockons-mini-crt">', 'after_widget' => '</div></div>' ) );
 }
 add_action('wp_footer', 'blockons_add_footer_wc_minicart' );
 

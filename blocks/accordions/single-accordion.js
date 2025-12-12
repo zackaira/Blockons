@@ -3,7 +3,7 @@ import {
 	InnerBlocks,
 	useBlockProps,
 	InspectorControls,
-} from "@wordpress/block-editor";
+} from '@wordpress/block-editor';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 import {
@@ -12,76 +12,76 @@ import {
 	PanelBody,
 	SelectControl,
 	RangeControl,
-} from "@wordpress/components";
-import FontAwesomeIcon from "../_components/FontAwesomeIcon";
-import BlockonsColorpicker from "../_components/BlockonsColorpicker";
+} from '@wordpress/components';
+import FontAwesomeIcon from '../_components/FontAwesomeIcon';
+import BlockonsColorpicker from '../_components/BlockonsColorpicker';
 import {
 	elementTags,
 	accordionArrowIcons,
 	colorPickerPalette,
-} from "../block-global";
+} from '../block-global';
 
 // Registering Child Innerblock for the Accordionbed Content block
-registerBlockType("blockons/accordion", {
-	apiVersion: 2,
-	title: __("Accordion", "blockons"),
-	icon: "welcome-add-page",
-	parent: ["blockons/accordions"],
+registerBlockType('blockons/accordion', {
+	apiVersion: 3,
+	title: __('Accordion', 'blockons'),
+	icon: 'welcome-add-page',
+	parent: ['blockons/accordions'],
 	attributes: {
 		hideFrontend: {
-			type: "boolean",
+			type: 'boolean',
 			default: false,
 		},
 		labelTag: {
-			type: "string",
-			default: "h4",
+			type: 'string',
+			default: 'h4',
 		},
 		stayOpen: {
-			type: "boolean",
+			type: 'boolean',
 			default: false,
 		},
 		accordionLabel: {
-			type: "string",
-			default: "",
+			type: 'string',
+			default: '',
 		},
 		accordionIcon: {
-			type: "string",
-			default: "arrow-right",
+			type: 'string',
+			default: 'arrow-right',
 		},
 		labelSpacing: {
-			type: "number",
+			type: 'number',
 			default: 10,
 		},
 		itemSpacing: {
-			type: "number",
+			type: 'number',
 			default: 12,
 		},
 		itemLabelBgColor: {
-			type: "string",
-			default: "#efefef",
+			type: 'string',
+			default: '#efefef',
 		},
 		labelFontSize: {
-			type: "number",
+			type: 'number',
 			default: 16,
 		},
 		itemLabelFontColor: {
-			type: "string",
-			default: "#555",
+			type: 'string',
+			default: '#555',
 		},
 		labelIconSize: {
-			type: "number",
+			type: 'number',
 			default: 20,
 		},
 		itemLabelIconColor: {
-			type: "string",
-			default: "#555",
+			type: 'string',
+			default: '#555',
 		},
 		itemContentBgColor: {
-			type: "string",
-			default: "#FFF",
+			type: 'string',
+			default: '#FFF',
 		},
 	},
-	usesContext: ["blockons/iconFirst", "blockons/closeAll"],
+	usesContext: ['blockons/iconFirst', 'blockons/closeAll'],
 	/**
 	 *
 	 * Edit function for Child Accordion Block
@@ -120,19 +120,18 @@ registerBlockType("blockons/accordion", {
 			setAttributes({ accordionIcon: newAccordionIcon });
 		};
 
-
-		const DEFAULT = [["core/paragraph", {}]];
+		const DEFAULT = [['core/paragraph', {}]];
 
 		// Block Props for proper WordPress block functionality
 		const blockProps = useBlockProps({
-			className: `${isContentVisible ? "selected" : ""} ${
-				accordionIcon === "plus" ||
-				accordionIcon === "eye" ||
-				accordionIcon === "circle-plus"
-					? "change " + accordionIcon
-					: "rotate"
-			} ${hideFrontend ? "hidden-frontend" : ""}`,
-			style: { marginBottom: itemSpacing }
+			className: `${isContentVisible ? 'selected' : ''} ${
+				accordionIcon === 'plus' ||
+				accordionIcon === 'eye' ||
+				accordionIcon === 'circle-plus'
+					? 'change ' + accordionIcon
+					: 'rotate'
+			} ${hideFrontend ? 'hidden-frontend' : ''}`,
+			style: { marginBottom: itemSpacing },
 		});
 
 		return (
@@ -140,15 +139,15 @@ registerBlockType("blockons/accordion", {
 				{isSelected && (
 					<InspectorControls>
 						<PanelBody
-							title={__("Accordion Settings", "blockons")}
+							title={__('Accordion Settings', 'blockons')}
 							initialOpen={true}
 						>
 							<ToggleControl
-								label={__("Hide from Frontend", "blockons")}
+								label={__('Hide from Frontend', 'blockons')}
 								checked={hideFrontend}
 								help={__(
-									"Temporarily hide this panel from the frontend while editing.",
-									"blockons"
+									'Temporarily hide this panel from the frontend while editing.',
+									'blockons',
 								)}
 								onChange={(newValue) => {
 									setAttributes({ hideFrontend: newValue });
@@ -158,12 +157,15 @@ registerBlockType("blockons/accordion", {
 							<div className="blockons-divider"></div>
 
 							<SelectControl
-								label={__("Label Element", "blockons")}
+								label={__('Label Element', 'blockons')}
 								value={labelTag}
 								options={elementTags}
 								onChange={(newValue) =>
 									setAttributes({
-										labelTag: newValue === undefined ? "h4" : newValue,
+										labelTag:
+											newValue === undefined
+												? 'h4'
+												: newValue,
 									})
 								}
 								__next40pxDefaultSize={true}
@@ -171,11 +173,11 @@ registerBlockType("blockons/accordion", {
 							/>
 
 							<ToggleControl
-								label={__("Stay Open", "blockons")}
+								label={__('Stay Open', 'blockons')}
 								checked={stayOpen}
 								help={__(
-									"Expand this panel on initial page load. Also Use this to keep the panel open while editing.",
-									"blockons"
+									'Expand this panel on initial page load. Also Use this to keep the panel open while editing.',
+									'blockons',
 								)}
 								onChange={(newValue) => {
 									setAttributes({ stayOpen: newValue });
@@ -184,33 +186,39 @@ registerBlockType("blockons/accordion", {
 							/>
 						</PanelBody>
 						<PanelBody
-							title={__("Accordion Design", "blockons")}
+							title={__('Accordion Design', 'blockons')}
 							initialOpen={false}
 						>
-							<p>{__("Accordion Spacing", "blockons")}</p>
+							<p>{__('Accordion Spacing', 'blockons')}</p>
 							<RangeControl
 								value={itemSpacing}
-								onChange={(newalue) => setAttributes({ itemSpacing: newalue })}
+								onChange={(newalue) =>
+									setAttributes({ itemSpacing: newalue })
+								}
 								min={0}
 								max={100}
 								__next40pxDefaultSize={true}
 								__nextHasNoMarginBottom={true}
 							/>
 
-							<h4>{__("Accordion Labels", "blockons")}</h4>
+							<h4>{__('Accordion Labels', 'blockons')}</h4>
 							<BlockonsColorpicker
-								label={__("Label Color", "blockons")}
+								label={__('Label Color', 'blockons')}
 								value={itemLabelBgColor}
 								onChange={(newValue) =>
-									setAttributes({ itemLabelBgColor: newValue })
+									setAttributes({
+										itemLabelBgColor: newValue,
+									})
 								}
 								paletteColors={colorPickerPalette}
 							/>
-							<p>{__("Font Size", "blockons")}</p>
+							<p>{__('Font Size', 'blockons')}</p>
 							<RangeControl
 								value={labelFontSize}
 								onChange={(newValue) =>
-									setAttributes({ labelFontSize: parseInt(newValue) })
+									setAttributes({
+										labelFontSize: parseInt(newValue),
+									})
 								}
 								min={11}
 								max={44}
@@ -218,18 +226,22 @@ registerBlockType("blockons/accordion", {
 								__nextHasNoMarginBottom={true}
 							/>
 							<BlockonsColorpicker
-								label={__("Font Color", "blockons")}
+								label={__('Font Color', 'blockons')}
 								value={itemLabelFontColor}
 								onChange={(newValue) =>
-									setAttributes({ itemLabelFontColor: newValue })
+									setAttributes({
+										itemLabelFontColor: newValue,
+									})
 								}
 								paletteColors={colorPickerPalette}
 							/>
-							<p>{__("Icon Size", "blockons")}</p>
+							<p>{__('Icon Size', 'blockons')}</p>
 							<RangeControl
 								value={labelIconSize}
 								onChange={(newValue) =>
-									setAttributes({ labelIconSize: parseInt(newValue) })
+									setAttributes({
+										labelIconSize: parseInt(newValue),
+									})
 								}
 								min={11}
 								max={44}
@@ -237,22 +249,29 @@ registerBlockType("blockons/accordion", {
 								__nextHasNoMarginBottom={true}
 							/>
 							<BlockonsColorpicker
-								label={__("Icon Color", "blockons")}
+								label={__('Icon Color', 'blockons')}
 								value={itemLabelIconColor}
 								onChange={(newValue) =>
-									setAttributes({ itemLabelIconColor: newValue })
+									setAttributes({
+										itemLabelIconColor: newValue,
+									})
 								}
 								paletteColors={colorPickerPalette}
 							/>
 
-							{context["blockons/iconFirst"] && (
+							{context['blockons/iconFirst'] && (
 								<>
 									<br />
-									<p>{__("Icon & Label Spacing", "blockons")}</p>
+									<p>
+										{__('Icon & Label Spacing', 'blockons')}
+									</p>
 									<RangeControl
 										value={labelSpacing}
 										onChange={(newValue) =>
-											setAttributes({ labelSpacing: parseInt(newValue) })
+											setAttributes({
+												labelSpacing:
+													parseInt(newValue),
+											})
 										}
 										min={0}
 										max={200}
@@ -262,9 +281,9 @@ registerBlockType("blockons/accordion", {
 								</>
 							)}
 
-							<h4>{__("Accordion Content", "blockons")}</h4>
+							<h4>{__('Accordion Content', 'blockons')}</h4>
 							<BlockonsColorpicker
-								label={__("Background Color", "blockons")}
+								label={__('Background Color', 'blockons')}
 								value={itemContentBgColor}
 								onChange={(value) =>
 									setAttributes({ itemContentBgColor: value })
@@ -275,7 +294,7 @@ registerBlockType("blockons/accordion", {
 					</InspectorControls>
 				)}
 				<div
-					className={"accordion-label"}
+					className={'accordion-label'}
 					style={{
 						backgroundColor: itemLabelBgColor,
 						borderColor: itemLabelBgColor,
@@ -283,7 +302,7 @@ registerBlockType("blockons/accordion", {
 				>
 					<RichText
 						tagName="h6"
-						placeholder={__("Accordion Label", "blockons")}
+						placeholder={__('Accordion Label', 'blockons')}
 						value={accordionLabel}
 						multiline={false}
 						className="accordion-label-title"
@@ -294,10 +313,13 @@ registerBlockType("blockons/accordion", {
 						}}
 					/>
 
-					<div className="accordion-icon" style={{ marginRight: labelSpacing }}>
+					<div
+						className="accordion-icon"
+						style={{ marginRight: labelSpacing }}
+					>
 						<Dropdown
 							contentClassName="blockons-icon-selecter"
-							popoverProps={{ placement: "bottom-center" }}
+							popoverProps={{ placement: 'bottom-center' }}
 							renderToggle={({ isOpen, onToggle }) => (
 								<FontAwesomeIcon
 									icon={accordionIcon}
@@ -314,7 +336,9 @@ registerBlockType("blockons/accordion", {
 										key={icon}
 										icon={icon}
 										iconSize={20}
-										onClick={() => onChangeAccordionIcon(icon)}
+										onClick={() =>
+											onChangeAccordionIcon(icon)
+										}
 									/>
 								))
 							}
@@ -339,20 +363,20 @@ registerBlockType("blockons/accordion", {
 	 */
 	save: ({ attributes }) => {
 		const blockProps = useBlockProps.save({
-			className: `accordion-panel wp-block-blockons-accordion ${attributes.stayOpen ? "active" : ""} ${
-				attributes.accordionIcon === "plus" ||
-				attributes.accordionIcon === "eye" ||
-				attributes.accordionIcon === "circle-plus"
-					? "change " + attributes.accordionIcon
-					: "rotate"
-			} ${attributes.hideFrontend ? "hidden-frontend" : ""}`,
+			className: `accordion-panel wp-block-blockons-accordion ${attributes.stayOpen ? 'active' : ''} ${
+				attributes.accordionIcon === 'plus' ||
+				attributes.accordionIcon === 'eye' ||
+				attributes.accordionIcon === 'circle-plus'
+					? 'change ' + attributes.accordionIcon
+					: 'rotate'
+			} ${attributes.hideFrontend ? 'hidden-frontend' : ''}`,
 			style: { marginBottom: attributes.itemSpacing },
 		});
 
 		return (
 			<div {...blockProps}>
 				<div
-					className={"accordion-label"}
+					className={'accordion-label'}
 					style={{
 						backgroundColor: attributes.itemLabelBgColor,
 						borderColor: attributes.itemLabelBgColor,
@@ -388,7 +412,7 @@ registerBlockType("blockons/accordion", {
 					style={{
 						backgroundColor: attributes.itemContentBgColor,
 						...(attributes.stayOpen
-							? { maxHeight: "initial" } // FIX THIS NOT ANIMATING PROPERLY
+							? { maxHeight: 'initial' } // FIX THIS NOT ANIMATING PROPERLY
 							: { maxHeight: null }),
 					}}
 				>

@@ -1,5 +1,5 @@
-import { useEffect } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
+import { useEffect } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import {
 	RichText,
 	AlignmentToolbar,
@@ -7,7 +7,7 @@ import {
 	InspectorControls,
 	useBlockProps,
 	MediaUpload,
-} from "@wordpress/block-editor";
+} from '@wordpress/block-editor';
 import {
 	PanelBody,
 	ToggleControl,
@@ -15,10 +15,10 @@ import {
 	TextControl,
 	Button,
 	__experimentalUnitControl as UnitControl,
-} from "@wordpress/components";
-import { v4 as uuidv4 } from "uuid";
-import BlockonsColorpicker from "../_components/BlockonsColorpicker";
-import { colorPickerPalette } from "../block-global";
+} from '@wordpress/components';
+import { v4 as uuidv4 } from 'uuid';
+import BlockonsColorpicker from '../_components/BlockonsColorpicker';
+import { colorPickerPalette } from '../block-global';
 
 const Edit = (props) => {
 	const {
@@ -40,7 +40,7 @@ const Edit = (props) => {
 		},
 		setAttributes,
 	} = props;
-	const pluginUrl = blockonsEditorObj.pluginUrl || "";
+	const pluginUrl = blockonsEditorObj.pluginUrl || '';
 	const blockProps = useBlockProps({
 		className: `align-${alignment}`,
 	});
@@ -53,7 +53,7 @@ const Edit = (props) => {
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({
-			alignment: newAlignment === undefined ? "left" : newAlignment,
+			alignment: newAlignment === undefined ? 'left' : newAlignment,
 		});
 	};
 
@@ -77,16 +77,18 @@ const Edit = (props) => {
 			{isSelected && (
 				<InspectorControls>
 					<PanelBody
-						title={__("Image Comparison Settings", "blockons")}
+						title={__('Image Comparison Settings', 'blockons')}
 						initialOpen={true}
 					>
 						<UnitControl
-							label={__("Slider Width", "blockons")}
+							label={__('Slider Width', 'blockons')}
 							value={maxWidth}
-							onChange={(value) => setAttributes({ maxWidth: value })}
+							onChange={(value) =>
+								setAttributes({ maxWidth: value })
+							}
 							units={[
-								{ value: "%", label: "%", default: 100 },
-								{ value: "px", label: "px", default: 600 },
+								{ value: '%', label: '%', default: 100 },
+								{ value: 'px', label: 'px', default: 600 },
 							]}
 							isResetValueOnUnitChange
 							__next40pxDefaultSize={true}
@@ -94,16 +96,24 @@ const Edit = (props) => {
 						<div className="blockons-divider"></div>
 
 						<SelectControl
-							label={__("Image Display", "blockons")}
+							label={__('Image Display', 'blockons')}
 							value={slideDirection}
 							options={[
-								{ label: __("Horizontal", "blockons"), value: "horizontal" },
-								{ label: __("Vertical", "blockons"), value: "vertical" },
+								{
+									label: __('Horizontal', 'blockons'),
+									value: 'horizontal',
+								},
+								{
+									label: __('Vertical', 'blockons'),
+									value: 'vertical',
+								},
 							]}
 							onChange={(newValue) =>
 								setAttributes({
 									slideDirection:
-										newValue === undefined ? "horizontal" : newValue,
+										newValue === undefined
+											? 'horizontal'
+											: newValue,
 								})
 							}
 							__next40pxDefaultSize={true}
@@ -112,38 +122,46 @@ const Edit = (props) => {
 						<div className="blockons-divider"></div>
 
 						<ToggleControl
-							label={__("Automatic Slide on Hover", "blockons")}
+							label={__('Automatic Slide on Hover', 'blockons')}
 							checked={automatic}
-							onChange={(newValue) => setAttributes({ automatic: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ automatic: newValue })
+							}
 							__nextHasNoMarginBottom={true}
 						/>
 						<div className="blockons-divider"></div>
 
 						<ToggleControl
-							label={__("Add Image Labels", "blockons")}
+							label={__('Add Image Labels', 'blockons')}
 							checked={imageLabels}
-							onChange={(newValue) => setAttributes({ imageLabels: newValue })}
+							onChange={(newValue) =>
+								setAttributes({ imageLabels: newValue })
+							}
 							__nextHasNoMarginBottom={true}
 						/>
 						{imageLabels && (
 							<>
 								<TextControl
-									label={__("Before Label", "blockons")}
+									label={__('Before Label', 'blockons')}
 									value={before}
-									onChange={(newValue) => setAttributes({ before: newValue })}
+									onChange={(newValue) =>
+										setAttributes({ before: newValue })
+									}
 									__next40pxDefaultSize={true}
 									__nextHasNoMarginBottom={true}
 								/>
 								<TextControl
-									label={__("After Label", "blockons")}
+									label={__('After Label', 'blockons')}
 									value={after}
-									onChange={(newValue) => setAttributes({ after: newValue })}
+									onChange={(newValue) =>
+										setAttributes({ after: newValue })
+									}
 									__next40pxDefaultSize={true}
 									__nextHasNoMarginBottom={true}
 								/>
 								<div className="blockons-divider"></div>
 								<BlockonsColorpicker
-									label={__("Label Color", "blockons")}
+									label={__('Label Color', 'blockons')}
 									value={labelColor}
 									onChange={(newColor) =>
 										setAttributes({ labelColor: newColor })
@@ -155,26 +173,43 @@ const Edit = (props) => {
 						)}
 
 						<SelectControl
-							label={__("Handle Design", "blockons")}
+							label={__('Handle Design', 'blockons')}
 							value={handle}
 							options={[
-								{ label: __("Handle with Arrows", "blockons"), value: "one" },
-								{ label: __("Plain Side Arrows", "blockons"), value: "two" },
-								{ label: __("Large Side Arrows", "blockons"), value: "three" },
-								{ label: __("Simple Line", "blockons"), value: "four" },
+								{
+									label: __('Handle with Arrows', 'blockons'),
+									value: 'one',
+								},
+								{
+									label: __('Plain Side Arrows', 'blockons'),
+									value: 'two',
+								},
+								{
+									label: __('Large Side Arrows', 'blockons'),
+									value: 'three',
+								},
+								{
+									label: __('Simple Line', 'blockons'),
+									value: 'four',
+								},
 							]}
 							onChange={(newValue) =>
 								setAttributes({
-									handle: newValue === undefined ? "one" : newValue,
+									handle:
+										newValue === undefined
+											? 'one'
+											: newValue,
 								})
 							}
 							__next40pxDefaultSize={true}
 							__nextHasNoMarginBottom={true}
 						/>
 						<BlockonsColorpicker
-							label={__("Handle Color", "blockons")}
+							label={__('Handle Color', 'blockons')}
 							value={handleColor}
-							onChange={(newColor) => setAttributes({ handleColor: newColor })}
+							onChange={(newColor) =>
+								setAttributes({ handleColor: newColor })
+							}
 							paletteColors={colorPickerPalette}
 						/>
 					</PanelBody>
@@ -182,7 +217,10 @@ const Edit = (props) => {
 			)}
 			{
 				<BlockControls>
-					<AlignmentToolbar value={alignment} onChange={onChangeAlignment} />
+					<AlignmentToolbar
+						value={alignment}
+						onChange={onChangeAlignment}
+					/>
 				</BlockControls>
 			}
 			<div
@@ -194,20 +232,24 @@ const Edit = (props) => {
 				{imageAfter?.url && (
 					<MediaUpload
 						className="components-icon-button components-toolbar__control"
-						allowedTypes={["image"]}
+						allowedTypes={['image']}
 						value={imageBefore}
-						onSelect={(media) => handleImageUpload(media, "imageBefore")}
+						onSelect={(media) =>
+							handleImageUpload(media, 'imageBefore')
+						}
 						render={({ open }) => {
 							return (
 								<>
 									{imageBefore?.url ? (
 										<Button
-											className="blockons-ic-button before remove fa-xmark"
-											onClick={() => handleImageRemove("imageBefore")}
+											className="blockons-ic-button before dashicons dashicons-no-alt"
+											onClick={() =>
+												handleImageRemove('imageBefore')
+											}
 										></Button>
 									) : (
 										<Button
-											className="blockons-ic-button before fa-upload"
+											className="blockons-ic-button before dashicons dashicons-format-image"
 											onClick={open}
 										></Button>
 									)}
@@ -218,20 +260,22 @@ const Edit = (props) => {
 				)}
 				<MediaUpload
 					className="components-icon-button components-toolbar__control"
-					allowedTypes={["image"]}
+					allowedTypes={['image']}
 					value={imageAfter}
-					onSelect={(media) => handleImageUpload(media, "imageAfter")}
+					onSelect={(media) => handleImageUpload(media, 'imageAfter')}
 					render={({ open }) => {
 						return (
 							<>
 								{imageAfter?.url ? (
 									<Button
-										className="blockons-ic-button after remove fa-xmark"
-										onClick={() => handleImageRemove("imageAfter")}
+										className="blockons-ic-button after dashicons dashicons-no-alt"
+										onClick={() =>
+											handleImageRemove('imageAfter')
+										}
 									></Button>
 								) : (
 									<Button
-										className="blockons-ic-button after fa-upload"
+										className="blockons-ic-button after dashicons dashicons-format-image"
 										onClick={open}
 									></Button>
 								)}
@@ -244,16 +288,16 @@ const Edit = (props) => {
 					<img-comparison-slider
 						tabindex="0"
 						className="rendered"
-						{...(automatic ? { hover: "hover" } : { hover: false })}
+						{...(automatic ? { hover: 'hover' } : { hover: false })}
 						direction={slideDirection}
 						style={{
-							"--divider-color": handleColor,
-							"--default-handle-color": handleColor,
-							...(handle === "four"
+							'--divider-color': handleColor,
+							'--default-handle-color': handleColor,
+							...(handle === 'four'
 								? {
-										"--divider-width": 4,
-										"--default-handle-opacity": 0,
-								}
+										'--divider-width': 4,
+										'--default-handle-opacity': 0,
+									}
 								: {}),
 						}}
 					>
@@ -263,10 +307,12 @@ const Edit = (props) => {
 							{imageLabels && (
 								<RichText
 									tagName="div"
-									placeholder={__("Before", "blockons")}
+									placeholder={__('Before', 'blockons')}
 									value={before}
 									className="blockons-ic-title before"
-									onChange={(value) => setAttributes({ before: value })}
+									onChange={(value) =>
+										setAttributes({ before: value })
+									}
 									style={{
 										color: labelColor,
 									}}
@@ -279,10 +325,12 @@ const Edit = (props) => {
 							{imageLabels && (
 								<RichText
 									tagName="div"
-									placeholder={__("After", "blockons")}
+									placeholder={__('After', 'blockons')}
 									value={after}
 									className="blockons-ic-title after"
-									onChange={(value) => setAttributes({ after: value })}
+									onChange={(value) =>
+										setAttributes({ after: value })
+									}
 									style={{
 										color: labelColor,
 									}}
@@ -290,14 +338,17 @@ const Edit = (props) => {
 							)}
 						</div>
 
-						{handle === "one" && (
+						{handle === 'one' && (
 							<div
 								className="handle-bar"
 								slot="handle"
-								style={{ backgroundColor: handleColor, borderColor: handleColor }}
+								style={{
+									backgroundColor: handleColor,
+									borderColor: handleColor,
+								}}
 							></div>
 						)}
-						{handle === "three" && (
+						{handle === 'three' && (
 							<svg
 								slot="handle"
 								className="large-arrow-handle"
@@ -318,7 +369,8 @@ const Edit = (props) => {
 				) : (
 					<div className="aspect-ratio ratio-32rectangle noimg">
 						<div className="aspect-img">
-							{imageAfter.url && `<-- ${__("Add A Second Image", "blockons")}`}
+							{imageAfter.url &&
+								`<-- ${__('Add A Second Image', 'blockons')}`}
 						</div>
 					</div>
 				)}

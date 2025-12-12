@@ -49,7 +49,7 @@ const generateTextareaId = (label) => {
 };
 
 registerBlockType('blockons/form-textarea', {
-	apiVersion: 2,
+	apiVersion: 3,
 	title: __('Form Textarea', 'blockons'),
 	icon: 'text',
 	parent: ['blockons/contact-form'],

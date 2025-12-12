@@ -65,7 +65,7 @@ const generateInputId = (label) => {
 };
 
 registerBlockType('blockons/form-text-input', {
-	apiVersion: 2,
+	apiVersion: 3,
 	title: __('Form Text Input', 'blockons'),
 	icon: 'text',
 	parent: ['blockons/contact-form'],

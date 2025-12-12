@@ -293,6 +293,7 @@ class Blockons {
 				wp_enqueue_style('blockons-sidecart-pro');
 			}
 
+			wp_enqueue_script( 'wc-cart-fragments' );
 			wp_enqueue_script('blockons-wc-mini-cart');
 		}
 	} // End blockons_frontend_scripts ()

@@ -46,7 +46,7 @@ const createDefaultOption = (index) => ({
 });
 
 registerBlockType('blockons/form-checkbox', {
-	apiVersion: 2,
+	apiVersion: 3,
 	title: __('Form Checkbox Group', 'blockons'),
 	icon: 'button',
 	parent: ['blockons/contact-form'],

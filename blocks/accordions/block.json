@@ -1,12 +1,18 @@
 {
 	"$schema": "https://json.schemastore.org/block.json",
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "blockons/accordions",
 	"title": "Accordions",
 	"textdomain": "blockons",
 	"icon": "menu",
 	"category": "blockons-category",
-	"keywords": ["accordions", "accordion", "content", "collapsible", "blockons"],
+	"keywords": [
+		"accordions",
+		"accordion",
+		"content",
+		"collapsible",
+		"blockons"
+	],
 	"supports": {
 		"html": false
 	},

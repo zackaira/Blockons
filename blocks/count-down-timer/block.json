@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/block.json",
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "blockons/count-down-timer",
 	"title": "Count Down Timer",
 	"textdomain": "blockons",

@@ -1,15 +1,15 @@
 <?php
 /**
  * Plugin Name: Blockons
- * Version: 1.2.14
+ * Version: 1.2.15
  * Plugin URI: https://blockons.com/
  * Description: Enhanced WordPress editor blocks for Gutenberg, including core Block Extensions and Site Addons for your WordPress site and WooCommerce online store
  * Author: Kaira
  * Author URI: https://kairaweb.com/
  * Requires at least: 5.0
- * Tested up to: 6.8
+ * Tested up to: 6.9
  * WC requires at least: 3.2
- * WC tested up to: 10.2
+ * WC tested up to: 10.3
  * Text Domain: blockons
  * Domain Path: /lang/
  * 
@@ -20,7 +20,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( !defined( 'BLOCKONS_PLUGIN_VERSION' ) ) {
-	define('BLOCKONS_PLUGIN_VERSION', '1.2.14');
+	define('BLOCKONS_PLUGIN_VERSION', '1.2.15');
 }
 if ( !defined( 'BLOCKONS_PLUGIN_URL' ) ) {
 	define('BLOCKONS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

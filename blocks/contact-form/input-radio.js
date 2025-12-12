@@ -46,7 +46,7 @@ const createDefaultOption = (index) => ({
 });
 
 registerBlockType('blockons/form-radio', {
-	apiVersion: 2,
+	apiVersion: 3,
 	title: __('Form Radio Group', 'blockons'),
 	icon: 'marker',
 	parent: ['blockons/contact-form'],

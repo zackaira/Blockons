@@ -1,42 +1,42 @@
-import { __ } from "@wordpress/i18n";
-import { useEffect } from "@wordpress/element";
-import { registerBlockType } from "@wordpress/blocks";
-import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
+import { __ } from '@wordpress/i18n';
+import { useEffect } from '@wordpress/element';
+import { registerBlockType } from '@wordpress/blocks';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
-registerBlockType("blockons/ds-content", {
-	apiVersion: 2,
-	title: __("Content", "blockons"),
-	icon: "welcome-add-page",
-	parent: ["blockons/content-selector"],
-	category: "design",
+registerBlockType('blockons/ds-content', {
+	apiVersion: 3,
+	title: __('Content', 'blockons'),
+	icon: 'welcome-add-page',
+	parent: ['blockons/content-selector'],
+	category: 'design',
 
 	attributes: {
 		contentLabel: {
-			type: "string",
-			default: "Option Label",
+			type: 'string',
+			default: 'Option Label',
 		},
 		type: {
-			type: "string",
-			default: "content",
+			type: 'string',
+			default: 'content',
 		},
 		redirectUrl: {
-			type: "string",
-			default: "",
+			type: 'string',
+			default: '',
 		},
 		preText: {
-			type: "string",
-			default: "The page will redirect in: ",
+			type: 'string',
+			default: 'The page will redirect in: ',
 		},
 		countDown: {
-			type: "string",
-			default: "5",
+			type: 'string',
+			default: '5',
 		},
 		clientId: {
-			type: "string",
-			default: "",
+			type: 'string',
+			default: '',
 		},
 	},
-	usesContext: ["blockons/selectedContent"],
+	usesContext: ['blockons/selectedContent'],
 
 	edit: ({
 		attributes: { contentLabel, type, redirectUrl, preText, countDown },
@@ -46,7 +46,7 @@ registerBlockType("blockons/ds-content", {
 	}) => {
 		const blockProps = useBlockProps({
 			className: `blockons-ds-content content-ds-${clientId} ${
-				context["blockons/selectedContent"] === clientId ? "active" : ""
+				context['blockons/selectedContent'] === clientId ? 'active' : ''
 			}`,
 		});
 
@@ -54,11 +54,11 @@ registerBlockType("blockons/ds-content", {
 			setAttributes({ clientId: clientId });
 		}, []);
 
-		const TEMPLATE = [["core/paragraph", { content: "Tab Content" }]];
+		const TEMPLATE = [['core/paragraph', { content: 'Tab Content' }]];
 
 		return (
 			<div {...blockProps}>
-				{type === "redirect" ? (
+				{type === 'redirect' ? (
 					<div className="blockons-ds-countdown">
 						{countDown && countDown > 0 && redirectUrl && (
 							<div className="blockons-ds-countdown-txt">
@@ -88,7 +88,7 @@ registerBlockType("blockons/ds-content", {
 		});
 		return (
 			<div {...blockProps}>
-				{attributes.type === "redirect" ? (
+				{attributes.type === 'redirect' ? (
 					<div className="blockons-ds-countdown">
 						{attributes.countDown &&
 							attributes.countDown > 0 &&
@@ -99,7 +99,9 @@ registerBlockType("blockons/ds-content", {
 										<span
 											className="blockons-dscount"
 											data-count={attributes.countDown}
-											data-redirect={attributes.redirectUrl}
+											data-redirect={
+												attributes.redirectUrl
+											}
 										>
 											{attributes.countDown}
 										</span>

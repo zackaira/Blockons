@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/block.json",
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "blockons/table-of-contents",
 	"title": "Table of Contents",
 	"textdomain": "blockons",
@@ -48,7 +48,7 @@
 			"type": "boolean",
 			"default": false
 		},
-		"showTitle" : {
+		"showTitle": {
 			"type": "boolean",
 			"default": true
 		},

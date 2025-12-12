@@ -45,7 +45,7 @@ const generateAcceptanceId = (label) => {
 };
 
 registerBlockType('blockons/form-acceptance', {
-	apiVersion: 2,
+	apiVersion: 3,
 	title: __('Form Acceptance', 'blockons'),
 	icon: 'saved',
 	parent: ['blockons/contact-form'],

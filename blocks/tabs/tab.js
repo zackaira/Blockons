@@ -1,24 +1,24 @@
-import { __ } from "@wordpress/i18n";
-import { useEffect } from "@wordpress/element";
-import { registerBlockType } from "@wordpress/blocks";
-import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
-import { TextControl } from "@wordpress/components";
+import { __ } from '@wordpress/i18n';
+import { useEffect } from '@wordpress/element';
+import { registerBlockType } from '@wordpress/blocks';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { TextControl } from '@wordpress/components';
 
-registerBlockType("blockons/tab", {
-	apiVersion: 2,
-	title: __("Tab", "blockons"),
-	icon: "welcome-add-page",
-	parent: ["blockons/tabs"],
-	category: "design",
+registerBlockType('blockons/tab', {
+	apiVersion: 3,
+	title: __('Tab', 'blockons'),
+	icon: 'welcome-add-page',
+	parent: ['blockons/tabs'],
+	category: 'design',
 
 	attributes: {
 		tabLabel: {
-			type: "string",
-			default: "Tab Title",
+			type: 'string',
+			default: 'Tab Title',
 		},
 		clientId: {
-			type: "string",
-			default: "",
+			type: 'string',
+			default: '',
 		},
 	},
 
@@ -32,14 +32,16 @@ registerBlockType("blockons/tab", {
 		}, []);
 
 		// Default template for InnerBlocks
-		const TEMPLATE = [["core/paragraph", { content: "Tab Content" }]];
+		const TEMPLATE = [['core/paragraph', { content: 'Tab Content' }]];
 
 		return (
 			<div {...blockProps}>
 				<TextControl
 					value={tabLabel}
-					onChange={(newLabel) => setAttributes({ tabLabel: newLabel })}
-					placeholder={__("Tab Label", "blockons")}
+					onChange={(newLabel) =>
+						setAttributes({ tabLabel: newLabel })
+					}
+					placeholder={__('Tab Label', 'blockons')}
 					className="blockons-inner-tab-label"
 					__next40pxDefaultSize={true}
 					__nextHasNoMarginBottom={true}
