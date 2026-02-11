@@ -8,7 +8,7 @@
  *
  * @package blockons
  */
-$custom_classes = 'align-' . $attributes['alignment'] . ' style-' . $attributes['sliderStyle'] . ' rn-' . $attributes['sliderRoundNess'];
+$custom_classes = 'align-' . sanitize_html_class( $attributes['alignment'] ) . ' style-' . sanitize_html_class( $attributes['sliderStyle'] ) . ' rn-' . sanitize_html_class( $attributes['sliderRoundNess'] );
 
 $sliderOptions = array(
 	"autoHeight" => true,
@@ -31,7 +31,7 @@ $sliderOptions = array(
 );
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes(['class' => $custom_classes]) ); ?>>
-	<div class="blockons-slider video-slider <?php echo isset($attributes['showOnHover']) && $attributes['showOnHover'] == true ? sanitize_html_class("controlsOnHover") : ""; ?> navigation-<?php echo sanitize_html_class($attributes['navigationStyle']); ?> navigation-<?php echo sanitize_html_class($attributes['navigationColor']); ?> pagination-<?php echo sanitize_html_class($attributes['paginationStyle']); ?> pagination-<?php echo sanitize_html_class($attributes['paginationColor']); ?> <?php echo isset($attributes['navigationArrow']) && $attributes['navigationArrow'] == "ban" ? sanitize_html_class("default-icon") : sanitize_html_class("custom-icon"); ?> arrows-<?php echo sanitize_html_class($attributes['navigationArrow']); ?>" id="<?php echo esc_attr($attributes['uniqueId']); ?>" data-settings="<?php echo esc_attr(json_encode((object)$sliderOptions)); ?>" style="<?php echo isset($attributes['sliderStyle']) && $attributes['sliderStyle'] == "three" ? "padding: " . $attributes['sliderBorderWidth'] . "px; border-radius: " . $attributes['sliderOuterRound'] . "px; background-color: " . $attributes['sliderBorderColor'] . ";" : ""; ?>">
+	<div class="blockons-slider video-slider <?php echo isset($attributes['showOnHover']) && $attributes['showOnHover'] == true ? sanitize_html_class("controlsOnHover") : ""; ?> navigation-<?php echo sanitize_html_class($attributes['navigationStyle']); ?> navigation-<?php echo sanitize_html_class($attributes['navigationColor']); ?> pagination-<?php echo sanitize_html_class($attributes['paginationStyle']); ?> pagination-<?php echo sanitize_html_class($attributes['paginationColor']); ?> <?php echo isset($attributes['navigationArrow']) && $attributes['navigationArrow'] == "ban" ? sanitize_html_class("default-icon") : sanitize_html_class("custom-icon"); ?> arrows-<?php echo sanitize_html_class($attributes['navigationArrow']); ?>" id="<?php echo esc_attr($attributes['uniqueId']); ?>" data-settings="<?php echo esc_attr(json_encode((object)$sliderOptions)); ?>" style="<?php echo esc_attr( isset( $attributes['sliderStyle'] ) && $attributes['sliderStyle'] === 'three' ? 'padding: ' . absint( $attributes['sliderBorderWidth'] ) . 'px; border-radius: ' . absint( $attributes['sliderOuterRound'] ) . 'px; background-color: ' . ( isset( $attributes['sliderBorderColor'] ) ? $attributes['sliderBorderColor'] : '' ) . ';' : '' ); ?>">
 		<div class="video-swiper-<?php echo esc_attr($attributes['uniqueId']); ?> swiper">
 			<div class="swiper-wrapper">
 				<?php foreach ($attributes['sliderSlides'] as $i => $slide) { ?>
@@ -73,7 +73,7 @@ $sliderOptions = array(
 								<div class="aspect-img"></div>
 							</div>
 
-							<div class="swiper-slide-img" style="<?php echo (isset($slide['coverImage']) && (isset($slide['coverImage']['url']) && $slide['coverImage']['url'] != "")) ? "background-image: url(" . esc_url($slide['coverImage']['url']) . ");" : ""; ?>">
+							<div class="swiper-slide-img" style="<?php echo esc_attr( ( isset( $slide['coverImage']['url'] ) && $slide['coverImage']['url'] !== '' ) ? 'background-image: url(' . esc_url( $slide['coverImage']['url'] ) . ');' : '' ); ?>">
 								<?php if (((isset($slide['videoType']) && $slide['videoType'] == "youtube" || $slide['videoType'] == "vimeo") && (isset($slide['videoId']) && $slide['videoId'] != "")) || (isset($slide['videoType']) && $slide['videoType'] == "custom") && isset($slide['customVideo']['url']) && $slide['customVideo']['url'] != "") : ?>
 									<div class="play-button" title="<?php esc_html_e("The video only plays on the frontend", "blockons"); ?>"></div>
 								<?php endif; ?>

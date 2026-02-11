@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/block.json",
-	"apiVersion": 3,
+	"apiVersion": 2,
 	"name": "blockons/wc-mini-cart",
 	"title": "WooCommerce Mini Cart",
 	"textdomain": "blockons",

@@ -76,7 +76,10 @@ const Edit = (props) => {
 				const data = await response.json();
 
 				if (!response.ok) {
-					console.error('API key fetch failed:', data.error || 'Unknown error');
+					console.error(
+						'API key fetch failed:',
+						data.error || 'Unknown error',
+					);
 					setMapboxToken(0);
 					return;
 				}
@@ -229,7 +232,7 @@ const Edit = (props) => {
 	};
 
 	useEffect(() => {
-		if ((enableMap, mapRef.current)) {
+		if (enableMap && mapRef.current) {
 			updateMarkersOnMap();
 		}
 	}, [enableMap, markers, selectedMarker]);
@@ -625,8 +628,12 @@ const Edit = (props) => {
 														)}
 														value={marker.latitude}
 														disabled
-														__next40pxDefaultSize={true}
-														__nextHasNoMarginBottom={true}
+														__next40pxDefaultSize={
+															true
+														}
+														__nextHasNoMarginBottom={
+															true
+														}
 													/>
 													<TextControl
 														label={__(
@@ -635,8 +642,12 @@ const Edit = (props) => {
 														)}
 														value={marker.longitude}
 														disabled
-														__next40pxDefaultSize={true}
-														__nextHasNoMarginBottom={true}
+														__next40pxDefaultSize={
+															true
+														}
+														__nextHasNoMarginBottom={
+															true
+														}
 													/>
 												</div>
 
@@ -667,8 +678,12 @@ const Edit = (props) => {
 																	)}
 																</a>
 															}
-															__next40pxDefaultSize={true}
-															__nextHasNoMarginBottom={true}
+															__next40pxDefaultSize={
+																true
+															}
+															__nextHasNoMarginBottom={
+																true
+															}
 														/>
 
 														<BlockonsColorpicker

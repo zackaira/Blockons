@@ -194,13 +194,7 @@ registerBlockType('blockons/form-acceptance', {
 			],
 		);
 
-		const fieldStyles = useMemo(
-			() => ({
-				marginBottom: `${rowSpacing}px`,
-				padding: `0 ${columnSpacing}px`,
-			}),
-			[columnSpacing, rowSpacing],
-		);
+		// const fieldStyles = useMemo(() => ({}), []);
 
 		return (
 			<div {...blockProps}>
@@ -441,10 +435,7 @@ registerBlockType('blockons/form-acceptance', {
 			gap: `${useCustomText ? customTextSpacing : textSpacing}px`,
 		};
 
-		const fieldStyles = {
-			marginBottom: `${rowSpacing}px`,
-			padding: `0 ${columnSpacing}px`,
-		};
+		const fieldStyles = {};
 
 		return (
 			<div {...blockProps}>

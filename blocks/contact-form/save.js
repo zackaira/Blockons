@@ -6,6 +6,7 @@ const Save = ({ attributes }) => {
 		isPremium,
 		formWidth,
 		columnSpacing,
+		rowSpacing,
 		alignment,
 		align,
 		formName,
@@ -17,7 +18,7 @@ const Save = ({ attributes }) => {
 		bccEmails,
 		includeMetadata,
 		showLabels,
-		labelSize,
+		textSize,
 		submitButtonText,
 		successMessage,
 		errorMessage,
@@ -80,15 +81,14 @@ const Save = ({ attributes }) => {
 
 					<div
 						className={`blockons-cf-fields ${!showLabels ? 'nolabels' : ''} ${errorPosition}`}
+						style={{
+							'--blockons-column-gap': `${columnSpacing}px`,
+							'--blockons-row-gap': `${rowSpacing}px`,
+						}}
 					>
 						<InnerBlocks.Content />
 
-						<div
-							className="blockons-cf--button"
-							style={{
-								padding: `0 ${columnSpacing}px`,
-							}}
-						>
+						<div className="blockons-cf--button">
 							<button
 								type="button"
 								className="blockons-cf-submit-btn"
@@ -97,7 +97,7 @@ const Save = ({ attributes }) => {
 									color: buttonFontColor,
 									borderRadius: inputBorderRadius,
 									marginTop: buttonSpacing,
-									fontSize: labelSize,
+									fontSize: textSize,
 								}}
 							>
 								{submitButtonText ||

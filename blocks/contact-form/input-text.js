@@ -222,10 +222,8 @@ registerBlockType('blockons/form-text-input', {
 				color: textColor,
 				fontSize: `${textSize}px`,
 				gap: `${textSpacing}px`,
-				marginBottom: `${rowSpacing}px`,
-				padding: `0 ${columnSpacing}px`,
 			}),
-			[textColor, textSize, textSpacing, columnSpacing, rowSpacing],
+			[textColor, textSize, textSpacing],
 		);
 
 		const labelStyles = useMemo(
@@ -477,8 +475,6 @@ registerBlockType('blockons/form-text-input', {
 			color: textColor,
 			fontSize: `${textSize}px`,
 			gap: `${textSpacing}px`,
-			marginBottom: `${rowSpacing}px`,
-			padding: `0 ${columnSpacing}px`,
 		};
 
 		const labelStyles = {

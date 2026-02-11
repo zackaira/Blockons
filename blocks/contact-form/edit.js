@@ -552,8 +552,8 @@ const Edit = (props) => {
 									columnSpacing: value,
 								});
 							}}
-							min={0}
-							max={40}
+							min={4}
+							max={100}
 							help={__(
 								'Adjust the space between form fields IF you edit field widths',
 								'blockons',
@@ -855,6 +855,10 @@ const Edit = (props) => {
 
 					<div
 						className={`blockons-cf-fields ${!showLabels ? 'nolabels' : ''} ${errorPosition}`}
+						style={{
+							'--blockons-column-gap': `${columnSpacing}px`,
+							'--blockons-row-gap': `${rowSpacing}px`,
+						}}
 					>
 						<InnerBlocks
 							allowedBlocks={ALLOWED_BLOCKS}
@@ -862,12 +866,7 @@ const Edit = (props) => {
 							templateLock={false}
 						/>
 
-						<div
-							className="blockons-cf--button"
-							style={{
-								padding: `0 ${columnSpacing}px`,
-							}}
-						>
+						<div className="blockons-cf--button">
 							<button
 								type="button"
 								className="blockons-cf-submit-btn"
