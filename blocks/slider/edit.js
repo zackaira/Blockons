@@ -504,7 +504,7 @@ const Edit = (props) => {
 	const slides = sliderSlides.map((slideItem, index) => (
 		<div
 			key={slideItem.id || index}
-			className={`swiper-slide-inner ${
+			className={`swiper-slide-inner slide ${
 				slideItem.style?.position ? slideItem.style.position : position
 			} ${forceFullWidth || imageProportion !== 'actual' ? 'imgfull' : ''}`}
 		>
@@ -1976,7 +1976,10 @@ const Edit = (props) => {
 					}}
 				>
 					{slides.map((slideContent, index) => (
-						<SwiperSlide key={sliderSlides[index]?.id || index}>
+						<SwiperSlide
+							key={sliderSlides[index]?.id || index}
+							id={sliderSlides[index]?.id || index}
+						>
 							{slideContent}
 						</SwiperSlide>
 					))}
