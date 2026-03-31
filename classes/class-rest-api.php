@@ -18,17 +18,17 @@ class Blockons_WC_Rest_Routes {
 		register_rest_route('blcns/v1', '/settings', [
 			'methods' => 'GET',
 			'callback' => [$this, 'blockons_get_settings'],
-			'permission_callback' => [$this, 'blockons_get_settings_permission'],
+			'permission_callback' => [$this, 'blockons_admin_permission'],
 		]);
 		register_rest_route('blcns/v1', '/settings', [
 			'methods' => 'POST',
 			'callback' => [$this, 'blockons_save_settings'],
-			'permission_callback' => [$this, 'blockons_save_settings_permission'],
+			'permission_callback' => [$this, 'blockons_admin_permission'],
 		]);
 		register_rest_route('blcns/v1', '/delete', [
 			'methods' => 'DELETE',
 			'callback' => [$this, 'blockons_delete_settings'],
-			'permission_callback' => [$this, 'blockons_save_settings_permission'],
+			'permission_callback' => [$this, 'blockons_admin_permission'],
 		]);
 		
 		if ( Blockons_Admin::blockons_is_plugin_active( 'woocommerce.php' ) ) {

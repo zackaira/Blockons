@@ -23,7 +23,7 @@ import {
 
 // Registering Child Innerblock for the Accordionbed Content block
 registerBlockType('blockons/accordion', {
-	apiVersion: 3,
+	apiVersion: 2,
 	title: __('Accordion', 'blockons'),
 	icon: 'welcome-add-page',
 	parent: ['blockons/accordions'],

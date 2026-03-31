@@ -5,7 +5,7 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { TextControl } from '@wordpress/components';
 
 registerBlockType('blockons/tab', {
-	apiVersion: 3,
+	apiVersion: 2,
 	title: __('Tab', 'blockons'),
 	icon: 'welcome-add-page',
 	parent: ['blockons/tabs'],

@@ -5,7 +5,7 @@ Tags: gutenberg, editor blocks, woocommerce blocks, page builder, ultimate block
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.9
-Stable tag: 1.2.17
+Stable tag: 1.2.19
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -246,11 +246,12 @@ This could be from the theme you're using, or another plugin. Again, please [con
 
 == Changelog ==
 
-= 1.2.17 =
+= 1.2.19 =
 * Styling tweaks/fixes
 * Fixed Contact Form block alignments bug
 * Improved Contact Form block grid layout
 * Added security fix to video slider block
+* Added security fix for plugin global settings
 * Fixed Maps block not working on apiVersion 3
 
 = 1.2.15 =

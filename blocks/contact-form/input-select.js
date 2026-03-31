@@ -44,7 +44,7 @@ const generateSelectId = (label) => {
 };
 
 registerBlockType('blockons/form-select', {
-	apiVersion: 3,
+	apiVersion: 2,
 	title: __('Form Select', 'blockons'),
 	icon: 'menu',
 	parent: ['blockons/contact-form'],

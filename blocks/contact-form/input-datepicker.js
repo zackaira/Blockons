@@ -98,7 +98,7 @@ const useDateFormatOptions = (enableTime) => {
 };
 
 registerBlockType('blockons/form-datepicker', {
-	apiVersion: 3,
+	apiVersion: 2,
 	title: __('Form Date Picker', 'blockons'),
 	icon: 'calendar-alt',
 	parent: ['blockons/contact-form'],

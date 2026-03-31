@@ -33,6 +33,9 @@ const SettingsPage = () => {
 	const isAdmin = Boolean(blockonsObject.isAdmin);
 	const wcActive = Boolean(blockonsObject.wcActive);
 	const defaults = blockonsObject.blockonsDefaults;
+	const restHeaders = {
+		'X-WP-NONCE': blockonsObject.nonce,
+	};
 
 	const [showPageLoaderPreview, setShowPageLoaderPreview] = useState(false);
 	const [showBttbPreview, setShowBttbPreview] = useState(false);
@@ -100,7 +103,7 @@ const SettingsPage = () => {
 					// Add Nonce to prevent this working elsewhere
 					headers: {
 						'content-type': 'application/json',
-						'X-WP-NONCE': blockonsObject.nonce,
+						...restHeaders,
 					},
 				},
 			)
@@ -130,9 +133,7 @@ const SettingsPage = () => {
 			setLoadSetting(true);
 			axios
 				.delete(url + '/delete', {
-					headers: {
-						'X-WP-NONCE': blockonsObject.nonce,
-					},
+					headers: restHeaders,
 				})
 				.then((res) => {
 					setLoader(false);
@@ -144,7 +145,9 @@ const SettingsPage = () => {
 	// Get Settings from db
 	useEffect(() => {
 		axios
-			.get(url + '/settings')
+			.get(url + '/settings', {
+				headers: restHeaders,
+			})
 			.then((res) => {
 				const blockonsOptions = res.data
 					? JSON.parse(res.data)
