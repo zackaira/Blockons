@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: gutenberg, editor blocks, woocommerce blocks, page builder, ultimate blocks
 Requires at least: 5.0
 Requires PHP: 5.6
-Tested up to: 6.9
-Stable tag: 1.2.19
+Tested up to: 7.1
+Stable tag: 1.2.20
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ Introducing [Blockons](https://blockons.com/go/website/): A WordPress Plugin for
 
 Blockons is your perfect partner for creating stunning WordPress pages with ease. This free plugin enhances your WordPress experience by adding 17 dynamic and advanced editor blocks, including 3 specially designed for WooCommerce.
 
-These blocks work seamlessly with the core WordPress editor (formerly known as Gutenberg), allowing you to craft engaging and visually appealing web pages without any hassle.
+These blocks work seamlessly with the core WordPress Gutenberg editor, allowing you to craft engaging and visually appealing web pages without any hassle.
 
 But that's not all!
 
@@ -245,6 +245,15 @@ Please [contact us](https://blockons.com/go/contact/) so we can post a fix and g
 This could be from the theme you're using, or another plugin. Again, please [contact us](https://blockons.com/go/contact/) so we can post a fix or give you custom CSS to fix it.
 
 == Changelog ==
+
+= 1.2.20 =
+* Styling tweaks/fixes
+* Fixed Accordion blocks editor bug
+* Fixed Video Slider editor play button
+* Fixed map block marker bug
+* Update Freemius SDK
+* Updated the language .pot file
+* Updated Swiper and UUID to patched versions
 
 = 1.2.19 =
 * Styling tweaks/fixes

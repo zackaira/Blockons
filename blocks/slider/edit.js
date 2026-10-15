@@ -22,7 +22,7 @@ import BlockonsColorpicker from '../_components/BlockonsColorpicker';
 import BlockonsLoader from '../_components/BlockonsLoader';
 import FontAwesomeIcon from '../_components/FontAwesomeIcon';
 import { sliderArrowIcons, colorPickerPalette } from '../block-global';
-import { Navigation, Pagination, EffectFade, EffectCoverflow } from 'swiper';
+import { Navigation, Pagination, EffectFade, EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import axios from 'axios';
 
@@ -130,7 +130,11 @@ const Edit = (props) => {
 			loop: mode === 'loop' ? true : false,
 			rewind: mode === 'rewind' ? true : false,
 			simulateTouch: false,
-			navigation: navigation,
+			navigation: navigation
+				? {
+						addIcons: false,
+					}
+				: false,
 			pagination: pagination
 				? {
 						type:

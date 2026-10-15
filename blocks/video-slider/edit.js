@@ -21,7 +21,7 @@ import BlockonsColorpicker from "../_components/BlockonsColorpicker";
 import FontAwesomeIcon from "../_components/FontAwesomeIcon";
 import { sliderArrowIcons } from "../block-global";
 import { colorPickerPalette } from "../block-global";
-import { Navigation, Pagination, EffectFade, EffectCoverflow } from "swiper";
+import { Navigation, Pagination, EffectFade, EffectCoverflow } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { blockonsSlideVideoAction } from "./video-actions";
 
@@ -72,7 +72,11 @@ const Edit = (props) => {
 		loop: mode === "loop" ? true : false,
 		rewind: mode === "rewind" ? true : false,
 		simulateTouch: false,
-		navigation: navigation,
+		navigation: navigation
+			? {
+					addIcons: false,
+				}
+			: false,
 		pagination: pagination
 			? {
 					type: paginationStyle === "fraction" ? "fraction" : "bullets",

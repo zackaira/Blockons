@@ -6,7 +6,7 @@ const ProPromo = ({ blockonsOptions, clickClose, upgradeUrl }) => {
 		<div className="blockons-propromo">
 			<div>
 				{__(
-					'Purchase Blockons Pro now and get ALL features for only $29!',
+					'Purchase Blockons Pro now and get ALL features for only $19!',
 					'blockons',
 				)}
 			</div>

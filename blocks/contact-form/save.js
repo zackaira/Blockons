@@ -90,7 +90,7 @@ const Save = ({ attributes }) => {
 
 						<div className="blockons-cf--button">
 							<button
-								type="button"
+								type="submit"
 								className="blockons-cf-submit-btn"
 								style={{
 									backgroundColor: buttonColor,

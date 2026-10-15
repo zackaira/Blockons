@@ -104,12 +104,14 @@ class Blockons {
 		));
 
 		// Contact Form Block JS
+		$form_handler_path = BLOCKONS_PLUGIN_DIR . 'dist/form-handler.min.js';
+		$form_handler_version = BLOCKONS_PLUGIN_VERSION . '.' . (file_exists($form_handler_path) ? filemtime($form_handler_path) : '0');
 		if ($isPro) {
 			wp_register_style('blockons-flatpickr-style', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/contact-form/flatpickr/flatpickr.min.css'), array(), BLOCKONS_PLUGIN_VERSION);
 			wp_register_script('blockons-flatpickr-script', esc_url(BLOCKONS_PLUGIN_URL . 'assets/blocks/contact-form/flatpickr/flatpickr.min.js'), array(), BLOCKONS_PLUGIN_VERSION);
-			wp_register_script('blockons-form-handler', esc_url(BLOCKONS_PLUGIN_URL . 'dist/form-handler.min.js'), array('wp-api', 'wp-api-fetch', 'blockons-flatpickr-script'), BLOCKONS_PLUGIN_VERSION, true);
+			wp_register_script('blockons-form-handler', esc_url(BLOCKONS_PLUGIN_URL . 'dist/form-handler.min.js'), array('wp-api', 'wp-api-fetch', 'blockons-flatpickr-script'), $form_handler_version, true);
 		} else {
-			wp_register_script('blockons-form-handler', esc_url(BLOCKONS_PLUGIN_URL . 'dist/form-handler.min.js'), array('wp-api', 'wp-api-fetch'), BLOCKONS_PLUGIN_VERSION, true);
+			wp_register_script('blockons-form-handler', esc_url(BLOCKONS_PLUGIN_URL . 'dist/form-handler.min.js'), array('wp-api', 'wp-api-fetch'), $form_handler_version, true);
 		}
 
 		wp_localize_script('blockons-form-handler', 'blockonsFormObj', array(
@@ -127,6 +129,8 @@ class Blockons {
 				'subject' => __('New Contact Form Submission', 'blockons'),
 				'error' => __('An error occurred. Please try again.', 'blockons'),
 				'recaptcha_error' => __('reCAPTCHA verification failed. Please try again.', 'blockons'),
+				'file_too_large' => __('This file is too large', 'blockons'),
+				'reload' => __('Please refresh the page and try again.', 'blockons'),
 			),
 		));
 

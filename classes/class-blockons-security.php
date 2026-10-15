@@ -3,8 +3,7 @@
  * Security Manager for Form Submissions
  */
 class Blockons_Security_Manager {
-    // Increase the threshold and track per form instead of globally
-    private $rate_limit_threshold = 30; // Maximum submissions per hour
+    private $rate_limit_threshold = 5; // Maximum submissions per hour
     private $rate_limit_window = 3600; // 1 hour in seconds
     private static $instance = null;
 
@@ -29,26 +28,21 @@ class Blockons_Security_Manager {
      * Get client IP address
      */
     public function get_client_ip() {
-        $ip_headers = [
-            'HTTP_CLIENT_IP',
-            'HTTP_X_FORWARDED_FOR',
-            'HTTP_X_FORWARDED',
-            'HTTP_X_CLUSTER_CLIENT_IP',
-            'HTTP_FORWARDED_FOR',
-            'HTTP_FORWARDED',
-            'REMOTE_ADDR'
-        ];
-
-        foreach ($ip_headers as $header) {
-            if (!empty($_SERVER[$header])) {
-                $ip = trim(explode(',', $_SERVER[$header])[0]);
-                if (filter_var($ip, FILTER_VALIDATE_IP)) {
-                    return $ip;
-                }
-            }
+        $remote = isset($_SERVER['REMOTE_ADDR']) ? trim((string) $_SERVER['REMOTE_ADDR']) : '';
+        if (!filter_var($remote, FILTER_VALIDATE_IP)) {
+            $remote = 'unknown';
         }
-        
-        return 'unknown';
+
+        /**
+         * IP used for rate limiting and submission metadata.
+         * Defaults to REMOTE_ADDR. Sites behind a trusted proxy can return the visitor IP.
+         */
+        $ip = apply_filters('blockons_form_client_ip', $remote);
+        if (!is_string($ip) || !filter_var($ip, FILTER_VALIDATE_IP)) {
+            return $remote;
+        }
+
+        return $ip;
     }
 
     /**
@@ -60,12 +54,11 @@ class Blockons_Security_Manager {
             return true;
         }
 
-        // Get the submission count for this IP and form
-        $rate_key = sprintf('blockons_submissions_%s_%s', $ip_address, $form_id);
+        // Transient keys are limited to 172 characters, so hash the IP and form name.
+        $rate_key = 'blcns_sub_' . md5($ip_address . '|' . $form_id);
         $submissions = get_transient($rate_key);
         
         if (false === $submissions) {
-            // First submission for this IP/form combination
             set_transient($rate_key, 1, $this->rate_limit_window);
             return true;
         }
@@ -80,8 +73,13 @@ class Blockons_Security_Manager {
             return false;
         }
 
-        // Increment the submission count
-        set_transient($rate_key, $submissions + 1, $this->rate_limit_window);
+        $ttl = $this->rate_limit_window;
+        $expires_at = get_option('_transient_timeout_' . $rate_key);
+        if ($expires_at) {
+            $ttl = max(1, (int) $expires_at - time());
+        }
+
+        set_transient($rate_key, $submissions + 1, $ttl);
         return true;
     }
 
@@ -89,11 +87,7 @@ class Blockons_Security_Manager {
      * Check if running in development environment
      */
     private function is_development_environment() {
-        return (
-            strpos($_SERVER['HTTP_HOST'], 'localhost') !== false || 
-            in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']) ||
-            (defined('WP_DEBUG') && WP_DEBUG === true)
-        );
+        return defined('BLOCKONS_CONTACT_FORM_DEV_MODE') && BLOCKONS_CONTACT_FORM_DEV_MODE;
     }
 
     /**
@@ -113,23 +107,24 @@ class Blockons_Security_Manager {
                 }
             }
     
-            // Validate required fields
-            $required_fields = ['emailTo', 'fields'];
-            foreach ($required_fields as $field) {
-                if (!isset($form_data[$field])) {
-                    throw new Exception("Missing required field: {$field}");
-                }
+            if (!isset($form_data['emailTo']) || !isset($form_data['fields']) || !is_array($form_data['fields'])) {
+                throw new Exception('Missing required field: emailTo');
             }
-    
-            // Validate email
-            if (!is_email($form_data['emailTo'])) {
+
+            if (trim((string) $form_data['emailTo']) === '') {
                 throw new Exception('Invalid recipient email address');
             }
-    
-            // Convert boolean strings to actual booleans
+
+            $email_check = $this->validate_email_addresses($form_data);
+            if (is_wp_error($email_check)) {
+                return $email_check;
+            }
+
+            $form_data = $this->sanitize_form_data($form_data);
+
             if (isset($form_data['includeMetadata'])) {
                 $form_data['includeMetadata'] = filter_var(
-                    $form_data['includeMetadata'], 
+                    $form_data['includeMetadata'],
                     FILTER_VALIDATE_BOOLEAN
                 );
             }
@@ -231,7 +226,7 @@ class Blockons_Security_Manager {
 
                 // Validate each email address
                 foreach ($emails as $email) {
-                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    if (!is_email($email)) {
                         return new WP_Error(
                             'invalid_email',
                             /* translators: %s: the invalid email address */
@@ -250,18 +245,35 @@ class Blockons_Security_Manager {
      * Sanitize form data
      */
     public function sanitize_form_data($form_data) {
+        $allowed = [
+            'emailTo',
+            'emailSubject',
+            'fromEmail',
+            'fromName',
+            'ccEmails',
+            'bccEmails',
+            'includeMetadata',
+            'formName',
+            'fields',
+            'recaptchaToken',
+            'pageTitle',
+        ];
+
         $sanitized = [];
-        foreach ($form_data as $key => $value) {
+        foreach ($allowed as $key) {
+            if (!array_key_exists($key, $form_data)) {
+                continue;
+            }
+
+            $value = $form_data[$key];
             if ($key === 'fields' && is_array($value)) {
-                // Special handling for fields array
                 $sanitized['fields'] = $this->sanitize_form_fields($value);
-            } else if (in_array($key, ['emailTo', 'ccEmails', 'bccEmails'])) {
-                // Special handling for email fields
+            } else if (in_array($key, ['emailTo', 'ccEmails', 'bccEmails'], true)) {
                 $sanitized[$key] = $this->sanitize_email_list($value, $key);
             } else if (is_array($value)) {
-                $sanitized[$key] = array_map('sanitize_text_field', $value);
+                continue;
             } else {
-                $sanitized[$key] = sanitize_text_field($value);
+                $sanitized[$key] = sanitize_text_field((string) $value);
             }
         }
         return $sanitized;
@@ -321,6 +333,15 @@ class Blockons_Security_Manager {
                 return sanitize_email($value);
             case 'url':
                 return esc_url_raw($value);
+            case 'file':
+                if (!is_array($value)) {
+                    return '';
+                }
+                return [
+                    'name' => sanitize_file_name($value['name'] ?? ''),
+                    'size' => isset($value['size']) ? absint($value['size']) : 0,
+                    'type' => sanitize_mime_type($value['type'] ?? ''),
+                ];
             case 'checkbox_group':
                 if (is_array($value)) {
                     return array_map([$this, 'sanitize_checkbox_value'], $value);

@@ -3,7 +3,9 @@ import {
 	InnerBlocks,
 	useBlockProps,
 	InspectorControls,
+	store as blockEditorStore,
 } from '@wordpress/block-editor';
+import { useSelect } from '@wordpress/data';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 import {
@@ -91,6 +93,7 @@ registerBlockType('blockons/accordion', {
 		const {
 			isSelected,
 			className,
+			clientId,
 			attributes: {
 				hideFrontend,
 				labelTag,
@@ -110,8 +113,15 @@ registerBlockType('blockons/accordion', {
 			context,
 		} = props;
 
-		// Determine if accordion content should be visible
-		const isContentVisible = stayOpen || isSelected;
+		// Stay open while editing nested blocks, not only when the accordion itself is selected.
+		const hasSelectedInnerBlock = useSelect(
+			(select) =>
+				select(blockEditorStore).hasSelectedInnerBlock(clientId, true),
+			[clientId],
+		);
+
+		const isContentVisible =
+			stayOpen || isSelected || hasSelectedInnerBlock;
 
 		const onChangeAccordionLabel = (newAccordionLabel) => {
 			setAttributes({ accordionLabel: newAccordionLabel });
@@ -176,7 +186,7 @@ registerBlockType('blockons/accordion', {
 								label={__('Stay Open', 'blockons')}
 								checked={stayOpen}
 								help={__(
-									'Expand this panel on initial page load. Also Use this to keep the panel open while editing.',
+									'Expand this panel on initial page load.',
 									'blockons',
 								)}
 								onChange={(newValue) => {

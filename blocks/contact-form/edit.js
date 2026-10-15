@@ -386,7 +386,7 @@ const Edit = (props) => {
 									setAttributes({ fromName: value })
 								}
 								help={__(
-									'Add the NAME shortcode here',
+									'Sender name. You can use a field shortcode, for example [name]. Leave blank to use the site name. An SMTP plugin can override this.',
 									'blockons',
 								)}
 								__next40pxDefaultSize={true}
@@ -399,7 +399,7 @@ const Edit = (props) => {
 									setAttributes({ fromEmail: value })
 								}
 								help={__(
-									'Add the EMAIL shortcode here',
+									'Optional sender address on this site’s domain, such as hello@yoursite.com. Replies go to the email field on the form. Leave blank to use wordpress@yoursite.com. Not used when an SMTP plugin is sending mail.',
 									'blockons',
 								)}
 								__next40pxDefaultSize={true}
@@ -868,7 +868,7 @@ const Edit = (props) => {
 
 						<div className="blockons-cf--button">
 							<button
-								type="button"
+								type="submit"
 								className="blockons-cf-submit-btn"
 								style={{
 									backgroundColor: buttonColor,

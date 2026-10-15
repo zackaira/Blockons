@@ -3,8 +3,13 @@
  * Create Custom Rest API Endpoints
  */
 class Blockons_WC_Rest_Routes {
+	private $outbound_from_email = '';
+	private $outbound_from_name = '';
+	private $mail_hooks_added = false;
+
 	public function __construct() {
 		add_action('rest_api_init', [$this, 'blockons_create_rest_routes']);
+		add_filter('render_block', [$this, 'blockons_sign_contact_form_block'], 10, 2);
 		
 		// AJAX handlers for quickview functionality
 		add_action('wp_ajax_blockons_clear_cart_notices', [$this, 'blockons_clear_cart_notices']);
@@ -87,6 +92,26 @@ class Blockons_WC_Rest_Routes {
             'callback' => [$this, 'blockons_handle_contact_form_submission'],
             'permission_callback' => '__return_true', // Allow public access
         ));
+
+		register_rest_route('blcns/v1', '/form-upload', array(
+			'methods' => 'GET',
+			'callback' => [$this, 'blockons_download_form_upload'],
+			'permission_callback' => '__return_true',
+			'args' => array(
+				'file' => array(
+					'required' => true,
+				),
+				'expires' => array(
+					'required' => true,
+				),
+				'token' => array(
+					'required' => true,
+				),
+				'name' => array(
+					'required' => false,
+				),
+			),
+		));
 
 		// Add Excerpt to Search Results
 		register_rest_field( 'search-result', 'extras', array(
@@ -431,26 +456,65 @@ class Blockons_WC_Rest_Routes {
 		$isPremium = (bool) blockons_fs()->can_use_premium_code__premium_only();
 	
 		try {
-			// Initialize security manager
 			$security = Blockons_Security_Manager::get_instance();
-			// Get client IP address
-			$ip_address = $this->get_client_ip();
-	
-			// Validate request data
+			$config = $this->verify_signed_form_config($request);
+			if (is_wp_error($config)) {
+				return $config;
+			}
+
+			if (!$isPremium) {
+				$config['ccEmails'] = '';
+				$config['bccEmails'] = '';
+			}
+
+			$file_fields = isset($config['fileFields']) && is_array($config['fileFields']) ? $config['fileFields'] : [];
+			foreach (['emailTo', 'emailSubject', 'fromEmail', 'fromName', 'ccEmails', 'bccEmails', 'includeMetadata', 'formName'] as $config_key) {
+				if (array_key_exists($config_key, $config)) {
+					$request->set_param($config_key, $config[$config_key]);
+				}
+			}
+
+			$honeypot = $request->get_param('asite');
+			if (is_string($honeypot) && trim(wp_unslash($honeypot)) !== '') {
+				return new WP_REST_Response([
+					'success' => true,
+					'message' => __('Form submitted successfully', 'blockons')
+				], 200);
+			}
+
 			$form_data = $security->validate_request($request);
 			if (is_wp_error($form_data)) {
 				return $form_data;
 			}
 
-			// Inject the page title from JS
-			$form_data['pageTitle'] = sanitize_text_field( $request->get_param('pageTitle', '') );
-	
+			$page_title = $request->get_param('pageTitle');
+			$form_data['pageTitle'] = sanitize_text_field(is_string($page_title) ? wp_unslash($page_title) : '');
+			$form_data['fileFields'] = $file_fields;
+			$form_data['recaptchaAction'] = isset($config['recaptchaAction']) ? (string) $config['recaptchaAction'] : '';
+
+			foreach ($form_data['fields'] as $field) {
+				if (isset($field['name']) && $field['name'] === 'asite' && !empty($field['value'])) {
+					return new WP_REST_Response([
+						'success' => true,
+						'message' => __('Form submitted successfully', 'blockons')
+					], 200);
+				}
+			}
+
+			$ip_address = $this->get_client_ip();
+			if (!$security->check_submission_rate($ip_address, $form_data['formName'] ?? 'default')) {
+				return new WP_Error(
+					'rate_limit_exceeded',
+					__('Too many submissions. Please try again later.', 'blockons'),
+					array('status' => 429)
+				);
+			}
+
 			$options = get_option('blockons_options');
 			if (is_string($options)) {
 				$options = json_decode($options, true);
 			}
 	
-			// Verify reCAPTCHA if required
 			if ($isPremium && $this->should_verify_recaptcha($options)) {
 				if (empty($form_data['recaptchaToken'])) {
 					return new WP_Error(
@@ -460,51 +524,16 @@ class Blockons_WC_Rest_Routes {
 					);
 				}
 	
-				$recaptcha_result = $this->verify_recaptcha($form_data['recaptchaToken'], $options);
+				$recaptcha_result = $this->verify_recaptcha($form_data['recaptchaToken'], $options, $form_data['recaptchaAction']);
 				if (is_wp_error($recaptcha_result)) {
 					return $recaptcha_result;
 				}
 			}
 	
-			// Apply filters only when handling form submission
-			add_filter('wp_mail_from', [$this, 'blockons_custom_wp_mail_from']);
-			add_filter('wp_mail_from_name', [$this, 'blockons_custom_wp_mail_from_name']);    
-	
-			// Handle file uploads if present
 			if (!empty($_FILES)) {
-				try {
-					// Note: handle_file_uploads will update $form_data['fields'] with file info
-					$uploads = $this->handle_file_uploads($form_data);
-				} catch (Exception $e) {
-					error_log('File upload error: ' . $e->getMessage());
-					return new WP_Error(
-						'upload_error',
-						$e->getMessage(),
-						array('status' => 400)
-					);
-				}
+				$this->handle_file_uploads($form_data);
 			}
 	
-			// Check submission rate
-			if (!$security->check_submission_rate($ip_address, $form_data['formId'] ?? 'default')) {
-				return new WP_Error(
-					'rate_limit_exceeded',
-					__('Too many submissions. Please try again later.', 'blockons'),
-					array('status' => 429)
-				);
-			}
-	
-			// Check honeypot
-			foreach ($form_data['fields'] as $field) {
-				if (isset($field['name']) && $field['name'] === 'asite' && !empty($field['value'])) {
-					return new WP_REST_Response([
-						'success' => true,
-						'message' => __('Form submitted successfully', 'blockons')
-					], 200);
-				}
-			}
-	
-			// Validate recipient emails
 			$to_emails = array_map('trim', explode(',', $form_data['emailTo']));
 			$valid_emails = array_filter($to_emails, 'is_email');
 	
@@ -516,9 +545,7 @@ class Blockons_WC_Rest_Routes {
 				);
 			}
 	
-			// Check if we're in development environment
 			if ($this->is_development_environment()) {
-				// Save submission if enabled
 				if ($isPremium && $this->should_save_submission($options)) {
 					$email_result = [
 						'content' => $this->prepare_email_content($form_data),
@@ -531,40 +558,40 @@ class Blockons_WC_Rest_Routes {
 	
 				return new WP_REST_Response([
 					'success' => true,
-					'message' => __('Form submitted successfully (Development Mode)', 'blockons'),
+					'message' => __('Development mode is on, so this message was not emailed.', 'blockons'),
 					'dev_mode' => true
 				], 200);
 			}
 	
-			// Process submission for production
+			$this->blockons_prepare_sender($form_data);
 			$email_result = $this->process_form_submission($form_data, $valid_emails);
 			if (is_wp_error($email_result)) {
 				error_log('Email error: ' . $email_result->get_error_message());
-				throw new Exception($email_result->get_error_message());
+				throw new Exception(__('There was an error sending your message. Please try again.', 'blockons'));
 			}
 	
-			// Save submission if enabled
 			if ($isPremium && $this->should_save_submission($options)) {
 				$this->save_form_submission($form_data, $email_result);
 			}
-	
-			// Remove filters immediately after sending the email
-			remove_filter('wp_mail_from', [$this, 'blockons_custom_wp_mail_from']);
-			remove_filter('wp_mail_from_name', [$this, 'blockons_custom_wp_mail_from_name']);    
 	
 			return new WP_REST_Response([
 				'success' => true,
 				'message' => __('Form submitted successfully', 'blockons')
 			], 200);
 	
-		} catch (Exception $e) {
+		} catch (\Throwable $e) {
 			error_log('Form submission error: ' . $e->getMessage());
-			error_log('Error trace: ' . $e->getTraceAsString());
+			$status = ((int) $e->getCode() === 400) ? 400 : 500;
+			$message = ($status === 400)
+				? $e->getMessage()
+				: __('There was an error sending your message. Please try again.', 'blockons');
 			return new WP_Error(
 				'submission_error',
-				$e->getMessage(),
-				array('status' => 500)
+				$message,
+				array('status' => $status)
 			);
+		} finally {
+			$this->blockons_remove_mail_hooks();
 		}
 	}
 
@@ -572,17 +599,24 @@ class Blockons_WC_Rest_Routes {
 	 * Custom WP Mail "From" Email
 	 */
 	public function blockons_custom_wp_mail_from($email) {
-		$admin_email = get_bloginfo('admin_email');
-		$site_domain = parse_url(get_site_url(), PHP_URL_HOST);
-		
-		return is_email($admin_email) ? $admin_email : 'noreply@' . $site_domain;
+		return is_email($this->outbound_from_email) ? $this->outbound_from_email : $email;
 	}
 
 	/**
 	 * Custom WP Mail "From" Name
 	 */
 	public function blockons_custom_wp_mail_from_name($name) {
-		return get_bloginfo('name');
+		return $this->outbound_from_name !== '' ? $this->outbound_from_name : $name;
+	}
+
+	/**
+	 * Set the envelope sender when this plugin is responsible for the From address.
+	 * SMTP plugins set this themselves, so this hook is not added while one is active.
+	 */
+	public function blockons_configure_phpmailer($phpmailer) {
+		if (is_email($this->outbound_from_email)) {
+			$phpmailer->Sender = $this->outbound_from_email;
+		}
 	}
 
 	/**
@@ -598,7 +632,7 @@ class Blockons_WC_Rest_Routes {
 	/**
 	 * Verify reCAPTCHA token
 	 */
-	private function verify_recaptcha($token, $options) {
+	private function verify_recaptcha($token, $options, $expected_action = '') {
 		if (empty($token)) {
 			return new WP_Error(
 				'recaptcha_missing',
@@ -606,12 +640,18 @@ class Blockons_WC_Rest_Routes {
 				array('status' => 400)
 			);
 		}
+
+		$body_args = [
+			'secret' => $options['contactforms']['recaptcha_secret'],
+			'response' => $token,
+		];
+		$remote_ip = $this->get_client_ip();
+		if ($remote_ip !== 'unknown') {
+			$body_args['remoteip'] = $remote_ip;
+		}
 	
 		$response = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
-			'body' => [
-				'secret' => $options['contactforms']['recaptcha_secret'],
-				'response' => $token
-			]
+			'body' => $body_args,
 		]);
 	
 		if (is_wp_error($response)) {
@@ -625,7 +665,24 @@ class Blockons_WC_Rest_Routes {
 	
 		$body = json_decode(wp_remote_retrieve_body($response), true);
 	
-		if (!$body['success'] || ($body['score'] ?? 0) < 0.5) {
+		if (!is_array($body) || empty($body['success']) || !isset($body['score']) || (float) $body['score'] < 0.5) {
+			return new WP_Error(
+				'recaptcha_failed',
+				__('reCAPTCHA verification failed', 'blockons'),
+				array('status' => 400)
+			);
+		}
+
+		if ($expected_action !== '' && (($body['action'] ?? '') !== $expected_action)) {
+			return new WP_Error(
+				'recaptcha_failed',
+				__('reCAPTCHA verification failed', 'blockons'),
+				array('status' => 400)
+			);
+		}
+
+		$hostname = isset($body['hostname']) ? (string) $body['hostname'] : '';
+		if (!$this->blockons_recaptcha_hostname_matches($hostname)) {
 			return new WP_Error(
 				'recaptcha_failed',
 				__('reCAPTCHA verification failed', 'blockons'),
@@ -659,14 +716,18 @@ class Blockons_WC_Rest_Routes {
 				];
 			}
 
-			// Send email
+			$mail_error = null;
+			$capture_mail_error = function ($wp_error) use (&$mail_error) {
+				$mail_error = $wp_error;
+			};
+			add_action('wp_mail_failed', $capture_mail_error);
 			$mail_sent = wp_mail($emailRecipients, $subject, $email_content, $headers);
+			remove_action('wp_mail_failed', $capture_mail_error);
 
 			if (!$mail_sent) {
-				$error = error_get_last();
-				$error_message = ($error && isset($error['message'])) ? $error['message'] : 'Unknown error';
-				error_log('Mail send failed. PHP error: ' . print_r($error, true));
-				throw new Exception('Failed to send email: ' . $error_message);
+				$detail = ($mail_error instanceof WP_Error) ? $mail_error->get_error_message() : 'Unknown error';
+				error_log('Blockons form mail failed: ' . $detail);
+				throw new Exception(__('There was an error sending your message. Please try again.', 'blockons'));
 			}
 	
 			return [
@@ -728,131 +789,108 @@ class Blockons_WC_Rest_Routes {
 	 * Handle file uploads
 	 */
 	private function handle_file_uploads(&$form_data) {
-		try {
-			$uploads = [];
-			$upload_dir = wp_upload_dir();
-			$form_upload_dir = $upload_dir['basedir'] . '/blockons/form-uploads/' . date('Y/m');
-	
-			// Create necessary directories
-			$dirs = [
-				$upload_dir['basedir'] . '/blockons',
-				$upload_dir['basedir'] . '/blockons/form-uploads',
-				$form_upload_dir
-			];
-	
-			foreach ($dirs as $dir) {
-				if (!wp_mkdir_p($dir)) {
-					throw new Exception(__('Failed to create upload directory', 'blockons'));
-				}
+		$uploads = [];
+		$upload_dir = wp_upload_dir();
+		$base_dir = $upload_dir['basedir'] . '/blockons/form-uploads';
+		$form_upload_dir = $base_dir . '/' . gmdate('Y/m');
+		$rules = [];
+
+		foreach ($form_data['fileFields'] ?? [] as $rule) {
+			if (!empty($rule['name'])) {
+				$rules[$rule['name']] = $rule;
 			}
-	
-			// Track processed files
-			$processed_files = [];
-	
-			foreach ($_FILES as $key => $file) {
-				// Skip if already processed or has error
-				if (in_array($key, $processed_files) || $file['error'] !== UPLOAD_ERR_OK) {
-					continue;
-				}
-				
-				try {
-					// Basic validation
-					$max_size = isset($form_data['maxFileSize']) 
-						? intval($form_data['maxFileSize']) * 1024 * 1024 
-						: 5 * 1024 * 1024;
-	
-					if ($file['size'] > $max_size) {
-						throw new Exception(sprintf(
-							/* translators: %s: the maximum file size allowed (e.g., "2 MB") */
-							__('File size exceeds limit of %s', 'blockons'),
-							size_format($max_size)
-						));
-					}
-	
-					// Check MIME type
-					$allowed_types = [
-						'application/pdf' => 'pdf',
-						'application/msword' => 'doc',
-						'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'docx',
-						'text/plain' => 'txt',
-						'image/jpeg' => 'jpg',
-						'image/png' => 'png',
-						'image/gif' => 'gif',
-						'image/webp' => 'webp',
-						'video/mp4' => 'mp4',
-						'audio/mpeg' => 'mp3',
-						'audio/wav' => 'wav'
-					];
-	
-					// Get MIME type
-					if (!file_exists($file['tmp_name'])) {
-						error_log('Temp file does not exist: ' . $file['tmp_name']);
-						continue;
-					}
-	
-					$finfo = finfo_open(FILEINFO_MIME_TYPE);
-					$mime_type = finfo_file($finfo, $file['tmp_name']);
-					finfo_close($finfo);
-	
-					if (!isset($allowed_types[$mime_type])) {
-						throw new Exception(__('Invalid file type', 'blockons') . ': ' . $mime_type);
-					}
-	
-					// Prepare filename
-					$file_extension = $allowed_types[$mime_type];
-					$filename = sanitize_file_name(pathinfo($file['name'], PATHINFO_FILENAME) . '.' . $file_extension);
-					$unique_filename = wp_unique_filename($form_upload_dir, $filename);
-					$upload_path = $form_upload_dir . '/' . $unique_filename;
-	
-					if (@move_uploaded_file($file['tmp_name'], $upload_path)) {
-						@chmod($upload_path, 0644);
-	
-						$file_url = $upload_dir['baseurl'] . '/blockons/form-uploads/' . date('Y/m') . '/' . $unique_filename;
-						
-						// Store upload info
-						$file_data = array(
-							'url' => esc_url($file_url),
-							'file' => $upload_path,
-							'type' => $mime_type,
-							'name' => $filename,
-							'size' => $file['size'],
-							'originalName' => $file['name']
-						);
-						
-						$uploads[$key] = $file_data;
-	
-						// Update the corresponding field in form_data
-						if (!empty($form_data['fields'])) {
-							foreach ($form_data['fields'] as &$field) {
-								if ($field['type'] === 'file' && $field['name'] === $key) {
-									// Update the field value with file information
-									$field['value'] = array(
-										'name' => $filename,
-										'size' => $file['size'],
-										'type' => $mime_type,
-										'url' => esc_url($file_url)
-									);
-									break;
-								}
-							}
-						}
-	
-						$processed_files[] = $key;
-					} else {
-						$upload_error = error_get_last();
-						throw new Exception(__('Failed to move uploaded file', 'blockons'));
-					}
-	
-				} catch (Exception $e) {
-					throw $e;
-				}
-			}
-	
-			return $uploads;
-	
-		} catch (Exception $e) {
-			throw $e;
 		}
+
+		if (false === get_transient('blockons_upload_cleanup')) {
+			$this->cleanup_old_uploads(30);
+			set_transient('blockons_upload_cleanup', 1, DAY_IN_SECONDS);
+		}
+
+		foreach ([$upload_dir['basedir'] . '/blockons', $base_dir, $form_upload_dir] as $dir) {
+			$this->blockons_protect_upload_dir($dir);
+		}
+
+		foreach ($_FILES as $key => $file) {
+			if (!isset($file['error']) || $file['error'] === UPLOAD_ERR_NO_FILE) {
+				continue;
+			}
+
+			if ($file['error'] !== UPLOAD_ERR_OK) {
+				throw new Exception(__('Failed to upload file', 'blockons'), 400);
+			}
+
+			if (!isset($rules[$key])) {
+				throw new Exception(__('This file field is not allowed', 'blockons'), 400);
+			}
+
+			$max_size = isset($rules[$key]['maxBytes']) ? (int) $rules[$key]['maxBytes'] : (2 * 1024 * 1024);
+			$max_size = max(1, min($max_size, 10 * 1024 * 1024));
+
+			if ($file['size'] > $max_size) {
+				throw new Exception(sprintf(
+					/* translators: %s: the maximum file size allowed (e.g., "2 MB") */
+					__('File size exceeds limit of %s', 'blockons'),
+					size_format($max_size)
+				), 400);
+			}
+
+			if (empty($file['tmp_name']) || !file_exists($file['tmp_name']) || !function_exists('finfo_open')) {
+				throw new Exception(__('Failed to upload file', 'blockons'), 400);
+			}
+
+			$allowed_types = $this->blockons_allowed_upload_mimes($rules[$key]['accept'] ?? '');
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+			$mime_type = $finfo ? finfo_file($finfo, $file['tmp_name']) : '';
+			if ($finfo) {
+				finfo_close($finfo);
+			}
+
+			if (!isset($allowed_types[$mime_type])) {
+				throw new Exception(__('This file type is not allowed', 'blockons'), 400);
+			}
+
+			$file_extension = $allowed_types[$mime_type];
+			$stored_name = wp_generate_password(32, false, false) . '.' . $file_extension;
+			$upload_path = $form_upload_dir . '/' . $stored_name;
+			$original_name = sanitize_file_name($file['name']);
+			if ($original_name === '') {
+				$original_name = 'upload.' . $file_extension;
+			}
+
+			if (!@move_uploaded_file($file['tmp_name'], $upload_path)) {
+				throw new Exception(__('Failed to move uploaded file', 'blockons'), 400);
+			}
+
+			@chmod($upload_path, 0644);
+
+			$relative = gmdate('Y/m') . '/' . $stored_name;
+			$file_url = $this->blockons_signed_upload_url($relative, $original_name);
+			$file_data = array(
+				'url' => esc_url_raw($file_url),
+				'file' => $upload_path,
+				'type' => $mime_type,
+				'name' => $original_name,
+				'size' => $file['size'],
+			);
+			$uploads[$key] = $file_data;
+
+			if (!empty($form_data['fields'])) {
+				foreach ($form_data['fields'] as &$field) {
+					if (($field['type'] ?? '') === 'file' && ($field['name'] ?? '') === $key) {
+						$field['value'] = array(
+							'name' => $original_name,
+							'size' => $file['size'],
+							'type' => $mime_type,
+							'url' => esc_url_raw($file_url),
+						);
+						break;
+					}
+				}
+				unset($field);
+			}
+		}
+
+		return $uploads;
 	}
 	
 	/**
@@ -933,34 +971,18 @@ class Blockons_WC_Rest_Routes {
 						break;
 	
 					case 'file':
-						if (!empty($field['value'])) {
-							// Handle file value as array
-							if (is_array($field['value'])) {
+						if (is_array($field['value']) && !empty($field['value']['url'])) {
+							$compiled_message .= sprintf(
+								"%s: %s (%s)\n",
+								esc_html($label),
+								esc_url($field['value']['url']),
+								sanitize_text_field($field['value']['name'] ?? '')
+							);
+
+							if (!empty($field['value']['size'])) {
 								$compiled_message .= sprintf(
-									"%s: %s\n",
-									esc_html($label),
-									esc_url($field['value']['name'])
-								);
-								
-								if (!empty($field['value']['size'])) {
-									$compiled_message .= sprintf(
-										"File Size: %s\n",
-										size_format($field['value']['size'])
-									);
-								}
-								
-								if (!empty($field['value']['type'])) {
-									$compiled_message .= sprintf(
-										"File Type: %s\n",
-										esc_html($field['value']['type'])
-									);
-								}
-							} else {
-								// Handle file value as string (URL)
-								$compiled_message .= sprintf(
-									"%s: %s\n",
-									esc_html($label),
-									esc_url($field['value'])
+									"File Size: %s\n",
+									size_format($field['value']['size'])
 								);
 							}
 						}
@@ -999,10 +1021,13 @@ class Blockons_WC_Rest_Routes {
 							break;
 	
 					default:
+						if (!is_scalar($field['value'])) {
+							break;
+						}
 						$compiled_message .= sprintf(
 							"%s: %s\n",
 							esc_html($label),
-							esc_html($field['value'])
+							esc_html((string) $field['value'])
 						);
 				}
 			}
@@ -1023,27 +1048,10 @@ class Blockons_WC_Rest_Routes {
 		try {
 			$headers = array();
 			
-			// Set content type
 			$headers[] = 'Content-Type: text/plain; charset=UTF-8';
-        
-			// Get site domain and admin email
-			$site_domain = parse_url(get_site_url(), PHP_URL_HOST);
-			$admin_email = get_bloginfo('admin_email');
-	
-			// Ensure a valid email is used for "From"
-			if (!is_email($admin_email)) {
-				$admin_email = 'noreply@' . $site_domain; // Fallback email
-			}
-	
-			// Set "From" name and email
-			$from_name = get_bloginfo('name');
-			$from_email = $admin_email; // Force it to use the site admin email
-	
-			$headers[] = "From: $from_name <$from_email>";
-			// Add Return-Path to prevent "via" issues
-			$headers[] = "Return-Path: <$from_email>";
 
-			// Set Reply-To
+			// From and the envelope sender are applied with wp_mail filters when no
+			// SMTP plugin is active. A From header here would override WP Mail SMTP.
 			$reply_to = $this->get_reply_to_email($form_data);
 			if ($reply_to && is_email($reply_to)) {
 				$headers[] = "Reply-To: $reply_to";
@@ -1091,8 +1099,7 @@ class Blockons_WC_Rest_Routes {
 			}
 		}
 
-		// Fallback to from_email if set
-		return !empty($form_data['fromEmail']) ? $form_data['fromEmail'] : null;
+		return null;
 	}
 
 	/**
@@ -1108,14 +1115,13 @@ class Blockons_WC_Rest_Routes {
 			// Process any shortcodes in the subject
 			$processed_subject = $this->process_shortcodes($subject, $form_data);
 	
-			// Clean the subject line
-			$processed_subject = wp_strip_all_tags(trim($processed_subject));
+			$processed_subject = preg_replace('/[\r\n]+/', ' ', wp_strip_all_tags(trim($processed_subject)));
 	
 			return $processed_subject;
 	
 		} catch (Exception $e) {
 			error_log('Error processing email subject: ' . $e->getMessage());
-			return $subject; // Return original subject if processing fails
+			return __('New Form Submission', 'blockons');
 		}
 	}
 
@@ -1254,26 +1260,8 @@ class Blockons_WC_Rest_Routes {
 	 * Get client IP address
 	 */
 	private function get_client_ip() {
-		$ip_headers = [
-			'HTTP_CLIENT_IP',
-			'HTTP_X_FORWARDED_FOR',
-			'HTTP_X_FORWARDED',
-			'HTTP_X_CLUSTER_CLIENT_IP',
-			'HTTP_FORWARDED_FOR',
-			'HTTP_FORWARDED',
-			'REMOTE_ADDR'
-		];
-	
-		foreach ($ip_headers as $header) {
-			if (!empty($_SERVER[$header])) {
-				$ip = trim(explode(',', $_SERVER[$header])[0]);
-				if (filter_var($ip, FILTER_VALIDATE_IP)) {
-					return $ip;
-				}
-			}
-		}
-		
-		return 'unknown';
+		$security = Blockons_Security_Manager::get_instance();
+		return $security->get_client_ip();
 	}
 
 	/**
@@ -1321,11 +1309,7 @@ class Blockons_WC_Rest_Routes {
 	 * Check if running in development environment
 	 */
 	private function is_development_environment() {
-		return (
-			strpos($_SERVER['HTTP_HOST'], 'localhost') !== false || 
-			in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']) ||
-			(defined('WP_DEBUG') && WP_DEBUG === true)
-		);
+		return defined('BLOCKONS_CONTACT_FORM_DEV_MODE') && BLOCKONS_CONTACT_FORM_DEV_MODE;
 	}
 
 	/**
@@ -1351,6 +1335,415 @@ class Blockons_WC_Rest_Routes {
 		}
 
 		wp_send_json_success('Cart notices cleared');
+	}
+
+	/**
+	 * Sign the saved mail settings so submissions cannot change the recipients.
+	 */
+	public function blockons_sign_contact_form_block($content, $block) {
+		if (!is_string($content) || ($block['blockName'] ?? '') !== 'blockons/contact-form') {
+			return $content;
+		}
+
+		if (strpos($content, 'name="blockons_form_token"') !== false) {
+			return $content;
+		}
+
+		$attrs = isset($block['attrs']) && is_array($block['attrs']) ? $block['attrs'] : [];
+		$include = array_key_exists('includeMetadata', $attrs) ? (bool) $attrs['includeMetadata'] : true;
+		$form_name = isset($attrs['formName']) && $attrs['formName'] !== ''
+			? (string) $attrs['formName']
+			: 'New Website Form';
+		$subject = isset($attrs['emailSubject']) && $attrs['emailSubject'] !== ''
+			? (string) $attrs['emailSubject']
+			: 'New Contact Form Submission';
+
+		$file_fields = [];
+		if (preg_match_all('/<input\b[^>]*type=["\']file["\'][^>]*>/i', $content, $inputs)) {
+			foreach ($inputs[0] as $input) {
+				$name = '';
+				$max_bytes = 2 * 1024 * 1024;
+				$accept = '';
+				if (preg_match('/\bname=["\']([^"\']+)["\']/', $input, $match)) {
+					$name = $match[1];
+				}
+				if (preg_match('/\bdata-max-size=["\'](\d+)["\']/', $input, $match)) {
+					$max_bytes = (int) $match[1];
+				}
+				if (preg_match('/\baccept=["\']([^"\']*)["\']/', $input, $match)) {
+					$accept = $match[1];
+				}
+				if ($name !== '') {
+					$file_fields[] = [
+						'name' => $name,
+						'maxBytes' => $max_bytes,
+						'accept' => $accept,
+					];
+				}
+			}
+		}
+
+		$config = [
+			'v' => 1,
+			'emailTo' => isset($attrs['emailTo']) ? (string) $attrs['emailTo'] : '',
+			'emailSubject' => $subject,
+			'fromEmail' => isset($attrs['fromEmail']) ? (string) $attrs['fromEmail'] : '',
+			'fromName' => isset($attrs['fromName']) ? (string) $attrs['fromName'] : '',
+			'ccEmails' => isset($attrs['ccEmails']) ? (string) $attrs['ccEmails'] : '',
+			'bccEmails' => isset($attrs['bccEmails']) ? (string) $attrs['bccEmails'] : '',
+			'includeMetadata' => $include ? '1' : '0',
+			'formName' => $form_name,
+			'recaptchaAction' => $this->blockons_recaptcha_action($form_name),
+			'fileFields' => $file_fields,
+		];
+
+		$json = wp_json_encode($config);
+		$token = hash_hmac('sha256', $json, wp_salt('auth'));
+		$hidden = sprintf(
+			'<input type="hidden" name="blockons_form_config" value="%s" /><input type="hidden" name="blockons_form_token" value="%s" />',
+			esc_attr($json),
+			esc_attr($token)
+		);
+
+		$updated = preg_replace('/<\/form>/', $hidden . '</form>', $content, 1);
+		return is_string($updated) ? $updated : $content;
+	}
+
+	/**
+	 * Confirm the posted mail settings match a form rendered by this site.
+	 */
+	private function verify_signed_form_config($request) {
+		$config_json = $request->get_param('formConfig');
+		$token = $request->get_param('formToken');
+
+		if (!is_string($config_json) || $config_json === '' || !is_string($token) || $token === '') {
+			return new WP_Error(
+				'invalid_form',
+				__('Please refresh the page and try again.', 'blockons'),
+				array('status' => 400)
+			);
+		}
+
+		$matched_json = '';
+		$candidates = array_unique([$config_json, wp_unslash($config_json)]);
+		$token_candidates = array_unique([$token, wp_unslash($token)]);
+		foreach ($candidates as $candidate) {
+			$expected = hash_hmac('sha256', $candidate, wp_salt('auth'));
+			foreach ($token_candidates as $token_candidate) {
+				if (hash_equals($expected, $token_candidate)) {
+					$matched_json = $candidate;
+					break 2;
+				}
+			}
+		}
+
+		if ($matched_json === '') {
+			return new WP_Error(
+				'invalid_form',
+				__('Please refresh the page and try again.', 'blockons'),
+				array('status' => 400)
+			);
+		}
+
+		$config = json_decode($matched_json, true);
+		if (!is_array($config) || empty($config['emailTo'])) {
+			return new WP_Error(
+				'invalid_form',
+				__('Please refresh the page and try again.', 'blockons'),
+				array('status' => 400)
+			);
+		}
+
+		return $config;
+	}
+
+	/**
+	 * reCAPTCHA v3 action. Must match the value embedded in the signed form config.
+	 */
+	private function blockons_recaptcha_action($form_name) {
+		$slug = strtolower((string) $form_name);
+		$slug = preg_replace('/[^a-z0-9_-]/', '_', $slug);
+		$slug = trim((string) $slug, '_');
+		if ($slug === '') {
+			$slug = 'contact_form';
+		}
+		return substr('submit_' . $slug, 0, 100);
+	}
+
+	/**
+	 * Hostname returned by Google must be this site.
+	 */
+	private function blockons_recaptcha_hostname_matches($hostname) {
+		$normalize = function ($host) {
+			$host = strtolower(preg_replace('/:\d+$/', '', (string) $host));
+			return preg_replace('/^www\./', '', $host);
+		};
+
+		$seen = $normalize($hostname);
+		if ($seen === '') {
+			return false;
+		}
+
+		$allowed = [
+			wp_parse_url(home_url(), PHP_URL_HOST),
+			wp_parse_url(site_url(), PHP_URL_HOST),
+			$_SERVER['HTTP_HOST'] ?? '',
+		];
+
+		foreach ($allowed as $host) {
+			if ($seen === $normalize($host)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Use a site-domain From address only when no SMTP plugin is sending the mail.
+	 */
+	private function blockons_prepare_sender($form_data) {
+		if ($this->blockons_smtp_plugin_active()) {
+			return;
+		}
+
+		$from_name = '';
+		if (!empty($form_data['fromName'])) {
+			$from_name = $this->process_shortcodes($form_data['fromName'], $form_data);
+		}
+		$from_name = trim(preg_replace('/[\r\n]+/', ' ', wp_strip_all_tags((string) $from_name)));
+		if ($from_name === '') {
+			$from_name = wp_specialchars_decode(get_bloginfo('name'), ENT_QUOTES);
+		}
+
+		$from_email = '';
+		if (!empty($form_data['fromEmail'])) {
+			$processed = trim($this->process_shortcodes($form_data['fromEmail'], $form_data));
+			if (is_email($processed) && $this->blockons_email_on_site_domain($processed)) {
+				$from_email = $processed;
+			}
+		}
+		if ($from_email === '') {
+			$from_email = $this->blockons_default_from_email();
+		}
+
+		$from_email = apply_filters('blockons_contact_form_from_email', $from_email, $form_data);
+		$from_name = apply_filters('blockons_contact_form_from_name', $from_name, $form_data);
+		if (!is_email($from_email)) {
+			$from_email = $this->blockons_default_from_email();
+		}
+
+		$this->outbound_from_email = $from_email;
+		$this->outbound_from_name = is_string($from_name) ? $from_name : '';
+		add_filter('wp_mail_from', [$this, 'blockons_custom_wp_mail_from'], 999);
+		add_filter('wp_mail_from_name', [$this, 'blockons_custom_wp_mail_from_name'], 999);
+		add_action('phpmailer_init', [$this, 'blockons_configure_phpmailer'], 5);
+		$this->mail_hooks_added = true;
+	}
+
+	/**
+	 * Remove mail hooks added for a single submission.
+	 */
+	private function blockons_remove_mail_hooks() {
+		if (!$this->mail_hooks_added) {
+			return;
+		}
+
+		remove_filter('wp_mail_from', [$this, 'blockons_custom_wp_mail_from'], 999);
+		remove_filter('wp_mail_from_name', [$this, 'blockons_custom_wp_mail_from_name'], 999);
+		remove_action('phpmailer_init', [$this, 'blockons_configure_phpmailer'], 5);
+		$this->mail_hooks_added = false;
+		$this->outbound_from_email = '';
+		$this->outbound_from_name = '';
+	}
+
+	/**
+	 * Common SMTP plugins own the From address and envelope sender.
+	 */
+	private function blockons_smtp_plugin_active() {
+		$active = function_exists('wp_mail_smtp')
+			|| class_exists('\WPMailSMTP\Options')
+			|| class_exists('PostmanOptions')
+			|| class_exists('\PostSMTP\Postman\Postman')
+			|| defined('POST_SMTP_VER')
+			|| defined('FLUENTMAIL')
+			|| class_exists('\FluentMail\App\App')
+			|| class_exists('\EasyWPSMTP\Options')
+			|| defined('EASY_WP_SMTP_VERSION');
+
+		return (bool) apply_filters('blockons_contact_form_smtp_active', $active);
+	}
+
+	/**
+	 * WordPress default sender on this site's domain.
+	 */
+	private function blockons_default_from_email() {
+		$sitename = wp_parse_url(home_url(), PHP_URL_HOST);
+		$sitename = preg_replace('/^www\./', '', (string) $sitename);
+		return 'wordpress@' . $sitename;
+	}
+
+	/**
+	 * True when the mailbox domain matches the site domain.
+	 */
+	private function blockons_email_on_site_domain($email) {
+		$email_domain = strtolower((string) substr(strrchr($email, '@'), 1));
+		$site = strtolower((string) wp_parse_url(home_url(), PHP_URL_HOST));
+		$site = preg_replace('/^www\./', '', $site);
+		$email_domain = preg_replace('/^www\./', '', $email_domain);
+		return $email_domain !== '' && $email_domain === $site;
+	}
+
+	/**
+	 * Keep uploaded files out of direct web access on Apache and IIS.
+	 */
+	private function blockons_protect_upload_dir($dir) {
+		if (!wp_mkdir_p($dir)) {
+			throw new Exception(__('Failed to create upload directory', 'blockons'), 400);
+		}
+
+		$htaccess = $dir . '/.htaccess';
+		if (!file_exists($htaccess)) {
+			file_put_contents(
+				$htaccess,
+				"Options -Indexes\n<IfModule mod_authz_core.c>\nRequire all denied\n</IfModule>\n<IfModule !mod_authz_core.c>\nDeny from all\n</IfModule>\n"
+			);
+		}
+
+		$index = $dir . '/index.php';
+		if (!file_exists($index)) {
+			file_put_contents($index, "<?php\n// Silence is golden.\n");
+		}
+
+		$web_config = $dir . '/web.config';
+		if (!file_exists($web_config)) {
+			file_put_contents(
+				$web_config,
+				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<configuration>\n  <system.webServer>\n    <authorization>\n      <remove users=\"*\" roles=\"\" verbs=\"\" />\n      <add accessType=\"Deny\" users=\"*\" />\n    </authorization>\n  </system.webServer>\n</configuration>\n"
+			);
+		}
+	}
+
+	/**
+	 * MIME types allowed for a file field, limited to its accept list.
+	 */
+	private function blockons_allowed_upload_mimes($accept) {
+		$map = [
+			'application/pdf' => 'pdf',
+			'application/msword' => 'doc',
+			'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'docx',
+			'text/plain' => 'txt',
+			'image/jpeg' => 'jpg',
+			'image/png' => 'png',
+			'image/gif' => 'gif',
+			'image/webp' => 'webp',
+			'video/mp4' => 'mp4',
+			'audio/mpeg' => 'mp3',
+			'audio/wav' => 'wav',
+		];
+
+		$extensions = array_filter(array_map(function ($part) {
+			return strtolower(ltrim(trim($part), '.'));
+		}, explode(',', (string) $accept)));
+
+		if (in_array('jpeg', $extensions, true)) {
+			$extensions[] = 'jpg';
+		}
+		if (in_array('jpg', $extensions, true)) {
+			$extensions[] = 'jpeg';
+		}
+
+		if (empty($extensions)) {
+			return $map;
+		}
+
+		$allowed = [];
+		foreach ($map as $mime => $extension) {
+			if (in_array($extension, $extensions, true) || ($extension === 'jpg' && in_array('jpeg', $extensions, true))) {
+				$allowed[$mime] = $extension;
+			}
+		}
+
+		return $allowed;
+	}
+
+	/**
+	 * Expiring download URL. The file itself is not served from the uploads URL.
+	 */
+	private function blockons_signed_upload_url($relative_path, $original_name) {
+		$expires = time() + (30 * DAY_IN_SECONDS);
+		$token = hash_hmac('sha256', $relative_path . '|' . $expires . '|' . $original_name, wp_salt('auth'));
+
+		return add_query_arg(
+			[
+				'file' => $relative_path,
+				'expires' => $expires,
+				'token' => $token,
+				'name' => $original_name,
+			],
+			rest_url('blcns/v1/form-upload')
+		);
+	}
+
+	/**
+	 * Stream a form upload after the signature and expiry check.
+	 */
+	public function blockons_download_form_upload($request) {
+		$file = (string) $request->get_param('file');
+		$expires = (int) $request->get_param('expires');
+		$token = (string) $request->get_param('token');
+		$name = sanitize_file_name((string) $request->get_param('name'));
+
+		if ($name === '') {
+			$name = 'download';
+		}
+
+		if ($expires < time() || !preg_match('#^\d{4}/\d{2}/[A-Za-z0-9]+\.[A-Za-z0-9]+$#', $file)) {
+			return new WP_Error(
+				'forbidden',
+				__('This file link has expired.', 'blockons'),
+				array('status' => 403)
+			);
+		}
+
+		$expected = hash_hmac('sha256', $file . '|' . $expires . '|' . $name, wp_salt('auth'));
+		if (!hash_equals($expected, $token)) {
+			return new WP_Error(
+				'forbidden',
+				__('Invalid file link.', 'blockons'),
+				array('status' => 403)
+			);
+		}
+
+		$base = wp_normalize_path(wp_upload_dir()['basedir'] . '/blockons/form-uploads');
+		$path = wp_normalize_path($base . '/' . $file);
+		if (strpos($path, $base . '/') !== 0 || !is_file($path)) {
+			return new WP_Error(
+				'not_found',
+				__('File not found.', 'blockons'),
+				array('status' => 404)
+			);
+		}
+
+		$mime = 'application/octet-stream';
+		if (function_exists('finfo_open')) {
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+			$detected = finfo_file($finfo, $path);
+			finfo_close($finfo);
+			if (is_string($detected) && $detected !== '') {
+				$mime = $detected;
+			}
+		}
+		$mime = str_replace(["\r", "\n"], '', $mime);
+		$name = str_replace(['"', "\r", "\n"], '', $name);
+
+		nocache_headers();
+		header('Content-Type: ' . $mime);
+		header('Content-Disposition: attachment; filename="' . $name . '"');
+		header('Content-Length: ' . filesize($path));
+		header('X-Robots-Tag: noindex, nofollow', true);
+		readfile($path);
+		exit;
 	}
 }
 new Blockons_WC_Rest_Routes();

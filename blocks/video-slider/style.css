@@ -108,7 +108,7 @@
 	width: 80px;
 	height: 80px;
 	margin: -40px 0 0 -40px;
-	font-family: "Font Awesome 6 Free";
+	font-family: "Font Awesome 7 Free";
 	font-weight: 900;
 	display: flex;
 	align-items: center;
@@ -122,6 +122,8 @@
 }
 .wp-block-blockons-video-slider .swiper-slide-img .play-button::after {
 	content: "\f04b";
+	font-family: "Font Awesome 7 Free";
+	font-weight: 900;
 	border: 0 !important;
 	font-size: 38px;
 	margin-left: 5px;
@@ -135,6 +137,36 @@
 .wp-block-blockons-video-slider .swiper-button-prev,
 .wp-block-blockons-video-slider .swiper-button-next {
 	background-image: none;
+}
+.wp-block-blockons-video-slider .blockons-slider .swiper-button-prev svg,
+.wp-block-blockons-video-slider .blockons-slider .swiper-button-next svg {
+	display: none;
+}
+.wp-block-blockons-video-slider
+	.blockons-slider.default-icon
+	.swiper-button-prev::after,
+.wp-block-blockons-video-slider
+	.blockons-slider.default-icon
+	.swiper-button-next::after {
+	content: "";
+	display: block;
+	box-sizing: border-box;
+	width: 0.35em;
+	height: 0.35em;
+	border-style: solid;
+	border-color: currentColor;
+	border-width: 0.08em 0.08em 0 0;
+	font-size: var(--swiper-navigation-size, 44px);
+}
+.wp-block-blockons-video-slider
+	.blockons-slider.default-icon
+	.swiper-button-prev::after {
+	transform: translateX(0.08em) rotate(-135deg);
+}
+.wp-block-blockons-video-slider
+	.blockons-slider.default-icon
+	.swiper-button-next::after {
+	transform: translateX(-0.08em) rotate(45deg);
 }
 .wp-block-blockons-video-slider
 	.blockons-slider.navigation-round
@@ -253,6 +285,27 @@
 	.blockons-slider.default-icon.navigation-square
 	.swiper-button-next::after {
 	font-size: 30px;
+}
+.wp-block-blockons-video-slider
+	.blockons-slider.default-icon.navigation-round
+	.swiper-button-prev svg,
+.wp-block-blockons-video-slider
+	.blockons-slider.default-icon.navigation-round
+	.swiper-button-next svg,
+.wp-block-blockons-video-slider
+	.blockons-slider.default-icon.navigation-rounded
+	.swiper-button-prev svg,
+.wp-block-blockons-video-slider
+	.blockons-slider.default-icon.navigation-rounded
+	.swiper-button-next svg,
+.wp-block-blockons-video-slider
+	.blockons-slider.default-icon.navigation-square
+	.swiper-button-prev svg,
+.wp-block-blockons-video-slider
+	.blockons-slider.default-icon.navigation-square
+	.swiper-button-next svg {
+	width: auto;
+	height: 30px;
 }
 /* - Arrows - */
 .wp-block-blockons-video-slider

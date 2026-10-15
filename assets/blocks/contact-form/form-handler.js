@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 	const recaptchaEnabled = blockonsFormObj.recaptchaEnabled || false;
 	const translations = blockonsFormObj.translations;
 	const isPremium = Boolean(blockonsFormObj.isPremium) || false;
+	const debug = () => {};
 
 	// Fetch reCAPTCHA key and initialize it immediately
 	let recaptchaSiteKey = '';
@@ -358,16 +359,29 @@ document.addEventListener('DOMContentLoaded', async function () {
 	};
 
 	const validateField = (input, fieldData) => {
-		if (!fieldData.required) return true;
-
-		// Handle file inputs
+		// Handle file inputs, including optional files that are too large.
 		if (fieldData.type === 'file') {
-			if (!input.files || input.files.length === 0) {
-				showFieldError(input, translations.required);
+			const selectedFile = input.files && input.files[0];
+			if (!selectedFile) {
+				if (fieldData.required) {
+					showFieldError(input, translations.required);
+					return false;
+				}
+				return true;
+			}
+
+			const maxBytes = parseInt(input.dataset.maxSize, 10);
+			if (maxBytes && selectedFile.size > maxBytes) {
+				showFieldError(
+					input,
+					translations.file_too_large || translations.error,
+				);
 				return false;
 			}
 			return true;
 		}
+
+		if (!fieldData.required) return true;
 
 		// Handle single checkboxes (like acceptance)
 		if (fieldData.type === 'checkbox') {
@@ -500,6 +514,24 @@ document.addEventListener('DOMContentLoaded', async function () {
 		return true;
 	};
 
+	const getRecaptchaAction = (form) => {
+		const configInput = form.querySelector('[name="blockons_form_config"]');
+		if (!configInput || !configInput.value) {
+			return 'submit_contact_form';
+		}
+
+		try {
+			const parsed = JSON.parse(configInput.value);
+			if (parsed && parsed.recaptchaAction) {
+				return String(parsed.recaptchaAction).slice(0, 100);
+			}
+		} catch (err) {
+			return 'submit_contact_form';
+		}
+
+		return 'submit_contact_form';
+	};
+
 	// Form processing
 	const processForms = () => {
 		const forms = document.querySelectorAll('.blockons-cf-form');
@@ -529,41 +561,36 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 			setupInputListeners(elements.inputs);
 
-			form.addEventListener('submit', (e) => e.preventDefault());
-
-			elements.submitBtn.addEventListener('click', async (e) => {
-				e.preventDefault();
-
-				if (elements.honeypot?.value.trim() !== '') {
-					console.log('Honeypot triggered');
+			const beginSubmit = async () => {
+				if (form.dataset.submitting === '1') {
 					return;
 				}
+				form.dataset.submitting = '1';
 
-				if (recaptchaEnabled && recaptchaSiteKey) {
-					try {
+				try {
+					if (elements.honeypot?.value.trim() !== '') {
+						handleSuccessfulSubmission(form, elements);
+						return;
+					}
+
+					if (recaptchaEnabled && recaptchaSiteKey) {
 						const grecaptcha = await initializeReCaptcha();
 
 						if (!grecaptcha) {
 							throw new Error('reCAPTCHA not initialized');
 						}
 
-						// Execute reCAPTCHA and get token with unique action per form
-						const formId =
-							form.getAttribute('data-form-id') || 'contact_form';
 						const token = await grecaptcha.execute(
 							recaptchaSiteKey,
 							{
-								action: `submit_${formId}`,
+								action: getRecaptchaAction(form),
 							},
 						);
 
 						if (!token) {
-							throw new Error(
-								'reCAPTCHA token generation failed.',
-							);
+							throw new Error('reCAPTCHA token generation failed.');
 						}
 
-						// Add token to form
 						let recaptchaInput = form.querySelector(
 							'input[name="recaptchaToken"]',
 						);
@@ -575,18 +602,42 @@ document.addEventListener('DOMContentLoaded', async function () {
 						}
 						recaptchaInput.value = token;
 
-						// Submit form
-						submitForm(form, elements);
-					} catch (error) {
-						console.error('reCAPTCHA error:', error);
-						handleSubmissionError(
-							{ message: translations.recaptcha_error },
-							elements,
-						);
+						await submitForm(form, elements);
+					} else {
+						await submitForm(form, elements);
 					}
-				} else {
-					submitForm(form, elements);
+				} catch (error) {
+					handleSubmissionError(
+						{ message: translations.recaptcha_error },
+						elements,
+					);
+				} finally {
+					delete form.dataset.submitting;
 				}
+			};
+
+			form.addEventListener('submit', (e) => {
+				e.preventDefault();
+				beginSubmit();
+			});
+
+			elements.submitBtn.addEventListener('click', (e) => {
+				if (elements.submitBtn.getAttribute('type') === 'submit') {
+					return;
+				}
+				e.preventDefault();
+				beginSubmit();
+			});
+
+			form.addEventListener('keydown', (e) => {
+				if (e.key !== 'Enter' || e.target.tagName === 'TEXTAREA') {
+					return;
+				}
+				if (elements.submitBtn.getAttribute('type') === 'submit') {
+					return;
+				}
+				e.preventDefault();
+				beginSubmit();
 			});
 		});
 	};
@@ -700,36 +751,31 @@ document.addEventListener('DOMContentLoaded', async function () {
 						block: 'center',
 					});
 				}
-				throw new Error('Form validation failed');
+				return;
 			}
 
 			if (!fields || fields.length === 0)
 				throw new Error('No form fields found');
 
+			const configInput = form.querySelector(
+				'[name="blockons_form_config"]',
+			);
+			const tokenInput = form.querySelector('[name="blockons_form_token"]');
+			if (
+				!configInput ||
+				!tokenInput ||
+				!configInput.value ||
+				!tokenInput.value
+			) {
+				throw new Error(translations.reload || translations.error);
+			}
+
 			const formData = new FormData();
-			formData.append('emailTo', wrapper.dataset.emailTo || '');
-			formData.append('formName', wrapper.dataset.formId || '');
+			formData.append('formConfig', configInput.value);
+			formData.append('formToken', tokenInput.value);
 			formData.append(
-				'emailSubject',
-				wrapper.dataset.emailSubject || translations.subject,
-			);
-			formData.append('fromName', wrapper.dataset.fromName || '');
-			formData.append('fromEmail', wrapper.dataset.fromEmail || '');
-			formData.append(
-				'ccEmails',
-				isPremium && wrapper.dataset.ccEmails
-					? wrapper.dataset.ccEmails
-					: '',
-			);
-			formData.append(
-				'bccEmails',
-				isPremium && wrapper.dataset.bccEmails
-					? wrapper.dataset.bccEmails
-					: '',
-			);
-			formData.append(
-				'includeMetadata',
-				wrapper.dataset.includeMetadata === 'true',
+				'asite',
+				form.querySelector('input[name="asite"]')?.value || '',
 			);
 
 			// For [page_title] shortcode
@@ -785,6 +831,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 			if (!response.ok)
 				throw new Error(data.message || translations.error);
+
+			if (data.dev_mode) {
+				throw new Error(data.message || translations.error);
+			}
 
 			handleSuccessfulSubmission(form, elements);
 		} catch (error) {

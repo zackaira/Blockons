@@ -62,7 +62,7 @@
 		}
 	},
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
+	"editorStyle": ["file:./index.css", "blockons-mapbox-gl-css"],
 	"viewScript": ["blockons-mapbox-js", "blockons-mapbox-gl"],
 	"viewStyle": ["blockons-mapbox-gl-css"],
 	"style": ["file:./style-index.css", "blockons-fontawesome"]

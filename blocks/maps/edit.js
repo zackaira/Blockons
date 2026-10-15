@@ -15,11 +15,73 @@ import {
 	ToolbarButton,
 	Dropdown,
 } from '@wordpress/components';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import BlockonsColorpicker from '../_components/BlockonsColorpicker';
 import { colorPickerPalette } from '../block-global';
 import BlockonsNote from '../../src/backend/settings/components/UI/BlockonsNote';
+
+const MAPBOX_CSS =
+	'https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css';
+const MAPBOX_JS = 'https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js';
+
+// The block canvas is an iframe. Mapbox must run in that same window,
+// otherwise it cannot build the map inside the editor frame.
+const loadMapboxGL = (container) => {
+	const doc = container?.ownerDocument;
+	const view = doc?.defaultView;
+
+	if (!view) {
+		return Promise.reject(
+			new Error('Map container is not attached to a document.'),
+		);
+	}
+
+	if (view.mapboxgl) {
+		return Promise.resolve(view.mapboxgl);
+	}
+
+	if (!doc.getElementById('blockons-mapbox-gl-css')) {
+		const link = doc.createElement('link');
+		link.id = 'blockons-mapbox-gl-css';
+		link.rel = 'stylesheet';
+		link.href = MAPBOX_CSS;
+		doc.head.appendChild(link);
+	}
+
+	return new Promise((resolve, reject) => {
+		const finish = () => {
+			if (view.mapboxgl) {
+				resolve(view.mapboxgl);
+				return;
+			}
+			reject(new Error('Mapbox GL did not initialize.'));
+		};
+
+		const existing = doc.getElementById('blockons-mapbox-gl-js');
+		if (existing) {
+			if (existing.dataset.loaded === 'true') {
+				finish();
+				return;
+			}
+			existing.addEventListener('load', finish, { once: true });
+			existing.addEventListener(
+				'error',
+				() => reject(new Error('Mapbox GL failed to load.')),
+				{ once: true },
+			);
+			return;
+		}
+
+		const script = doc.createElement('script');
+		script.id = 'blockons-mapbox-gl-js';
+		script.src = MAPBOX_JS;
+		script.onload = () => {
+			script.dataset.loaded = 'true';
+			finish();
+		};
+		script.onerror = () => reject(new Error('Mapbox GL failed to load.'));
+		doc.head.appendChild(script);
+	});
+};
 
 const DEFAULT_LAT = -33.9249; // CT
 const DEFAULT_LNG = 18.4241;
@@ -54,9 +116,13 @@ const Edit = (props) => {
 	const [tempZoom, setTempZoom] = useState(zoom);
 	const [tempLat, setTempLat] = useState(mapLatitude);
 	const [tempLng, setTempLng] = useState(mapLongitude);
+	const [mapVersion, setMapVersion] = useState(0);
 	const mapContainerRef = useRef(null);
 	const mapRef = useRef(null);
+	const mapboxLibRef = useRef(null);
 	const markerRefs = useRef([]);
+	const mapViewRef = useRef({ mapLatitude, mapLongitude, zoom });
+	mapViewRef.current = { mapLatitude, mapLongitude, zoom };
 
 	// Fetch the Mapbox API key from your endpoint on mount.
 	useEffect(() => {
@@ -128,33 +194,91 @@ const Edit = (props) => {
 	}, []);
 
 	useEffect(() => {
-		if (enableMap && mapContainerRef.current) {
-			mapboxgl.accessToken = mapboxToken;
+		if (
+			!enableMap ||
+			!mapContainerRef.current ||
+			mapRef.current ||
+			!mapboxToken
+		) {
+			return;
+		}
 
-			const initialLat = mapLatitude || DEFAULT_LAT;
-			const initialLng = mapLongitude || DEFAULT_LNG;
+		const container = mapContainerRef.current;
+		let cancelled = false;
 
-			if (!mapRef.current) {
-				mapRef.current = new mapboxgl.Map({
+		loadMapboxGL(container)
+			.then((mapboxgl) => {
+				if (cancelled || mapRef.current || !mapContainerRef.current) {
+					return;
+				}
+
+				mapboxLibRef.current = mapboxgl;
+				mapboxgl.accessToken = mapboxToken;
+
+				const {
+					mapLatitude: latitude,
+					mapLongitude: longitude,
+					zoom: initialZoom,
+				} = mapViewRef.current;
+
+				const map = new mapboxgl.Map({
 					container: mapContainerRef.current,
 					style: 'mapbox://styles/mapbox/streets-v11',
-					center: [initialLng, initialLat],
-					zoom: zoom,
+					center: [
+						longitude || DEFAULT_LNG,
+						latitude || DEFAULT_LAT,
+					],
+					zoom: initialZoom,
 				});
 
-				mapRef.current.on('moveend', () => {
+				mapRef.current = map;
+				setMapVersion((version) => version + 1);
+
+				map.on('moveend', () => {
+					if (!mapRef.current) {
+						return;
+					}
 					const center = mapRef.current.getCenter();
 					setTempLat(parseFloat(center.lat.toFixed(6)));
 					setTempLng(parseFloat(center.lng.toFixed(6)));
 				});
 
-				mapRef.current.on('zoomend', () => {
+				map.on('zoomend', () => {
+					if (!mapRef.current) {
+						return;
+					}
 					const newZoom = mapRef.current.getZoom();
 					setTempZoom(parseFloat(newZoom.toFixed(2)));
 				});
+
+				map.on('load', () => {
+					if (!mapRef.current) {
+						return;
+					}
+					mapRef.current.resize();
+					setMapVersion((version) => version + 1);
+				});
+			})
+			.catch((error) => {
+				if (!cancelled) {
+					console.error('Error initializing Mapbox map:', error);
+				}
+			});
+
+		return () => {
+			cancelled = true;
+		};
+	}, [enableMap, mapboxToken]);
+
+	useEffect(() => {
+		return () => {
+			if (!mapRef.current) {
+				return;
 			}
-		}
-	}, [enableMap, mapLatitude, mapLongitude]);
+			mapRef.current.remove();
+			mapRef.current = null;
+		};
+	}, []);
 
 	const updateIconSelection = () => {
 		document
@@ -231,34 +355,41 @@ const Edit = (props) => {
 		}
 	};
 
-	useEffect(() => {
-		if (enableMap && mapRef.current) {
-			updateMarkersOnMap();
-		}
-	}, [enableMap, markers, selectedMarker]);
-
 	const updateMarkersOnMap = () => {
 		if (!mapRef.current) return;
 		markerRefs.current.forEach((marker) => marker.remove());
 		markerRefs.current = [];
 
-		const markersToDisplay = isPremium ? markers : markers.slice(0, 1);
-		markersToDisplay.forEach((marker, index) =>
-			addMarkerToMap(marker, index),
-		);
+		const source = Array.isArray(markers) ? markers : [];
+		const markersToDisplay = isPremium ? source : source.slice(0, 1);
+		markersToDisplay.forEach((marker, index) => {
+			const latitude = parseFloat(marker.latitude);
+			const longitude = parseFloat(marker.longitude);
+			if (Number.isFinite(latitude) && Number.isFinite(longitude)) {
+				addMarkerToMap(
+					{ ...marker, latitude, longitude },
+					index,
+				);
+			}
+		});
 	};
 
 	const autoCenterMap = () => {
-		if (!mapRef.current || markers.length === 0) return;
+		const source = Array.isArray(markers) ? markers : [];
+		if (!mapRef.current || source.length === 0) return;
 
-		const markersToDisplay = isPremium ? markers : markers.slice(0, 1);
+		const markersToDisplay = isPremium ? source : source.slice(0, 1);
 
-		if (markers.length === 1) {
+		if (markersToDisplay.length === 1) {
 			mapRef.current.setCenter([
-				markers[0].longitude,
-				markers[0].latitude,
+				markersToDisplay[0].longitude,
+				markersToDisplay[0].latitude,
 			]);
 		} else {
+			const mapboxgl = mapboxLibRef.current;
+			if (!mapboxgl) {
+				return;
+			}
 			const bounds = new mapboxgl.LngLatBounds();
 			markersToDisplay.forEach((marker) =>
 				bounds.extend([marker.longitude, marker.latitude]),
@@ -270,7 +401,14 @@ const Edit = (props) => {
 	const addMarkerToMap = (marker, index) => {
 		if (!mapRef.current) return;
 
-		const markerElement = document.createElement('div');
+		const mapboxgl = mapboxLibRef.current;
+		if (!mapboxgl) {
+			return;
+		}
+
+		const markerElement = mapRef.current
+			.getContainer()
+			.ownerDocument.createElement('div');
 		markerElement.className = `blockons-map-marker ${marker.icon || 'fas fa-map-marker-alt'}`;
 		markerElement.style.color = marker.iconColor || markersColor;
 		markerElement.style.backgroundColor =
@@ -293,17 +431,23 @@ const Edit = (props) => {
 
 		newMarker.on('dragend', () => {
 			const lngLat = newMarker.getLngLat();
-			const updatedMarkers = [...markers];
+			const currentMarkers = Array.isArray(markers) ? markers : [];
+			if (!currentMarkers[index]) {
+				return;
+			}
 
+			const updatedMarkers = [...currentMarkers];
 			updatedMarkers[index] = {
-				...updatedMarkers[index], // Preserve existing data
+				...updatedMarkers[index],
 				latitude: parseFloat(lngLat.lat.toFixed(6)),
 				longitude: parseFloat(lngLat.lng.toFixed(6)),
 			};
 
 			setAttributes({ markers: updatedMarkers });
 
-			mapRef.current.panTo([lngLat.lng, lngLat.lat]);
+			if (mapRef.current) {
+				mapRef.current.panTo([lngLat.lng, lngLat.lat]);
+			}
 		});
 
 		markerRefs.current[index] = newMarker;
@@ -344,12 +488,21 @@ const Edit = (props) => {
 	};
 
 	const addMarker = () => {
-		if (!mapRef.current) return;
+		const source = Array.isArray(markers) ? markers : [];
+		if (!isPremium && source.length >= 1) {
+			return;
+		}
 
-		const center = mapRef.current.getCenter();
+		const center = mapRef.current?.getCenter();
+		const latitude = center
+			? parseFloat(center.lat.toFixed(6))
+			: parseFloat(mapLatitude) || DEFAULT_LAT;
+		const longitude = center
+			? parseFloat(center.lng.toFixed(6))
+			: parseFloat(mapLongitude) || DEFAULT_LNG;
 		const newMarker = {
-			latitude: center.lat,
-			longitude: center.lng,
+			latitude,
+			longitude,
 			title: 'Place Name',
 			description: 'Place Description & Details',
 			icon: 'fas fa-map-marker-alt',
@@ -357,12 +510,14 @@ const Edit = (props) => {
 			iconBgColor: markerStyle === 'two' ? markersBgColor : '#FFFFFF',
 		};
 
-		const updatedMarkers = [...markers, newMarker];
-		setAttributes({ markers: updatedMarkers });
+		setAttributes({
+			markers: [...source, newMarker],
+			selectedMarker: source.length,
+		});
 
-		addMarkerToMap(newMarker, updatedMarkers.length - 1);
-
-		mapRef.current.panTo([center.lng, center.lat]);
+		if (mapRef.current) {
+			mapRef.current.panTo([longitude, latitude]);
+		}
 	};
 
 	const deleteMarker = (index) => {
@@ -374,14 +529,21 @@ const Edit = (props) => {
 			return;
 		}
 
-		const updatedMarkers = [...markers];
+		const source = Array.isArray(markers) ? markers : [];
+		const updatedMarkers = [...source];
 		updatedMarkers.splice(index, 1);
-		setAttributes({ markers: updatedMarkers });
 
-		if (markerRefs.current[index]) {
-			markerRefs.current[index].remove();
-			markerRefs.current.splice(index, 1);
+		let nextSelected = selectedMarker;
+		if (nextSelected === index) {
+			nextSelected = null;
+		} else if (nextSelected !== null && nextSelected > index) {
+			nextSelected -= 1;
 		}
+
+		setAttributes({
+			markers: updatedMarkers,
+			selectedMarker: nextSelected,
+		});
 
 		if (updatedMarkers.length > 0 && mapRef.current) {
 			const lastMarker = updatedMarkers[updatedMarkers.length - 1];
@@ -394,6 +556,21 @@ const Edit = (props) => {
 			});
 		}
 	};
+
+	useEffect(() => {
+		if (!enableMap || !mapRef.current || !mapVersion) {
+			return;
+		}
+		updateMarkersOnMap();
+	}, [
+		enableMap,
+		mapVersion,
+		markers,
+		selectedMarker,
+		isPremium,
+		markersColor,
+		markersBgColor,
+	]);
 
 	const zoomToViewAllMarkers = () => {
 		if (!mapRef.current) return;
@@ -558,7 +735,7 @@ const Edit = (props) => {
 												<h5
 													onClick={() => {
 														selectMarker(index);
-														mapRef.current.panTo([
+														mapRef.current?.panTo([
 															marker.longitude,
 															marker.latitude,
 														]);
@@ -596,7 +773,7 @@ const Edit = (props) => {
 													}
 													onClick={() => {
 														selectMarker(index);
-														mapRef.current.panTo([
+														mapRef.current?.panTo([
 															marker.longitude,
 															marker.latitude,
 														]);
@@ -923,13 +1100,17 @@ const Edit = (props) => {
 			</InspectorControls>
 
 			<div
-				ref={mapContainerRef}
 				className={`blockons-mapbox ${enableMap ? 'usemap' : 'nomap'} marker-style-${markerStyle}`}
 				style={{ height: `${height}px` }}
 			>
+				<div
+					ref={mapContainerRef}
+					className="blockons-map-container"
+					style={{ height: '100%', width: '100%' }}
+				/>
 				{enableMap && (
 					<>
-						{markers.length > 0 && (
+						{Array.isArray(markers) && markers.length > 0 && (
 							<div className="blockons-map-marker-info">
 								{showMarkerIcons && (
 									<div className="blockons-map-icons">
@@ -940,7 +1121,7 @@ const Edit = (props) => {
 													className={`blockons-map-icon ${selectedMarker === index ? 'selected' : ''}`}
 													onClick={() => {
 														selectMarker(index);
-														mapRef.current.panTo([
+														mapRef.current?.panTo([
 															marker.longitude,
 															marker.latitude,
 														]);

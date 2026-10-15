@@ -9,6 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			const sliderElement = slider.firstElementChild.classList[0];
 			// console.log(sliderElement, sliderSettings);
 
+			// Keep the block ::after arrows. Swiper 12 would also inject SVG icons.
+			if (
+				sliderSettings.navigation &&
+				typeof sliderSettings.navigation === 'object'
+			) {
+				sliderSettings.navigation.addIcons = false;
+			}
+
 			if (sliderElement) {
 				// const blockonSwiper = new Swiper(`.${sliderElement}`, sliderSettings);
 				new Swiper(`.${sliderElement}`, sliderSettings);
